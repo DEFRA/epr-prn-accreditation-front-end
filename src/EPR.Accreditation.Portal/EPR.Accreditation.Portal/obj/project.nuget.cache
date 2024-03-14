@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "/f4TIqpr1ECTwTA+jpIjaCW/cskgUGyAxscU9FfN5wR+7MJHmGRKHUCV6y2fjwC+8ZxBpmTlxn19fshxzyGIxg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\a912346\\source\\repos\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\a912346\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}
