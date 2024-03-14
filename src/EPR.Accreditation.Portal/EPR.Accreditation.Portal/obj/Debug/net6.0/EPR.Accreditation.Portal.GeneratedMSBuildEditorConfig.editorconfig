@@ -17,3 +17,7 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\a912346\source\repos\epr-prn-accreditation-front-end\src\EPR.Accreditation.Portal\EPR.Accreditation.Portal
 build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/a912346/source/repos/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
