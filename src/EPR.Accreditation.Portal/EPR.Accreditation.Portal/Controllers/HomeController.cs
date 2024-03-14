@@ -8,5 +8,13 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [ActionName("WasteLicensesAndPermits")]
+        public async Task<IActionResult> WasteLicensesAndPermits(int? id)
+        {
+                return View(
+                    "WasteLicensesAndPermits");
+        }
     }
 }

@@ -1026,19 +1026,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\a912346\\.nuget\\packages\\": {}
+    "C:\\Users\\a914719\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\a912346\\source\\repos\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal.csproj",
+      "projectUniqueName": "C:\\Projects\\Repos\\DEFRA\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal.csproj",
       "projectName": "EPR.Accreditation.Portal",
-      "projectPath": "C:\\Users\\a912346\\source\\repos\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal.csproj",
-      "packagesPath": "C:\\Users\\a912346\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\a912346\\source\\repos\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\obj\\",
+      "projectPath": "C:\\Projects\\Repos\\DEFRA\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal.csproj",
+      "packagesPath": "C:\\Users\\a914719\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\Repos\\DEFRA\\epr-prn-accreditation-front-end\\src\\EPR.Accreditation.Portal\\EPR.Accreditation.Portal\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\a912346\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\a914719\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1046,6 +1051,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1058,6 +1064,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1092,7 +1103,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
