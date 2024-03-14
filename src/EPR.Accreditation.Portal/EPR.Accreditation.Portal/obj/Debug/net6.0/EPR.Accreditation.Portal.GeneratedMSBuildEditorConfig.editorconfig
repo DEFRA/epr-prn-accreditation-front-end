@@ -18,10 +18,50 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Projects\Repos\DEFRA\epr-prn-accreditation-front-end\src\EPR.Accreditation.Portal\EPR.Accreditation.Portal
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Error/Forbidden.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRm9yYmlkZGVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Error/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Error/PageNotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcUGFnZU5vdEZvdW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Home/WasteLicensesAndPermits.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXYXN0ZUxpY2Vuc2VzQW5kUGVybWl0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Shared/_ErrorSummaryPanel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FcnJvclN1bW1hcnlQYW5lbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Shared/_NotificationPanel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb25QYW5lbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Shared/_ScriptResources.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TY3JpcHRSZXNvdXJjZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/Shared/_ValidationSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Repos/DEFRA/epr-prn-accreditation-front-end/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

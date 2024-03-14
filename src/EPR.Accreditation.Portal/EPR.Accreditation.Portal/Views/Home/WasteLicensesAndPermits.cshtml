@@ -1,7 +1,75 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Waste licences and permits";
 }
 
-Waste Licenses and Permits Page
+<form method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-l">Waste licences and permits</h1>
+            <p class="govuk-hint">Enter the reference numbers for the licences and permits you have.</p>
+            <div class="govuk-form-group">
+                <h2 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--s" for="registration-number">
+                        Waste carrier, broker or dealer registration number
+                    </label>
+                </h2>
+                <div id="registration-hint" class="govuk-hint">
+                    Leave blank if you do not have one.
+                </div>
+                <input class="govuk-input" id="registration" name="registration" type="text" aria-describedby="registration-number-hint">
+            </div>
+            <div class="govuk-form-group">
+                <h2 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--s" for="permit-number">
+                        Waste management licence or environmental permit number
+                    </label>
+                </h2>
+                <div id="permit-number-hint" class="govuk-hint">
+                    Leave blank if you do not have one.
+                </div>
+                <input class="govuk-input" id="permit" name="permit" type="text" aria-describedby="permit-number-hint">
+            </div>
+            <div class="govuk-form-group">
+                <h2 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--s" for="activity-number">
+                        PPC 'Part A' or non-waste EPR 'Part A1' activity number
+                    </label>
+                </h2>
+                <div id="activity-number-hint" class="govuk-hint">
+                    Leave blank if you do not have one.
+                </div>
+                <input class="govuk-input" id="activity" name="activity" type="text" aria-describedby="activity-number-hint">
+            </div>
+            <div class="govuk-form-group">
+                <h2 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--s" for="activity-reference-number">
+                        PPC 'Part B or C' or non-waste EPR 'Part A2 or B' activity reference number
+                    </label>
+                </h2>
+                <div id="activity-reference-hint" class="govuk-hint">
+                    Leave blank if you do not have one.
+                </div>
+                <input class="govuk-input" id="activity-reference" name="activity-reference" type="text" aria-describedby="activity-reference-number-hint">
+            </div>
+            <div class="govuk-form-group">
+                <h2 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--s" for="discharge-number">
+                        Discharge consent number
+                    </label>
+                </h2>
+                <div id="discharge-hint" class="govuk-hint">
+                    Leave blank if you do not have one.
+                </div>
+                <input class="govuk-input" id="discharge" name="discharge" type="text" aria-describedby="discharge-number-hint">
+            </div>
+            <div class="govuk-button-group">
+                <button class="govuk-button" data-module="govuk-button" type="submit">
+                    Save and continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                    Save and come back later
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
