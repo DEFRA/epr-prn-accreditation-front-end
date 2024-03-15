@@ -412,3 +412,5 @@ FodyWeavers.xsd
 /src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/project.assets.json
 /src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/project.nuget.cache
 /src/EPR.Accreditation.Portal/.vs/EPR.Accreditation.Portal/DesignTimeBuild/.dtbcache.v2
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/EPR.Accreditation.Portal.csproj.user
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/wwwroot/js/index.js
