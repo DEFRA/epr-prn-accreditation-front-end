@@ -313,6 +313,9 @@ node_modules/
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
+/src/EPR.Accreditation.Portal/.vs/EPR.Accreditation.Portal/DesignTimeBuild/.dtbcache.v2
+/src/EPR.Accreditation.Portal/.vs/EPR.Accreditation.Portal/v17/.suo
+
 # Paket dependency manager
 .paket/paket.exe
 paket-files/
