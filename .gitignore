@@ -405,3 +405,10 @@ FodyWeavers.xsd
 *.sln.iml
 /src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/Debug/net6.0/EPR.Accreditation.Portal.AssemblyInfoInputs.cache
 /src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/Debug/net6.0/EPR.Accreditation.Portal.AssemblyInfo.cs
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/Debug/net6.0/EPR.Accreditation.Portal.assets.cache
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/Debug/net6.0/EPR.Accreditation.Portal.GeneratedMSBuildEditorConfig.editorconfig
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/EPR.Accreditation.Portal.csproj.nuget.dgspec.json
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/EPR.Accreditation.Portal.csproj.nuget.g.props
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/project.assets.json
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/project.nuget.cache
+/src/EPR.Accreditation.Portal/.vs/EPR.Accreditation.Portal/DesignTimeBuild/.dtbcache.v2
