@@ -19,7 +19,6 @@ namespace EPR.Accreditation.Portal.Services
             return new ApplicationSavedViewModel
             {
                 Id = id,
-                DateAndTime = DateTime.Now.ToString("dd/MM/yyyy hh:MM:ss"),
                 ApplicationExpiry = _configSettings.Value.Application_Saved_Days_Amount
             };
         }
