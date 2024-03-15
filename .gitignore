@@ -403,3 +403,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/Debug/net6.0/EPR.Accreditation.Portal.AssemblyInfoInputs.cache
+/src/EPR.Accreditation.Portal/EPR.Accreditation.Portal/obj/Debug/net6.0/EPR.Accreditation.Portal.AssemblyInfo.cs
