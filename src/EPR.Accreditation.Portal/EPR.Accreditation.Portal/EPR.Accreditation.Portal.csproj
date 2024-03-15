@@ -14,11 +14,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\EPR.Accreditation.App\EPR.Accreditation.App.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EPR.Accreditation.App\EPR.Accreditation.App.csproj" />
+    <Compile Update="Resources\ApplicationSavedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApplicationSavedResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ApplicationSavedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationSavedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
