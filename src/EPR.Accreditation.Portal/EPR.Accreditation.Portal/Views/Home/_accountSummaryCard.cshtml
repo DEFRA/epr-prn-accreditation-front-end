@@ -1,0 +1,30 @@
+﻿
+
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+        <div class="govuk-summary-card__title">
+            <h2 class="govuk-heading-m">@Model.Title</h2>
+            <span class="govuk-caption-m">
+                @Model.Description
+            </span>
+        </div>
+    </div>
+    <div class="govuk-summary-card__content">
+        @if (Model.Links != null)
+        {
+            Dictionary<string, string> links = (Dictionary<string, string>)(Model.Links);
+            if (links != null)
+            {
+                <ul class="govuk-list">
+                    @foreach (var link in links)
+                    {
+                        <li>
+                            <a class="govuk-link govuk-link--no-visited-state" href="@link.Value">@link.Key</a>
+                        </li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>
+
