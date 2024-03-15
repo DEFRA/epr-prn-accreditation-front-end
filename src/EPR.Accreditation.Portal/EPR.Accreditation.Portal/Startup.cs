@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using EPR.Accreditation.App.Services.Interfaces;
+using EPR.Accreditation.Portal.Services;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
 {
@@ -26,6 +28,7 @@ namespace EPR.Accreditation.Portal
             services.AddControllers();
             //services.AddDependencies(Configuration);
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddTransient<IAccreditationService, AccreditationService>();
 
             //var supportedCultures = new[]
             //{

@@ -130,7 +130,7 @@
     <value>Application saved</value>
   </data>
   <data name="ParagraphTextP1" xml:space="preserve">
-    <value>You can return to this application at any point over the next xx</value>
+    <value>You can return to this application at any point over the next </value>
   </data>
   <data name="ParagraphTextP2" xml:space="preserve">
     <value>days and pick up where you left off.</value>

@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.App.ViewModels
 {
     public class BackButtonViewModel
     {

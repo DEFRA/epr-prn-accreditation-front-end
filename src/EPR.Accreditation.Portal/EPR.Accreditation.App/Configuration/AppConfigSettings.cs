@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Portal.Configuration
+﻿namespace EPR.Accreditation.App.Configuration
 {
     public class AppConfigSettings
     {

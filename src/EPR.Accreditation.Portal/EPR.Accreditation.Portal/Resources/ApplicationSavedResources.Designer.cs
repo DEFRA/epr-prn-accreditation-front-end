@@ -97,7 +97,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can return to this application at any point over the next xx.
+        ///   Looks up a localized string similar to You can return to this application at any point over the next .
         /// </summary>
         public static string ParagraphTextP1 {
             get {
