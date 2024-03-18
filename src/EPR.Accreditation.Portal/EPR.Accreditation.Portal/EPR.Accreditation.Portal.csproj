@@ -23,6 +23,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\MasterResources.cy-GB.Designer.cs">
+      <DependentUpon>MasterResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\MasterResources.Designer.cs">
+      <DependentUpon>MasterResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\PhaseBannerResources.cy-GB.Designer.cs">
       <DependentUpon>PhaseBannerResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -43,6 +53,14 @@
   <ItemGroup>
     <EmbeddedResource Update="Resources\ApplicationSavedResources.cy-GB.resx">
       <LastGenOutput>ApplicationSavedResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MasterResources.cy-GB.resx">
+      <LastGenOutput>MasterResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MasterResources.resx">
+      <LastGenOutput>MasterResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PhaseBannerResources.cy-GB.resx">
