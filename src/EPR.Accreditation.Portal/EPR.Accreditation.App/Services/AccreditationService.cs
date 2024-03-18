@@ -2,7 +2,7 @@
 using EPR.Accreditation.App.ViewModels;
 using Microsoft.Extensions.Configuration;
 
-namespace EPR.Accreditation.Portal.Services
+namespace EPR.Accreditation.App.Services
 {
     public class AccreditationService : IAccreditationService
     {

@@ -1,5 +1,5 @@
-﻿using EPR.Accreditation.App.Services.Interfaces;
-using EPR.Accreditation.Portal.Services;
+﻿using EPR.Accreditation.App.Services;
+using EPR.Accreditation.App.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
