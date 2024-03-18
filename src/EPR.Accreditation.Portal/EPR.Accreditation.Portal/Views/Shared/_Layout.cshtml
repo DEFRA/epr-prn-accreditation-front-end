@@ -1,23 +1,16 @@
-<<<<<<< HEAD
 ﻿
 <!DOCTYPE html>
 <html lang="en-gb" class="govuk-template ">
-=======
-﻿@using EPR.Accreditation.App.Helpers.Interfaces
 @using EPR.Accreditation.Portal.ViewModels
-@inject IHttpContextAccessor httpContextAccessor
-@inject IQueryStringHelper queryStringHelper
-@inject ICultureHelper cultureHelper;
-@inject BackButtonViewModel backButtonViewModel;
 
 @{
-    var oppositeCultureValue = cultureHelper.GetCultureInfo();
-    var existingQueryStringParameters = queryStringHelper.RemoveCultureQueryString();
+    //var oppositeCultureValue = cultureHelper.GetCultureInfo();
+    //var existingQueryStringParameters = queryStringHelper.RemoveCultureQueryString();
 }
 
 <!DOCTYPE html>
-<html lang="@cultureHelper.ShortCultureCode()" class="govuk-template ">
->>>>>>> f1cdda25bb7b64b78bda4d63b7e3fc6a30167b41
+<html lang="" class="govuk-template ">
+
 <head>
     <meta charset="utf-8">
     <title>@ViewData["Title"] - GOV.UK</title>
@@ -65,11 +58,8 @@
                 </a>
             </div>
             <div class="govuk-header__navigation--end">
-<<<<<<< HEAD
+
                 
-=======
-                <a href="@Url.Action(null, null, new { culture = oppositeCultureValue })@existingQueryStringParameters" class="govuk-header__language">MasterResources.OppositeLanguage</a>
->>>>>>> f1cdda25bb7b64b78bda4d63b7e3fc6a30167b41
             </div>
         </div>
     </header>
@@ -77,7 +67,6 @@
         <div class="govuk-phase-banner">
             <p class="govuk-phase-banner__content">
                 <strong class="govuk-tag govuk-phase-banner__content__tag">
-<<<<<<< HEAD
                     @EPR.Accreditation.Portal.Resources.PhaseBannerResources.Tag
                 </strong>
                 <span class="govuk-phase-banner__text">
@@ -86,7 +75,6 @@
             </p>
         </div>
         
-=======
                    @*  @PhaseBannerResources.Tag *@
                 </strong>
                 <span class="govuk-phase-banner__text">
@@ -94,11 +82,7 @@
                 </span>
             </p>
         </div>
-        @if (backButtonViewModel.ShouldDisplay)
-        {
-          @*   <a href="@backButtonViewModel.PreviousUrl" class="govuk-back-link">@MasterResources.Back</a> *@
-        }
->>>>>>> f1cdda25bb7b64b78bda4d63b7e3fc6a30167b41
+        
         <main class="govuk-main-wrapper " id="main-content" role="main">
             @RenderBody()
         </main>
