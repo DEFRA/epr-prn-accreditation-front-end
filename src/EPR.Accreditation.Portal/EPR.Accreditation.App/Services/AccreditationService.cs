@@ -1,15 +1,14 @@
-﻿using EPR.Accreditation.App.Configuration;
-using EPR.Accreditation.App.Services.Interfaces;
+﻿using EPR.Accreditation.App.Services.Interfaces;
 using EPR.Accreditation.App.ViewModels;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 namespace EPR.Accreditation.Portal.Services
 {
     public class AccreditationService : IAccreditationService
     {
-        protected IOptions<AppConfigSettings> _configSettings;
+        private readonly IConfiguration _configSettings;
 
-        public AccreditationService(IOptions<AppConfigSettings> configSettings)
+        public AccreditationService(IConfiguration configSettings)
         {
             _configSettings = configSettings ?? throw new ArgumentNullException(nameof(configSettings));
         }
@@ -19,7 +18,7 @@ namespace EPR.Accreditation.Portal.Services
             return new ApplicationSavedViewModel
             {
                 Id = id,
-                ApplicationExpiry = _configSettings.Value.Application_Saved_Days_Amount
+                ApplicationExpiry = int.Parse(_configSettings["Days_Until_Expiration"])
             };
         }
     }
