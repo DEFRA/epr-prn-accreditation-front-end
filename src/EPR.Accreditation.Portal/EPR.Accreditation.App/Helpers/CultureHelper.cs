@@ -1,7 +1,7 @@
 ﻿using EPR.Accreditation.App.Helpers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
-using CultureConstants = EPRN.Common.Constants.CultureConstants;
+using CultureConstants = EPR.Accreditation.App.Constants.CultureConstants;
 
 namespace EPR.Accreditation.App.Helpers
 {
