@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EPR.Accreditation.Portal.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
@@ -15,6 +16,18 @@ namespace EPR.Accreditation.Portal.Controllers
         {
                 return View(
                     "WasteLicensesAndPermits");
+        }
+
+        [HttpPost]
+        [ActionName("WasteLicensesAndPermits")]
+        public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(wasteLicensesAndPermitsViewModel);
+
+
+            return View(
+                "WasteLicensesAndPermits");
         }
     }
 }
