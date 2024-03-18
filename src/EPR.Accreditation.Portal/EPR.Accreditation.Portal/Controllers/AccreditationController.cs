@@ -13,12 +13,12 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ApplicationSaved(int? id)
+        public IActionResult ApplicationSaved(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var viewModel = await _accreditationService.GetApplicationSavedViewModel(id.Value);
+            var viewModel = _accreditationService.GetApplicationSavedViewModel(id.Value);
 
             return View(viewModel);
         }

@@ -13,7 +13,7 @@ namespace EPR.Accreditation.Portal.Services
             _configSettings = configSettings ?? throw new ArgumentNullException(nameof(configSettings));
         }
 
-        public async Task<ApplicationSavedViewModel> GetApplicationSavedViewModel(int id)
+        public ApplicationSavedViewModel GetApplicationSavedViewModel(int id)
         {
             return new ApplicationSavedViewModel
             {
