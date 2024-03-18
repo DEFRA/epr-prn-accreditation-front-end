@@ -7,11 +7,11 @@
 }
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">
             <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
         </p>
-        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner govuk-notification-banner--success" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
             <div class="govuk-notification-banner__header">
                 <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
                     @ApplicationSavedResources.BannerTitle
@@ -21,18 +21,14 @@
                 <h3 class="govuk-notification-banner__heading">
                     @ApplicationSavedResources.BannerHeading
                 </h3>
-                <p class="govuk-body">
-                    @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
-                </p>
+                <p>@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")</p>
             </div>
         </div>
-        <p class="govuk-body">
-            @ApplicationSavedResources.ParagraphTextP1 @Model.ApplicationExpiry @ApplicationSavedResources.ParagraphTextP2
-        </p>
     </div>
 </div>
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-        <a href="/" class="govuk-button">@ApplicationSavedResources.BtnText</a>
-    </div>
-</div>
+
+<p class="govuk-body">
+    @ApplicationSavedResources.ParagraphTextP1 @Model.ApplicationExpiry @ApplicationSavedResources.ParagraphTextP2
+</p>
+
+<a href="/" class="govuk-button">@ApplicationSavedResources.BtnText</a>
