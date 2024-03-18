@@ -1,4 +1,5 @@
-﻿@using EPR.Accreditation.App.Helpers.Interfaces
+﻿@using EPR.Accreditation.Portal.Resources;
+@* @using EPR.Accreditation.App.Helpers.Interfaces
 @using EPR.Accreditation.App.ViewModels
 @inject IHttpContextAccessor httpContextAccessor
 @inject IQueryStringHelper queryStringHelper
@@ -9,9 +10,9 @@
     var oppositeCultureValue = cultureHelper.GetCultureInfo();
     var existingQueryStringParameters = queryStringHelper.RemoveCultureQueryString();
 }
-
+ *@
 <!DOCTYPE html>
-<html lang="@cultureHelper.ShortCultureCode()" class="govuk-template ">
+<html lang="en" class="govuk-template ">
 <head>
     <meta charset="utf-8">
     <title>@ViewData["Title"] - GOV.UK</title>
@@ -59,7 +60,6 @@
                 </a>
             </div>
             <div class="govuk-header__navigation--end">
-                <a href="@Url.Action(null, null, new { culture = oppositeCultureValue })@existingQueryStringParameters" class="govuk-header__language">MasterResources.OppositeLanguage</a>
             </div>
         </div>
     </header>
@@ -67,17 +67,13 @@
         <div class="govuk-phase-banner">
             <p class="govuk-phase-banner__content">
                 <strong class="govuk-tag govuk-phase-banner__content__tag">
-                   @*  @PhaseBannerResources.Tag *@
+                    @PhaseBannerResources.Tag
                 </strong>
                 <span class="govuk-phase-banner__text">
-                   @*  @PhaseBannerResources.BannerText_P1<a class="govuk-link" href="#">@PhaseBannerResources.BannerLinkText</a> @PhaseBannerResources.BannerText_P2 *@
+                    @PhaseBannerResources.BannerText_P1<a class="govuk-link" href="#">@PhaseBannerResources.BannerLinkText</a> @PhaseBannerResources.BannerText_P2
                 </span>
             </p>
         </div>
-        @if (backButtonViewModel.ShouldDisplay)
-        {
-          @*   <a href="@backButtonViewModel.PreviousUrl" class="govuk-back-link">@MasterResources.Back</a> *@
-        }
         <main class="govuk-main-wrapper " id="main-content" role="main">
             @RenderBody()
         </main>
