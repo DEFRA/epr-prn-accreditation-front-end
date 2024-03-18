@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EPR.Accreditation.Portal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80910a60a69c7b087029f2aeaa5ef7f89aa1401c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1d65ff2cf5c16802d03f59ac0feaedabcfe30768")]
 [assembly: System.Reflection.AssemblyProductAttribute("EPR.Accreditation.Portal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EPR.Accreditation.Portal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
