@@ -7,5 +7,5 @@ public class AppSettingsConfigOptions
 {
     public const string ConfigSection = "AppSettings";
 
-    public int? Days_Until_Expiration { get; set; }
+    public int? DaysUntilExpiration { get; set; }
 }

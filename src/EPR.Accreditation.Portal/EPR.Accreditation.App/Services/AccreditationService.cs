@@ -12,6 +12,8 @@ namespace EPR.Accreditation.App.Services
         public AccreditationService(IOptions<AppSettingsConfigOptions> configSettings)
         {
             _configSettings = configSettings ?? throw new ArgumentNullException(nameof(configSettings));
+            if (_configSettings.Value?.DaysUntilExpiration == null)
+                throw new ArgumentNullException(nameof(_configSettings.Value.DaysUntilExpiration));
         }
 
         public ApplicationSavedViewModel GetApplicationSavedViewModel(Guid id)
@@ -19,7 +21,7 @@ namespace EPR.Accreditation.App.Services
             return new ApplicationSavedViewModel
             {
                 Id = id,
-                ApplicationExpiry = (int)_configSettings.Value.Days_Until_Expiration
+                ApplicationExpiry = _configSettings.Value.DaysUntilExpiration.Value
             };
         }
     }

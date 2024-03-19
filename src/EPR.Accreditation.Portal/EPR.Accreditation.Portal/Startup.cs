@@ -50,7 +50,7 @@ namespace EPR.Accreditation.Portal
 
             // Register configuration options
             services.Configure<AppSettingsConfigOptions>(
-                Configuration.GetSection("AppSettings")
+                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
             );
         }
 
