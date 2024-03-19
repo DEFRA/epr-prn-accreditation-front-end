@@ -61,6 +61,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select yes if you hold a waste permit exemption.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you hold a waste permit exemption?.
         /// </summary>
         public static string PageHeading {

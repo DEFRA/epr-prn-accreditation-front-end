@@ -38,11 +38,24 @@ namespace EPR.Accreditation.Portal.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CheckWastePermitExemption(
-            PermitExemptionViewModel permitExemptionViewModel,
+            PermitExemptionViewModel viewModel,
             SaveButtonValues saveAndContinue)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
 
+            //await _accreditationService.SaveWastePermitExemption(viewModel);
+
+            if (saveAndContinue == SaveButtonValues.SaveAndContinue)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("ApplicationSaved", "Accreditation", new { viewModel.Id });
+            }
         }
     }
 }
