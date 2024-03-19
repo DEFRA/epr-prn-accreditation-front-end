@@ -1,10 +1,7 @@
-﻿@using EPR.Accreditation.Portal.Resources;
-@* @using EPR.Accreditation.App.Helpers.Interfaces
-@using EPR.Accreditation.App.ViewModels
-@inject IHttpContextAccessor httpContextAccessor
+﻿@using EPR.Accreditation.App.Helpers.Interfaces
+@using EPR.Accreditation.Portal.ViewModels
 @inject IQueryStringHelper queryStringHelper
 @inject ICultureHelper cultureHelper;
-@inject BackButtonViewModel backButtonViewModel;
 
 @{
     var oppositeCultureValue = cultureHelper.GetCultureInfo();
@@ -74,6 +71,10 @@
                 </span>
             </p>
         </div>
+        @if (true == false)
+        {
+          @*   <a href="@backButtonViewModel.PreviousUrl" class="govuk-back-link">@MasterResources.Back</a> *@
+        }
         <main class="govuk-main-wrapper " id="main-content" role="main">
             @RenderBody()
         </main>

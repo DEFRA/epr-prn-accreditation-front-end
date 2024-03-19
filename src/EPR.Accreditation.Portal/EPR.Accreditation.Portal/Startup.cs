@@ -1,6 +1,5 @@
-﻿using EPR.Accreditation.App.Options;
-using EPR.Accreditation.App.Services;
-using EPR.Accreditation.App.Services.Interfaces;
+﻿using EPR.Accreditation.App.Helpers;
+using EPR.Accreditation.App.Helpers.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
@@ -25,11 +24,13 @@ namespace EPR.Accreditation.Portal
                     .AddRazorRuntimeCompilation();
             }
 
+            services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddControllers();
             //services.AddDependencies(Configuration);
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddTransient<IAccreditationService, AccreditationService>();
+            services.AddScoped<ICultureHelper, CultureHelper>();
+            services.AddScoped<IQueryStringHelper, QueryStringHelper>();
 
             //var supportedCultures = new[]
             //{
