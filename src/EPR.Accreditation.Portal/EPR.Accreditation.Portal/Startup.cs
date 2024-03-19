@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using EPRN.Portal.RESTServices;
+using EPRN.Portal.RESTServices.Interfaces;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace EPR.Accreditation.Portal
 {
@@ -15,6 +20,8 @@ namespace EPR.Accreditation.Portal
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+
             if (Environment.IsDevelopment())
             {
                 services
@@ -26,6 +33,23 @@ namespace EPR.Accreditation.Portal
             services.AddControllers();
             //services.AddDependencies(Configuration);
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            
+            services.AddHttpContextAccessor();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => sp.GetService<IHttpContextAccessor>().HttpContext.Session);
+
+
+            //services.AddTransient<IHttpAccreditationService, HttpAccreditationService>();
+
+
+            services.AddTransient<IHttpAccreditationService>(s =>
+                     new HttpAccreditationService(
+                         s.GetRequiredService<IHttpContextAccessor>(),
+                         s.GetRequiredService<IHttpClientFactory>(),
+                         "https://localhost:7102/api",
+                         "Accreditation"));
+        //https://localhost:7102/api/Accreditation/6E04132D-9E52-4853-BE1E-D48C2DCA82BA
+
 
             //var supportedCultures = new[]
             //{

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
+    "net8.0": {
       "Microsoft.AspNetCore.Mvc.Razor.Extensions/6.0.25": {
         "type": "package",
         "dependencies": {
@@ -355,6 +355,16 @@
         },
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
+        }
+      },
+      "EPR.Accreditation.API.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/EPR.Accreditation.API.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPR.Accreditation.API.Common.dll": {}
         }
       }
     }
@@ -1017,10 +1027,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "EPR.Accreditation.API.Common/1.0.0": {
+      "type": "project",
+      "path": "../../../../epr-prn-accreditation-back-end/src/EPR.Accreditation.API.Common/EPR.Accreditation.API.Common.csproj",
+      "msbuildProject": "../../../../epr-prn-accreditation-back-end/src/EPR.Accreditation.API.Common/EPR.Accreditation.API.Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    "net8.0": [
+      "EPR.Accreditation.API.Common >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 6.0.25",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.19.5"
     ]
@@ -1047,7 +1063,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net8.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -1055,9 +1071,13 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "projectReferences": {}
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "C:\\Projects\\Repos\\DEFRA\\epr-prn-accreditation-back-end\\src\\EPR.Accreditation.API.Common\\EPR.Accreditation.API.Common.csproj": {
+              "projectPath": "C:\\Projects\\Repos\\DEFRA\\epr-prn-accreditation-back-end\\src\\EPR.Accreditation.API.Common\\EPR.Accreditation.API.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1072,8 +1092,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net8.0": {
+        "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
             "target": "Package",
@@ -1103,7 +1123,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
