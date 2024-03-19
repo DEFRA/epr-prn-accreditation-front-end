@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.App.Services;
+﻿using EPR.Accreditation.App.Options;
+using EPR.Accreditation.App.Services;
 using EPR.Accreditation.App.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -46,6 +47,11 @@ namespace EPR.Accreditation.Portal
             //        opts.SupportedCultures = supportedCultures;
             //        opts.SupportedUICultures = supportedCultures;
             //    });
+
+            // Register configuration options
+            services.Configure<AppSettingsConfigOptions>(
+                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

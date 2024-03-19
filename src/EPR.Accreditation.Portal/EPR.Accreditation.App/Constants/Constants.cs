@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace EPRN.Common.Constants;
+namespace EPR.Accreditation.App.Constants;
 
 public static class CultureConstants
 {
