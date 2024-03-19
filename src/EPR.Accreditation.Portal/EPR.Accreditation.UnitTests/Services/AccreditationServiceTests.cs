@@ -1,38 +1,45 @@
-﻿//using EPR.Accreditation.App.Services;
-//using Microsoft.Extensions.Configuration;
-//using Moq;
+﻿using EPR.Accreditation.App.Options;
+using EPR.Accreditation.App.Services;
+using Microsoft.Extensions.Options;
+using Moq;
 
+namespace EPR.Accreditation.UnitTests.Services
+{
+    [TestClass]
+    public class AccreditationServiceTests
+    {
+        private AccreditationService? _accreditationService;
+        private Mock<IOptions<AppSettingsConfigOptions>>? _mockConfigSettings;
 
-//namespace EPR.Accreditation.UnitTests.Services
-//{
-//    [TestClass]
-//    public class AccreditationServiceTests
-//    {
-//        private Mock<IConfiguration>? _mockConfigSettings;
-//        private AccreditationService? _accreditationService;
+        [TestInitialize]
+        public void Init()
+        {
+            var mockConfig = new AppSettingsConfigOptions
+            {
+                DaysUntilExpiration = 30
+            };
 
-//        [TestInitialize]
-//        public void Init()
-//        {
-//            _mockConfigSettings = new Mock<IConfiguration>();
-//            _accreditationService = new AccreditationService(_mockConfigSettings.Object);
-//        }
+            _mockConfigSettings = new Mock<IOptions<AppSettingsConfigOptions>>();
+            _mockConfigSettings.Setup(o => o.Value).Returns(mockConfig);
 
-//        [TestMethod]
-//        public void GetApplicationSavedViewModel_ReturnsCorrectViewModel()
-//        {
-//            _mockConfigSettings.Setup(config => config["Days_Until_Expiration"]).Returns("30");
+            _accreditationService = new AccreditationService(_mockConfigSettings.Object);
 
+        }
 
+        [TestMethod]
+        public void GetApplicationSavedViewModel_ReturnsCorrectViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
 
-//            // Act
+            // Act
+            var result = _accreditationService?.GetApplicationSavedViewModel(id);
 
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(id, result.Id);
+            Assert.AreEqual(30, result.ApplicationExpiry);
 
-
-//            // Assert
-
-//        }
-
-
-//    }
-//}
+        }
+    }
+}
