@@ -4,6 +4,6 @@ namespace EPR.Accreditation.App.Services.Interfaces
 {
     public interface IAccreditationService
     {
-        ApplicationSavedViewModel GetApplicationSavedViewModel(int id);
+        ApplicationSavedViewModel GetApplicationSavedViewModel(Guid id);
     }
 }

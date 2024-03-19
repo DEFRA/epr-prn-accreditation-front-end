@@ -13,7 +13,7 @@ namespace EPR.Accreditation.App.Services
             _configSettings = configSettings ?? throw new ArgumentNullException(nameof(configSettings));
         }
 
-        public ApplicationSavedViewModel GetApplicationSavedViewModel(int id)
+        public ApplicationSavedViewModel GetApplicationSavedViewModel(Guid id)
         {
             return new ApplicationSavedViewModel
             {

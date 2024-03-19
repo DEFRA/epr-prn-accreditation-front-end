@@ -23,21 +23,21 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public void ApplicationSaved_ReturnsNotFound_WithNullId()
         {
             // Arrange
-            int? id = null;
+            Guid? id = null;
 
             // Act
             var result = _accreditationController.ApplicationSaved(id);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
-            _mockAccreditationService.Verify(service => service.GetApplicationSavedViewModel(It.IsAny<int>()), Times.Never);
+            _mockAccreditationService.Verify(service => service.GetApplicationSavedViewModel(It.IsAny<Guid>()), Times.Never);
         }
 
         [TestMethod]
         public void ApplicationSaved_ReturnsCorrectly_WithValidId()
         {
             // Arrange
-            int id = 1;
+            Guid id = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
             var viewModel = new ApplicationSavedViewModel();
 
             _mockAccreditationService.Setup(service => service.GetApplicationSavedViewModel(id)).Returns(viewModel);
