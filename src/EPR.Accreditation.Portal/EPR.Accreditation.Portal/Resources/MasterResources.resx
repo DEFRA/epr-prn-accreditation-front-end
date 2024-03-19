@@ -120,4 +120,16 @@
   <data name="BackLink" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SaveAndComeBackLater" xml:space="preserve">
+    <value>Save and come back later</value>
+  </data>
+  <data name="SaveAndContinue" xml:space="preserve">
+    <value>Save and continue</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

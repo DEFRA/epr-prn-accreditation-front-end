@@ -1,4 +1,6 @@
-﻿using EPR.Accreditation.App.Services.Interfaces;
+﻿using EPR.Accreditation.App.Enums;
+using EPR.Accreditation.App.Services.Interfaces;
+using EPR.Accreditation.App.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
@@ -13,7 +15,7 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpGet]
-        public IActionResult ApplicationSaved(int? id)
+        public IActionResult ApplicationSaved(int? id) //TODO: CHANGE THIS
         {
             if (id == null)
                 return NotFound();
@@ -21,6 +23,26 @@ namespace EPR.Accreditation.Portal.Controllers
             var viewModel = _accreditationService.GetApplicationSavedViewModel(id.Value);
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            //var viewModel = _accreditationService.GetPermitExemptionViewModel(id.Value);
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckWastePermitExemption(
+            PermitExemptionViewModel permitExemptionViewModel,
+            SaveButtonValues saveAndContinue)
+        {
+            return View();
+
         }
     }
 }

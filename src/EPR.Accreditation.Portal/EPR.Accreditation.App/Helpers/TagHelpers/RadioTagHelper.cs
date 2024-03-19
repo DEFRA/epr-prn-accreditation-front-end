@@ -1,0 +1,79 @@
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.ComponentModel.DataAnnotations;
+
+namespace EPR.Accreditation.App.Helpers.TagHelpers
+{
+    [HtmlTargetElement("radios", TagStructure = TagStructure.NormalOrSelfClosing)]
+    public class RadioTagHelper : TagHelper
+    {
+        [HtmlAttributeName("asp-title")]
+        public string Title { get; set; }
+
+        public ModelExpression AspFor { get; set; }
+
+        [HtmlAttributeNotBound]
+        [ViewContext]
+        public ViewContext ViewContext { get; set; }
+
+        private readonly IHtmlGenerator _generator;
+
+        public override int Order => 1;
+
+        public RadioTagHelper(
+            IHtmlGenerator generator) : base()
+        {
+            _generator = generator;
+        }
+
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            if (AspFor == null)
+                return;
+
+            output.TagName = "div";
+            output.Attributes.Add("class", "govuk-form-group");
+
+            var container = new TagBuilder("fieldset");
+            container.AddCssClass("govuk-fieldset");
+            container.InnerHtml.AppendHtml(AddTitle());
+
+            var radioOptionContainer = new TagBuilder("div");
+            radioOptionContainer.AddCssClass("govuk-radios");
+            radioOptionContainer.Attributes.Add("data-module", "govuk-radios");
+
+            // see if we have a required attribute for the property we're saving into
+            var requiredAttribute = AspFor
+                .Metadata?
+                .ContainerType?
+                .GetProperty(AspFor.Name)?
+                .GetCustomAttributes(typeof(RequiredAttribute), false)
+                .FirstOrDefault() as RequiredAttribute;
+
+            var children = await output.GetChildContentAsync();
+            string content = children.GetContent();
+            container.InnerHtml.AppendHtml(content);
+
+            container.InnerHtml.AppendHtml(radioOptionContainer);
+            output.Content.AppendHtml(container);
+            output.TagMode = TagMode.StartTagAndEndTag;
+
+            await base.ProcessAsync(context, output);
+        }
+
+        private TagBuilder AddTitle()
+        {
+            var builder = new TagBuilder("legend");
+            builder.AddCssClass("govuk-fieldset__legend govuk-fieldset__legend--l");
+
+            var h1Builder = new TagBuilder("h1");
+            h1Builder.AddCssClass("govuk-fieldset__heading");
+            h1Builder.InnerHtml.AppendHtml(Title);
+
+            builder.InnerHtml.AppendHtml(h1Builder);
+
+            return builder;
+        }
+    }
+}
