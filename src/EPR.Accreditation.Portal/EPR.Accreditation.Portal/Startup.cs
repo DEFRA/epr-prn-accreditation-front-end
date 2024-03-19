@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using EPR.Accreditation.App.Options;
+using EPR.Accreditation.App.Services;
+using EPR.Accreditation.App.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
 {
@@ -26,6 +29,7 @@ namespace EPR.Accreditation.Portal
             services.AddControllers();
             //services.AddDependencies(Configuration);
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddTransient<IAccreditationService, AccreditationService>();
 
             //var supportedCultures = new[]
             //{
@@ -43,6 +47,11 @@ namespace EPR.Accreditation.Portal
             //        opts.SupportedCultures = supportedCultures;
             //        opts.SupportedUICultures = supportedCultures;
             //    });
+
+            // Register configuration options
+            services.Configure<AppSettingsConfigOptions>(
+                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

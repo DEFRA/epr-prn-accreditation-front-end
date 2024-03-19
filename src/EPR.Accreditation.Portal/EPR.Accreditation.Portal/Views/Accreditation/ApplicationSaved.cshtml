@@ -1,0 +1,34 @@
+﻿@model ApplicationSavedViewModel;
+@using EPR.Accreditation.Portal.Resources;
+@using EPR.Accreditation.App.ViewModels;
+
+@{
+    ViewData["Title"] = @ApplicationSavedResources.PageTitle;
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">
+            <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+        </p>
+        <div class="govuk-notification-banner govuk-notification-banner--success" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    @ApplicationSavedResources.BannerTitle
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                    @ApplicationSavedResources.BannerHeading
+                </h3>
+                <p>@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="govuk-body">
+    @ApplicationSavedResources.ParagraphTextP1 @Model.ApplicationExpiry @ApplicationSavedResources.ParagraphTextP2
+</p>
+
+<a href="/" class="govuk-button">@ApplicationSavedResources.BtnText</a>

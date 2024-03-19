@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>cb5be479-98ed-40d6-91a5-7f4a9e8d3ee8</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -14,11 +13,67 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\EPR.Accreditation.App\EPR.Accreditation.App.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EPR.Accreditation.App\EPR.Accreditation.App.csproj" />
+    <Compile Update="Resources\ApplicationSavedResources.cy-GB.Designer.cs">
+      <DependentUpon>ApplicationSavedResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\MasterResources.cy-GB.Designer.cs">
+      <DependentUpon>MasterResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\MasterResources.Designer.cs">
+      <DependentUpon>MasterResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\PhaseBannerResources.cy-GB.Designer.cs">
+      <DependentUpon>PhaseBannerResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\PhaseBannerResources.Designer.cs">
+      <DependentUpon>PhaseBannerResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ApplicationSavedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApplicationSavedResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ApplicationSavedResources.cy-GB.resx">
+      <LastGenOutput>ApplicationSavedResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MasterResources.cy-GB.resx">
+      <LastGenOutput>MasterResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MasterResources.resx">
+      <LastGenOutput>MasterResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PhaseBannerResources.cy-GB.resx">
+      <LastGenOutput>PhaseBannerResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PhaseBannerResources.resx">
+      <LastGenOutput>PhaseBannerResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ApplicationSavedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationSavedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
