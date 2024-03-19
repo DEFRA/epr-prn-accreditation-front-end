@@ -2,7 +2,7 @@
 {
     public class ApplicationSavedViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int ApplicationExpiry { get; set; }
     }
 }

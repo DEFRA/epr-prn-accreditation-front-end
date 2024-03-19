@@ -15,7 +15,7 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpGet]
-        public IActionResult ApplicationSaved(int? id) //TODO: CHANGE THIS
+        public IActionResult ApplicationSaved(Guid? id)
         {
             if (id == null)
                 return NotFound();
