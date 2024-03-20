@@ -27,7 +27,7 @@ public static class MultipartRequestHelpers
                && contentType.Contains("multipart/", StringComparison.OrdinalIgnoreCase);
     }
 
-    public static bool HasFileContentDisposition(ContentDispositionHeaderValue? contentDisposition)
+    public static bool HasFileContentDisposition(ContentDispositionHeaderValue contentDisposition)
     {
         return contentDisposition != null && contentDisposition.DispositionType.Equals("form-data");
     }
