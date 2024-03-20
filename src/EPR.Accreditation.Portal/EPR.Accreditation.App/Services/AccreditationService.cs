@@ -25,7 +25,7 @@ namespace EPR.Accreditation.App.Services
             };
         }
 
-        public WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id)
+        public async Task<WasteLicensesAndPermitsViewModel> GetWasteLicensesAndPermitsViewModel(Guid id)
         {
             return new WasteLicensesAndPermitsViewModel
             {
@@ -33,7 +33,7 @@ namespace EPR.Accreditation.App.Services
             };
         }
 
-        public Task SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode)
+        public async Task<Task> SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode)
         {
             return Task.CompletedTask;
         }

@@ -32,7 +32,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 id = Guid.NewGuid();
                 //return NotFound();
 
-            var viewModel = _accreditationService.GetWasteLicensesAndPermitsViewModel(id.Value);
+            var viewModel = await _accreditationService.GetWasteLicensesAndPermitsViewModel(id.Value);
 
             return View(viewModel);
         }
@@ -44,7 +44,7 @@ namespace EPR.Accreditation.Portal.Controllers
             if (!ModelState.IsValid)
                 return View(wasteLicensesAndPermitsViewModel);
 
-            _accreditationService.SaveWasteLicensesAndPermitsViewMode(wasteLicensesAndPermitsViewModel);
+            await _accreditationService.SaveWasteLicensesAndPermitsViewMode(wasteLicensesAndPermitsViewModel);
 
             return View(wasteLicensesAndPermitsViewModel);
         }
