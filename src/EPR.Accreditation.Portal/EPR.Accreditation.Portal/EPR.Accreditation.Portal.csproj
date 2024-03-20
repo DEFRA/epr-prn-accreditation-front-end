@@ -47,6 +47,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApplicationSavedResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\WasteLicensesAndPermitsResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WasteLicensesAndPermitsResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -73,6 +78,10 @@
     <EmbeddedResource Update="Resources\ApplicationSavedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationSavedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteLicensesAndPermitsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteLicensesAndPermitsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
