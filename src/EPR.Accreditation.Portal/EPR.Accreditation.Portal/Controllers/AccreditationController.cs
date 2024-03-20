@@ -26,24 +26,27 @@ namespace EPR.Accreditation.Portal.Controllers
 
         [HttpGet]
         [ActionName("WasteLicensesAndPermits")]
-        public async Task<IActionResult> WasteLicensesAndPermits(int? id)
+        public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
-            return View(
-                "WasteLicensesAndPermits");
+            if (id == null)
+                id = Guid.NewGuid();
+                //return NotFound();
+
+            var viewModel = _accreditationService.GetWasteLicensesAndPermitsViewModel(id.Value);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ActionName("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
         {
-            //if (!ModelState.IsValid)
-            //    return View(wasteLicensesAndPermitsViewModel);
+            if (!ModelState.IsValid)
+                return View(wasteLicensesAndPermitsViewModel);
 
-            //var accreditation = _httpAccreditationServicel.GetAccreditation("6E04132D-9E52-4853-BE1E-D48C2DCA82BA");
-            //_httpAccreditationServicel.CreateWastePermit(1, 1);
+            _accreditationService.SaveWasteLicensesAndPermitsViewMode(wasteLicensesAndPermitsViewModel);
 
-            return View(
-                "WasteLicensesAndPermits");
+            return View(wasteLicensesAndPermitsViewModel);
         }
     }
 }

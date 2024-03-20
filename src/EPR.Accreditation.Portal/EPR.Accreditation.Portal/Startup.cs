@@ -2,6 +2,8 @@
 using EPR.Accreditation.App.Helpers;
 using EPR.Accreditation.App.Helpers.Interfaces;
 using EPR.Accreditation.App.Options;
+using EPR.Accreditation.App.Services;
+using EPR.Accreditation.App.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
@@ -55,6 +57,8 @@ namespace EPR.Accreditation.Portal
             services.Configure<AppSettingsConfigOptions>(
                 Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
             );
+
+            services.AddTransient<IAccreditationService, AccreditationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
