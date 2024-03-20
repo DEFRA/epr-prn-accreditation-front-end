@@ -1,5 +1,5 @@
 ﻿@using EPR.Accreditation.App.Helpers.Interfaces
-@using EPR.Accreditation.Portal.ViewModels
+@using EPR.Accreditation.Portal.Resources
 @inject IQueryStringHelper queryStringHelper
 @inject ICultureHelper cultureHelper;
 
@@ -7,7 +7,7 @@
     var oppositeCultureValue = cultureHelper.GetCultureInfo();
     var existingQueryStringParameters = queryStringHelper.RemoveCultureQueryString();
 }
- *@
+
 <!DOCTYPE html>
 <html lang="en" class="govuk-template ">
 <head>

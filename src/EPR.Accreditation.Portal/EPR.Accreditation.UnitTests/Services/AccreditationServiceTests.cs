@@ -8,8 +8,8 @@ namespace EPR.Accreditation.UnitTests.Services
     [TestClass]
     public class AccreditationServiceTests
     {
-        private AccreditationService? _accreditationService;
-        private Mock<IOptions<AppSettingsConfigOptions>>? _mockConfigSettings;
+        private AccreditationService _accreditationService;
+        private Mock<IOptions<AppSettingsConfigOptions>> _mockConfigSettings;
 
         [TestInitialize]
         public void Init()

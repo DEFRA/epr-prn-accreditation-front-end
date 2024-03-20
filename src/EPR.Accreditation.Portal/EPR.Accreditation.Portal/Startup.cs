@@ -1,5 +1,7 @@
-﻿using EPR.Accreditation.App.Helpers;
+﻿using EPR.Accreditation.App.Constants;
+using EPR.Accreditation.App.Helpers;
 using EPR.Accreditation.App.Helpers.Interfaces;
+using EPR.Accreditation.App.Options;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
@@ -32,11 +34,11 @@ namespace EPR.Accreditation.Portal
             services.AddScoped<ICultureHelper, CultureHelper>();
             services.AddScoped<IQueryStringHelper, QueryStringHelper>();
 
-            //var supportedCultures = new[]
-            //{
-            //        CultureConstants.English,
-            //        CultureConstants.Welsh
-            //    };
+            var supportedCultures = new[]
+            {
+                    CultureConstants.English,
+                    CultureConstants.Welsh
+                };
             services.AddLocalization(opts =>
             {
                 opts.ResourcesPath = "Resources";
