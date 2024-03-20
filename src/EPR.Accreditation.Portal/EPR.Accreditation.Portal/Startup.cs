@@ -38,19 +38,13 @@ namespace EPR.Accreditation.Portal
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => sp.GetService<IHttpContextAccessor>().HttpContext.Session);
 
-
-            //services.AddTransient<IHttpAccreditationService, HttpAccreditationService>();
-
-
             services.AddTransient<IHttpAccreditationService>(s =>
                      new HttpAccreditationService(
                          s.GetRequiredService<IHttpContextAccessor>(),
                          s.GetRequiredService<IHttpClientFactory>(),
                          "https://localhost:7102/api",
                          "Accreditation"));
-        //https://localhost:7102/api/Accreditation/6E04132D-9E52-4853-BE1E-D48C2DCA82BA
-
-
+        
             //var supportedCultures = new[]
             //{
             //        CultureConstants.English,

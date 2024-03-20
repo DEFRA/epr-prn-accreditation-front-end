@@ -29,5 +29,10 @@ namespace EPRN.Portal.RESTServices
         {
             return await Get<Accreditation?>($"{id}");
         }
+
+        public async Task<Accreditation> SaveAccreditation(string id)
+        {
+            return await Put<Accreditation>($"{id}");
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using EPR.Accreditation.Portal.ViewModels;
-using EPRN.Portal.RESTServices;
 using EPRN.Portal.RESTServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +10,6 @@ namespace EPR.Accreditation.Portal.Controllers
 
         public HomeController()
         {
-
         }
 
         [ActivatorUtilitiesConstructor]
@@ -29,8 +27,8 @@ namespace EPR.Accreditation.Portal.Controllers
         [ActionName("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(int? id)
         {
-                return View(
-                    "WasteLicensesAndPermits");
+            return View(
+                "WasteLicensesAndPermits");
         }
 
         [HttpPost]
