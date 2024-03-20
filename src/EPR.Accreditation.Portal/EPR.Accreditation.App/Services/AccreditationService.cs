@@ -24,5 +24,18 @@ namespace EPR.Accreditation.App.Services
                 ApplicationExpiry = _configSettings.Value.DaysUntilExpiration.Value
             };
         }
+
+        public WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id)
+        {
+            return new WasteLicensesAndPermitsViewModel
+            {
+                Id = id,
+            };
+        }
+
+        public Task SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
