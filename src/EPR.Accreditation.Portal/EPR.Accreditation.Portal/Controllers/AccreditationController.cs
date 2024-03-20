@@ -44,7 +44,6 @@ namespace EPR.Accreditation.Portal.Controllers
             if (!ModelState.IsValid)
                 return View(wasteLicensesAndPermitsViewModel);
 
-
             _accreditationService.SaveWasteLicensesAndPermits(wasteLicensesAndPermitsViewModel);
 
             return View(wasteLicensesAndPermitsViewModel);
