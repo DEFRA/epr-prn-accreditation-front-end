@@ -1,7 +1,7 @@
-﻿using EPR.Accreditation.App.Constants;
-using EPR.Accreditation.App.Helpers;
-using EPR.Accreditation.App.Helpers.Interfaces;
-using EPR.Accreditation.App.Options;
+﻿using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Helpers;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
+using EPR.Accreditation.Portal.Options;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal

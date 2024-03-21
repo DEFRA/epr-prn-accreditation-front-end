@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EPR.Accreditation.App\EPR.Accreditation.App.csproj" />
     <ProjectReference Include="..\EPR.Accreditation.Portal\EPR.Accreditation.Portal.csproj" />
   </ItemGroup>
 

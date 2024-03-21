@@ -1,4 +1,4 @@
-﻿using EPR.Accreditation.App.Services.Interfaces;
+﻿using EPR.Accreditation.Portal.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
