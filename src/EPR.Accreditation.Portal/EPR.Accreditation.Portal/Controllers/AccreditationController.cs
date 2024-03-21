@@ -1,5 +1,5 @@
-﻿using EPR.Accreditation.App.Services.Interfaces;
-using EPR.Accreditation.App.ViewModels;
+﻿using EPR.Accreditation.Portal.Services.Interfaces;
+using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers

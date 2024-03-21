@@ -1,5 +1,6 @@
-﻿using EPR.Accreditation.App.Options;
-using EPR.Accreditation.App.Services;
+﻿
+using EPR.Accreditation.Portal.Options;
+using EPR.Accreditation.Portal.Services;
 using Microsoft.Extensions.Options;
 using Moq;
 
