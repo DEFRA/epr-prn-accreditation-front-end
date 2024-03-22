@@ -70,6 +70,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm the source before moving.
+        /// </summary>
+        public static string NoSourceSupplied {
+            get {
+                return ResourceManager.GetString("NoSourceSupplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Who do you source this waste from?.
         /// </summary>
         public static string PageTitle {

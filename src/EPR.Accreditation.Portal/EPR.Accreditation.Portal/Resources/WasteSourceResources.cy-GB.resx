@@ -120,6 +120,9 @@
   <data name="InfoText" xml:space="preserve">
     <value>[Welsh]Provide a list of UK businesses you source packaging from, including a brief description of what each business does, such as 'Trading Co, a supermarket chain'.</value>
   </data>
+  <data name="NoSourceSupplied" xml:space="preserve">
+    <value>[Welsh]Confirm the source before moving</value>
+  </data>
   <data name="PageTitle" xml:space="preserve">
     <value>[Welsh]Who do you source this waste from?</value>
   </data>

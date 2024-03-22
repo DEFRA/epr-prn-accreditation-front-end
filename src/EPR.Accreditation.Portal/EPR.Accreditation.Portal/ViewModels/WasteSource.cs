@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EPR.Accreditation.Portal.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace EPR.Accreditation.Portal.ViewModels
 {
@@ -10,7 +11,8 @@ namespace EPR.Accreditation.Portal.ViewModels
 
         public Guid MaterialId { get; set; }
 
-        [StringLength(500)]
+        [Required(ErrorMessageResourceType = typeof(WasteSourceResources), ErrorMessageResourceName = "NoSourceSupplied")]
+        [StringLength(200)]
         public string WasteSource { get; set; }
     }
 }

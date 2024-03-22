@@ -117,19 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLink" xml:space="preserve">
-    <value>[Welsh]Back</value>
+  <data name="charactersAtLimit" xml:space="preserve">
+    <value>You have 0 characters remaining</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>[Welsh]For:</value>
+  <data name="charactersOverLimitOne" xml:space="preserve">
+    <value>You have %{count} character too many</value>
   </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>English</value>
+  <data name="charactersOverLimitOther" xml:space="preserve">
+    <value>You have %{count} characters too many</value>
   </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>[Welsh]Save and come back later</value>
+  <data name="charactersUnderLimitOne" xml:space="preserve">
+    <value>You have %{count} character remaining</value>
   </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>[Welsh]Save and continue</value>
+  <data name="charactersUnderLimitOther" xml:space="preserve">
+    <value>You have %{count} characters remaining</value>
+  </data>
+  <data name="hideSection" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="showSection" xml:space="preserve">
+    <value>Show</value>
   </data>
 </root>

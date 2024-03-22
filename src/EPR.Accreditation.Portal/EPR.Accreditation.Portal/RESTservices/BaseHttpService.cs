@@ -145,6 +145,7 @@ namespace EPR.Accreditation.Portal.RESTservices
                     content = await streamReader.ReadToEndAsync();
                 }
 
+                _httpContextAccessor.HttpContext.Response.StatusCode = (int)response.StatusCode;
                 // set the response status code and throw the exception for the middleware to handle
                 throw new Exception(content);
             }
