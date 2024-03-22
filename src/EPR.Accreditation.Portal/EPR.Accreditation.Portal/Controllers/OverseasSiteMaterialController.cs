@@ -14,23 +14,31 @@ namespace EPR.Accreditation.Portal.Controllers
         {
         }
 
-        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}")]
-        public override async Task<IActionResult> MaterialWasteSource(
+        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteSource")]
+        public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
             Guid? siteId,
             Guid? materialId)
         {
-            return await base.MaterialWasteSource(
+            return await GetMaterialWasteSource(
                 id,
                 siteId,
                 materialId);
         }
 
-        [HttpPost("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}")]
-        public override async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
+        [HttpPost("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteSource")]
+        public async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
         {
-            return await base.MaterialWasteSource(viewModel);
+            return await SaveMaterialWasteSource(viewModel);
         }
 
+        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/ProcessingCapacity", Name = "OverseasSiteProcessingCapacity")]
+        public IActionResult EnterProcessingCapacity(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            return NotFound();
+        }
     }
 }
