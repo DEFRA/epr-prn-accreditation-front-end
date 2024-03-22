@@ -1,7 +1,10 @@
 ﻿using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Helpers;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Options;
+using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
@@ -29,10 +32,7 @@ namespace EPR.Accreditation.Portal
             services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddControllers();
-            //services.AddDependencies(Configuration);
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<ICultureHelper, CultureHelper>();
-            services.AddScoped<IQueryStringHelper, QueryStringHelper>();
+            services.AddPortalDependencies(Configuration);
 
             var supportedCultures = new[]
             {
