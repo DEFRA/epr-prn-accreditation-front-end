@@ -14,14 +14,14 @@ namespace EPR.Accreditation.Portal.Controllers
         {
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
-        public override async Task<IActionResult> MaterialWasteSource(
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource")]
+        public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
             Guid? siteId,
             Guid? materialId)
         {
             if (id != null && siteId != null && materialId != null)
-                return await base.MaterialWasteSource(
+                return await GetMaterialWasteSource(
                     id.Value,
                     siteId.Value,
                     materialId.Value);
@@ -29,10 +29,20 @@ namespace EPR.Accreditation.Portal.Controllers
                 return NotFound();
         }
 
-        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
-        public override async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
+        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource")]
+        public async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
         {
-            return await base.MaterialWasteSource(viewModel);
+            return await SaveMaterialWasteSource(viewModel);
         }
+
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/ProcessingCapacity", Name = "SiteProcessingCapacity")]
+        public IActionResult EnterProcessingCapacity(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            return NotFound();
+        }
+
     }
 }

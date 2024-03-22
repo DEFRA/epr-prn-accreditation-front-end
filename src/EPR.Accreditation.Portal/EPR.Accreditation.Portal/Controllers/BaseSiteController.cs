@@ -21,7 +21,7 @@ namespace EPR.Accreditation.Portal.Controllers
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
         }
 
-        public virtual async Task<IActionResult> MaterialWasteSource(
+        protected async Task<IActionResult> GetMaterialWasteSource(
             Guid? id,
             Guid? siteId,
             Guid? materialId)
@@ -32,11 +32,11 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         
-        public virtual async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
+        protected async Task<IActionResult> SaveMaterialWasteSource(WasteSourceViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await MaterialWasteSource(
+                return await GetMaterialWasteSource(
                     viewModel.Id,
                     viewModel.SiteId,
                     viewModel.MaterialId);
@@ -44,7 +44,24 @@ namespace EPR.Accreditation.Portal.Controllers
 
             await _accreditationSiteMaterialService.UpdateWasteSource(viewModel);
 
-            return View();
+            var routeName = string.Empty;
+
+            if(_siteType == SiteType.Site)
+            {
+                routeName = "SiteProcessingCapacity";
+            }
+            else
+            {
+                routeName = "OverseasSiteProcessingCapacity";
+            }
+
+            return RedirectToRoute(routeName,
+                new
+                {
+                    viewModel.Id,
+                    viewModel.SiteId,
+                    viewModel.MaterialId
+                });
         }
     }
 }
