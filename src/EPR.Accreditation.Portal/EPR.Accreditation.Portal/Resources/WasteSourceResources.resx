@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLink" xml:space="preserve">
-    <value>Back</value>
+  <data name="InfoText" xml:space="preserve">
+    <value>Provide a list of UK businesses you source packaging from, including a brief description of what each business does, such as 'Trading Co, a supermarket chain'.</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>For:</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Who do you source this waste from?</value>
   </data>
 </root>
