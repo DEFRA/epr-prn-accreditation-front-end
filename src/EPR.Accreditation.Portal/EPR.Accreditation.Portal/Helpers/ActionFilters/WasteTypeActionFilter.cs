@@ -29,15 +29,23 @@ namespace EPR.Accreditation.Portal.Helpers.ActionFilters
 
 
             if (!Guid.TryParse((string)idValue, out var id) ||
-                !Guid.TryParse((string)idValue, out var siteId) ||
-                !Guid.TryParse((string)idValue, out var materialId))
+                !Guid.TryParse((string)siteIdValue, out var siteId) ||
+                !Guid.TryParse((string)materialIdValue, out var materialId))
                 return;
 
-            //var wasteName = Task.Run(async () => await _accreditationSiteMaterialService.GetWasteName(
-            //    id,
-            //    siteId,
-            //    materialId)).Result;
-            //wasteCommonViewModel.Name = wasteName;
+            try
+            {
+                var wasteName = Task.Run(async () => await _accreditationSiteMaterialService.GetWasteName(
+                    id,
+                    siteId,
+                    materialId)).Result;
+                wasteCommonViewModel.Name = wasteName;
+            }
+            catch
+            {
+                // don't do anything here. We'll log the error further down, and any 400s or 401s do not
+                // report to the browser correctly here
+            }
         }
     }
 }

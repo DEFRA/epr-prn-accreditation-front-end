@@ -8,9 +8,7 @@
 }
 
 <form method="post">
-    <span class="govuk-caption-l">
-        @MasterResources.MaterialForLabel @materialTypeViewModel.Name
-    </span>
+    <partial name="_WasteMaterialName" />
     <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
         <div class="govuk-form-group">
             <p class="govuk-error-message">
@@ -29,7 +27,7 @@
                     </div>
                     <textarea class="govuk-textarea govuk-js-character-count" asp-for="WasteSource" rows="5" aria-describedby="with-hint-info with-hint-hint"></textarea>
                 </div>
-                <div id="with-hint-info" class="govuk-hint govuk-character-count__message">
+                <div id="WasteSource-info" class="govuk-hint govuk-character-count__message">
                     You can enter up to 200 characters
                 </div>
             </div>
@@ -38,6 +36,10 @@
     </div>
 
     <button class="govuk-button" data-module="govuk-button" type="submit">
-        Save
+        @MasterResources.SaveAndContinue
+    </button>
+
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="submit">
+        @MasterResources.SaveAndComeBack
     </button>
 </form>

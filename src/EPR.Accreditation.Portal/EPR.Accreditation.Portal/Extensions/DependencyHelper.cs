@@ -20,7 +20,7 @@ namespace EPR.Accreditation.Portal.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddTransient<MaterialTypeViewModel>();
+            services.AddScoped<MaterialTypeViewModel>();
             services.AddHttpClient("HttpClient");
             services.AddScoped<WasteTypeActionFilter>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();

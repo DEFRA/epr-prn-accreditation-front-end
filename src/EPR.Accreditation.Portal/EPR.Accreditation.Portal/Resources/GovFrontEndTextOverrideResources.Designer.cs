@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MasterResources___Copy {
+    public class GovFrontEndTextOverrideResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MasterResources___Copy() {
+        internal GovFrontEndTextOverrideResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.MasterResources - Copy", typeof(MasterResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.GovFrontEndTextOverrideResources", typeof(GovFrontEndTextOverrideResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,65 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Looks up a localized string similar to You have 0 characters remaining.
         /// </summary>
-        public static string BackLink {
+        public static string charactersAtLimit {
             get {
-                return ResourceManager.GetString("BackLink", resourceCulture);
+                return ResourceManager.GetString("charactersAtLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have %{count} character too many.
+        /// </summary>
+        public static string charactersOverLimitOne {
+            get {
+                return ResourceManager.GetString("charactersOverLimitOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have %{count} characters too many.
+        /// </summary>
+        public static string charactersOverLimitOther {
+            get {
+                return ResourceManager.GetString("charactersOverLimitOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have %{count} character remaining.
+        /// </summary>
+        public static string charactersUnderLimitOne {
+            get {
+                return ResourceManager.GetString("charactersUnderLimitOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have %{count} characters remaining.
+        /// </summary>
+        public static string charactersUnderLimitOther {
+            get {
+                return ResourceManager.GetString("charactersUnderLimitOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide.
+        /// </summary>
+        public static string hideSection {
+            get {
+                return ResourceManager.GetString("hideSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        public static string showSection {
+            get {
+                return ResourceManager.GetString("showSection", resourceCulture);
             }
         }
     }

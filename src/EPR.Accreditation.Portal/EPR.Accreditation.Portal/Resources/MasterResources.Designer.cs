@@ -77,5 +77,32 @@ namespace EPR.Accreditation.Portal.Resources {
                 return ResourceManager.GetString("MaterialForLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cymraeg.
+        /// </summary>
+        public static string OppositeLanguage {
+            get {
+                return ResourceManager.GetString("OppositeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and come back later.
+        /// </summary>
+        public static string SaveAndComeBack {
+            get {
+                return ResourceManager.GetString("SaveAndComeBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and continue.
+        /// </summary>
+        public static string SaveAndContinue {
+            get {
+                return ResourceManager.GetString("SaveAndContinue", resourceCulture);
+            }
+        }
     }
 }

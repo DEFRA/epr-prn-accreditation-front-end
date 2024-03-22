@@ -5,6 +5,7 @@ using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace EPR.Accreditation.Portal
@@ -43,13 +44,13 @@ namespace EPR.Accreditation.Portal
             {
                 opts.ResourcesPath = "Resources";
             });
-            //services
-            //    .Configure<RequestLocalizationOptions>(opts =>
-            //    {
-            //        opts.DefaultRequestCulture = new RequestCulture(CultureConstants.English);
-            //        opts.SupportedCultures = supportedCultures;
-            //        opts.SupportedUICultures = supportedCultures;
-            //    });
+            services
+                .Configure<RequestLocalizationOptions>(opts =>
+                {
+                    opts.DefaultRequestCulture = new RequestCulture(CultureConstants.English);
+                    opts.SupportedCultures = supportedCultures;
+                    opts.SupportedUICultures = supportedCultures;
+                });
 
             // Register configuration options
             services.Configure<AppSettingsConfigOptions>(
