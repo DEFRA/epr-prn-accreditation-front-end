@@ -15,7 +15,6 @@ namespace EPR.Accreditation.Portal.Helpers.ActionFilters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            throw new NotImplementedException();
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -34,11 +33,11 @@ namespace EPR.Accreditation.Portal.Helpers.ActionFilters
                 !Guid.TryParse((string)idValue, out var materialId))
                 return;
 
-            var wasteName = Task.Run(async () => await _accreditationSiteMaterialService.GetWasteName(
-                id,
-                siteId,
-                materialId)).Result;
-            wasteCommonViewModel.Name = wasteName;
+            //var wasteName = Task.Run(async () => await _accreditationSiteMaterialService.GetWasteName(
+            //    id,
+            //    siteId,
+            //    materialId)).Result;
+            //wasteCommonViewModel.Name = wasteName;
         }
     }
 }
