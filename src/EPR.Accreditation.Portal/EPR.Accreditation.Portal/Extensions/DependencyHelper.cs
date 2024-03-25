@@ -25,6 +25,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<ICultureHelper, CultureHelper>();
             services.AddScoped<IQueryStringHelper, QueryStringHelper>();
             services.AddScoped<IAccreditationSiteMaterialService, AccreditationSiteMaterialService>();
+            services.AddScoped<ISaveAndComeBackService, SaveAndComeBackService>(); 
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
@@ -35,6 +36,16 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"
+                    )
+            );
+
+            services
+                .AddScoped<IHttpSaveAndComeBackService>(s =>
+                    new HttpSaveAndComeBackService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "SaveAndComeBack"
                     )
             );
 
