@@ -117,25 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLink" xml:space="preserve">
-    <value>Back</value>
+  <data name="PageHeading" xml:space="preserve">
+    <value>[Welsh]Do you hold a waste permit exemption?</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>For:</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>Cymraeg</value>
-  </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>Save and come back later</value>
-  </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>Save and continue</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>[Welsh]Do you hold a waste permit exemption?</value>
   </data>
 </root>
