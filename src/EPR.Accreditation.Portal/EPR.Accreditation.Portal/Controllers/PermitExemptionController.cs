@@ -1,4 +1,5 @@
 ﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Services.PermitExemption.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,22 @@ namespace EPR.Accreditation.Portal.Controllers
 {
     public class PermitExemptionController : Controller
     {
+        protected readonly IPermitExemptionService _permitExemptionService;
+
+        public PermitExemptionController(IPermitExemptionService permitExemptionService)
+        {
+            _permitExemptionService = permitExemptionService ?? throw new ArgumentNullException(nameof(permitExemptionService));
+        }
+
         [HttpGet]
         public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
         {
             if (id == null)
                 return NotFound();
 
-            //var viewModel = _accreditationService.GetPermitExemptionViewModel(id.Value);
+            var viewModel = await _permitExemptionService.GetPermitExemptionViewModel(id.Value);
 
-            return View();
+            return View(viewModel);
         }
 
         [HttpPost]

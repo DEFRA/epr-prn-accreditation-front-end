@@ -6,6 +6,8 @@ using EPR.Accreditation.Portal.RESTservices;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+using EPR.Accreditation.Portal.Services.PermitExemption;
+using EPR.Accreditation.Portal.Services.PermitExemption.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
@@ -25,6 +27,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<ICultureHelper, CultureHelper>();
             services.AddScoped<IQueryStringHelper, QueryStringHelper>();
             services.AddScoped<IAccreditationSiteMaterialService, AccreditationSiteMaterialService>();
+            services.AddScoped<IPermitExemptionService, PermitExemptionService>();
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
