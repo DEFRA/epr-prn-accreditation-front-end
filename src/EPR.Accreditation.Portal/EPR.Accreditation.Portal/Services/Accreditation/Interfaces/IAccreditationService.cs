@@ -6,7 +6,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
     {
         ApplicationSavedViewModel GetApplicationSavedViewModel(Guid id);
 
-        Task<WasteLicensesAndPermitsViewModel> GetWasteLicensesAndPermitsViewModel(Guid id);
+        WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id);
 
         Task<Task> SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode);
 

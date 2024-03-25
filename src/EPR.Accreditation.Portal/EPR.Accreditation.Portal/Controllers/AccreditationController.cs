@@ -41,7 +41,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 id = Guid.NewGuid();
                 //return NotFound();
 
-            var viewModel = await _accreditationService.GetWasteLicensesAndPermitsViewModel(id.Value);
+            var viewModel = _accreditationService.GetWasteLicensesAndPermitsViewModel(id.Value);
 
             return View(viewModel);
         }

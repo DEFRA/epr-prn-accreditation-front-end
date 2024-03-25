@@ -61,5 +61,33 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             _mockAccreditationService.Verify(service => service.GetApplicationSavedViewModel(id), Times.Once);
         }
+
+        [TestMethod]
+        public void WasteLicensesAndPermits_ReturnsCorrectly_WithValidId()
+        {
+            // Arrange
+            Guid id = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
+            var viewModel = new WasteLicensesAndPermitsViewModel();
+
+            _mockAccreditationService.Setup(service => service.GetWasteLicensesAndPermitsViewModel(id)).Returns(viewModel);
+
+            // Act
+            var result = _accreditationController.WasteLicensesAndPermits(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result.Result, typeof(ViewResult));
+
+            var viewResult = result.Result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(WasteLicensesAndPermitsViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+
+            _mockAccreditationService.Verify(service => service.GetWasteLicensesAndPermitsViewModel(id), Times.Once);
+        }
     }
 }

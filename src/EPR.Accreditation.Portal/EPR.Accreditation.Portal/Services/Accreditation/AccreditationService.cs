@@ -32,7 +32,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             };
         }
 
-        public async Task<WasteLicensesAndPermitsViewModel> GetWasteLicensesAndPermitsViewModel(Guid id)
+        public WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id)
         {
             return new WasteLicensesAndPermitsViewModel
             {

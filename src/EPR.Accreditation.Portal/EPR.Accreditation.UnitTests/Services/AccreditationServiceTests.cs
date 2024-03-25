@@ -45,5 +45,19 @@ namespace EPR.Accreditation.UnitTests.Services
             Assert.AreEqual(30, result.ApplicationExpiry);
 
         }
+
+        [TestMethod]
+        public void GetWasteLicensesAndPermitsViewModel_ReturnsCorrectViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+
+            // Act
+            var result = _accreditationService?.GetWasteLicensesAndPermitsViewModel(id);
+
+            // Asset
+            Assert.IsNotNull(result);
+            Assert.AreEqual(id, result.Id);
+        }
     }
 }
