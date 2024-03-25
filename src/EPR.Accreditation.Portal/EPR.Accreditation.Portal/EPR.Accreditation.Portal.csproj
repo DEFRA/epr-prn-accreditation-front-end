@@ -99,6 +99,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Accreditation\" />
     <Folder Include="Microsoft\AspNetCore\Mvc\Abstractions\" />
   </ItemGroup>
 
