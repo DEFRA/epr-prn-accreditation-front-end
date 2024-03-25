@@ -68,9 +68,9 @@ namespace EPR.Accreditation.Portal.Controllers
             {
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id, 
-                    Request.HttpContext.GetRouteData().Values)
-                return null;
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
             }
             else
             {

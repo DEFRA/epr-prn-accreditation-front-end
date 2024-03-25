@@ -13,9 +13,9 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
         }
 
-        public async Task AddSaveAndComeBack(Guid accreditationExternalId, SaveAndComeBack saveAndContinue)
+        public async Task AddSaveAndComeBack(Guid accreditationExternalId, SaveAndComeBack saveAndComeBack)
         {
-            await Post($"{accreditationExternalId}, saveAndContinue");
+            await Post($"{accreditationExternalId}", saveAndComeBack);
         }
 
         public Task DeleteSaveAndComeBack(Guid accreditationExternalId)

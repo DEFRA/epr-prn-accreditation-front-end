@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
+﻿using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using Newtonsoft.Json;
@@ -24,8 +23,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             Guid accreditationExternalId,
             RouteValueDictionary routeDataValues)
         {
-            
-
             // Get area
             var area = routeDataValues["area"]?.ToString();
 
