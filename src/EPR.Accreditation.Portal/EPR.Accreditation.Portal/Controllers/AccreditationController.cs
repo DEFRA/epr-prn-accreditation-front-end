@@ -79,17 +79,13 @@ namespace EPR.Accreditation.Portal.Controllers
             wastePermit.WastePermitExemption = true;
             accreditation.WastePermit = wastePermit;
 
-
             var overseaSites = new List<DTOs.OverseasReprocessingSite>();
             overseaSites.Add(new DTOs.OverseasReprocessingSite());
             accreditation.Site = site;
             accreditation.OverseasReprocessingSites = overseaSites;
 
             wasteLicensesAndPermitsViewModel.SiteId = Guid.Parse("60FB09B6-07B4-4A33-9F8D-461FB02D64D7");
-
-            
             await _accreditationService.SaveAccreditation(wasteLicensesAndPermitsViewModel.Id, accreditation);
-
 
             return View(wasteLicensesAndPermitsViewModel);
         }
