@@ -1,12 +1,21 @@
-﻿using EPR.Accreditation.Portal.Services.Interfaces;
+﻿using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
     public class AccreditationController : Controller
     {
         private readonly IAccreditationService _accreditationService;
+
+        private static Random random = new Random();
+        private static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
         public AccreditationController(IAccreditationService accreditationService)
         {
@@ -45,6 +54,43 @@ namespace EPR.Accreditation.Portal.Controllers
                 return View(wasteLicensesAndPermitsViewModel);
 
             await _accreditationService.SaveWasteLicensesAndPermitsViewMode(wasteLicensesAndPermitsViewModel);
+
+            var accreditation = new DTOs.Accreditation();
+
+            accreditation.ReferenceNumber = RandomString(12);
+            //accreditation.ExternalId = Guid.NewGuid();
+            accreditation.OperatorTypeId = Enums.OperatorType.Reprocessor;
+            accreditation.OrganisationId = Guid.NewGuid();
+            accreditation.Large = true;
+            accreditation.AccreditationStatusId = Enums.AccreditationStatus.Accepted;
+            accreditation.SiteId = 1;
+            
+
+            var site = new DTOs.Site();
+            site.Address1 = "203 Pooley Green Rd";
+            site.Address2 = "Egham";
+            site.Id = 2;
+            site.ExternalId = Guid.NewGuid();
+
+            var wastePermit = new DTOs.WastePermit();
+            wastePermit.EnvironmentalPermitNumber = wasteLicensesAndPermitsViewModel.PermitNumber.ToString();
+            wastePermit.DischargeConsentNumber = wasteLicensesAndPermitsViewModel.DischargeConstentNumber.ToString();
+            wastePermit.DealerRegistrationNumber = wasteLicensesAndPermitsViewModel.RegistrationNumber.ToString();
+            wastePermit.PartAActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityReferenceNumber.ToString();
+            wastePermit.PartBActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityNumber.ToString();
+            wastePermit.OverseasReprocessingSiteId = 2;
+            wastePermit.WastePermitExemption = true;
+
+            var overseaSites = new List<DTOs.OverseasReprocessingSite>();
+            overseaSites.Add(new DTOs.OverseasReprocessingSite());
+
+            accreditation.WastePermit = wastePermit;
+            
+            accreditation.Site = site;
+            accreditation.OverseasReprocessingSites = overseaSites;
+
+            await _accreditationService.SaveAccreditation(accreditation);
+
 
             return View(wasteLicensesAndPermitsViewModel);
         }

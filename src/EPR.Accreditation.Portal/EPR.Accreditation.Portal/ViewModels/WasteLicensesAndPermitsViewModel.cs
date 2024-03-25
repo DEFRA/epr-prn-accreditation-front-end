@@ -4,6 +4,10 @@
     {
         public Guid Id { get; set; }
 
+        public Guid SiteId { get; set; }
+
+        public Guid MaterialId { get; set; }
+
         public double? RegistrationNumber { get; set; }
 
         public double? PermitNumber { get; set; }
