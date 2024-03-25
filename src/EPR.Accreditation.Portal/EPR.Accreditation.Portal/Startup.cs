@@ -2,6 +2,7 @@
 using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Helpers;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
+using EPR.Accreditation.Portal.Middleware;
 using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
@@ -96,6 +97,8 @@ namespace EPR.Accreditation.Portal
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }

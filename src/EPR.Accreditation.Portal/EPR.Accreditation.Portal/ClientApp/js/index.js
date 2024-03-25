@@ -14,6 +14,8 @@ window.$ = window.jQuery = jQuery;
 // functions and add further validation routines in
 import jqueryvalidatehooks from "./common/jquery-validate-hooks";
 
+import saveAndContinue from "./common/SaveAndContinue";
+
 // overrides of government scripts
 import Accordian from "./common/overrides"
 

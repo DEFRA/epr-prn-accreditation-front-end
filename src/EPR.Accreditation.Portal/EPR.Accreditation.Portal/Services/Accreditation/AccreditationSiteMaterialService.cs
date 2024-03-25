@@ -54,6 +54,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task UpdateWasteSource(WasteSourceViewModel wasteSourceViewModel)
         {
+            // this field is a required field. Therefore, if it's got to this point
+            // then "Save and come back later" has been selected and we are letting
+            // blank required fields through
+            if (wasteSourceViewModel.WasteSource == null)
+                wasteSourceViewModel.WasteSource = string.Empty;
+
             await _httpSiteMaterialService.UpdateWasteSource(
                 wasteSourceViewModel.Id,
                 wasteSourceViewModel.SiteId,

@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Accreditation\**" />
+    <Content Remove="Views\Accreditation\**" />
+    <EmbeddedResource Remove="Views\Accreditation\**" />
+    <None Remove="Views\Accreditation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EPR.Common.Authorization" Version="1.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
@@ -117,7 +124,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Accreditation\" />
+    <Folder Include="Microsoft\AspNetCore\Mvc\Abstractions\" />
   </ItemGroup>
 
 </Project>

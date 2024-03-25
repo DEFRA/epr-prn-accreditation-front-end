@@ -1,4 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +11,11 @@ namespace EPR.Accreditation.Portal.Controllers
     {
         protected readonly SiteType _siteType;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
+        protected readonly ISaveAndComeBackService _saveAndComeBackService;
 
         protected BaseSiteController(
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
+            ISaveAndComeBackService saveAndComeBackService,
             SiteType siteType)
         {
             if (siteType == SiteType.None)
@@ -19,6 +23,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
             _siteType = siteType;
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
+            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
         }
 
         protected async Task<IActionResult> GetMaterialWasteSource(
@@ -32,9 +37,13 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         
-        protected async Task<IActionResult> SaveMaterialWasteSource(WasteSourceViewModel viewModel)
+        protected async Task<IActionResult> SaveMaterialWasteSource(
+            WasteSourceViewModel viewModel,
+            SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton, 
+                WasteSourceResources.NoSourceSupplied))
             {
                 return await GetMaterialWasteSource(
                     viewModel.Id,
@@ -55,13 +64,24 @@ namespace EPR.Accreditation.Portal.Controllers
                 routeName = "OverseasSiteProcessingCapacity";
             }
 
-            return RedirectToRoute(routeName,
-                new
-                {
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
-                    viewModel.SiteId,
-                    viewModel.MaterialId
-                });
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(routeName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.SiteId,
+                        viewModel.MaterialId
+                    });
+            }
         }
     }
 }
