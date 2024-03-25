@@ -12,11 +12,5 @@ namespace EPR.Accreditation.Portal.Controllers
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
         }
 
-        [HttpGet]
-        public IActionResult _ApplicationSaved()
-        {
-
-            return View();
-        }
     }
 }
