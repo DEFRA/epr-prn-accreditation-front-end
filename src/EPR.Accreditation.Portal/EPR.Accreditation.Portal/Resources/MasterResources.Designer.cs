@@ -115,6 +115,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is a problem.
+        /// </summary>
+        public static string SummaryError {
+            get {
+                return ResourceManager.GetString("SummaryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Yes {
