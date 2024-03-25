@@ -27,6 +27,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return new ApplicationSavedViewModel
             {
                 Id = id,
+                
                 ApplicationExpiry = _configSettings.Value.DaysUntilExpiration.Value
             };
         }
