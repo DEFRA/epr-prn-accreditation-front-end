@@ -73,13 +73,13 @@ namespace EPR.Accreditation.Portal.Controllers
             site.ExternalId = Guid.NewGuid();
 
             var wastePermit = new DTOs.WastePermit();
-            wastePermit.EnvironmentalPermitNumber = wasteLicensesAndPermitsViewModel.PermitNumber.ToString();
-            wastePermit.DischargeConsentNumber = wasteLicensesAndPermitsViewModel.DischargeConstentNumber.ToString();
-            wastePermit.DealerRegistrationNumber = wasteLicensesAndPermitsViewModel.RegistrationNumber.ToString();
-            wastePermit.PartAActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityReferenceNumber.ToString();
-            wastePermit.PartBActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityNumber.ToString();
-            wastePermit.OverseasReprocessingSiteId = 2;
-            wastePermit.WastePermitExemption = true;
+            //wastePermit.EnvironmentalPermitNumber = wasteLicensesAndPermitsViewModel.PermitNumber.ToString();
+            //wastePermit.DischargeConsentNumber = wasteLicensesAndPermitsViewModel.DischargeConstentNumber.ToString();
+            //wastePermit.DealerRegistrationNumber = wasteLicensesAndPermitsViewModel.RegistrationNumber.ToString();
+            //wastePermit.PartAActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityReferenceNumber.ToString();
+            //wastePermit.PartBActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityNumber.ToString();
+            ////wastePermit.OverseasReprocessingSiteId = 1;
+            //wastePermit.WastePermitExemption = true;
 
             var overseaSites = new List<DTOs.OverseasReprocessingSite>();
             overseaSites.Add(new DTOs.OverseasReprocessingSite());
@@ -89,7 +89,9 @@ namespace EPR.Accreditation.Portal.Controllers
             accreditation.Site = site;
             accreditation.OverseasReprocessingSites = overseaSites;
 
-            await _accreditationService.SaveAccreditation(accreditation);
+            wasteLicensesAndPermitsViewModel.SiteId = Guid.Parse("60FB09B6-07B4-4A33-9F8D-461FB02D64D7");
+
+            await _accreditationService.SaveAccreditation(wasteLicensesAndPermitsViewModel.Id, accreditation);
 
 
             return View(wasteLicensesAndPermitsViewModel);

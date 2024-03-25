@@ -4,7 +4,6 @@
     {
         Task CreateAccreditation(
             Guid id,
-            Guid siteId,
             DTOs.Accreditation accreditation);
     }
 }

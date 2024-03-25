@@ -12,9 +12,9 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
         }
 
-        public async Task CreateAccreditation(Guid id, Guid siteId, DTOs.Accreditation accreditation)
+        public async Task CreateAccreditation(Guid id, DTOs.Accreditation accreditation)
         {
-            await Post($"{id}/Site/{siteId}", accreditation);
+            await Post($"{id}", accreditation);
         }
     }
 }

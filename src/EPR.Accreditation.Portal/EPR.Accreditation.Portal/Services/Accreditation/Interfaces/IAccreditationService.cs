@@ -10,6 +10,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 
         Task<Task> SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode);
 
-        Task SaveAccreditation(DTOs.Accreditation accreditation);
+        Task SaveAccreditation(Guid id, DTOs.Accreditation accreditation);
     }
 }

@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.Options;
+﻿using EPR.Accreditation.Portal.DTOs;
+using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.RESTservices;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
@@ -43,11 +44,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return Task.CompletedTask;
         }
 
-        public async Task SaveAccreditation(DTOs.Accreditation accreditation)
+        public async Task SaveAccreditation(Guid id, DTOs.Accreditation accreditation)
         {
-            await _httpAccreditationService.CreateAccreditation(accreditation.Id,
-                                                                accreditation.Site.ExternalId,
-                                                                accreditation);
+            await _httpAccreditationService.CreateAccreditation(id, accreditation);
         }
     }
 }
