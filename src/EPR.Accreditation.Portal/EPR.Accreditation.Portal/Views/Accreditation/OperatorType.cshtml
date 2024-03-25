@@ -1,0 +1,43 @@
+﻿@model EPR.Accreditation.Portal.ViewModels.OperatorTypeViewModel
+@using EPR.Accreditation.Portal.Resources;
+@using EPR.Accreditation.Facade.Common.Enums
+
+@{
+    ViewData["Title"] = @OperatorTypeResources.PageTitle;
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">
+            <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+        </p>
+
+        <form method="post">
+            <input type="hidden" asp-for="ExternalId" />
+            <radios asp-for="UserRole" asp-title="@OperatorTypeResources.PageTitle">
+                <p class="govuk-error-message">
+                    <span asp-validation-for="OperatorType"></span>
+                </p>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="OperatorType" value="@OperatorType.Reprocessor" aria-describedby="@OperatorTypeResources.Reprocessor">
+                    <label class="govuk-label govuk-radios__label" for="@OperatorTypeResources.Reprocessor">
+                        @OperatorTypeResources.Reprocessor
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="OperatorType" value="@OperatorType.Exporter" aria-describedby="@OperatorTypeResources.Exporter">
+                    <label class="govuk-label govuk-radios__label" for="@OperatorTypeResources.Exporter">
+                        @OperatorTypeResources.Exporter
+                    </label>
+                </div>
+
+            </radios>
+
+            <button class="govuk-button" data-module="govuk-button" type="submit">
+                @MasterResources.Continue
+            </button>
+        </form>
+    </div>
+</div>

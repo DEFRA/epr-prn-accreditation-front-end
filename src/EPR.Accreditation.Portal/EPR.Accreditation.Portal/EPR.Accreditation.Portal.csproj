@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Accreditation\**" />
-    <Content Remove="Views\Accreditation\**" />
-    <EmbeddedResource Remove="Views\Accreditation\**" />
-    <None Remove="Views\Accreditation\**" />
+    <Compile Remove="Microsoft\**" />
+    <Content Remove="Microsoft\**" />
+    <EmbeddedResource Remove="Microsoft\**" />
+    <None Remove="Microsoft\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +45,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialNamesResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\OperatorTypeResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OperatorTypeResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\PhaseBannerResources.cy-GB.Designer.cs">
       <DependentUpon>PhaseBannerResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -77,7 +82,7 @@
       <LastGenOutput>GovFrontEndTextOverrideResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\MasterResources.cy-GB.resx">
-      <Generator></Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\MasterResources.resx">
       <LastGenOutput>MasterResources.Designer.cs</LastGenOutput>
@@ -86,6 +91,10 @@
     <EmbeddedResource Update="Resources\MaterialNamesResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialNamesResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\OperatorTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OperatorTypeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PhaseBannerResources.cy-GB.resx">
       <LastGenOutput>PhaseBannerResources.cy-GB.Designer.cs</LastGenOutput>
@@ -106,7 +115,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Microsoft\AspNetCore\Mvc\Abstractions\" />
+    <ProjectReference Include="..\EPR.Accreditation.Portal.Common\EPR.Accreditation.Portal.Common.csproj" />
   </ItemGroup>
 
 </Project>

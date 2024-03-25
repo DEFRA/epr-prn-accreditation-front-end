@@ -120,6 +120,9 @@
   <data name="BackLink" xml:space="preserve">
     <value>[Welsh]Back</value>
   </data>
+  <data name="Continue" xml:space="preserve">
+    <value>[Welsh]Continue</value>
+  </data>
   <data name="MaterialForLabel" xml:space="preserve">
     <value>[Welsh]For:</value>
   </data>
