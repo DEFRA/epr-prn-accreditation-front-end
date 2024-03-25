@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Accreditation\**" />
+    <Content Remove="Views\Accreditation\**" />
+    <EmbeddedResource Remove="Views\Accreditation\**" />
+    <None Remove="Views\Accreditation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EPR.Common.Authorization" Version="1.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
@@ -22,6 +29,11 @@
       <DependentUpon>ApplicationSavedResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\GovFrontEndTextOverrideResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GovFrontEndTextOverrideResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\MasterResources.Designer.cs">
       <DependentUpon>MasterResources.resx</DependentUpon>
@@ -65,6 +77,10 @@
       <LastGenOutput>ApplicationSavedResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GovFrontEndTextOverrideResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GovFrontEndTextOverrideResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\MasterResources.cy-GB.resx">
       <Generator></Generator>
     </EmbeddedResource>
@@ -96,6 +112,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteLicensesAndPermitsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Microsoft\AspNetCore\Mvc\Abstractions\" />
   </ItemGroup>
 
 </Project>

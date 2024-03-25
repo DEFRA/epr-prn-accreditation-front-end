@@ -9,28 +9,45 @@ namespace EPR.Accreditation.Portal.Controllers
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class OverseasSiteMaterialController : BaseSiteController
     {
-        public OverseasSiteMaterialController(IAccreditationSiteMaterialService accreditationSiteMaterialService) 
-            : base(accreditationSiteMaterialService, SiteType.OverseasSite)
+        public OverseasSiteMaterialController(
+            IAccreditationSiteMaterialService accreditationSiteMaterialService,
+            ISaveAndComeBackService saveAndComeBackService) 
+            : base(
+                  accreditationSiteMaterialService, 
+                  saveAndComeBackService, 
+                  SiteType.OverseasSite)
         {
         }
 
-        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}")]
-        public override async Task<IActionResult> MaterialWasteSource(
+        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteSource")]
+        public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
             Guid? siteId,
             Guid? materialId)
         {
-            return await base.MaterialWasteSource(
+            return await GetMaterialWasteSource(
                 id,
                 siteId,
                 materialId);
         }
 
-        [HttpPost("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}")]
-        public override async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
+        [HttpPost("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteSource")]
+        public async Task<IActionResult> MaterialWasteSource(
+            WasteSourceViewModel viewModel,
+            SaveButton saveButton)
         {
-            return await base.MaterialWasteSource(viewModel);
+            return await SaveMaterialWasteSource(
+                viewModel, 
+                saveButton);
         }
 
+        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/ProcessingCapacity", Name = "OverseasSiteProcessingCapacity")]
+        public IActionResult EnterProcessingCapacity(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            return NotFound();
+        }
     }
 }

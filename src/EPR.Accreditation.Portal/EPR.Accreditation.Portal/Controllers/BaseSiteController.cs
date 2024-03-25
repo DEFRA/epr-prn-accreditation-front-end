@@ -1,4 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +11,11 @@ namespace EPR.Accreditation.Portal.Controllers
     {
         protected readonly SiteType _siteType;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
+        protected readonly ISaveAndComeBackService _saveAndComeBackService;
 
         protected BaseSiteController(
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
+            ISaveAndComeBackService saveAndComeBackService,
             SiteType siteType)
         {
             if (siteType == SiteType.None)
@@ -19,9 +23,10 @@ namespace EPR.Accreditation.Portal.Controllers
 
             _siteType = siteType;
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
+            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
         }
 
-        public virtual async Task<IActionResult> MaterialWasteSource(
+        protected async Task<IActionResult> GetMaterialWasteSource(
             Guid? id,
             Guid? siteId,
             Guid? materialId)
@@ -32,11 +37,15 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         
-        public virtual async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
+        protected async Task<IActionResult> SaveMaterialWasteSource(
+            WasteSourceViewModel viewModel,
+            SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton, 
+                WasteSourceResources.NoSourceSupplied))
             {
-                return await MaterialWasteSource(
+                return await GetMaterialWasteSource(
                     viewModel.Id,
                     viewModel.SiteId,
                     viewModel.MaterialId);
@@ -44,7 +53,35 @@ namespace EPR.Accreditation.Portal.Controllers
 
             await _accreditationSiteMaterialService.UpdateWasteSource(viewModel);
 
-            return View();
+            var routeName = string.Empty;
+
+            if(_siteType == SiteType.Site)
+            {
+                routeName = "SiteProcessingCapacity";
+            }
+            else
+            {
+                routeName = "OverseasSiteProcessingCapacity";
+            }
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(routeName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.SiteId,
+                        viewModel.MaterialId
+                    });
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.RESTservices.Interfaces;
+﻿using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
 namespace EPR.Accreditation.Portal.RESTservices
 {
@@ -12,17 +13,28 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
         }
 
-        public Task<string> GetMeterialName(Guid id, Guid siteId, Guid materialId)
+        public async Task<string> GetMeterialName(
+            Guid id, 
+            Guid siteId, 
+            Guid materialId,
+            Enums.Language language)
         {
-            throw new NotImplementedException();
+            return await Get<string>($"{id}/Site/{siteId}/Material/{materialId}/Name?language={language}", false);
         }
 
-        public async Task<string> GetWasteSource(Guid id, Guid siteId, Guid materialId)
+        public async Task<string> GetWasteSource(
+            Guid id, 
+            Guid siteId, 
+            Guid materialId)
         {
             return await Get<string>($"{id}/Site/{siteId}/Material/{materialId}");
         }
 
-        public async Task UpdateWasteSource(Guid id, Guid siteId, Guid materialId, string wasteSource)
+        public async Task UpdateWasteSource(
+            Guid id, 
+            Guid siteId, 
+            Guid materialId, 
+            string wasteSource)
         {
             await Put($"{id}/Site/{siteId}/Material/{materialId}", wasteSource);
         }

@@ -123,4 +123,13 @@
   <data name="MaterialForLabel" xml:space="preserve">
     <value>For:</value>
   </data>
+  <data name="OppositeLanguage" xml:space="preserve">
+    <value>Cymraeg</value>
+  </data>
+  <data name="SaveAndComeBack" xml:space="preserve">
+    <value>Save and come back later</value>
+  </data>
+  <data name="SaveAndContinue" xml:space="preserve">
+    <value>Save and continue</value>
+  </data>
 </root>
