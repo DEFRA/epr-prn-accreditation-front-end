@@ -1,4 +1,7 @@
-﻿namespace EPR.Accreditation.Portal.ViewModels
+﻿using EPR.Accreditation.Portal.Resources;
+using System.ComponentModel.DataAnnotations;
+
+namespace EPR.Accreditation.Portal.ViewModels
 {
     public class WasteLicensesAndPermitsViewModel
     {
@@ -8,14 +11,20 @@
 
         public Guid MaterialId { get; set; }
 
-        public double? RegistrationNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingRegistrationNumber")]
+        [MaxLength(20, ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "RegistrationNumberNotInRange")]
+        public string RegistrationNumber { get; set; }
 
-        public double? PermitNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingPermitNumber")]
+        public string PermitNumber { get; set; }
 
-        public double? ActivityNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingActivityNumber")]
+        public string ActivityNumber { get; set; }
 
-        public double? ActivityReferenceNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingActivityReferenceNumber")]
+        public string ActivityReferenceNumber { get; set; }
 
-        public double? DischargeConstentNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingDischargeConstentNumber")]
+        public string DischargeConstentNumber { get; set; }
     }
 }

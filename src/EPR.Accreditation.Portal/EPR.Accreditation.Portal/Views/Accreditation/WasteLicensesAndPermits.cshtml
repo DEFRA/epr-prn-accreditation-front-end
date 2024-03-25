@@ -18,7 +18,7 @@
                 <div class="govuk-form-group">
                     <p class="govuk-error-message">
                             <span asp-validation-for="RegistrationNumber"></span>
-                        </p>
+                    </p>
                     <h2 class="govuk-label-wrapper">
                         <label class="govuk-label govuk-label--s" for="registration-number">
                             @WasteLicensesAndPermitsResources.RegistrationNumber
@@ -30,6 +30,9 @@
                     <input class="govuk-input" id="RegistrationNumber" name="RegistrationNumber" type="text" aria-describedby="registration-number-hint">
                 </div>
                 <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="PermitNumber"></span>
+                    </p>
                     <h2 class="govuk-label-wrapper">
                         <label class="govuk-label govuk-label--s" for="permit-number">
                             @WasteLicensesAndPermitsResources.PermitNumber
@@ -41,6 +44,9 @@
                     <input class="govuk-input" id="PermitNumber" name="PermitNumber" type="text" aria-describedby="permit-number-hint">
                 </div>
                 <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="ActivityNumber"></span>
+                    </p>
                     <h2 class="govuk-label-wrapper">
                         <label class="govuk-label govuk-label--s" for="activity-number">
                             @WasteLicensesAndPermitsResources.ActivityNumber
@@ -52,6 +58,9 @@
                     <input class="govuk-input" id="ActivityNumber" name="ActivityNumber" type="text" aria-describedby="activity-number-hint">
                 </div>
                 <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="ActivityReferenceNumber"></span>
+                    </p>
                     <h2 class="govuk-label-wrapper">
                         <label class="govuk-label govuk-label--s" for="activity-reference-number">
                             @WasteLicensesAndPermitsResources.ActivityReferenceNumber
@@ -63,6 +72,9 @@
                     <input class="govuk-input" id="ActivityReferenceNumber" name="ActivityReferenceNumber" type="text" aria-describedby="activity-reference-number-hint">
                 </div>
                 <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="DischargeConstentNumber"></span>
+                    </p>
                     <h2 class="govuk-label-wrapper">
                         <label class="govuk-label govuk-label--s" for="discharge-number">
                             @WasteLicensesAndPermitsResources.DischargeConstentNumber
