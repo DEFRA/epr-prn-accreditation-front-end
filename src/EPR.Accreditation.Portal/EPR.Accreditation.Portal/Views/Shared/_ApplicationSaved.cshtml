@@ -1,5 +1,7 @@
-﻿@model EPR.Accreditation.Portal.ViewModels.ApplicationSavedViewModel;
+﻿@using EPR.Accreditation.Portal.Options;
 @using EPR.Accreditation.Portal.Resources;
+@using Microsoft.Extensions.Options;
+@inject IOptions<AppSettingsConfigOptions> _configSettings;
 
 @{
     ViewData["Title"] = @ApplicationSavedResources.PageTitle;
@@ -27,7 +29,7 @@
 </div>
 
 <p class="govuk-body">
-    @ApplicationSavedResources.ParagraphTextP1 @Model.ApplicationExpiry @ApplicationSavedResources.ParagraphTextP2
+    @ApplicationSavedResources.ParagraphTextP1 @_configSettings.Value.DaysUntilExpiration.Value @ApplicationSavedResources.ParagraphTextP2
 </p>
 
 <a href="/" class="govuk-button">@ApplicationSavedResources.BtnText</a>

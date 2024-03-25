@@ -13,14 +13,10 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpGet]
-        public IActionResult ApplicationSaved(Guid? id)
+        public IActionResult _ApplicationSaved()
         {
-            if (id == null)
-                return NotFound();
 
-            var viewModel = _accreditationService.GetApplicationSavedViewModel(id.Value);
-
-            return View(viewModel);
+            return View();
         }
     }
 }
