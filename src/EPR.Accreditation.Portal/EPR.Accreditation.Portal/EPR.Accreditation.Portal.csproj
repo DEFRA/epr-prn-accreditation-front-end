@@ -98,4 +98,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Accreditation\" />
+  </ItemGroup>
+
 </Project>
