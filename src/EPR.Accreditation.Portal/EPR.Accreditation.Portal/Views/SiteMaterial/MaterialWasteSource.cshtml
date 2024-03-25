@@ -1,0 +1,43 @@
+﻿@using EPR.Accreditation.Portal.Resources
+@using EPR.Accreditation.Portal.ViewModels
+@inject MaterialTypeViewModel materialTypeViewModel;
+@model WasteSourceViewModel
+
+@{
+    ViewData["Title"] = WasteSourceResources.PageTitle;
+}
+
+<form method="post">
+    <span class="govuk-caption-l">
+        @MasterResources.MaterialForLabel @materialTypeViewModel.Name
+    </span>
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="WasteSource"></span>
+            </p>
+
+            <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
+                <div class="govuk-form-group">
+                    <h1 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--l" for="with-hint">
+                            @WasteSourceResources.PageTitle
+                        </label>
+                    </h1>
+                    <div id="with-hint-hint" class="govuk-hint">
+                        @WasteSourceResources.InfoText
+                    </div>
+                    <textarea class="govuk-textarea govuk-js-character-count" asp-for="WasteSource" rows="5" aria-describedby="with-hint-info with-hint-hint"></textarea>
+                </div>
+                <div id="with-hint-info" class="govuk-hint govuk-character-count__message">
+                    You can enter up to 200 characters
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="govuk-button" data-module="govuk-button" type="submit">
+        Save
+    </button>
+</form>
