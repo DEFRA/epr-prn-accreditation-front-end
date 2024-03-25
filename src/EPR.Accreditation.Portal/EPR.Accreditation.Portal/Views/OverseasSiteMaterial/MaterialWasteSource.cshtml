@@ -1,5 +1,4 @@
-﻿@using EPR.Accreditation.Portal.Resources
-@using EPR.Accreditation.Portal.ViewModels
+﻿@using EPR.Accreditation.Portal.ViewModels
 
 @model WasteSourceViewModel
 
@@ -34,12 +33,5 @@
 
         </div>
     </div>
-
-    <button class="govuk-button" data-module="govuk-button" type="submit">
-        @MasterResources.SaveAndContinue
-    </button>
-
-    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="submit">
-        @MasterResources.SaveAndComeBack
-    </button>
+    <partial name="_SaveButtons" />
 </form>

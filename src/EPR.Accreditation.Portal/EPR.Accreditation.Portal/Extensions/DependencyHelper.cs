@@ -41,6 +41,16 @@ namespace EPR.Accreditation.Portal.Extensions
                     )
             );
 
+            services
+                .AddScoped<IHttpSaveAndComeBackService>(s =>
+                    new HttpSaveAndComeBackService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "SaveAndComeBack"
+                    )
+            );
+
             return services;
         }
     }

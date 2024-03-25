@@ -9,8 +9,13 @@ namespace EPR.Accreditation.Portal.Controllers
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class SiteMaterialController : BaseSiteController
     {
-        public SiteMaterialController(IAccreditationSiteMaterialService accreditationSiteMaterialService) 
-            : base(accreditationSiteMaterialService, SiteType.Site)
+        public SiteMaterialController(
+            IAccreditationSiteMaterialService accreditationSiteMaterialService,
+            ISaveAndComeBackService saveAndComeBackService) 
+            : base(
+                  accreditationSiteMaterialService,
+                  saveAndComeBackService, 
+                  SiteType.Site)
         {
         }
 
@@ -30,9 +35,13 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource")]
-        public async Task<IActionResult> MaterialWasteSource(WasteSourceViewModel viewModel)
+        public async Task<IActionResult> MaterialWasteSource(
+            WasteSourceViewModel viewModel,
+            SaveButton saveButton)
         {
-            return await SaveMaterialWasteSource(viewModel);
+            return await SaveMaterialWasteSource(
+                viewModel, 
+                saveButton);
         }
 
         [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/ProcessingCapacity", Name = "SiteProcessingCapacity")]

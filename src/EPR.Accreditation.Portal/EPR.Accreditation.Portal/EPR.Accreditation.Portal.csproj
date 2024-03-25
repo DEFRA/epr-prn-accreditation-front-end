@@ -98,4 +98,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Microsoft\AspNetCore\Mvc\Abstractions\" />
+  </ItemGroup>
+
 </Project>
