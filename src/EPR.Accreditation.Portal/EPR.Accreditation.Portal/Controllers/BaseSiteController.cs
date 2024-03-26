@@ -40,21 +40,14 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? materialId)
         {
             // need to add back link
-            _backPageViewModel.Url = _urlHelper.ActionLink(
-                "ChooseMaterial",
-                _siteType == SiteType.OverseasSite ? "OverseasSite" : "Site",
-                new object[] { id, siteId, materialId });
-
-            var obj = new 
-            {
-                id = id,
-                siteId = siteId,
-                materialId = materialId
-            };
-
             _backPageViewModel.Url = _urlHelper.RouteUrl(
                 _siteType == SiteType.OverseasSite ? "OverseasSiteChooseMaterial" : "SiteChooseMaterial",
-                obj);
+                new
+                {
+                    id = id,
+                    siteId = siteId,
+                    materialId = materialId
+                });
 
             var wasteSource = await _accreditationSiteMaterialService.GetWasteSource(id.Value, siteId.Value, materialId.Value);
 
