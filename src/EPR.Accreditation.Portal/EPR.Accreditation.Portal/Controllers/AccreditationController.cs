@@ -2,7 +2,6 @@
 using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.Services.PermitExemption.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,19 +10,19 @@ namespace EPR.Accreditation.Portal.Controllers
     [Route("[controller]/{id}")]
     public class AccreditationController : Controller
     {
-        protected readonly IPermitExemptionService _permitExemptionService;
+        protected readonly IWastePermitService _wastePermitService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelper _urlHelper;
 
         public AccreditationController(
-            IPermitExemptionService permitExemptionService,
+            IWastePermitService wastePermitService,
             ISaveAndComeBackService saveAndComeBackService,
             IUrlHelper urlHelper,
             BackPageViewModel backPageViewModel)
         {
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
-            _permitExemptionService = permitExemptionService ?? throw new ArgumentNullException(nameof(permitExemptionService));
+            _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _backPageViewModel = backPageViewModel;
         }
@@ -37,7 +36,7 @@ namespace EPR.Accreditation.Portal.Controllers
             if (id == null)
                 return NotFound();
 
-            var viewModel = await _permitExemptionService.GetPermitExemptionViewModel(id.Value);
+            var viewModel = await _wastePermitService.GetPermitExemptionViewModel(id.Value);
 
             return View(viewModel);
         }
@@ -54,7 +53,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 return View(viewModel);
             }
 
-            await _permitExemptionService.UpdatePermitExemption(viewModel);
+            await _wastePermitService.UpdatePermitExemption(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue)
             {

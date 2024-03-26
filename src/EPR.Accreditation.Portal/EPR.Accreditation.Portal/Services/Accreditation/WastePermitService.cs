@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.PermitExemption.Interfaces;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 
-namespace EPR.Accreditation.Portal.Services.PermitExemption
+namespace EPR.Accreditation.Portal.Services.Accreditation
 {
-    public class PermitExemptionService : IPermitExemptionService
+    public class WastePermitService : IWastePermitService
     {
 
         protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IHttpWastePermitService _httpWastePermitService;
         private readonly IMapper _mapper;
 
-        public PermitExemptionService(
+        public WastePermitService(
             IHttpContextAccessor httpContextAccessor,
             IHttpWastePermitService httpWastePermitService,
             IMapper mapper)

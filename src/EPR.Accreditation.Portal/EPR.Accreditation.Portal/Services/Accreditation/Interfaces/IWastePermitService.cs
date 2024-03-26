@@ -1,8 +1,8 @@
 ﻿using EPR.Accreditation.Portal.ViewModels;
 
-namespace EPR.Accreditation.Portal.Services.PermitExemption.Interfaces
+namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
-    public interface IPermitExemptionService
+    public interface IWastePermitService
     {
         Task<PermitExemptionViewModel> GetPermitExemptionViewModel(Guid id);
 
