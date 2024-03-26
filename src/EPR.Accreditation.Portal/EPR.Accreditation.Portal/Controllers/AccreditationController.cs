@@ -8,14 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
-    public class PermitExemptionController : Controller
+    [Route("[controller]/{id}")]
+    public class AccreditationController : Controller
     {
         protected readonly IPermitExemptionService _permitExemptionService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelper _urlHelper;
 
-        public PermitExemptionController(
+        public AccreditationController(
             IPermitExemptionService permitExemptionService,
             ISaveAndComeBackService saveAndComeBackService,
             IUrlHelper urlHelper,
@@ -27,7 +28,7 @@ namespace EPR.Accreditation.Portal.Controllers
             _backPageViewModel = backPageViewModel;
         }
 
-        [HttpGet]
+        [HttpGet("PermitExemption")]
         public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
         {
             // need to add back link
@@ -41,7 +42,7 @@ namespace EPR.Accreditation.Portal.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpPost("PermitExemption")]
         public async Task<IActionResult> CheckWastePermitExemption(
             PermitExemptionViewModel viewModel,
             SaveButton saveButton)

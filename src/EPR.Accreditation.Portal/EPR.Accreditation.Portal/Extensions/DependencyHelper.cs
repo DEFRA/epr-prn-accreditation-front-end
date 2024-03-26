@@ -61,7 +61,7 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "WastePermit"
+                        "Accreditation"
                     )
             );
 
