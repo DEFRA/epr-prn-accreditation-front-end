@@ -6,7 +6,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
     public interface IAccreditationService
     {
         Task<OperatorTypeViewModel> GetOperatorType(Guid id);
-        Task UpdateOperatorType(OperatorTypeViewModel viewModel);
+        Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel);
 
     }
 }

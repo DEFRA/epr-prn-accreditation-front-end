@@ -17,9 +17,15 @@ namespace EPR.Accreditation.Portal.Controllers
         [ActionName("OperatorType")]
         public async Task<IActionResult> OperatorType(Guid? id)
         {
-            var operatorType = await _accreditationService.GetOperatorType(id.Value);
+            if (id.HasValue)
+            {
+                var operatorType = await _accreditationService.GetOperatorType(id.Value);
 
-            return View(operatorType);
+                return View(operatorType);
+
+            }
+
+            return View(new OperatorTypeViewModel());
         }
 
         [HttpPost]
@@ -29,7 +35,7 @@ namespace EPR.Accreditation.Portal.Controllers
             if(!ModelState.IsValid)
                 return View(vm);
 
-            await _accreditationService.UpdateOperatorType(vm);
+            var externalId = await _accreditationService.CreateAccreditation(vm);
 
             return RedirectToAction("Index", "Home");
         }

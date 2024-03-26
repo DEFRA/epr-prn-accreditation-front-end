@@ -23,11 +23,11 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return new OperatorTypeViewModel { ExternalId = id, OperatorType = result };
         }
 
-        public async Task UpdateOperatorType(OperatorTypeViewModel viewModel)
+        public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            await _httpAccreditationService.UpdateOperatorType(
-                viewModel.ExternalId,
-                viewModel.OperatorType);
+            var accreditation = new Facade.Common.Dtos.Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
+            return externalId;
         }
     }
 }

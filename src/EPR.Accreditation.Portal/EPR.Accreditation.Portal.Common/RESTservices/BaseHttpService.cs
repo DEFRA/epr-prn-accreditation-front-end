@@ -61,6 +61,16 @@ namespace EPR.Accreditation.Facade.Common.RESTservices
         }
 
         /// <summary>
+        /// Performs an Http POST returning the speicified object
+        /// </summary>
+        protected async Task<T> Post<T>(object payload = null)
+        {
+            var url = $"{_baseUrl}";
+
+            return await Send<T>(CreateMessage(url, payload, HttpMethod.Post));
+        }
+
+        /// <summary>
         /// Performs an Http POST without returning any data
         /// </summary>
         protected async Task Post(string url, object payload = null)

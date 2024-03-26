@@ -7,9 +7,7 @@ namespace EPR.Accreditation.Facade.Common.RESTservices.Interfaces
     {
 
         Task<OperatorType> GetOperatorType(Guid accreditationExternalId);
-        Task UpdateOperatorType(
-            Guid accreditationExternalId, 
-            OperatorType operatorTypeId);
+        Task<Guid> CreateAccreditation(DTO.Accreditation accreditation);
 
         Task<DTO.AccreditationMaterial> GetAccreditationMaterial(
             Guid accreditationExternalId,
