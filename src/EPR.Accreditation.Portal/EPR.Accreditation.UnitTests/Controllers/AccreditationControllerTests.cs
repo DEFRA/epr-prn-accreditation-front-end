@@ -28,7 +28,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Guid id = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
             var viewModel = new WasteLicensesAndPermitsViewModel();
 
-            _mockAccreditationService.Setup(service => service.GetWasteLicensesAndPermitsViewModel(id)).Returns(viewModel);
+            _mockAccreditationService.Setup(service => service.GetWastePermitViewModel(id)).Returns(viewModel);
 
             // Act
             var result = _accreditationController.WasteLicensesAndPermits(id);
@@ -46,7 +46,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // check view name
             Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
 
-            _mockAccreditationService.Verify(service => service.GetWasteLicensesAndPermitsViewModel(id), Times.Once);
+            _mockAccreditationService.Verify(service => service.GetWastePermitViewModel(id), Times.Once);
         }
     }
 }

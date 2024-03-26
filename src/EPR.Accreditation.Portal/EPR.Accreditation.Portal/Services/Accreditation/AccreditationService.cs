@@ -22,7 +22,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
         }
 
-        public WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id)
+        public WasteLicensesAndPermitsViewModel GetWastePermitViewModel(Guid id)
         {
             var wastePermit = _httpAccreditationService.GetWastePermit(id);
 

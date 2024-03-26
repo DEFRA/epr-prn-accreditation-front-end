@@ -39,7 +39,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var id = Guid.NewGuid();
 
             // Act
-            var result = _accreditationService?.GetWasteLicensesAndPermitsViewModel(id);
+            var result = _accreditationService?.GetWastePermitViewModel(id);
 
             // Asset
             Assert.IsNotNull(result);

@@ -5,7 +5,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
     public interface IAccreditationService
     {
-        WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id);
+        WasteLicensesAndPermitsViewModel GetWastePermitViewModel(Guid id);
 
         Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
     }

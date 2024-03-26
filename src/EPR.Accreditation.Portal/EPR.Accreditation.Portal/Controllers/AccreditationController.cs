@@ -13,29 +13,26 @@ namespace EPR.Accreditation.Portal.Controllers
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
         }
 
-        [HttpGet]
-        [ActionName("WasteLicensesAndPermits")]
+        [HttpGet, ActionName("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
             if (id == null)
                 return NotFound();
 
-            var viewModel = _accreditationService.GetWasteLicensesAndPermitsViewModel(id.Value);
+            var viewModel = _accreditationService.GetWastePermitViewModel(id.Value);
 
             return View(viewModel);
         }
 
-        [HttpPost]
-        [ActionName("WasteLicensesAndPermits")]
+        [HttpPost, ActionName("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
         {
             if (!ModelState.IsValid)
                 return View(wasteLicensesAndPermitsViewModel);
 
             await _accreditationService.SaveWastePermit(wasteLicensesAndPermitsViewModel);
-            var accreditionWastePermit = _accreditationService.GetWasteLicensesAndPermitsViewModel(wasteLicensesAndPermitsViewModel.Id);
-
-            return View(accreditionWastePermit);
+            
+            return View("CheckWastePermitExemption");
         }
     }
 }
