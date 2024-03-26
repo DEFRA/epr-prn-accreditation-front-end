@@ -21,6 +21,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<MaterialTypeViewModel>();
             services.AddHttpClient("HttpClient");
             services.AddScoped<WasteTypeActionFilter>();
+            services.AddScoped<BackPageViewModel>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<ICultureHelper, CultureHelper>();
             services.AddScoped<IQueryStringHelper, QueryStringHelper>();

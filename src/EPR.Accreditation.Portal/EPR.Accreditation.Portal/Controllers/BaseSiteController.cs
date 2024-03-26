@@ -9,21 +9,29 @@ namespace EPR.Accreditation.Portal.Controllers
 {
     public abstract class BaseSiteController : Controller
     {
+        // overriden in inheriting classes
+        protected string SiteProcessingCapacityRouteName;
         protected readonly SiteType _siteType;
+        protected IUrlHelper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
+        protected readonly BackPageViewModel _backPageViewModel;
 
         protected BaseSiteController(
+            IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
+            BackPageViewModel backPageViewModel,
             SiteType siteType)
         {
             if (siteType == SiteType.None)
                 throw new ArgumentException("Site enum cannot be 'None'");
 
+            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _siteType = siteType;
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
+            _backPageViewModel = backPageViewModel ?? throw new ArgumentNullException(nameof(backPageViewModel));
         }
 
         protected async Task<IActionResult> GetMaterialWasteSource(
@@ -31,18 +39,27 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? siteId,
             Guid? materialId)
         {
+            // need to add back link
+            _backPageViewModel.Url = _urlHelper.RouteUrl(
+                _siteType == SiteType.OverseasSite ? "OverseasSiteChooseMaterial" : "SiteChooseMaterial",
+                new
+                {
+                    id = id,
+                    siteId = siteId,
+                    materialId = materialId
+                });
+
             var wasteSource = await _accreditationSiteMaterialService.GetWasteSource(id.Value, siteId.Value, materialId.Value);
 
             return View(wasteSource);
         }
 
-        
         protected async Task<IActionResult> SaveMaterialWasteSource(
             WasteSourceViewModel viewModel,
             SaveButton saveButton)
         {
             if (!ModelState.IsValidForSaveForLater(
-                saveButton, 
+                saveButton,
                 WasteSourceResources.NoSourceSupplied))
             {
                 return await GetMaterialWasteSource(
@@ -51,18 +68,9 @@ namespace EPR.Accreditation.Portal.Controllers
                     viewModel.MaterialId);
             }
 
+            // save the data regardless of whether this is save and continue or
+            // save and come back later
             await _accreditationSiteMaterialService.UpdateWasteSource(viewModel);
-
-            var routeName = string.Empty;
-
-            if(_siteType == SiteType.Site)
-            {
-                routeName = "SiteProcessingCapacity";
-            }
-            else
-            {
-                routeName = "OverseasSiteProcessingCapacity";
-            }
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
@@ -74,7 +82,7 @@ namespace EPR.Accreditation.Portal.Controllers
             }
             else
             {
-                return RedirectToRoute(routeName,
+                return RedirectToRoute(SiteProcessingCapacityRouteName,
                     new
                     {
                         viewModel.Id,

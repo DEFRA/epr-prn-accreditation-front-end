@@ -10,16 +10,30 @@ namespace EPR.Accreditation.Portal.Controllers
     public class SiteMaterialController : BaseSiteController
     {
         public SiteMaterialController(
+            IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
-            ISaveAndComeBackService saveAndComeBackService) 
+            ISaveAndComeBackService saveAndComeBackService,
+            BackPageViewModel backPageViewModel) 
             : base(
+                  urlHelper,
                   accreditationSiteMaterialService,
                   saveAndComeBackService, 
+                  backPageViewModel,
                   SiteType.Site)
         {
+            SiteProcessingCapacityRouteName = "SiteProcessingCapacity";
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource")]
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/Material", Name = "SiteChooseMaterial")]
+        public IActionResult ChooseMaterial(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource", Name = "SiteWasteSource")]
         public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
             Guid? siteId,
