@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.DTOs;
+﻿using AutoMapper;
+using EPR.Accreditation.Portal.DTOs;
 using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.RESTservices;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
@@ -10,12 +11,15 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 {
     public class AccreditationService : IAccreditationService
     {
+        private readonly IMapper _mapper;
+
         protected IOptions<AppSettingsConfigOptions> _configSettings;
 
         protected IHttpAccreditationService _httpAccreditationService;
 
-        public AccreditationService(IOptions<AppSettingsConfigOptions> configSettings, IHttpAccreditationService httpAccreditationService)
+        public AccreditationService(IMapper mapper, IOptions<AppSettingsConfigOptions> configSettings, IHttpAccreditationService httpAccreditationService)
         {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _configSettings = configSettings ?? throw new ArgumentNullException(nameof(configSettings));
             if (_configSettings.Value?.DaysUntilExpiration == null)
                 throw new ArgumentNullException(nameof(_configSettings.Value.DaysUntilExpiration));
@@ -27,15 +31,11 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var wastePermit = _httpAccreditationService.GetWastePermit(id);
 
             WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicensesAndPermitsViewModel();
+            wasteLicensesAndPermitsViewModel.Id = id;
 
             if (wastePermit.Result != null)
             {
-                wasteLicensesAndPermitsViewModel.Id = id;
-                wasteLicensesAndPermitsViewModel.PermitNumber = wastePermit.Result.EnvironmentalPermitNumber;
-                wasteLicensesAndPermitsViewModel.DischargeConstentNumber = wastePermit.Result.DischargeConsentNumber;
-                wasteLicensesAndPermitsViewModel.RegistrationNumber = wastePermit.Result.DealerRegistrationNumber;
-                wasteLicensesAndPermitsViewModel.ActivityReferenceNumber = wastePermit.Result.PartAActivityReferenceNumber;
-                wasteLicensesAndPermitsViewModel.ActivityNumber = wastePermit.Result.PartBActivityReferenceNumber;
+                wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit.Result);
             }
 
             return wasteLicensesAndPermitsViewModel;
@@ -43,13 +43,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
         {
-            var wastePermit = new DTOs.WastePermit();
-            wastePermit.EnvironmentalPermitNumber = wasteLicensesAndPermitsViewModel.PermitNumber;
-            wastePermit.DischargeConsentNumber = wasteLicensesAndPermitsViewModel.DischargeConstentNumber;
-            wastePermit.DealerRegistrationNumber = wasteLicensesAndPermitsViewModel.RegistrationNumber;
-            wastePermit.PartAActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityReferenceNumber;
-            wastePermit.PartBActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityNumber;
-         
+            var wastePermit = _mapper.Map<DTOs.WastePermit>(wasteLicensesAndPermitsViewModel);
+            
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
     }

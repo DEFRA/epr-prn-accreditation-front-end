@@ -31,6 +31,7 @@ namespace EPR.Accreditation.Portal
                     .AddRazorRuntimeCompilation();
             }
 
+            services.AddAutoMapper(typeof(Program));
             services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddControllers();

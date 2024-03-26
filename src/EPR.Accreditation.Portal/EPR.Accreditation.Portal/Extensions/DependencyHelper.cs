@@ -12,6 +12,8 @@ using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
+using AutoMapper;
+using EPRN.Accreditation.Profiles;
 
 namespace EPR.Accreditation.Portal.Extensions
 {
@@ -63,6 +65,15 @@ namespace EPR.Accreditation.Portal.Extensions
                         "SaveAndComeBack"
                     )
             );
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AccreditationProfile());
+                mc.AllowNullCollections = true;
+            });
+
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             return services;
         }
