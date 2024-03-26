@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.ViewModels;
+﻿using EPR.Accreditation.Portal.DTOs;
+using EPR.Accreditation.Portal.ViewModels;
 
 namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
@@ -6,8 +7,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
     {
         WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id);
 
-        Task<Task> SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode);
-
-        Task SaveAccreditation(Guid id, DTOs.Accreditation accreditation);
+        Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
     }
 }

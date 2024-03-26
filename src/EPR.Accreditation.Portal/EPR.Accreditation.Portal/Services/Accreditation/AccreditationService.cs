@@ -24,20 +24,29 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id)
         {
+            var wastePermit = _httpAccreditationService.GetWastePermit(id);
+
             return new WasteLicensesAndPermitsViewModel
             {
                 Id = id,
+                PermitNumber = wastePermit.Result.EnvironmentalPermitNumber,
+                DischargeConstentNumber = wastePermit.Result.DischargeConsentNumber,
+                RegistrationNumber = wastePermit.Result.DealerRegistrationNumber,
+                ActivityReferenceNumber = wastePermit.Result.PartAActivityReferenceNumber,
+                ActivityNumber = wastePermit.Result.PartBActivityReferenceNumber
             };
         }
 
-        public async Task<Task> SaveWasteLicensesAndPermitsViewMode(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewMode)
+        public async Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
         {
-            return Task.CompletedTask;
-        }
-
-        public async Task SaveAccreditation(Guid id, DTOs.Accreditation accreditation)
-        {
-            await _httpAccreditationService.CreateAccreditation(id, accreditation);
+            var wastePermit = new DTOs.WastePermit();
+            wastePermit.EnvironmentalPermitNumber = wasteLicensesAndPermitsViewModel.PermitNumber;
+            wastePermit.DischargeConsentNumber = wasteLicensesAndPermitsViewModel.DischargeConstentNumber;
+            wastePermit.DealerRegistrationNumber = wasteLicensesAndPermitsViewModel.RegistrationNumber;
+            wastePermit.PartAActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityReferenceNumber;
+            wastePermit.PartBActivityReferenceNumber = wasteLicensesAndPermitsViewModel.ActivityNumber;
+         
+            await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
     }
 }
