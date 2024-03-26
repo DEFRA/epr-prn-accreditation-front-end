@@ -74,6 +74,15 @@ namespace EPR.Accreditation.Portal.Controllers
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
+                _backPageViewModel.Url = _urlHelper.RouteUrl(
+                    _siteType == SiteType.OverseasSite ? "OverseasSiteChooseMaterial" : "SiteChooseMaterial",
+                    new
+                    {
+                        Id = viewModel.Id,
+                        SiteId = viewModel.SiteId,
+                        materialId = viewModel.MaterialId
+                    });
+
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
