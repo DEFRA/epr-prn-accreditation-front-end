@@ -26,15 +26,19 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         {
             var wastePermit = _httpAccreditationService.GetWastePermit(id);
 
-            return new WasteLicensesAndPermitsViewModel
+            WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicensesAndPermitsViewModel();
+
+            if (wastePermit.Result != null)
             {
-                Id = id,
-                PermitNumber = wastePermit.Result.EnvironmentalPermitNumber,
-                DischargeConstentNumber = wastePermit.Result.DischargeConsentNumber,
-                RegistrationNumber = wastePermit.Result.DealerRegistrationNumber,
-                ActivityReferenceNumber = wastePermit.Result.PartAActivityReferenceNumber,
-                ActivityNumber = wastePermit.Result.PartBActivityReferenceNumber
-            };
+                wasteLicensesAndPermitsViewModel.Id = id;
+                wasteLicensesAndPermitsViewModel.PermitNumber = wastePermit.Result.EnvironmentalPermitNumber;
+                wasteLicensesAndPermitsViewModel.DischargeConstentNumber = wastePermit.Result.DischargeConsentNumber;
+                wasteLicensesAndPermitsViewModel.RegistrationNumber = wastePermit.Result.DealerRegistrationNumber;
+                wasteLicensesAndPermitsViewModel.ActivityReferenceNumber = wastePermit.Result.PartAActivityReferenceNumber;
+                wasteLicensesAndPermitsViewModel.ActivityNumber = wastePermit.Result.PartBActivityReferenceNumber;
+            }
+
+            return wasteLicensesAndPermitsViewModel;
         }
 
         public async Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)

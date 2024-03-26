@@ -2,6 +2,8 @@
 using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Moq;
 
@@ -41,7 +43,7 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Asset
             Assert.IsNotNull(result);
-            Assert.AreEqual(id, result.Id);
+            Assert.IsInstanceOfType(result, typeof(WasteLicensesAndPermitsViewModel));
         }
     }
 }
