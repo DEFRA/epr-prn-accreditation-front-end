@@ -12,18 +12,27 @@ namespace EPR.Accreditation.Portal.Controllers
     {
         protected readonly IPermitExemptionService _permitExemptionService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
+        protected readonly BackPageViewModel _backPageViewModel;
+        protected IUrlHelper _urlHelper;
 
         public PermitExemptionController(
             IPermitExemptionService permitExemptionService,
-            ISaveAndComeBackService saveAndComeBackService)
+            ISaveAndComeBackService saveAndComeBackService,
+            IUrlHelper urlHelper,
+            BackPageViewModel backPageViewModel)
         {
+            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _permitExemptionService = permitExemptionService ?? throw new ArgumentNullException(nameof(permitExemptionService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
+            _backPageViewModel = backPageViewModel;
         }
 
         [HttpGet]
         public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
         {
+            // need to add back link
+            _backPageViewModel.Url = _urlHelper.ActionLink("Index", "Home"); //TODO: Need to change with Sajid's endpoint
+
             if (id == null)
                 return NotFound();
 
