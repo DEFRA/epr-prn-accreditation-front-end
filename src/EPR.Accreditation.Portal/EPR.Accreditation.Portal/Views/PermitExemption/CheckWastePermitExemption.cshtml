@@ -9,7 +9,7 @@
 }
 
 <partial name="_ValidationSummary" />
-@* <partial name="_WasteMaterialName" /> *@
+<partial name="_WasteMaterialName" />
 <form method="post">
     <radios asp-for="HasPermitExemption" asp-title="@PermitExemptionResources.PageHeading">
         <p class="govuk-error-message">
@@ -28,12 +28,5 @@
             </label>
         </div>
     </radios>
-    <div class="govuk-button-group">
-        <button class="govuk-button" data-module="govuk-button" type="submit" name="saveAndContinue" value="@SaveButtonValues.SaveAndContinue">
-            @MasterResources.SaveAndContinue
-        </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" name="saveAndContinue" value="@SaveButtonValues.SaveAndComeBackLater">
-            @MasterResources.SaveAndComeBack
-        </button>
-    </div>
+    <partial name="_SaveButtons" />
 </form>

@@ -26,5 +26,16 @@ namespace EPR.Accreditation.Portal.Services.PermitExemption
                 HasPermitExemption = await _httpWastePermitService.GetHasPermitExemption(id)
             };
         }
+
+        public async Task UpdatePermitExemption(PermitExemptionViewModel permitExemptionViewModel)
+        {
+            if (permitExemptionViewModel.HasPermitExemption == null)
+                permitExemptionViewModel.HasPermitExemption = null;
+
+            await _httpWastePermitService.UpdatePermitExemption(
+                permitExemptionViewModel.Id,
+                permitExemptionViewModel.HasPermitExemption
+                );
+        }
     }
 }

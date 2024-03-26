@@ -16,5 +16,10 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             return await Get<bool?>($"{id}/WastePermitExemption");
         }
+
+        public async Task UpdatePermitExemption(Guid id, bool? hasPermitExemption)
+        {
+            await Put($"{id}/WastePermitExemption", hasPermitExemption);
+        }
     }
 }

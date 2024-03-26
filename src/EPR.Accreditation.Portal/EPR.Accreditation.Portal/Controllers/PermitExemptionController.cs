@@ -1,4 +1,7 @@
 ﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Resources;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.Services.PermitExemption.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +11,14 @@ namespace EPR.Accreditation.Portal.Controllers
     public class PermitExemptionController : Controller
     {
         protected readonly IPermitExemptionService _permitExemptionService;
+        protected readonly ISaveAndComeBackService _saveAndComeBackService;
 
-        public PermitExemptionController(IPermitExemptionService permitExemptionService)
+        public PermitExemptionController(
+            IPermitExemptionService permitExemptionService,
+            ISaveAndComeBackService saveAndComeBackService)
         {
             _permitExemptionService = permitExemptionService ?? throw new ArgumentNullException(nameof(permitExemptionService));
+            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
         }
 
         [HttpGet]
@@ -28,22 +35,28 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckWastePermitExemption(
             PermitExemptionViewModel viewModel,
-            SaveButtonValues saveAndContinue)
+            SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PermitExemptionResources.ErrorMessage))
             {
                 return View(viewModel);
             }
 
-            //await _accreditationService.SaveWastePermitExemption(viewModel);
+            await _permitExemptionService.UpdatePermitExemption(viewModel);
 
-            if (saveAndContinue == SaveButtonValues.SaveAndContinue)
+            if (saveButton == SaveButton.SaveAndContinue)
             {
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                return RedirectToAction("ApplicationSaved", "Accreditation", new { viewModel.Id });
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
             }
         }
     }
