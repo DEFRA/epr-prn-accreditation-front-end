@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.RESTservices.Interfaces;
+﻿using EPR.Accreditation.Portal.DTOs.WastePermit;
+using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
 namespace EPR.Accreditation.Portal.RESTservices
 {
@@ -17,9 +18,9 @@ namespace EPR.Accreditation.Portal.RESTservices
             return await Get<bool?>($"{id}/WastePermitExemption");
         }
 
-        public async Task UpdatePermitExemption(Guid id, bool? hasPermitExemption)
+        public async Task UpdatePermitExemption(Guid id, PermitExemption permitExemption)
         {
-            await Put($"{id}/WastePermitExemption", hasPermitExemption);
+            await Put($"{id}/WastePermitExemption", permitExemption);
         }
     }
 }

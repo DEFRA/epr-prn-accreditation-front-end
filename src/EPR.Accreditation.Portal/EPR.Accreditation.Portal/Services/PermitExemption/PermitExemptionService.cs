@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.RESTservices.Interfaces;
+﻿using AutoMapper;
+using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.PermitExemption.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 
@@ -9,13 +10,16 @@ namespace EPR.Accreditation.Portal.Services.PermitExemption
 
         protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IHttpWastePermitService _httpWastePermitService;
+        private readonly IMapper _mapper;
 
         public PermitExemptionService(
             IHttpContextAccessor httpContextAccessor,
-            IHttpWastePermitService httpWastePermitService)
+            IHttpWastePermitService httpWastePermitService,
+            IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpWastePermitService = httpWastePermitService ?? throw new ArgumentNullException(nameof(httpWastePermitService));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<PermitExemptionViewModel> GetPermitExemptionViewModel(Guid id)
@@ -29,12 +33,12 @@ namespace EPR.Accreditation.Portal.Services.PermitExemption
 
         public async Task UpdatePermitExemption(PermitExemptionViewModel permitExemptionViewModel)
         {
-            if (permitExemptionViewModel.HasPermitExemption == null)
-                permitExemptionViewModel.HasPermitExemption = null;
+
+            var permitExemptionDto = _mapper.Map<DTOs.WastePermit.PermitExemption>(permitExemptionViewModel);
 
             await _httpWastePermitService.UpdatePermitExemption(
                 permitExemptionViewModel.Id,
-                permitExemptionViewModel.HasPermitExemption
+                permitExemptionDto
                 );
         }
     }
