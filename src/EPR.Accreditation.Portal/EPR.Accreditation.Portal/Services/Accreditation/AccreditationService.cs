@@ -22,16 +22,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
         }
 
-        public ApplicationSavedViewModel GetApplicationSavedViewModel(Guid id)
-        {
-            return new ApplicationSavedViewModel
-            {
-                Id = id,
-                
-                ApplicationExpiry = _configSettings.Value.DaysUntilExpiration.Value
-            };
-        }
-
         public WasteLicensesAndPermitsViewModel GetWasteLicensesAndPermitsViewModel(Guid id)
         {
             return new WasteLicensesAndPermitsViewModel
