@@ -8,6 +8,6 @@ namespace EPR.Accreditation.Portal.ViewModels
         public Guid Id { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(PermitExemptionResources), ErrorMessageResourceName = "ErrorMessage")]
-        public bool HasPermitExemption { get; set; }
+        public bool? HasPermitExemption { get; set; }
     }
 }
