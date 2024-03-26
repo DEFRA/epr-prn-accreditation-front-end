@@ -23,17 +23,6 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpGet]
-        public IActionResult ApplicationSaved(Guid? id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var viewModel = _accreditationService.GetApplicationSavedViewModel(id.Value);
-
-            return View(viewModel);
-        }
-
-        [HttpGet]
         [ActionName("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {

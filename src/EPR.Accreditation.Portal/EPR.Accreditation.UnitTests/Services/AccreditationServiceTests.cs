@@ -31,22 +31,6 @@ namespace EPR.Accreditation.UnitTests.Services
         }
 
         [TestMethod]
-        public void GetApplicationSavedViewModel_ReturnsCorrectViewModel()
-        {
-            // Arrange
-            var id = Guid.NewGuid();
-
-            // Act
-            var result = _accreditationService?.GetApplicationSavedViewModel(id);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(id, result.Id);
-            Assert.AreEqual(30, result.ApplicationExpiry);
-
-        }
-
-        [TestMethod]
         public void GetWasteLicensesAndPermitsViewModel_ReturnsCorrectViewModel()
         {
             // Arrange
