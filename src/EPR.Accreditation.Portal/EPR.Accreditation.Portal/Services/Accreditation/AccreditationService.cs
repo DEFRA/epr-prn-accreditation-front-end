@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using EPR.Accreditation.Portal.DTOs;
 using EPR.Accreditation.Portal.Options;
-using EPR.Accreditation.Portal.RESTservices;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -31,12 +29,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var wastePermit = _httpAccreditationService.GetWastePermit(id);
 
             WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicensesAndPermitsViewModel();
-            wasteLicensesAndPermitsViewModel.Id = id;
-
+            
             if (wastePermit.Result != null)
             {
                 wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit.Result);
             }
+            
+            wasteLicensesAndPermitsViewModel.Id = id;
 
             return wasteLicensesAndPermitsViewModel;
         }
