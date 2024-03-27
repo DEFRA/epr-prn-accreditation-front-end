@@ -1,7 +1,9 @@
-﻿using EPR.Accreditation.Portal.Configuration;
+﻿using AutoMapper;
+using EPR.Accreditation.Portal.Configuration;
 using EPR.Accreditation.Portal.Helpers;
 using EPR.Accreditation.Portal.Helpers.ActionFilters;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
+using EPR.Accreditation.Portal.Profiles;
 using EPR.Accreditation.Portal.RESTservices;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
@@ -26,7 +28,8 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<ICultureHelper, CultureHelper>();
             services.AddScoped<IQueryStringHelper, QueryStringHelper>();
             services.AddScoped<IAccreditationSiteMaterialService, AccreditationSiteMaterialService>();
-            services.AddScoped<ISaveAndComeBackService, SaveAndComeBackService>(); 
+            services.AddScoped<ISaveAndComeBackService, SaveAndComeBackService>();
+            services.AddScoped<IWastePermitService, WastePermitService>();
             services.AddScoped<IAccreditationService, AccreditationService>();
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
@@ -50,6 +53,25 @@ namespace EPR.Accreditation.Portal.Extensions
                         "SaveAndComeBack"
                     )
             );
+
+            services
+                .AddScoped<IHttpWastePermitService>(s =>
+                    new HttpWastePermitService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"
+                    )
+            );
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AccreditationProfile());
+                mc.AllowNullCollections = true;
+            });
+
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services
                 .AddScoped<Facade.Common.RESTservices.Interfaces.IHttpAccreditationService>(s =>

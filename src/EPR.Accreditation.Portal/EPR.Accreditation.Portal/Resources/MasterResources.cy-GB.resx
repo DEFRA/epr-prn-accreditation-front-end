@@ -126,6 +126,9 @@
   <data name="MaterialForLabel" xml:space="preserve">
     <value>[Welsh]For:</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>[Welsh]No</value>
+  </data>
   <data name="OppositeLanguage" xml:space="preserve">
     <value>English</value>
   </data>
@@ -134,5 +137,11 @@
   </data>
   <data name="SaveAndContinue" xml:space="preserve">
     <value>[Welsh]Save and continue</value>
+  </data>
+  <data name="SummaryError" xml:space="preserve">
+    <value>[Welsh]There is a problem</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>[Welsh]Yes</value>
   </data>
 </root>

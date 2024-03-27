@@ -8,13 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Microsoft\**" />
-    <Content Remove="Microsoft\**" />
-    <EmbeddedResource Remove="Microsoft\**" />
-    <None Remove="Microsoft\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="EPR.Common.Authorization" Version="1.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
@@ -25,6 +19,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\PermitExemptionResources.cy-GB.Designer.cs">
+      <DependentUpon>PermitExemptionResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\PermitExemptionResources.Designer.cs">
+      <DependentUpon>PermitExemptionResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\ApplicationSavedResources.cy-GB.Designer.cs">
       <DependentUpon>ApplicationSavedResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -73,6 +77,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\PermitExemptionResources.cy-GB.resx">
+      <LastGenOutput>PermitExemptionResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PermitExemptionResources.resx">
+      <LastGenOutput>PermitExemptionResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\ApplicationSavedResources.cy-GB.resx">
       <LastGenOutput>ApplicationSavedResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>

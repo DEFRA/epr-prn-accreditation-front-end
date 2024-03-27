@@ -9,7 +9,5 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
         Task AddSaveAndComeBack(
             Guid accreditationExternalId,
             RouteValueDictionary keyValuePairs);
-
-        Task DeleteSaveAndComeBack(Guid accreditationExternalId);
     }
 }
