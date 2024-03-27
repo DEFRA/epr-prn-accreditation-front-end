@@ -14,17 +14,20 @@ namespace EPR.Accreditation.Portal.Controllers
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelper _urlHelper;
+        private readonly IAccreditationService _accreditationService;
 
         public AccreditationController(
             IWastePermitService wastePermitService,
             ISaveAndComeBackService saveAndComeBackService,
             IUrlHelper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            IAccreditationService accreditationService)
         {
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _backPageViewModel = backPageViewModel;
+            _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
         }
 
         [HttpGet("PermitExemption")]
@@ -64,6 +67,34 @@ namespace EPR.Accreditation.Portal.Controllers
                 viewModel.Id,
                 Request.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
+        }
+
+        [HttpGet]
+        [ActionName("OperatorType")]
+        public async Task<IActionResult> OperatorType(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                var operatorType = await _accreditationService.GetOperatorType(id.Value);
+
+                return View(operatorType);
+
+            }
+
+            return View(new OperatorTypeViewModel());
+        }
+
+
+        [HttpPost]
+        [ActionName("OperatorType")]
+        public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            var externalId = await _accreditationService.CreateAccreditation(vm);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
