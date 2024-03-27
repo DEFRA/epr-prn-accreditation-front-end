@@ -9,7 +9,5 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task AddSaveAndComeBack(
             Guid accreditationExternalId,
             SaveAndComeBack saveAndContinue);
-
-        Task DeleteSaveAndComeBack(Guid accreditationExternalId);
     }
 }
