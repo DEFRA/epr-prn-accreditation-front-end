@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Portal.Configuration;
-using EPR.Accreditation.Portal.Services;
-using Microsoft.Extensions.Options;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Helpers;
 using EPR.Accreditation.Portal.Helpers.ActionFilters;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
@@ -14,8 +11,6 @@ using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
-using AutoMapper;
-using EPRN.Accreditation.Profiles;
 
 namespace EPR.Accreditation.Portal.Extensions
 {

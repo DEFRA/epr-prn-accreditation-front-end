@@ -3,7 +3,6 @@ using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.ViewModels;
-using EPRN.Accreditation.Profiles;
 using Microsoft.Extensions.Options;
 using Moq;
 

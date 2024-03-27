@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
         {
-            var wastePermit = _mapper.Map<DTOs.WastePermit>(wasteLicensesAndPermitsViewModel);
+            var wastePermit = _mapper.Map<DTOs.WastePermit.LicensesAndPermitsReferences>(wasteLicensesAndPermitsViewModel);
             
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }

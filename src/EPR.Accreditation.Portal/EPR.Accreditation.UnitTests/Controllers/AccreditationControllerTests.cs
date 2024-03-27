@@ -14,6 +14,9 @@ namespace EPR.Accreditation.UnitTests.Controllers
         protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         protected Mock<IHttpAccreditationService> _mockhttpAccreditationService;
         private Mock<IAccreditationService> _mockAccreditationService;
+        private Mock<IWastePermitService> _mockWastePermitService;
+        private Mock<IUrlHelper> _mockUrlHelper;
+        private Mock<BackPageViewModel> _backPageViewModel;
         private AccreditationController _accreditationController;
 
         [TestInitialize]
@@ -21,7 +24,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         {
             _mockAccreditationService = new Mock<IAccreditationService>();
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService> { CallBase = true };
-            _accreditationController = new AccreditationController(_mockAccreditationService.Object, _mockSaveAndComeBackService.Object);
+            _accreditationController = new AccreditationController(_mockWastePermitService.Object, _mockSaveAndComeBackService.Object, _mockAccreditationService.Object, _mockUrlHelper.Object, _backPageViewModel.Object);
         }
 
         [TestMethod]

@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EPR.Accreditation.Portal.DTOs
+namespace EPR.Accreditation.Portal.DTOs.WastePermit
 {
-    public class WastePermit
+    public class LicensesAndPermitsReferences
     {
         public int AccreditationId { get; set; }
-
-        public int? OverseasReprocessingSiteId { get; set; }
 
         [MaxLength(100)]
         public string DealerRegistrationNumber { get; set; }
@@ -22,7 +20,5 @@ namespace EPR.Accreditation.Portal.DTOs
 
         [MaxLength(50)]
         public string DischargeConsentNumber { get; set; }
-
-        public bool? WastePermitExemption { get; set; }
     }
 }

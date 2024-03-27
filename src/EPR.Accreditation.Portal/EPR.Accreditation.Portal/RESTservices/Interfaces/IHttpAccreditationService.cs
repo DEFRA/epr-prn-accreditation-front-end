@@ -1,11 +1,11 @@
-﻿using EPR.Accreditation.Portal.DTOs;
+﻿using EPR.Accreditation.Portal.DTOs.WastePermit;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
     public interface IHttpAccreditationService
     {
-        Task CreateWastePermit(Guid accreditationId, DTOs.WastePermit wastePermit);
+        Task CreateWastePermit(Guid accreditationId, LicensesAndPermitsReferences wastePermit);
 
-        Task<WastePermit> GetWastePermit(Guid accreditationId);
+        Task<LicensesAndPermitsReferences> GetWastePermit(Guid accreditationId);
     }
 }

@@ -1,4 +1,4 @@
-﻿using EPR.Accreditation.Portal.DTOs;
+﻿using EPR.Accreditation.Portal.DTOs.WastePermit;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
 namespace EPR.Accreditation.Portal.RESTservices
@@ -15,14 +15,14 @@ namespace EPR.Accreditation.Portal.RESTservices
 
         public async Task CreateWastePermit(
             Guid id, 
-            DTOs.WastePermit wastePermit)
+            LicensesAndPermitsReferences wastePermit)
         {
             await Post($"{id}/WastePermit", wastePermit);
         }
         
-        public async Task<WastePermit> GetWastePermit(Guid id)
+        public async Task<LicensesAndPermitsReferences> GetWastePermit(Guid id)
         {
-           return await Get<WastePermit>($"{id}/WastePermit");
+           return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
         }
     }
 }
