@@ -33,7 +33,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task UpdatePermitExemption(PermitExemptionViewModel permitExemptionViewModel)
         {
-
             var permitExemptionDto = _mapper.Map<DTOs.WastePermit.PermitExemption>(permitExemptionViewModel);
 
             await _httpWastePermitService.UpdatePermitExemption(

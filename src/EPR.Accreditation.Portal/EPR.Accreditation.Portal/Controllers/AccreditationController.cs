@@ -49,28 +49,21 @@ namespace EPR.Accreditation.Portal.Controllers
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
-            {
                 return View(viewModel);
-            }
 
             await _wastePermitService.UpdatePermitExemption(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue && viewModel.HasPermitExemption.Value == true)
-            {
                 return RedirectToAction("ExemptionReferences", "Accreditation");
-            }
+
             else if (saveButton == SaveButton.SaveAndContinue && viewModel.HasPermitExemption.Value == false)
-            {
                 return RedirectToAction("AuthorityToIssues", "Accreditation");
-            }
-            else
-            {
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
+
+            // this is all the data we require to save for come back later
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.Id,
+                Request.HttpContext.GetRouteData().Values);
+            return View("_ApplicationSaved");
         }
     }
 }
