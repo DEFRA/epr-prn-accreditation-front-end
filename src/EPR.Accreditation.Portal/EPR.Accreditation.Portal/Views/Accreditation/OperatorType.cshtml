@@ -14,7 +14,7 @@
 
         <form method="post">
             <input type="hidden" asp-for="ExternalId" />
-            <radios asp-for="UserRole" asp-title="@OperatorTypeResources.PageTitle">
+            <radios asp-for="OperatorType" asp-title="@OperatorTypeResources.PageTitle">
                 <p class="govuk-error-message">
                     <span asp-validation-for="OperatorType"></span>
                 </p>
