@@ -30,7 +30,7 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpGet("PermitExemption")]
         public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
         {
-            // need to add back link
+            // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)
@@ -54,6 +54,8 @@ namespace EPR.Accreditation.Portal.Controllers
             }
 
             await _wastePermitService.UpdatePermitExemption(viewModel);
+
+            await _saveAndComeBackService.DeleteSaveAndComeBack(viewModel.Id);
 
             if (saveButton == SaveButton.SaveAndContinue && viewModel.HasPermitExemption.Value == true)
             {

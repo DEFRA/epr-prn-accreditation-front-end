@@ -6,9 +6,9 @@ namespace EPR.Accreditation.Portal.RESTservices
     public class HttpSaveAndComeBackService : BaseHttpService, IHttpSaveAndComeBackService
     {
         public HttpSaveAndComeBackService(
-            IHttpContextAccessor httpContextAccessor, 
-            IHttpClientFactory httpClientFactory, 
-            string baseUrl, 
+            IHttpContextAccessor httpContextAccessor,
+            IHttpClientFactory httpClientFactory,
+            string baseUrl,
             string endPointName) : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }
@@ -18,9 +18,9 @@ namespace EPR.Accreditation.Portal.RESTservices
             await Post($"{accreditationExternalId}", saveAndComeBack);
         }
 
-        public Task DeleteSaveAndComeBack(Guid accreditationExternalId)
+        public async Task DeleteSaveAndComeBack(Guid accreditationExternalId)
         {
-            throw new NotImplementedException();
+            await Delete($"{accreditationExternalId}");
         }
 
         public Task<SaveAndComeBack> GetSaveAndComeBack(Guid accreditationExternalId)

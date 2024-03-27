@@ -51,7 +51,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task DeleteSaveAndComeBack(Guid accreditationExternalId)
         {
-
+            await _httpSaveAndComeBackService.DeleteSaveAndComeBack(accreditationExternalId);
         }
     }
 }
