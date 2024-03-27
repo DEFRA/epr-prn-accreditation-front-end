@@ -1,0 +1,31 @@
+﻿@model PermitExemptionViewModel
+@using EPR.Accreditation.Portal.Enums
+@using EPR.Accreditation.Portal.ViewModels
+@using EPR.Accreditation.Portal.Resources
+@using EPR.Accreditation.Portal.Helpers.TagHelpers
+
+@{
+    ViewData["Title"] = PermitExemptionResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+<form method="post">
+    <radios asp-for="HasPermitExemption" asp-title="@PermitExemptionResources.PageHeading">
+        <p class="govuk-error-message">
+            <span asp-validation-for="HasPermitExemption"></span>
+        </p>
+        <div class="govuk-radios__item">
+            <input class="govuk-radios__input" type="radio" asp-for="HasPermitExemption" value="@true" aria-describedby="@MasterResources.Yes">
+            <label class="govuk-label govuk-radios__label" for="@MasterResources.Yes">
+                @MasterResources.Yes
+            </label>
+        </div>
+        <div class="govuk-radios__item">
+            <input class="govuk-radios__input" type="radio" asp-for="HasPermitExemption" value="@false" aria-describedby="@MasterResources.No">
+            <label class="govuk-label govuk-radios__label" for="@MasterResources.No">
+                @MasterResources.No
+            </label>
+        </div>
+    </radios>
+    <partial name="_SaveButtons" />
+</form>

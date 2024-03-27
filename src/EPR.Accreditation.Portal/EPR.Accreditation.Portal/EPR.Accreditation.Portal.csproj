@@ -26,6 +26,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\PermitExemptionResources.cy-GB.Designer.cs">
+      <DependentUpon>PermitExemptionResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\PermitExemptionResources.Designer.cs">
+      <DependentUpon>PermitExemptionResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\ApplicationSavedResources.cy-GB.Designer.cs">
       <DependentUpon>ApplicationSavedResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -74,6 +84,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\PermitExemptionResources.cy-GB.resx">
+      <LastGenOutput>PermitExemptionResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PermitExemptionResources.resx">
+      <LastGenOutput>PermitExemptionResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\ApplicationSavedResources.cy-GB.resx">
       <LastGenOutput>ApplicationSavedResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>

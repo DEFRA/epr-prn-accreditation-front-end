@@ -1,8 +1,11 @@
 ﻿@using EPR.Accreditation.Portal.Enums
-<button class="govuk-button" data-module="govuk-button" type="submit" name="saveButton" value="@SaveButton.SaveAndContinue">
-    @MasterResources.SaveAndContinue
-</button>
 
-<button class="govuk-button govuk-button--secondary .saveAndComeBack" data-module="govuk-button" type="submit" name="saveButton" value="@SaveButton.SaveAndComeBack">
-    @MasterResources.SaveAndComeBack
-</button>
+<div class="govuk-button-group">
+    <button class="govuk-button" data-module="govuk-button" type="submit" name="saveButton" value="@SaveButton.SaveAndContinue">
+        @MasterResources.SaveAndContinue
+    </button>
+
+    <button class="govuk-button govuk-button--secondary .saveAndComeBack" data-module="govuk-button" type="submit" name="saveButton" value="@SaveButton.SaveAndComeBack">
+        @MasterResources.SaveAndComeBack
+    </button>
+</div>

@@ -7,7 +7,9 @@ using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace EPR.Accreditation.Portal
 {
@@ -45,6 +47,11 @@ namespace EPR.Accreditation.Portal
             services.AddLocalization(opts =>
             {
                 opts.ResourcesPath = "Resources";
+            });
+            services.AddScoped<IUrlHelper>(x => {
+                var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+                var factory = x.GetRequiredService<IUrlHelperFactory>();
+                return factory.GetUrlHelper(actionContext);
             });
             services
                 .Configure<RequestLocalizationOptions>(opts =>

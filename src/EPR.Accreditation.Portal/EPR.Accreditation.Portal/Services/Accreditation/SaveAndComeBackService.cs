@@ -48,10 +48,5 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                     Parameters = JsonConvert.SerializeObject(routeValues)
                 });
         }
-
-        public async Task DeleteSaveAndComeBack(Guid accreditationExternalId)
-        {
-
-        }
     }
 }
