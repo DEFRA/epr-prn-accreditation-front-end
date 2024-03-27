@@ -55,8 +55,6 @@ namespace EPR.Accreditation.Portal.Controllers
 
             await _wastePermitService.UpdatePermitExemption(viewModel);
 
-            await _saveAndComeBackService.DeleteSaveAndComeBack(viewModel.Id);
-
             if (saveButton == SaveButton.SaveAndContinue && viewModel.HasPermitExemption.Value == true)
             {
                 return RedirectToAction("ExemptionReferences", "Accreditation");

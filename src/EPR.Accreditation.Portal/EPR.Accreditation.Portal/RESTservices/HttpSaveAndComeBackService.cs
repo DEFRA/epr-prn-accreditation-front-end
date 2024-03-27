@@ -17,12 +17,6 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             await Post($"{accreditationExternalId}", saveAndComeBack);
         }
-
-        public async Task DeleteSaveAndComeBack(Guid accreditationExternalId)
-        {
-            await Delete($"{accreditationExternalId}");
-        }
-
         public Task<SaveAndComeBack> GetSaveAndComeBack(Guid accreditationExternalId)
         {
             throw new NotImplementedException();
