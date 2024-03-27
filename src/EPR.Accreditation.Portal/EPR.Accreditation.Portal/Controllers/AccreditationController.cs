@@ -74,6 +74,9 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpGet("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
+            // TODO: Need to add correct back link in the future
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
             if (id == null)
                 return NotFound();
 
@@ -85,7 +88,9 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpPost("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel viewModel, SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PermitExemptionResources.ErrorMessage))
                 return View(viewModel);
 
             await _accreditationService.SaveWastePermit(viewModel);
@@ -96,11 +101,11 @@ namespace EPR.Accreditation.Portal.Controllers
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
                     Request.HttpContext.GetRouteData().Values);
-                return View("PermitExemption");
+                return View("_ApplicationSaved");
             }
             else
             {
-                return RedirectToRoute("PermitExemption",
+                return RedirectToAction("PermitExemption", "Accreditation",
                     new
                     {
                         viewModel.Id
