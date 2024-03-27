@@ -9,22 +9,10 @@ namespace EPRN.Accreditation.Profiles
         public AccreditationProfile()
         {
             CreateMap<EPR.Accreditation.Portal.DTOs.WastePermit, WasteLicensesAndPermitsViewModel>()
-                .ForMember(d => d.Id, opt => opt.Ignore())
-                .ForMember(d => d.PermitNumber, o => o.MapFrom(s => s.EnvironmentalPermitNumber))
-                .ForMember(d => d.DischargeConstentNumber, o => o.MapFrom(s => s.DischargeConsentNumber))
-                .ForMember(d => d.RegistrationNumber, o => o.MapFrom(s => s.DealerRegistrationNumber))
-                .ForMember(d => d.ActivityReferenceNumber, o => o.MapFrom(s => s.PartAActivityReferenceNumber))
-                .ForMember(d => d.ActivityNumber, o => o.MapFrom(s => s.PartBActivityReferenceNumber))
-                ;
+                .ForMember(d => d.Id, opt => opt.Ignore());
 
             CreateMap<WasteLicensesAndPermitsViewModel, EPR.Accreditation.Portal.DTOs.WastePermit>()
-                .ForMember(s => s.Id, opt => opt.Ignore())
-                .ForMember(d => d.EnvironmentalPermitNumber, o => o.MapFrom(s => s.PermitNumber))
-                .ForMember(d => d.DischargeConsentNumber, o => o.MapFrom(s => s.DischargeConstentNumber))
-                .ForMember(d => d.DealerRegistrationNumber, o => o.MapFrom(s => s.RegistrationNumber))
-                .ForMember(d => d.PartAActivityReferenceNumber, o => o.MapFrom(s => s.ActivityReferenceNumber))
-                .ForMember(d => d.PartBActivityReferenceNumber, o => o.MapFrom(s => s.ActivityNumber))
-                ;
+                .ForMember(s => s.Id, opt => opt.Ignore());
         }
     }
 }

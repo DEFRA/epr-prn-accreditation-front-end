@@ -7,20 +7,20 @@ namespace EPR.Accreditation.Portal.ViewModels
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingRegistrationNumber")]
-        [MaxLength(20, ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "RegistrationNumberNotInRange")]
-        public string RegistrationNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingDealerRegistrationNumberNumber")]
+        [MaxLength(20, ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "DealerRegistrationNumberNumberNotInRange")]
+        public string DealerRegistrationNumber { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingPermitNumber")]
-        public string PermitNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingEnvironmentalPermitNumber")]
+        public string EnvironmentalPermitNumber { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingActivityNumber")]
-        public string ActivityNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingPartBActivityReferenceNumber")]
+        public string PartBActivityReferenceNumber { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingActivityReferenceNumber")]
-        public string ActivityReferenceNumber { get; set; }
+        [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingPartAActivityReferenceNumber")]
+        public string PartAActivityReferenceNumber { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(WasteLicensesAndPermitsResources), ErrorMessageResourceName = "MissingDischargeConstentNumber")]
-        public string DischargeConstentNumber { get; set; }
+        public string DischargeConsentNumber { get; set; }
     }
 }

@@ -33,10 +33,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             if (wastePermit.Result != null)
             {
                 wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit.Result);
+                wasteLicensesAndPermitsViewModel.Id = id;
             }
             
-            wasteLicensesAndPermitsViewModel.Id = id;
-
             return wasteLicensesAndPermitsViewModel;
         }
 

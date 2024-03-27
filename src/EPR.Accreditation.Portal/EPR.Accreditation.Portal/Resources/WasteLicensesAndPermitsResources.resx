@@ -117,38 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivityNumber" xml:space="preserve">
-    <value>PPC 'Part A' or non-waste EPR 'Part A1' activity number</value>
+  <data name="DealerRegistrationNumber" xml:space="preserve">
+    <value>Waste carrier, broker or dealer registration number</value>
   </data>
-  <data name="ActivityNumberNotInRange" xml:space="preserve">
-    <value>Activity number not in range</value>
-  </data>
-  <data name="ActivityReferenceNumber" xml:space="preserve">
-    <value>PPC 'Part B or C' or non-waste EPR 'Part A2 or B' activity reference number </value>
-  </data>
-  <data name="ActivityReferenceNumberNotInRange" xml:space="preserve">
-    <value>Activity number not in range</value>
+  <data name="DealerRegistrationNumberNotInRange" xml:space="preserve">
+    <value>Registration numberr not in range</value>
   </data>
   <data name="DischargeConstentNumber" xml:space="preserve">
     <value>Discharge consent number</value>
   </data>
-  <data name="DischargeConstentNumberNotInRange" xml:space="preserve">
-    <value>Discharge number not in range</value>
+  <data name="EnvironmentalPermitNumber" xml:space="preserve">
+    <value>Waste management license or environment permit number</value>
   </data>
   <data name="LeaveBlank" xml:space="preserve">
     <value>Leave blank if you do not have one.</value>
   </data>
-  <data name="MissingActivityNumber" xml:space="preserve">
-    <value>Missing activity number</value>
-  </data>
-  <data name="MissingActivityReferenceNumber" xml:space="preserve">
-    <value>Missing actitivy reference number</value>
+  <data name="MissingDealerRegistrationNumberNumber" xml:space="preserve">
+    <value>Waste carrier, broker or dealer registration number is missing</value>
   </data>
   <data name="MissingDischargeConstentNumber" xml:space="preserve">
     <value>Missing discharge constent number</value>
   </data>
-  <data name="MissingPermitNumber" xml:space="preserve">
+  <data name="MissingEnvironmentalPermitNumber" xml:space="preserve">
     <value>Permit Number is missing</value>
+  </data>
+  <data name="MissingPartAActivityReferenceNumber" xml:space="preserve">
+    <value>Missing actitivy reference number</value>
+  </data>
+  <data name="MissingPartBActivityReferenceNumber" xml:space="preserve">
+    <value>Missing activity number</value>
   </data>
   <data name="MissingRegistrationNumber" xml:space="preserve">
     <value>Registration Number is missing</value>
@@ -156,16 +153,10 @@
   <data name="PageTitle" xml:space="preserve">
     <value>Waste Licenses And Permits</value>
   </data>
-  <data name="PermitNumber" xml:space="preserve">
-    <value>Waste management license or environment permit number</value>
+  <data name="PartAActivityReferenceNumber" xml:space="preserve">
+    <value>PPC 'Part B or C' or non-waste EPR 'Part A2 or B' activity reference number </value>
   </data>
-  <data name="PermitNumberNotInRange" xml:space="preserve">
-    <value>Permit number not in range</value>
-  </data>
-  <data name="RegistrationNumber" xml:space="preserve">
-    <value>Waste carrier, broker or dealer registration number</value>
-  </data>
-  <data name="RegistrationNumberNotInRange" xml:space="preserve">
-    <value>Registration numberr not in range</value>
+  <data name="PartBActivityReferenceNumber" xml:space="preserve">
+    <value>PPC 'Part A' or non-waste EPR 'Part A1' activity number</value>
   </data>
 </root>

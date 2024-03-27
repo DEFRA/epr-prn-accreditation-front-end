@@ -61,38 +61,20 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PPC &apos;Part A&apos; or non-waste EPR &apos;Part A1&apos; activity number.
+        ///   Looks up a localized string similar to Waste carrier, broker or dealer registration number.
         /// </summary>
-        public static string ActivityNumber {
+        public static string DealerRegistrationNumber {
             get {
-                return ResourceManager.GetString("ActivityNumber", resourceCulture);
+                return ResourceManager.GetString("DealerRegistrationNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activity number not in range.
+        ///   Looks up a localized string similar to Registration numberr not in range.
         /// </summary>
-        public static string ActivityNumberNotInRange {
+        public static string DealerRegistrationNumberNotInRange {
             get {
-                return ResourceManager.GetString("ActivityNumberNotInRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PPC &apos;Part B or C&apos; or non-waste EPR &apos;Part A2 or B&apos; activity reference number .
-        /// </summary>
-        public static string ActivityReferenceNumber {
-            get {
-                return ResourceManager.GetString("ActivityReferenceNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activity number not in range.
-        /// </summary>
-        public static string ActivityReferenceNumberNotInRange {
-            get {
-                return ResourceManager.GetString("ActivityReferenceNumberNotInRange", resourceCulture);
+                return ResourceManager.GetString("DealerRegistrationNumberNotInRange", resourceCulture);
             }
         }
         
@@ -106,11 +88,11 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Discharge number not in range.
+        ///   Looks up a localized string similar to Waste management license or environment permit number.
         /// </summary>
-        public static string DischargeConstentNumberNotInRange {
+        public static string EnvironmentalPermitNumber {
             get {
-                return ResourceManager.GetString("DischargeConstentNumberNotInRange", resourceCulture);
+                return ResourceManager.GetString("EnvironmentalPermitNumber", resourceCulture);
             }
         }
         
@@ -124,20 +106,11 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing activity number.
+        ///   Looks up a localized string similar to Waste carrier, broker or dealer registration number is missing.
         /// </summary>
-        public static string MissingActivityNumber {
+        public static string MissingDealerRegistrationNumberNumber {
             get {
-                return ResourceManager.GetString("MissingActivityNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing actitivy reference number.
-        /// </summary>
-        public static string MissingActivityReferenceNumber {
-            get {
-                return ResourceManager.GetString("MissingActivityReferenceNumber", resourceCulture);
+                return ResourceManager.GetString("MissingDealerRegistrationNumberNumber", resourceCulture);
             }
         }
         
@@ -153,9 +126,27 @@ namespace EPR.Accreditation.Portal.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Permit Number is missing.
         /// </summary>
-        public static string MissingPermitNumber {
+        public static string MissingEnvironmentalPermitNumber {
             get {
-                return ResourceManager.GetString("MissingPermitNumber", resourceCulture);
+                return ResourceManager.GetString("MissingEnvironmentalPermitNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing actitivy reference number.
+        /// </summary>
+        public static string MissingPartAActivityReferenceNumber {
+            get {
+                return ResourceManager.GetString("MissingPartAActivityReferenceNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing activity number.
+        /// </summary>
+        public static string MissingPartBActivityReferenceNumber {
+            get {
+                return ResourceManager.GetString("MissingPartBActivityReferenceNumber", resourceCulture);
             }
         }
         
@@ -178,38 +169,20 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste management license or environment permit number.
+        ///   Looks up a localized string similar to PPC &apos;Part B or C&apos; or non-waste EPR &apos;Part A2 or B&apos; activity reference number .
         /// </summary>
-        public static string PermitNumber {
+        public static string PartAActivityReferenceNumber {
             get {
-                return ResourceManager.GetString("PermitNumber", resourceCulture);
+                return ResourceManager.GetString("PartAActivityReferenceNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permit number not in range.
+        ///   Looks up a localized string similar to PPC &apos;Part A&apos; or non-waste EPR &apos;Part A1&apos; activity number.
         /// </summary>
-        public static string PermitNumberNotInRange {
+        public static string PartBActivityReferenceNumber {
             get {
-                return ResourceManager.GetString("PermitNumberNotInRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Waste carrier, broker or dealer registration number.
-        /// </summary>
-        public static string RegistrationNumber {
-            get {
-                return ResourceManager.GetString("RegistrationNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Registration numberr not in range.
-        /// </summary>
-        public static string RegistrationNumberNotInRange {
-            get {
-                return ResourceManager.GetString("RegistrationNumberNotInRange", resourceCulture);
+                return ResourceManager.GetString("PartBActivityReferenceNumber", resourceCulture);
             }
         }
     }

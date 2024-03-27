@@ -3,6 +3,7 @@ using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.ViewModels;
+using EPRN.Accreditation.Profiles;
 using Microsoft.Extensions.Options;
 using Moq;
 
@@ -11,7 +12,7 @@ namespace EPR.Accreditation.UnitTests.Services
     [TestClass]
     public class AccreditationServiceTests
     {
-        private Mock<IMapper> _mockMapper;
+        private Mock<IMapper> _mockMapper = null;
         private Mock<IHttpAccreditationService> _httpAccreditionService;
         private AccreditationService _accreditationService;
         private Mock<IOptions<AppSettingsConfigOptions>> _mockConfigSettings;
@@ -30,7 +31,6 @@ namespace EPR.Accreditation.UnitTests.Services
             _mockConfigSettings.Setup(o => o.Value).Returns(mockConfig);
 
             _accreditationService = new AccreditationService(_mockMapper.Object, _mockConfigSettings.Object, _httpAccreditionService.Object);
-
         }
 
         [TestMethod]
