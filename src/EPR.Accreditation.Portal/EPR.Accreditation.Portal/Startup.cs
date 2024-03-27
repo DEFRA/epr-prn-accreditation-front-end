@@ -33,6 +33,7 @@ namespace EPR.Accreditation.Portal
                     .AddRazorRuntimeCompilation();
             }
 
+            services.AddAutoMapper(typeof(Program));
             services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddControllers();
@@ -64,6 +65,8 @@ namespace EPR.Accreditation.Portal
             services.Configure<AppSettingsConfigOptions>(
                 Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
             );
+
+            services.AddTransient<IAccreditationService, AccreditationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

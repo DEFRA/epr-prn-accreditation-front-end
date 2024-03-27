@@ -1,4 +1,7 @@
 ﻿using EPR.Accreditation.Portal.Configuration;
+using EPR.Accreditation.Portal.Services;
+using Microsoft.Extensions.Options;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Helpers;
 using EPR.Accreditation.Portal.Helpers.ActionFilters;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
@@ -9,6 +12,8 @@ using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
+using AutoMapper;
+using EPRN.Accreditation.Profiles;
 
 namespace EPR.Accreditation.Portal.Extensions
 {
@@ -38,6 +43,18 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"
                     )
+                
+            );
+            services
+                .AddScoped<IAccreditationService, AccreditationService>()
+                .AddScoped<IHttpAccreditationService>(s =>
+                    new HttpAccreditionService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"
+                    )
+
             );
 
             services
@@ -49,6 +66,15 @@ namespace EPR.Accreditation.Portal.Extensions
                         "SaveAndComeBack"
                     )
             );
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AccreditationProfile());
+                mc.AllowNullCollections = true;
+            });
+
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             return services;
         }
