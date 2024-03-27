@@ -10,9 +10,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
     public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;
-
         protected IOptions<AppSettingsConfigOptions> _configSettings;
-
         protected IHttpAccreditationService _httpAccreditationService;
 
         public AccreditationService(IMapper mapper, IOptions<AppSettingsConfigOptions> configSettings, IHttpAccreditationService httpAccreditationService)
@@ -24,15 +22,15 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
         }
 
-        public WasteLicensesAndPermitsViewModel GetWastePermitViewModel(Guid id)
+        public async Task<WasteLicensesAndPermitsViewModel> GetWastePermitViewModel(Guid id)
         {
-            var wastePermit = _httpAccreditationService.GetWastePermit(id);
+            var wastePermit = await _httpAccreditationService.GetWastePermit(id);
 
             WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicensesAndPermitsViewModel();
             
-            if (wastePermit.Result != null)
+            if (wastePermit != null)
             {
-                wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit.Result);
+                wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit);
                 wasteLicensesAndPermitsViewModel.Id = id;
             }
             

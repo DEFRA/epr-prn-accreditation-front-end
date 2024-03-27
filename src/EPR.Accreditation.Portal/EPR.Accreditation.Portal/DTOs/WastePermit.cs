@@ -4,8 +4,6 @@ namespace EPR.Accreditation.Portal.DTOs
 {
     public class WastePermit
     {
-        public int Id { get; set; }
-
         public int AccreditationId { get; set; }
 
         public int? OverseasReprocessingSiteId { get; set; }

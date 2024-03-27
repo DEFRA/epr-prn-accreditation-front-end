@@ -8,11 +8,9 @@ namespace EPRN.Accreditation.Profiles
     {
         public AccreditationProfile()
         {
-            CreateMap<EPR.Accreditation.Portal.DTOs.WastePermit, WasteLicensesAndPermitsViewModel>()
-                .ForMember(d => d.Id, opt => opt.Ignore());
-
-            CreateMap<WasteLicensesAndPermitsViewModel, EPR.Accreditation.Portal.DTOs.WastePermit>()
-                .ForMember(s => s.Id, opt => opt.Ignore());
+            CreateMap<EPR.Accreditation.Portal.DTOs.WastePermit, WasteLicensesAndPermitsViewModel>();
+                
+            CreateMap<WasteLicensesAndPermitsViewModel, EPR.Accreditation.Portal.DTOs.WastePermit>();
         }
     }
 }

@@ -13,7 +13,9 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
         }
 
-        public async Task CreateWastePermit(Guid id, DTOs.WastePermit wastePermit)
+        public async Task CreateWastePermit(
+            Guid id, 
+            DTOs.WastePermit wastePermit)
         {
             await Post($"{id}/WastePermit", wastePermit);
         }
