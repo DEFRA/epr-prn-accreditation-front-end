@@ -16,7 +16,6 @@ namespace EPR.Accreditation.Portal.Controllers
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelper _urlHelper;
-        private readonly IAccreditationService _accreditationService;
 
         public AccreditationController(
             IWastePermitService wastePermitService,
@@ -30,7 +29,6 @@ namespace EPR.Accreditation.Portal.Controllers
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
-            _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
         }
 
         [HttpGet("PermitExemption")]

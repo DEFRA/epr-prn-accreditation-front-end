@@ -1,4 +1,7 @@
-﻿using EPR.Accreditation.Portal.DTOs.WastePermit;
+﻿using EPR.Accreditation.Facade.Common.Enums;
+using EPR.Accreditation.Portal.DTOs.WastePermit;
+using EPR.Accreditation.Facade.Common.Enums;
+using DTO = EPR.Accreditation.Facade.Common.Dtos;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
@@ -7,5 +10,19 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task CreateWastePermit(Guid accreditationId, LicensesAndPermitsReferences wastePermit);
 
         Task<LicensesAndPermitsReferences> GetWastePermit(Guid accreditationId);
+
+        Task<OperatorType> GetOperatorType(Guid accreditationExternalId);
+        Task<Guid> CreateAccreditation(DTO.Accreditation accreditation);
+
+        Task<DTO.AccreditationMaterial> GetAccreditationMaterial(
+            Guid accreditationExternalId,
+            Guid siteExternalId,
+            Guid materialExternalId);
+        Task UpdateAccreditationMaterial(
+            Guid accreditationExternalId,
+            Guid siteExternalId,
+            Guid materialExternalId,
+            DTO.AccreditationMaterial accreditationMaterial);
     }
 }
+
