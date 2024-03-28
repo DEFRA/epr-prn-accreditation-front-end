@@ -7,6 +7,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
     {
         Task<OperatorTypeViewModel> GetOperatorType(Guid id);
         Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel);
-
+        Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
     }
 }

@@ -96,5 +96,29 @@ namespace EPR.Accreditation.Portal.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+
+        [HttpGet("TaskList")]
+        public async Task<IActionResult> TaskList(
+            Guid? id)
+
+        {
+            var expectedViewModel = _accreditationService.GetTaskList(id.Value, new Guid(), new Guid());
+            return View(new TaskListViewModel());
+        }
+
+        [HttpGet("Overseas")]
+        public async Task<IActionResult> Overseas(
+            Guid? id)
+
+        {
+            return View("overseas");
+        }
+
+        [HttpGet("Upload")]
+        public async Task<IActionResult> Upload(Guid id)
+        {
+            return View("upload");
+        }
     }
 }

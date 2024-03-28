@@ -1,0 +1,87 @@
+﻿@model TaskListViewModel
+@using EPR.Accreditation.Portal.Enums
+@using EPR.Accreditation.Portal.ViewModels
+@using EPR.Accreditation.Portal.Resources
+@using EPR.Accreditation.Portal.Helpers.TagHelpers
+
+@{
+    ViewData["Title"] = TaskListResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column">
+            <p class="govuk-body">
+                <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+            </p>
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                <h1 class="govuk-panel__title">Apply for accreditation as an exporter</h1>
+                    <p class="govuk-body">This is your application task list. You can save your progress and come back to it at any time.</p>
+                </div>
+
+                <div class="govuk-grid-column-full">
+                    <h2 class="govuk-heading-m">Waste licences, PRNs and business plan</h2>
+                    <table class="govuk-table">
+                        <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href="">Waste licences, exemptions and PRNs</a></ul></td>
+                            <td></td>
+                            <td>Not Started</td>
+                        </tr>
+                        <tr>
+                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = "ADC2656C-29DF-4D07-8AB1-4CA7B7616A2D" })>Upload your business plan</a></ul></td>
+                            <td></td>
+                            <td>Not Started</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="govuk-grid-column-full">
+                    <h2 class="govuk-heading-m">About the packaging waste you export</h2>
+                    <p class="govuk-body">Once you’ve completed one material you can add more materials. You can upload documents after you've chosen a material.</p>
+                    <table class="govuk-table">
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <td>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href="">About the material</a>
+                            </td>
+                                <td>Not Started</td></ul>
+                            </tr>
+                            <tr>
+                            <td>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = "ADC2656C-29DF-4D07-8AB1-4CA7B7616A2D" })>Upload sampling and inspection plan and recording system for this material</a></ul>
+                            </td>
+                                <td>Cannot start yet</td>
+                            </tr>
+                    </table>
+                </div>
+
+                <div class="govuk-grid-column-full">
+                    <h2 class="govuk-heading-m">Overseas reprocessing sites</h2>
+                    <table class="govuk-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Overseas","Accreditation", new { id = "ADC2656C-29DF-4D07-8AB1-4CA7B7616A2D" })>Overseas reprocessing sites </a>
+                            </td>
+                            <td>Cannot start yet</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td><p class="govuk-hint">Can be started after completing 'About the waste you export'.</p></td>
+                        </tr>
+                </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
