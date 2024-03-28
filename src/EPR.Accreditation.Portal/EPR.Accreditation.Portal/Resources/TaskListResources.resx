@@ -117,10 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMaterial" xml:space="preserve">
+    <value>About the material</value>
+  </data>
+  <data name="OverseasHeader" xml:space="preserve">
+    <value>Overseas reprocessing sites</value>
+  </data>
+  <data name="OverseasHintLink" xml:space="preserve">
+    <value>Can be started after completing 'About the waste you export'.</value>
+  </data>
+  <data name="OverseasLink" xml:space="preserve">
+    <value>Overseas reprocessing sites </value>
+  </data>
   <data name="PageHeading" xml:space="preserve">
-    <value>Task List</value>
+    <value>This is your application task list. You can save your progress and come back to it at any time.</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Task List</value>
+    <value>Apply for accreditation as an exporter</value>
+  </data>
+  <data name="UploadBusinessPlan" xml:space="preserve">
+    <value>Upload your business plan </value>
+  </data>
+  <data name="UploadInspectionPlan" xml:space="preserve">
+    <value>Upload sampling and inspection plan and recording system for this material</value>
+  </data>
+  <data name="WasteExportHeader" xml:space="preserve">
+    <value>About the packaging waste you export </value>
+  </data>
+  <data name="WasteExportTitle" xml:space="preserve">
+    <value>Once you’ve completed one material you can add more materials. You can upload documents after you've chosen a material. </value>
+  </data>
+  <data name="WasteLicencesHeading" xml:space="preserve">
+    <value>Waste licences, PRNs and business plan </value>
   </data>
 </root>

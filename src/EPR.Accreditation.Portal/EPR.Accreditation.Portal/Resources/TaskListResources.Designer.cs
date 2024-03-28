@@ -61,7 +61,43 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task List.
+        ///   Looks up a localized string similar to About the material.
+        /// </summary>
+        public static string AboutMaterial {
+            get {
+                return ResourceManager.GetString("AboutMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overseas reprocessing sites.
+        /// </summary>
+        public static string OverseasHeader {
+            get {
+                return ResourceManager.GetString("OverseasHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can be started after completing &apos;About the waste you export&apos;..
+        /// </summary>
+        public static string OverseasHintLink {
+            get {
+                return ResourceManager.GetString("OverseasHintLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overseas reprocessing sites .
+        /// </summary>
+        public static string OverseasLink {
+            get {
+                return ResourceManager.GetString("OverseasLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is your application task list. You can save your progress and come back to it at any time..
         /// </summary>
         public static string PageHeading {
             get {
@@ -70,11 +106,56 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task List.
+        ///   Looks up a localized string similar to Apply for accreditation as an exporter.
         /// </summary>
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload your business plan .
+        /// </summary>
+        public static string UploadBusinessPlan {
+            get {
+                return ResourceManager.GetString("UploadBusinessPlan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload sampling and inspection plan and recording system for this material.
+        /// </summary>
+        public static string UploadInspectionPlan {
+            get {
+                return ResourceManager.GetString("UploadInspectionPlan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About the packaging waste you export .
+        /// </summary>
+        public static string WasteExportHeader {
+            get {
+                return ResourceManager.GetString("WasteExportHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once you’ve completed one material you can add more materials. You can upload documents after you&apos;ve chosen a material. .
+        /// </summary>
+        public static string WasteExportTitle {
+            get {
+                return ResourceManager.GetString("WasteExportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste licences, PRNs and business plan .
+        /// </summary>
+        public static string WasteLicencesHeading {
+            get {
+                return ResourceManager.GetString("WasteLicencesHeading", resourceCulture);
             }
         }
     }
