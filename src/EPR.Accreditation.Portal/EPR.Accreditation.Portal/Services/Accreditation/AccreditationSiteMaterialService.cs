@@ -97,14 +97,33 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 materialOutputsDto);
         }
 
-        public Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(Guid id, Guid siteId, Guid materialId)
+        public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
+            Guid id,
+            Guid siteId,
+            Guid materialId)
         {
-            throw new NotImplementedException();
+            return new ReprocessedWasteLastYearViewModel
+            {
+                Id = id,
+                HasReprocessedWasteLastYear = await _httpSiteMaterialService.GetReprocessedWasteLastYear(
+                    id,
+                    siteId,
+                    materialId)
+            };
         }
 
-        public Task UpdateReprocessedWasteLastYear(ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel)
+        public async Task UpdateReprocessedWasteLastYear(
+            ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel)
         {
-            throw new NotImplementedException();
+            var reprocessedWasteLastYearDto = _mapper.Map<DTOs.MaterialReprocessorDetails.ReprocessedWasteLastYear>(
+                reprocessedWasteLastYearViewModel);
+
+            await _httpSiteMaterialService.UpdateReprocessedWasteLastYear(
+                reprocessedWasteLastYearViewModel.Id,
+                reprocessedWasteLastYearViewModel.SiteId,
+                reprocessedWasteLastYearViewModel.MaterialId,
+                reprocessedWasteLastYearDto
+                );
         }
     }
 }

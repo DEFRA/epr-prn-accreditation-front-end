@@ -105,7 +105,7 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteLastYear")]
         public async Task<IActionResult> WasteLastYear(
             Guid? id,
             Guid? siteId,
@@ -132,7 +132,7 @@ namespace EPR.Accreditation.Portal.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
+        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteLastYear")]
         public async Task<IActionResult> WasteLastYear(
             ReprocessedWasteLastYearViewModel viewModel,
             SaveButton saveButton)

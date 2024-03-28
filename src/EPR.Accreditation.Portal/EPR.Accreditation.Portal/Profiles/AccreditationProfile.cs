@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
 using EPR.Accreditation.Portal.ViewModels;
 

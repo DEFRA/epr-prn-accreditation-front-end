@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Portal.DTOs.WastePermit
+﻿namespace EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails
 {
     public class ReprocessedWasteLastYear
     {

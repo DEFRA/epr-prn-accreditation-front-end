@@ -29,6 +29,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
             Guid siteId,
             Guid materialId);
 
-        Task UpdateReprocessedWasteLastYear(ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel);
+        Task UpdateReprocessedWasteLastYear(
+            ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel);
     }
 }
