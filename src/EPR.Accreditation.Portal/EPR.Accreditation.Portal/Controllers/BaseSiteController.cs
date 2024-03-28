@@ -10,12 +10,15 @@ namespace EPR.Accreditation.Portal.Controllers
     public abstract class BaseSiteController : Controller
     {
         // overriden in inheriting classes
+        protected string SiteChooseMaterialRouteName;
         protected string SiteProcessingCapacityRouteName;
-        protected readonly SiteType _siteType;
-        protected IUrlHelper _urlHelper;
+        protected string SiteProductsProducedRouteName;
+        protected string SiteNonWasteInputsRouteName;
+        protected readonly IUrlHelper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
+        protected SiteType _siteType;
 
         protected BaseSiteController(
             IUrlHelper urlHelper,
@@ -24,11 +27,8 @@ namespace EPR.Accreditation.Portal.Controllers
             BackPageViewModel backPageViewModel,
             SiteType siteType)
         {
-            if (siteType == SiteType.None)
-                throw new ArgumentException("Site enum cannot be 'None'");
-
-            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _siteType = siteType;
+            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _backPageViewModel = backPageViewModel ?? throw new ArgumentNullException(nameof(backPageViewModel));
@@ -75,7 +75,7 @@ namespace EPR.Accreditation.Portal.Controllers
             if (saveButton == SaveButton.SaveAndComeBack)
             {
                 _backPageViewModel.Url = _urlHelper.RouteUrl(
-                    _siteType == SiteType.OverseasSite ? "OverseasSiteChooseMaterial" : "SiteChooseMaterial",
+                    SiteChooseMaterialRouteName,
                     new
                     {
                         Id = viewModel.Id,
@@ -92,6 +92,64 @@ namespace EPR.Accreditation.Portal.Controllers
             else
             {
                 return RedirectToRoute(SiteProcessingCapacityRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.SiteId,
+                        viewModel.MaterialId
+                    });
+            }
+        }
+
+        public async Task<IActionResult> GetMaterialOutputs(
+            Guid id,
+            Guid siteId,
+            Guid materialId)
+        {
+                var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
+                    id,
+                    siteId,
+                    materialId);
+
+                return View(materialOutputsViewModel);
+        }
+
+        protected async Task<IActionResult> SaveMaterialOutputs(
+            MaterialOutputsViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialOutputsResources.FieldEntryMissing))
+            {
+                return await GetMaterialOutputs(
+                    viewModel.Id,
+                    viewModel.SiteId,
+                    viewModel.MaterialId);
+            }
+
+            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                _backPageViewModel.Url = _urlHelper.RouteUrl(
+                    SiteNonWasteInputsRouteName,
+                    new
+                    {
+                        Id = viewModel.Id,
+                        SiteId = viewModel.SiteId,
+                        materialId = viewModel.MaterialId
+                    });
+
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(SiteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,

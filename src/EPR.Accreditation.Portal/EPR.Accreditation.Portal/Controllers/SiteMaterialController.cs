@@ -13,15 +13,17 @@ namespace EPR.Accreditation.Portal.Controllers
             IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
-            BackPageViewModel backPageViewModel) 
+            BackPageViewModel backPageViewModel)
             : base(
                   urlHelper,
                   accreditationSiteMaterialService,
-                  saveAndComeBackService, 
+                  saveAndComeBackService,
                   backPageViewModel,
                   SiteType.Site)
         {
             SiteProcessingCapacityRouteName = "SiteProcessingCapacity";
+            SiteProductsProducedRouteName = "SiteProductsProduced";
+            SiteChooseMaterialRouteName = "SiteChooseMaterial";
         }
 
         [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/Material", Name = "SiteChooseMaterial")]
@@ -54,7 +56,7 @@ namespace EPR.Accreditation.Portal.Controllers
             SaveButton saveButton)
         {
             return await SaveMaterialWasteSource(
-                viewModel, 
+                viewModel,
                 saveButton);
         }
 
@@ -67,5 +69,38 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs", Name = "SiteMaterialOutputs")]
+        public async Task<IActionResult> MaterialOutputs(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            if (id != null && siteId != null && materialId != null)
+                return await GetMaterialOutputs(
+                    id.Value,
+                    siteId.Value,
+                    materialId.Value);
+            else
+                return NotFound();
+        }
+
+        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs")]
+        public async Task<IActionResult> MaterialOutputs(
+            MaterialOutputsViewModel materialOutputsViewModel,
+            SaveButton saveButton)
+        {
+            return await SaveMaterialOutputs(
+                materialOutputsViewModel,
+                saveButton);
+        }
+
+        /// 
+        /// STUBBED METHOD
+        /// 
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/ProductsProduced", Name = "SiteProductsProduced")]
+        public IActionResult ProductsProduced()
+        {
+            return NotFound();
+        }
     }
 }

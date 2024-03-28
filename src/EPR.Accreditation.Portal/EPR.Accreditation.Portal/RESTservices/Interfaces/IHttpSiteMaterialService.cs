@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.Constants;
+﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.Constants;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
@@ -20,5 +21,16 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid siteId,
             Guid materialId,
             string wasteSource);
+
+        Task<MaterialOutputsDto> GetMaterialOutputs(
+            Guid id,
+            Guid siteId,
+            Guid materialId);
+
+        Task UpdateMaterialOutputs(
+            Guid id,
+            Guid siteId,
+            Guid materialId,
+            MaterialOutputsDto materialOutputsDto);
     }
 }

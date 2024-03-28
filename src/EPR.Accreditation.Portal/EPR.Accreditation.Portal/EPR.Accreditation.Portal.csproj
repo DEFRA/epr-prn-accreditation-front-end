@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\MaterialOutputsResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MaterialOutputsResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\TaskListResources.Designer.cs">
       <DependentUpon>TaskListResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -82,6 +87,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\MaterialOutputsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialOutputsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListResources.resx">
       <LastGenOutput>TaskListResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
