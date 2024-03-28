@@ -29,8 +29,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         /// accreditation, site and material
         /// </summary>
         public async Task<string> GetWasteName(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             // identify the language
@@ -47,8 +47,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         }
 
         public async Task<WasteSourceViewModel> GetWasteSource(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             return new WasteSourceViewModel
@@ -68,13 +68,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             await _httpSiteMaterialService.UpdateWasteSource(
                 wasteSourceViewModel.Id,
                 wasteSourceViewModel.SiteId,
-                wasteSourceViewModel.MaterialId, 
+                wasteSourceViewModel.MaterialId,
                 wasteSourceViewModel.WasteSource);
         }
 
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
@@ -95,6 +95,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 materialOutputsViewModel.SiteId,
                 materialOutputsViewModel.MaterialId,
                 materialOutputsDto);
+        }
+
+        public Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(Guid id, Guid siteId, Guid materialId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateReprocessedWasteLastYear(ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }

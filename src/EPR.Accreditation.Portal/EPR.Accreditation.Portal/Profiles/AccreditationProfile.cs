@@ -10,6 +10,7 @@ namespace EPR.Accreditation.Portal.Profiles
         public AccreditationProfile()
         {
             CreateMap<PermitExemptionViewModel, PermitExemption>();
+            CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
         }

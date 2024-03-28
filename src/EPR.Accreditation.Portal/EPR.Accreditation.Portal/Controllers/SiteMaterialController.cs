@@ -1,5 +1,7 @@
 ﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Helpers.ActionFilters;
+using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -101,6 +103,58 @@ namespace EPR.Accreditation.Portal.Controllers
         public IActionResult ProductsProduced()
         {
             return NotFound();
+        }
+
+        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
+        public async Task<IActionResult> WasteLastYear(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            // TODO: Need to add correct back link in the future
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
+            if (id == null)
+                return NotFound();
+
+            if (siteId == null)
+                return NotFound();
+
+            if (materialId == null)
+                return NotFound();
+
+            var viewModel = await _accreditationSiteMaterialService.GetReprocessedWasteLastYearViewModel(
+                id.Value,
+                siteId.Value,
+                materialId.Value
+                );
+
+            return View(viewModel);
+        }
+
+        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
+        public async Task<IActionResult> WasteLastYear(
+            ReprocessedWasteLastYearViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+            saveButton,
+                PermitExemptionResources.ErrorMessage))
+                return View(viewModel);
+
+            await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
+
+            if (saveButton == SaveButton.SaveAndContinue && viewModel.HasReprocessedWasteLastYear.Value == true)
+                return RedirectToAction("EnterWasteInputs", "Accreditation");
+
+            else if (saveButton == SaveButton.SaveAndContinue && viewModel.HasReprocessedWasteLastYear.Value == false)
+                return RedirectToAction("EstimateAnnualWasteInputs", "Accreditation");
+
+            // this is all the data we require to save for come back later
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.Id,
+                Request.HttpContext.GetRouteData().Values);
+            return View("_ApplicationSaved");
         }
     }
 }
