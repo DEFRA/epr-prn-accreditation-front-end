@@ -21,18 +21,18 @@
                 <h1 class="govuk-panel__title">@TaskListResources.PageTitle</h1>
                 <p class="govuk-body">@TaskListResources.PageHeading</p>
                 </div>
-
+            
                 <div class="govuk-grid-column-full">
                 <h2 class="govuk-heading-m">@TaskListResources.WasteLicencesHeading</h2>
                     <table class="govuk-table">
                         <tbody class="govuk-table__body">
                         <tr class="govuk-table__row">
-                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href="">@TaskListResources.WasteLicencesHeading</a></ul></td>
+                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href="@Url.Action("WasteLicensesAndPermits","Accreditation", new { id = Model.Id })">@TaskListResources.WasteLicencesHeading</a></ul></td>
                             <td></td>
                             <td>Not Started</td>
                         </tr>
                         <tr>
-                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = "ADC2656C-29DF-4D07-8AB1-4CA7B7616A2D" })>@TaskListResources.UploadBusinessPlan</a></ul></td>
+                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = Model.Id })>@TaskListResources.UploadBusinessPlan</a></ul></td>
                             <td></td>
                             <td>Not Started</td>
                         </tr>
@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                             <td>
-                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = "ADC2656C-29DF-4D07-8AB1-4CA7B7616A2D" })>@TaskListResources.UploadInspectionPlan</a></ul>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = Model.Id })>@TaskListResources.UploadInspectionPlan</a></ul>
                             </td>
                                 <td>Cannot start yet</td>
                             </tr>
@@ -65,7 +65,7 @@
                     <tbody class="govuk-table__body">
                         <tr class="govuk-table__row">
                             <td>
-                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Overseas","Accreditation", new { id = "ADC2656C-29DF-4D07-8AB1-4CA7B7616A2D" })>@TaskListResources.OverseasLink</a>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Overseas","Accreditation", new { id = Model.Id })>@TaskListResources.OverseasLink</a>
                             </td>
                             <td>Cannot start yet</td>
                         </tr>
