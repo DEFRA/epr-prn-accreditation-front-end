@@ -114,22 +114,18 @@ namespace EPR.Accreditation.Portal.Controllers
             // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("EnterProcessingCapacity", "SiteMaterial");
 
-            if (id == null)
-                return NotFound();
-
-            if (siteId == null)
-                return NotFound();
-
-            if (materialId == null)
-                return NotFound();
-
-            var viewModel = await _accreditationSiteMaterialService.GetReprocessedWasteLastYearViewModel(
+            if (id != null && siteId != null && materialId != null)
+            {
+                var viewModel = await _accreditationSiteMaterialService.GetReprocessedWasteLastYearViewModel(
                 id.Value,
                 siteId.Value,
                 materialId.Value
                 );
 
-            return View(viewModel);
+                return View(viewModel);
+            }
+            else
+                return NotFound();
         }
 
         [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteLastYear")]
