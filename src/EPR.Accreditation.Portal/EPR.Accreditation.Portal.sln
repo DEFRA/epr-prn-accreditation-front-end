@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPR.Accreditation.Portal", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPR.Accreditation.UnitTests", "EPR.Accreditation.UnitTests\EPR.Accreditation.UnitTests.csproj", "{C1E36F10-795E-4DC6-9152-F2C302B18E4D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPR.Accreditation.Portal.Common", "EPR.Accreditation.Portal.Common\EPR.Accreditation.Portal.Common.csproj", "{E9313DD8-1828-4708-B0BD-B68DC30C3CE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C1E36F10-795E-4DC6-9152-F2C302B18E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1E36F10-795E-4DC6-9152-F2C302B18E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1E36F10-795E-4DC6-9152-F2C302B18E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9313DD8-1828-4708-B0BD-B68DC30C3CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9313DD8-1828-4708-B0BD-B68DC30C3CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9313DD8-1828-4708-B0BD-B68DC30C3CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9313DD8-1828-4708-B0BD-B68DC30C3CE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

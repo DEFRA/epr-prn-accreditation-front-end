@@ -1,47 +1,33 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.Options;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
+﻿using EPR.Accreditation.Facade.Common.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.Extensions.Options;
 
 namespace EPR.Accreditation.Portal.Services.Accreditation
 {
     public class AccreditationService : IAccreditationService
     {
-        private readonly IMapper _mapper;
-        protected IOptions<AppSettingsConfigOptions> _configSettings;
-        protected IHttpAccreditationService _httpAccreditationService;
+        protected readonly IHttpAccreditationService _httpAccreditationService;
+        protected readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccreditationService(IMapper mapper, IOptions<AppSettingsConfigOptions> configSettings, IHttpAccreditationService httpAccreditationService)
+        public AccreditationService(IHttpAccreditationService httpAccreditationService,
+            IHttpContextAccessor httpContextAccessor)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _configSettings = configSettings ?? throw new ArgumentNullException(nameof(configSettings));
-            if (_configSettings.Value?.DaysUntilExpiration == null)
-                throw new ArgumentNullException(nameof(_configSettings.Value.DaysUntilExpiration));
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
+
         }
 
-        public async Task<WasteLicensesAndPermitsViewModel> GetWastePermitViewModel(Guid id)
+        public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
-            var wastePermit = await _httpAccreditationService.GetWastePermit(id);
-
-            WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicensesAndPermitsViewModel();
-            
-            if (wastePermit != null)
-            {
-                wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit);
-                wasteLicensesAndPermitsViewModel.Id = id;
-            }
-            
-            return wasteLicensesAndPermitsViewModel;
+            var result = await _httpAccreditationService.GetOperatorType(id);
+            return new OperatorTypeViewModel { ExternalId = id, OperatorType = result };
         }
 
-        public async Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
+        public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var wastePermit = _mapper.Map<DTOs.WastePermit.LicensesAndPermitsReferences>(wasteLicensesAndPermitsViewModel);
-            
-            await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
+            var accreditation = new Facade.Common.Dtos.Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
+            return externalId;
         }
     }
 }
