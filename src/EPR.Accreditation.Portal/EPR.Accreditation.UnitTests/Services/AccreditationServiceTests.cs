@@ -47,7 +47,7 @@ namespace EPR.Accreditation.UnitTests.Services
         }
 
         [TestMethod]
-        public void GetWasteLicensesAndPermitsViewModel_ReturnsCorrectViewModel2()
+        public void GetWasteLicensesAndPermitsViewModel_CheckService_Call()
         {
             // Arrange
             var id = Guid.NewGuid();
