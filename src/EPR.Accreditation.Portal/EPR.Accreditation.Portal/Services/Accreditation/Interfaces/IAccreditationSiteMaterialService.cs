@@ -15,5 +15,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
             Guid materialId);
 
         Task UpdateWasteSource(WasteSourceViewModel wasteSourceViewModel);
+
+        Task<MaterialOutputsViewModel> GetMaterialOutputs(
+            Guid id,
+            Guid siteId,
+            Guid materialId);
+
+        Task UpdateMaterialOutputs(
+            MaterialOutputsViewModel materialOutputsViewModel);
     }
 }

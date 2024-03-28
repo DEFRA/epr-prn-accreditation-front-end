@@ -1,4 +1,6 @@
-﻿using EPR.Accreditation.Portal.Constants;
+﻿using AutoMapper;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.Constants;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -8,13 +10,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 {
     public class AccreditationSiteMaterialService : IAccreditationSiteMaterialService
     {
+        protected readonly IMapper _mapper;
         protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IHttpSiteMaterialService _httpSiteMaterialService;
 
         public AccreditationSiteMaterialService(
+            IMapper mapper,
             IHttpContextAccessor httpContextAccessor,
             IHttpSiteMaterialService httpSiteMaterialService)
         {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpSiteMaterialService = httpSiteMaterialService ?? throw new ArgumentNullException(nameof(httpSiteMaterialService));
         }
@@ -65,6 +70,31 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.SiteId,
                 wasteSourceViewModel.MaterialId, 
                 wasteSourceViewModel.WasteSource);
+        }
+
+        public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
+            Guid id, 
+            Guid siteId, 
+            Guid materialId)
+        {
+            var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
+                id,
+                siteId,
+                materialId);
+
+            return _mapper.Map<MaterialOutputsViewModel>(materialOutputsDto);
+        }
+
+        public async Task UpdateMaterialOutputs(
+            MaterialOutputsViewModel materialOutputsViewModel)
+        {
+            var materialOutputsDto = _mapper.Map<MaterialOutputsDto>(materialOutputsViewModel);
+
+            await _httpSiteMaterialService.UpdateMaterialOutputs(
+                materialOutputsViewModel.Id,
+                materialOutputsViewModel.SiteId,
+                materialOutputsViewModel.MaterialId,
+                materialOutputsDto);
         }
     }
 }

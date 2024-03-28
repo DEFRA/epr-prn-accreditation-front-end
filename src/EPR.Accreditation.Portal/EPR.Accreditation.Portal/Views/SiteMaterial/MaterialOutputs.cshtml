@@ -1,0 +1,70 @@
+﻿@model MaterialOutputsViewModel
+
+@{
+    ViewData["Title"] = MaterialOutputsResources.Title;
+}
+
+<form method="post">
+    <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+                @MaterialOutputsResources.Title
+            </h1>
+        </legend>
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="TonnesNotProcessedOnSite"></span>
+            </p>
+
+            <h1 class="govuk-heading-m">
+                @MaterialOutputsResources.MaterialsNotProcessedField
+            </h1>
+
+            <div id="event-name-hint" class="govuk-hint">
+                @MaterialOutputsResources.NotProcessedOnSiteHint
+            </div>
+
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="TonnesNotProcessedOnSite" autocomplete="off" />
+                <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+            </div>
+        </div>
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="TonnesContaminents"></span>
+            </p>
+
+            <h1 class="govuk-heading-m">
+                @MaterialOutputsResources.ContaminentsField
+            </h1>
+
+            <div id="event-name-hint" class="govuk-hint">
+                @MaterialOutputsResources.ContaminentsHint
+            </div>
+
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="TonnesContaminents" autocomplete="off" />
+                <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+            </div>
+        </div>
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="TonnesProcessLoss"></span>
+            </p>
+
+            <h1 class="govuk-heading-m">
+                @MaterialOutputsResources.ProcessLossField
+            </h1>
+
+            <div id="event-name-hint" class="govuk-hint">
+                @MaterialOutputsResources.ProcessLossHint
+            </div>
+
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="TonnesProcessLoss" autocomplete="off" />
+                <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+            </div>
+        </div>
+    </fieldset>
+    <partial name="_SaveButtons" />
+</form>
