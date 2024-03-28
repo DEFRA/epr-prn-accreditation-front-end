@@ -5,12 +5,12 @@
 @using EPR.Accreditation.Portal.Helpers.TagHelpers
 
 @{
-    ViewData["Title"] = PermitExemptionResources.PageTitle;
+    ViewData["Title"] = WasteLastYearResources.PageTitle;
 }
 
 <partial name="_ValidationSummary" />
 <form method="post">
-    <radios asp-for="HasReprocessedWasteLastYear" asp-title="@PermitExemptionResources.PageHeading">
+    <radios asp-for="HasReprocessedWasteLastYear" asp-title="@WasteLastYearResources.PageHeading">
         <p class="govuk-error-message">
             <span asp-validation-for="HasReprocessedWasteLastYear"></span>
         </p>

@@ -112,7 +112,7 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? materialId)
         {
             // TODO: Need to add correct back link in the future
-            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+            _backPageViewModel.Url = _urlHelper.ActionLink("EnterProcessingCapacity", "SiteMaterial");
 
             if (id == null)
                 return NotFound();
