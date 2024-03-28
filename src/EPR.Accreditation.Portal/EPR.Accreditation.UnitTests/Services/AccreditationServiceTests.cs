@@ -45,5 +45,38 @@ namespace EPR.Accreditation.UnitTests.Services
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(WasteLicensesAndPermitsViewModel));
         }
+
+        [TestMethod]
+        public void GetWasteLicensesAndPermitsViewModel_ReturnsCorrectViewModel2()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var expectedDto = new Portal.DTOs.WastePermit.LicensesAndPermitsReferences();
+            var expectedViewModel = new WasteLicensesAndPermitsViewModel();
+
+            expectedDto = new Portal.DTOs.WastePermit.LicensesAndPermitsReferences()
+            {
+                AccreditationId = 1,
+                EnvironmentalPermitNumber = "1",
+                DealerRegistrationNumber = "1",
+                PartAActivityReferenceNumber = "1",
+                PartBActivityReferenceNumber = "1",
+            };
+
+            _httpAccreditionService.Setup(service => service.GetWastePermit(id))
+                .ReturnsAsync(expectedDto);
+
+            // Act
+            var result = _accreditationService?.GetWastePermitViewModel(id);
+
+            // Asset
+            Assert.IsNotNull(result);
+            _httpAccreditionService.Verify(s =>
+                s.GetWastePermit(
+                    It.Is<Guid>(p => p == id)),
+                Times.Once);
+            _httpAccreditionService.Verify(s =>
+                s.GetWastePermit(id), Times.Once);
+        }
     }
 }
