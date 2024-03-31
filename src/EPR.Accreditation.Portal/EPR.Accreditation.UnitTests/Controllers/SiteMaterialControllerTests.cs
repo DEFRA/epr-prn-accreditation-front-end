@@ -1,4 +1,5 @@
 ﻿using EPR.Accreditation.Portal.Controllers;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -64,7 +65,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         }
 
         [TestMethod]
-        public async Task WasteLastYear_ReturnsView_ForValidIds_()
+        public async Task WasteLastYear_ReturnsView_ForValidIds()
         {
             // Arrange
             var id = Guid.NewGuid();
@@ -82,6 +83,8 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             var viewResult = (ViewResult)result;
             Assert.AreEqual(expectedViewModel, viewResult.Model);
+
+            _mockAccreditationSiteMaterialService.Verify(service => service.GetReprocessedWasteLastYearViewModel(id, siteId, materialId), Times.Once);
         }
 
         [TestMethod]
@@ -92,6 +95,9 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+            _mockAccreditationSiteMaterialService.Verify(
+                service => service.GetReprocessedWasteLastYearViewModel(Guid.Empty, Guid.NewGuid(), Guid.NewGuid()), Times.Never);
         }
 
         [TestMethod]
@@ -102,6 +108,9 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+            _mockAccreditationSiteMaterialService.Verify(
+                service => service.GetReprocessedWasteLastYearViewModel(Guid.Empty, Guid.Empty, Guid.Empty), Times.Never);
         }
 
         [TestMethod]
@@ -130,6 +139,8 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             _mockUrlHelper.Verify(u => u.ActionLink("EnterProcessingCapacity", "SiteMaterial", null, null, null, null), Times.Once);
+            _mockAccreditationSiteMaterialService.Verify(
+                service => service.GetReprocessedWasteLastYearViewModel(id, siteId, materialId), Times.Once);
         }
 
         [TestMethod]
@@ -151,6 +162,9 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             var viewResult = (ViewResult)result;
             Assert.IsNull(viewResult.ViewName);
+
+            _mockAccreditationSiteMaterialService.Verify(
+                service => service.GetReprocessedWasteLastYearViewModel(id, siteId, materialId), Times.Once);
         }
 
         [TestMethod]
@@ -169,6 +183,89 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+            _mockAccreditationSiteMaterialService.Verify(
+                service => service.GetReprocessedWasteLastYearViewModel(id, siteId, materialId), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task WasteLastYear_SavesWithValidData_SaveAndContinue()
+        {
+            // Arrange
+            var viewModel = new ReprocessedWasteLastYearViewModel
+            {
+                Id = Guid.NewGuid(),
+                HasReprocessedWasteLastYear = true
+            };
+
+            // Act
+            var result = await _siteMaterialController.WasteLastYear(viewModel, SaveButton.SaveAndContinue);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+
+            _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task WasteLastYear_SavesWithValidData_SaveAndComeBack()
+        {
+            // Arrange
+            var viewModel = new ReprocessedWasteLastYearViewModel
+            {
+                Id = Guid.NewGuid(),
+                HasReprocessedWasteLastYear = false
+            };
+
+            // Act
+            var result = await _siteMaterialController.WasteLastYear(viewModel, SaveButton.SaveAndComeBack);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+
+            _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task WasteLastYear_ReturnsCorrectView_WhenModelIsInvalid()
+        {
+            // Arrange
+            var viewModel = new ReprocessedWasteLastYearViewModel();
+            _mockAccreditationSiteMaterialService.Setup(
+                s => s.GetReprocessedWasteLastYearViewModel(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>()))
+                .ReturnsAsync(new ReprocessedWasteLastYearViewModel());
+
+            _siteMaterialController.ModelState.AddModelError("Error", "Error");
+
+            // Act
+            var result = await _siteMaterialController.WasteLastYear(
+                It.IsAny<Guid>(),
+                It.IsAny<Guid>(),
+                It.IsAny<Guid>());
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ReprocessedWasteLastYearViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateReprocessedWasteLastYear(viewModel), Times.Never);
         }
     }
 }
