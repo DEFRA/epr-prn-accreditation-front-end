@@ -237,20 +237,12 @@ namespace EPR.Accreditation.UnitTests.Controllers
         {
             // Arrange
             var viewModel = new ReprocessedWasteLastYearViewModel();
-            _mockAccreditationSiteMaterialService.Setup(
-                s => s.GetReprocessedWasteLastYearViewModel(
-                    It.IsAny<Guid>(),
-                    It.IsAny<Guid>(),
-                    It.IsAny<Guid>()))
-                .ReturnsAsync(new ReprocessedWasteLastYearViewModel());
+            var saveButton = new SaveButton();
 
             _siteMaterialController.ModelState.AddModelError("Error", "Error");
 
             // Act
-            var result = await _siteMaterialController.WasteLastYear(
-                It.IsAny<Guid>(),
-                It.IsAny<Guid>(),
-                It.IsAny<Guid>());
+            var result = await _siteMaterialController.WasteLastYear(viewModel, saveButton);
 
             // Assert
             Assert.IsNotNull(result);
