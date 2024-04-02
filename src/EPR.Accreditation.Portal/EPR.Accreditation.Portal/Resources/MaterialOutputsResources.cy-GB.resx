@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ContaminentsBlank" xml:space="preserve">
+    <value>[Welsh]Enter waste material outputs before moving</value>
+  </data>
   <data name="ContaminentsField" xml:space="preserve">
     <value>[Welsh]Contaminents</value>
   </data>
   <data name="ContaminentsHint" xml:space="preserve">
     <value>[Welsh]The tonnage of contaminents removed from the materials during reprocessing, including non-recyclable components or impurities.</value>
   </data>
-  <data name="FieldEntryMissing" xml:space="preserve">
+  <data name="MaterialsNotProcessedBlank" xml:space="preserve">
     <value>[Welsh]Enter waste material outputs before moving</value>
   </data>
   <data name="MaterialsNotProcessedField" xml:space="preserve">
@@ -131,6 +134,9 @@
   </data>
   <data name="NotProcessedOnSiteHint" xml:space="preserve">
     <value>[Welsh]The tonnage of materials received but not processed at your site, including materials sent to other sites for processing.</value>
+  </data>
+  <data name="ProcessLossBlank" xml:space="preserve">
+    <value>[Welsh]Enter waste material outputs before moving</value>
   </data>
   <data name="ProcessLossField" xml:space="preserve">
     <value>[Welsh]Process Loss</value>

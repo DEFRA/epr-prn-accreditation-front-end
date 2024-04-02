@@ -82,6 +82,13 @@ namespace EPR.Accreditation.Portal.Extensions
                         "Accreditation")
                     );
 
+            // control client validation based on configuration
+            services.AddRazorPages()
+                .AddViewOptions(o =>
+                {
+                    o.HtmlHelperOptions.ClientValidationEnabled = configuration.GetValue<bool>("ClientValidationEnabled");
+                });
+
             return services;
         }
     }
