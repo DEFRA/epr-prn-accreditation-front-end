@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MaterialOutputsResources {
+    public class TaskListResources___Copy {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MaterialOutputsResources() {
+        internal TaskListResources___Copy() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.MaterialOutputsResources", typeof(MaterialOutputsResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.TaskListResources - Copy", typeof(TaskListResources___Copy).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,101 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter waste material outputs before moving.
+        ///   Looks up a localized string similar to About the material.
         /// </summary>
-        public static string ContaminentsBlank {
+        public static string AboutMaterial {
             get {
-                return ResourceManager.GetString("ContaminentsBlank", resourceCulture);
+                return ResourceManager.GetString("AboutMaterial", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contaminents.
+        ///   Looks up a localized string similar to Overseas reprocessing sites.
         /// </summary>
-        public static string ContaminentsField {
+        public static string OverseasHeader {
             get {
-                return ResourceManager.GetString("ContaminentsField", resourceCulture);
+                return ResourceManager.GetString("OverseasHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tonnage of contaminents removed from the materials during reprocessing, including non-recyclable components or impurities..
+        ///   Looks up a localized string similar to Can be started after completing &apos;About the waste you export&apos;..
         /// </summary>
-        public static string ContaminentsHint {
+        public static string OverseasHintLink {
             get {
-                return ResourceManager.GetString("ContaminentsHint", resourceCulture);
+                return ResourceManager.GetString("OverseasHintLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter waste material outputs before moving.
+        ///   Looks up a localized string similar to Overseas reprocessing sites .
         /// </summary>
-        public static string MaterialsNotProcessedBlank {
+        public static string OverseasLink {
             get {
-                return ResourceManager.GetString("MaterialsNotProcessedBlank", resourceCulture);
+                return ResourceManager.GetString("OverseasLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Materials not processed on site.
+        ///   Looks up a localized string similar to This is your application task list. You can save your progress and come back to it at any time..
         /// </summary>
-        public static string MaterialsNotProcessedField {
+        public static string PageHeading {
             get {
-                return ResourceManager.GetString("MaterialsNotProcessedField", resourceCulture);
+                return ResourceManager.GetString("PageHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tonnage of materials received but not processed at your site, including materials sent to other sites for processing..
+        ///   Looks up a localized string similar to Apply for accreditation as an exporter.
         /// </summary>
-        public static string NotProcessedOnSiteHint {
+        public static string PageTitle {
             get {
-                return ResourceManager.GetString("NotProcessedOnSiteHint", resourceCulture);
+                return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter waste material outputs before moving.
+        ///   Looks up a localized string similar to Upload your business plan .
         /// </summary>
-        public static string ProcessLossBlank {
+        public static string UploadBusinessPlan {
             get {
-                return ResourceManager.GetString("ProcessLossBlank", resourceCulture);
+                return ResourceManager.GetString("UploadBusinessPlan", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Process Loss.
+        ///   Looks up a localized string similar to Upload sampling and inspection plan and recording system for this material.
         /// </summary>
-        public static string ProcessLossField {
+        public static string UploadInspectionPlan {
             get {
-                return ResourceManager.GetString("ProcessLossField", resourceCulture);
+                return ResourceManager.GetString("UploadInspectionPlan", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tonnage of material lost due to processing, such as material degradation or waste..
+        ///   Looks up a localized string similar to About the packaging waste you export .
         /// </summary>
-        public static string ProcessLossHint {
+        public static string WasteExportHeader {
             get {
-                return ResourceManager.GetString("ProcessLossHint", resourceCulture);
+                return ResourceManager.GetString("WasteExportHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your waste material outputs for the last calendar year.
+        ///   Looks up a localized string similar to Once you’ve completed one material you can add more materials. You can upload documents after you&apos;ve chosen a material. .
         /// </summary>
-        public static string Title {
+        public static string WasteExportTitle {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("WasteExportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste licences, PRNs and business plan .
+        /// </summary>
+        public static string WasteLicencesHeading {
+            get {
+                return ResourceManager.GetString("WasteLicencesHeading", resourceCulture);
             }
         }
     }

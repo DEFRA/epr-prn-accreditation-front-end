@@ -29,5 +29,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }
+
+        public async Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId)
+        {
+            var viewModel = new TaskListViewModel
+            {
+                Id = id,
+                SiteId = siteId,
+                MaterialId = materialId
+            };
+            return viewModel;
+        }
     }
 }
