@@ -61,6 +61,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter waste material outputs before moving.
+        /// </summary>
+        public static string ContaminentsBlank {
+            get {
+                return ResourceManager.GetString("ContaminentsBlank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contaminents.
         /// </summary>
         public static string ContaminentsField {
@@ -81,9 +90,9 @@ namespace EPR.Accreditation.Portal.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enter waste material outputs before moving.
         /// </summary>
-        public static string FieldEntryMissing {
+        public static string MaterialsNotProcessedBlank {
             get {
-                return ResourceManager.GetString("FieldEntryMissing", resourceCulture);
+                return ResourceManager.GetString("MaterialsNotProcessedBlank", resourceCulture);
             }
         }
         
@@ -102,6 +111,15 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string NotProcessedOnSiteHint {
             get {
                 return ResourceManager.GetString("NotProcessedOnSiteHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter waste material outputs before moving.
+        /// </summary>
+        public static string ProcessLossBlank {
+            get {
+                return ResourceManager.GetString("ProcessLossBlank", resourceCulture);
             }
         }
         

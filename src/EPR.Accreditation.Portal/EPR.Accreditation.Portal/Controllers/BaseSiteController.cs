@@ -120,7 +120,9 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                MaterialOutputsResources.FieldEntryMissing))
+                MaterialOutputsResources.MaterialsNotProcessedBlank,
+                MaterialOutputsResources.ContaminentsBlank,
+                MaterialOutputsResources.ProcessLossBlank))
             {
                 return await GetMaterialOutputs(
                     viewModel.Id,
