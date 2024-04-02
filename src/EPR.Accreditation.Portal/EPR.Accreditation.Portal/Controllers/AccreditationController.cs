@@ -111,16 +111,12 @@ namespace EPR.Accreditation.Portal.Controllers
                                                                         materialId.Value);
                 return View(model);
             }
-            else
-                NotFound();
-
-            return View();
+            return NotFound();
         }
 
         [HttpGet("Overseas")]
         public async Task<IActionResult> Overseas(
             Guid? id)
-
         {
             return View("overseas");
         }
