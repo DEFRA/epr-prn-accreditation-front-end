@@ -1,0 +1,80 @@
+﻿@model TaskListViewModel
+@using EPR.Accreditation.Portal.Enums
+@using EPR.Accreditation.Portal.ViewModels
+@using EPR.Accreditation.Portal.Resources
+@using EPR.Accreditation.Portal.Helpers.TagHelpers
+
+@{
+    ViewData["Title"] = TaskListResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column">
+            <p class="govuk-body">
+                <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+            </p>
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                <h1 class="govuk-panel__title">@TaskListResources.PageTitle</h1>
+                <p class="govuk-body">@TaskListResources.PageHeading</p>
+                </div>
+            
+                <div class="govuk-grid-column-full">
+                <h2 class="govuk-heading-m">@TaskListResources.WasteLicencesHeading</h2>
+                    <table class="govuk-table">
+                        <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href="@Url.Action("WasteLicensesAndPermits","Accreditation", new { id = Model.Id })">@TaskListResources.WasteLicencesHeading</a></ul></td>
+                            <td></td>
+                            <td>Not Started</td>
+                        </tr>
+                        <tr>
+                            <td><ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = Model.Id })>@TaskListResources.UploadBusinessPlan</a></ul></td>
+                            <td></td>
+                            <td>Not Started</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="govuk-grid-column-full">
+                <h2 class="govuk-heading-m">@TaskListResources.WasteExportHeader</h2>
+                <p class="govuk-body">@TaskListResources.WasteExportTitle</p>
+                    <table class="govuk-table">
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <td>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href="">@TaskListResources.AboutMaterial</a>
+                            </td>
+                                <td>Not Started</td></ul>
+                            </tr>
+                            <tr>
+                            <td>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = Model.Id })>@TaskListResources.UploadInspectionPlan</a></ul>
+                            </td>
+                                <td>Cannot start yet</td>
+                            </tr>
+                    </table>
+                </div>
+
+                <div class="govuk-grid-column-full">
+                <h2 class="govuk-heading-m">@TaskListResources.OverseasHeader</h2>
+                    <table class="govuk-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Overseas","Accreditation", new { id = Model.Id })>@TaskListResources.OverseasLink</a>
+                            </td>
+                            <td>Cannot start yet</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td><p class="govuk-hint">@TaskListResources.OverseasHintLink</p></td>
+                        </tr>
+                </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
