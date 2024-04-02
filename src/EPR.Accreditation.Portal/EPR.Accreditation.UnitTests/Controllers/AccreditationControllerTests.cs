@@ -39,9 +39,11 @@ namespace EPR.Accreditation.UnitTests.Controllers
         {
             // Arrange
             var id = Guid.NewGuid();
+            var siteId = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
 
             // Act
-            var result = await _accreditationController.TaskList(id);
+            var result = await _accreditationController.TaskList(id, siteId, materialId);
 
             // Assert
             Assert.IsNotNull(result); // Assuming you expect a non-null result

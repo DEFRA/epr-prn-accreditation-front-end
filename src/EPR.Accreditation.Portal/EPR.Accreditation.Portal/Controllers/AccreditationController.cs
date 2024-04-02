@@ -97,14 +97,24 @@ namespace EPR.Accreditation.Portal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-        [HttpGet("TaskList")]
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
         public async Task<IActionResult> TaskList(
-            Guid? id)
-
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
         {
-            var expectedViewModel = _accreditationService.GetTaskList(id.Value, new Guid(), new Guid());
-            return View(new TaskListViewModel());
+            if (id != null && siteId != null && materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                                                                        id.Value,
+                                                                        siteId.Value,
+                                                                        materialId.Value);
+                return View(model);
+            }
+            else
+                NotFound();
+
+            return View();
         }
 
         [HttpGet("Overseas")]
