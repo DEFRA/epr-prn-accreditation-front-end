@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+using EPR.Accreditation.Portal.Enums;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
@@ -12,11 +13,13 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Enums.Language language);
 
         Task<string> GetWasteSource(
+            SiteType siteType,
             Guid id,
             Guid siteId,
             Guid materialId);
 
         Task UpdateWasteSource(
+            SiteType siteType,
             Guid id,
             Guid siteId,
             Guid materialId,

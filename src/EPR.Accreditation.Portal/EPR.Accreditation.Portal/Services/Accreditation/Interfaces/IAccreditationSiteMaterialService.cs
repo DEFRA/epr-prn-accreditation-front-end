@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.ViewModels;
+﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.ViewModels;
 
 namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
@@ -10,11 +11,14 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
             Guid materialId);
 
         Task<WasteSourceViewModel> GetWasteSource(
+            SiteType siteType,
             Guid id,
             Guid siteId,
             Guid materialId);
 
-        Task UpdateWasteSource(WasteSourceViewModel wasteSourceViewModel);
+        Task UpdateWasteSource(
+            SiteType siteType,
+            WasteSourceViewModel wasteSourceViewModel);
 
         Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
