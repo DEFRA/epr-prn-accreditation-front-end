@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -47,17 +48,24 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         }
 
         public async Task<WasteSourceViewModel> GetWasteSource(
+            SiteType siteType,
             Guid id, 
             Guid siteId, 
             Guid materialId)
         {
             return new WasteSourceViewModel
             {
-                WasteSource = await _httpSiteMaterialService.GetWasteSource(id, siteId, materialId)
+                WasteSource = await _httpSiteMaterialService.GetWasteSource(
+                    siteType,
+                    id, 
+                    siteId, 
+                    materialId)
             };
         }
 
-        public async Task UpdateWasteSource(WasteSourceViewModel wasteSourceViewModel)
+        public async Task UpdateWasteSource(
+            SiteType siteType,
+            WasteSourceViewModel wasteSourceViewModel)
         {
             // this field is a required field. Therefore, if it's got to this point
             // then "Save and come back later" has been selected and we are letting
@@ -66,6 +74,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.WasteSource = string.Empty;
 
             await _httpSiteMaterialService.UpdateWasteSource(
+                siteType,
                 wasteSourceViewModel.Id,
                 wasteSourceViewModel.SiteId,
                 wasteSourceViewModel.MaterialId, 

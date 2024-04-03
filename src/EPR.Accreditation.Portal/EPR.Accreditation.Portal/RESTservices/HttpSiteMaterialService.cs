@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
 namespace EPR.Accreditation.Portal.RESTservices
@@ -24,20 +25,24 @@ namespace EPR.Accreditation.Portal.RESTservices
         }
 
         public async Task<string> GetWasteSource(
+            SiteType siteType,
             Guid id, 
             Guid siteId, 
             Guid materialId)
         {
-            return await Get<string>($"{id}/Site/{siteId}/Material/{materialId}/WasteSource");
+            var site = GetSiteName(siteType);
+            return await Get<string>($"{id}/{site}/{siteId}/Material/{materialId}/WasteSource");
         }
 
         public async Task UpdateWasteSource(
+            SiteType siteType,
             Guid id, 
             Guid siteId, 
             Guid materialId, 
             string wasteSource)
         {
-            await Put($"{id}/Site/{siteId}/Material/{materialId}/WasteSource", wasteSource);
+            var site = GetSiteName(siteType);
+            await Put($"{id}/{site}/{siteId}/Material/{materialId}/WasteSource", wasteSource);
         }
 
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
@@ -56,5 +61,7 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             await Put($"{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs", materialOutputsDto);
         }
+
+        private string GetSiteName(SiteType siteType) => siteType == SiteType.Site ? "Site" : "OverseasSite";
     }
 }
