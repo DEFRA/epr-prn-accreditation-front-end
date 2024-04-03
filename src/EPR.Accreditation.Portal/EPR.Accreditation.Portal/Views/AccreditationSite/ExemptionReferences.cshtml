@@ -4,19 +4,17 @@
 
 <form method="post">
     <h1 class="govuk-heading-l">Enter all your exemption references</h1>
+    <p class="govuk-hint"></p>
     @for (int i = 1; i < 4; i++)
     {
         <div class="govuk-form-group">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
-                    <input class="govuk-input govuk-input--width-20" type="text" id="@i">
+                    <input class="govuk-input govuk-input--width-30" type="text" id="@i">
                 </div>
             </div>
         </div>
     }
-    <p class="govuk-body">
-        <a href="#" class="govuk-link govuk-link--no-visited-state">Add another reference</a>
-    </p>
     <div class="govuk-button-group">
         <button class="govuk-button" data-module="govuk-button" type="submit">
             Save and continue

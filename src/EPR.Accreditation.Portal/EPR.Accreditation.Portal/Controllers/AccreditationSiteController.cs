@@ -26,6 +26,7 @@ namespace EPR.Accreditation.Portal.Controllers
             _accreditationSiteService = accreditationSiteService ?? throw new ArgumentNullException(nameof(accreditationSiteService));
         }
 
+        [HttpGet("ExemptionReferences")]
         public async Task<IActionResult> ExemptionReferences(
             Guid? id,
             Guid? siteId)
@@ -35,9 +36,9 @@ namespace EPR.Accreditation.Portal.Controllers
             if (id == null)
                 return NotFound();
 
-            var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(
-                id.Value,
-                siteId.Value);
+            //var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(
+            //    id.Value,
+            //    siteId.Value);
 
             return View();
         }
