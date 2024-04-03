@@ -1,12 +1,13 @@
-﻿@{
-    ViewData["Title"] = "Enter all your exemption references";
+﻿@model ExemptionReferencesViewModel
+
+
+@{
+    ViewData["Title"] = ExemptionReferencesResources.PageTitle;
 }
 
-@model ExemptionReferencesViewModel
-
 <form method="post">
-    <h1 class="govuk-heading-l">Enter all your exemption references</h1>
-    <p class="govuk-body">Leave blank once you have entered all of your waste exemption references.</p>
+    <h1 class="govuk-heading-l">@ExemptionReferencesResources.PageHeading</h1>
+    <p class="govuk-body">@ExemptionReferencesResources.P1</p>
 
     <p class="govuk-error-message">
         <span asp-validation-for="ReferenceNumber1"></span>
@@ -63,12 +64,5 @@
         </div>
     </div>
 
-    <div class="govuk-button-group">
-        <button class="govuk-button" data-module="govuk-button" type="submit">
-            Save and continue
-        </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Save and come back later
-        </button>
-    </div>
+    <partial name="_SaveButtons" />
 </form>
