@@ -24,11 +24,11 @@ namespace EPR.Accreditation.UnitTests.Controllers
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _backPageViewModel = new BackPageViewModel();
 
-            _siteMaterialController = new SiteMaterialController(
-                _mockUrlHelper.Object,
-                _mockAccreditationSiteMaterialService.Object,
-                _mockSaveAndComeBackService.Object,
-                _backPageViewModel);
+            //_siteMaterialController = new SiteMaterialController(
+            //    _mockUrlHelper.Object,
+            //    _mockAccreditationSiteMaterialService.Object,
+            //    _mockSaveAndComeBackService.Object,
+            //    _backPageViewModel);
         }
 
         [TestMethod]

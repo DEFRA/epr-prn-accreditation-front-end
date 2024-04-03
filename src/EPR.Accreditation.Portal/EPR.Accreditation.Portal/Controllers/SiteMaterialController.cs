@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
+    [Route("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class SiteMaterialController : BaseSiteController
     {
@@ -26,7 +27,7 @@ namespace EPR.Accreditation.Portal.Controllers
             SiteChooseMaterialRouteName = "SiteChooseMaterial";
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/Material", Name = "SiteChooseMaterial")]
+        [HttpGet("Material", Name = "SiteChooseMaterial")]
         public IActionResult ChooseMaterial(
             Guid? id,
             Guid? siteId,
@@ -35,7 +36,7 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource", Name = "SiteWasteSource")]
+        [HttpGet("WasteSource", Name = "SiteWasteSource")]
         public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
             Guid? siteId,
@@ -50,7 +51,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 return NotFound();
         }
 
-        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/WasteSource")]
+        [HttpPost("WasteSource")]
         public async Task<IActionResult> MaterialWasteSource(
             WasteSourceViewModel viewModel,
             SaveButton saveButton)
@@ -60,7 +61,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 saveButton);
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/ProcessingCapacity", Name = "SiteProcessingCapacity")]
+        [HttpGet("ProcessingCapacity", Name = "SiteProcessingCapacity")]
         public IActionResult EnterProcessingCapacity(
             Guid? id,
             Guid? siteId,
@@ -69,7 +70,7 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs", Name = "SiteMaterialOutputs")]
+        [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
             Guid? id,
             Guid? siteId,
@@ -84,7 +85,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 return NotFound();
         }
 
-        [HttpPost("Accreditation/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs")]
+        [HttpPost("MaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
             MaterialOutputsViewModel materialOutputsViewModel,
             SaveButton saveButton)
@@ -97,7 +98,7 @@ namespace EPR.Accreditation.Portal.Controllers
         /// 
         /// STUBBED METHOD
         /// 
-        [HttpGet("Accreditation/{id}/Site/{siteId}/Material/{materialId}/ProductsProduced", Name = "SiteProductsProduced")]
+        [HttpGet("ProductsProduced", Name = "SiteProductsProduced")]
         public IActionResult ProductsProduced()
         {
             return NotFound();

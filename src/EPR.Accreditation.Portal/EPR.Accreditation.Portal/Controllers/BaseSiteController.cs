@@ -49,7 +49,11 @@ namespace EPR.Accreditation.Portal.Controllers
                     materialId = materialId
                 });
 
-            var wasteSource = await _accreditationSiteMaterialService.GetWasteSource(id.Value, siteId.Value, materialId.Value);
+            var wasteSource = await _accreditationSiteMaterialService.GetWasteSource(
+                _siteType,
+                id.Value, 
+                siteId.Value, 
+                materialId.Value);
 
             return View(wasteSource);
         }
@@ -70,7 +74,9 @@ namespace EPR.Accreditation.Portal.Controllers
 
             // save the data regardless of whether this is save and continue or
             // save and come back later
-            await _accreditationSiteMaterialService.UpdateWasteSource(viewModel);
+            await _accreditationSiteMaterialService.UpdateWasteSource(
+                _siteType,
+                viewModel);
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
