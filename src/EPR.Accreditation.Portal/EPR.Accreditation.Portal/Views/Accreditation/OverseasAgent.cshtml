@@ -1,0 +1,49 @@
+﻿@model EPR.Accreditation.Portal.ViewModels.OverseasAgentViewModel
+@using EPR.Accreditation.Portal.Resources;
+@using EPR.Accreditation.Facade.Common.Enums
+
+@{
+    ViewData["Title"] = OverseasAgentResources.PageTitle;
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">
+            <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+        </p>
+
+        <form method="post">
+            <input type="hidden" asp-for="ExternalId" />
+            <radios asp-for="UseOverseasAgent" asp-title="@OverseasAgentResources.PageTitle">
+                <p class="govuk-error-message">
+                    <span asp-validation-for="UseOverseasAgent"></span>
+                </p>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="UseOverseasAgent" value="@true" aria-describedby="@MasterResources.Yes">
+                    <label class="govuk-label govuk-radios__label" for="@MasterResources.Yes">
+                        @MasterResources.Yes
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="UseOverseasAgent" value="@false" aria-describedby="@MasterResources.No">
+                    <label class="govuk-label govuk-radios__label" for="@MasterResources.No">
+                        @MasterResources.No
+                    </label>
+                </div>
+
+            </radios>
+
+            <div class="govuk-button-group">
+                <button class="govuk-button" data-module="govuk-button" type="submit">
+                    @MasterResources.Continue
+                </button>
+
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="button">
+                    @MasterResources.SaveAndComeBack
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

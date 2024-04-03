@@ -71,6 +71,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
         [HttpGet]
         [ActionName("OperatorType")]
+        [Route("OperatorType")]
         public async Task<IActionResult> OperatorType(Guid? id)
         {
             if (id.HasValue)
@@ -87,12 +88,42 @@ namespace EPR.Accreditation.Portal.Controllers
 
         [HttpPost]
         [ActionName("OperatorType")]
+        [Route("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
         {
             if (!ModelState.IsValid)
                 return View(vm);
 
             var externalId = await _accreditationService.CreateAccreditation(vm);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [ActionName("OverseasAgent")]
+        [Route("OverseasAgent")]
+        public async Task<IActionResult> OverseasAgent(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                //var operatorType = await _accreditationService.GetOperatorType(id.Value);
+
+                return View(new OverseasAgentViewModel());  // TODO:
+
+            }
+
+            return View(new OverseasAgentViewModel());
+        }
+
+        [HttpPost]
+        [ActionName("OverseasAgent")]
+        [Route("OverseasAgent")]
+        public async Task<IActionResult> OverseasAgent(OverseasAgentViewModel vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            //var externalId = await _accreditationService.CreateAccreditation(vm);
 
             return RedirectToAction("Index", "Home");
         }
