@@ -20,11 +20,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         {
             return new ExemptionReferencesViewModel
             {
-                Id = id,
-                SiteId = siteId,
-                ExemptionReferences = await _httpAccreditationSiteService.GetExemptionReferences(
-                    id,
-                    siteId)
+
             };
         }
     }

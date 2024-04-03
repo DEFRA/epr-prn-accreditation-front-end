@@ -2,19 +2,67 @@
     ViewData["Title"] = "Enter all your exemption references";
 }
 
+@model ExemptionReferencesViewModel
+
 <form method="post">
     <h1 class="govuk-heading-l">Enter all your exemption references</h1>
-    <p class="govuk-hint"></p>
-    @for (int i = 1; i < 4; i++)
-    {
-        <div class="govuk-form-group">
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-full">
-                    <input class="govuk-input govuk-input--width-30" type="text" id="@i">
-                </div>
+    <p class="govuk-body">Leave blank once you have entered all of your waste exemption references.</p>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="ReferenceNumber1"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber1">
             </div>
         </div>
-    }
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="ReferenceNumber2"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber2">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="ReferenceNumber3"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber3">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="ReferenceNumber4"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber4">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="ReferenceNumber5"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber5">
+            </div>
+        </div>
+    </div>
+
     <div class="govuk-button-group">
         <button class="govuk-button" data-module="govuk-button" type="submit">
             Save and continue
