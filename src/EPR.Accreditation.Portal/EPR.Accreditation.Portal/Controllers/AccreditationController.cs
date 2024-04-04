@@ -97,6 +97,44 @@ namespace EPR.Accreditation.Portal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        [ActionName("OverseasAgent")]
+        public async Task<IActionResult> OverseasAgent(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                var overseasAgent = await _accreditationService.GetOverseasAgent(id.Value);
+
+                return View(new OverseasAgentViewModel());  // TODO:
+            }
+
+            return View(new OverseasAgentViewModel());
+        }
+
+        [HttpPost]
+        [ActionName("OverseasAgent")]
+        public async Task<IActionResult> OverseasAgent(
+            OverseasAgentViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            //await _accreditationService.UpdateOrverseasAgent(viewModel); // TODO:
+
+            if (saveButton == SaveButton.SaveAndContinue && viewModel.UseOverseasAgent.Value == true)
+                return RedirectToAction("Overseas", "Accreditation");
+
+            else if (saveButton == SaveButton.SaveAndContinue && viewModel.UseOverseasAgent.Value == false)
+                return RedirectToAction("ListUkPorts", "Accreditation"); // TODO:
+
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.ExternalId,
+                Request.HttpContext.GetRouteData().Values);
+
+            return View("_ApplicationSaved");
+        }
+
         [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
         public async Task<IActionResult> TaskList(
             Guid? id,
@@ -125,33 +163,6 @@ namespace EPR.Accreditation.Portal.Controllers
         public async Task<IActionResult> Upload(Guid id)
         {
             return View("upload");
-        }
-
-        [HttpGet("OverseasAgent")]
-        [ActionName("OverseasAgent")]
-        public async Task<IActionResult> OverseasAgent(Guid? id)
-        {
-            if (id.HasValue)
-            {
-                //var operatorType = await _accreditationService.GetOperatorType(id.Value);
-
-                return View(new OverseasAgentViewModel());  // TODO:
-
-            }
-
-            return View(new OverseasAgentViewModel());
-        }
-
-        [HttpPost("OverseasAgent")]
-        [ActionName("OverseasAgent")]
-        public async Task<IActionResult> OverseasAgent(OverseasAgentViewModel vm)
-        {
-            if (!ModelState.IsValid)
-                return View(vm);
-
-            //var externalId = await _accreditationService.CreateAccreditation(vm);
-
-            return RedirectToAction("Index", "Home");
         }
     }
 }
