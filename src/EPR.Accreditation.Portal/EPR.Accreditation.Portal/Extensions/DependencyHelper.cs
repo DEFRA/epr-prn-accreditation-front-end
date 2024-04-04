@@ -31,6 +31,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<ISaveAndComeBackService, SaveAndComeBackService>();
             services.AddScoped<IWastePermitService, WastePermitService>();
             services.AddScoped<IAccreditationService, AccreditationService>();
+            services.AddScoped<ISiteService, SiteService>();
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
@@ -76,6 +77,16 @@ namespace EPR.Accreditation.Portal.Extensions
                     )
             );
 
+            services
+                .AddScoped<IHttpSiteService>(s =>
+                    new HttpSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Site"
+                    )
+            );
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AccreditationProfile());
@@ -84,15 +95,6 @@ namespace EPR.Accreditation.Portal.Extensions
 
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-
-            services
-                .AddScoped<Facade.Common.RESTservices.Interfaces.IHttpAccreditationService>(s =>
-                    new Facade.Common.RESTservices.HttpAccreditationService(
-                        s.GetRequiredService<IHttpContextAccessor>(),
-                        s.GetRequiredService<IHttpClientFactory>(),
-                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation")
-                    );
 
             // control client validation based on configuration
             services.AddRazorPages()

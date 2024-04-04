@@ -14,6 +14,7 @@ namespace EPR.Accreditation.Portal.Controllers
         private readonly IAccreditationService _accreditationService;
         protected readonly IWastePermitService _wastePermitService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
+        protected readonly ISiteService _siteService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelper _urlHelper;
 
@@ -22,13 +23,15 @@ namespace EPR.Accreditation.Portal.Controllers
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            ISiteService siteService)
         {
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
+            _siteService = siteService ?? throw new ArgumentNullException(nameof(siteService));
         }
 
         [HttpGet("PermitExemption")]
@@ -168,6 +171,28 @@ namespace EPR.Accreditation.Portal.Controllers
         public async Task<IActionResult> Upload(Guid id)
         {
             return View("upload");
+        }
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
+        public async Task<IActionResult> TaskListSite(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            if (id != null && siteId != null && materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                                                                        id.Value,
+                                                                        siteId.Value,
+                                                                        materialId.Value);
+
+                var site = _siteService.GetSite(id.Value, siteId.Value).Result;
+                if (site != null)
+                    model.Address = site.Address1;
+
+                return View("TaskListSite", model);
+            }
+            return NotFound();
         }
     }
 }
