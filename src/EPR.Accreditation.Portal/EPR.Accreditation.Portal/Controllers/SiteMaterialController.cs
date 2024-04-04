@@ -13,11 +13,13 @@ namespace EPR.Accreditation.Portal.Controllers
     public class SiteMaterialController : BaseSiteController
     {
         public SiteMaterialController(
+            IHttpContextAccessor httpContextAccessor,
             IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel)
             : base(
+                  httpContextAccessor,
                   urlHelper,
                   accreditationSiteMaterialService,
                   saveAndComeBackService,
@@ -78,7 +80,9 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? siteId,
             Guid? materialId)
         {
-            if (id != null && siteId != null && materialId != null)
+            if (id != null && 
+                siteId != null && 
+                materialId != null)
                 return await GetMaterialOutputs(
                     id.Value,
                     siteId.Value,

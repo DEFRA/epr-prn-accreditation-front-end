@@ -44,7 +44,11 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             else if (currentCulture.Name == CultureConstants.Welsh.Name)
                 language = Enums.Language.Welsh;
 
-            return await _httpSiteMaterialService.GetMeterialName(id, siteId, materialId, language);
+            return await _httpSiteMaterialService.GetMeterialName(
+                id, 
+                siteId, 
+                materialId, 
+                language);
         }
 
         public async Task<WasteSourceViewModel> GetWasteSource(

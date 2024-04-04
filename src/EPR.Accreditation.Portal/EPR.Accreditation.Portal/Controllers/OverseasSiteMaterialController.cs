@@ -11,11 +11,13 @@ namespace EPR.Accreditation.Portal.Controllers
     public class OverseasSiteMaterialController : BaseSiteController
     {
         public OverseasSiteMaterialController(
+            IHttpContextAccessor httpContextAccessor,
             IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel)
             : base(
+                  httpContextAccessor,
                   urlHelper,
                   accreditationSiteMaterialService,
                   saveAndComeBackService,

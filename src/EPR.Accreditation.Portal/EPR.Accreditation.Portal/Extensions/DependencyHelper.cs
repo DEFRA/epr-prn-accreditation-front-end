@@ -43,6 +43,18 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"
                     )
+                
+            );
+            services
+                .AddScoped<IAccreditationService, AccreditationService>()
+                .AddScoped<IHttpAccreditationService>(s =>
+                    new HttpAccreditionService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"
+                    )
+
             );
 
             services
