@@ -21,16 +21,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<ExemptionReferencesViewModel> GetExemptionReferencesViewModel(
-            Guid id,
-            Guid siteId)
+        public async Task<ExemptionReferencesViewModel> GetExemptionReferencesViewModel(Guid id)
         {
-            var exemptionReferences = await _httpAccreditationSiteService.GetExemptionReferences(id, siteId);
+            var exemptionReferences = await _httpAccreditationSiteService.GetExemptionReferences(id);
 
             return new ExemptionReferencesViewModel
             {
                 Id = id,
-                SiteId = siteId,
                 ExemptionReferencesVm = exemptionReferences.Select(x => new ExemptionReferenceViewModel
                 {
                     Reference = x

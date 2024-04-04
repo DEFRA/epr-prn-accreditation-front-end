@@ -2,9 +2,7 @@
 {
     public interface IHttpAccreditationSiteService
     {
-        Task<IEnumerable<string>> GetExemptionReferences(
-            Guid id,
-            Guid siteId);
+        Task<IEnumerable<string>> GetExemptionReferences(Guid id);
 
         Task UpdateExemptionReferences(
             Guid id,

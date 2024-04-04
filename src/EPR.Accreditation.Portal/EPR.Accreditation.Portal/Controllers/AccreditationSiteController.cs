@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
-    [Route("[controller]/{id}/Site/{siteId}")]
+    [Route("[controller]/{id}/Site/")]
     public class AccreditationSiteController : Controller
     {
         protected readonly IAccreditationSiteService _accreditationSiteService;
@@ -30,22 +30,15 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
         [HttpGet("ExemptionReferences")]
-        public async Task<IActionResult> ExemptionReferences(
-            Guid? id,
-            Guid? siteId)
+        public async Task<IActionResult> ExemptionReferences(Guid? id)
         {
             // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)
                 return NotFound();
-
-            if (siteId == null)
-                return NotFound();
-
-            var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(
-                id.Value,
-                siteId.Value);
+            ;
+            var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(id.Value);
 
             return View(viewModel);
         }

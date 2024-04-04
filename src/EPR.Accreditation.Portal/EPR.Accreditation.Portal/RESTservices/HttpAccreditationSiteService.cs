@@ -12,11 +12,9 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
         }
 
-        public async Task<IEnumerable<string>> GetExemptionReferences(
-            Guid id,
-            Guid siteId)
+        public async Task<IEnumerable<string>> GetExemptionReferences(Guid id)
         {
-            return await Get<IEnumerable<string>>($"{id}/Site/{siteId}/ExemptionReferences");
+            return await Get<IEnumerable<string>>($"{id}/Site/ExemptionReferences");
         }
 
         public async Task UpdateExemptionReferences(
