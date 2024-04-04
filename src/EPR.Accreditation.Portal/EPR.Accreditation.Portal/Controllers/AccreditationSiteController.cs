@@ -51,15 +51,8 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // If the ModelState is not valid, return the view with validation errors
                 return View(viewModel);
             }
-
-            // At this point, the model state is valid, and you can access the reference numbers
-            // from viewModel.ReferenceNumber1, viewModel.ReferenceNumber2, etc.
-            // You can also access all reference numbers from viewModel.ExemptionReferences.
-
-            // Here, you can process the data, save it to a database, etc.
 
             return RedirectToAction("Success");
         }
