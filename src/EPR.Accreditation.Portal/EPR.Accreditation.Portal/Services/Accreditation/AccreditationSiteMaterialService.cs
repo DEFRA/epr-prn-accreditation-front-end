@@ -30,8 +30,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         /// accreditation, site and material
         /// </summary>
         public async Task<string> GetWasteName(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             // identify the language
@@ -53,16 +53,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task<WasteSourceViewModel> GetWasteSource(
             SiteType siteType,
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             return new WasteSourceViewModel
             {
                 WasteSource = await _httpSiteMaterialService.GetWasteSource(
                     siteType,
-                    id, 
-                    siteId, 
+                    id,
+                    siteId,
                     materialId)
             };
         }
@@ -81,13 +81,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 siteType,
                 wasteSourceViewModel.Id,
                 wasteSourceViewModel.SiteId,
-                wasteSourceViewModel.MaterialId, 
+                wasteSourceViewModel.MaterialId,
                 wasteSourceViewModel.WasteSource);
         }
 
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
@@ -108,6 +108,35 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 materialOutputsViewModel.SiteId,
                 materialOutputsViewModel.MaterialId,
                 materialOutputsDto);
+        }
+
+        public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
+            Guid id,
+            Guid siteId,
+            Guid materialId)
+        {
+            return new ReprocessedWasteLastYearViewModel
+            {
+                Id = id,
+                HasReprocessedWasteLastYear = await _httpSiteMaterialService.GetReprocessedWasteLastYear(
+                    id,
+                    siteId,
+                    materialId)
+            };
+        }
+
+        public async Task UpdateReprocessedWasteLastYear(
+            ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel)
+        {
+            var reprocessedWasteLastYearDto = _mapper.Map<DTOs.MaterialReprocessorDetails.ReprocessedWasteLastYear>(
+                reprocessedWasteLastYearViewModel);
+
+            await _httpSiteMaterialService.UpdateReprocessedWasteLastYear(
+                reprocessedWasteLastYearViewModel.Id,
+                reprocessedWasteLastYearViewModel.SiteId,
+                reprocessedWasteLastYearViewModel.MaterialId,
+                reprocessedWasteLastYearDto
+                );
         }
     }
 }
