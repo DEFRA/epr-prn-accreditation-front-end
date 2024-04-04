@@ -139,5 +139,35 @@ namespace EPR.Accreditation.Portal.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
+        public async Task<IActionResult> TaskList(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            if (id != null && siteId != null && materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                                                                        id.Value,
+                                                                        siteId.Value,
+                                                                        materialId.Value);
+                return View(model);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("Overseas")]
+        public async Task<IActionResult> Overseas(
+            Guid? id)
+        {
+            return View("overseas");
+        }
+
+        [HttpGet("Upload")]
+        public async Task<IActionResult> Upload(Guid id)
+        {
+            return View("upload");
+        }
     }
 }

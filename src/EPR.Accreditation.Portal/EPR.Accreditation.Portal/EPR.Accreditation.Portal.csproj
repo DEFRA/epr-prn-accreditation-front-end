@@ -24,6 +24,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialOutputsResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
+      <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\TaskListResources.Designer.cs">
+      <DependentUpon>TaskListResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\WasteLastYearResources.cy-GB.Designer.cs">
+      <DependentUpon>WasteLastYearResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\WasteLastYearResources.Designer.cs">
+      <DependentUpon>WasteLastYearResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\PermitExemptionResources.cy-GB.Designer.cs">
       <DependentUpon>PermitExemptionResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -90,6 +110,22 @@
     <EmbeddedResource Update="Resources\MaterialOutputsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\TaskListResources.cy-GB.resx">
+      <LastGenOutput>TaskListResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\TaskListResources.resx">
+      <LastGenOutput>TaskListResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteLastYearResources.cy-GB.resx">
+      <LastGenOutput>WasteLastYearResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteLastYearResources.resx">
+      <LastGenOutput>WasteLastYearResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PermitExemptionResources.cy-GB.resx">
       <LastGenOutput>PermitExemptionResources.cy-GB.Designer.cs</LastGenOutput>

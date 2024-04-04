@@ -56,5 +56,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
+
+        public async Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId)
+        {
+            var viewModel = new TaskListViewModel
+            {
+                Id = id,
+                SiteId = siteId,
+                MaterialId = materialId
+            };
+            return viewModel;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -29,8 +30,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         /// accreditation, site and material
         /// </summary>
         public async Task<string> GetWasteName(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             // identify the language
@@ -47,17 +48,24 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         }
 
         public async Task<WasteSourceViewModel> GetWasteSource(
-            Guid id, 
-            Guid siteId, 
+            SiteType siteType,
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             return new WasteSourceViewModel
             {
-                WasteSource = await _httpSiteMaterialService.GetWasteSource(id, siteId, materialId)
+                WasteSource = await _httpSiteMaterialService.GetWasteSource(
+                    siteType,
+                    id,
+                    siteId,
+                    materialId)
             };
         }
 
-        public async Task UpdateWasteSource(WasteSourceViewModel wasteSourceViewModel)
+        public async Task UpdateWasteSource(
+            SiteType siteType,
+            WasteSourceViewModel wasteSourceViewModel)
         {
             // this field is a required field. Therefore, if it's got to this point
             // then "Save and come back later" has been selected and we are letting
@@ -66,15 +74,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.WasteSource = string.Empty;
 
             await _httpSiteMaterialService.UpdateWasteSource(
+                siteType,
                 wasteSourceViewModel.Id,
                 wasteSourceViewModel.SiteId,
-                wasteSourceViewModel.MaterialId, 
+                wasteSourceViewModel.MaterialId,
                 wasteSourceViewModel.WasteSource);
         }
 
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId)
         {
             var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
@@ -95,6 +104,35 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 materialOutputsViewModel.SiteId,
                 materialOutputsViewModel.MaterialId,
                 materialOutputsDto);
+        }
+
+        public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
+            Guid id,
+            Guid siteId,
+            Guid materialId)
+        {
+            return new ReprocessedWasteLastYearViewModel
+            {
+                Id = id,
+                HasReprocessedWasteLastYear = await _httpSiteMaterialService.GetReprocessedWasteLastYear(
+                    id,
+                    siteId,
+                    materialId)
+            };
+        }
+
+        public async Task UpdateReprocessedWasteLastYear(
+            ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel)
+        {
+            var reprocessedWasteLastYearDto = _mapper.Map<DTOs.MaterialReprocessorDetails.ReprocessedWasteLastYear>(
+                reprocessedWasteLastYearViewModel);
+
+            await _httpSiteMaterialService.UpdateReprocessedWasteLastYear(
+                reprocessedWasteLastYearViewModel.Id,
+                reprocessedWasteLastYearViewModel.SiteId,
+                reprocessedWasteLastYearViewModel.MaterialId,
+                reprocessedWasteLastYearDto
+                );
         }
     }
 }
