@@ -14,6 +14,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected string SiteProcessingCapacityRouteName;
         protected string SiteProductsProducedRouteName;
         protected string SiteNonWasteInputsRouteName;
+        protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IUrlHelper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
@@ -21,6 +22,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected SiteType _siteType;
 
         protected BaseSiteController(
+            IHttpContextAccessor httpContextAccessor,
             IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
@@ -28,6 +30,7 @@ namespace EPR.Accreditation.Portal.Controllers
             SiteType siteType)
         {
             _siteType = siteType;
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
@@ -92,7 +95,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
                 return View("_ApplicationSaved");
             }
             else
@@ -112,12 +115,12 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid siteId,
             Guid materialId)
         {
-                var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
-                    id,
-                    siteId,
-                    materialId);
+            var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
+                id,
+                siteId,
+                materialId);
 
-                return View(materialOutputsViewModel);
+            return View(materialOutputsViewModel);
         }
 
         protected async Task<IActionResult> SaveMaterialOutputs(
@@ -152,7 +155,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
                 return View("_ApplicationSaved");
             }
             else
