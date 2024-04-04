@@ -6,6 +6,10 @@ namespace EPR.Accreditation.Portal.ViewModels
 {
     public class ExemptionReferencesViewModel
     {
+        public Guid Id { get; set; }
+
+        public Guid SiteId { get; set; }
+
         [AllReferenceNumbersEmpty(ErrorMessageResourceType = typeof(ExemptionReferencesResources), ErrorMessageResourceName = "ErrorMessageBlank")]
         [RegularExpression(@"^[a-zA-Z0-9/]*$", ErrorMessageResourceType = typeof(ExemptionReferencesResources), ErrorMessageResourceName = "ErrorMessageInvalidFormat")]
         [StringLength(20, ErrorMessageResourceType = typeof(ExemptionReferencesResources), ErrorMessageResourceName = "ErrorMessageTooLong")]
@@ -35,5 +39,7 @@ namespace EPR.Accreditation.Portal.ViewModels
         [StringLength(20, ErrorMessageResourceType = typeof(ExemptionReferencesResources), ErrorMessageResourceName = "ErrorMessageTooLong")]
         [UniqueReferenceNumber(ErrorMessageResourceType = typeof(ExemptionReferencesResources), ErrorMessageResourceName = "ErrorMessageDuplicate")]
         public string ReferenceNumber5 { get; set; }
+
+        public IEnumerable<string> ExemptionReferences { get; set; }
     }
 }

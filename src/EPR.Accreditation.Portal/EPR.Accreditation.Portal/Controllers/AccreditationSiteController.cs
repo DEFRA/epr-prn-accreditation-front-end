@@ -1,4 +1,7 @@
-﻿using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+﻿using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Resources;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +36,11 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
             if (id == null)
+                return NotFound();
+
+            if (siteId == null)
                 return NotFound();
 
             //var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(
@@ -45,16 +52,27 @@ namespace EPR.Accreditation.Portal.Controllers
 
         [HttpPost("ExemptionReferences")]
         public async Task<IActionResult> ExemptionReferences(
-            Guid? id,
-            Guid? siteId,
-            ExemptionReferencesViewModel viewModel)
+            ExemptionReferencesViewModel viewModel,
+            SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+            ExemptionReferencesResources.ErrorMessageBlank,
+            ExemptionReferencesResources.ErrorMessageDuplicate,
+            ExemptionReferencesResources.ErrorMessageInvalidFormat,
+            ExemptionReferencesResources.ErrorMessageTooLong))
                 return View(viewModel);
-            }
 
-            return RedirectToAction("Success");
+            await _accreditationSiteService.UpdateExemptionReferences(viewModel);
+
+            if (saveButton == SaveButton.SaveAndContinue)
+                return RedirectToAction("HowManyTonnes", "Accreditation");
+
+            // this is all the data we require to save for come back later
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.Id,
+                Request.HttpContext.GetRouteData().Values);
+            return View("_ApplicationSaved");
         }
     }
 }

@@ -7,5 +7,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
         Task<ExemptionReferencesViewModel> GetExemptionReferencesViewModel(
             Guid id,
             Guid siteId);
+
+        Task UpdateExemptionReferences(ExemptionReferencesViewModel exemptionReferencesViewModel);
     }
 }

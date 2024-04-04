@@ -7,5 +7,10 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task<IEnumerable<ExemptionReference>> GetExemptionReferences(
             Guid id,
             Guid siteId);
+
+        Task UpdateExemptionReferences(
+            Guid id,
+            Guid siteId,
+            IEnumerable<string> exemptionReferences);
     }
 }
