@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
+    [Route("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}")]
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class OverseasSiteMaterialController : BaseSiteController
     {
@@ -13,18 +14,20 @@ namespace EPR.Accreditation.Portal.Controllers
             IUrlHelper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
-            BackPageViewModel backPageViewModel) 
+            BackPageViewModel backPageViewModel)
             : base(
                   urlHelper,
-                  accreditationSiteMaterialService, 
+                  accreditationSiteMaterialService,
                   saveAndComeBackService,
                   backPageViewModel,
                   SiteType.OverseasSite)
         {
             SiteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
+            SiteProductsProducedRouteName = "OverseasSiteProductsProduced";
+            SiteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
         }
 
-        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/Material", Name = "OverseasSiteChooseMaterial")]
+        [HttpGet("Material", Name = "OverseasSiteChooseMaterial")]
         public IActionResult ChooseMaterial(
             Guid? id,
             Guid? siteId,
@@ -33,7 +36,7 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
-        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteSource", Name = "OverseasWasteSource")]
+        [HttpGet("WasteSource", Name = "OverseasWasteSource")]
         public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
             Guid? siteId,
@@ -45,17 +48,17 @@ namespace EPR.Accreditation.Portal.Controllers
                 materialId);
         }
 
-        [HttpPost("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteSource")]
+        [HttpPost("WasteSource")]
         public async Task<IActionResult> MaterialWasteSource(
             WasteSourceViewModel viewModel,
             SaveButton saveButton)
         {
             return await SaveMaterialWasteSource(
-                viewModel, 
+                viewModel,
                 saveButton);
         }
 
-        [HttpGet("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}/ProcessingCapacity", Name = "OverseasSiteProcessingCapacity")]
+        [HttpGet("ProcessingCapacity", Name = "OverseasSiteProcessingCapacity")]
         public IActionResult EnterProcessingCapacity(
             Guid? id,
             Guid? siteId,

@@ -69,9 +69,8 @@ namespace EPR.Accreditation.Portal.Controllers
             return View("_ApplicationSaved");
         }
 
-        [HttpGet]
+        [HttpGet("OperatorType")]
         [ActionName("OperatorType")]
-        [Route("OperatorType")]
         public async Task<IActionResult> OperatorType(Guid? id)
         {
             if (id.HasValue)
@@ -86,9 +85,8 @@ namespace EPR.Accreditation.Portal.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("OperatorType")]
         [ActionName("OperatorType")]
-        [Route("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -99,9 +97,38 @@ namespace EPR.Accreditation.Portal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
+        public async Task<IActionResult> TaskList(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            if (id != null && siteId != null && materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                                                                        id.Value,
+                                                                        siteId.Value,
+                                                                        materialId.Value);
+                return View(model);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("Overseas")]
+        public async Task<IActionResult> Overseas(
+            Guid? id)
+        {
+            return View("overseas");
+        }
+
+        [HttpGet("Upload")]
+        public async Task<IActionResult> Upload(Guid id)
+        {
+            return View("upload");
+        }
+
+        [HttpGet("OverseasAgent")]
         [ActionName("OverseasAgent")]
-        [Route("OverseasAgent")]
         public async Task<IActionResult> OverseasAgent(Guid? id)
         {
             if (id.HasValue)
@@ -115,9 +142,8 @@ namespace EPR.Accreditation.Portal.Controllers
             return View(new OverseasAgentViewModel());
         }
 
-        [HttpPost]
+        [HttpPost("OverseasAgent")]
         [ActionName("OverseasAgent")]
-        [Route("OverseasAgent")]
         public async Task<IActionResult> OverseasAgent(OverseasAgentViewModel vm)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
 using EPR.Accreditation.Portal.ViewModels;
 
@@ -9,6 +10,8 @@ namespace EPR.Accreditation.Portal.Profiles
         public AccreditationProfile()
         {
             CreateMap<PermitExemptionViewModel, PermitExemption>();
+            CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
+                .ReverseMap();
         }
     }
 }

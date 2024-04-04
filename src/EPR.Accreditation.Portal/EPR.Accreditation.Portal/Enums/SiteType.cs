@@ -2,7 +2,6 @@
 {
     public enum SiteType
     {
-        None,
         Site,
         OverseasSite
     }

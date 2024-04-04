@@ -79,6 +79,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places.
+        /// </summary>
+        public static string DecimalNumberFormatError {
+            get {
+                return ResourceManager.GetString("DecimalNumberFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For:.
         /// </summary>
         public static string MaterialForLabel {
@@ -129,6 +138,15 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string SummaryError {
             get {
                 return ResourceManager.GetString("SummaryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tonnes.
+        /// </summary>
+        public static string TonnesLabel {
+            get {
+                return ResourceManager.GetString("TonnesLabel", resourceCulture);
             }
         }
         

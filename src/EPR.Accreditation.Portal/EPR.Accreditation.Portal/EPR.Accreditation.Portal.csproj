@@ -19,6 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\MaterialOutputsResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MaterialOutputsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
+      <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\TaskListResources.Designer.cs">
+      <DependentUpon>TaskListResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\OverseasAgentResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -82,6 +97,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\MaterialOutputsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialOutputsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\TaskListResources.cy-GB.resx">
+      <LastGenOutput>TaskListResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\TaskListResources.resx">
+      <LastGenOutput>TaskListResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\OverseasAgentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>OverseasAgentResources.Designer.cs</LastGenOutput>

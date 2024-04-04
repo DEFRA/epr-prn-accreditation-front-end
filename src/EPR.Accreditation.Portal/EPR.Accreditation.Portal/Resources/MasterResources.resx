@@ -123,6 +123,9 @@
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="DecimalNumberFormatError" xml:space="preserve">
+    <value>Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
+  </data>
   <data name="MaterialForLabel" xml:space="preserve">
     <value>For:</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="SummaryError" xml:space="preserve">
     <value>There is a problem</value>
+  </data>
+  <data name="TonnesLabel" xml:space="preserve">
+    <value>Tonnes</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

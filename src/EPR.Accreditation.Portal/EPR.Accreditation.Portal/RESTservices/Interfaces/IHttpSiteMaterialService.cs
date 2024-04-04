@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.Constants;
+﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.Enums;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
@@ -11,14 +12,27 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Enums.Language language);
 
         Task<string> GetWasteSource(
+            SiteType siteType,
             Guid id, 
             Guid siteId, 
             Guid materialId);
 
         Task UpdateWasteSource(
+            SiteType siteType,
             Guid id,
             Guid siteId,
             Guid materialId,
             string wasteSource);
+
+        Task<MaterialOutputsDto> GetMaterialOutputs(
+            Guid id,
+            Guid siteId,
+            Guid materialId);
+
+        Task UpdateMaterialOutputs(
+            Guid id,
+            Guid siteId,
+            Guid materialId,
+            MaterialOutputsDto materialOutputsDto);
     }
 }
