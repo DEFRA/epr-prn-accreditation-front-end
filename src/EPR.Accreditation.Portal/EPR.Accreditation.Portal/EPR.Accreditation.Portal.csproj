@@ -34,6 +34,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\WasteLastYearResources.cy-GB.Designer.cs">
+      <DependentUpon>WasteLastYearResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\WasteLastYearResources.Designer.cs">
+      <DependentUpon>WasteLastYearResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\OverseasAgentResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -94,6 +104,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WasteSourceResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\WasteLicensesAndPermitsResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WasteLicensesAndPermitsResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -112,6 +127,14 @@
     <EmbeddedResource Update="Resources\OverseasAgentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>OverseasAgentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteLastYearResources.cy-GB.resx">
+      <LastGenOutput>WasteLastYearResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteLastYearResources.resx">
+      <LastGenOutput>WasteLastYearResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PermitExemptionResources.cy-GB.resx">
       <LastGenOutput>PermitExemptionResources.cy-GB.Designer.cs</LastGenOutput>
@@ -159,6 +182,10 @@
     <EmbeddedResource Update="Resources\WasteSourceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteSourceResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteLicensesAndPermitsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteLicensesAndPermitsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

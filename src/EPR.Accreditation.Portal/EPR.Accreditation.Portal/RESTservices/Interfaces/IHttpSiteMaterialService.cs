@@ -1,4 +1,5 @@
 ﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
 using EPR.Accreditation.Portal.Enums;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
@@ -13,8 +14,8 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 
         Task<string> GetWasteSource(
             SiteType siteType,
-            Guid id, 
-            Guid siteId, 
+            Guid id,
+            Guid siteId,
             Guid materialId);
 
         Task UpdateWasteSource(
@@ -34,5 +35,16 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid siteId,
             Guid materialId,
             MaterialOutputsDto materialOutputsDto);
+
+        Task<bool?> GetReprocessedWasteLastYear(
+            Guid id,
+            Guid siteId,
+            Guid materialId);
+
+        Task UpdateReprocessedWasteLastYear(
+            Guid id,
+            Guid siteId,
+            Guid materialId,
+            ReprocessedWasteLastYear reprocessedWasteLastYear);
     }
 }
