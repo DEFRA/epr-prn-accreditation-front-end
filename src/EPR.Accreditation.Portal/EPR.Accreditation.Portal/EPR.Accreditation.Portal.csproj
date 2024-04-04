@@ -24,6 +24,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialOutputsResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
+      <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\TaskListSiteResources.Designer.cs">
       <DependentUpon>TaskListSiteResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -115,6 +120,10 @@
     <EmbeddedResource Update="Resources\MaterialOutputsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
+      <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.resx">
       <LastGenOutput>TaskListSiteResources.Designer.cs</LastGenOutput>
