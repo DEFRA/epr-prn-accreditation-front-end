@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.ViewModels;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 
 namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
@@ -10,17 +11,9 @@ namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
         {
             var viewModel = (ExemptionReferencesViewModel)validationContext.ObjectInstance;
 
-            // Check if all reference numbers are empty
-            if (string.IsNullOrEmpty(viewModel.ReferenceNumber1) &&
-                string.IsNullOrEmpty(viewModel.ReferenceNumber2) &&
-                string.IsNullOrEmpty(viewModel.ReferenceNumber3) &&
-                string.IsNullOrEmpty(viewModel.ReferenceNumber4) &&
-                string.IsNullOrEmpty(viewModel.ReferenceNumber5))
-            {
-                return new ValidationResult(ErrorMessage ?? ExemptionReferencesResources.ErrorMessageBlank);
-            }
-
-            return ValidationResult.Success;
+            return viewModel.ExemptionReferencesVm.All(x => x.Reference.IsNullOrEmpty()) ?
+                new ValidationResult(ErrorMessage ?? ExemptionReferencesResources.ErrorMessageBlank)
+                : ValidationResult.Success;
         }
     }
 }

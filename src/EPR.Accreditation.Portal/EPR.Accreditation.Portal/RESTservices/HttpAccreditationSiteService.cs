@@ -1,5 +1,4 @@
-﻿using EPR.Accreditation.Portal.DTOs.AccreditationSite;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
+﻿using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
 namespace EPR.Accreditation.Portal.RESTservices
 {
@@ -13,17 +12,17 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
         }
 
-        public async Task<IEnumerable<ExemptionReference>> GetExemptionReferences(
+        public async Task<IEnumerable<string>> GetExemptionReferences(
             Guid id,
             Guid siteId)
         {
-            return await Get<IEnumerable<ExemptionReference>>($"{id}/Site/{siteId}");
+            return await Get<IEnumerable<string>>($"{id}/Site/{siteId}/ExemptionReferences");
         }
 
         public async Task UpdateExemptionReferences(
             Guid id,
             Guid siteId,
-            IEnumerable<ExemptionReference> exemptionReferences)
+            IEnumerable<string> exemptionReferences)
         {
             await Put($"{id}/Site/{siteId}/ExemptionReferences", exemptionReferences);
         }

@@ -1,6 +1,5 @@
 ﻿@model ExemptionReferencesViewModel
 
-
 @{
     ViewData["Title"] = ExemptionReferencesResources.PageTitle;
 }
@@ -10,60 +9,21 @@
     <h1 class="govuk-heading-l">@ExemptionReferencesResources.PageHeading</h1>
     <p class="govuk-body">@ExemptionReferencesResources.P1</p>
 
-    <p class="govuk-error-message">
-        <span asp-validation-for="ReferenceNumber1"></span>
-    </p>
-    <div class="govuk-form-group">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber1" data-clear-duplicate='true'>
+
+    @for (int i = 0; i < 5; i++)
+    {
+        var value = Model.ExemptionReferencesVm.Count > i ? Model.ExemptionReferencesVm[i].Reference : string.Empty;
+
+        <p class="govuk-error-message">
+            <span asp-validation-for="@value"></span>
+        </p>
+        <div class="govuk-form-group">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                    <input class="govuk-input govuk-input--width-30" type="text" asp-for="@value" data-clear-duplicate='true'>
+                </div>
             </div>
         </div>
-    </div>
-
-    <p class="govuk-error-message">
-        <span asp-validation-for="ReferenceNumber2"></span>
-    </p>
-    <div class="govuk-form-group">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber2" data-clear-duplicate='true'>
-            </div>
-        </div>
-    </div>
-
-    <p class="govuk-error-message">
-        <span asp-validation-for="ReferenceNumber3"></span>
-    </p>
-    <div class="govuk-form-group">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber3" data-clear-duplicate='true'>
-            </div>
-        </div>
-    </div>
-
-    <p class="govuk-error-message">
-        <span asp-validation-for="ReferenceNumber4"></span>
-    </p>
-    <div class="govuk-form-group">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber4" data-clear-duplicate='true'>
-            </div>
-        </div>
-    </div>
-
-    <p class="govuk-error-message">
-        <span asp-validation-for="ReferenceNumber5"></span>
-    </p>
-    <div class="govuk-form-group">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <input class="govuk-input govuk-input--width-30" type="text" asp-for="ReferenceNumber5" data-clear-duplicate='true'>
-            </div>
-        </div>
-    </div>
-
+    }
     <partial name="_SaveButtons" />
 </form>

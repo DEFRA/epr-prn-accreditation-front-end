@@ -13,9 +13,11 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public AccreditationSiteService(
             IHttpContextAccessor httpContextAccessor,
+            IHttpAccreditationSiteService httpAccreditationSiteService,
             IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _httpAccreditationSiteService = httpAccreditationSiteService ?? throw new ArgumentNullException(nameof(httpAccreditationSiteService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -29,11 +31,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             {
                 Id = id,
                 SiteId = siteId,
-                ReferenceNumber1 = exemptionReferences.ElementAt(0).ToString(),
-                ReferenceNumber2 = exemptionReferences.ElementAt(1).ToString(),
-                ReferenceNumber3 = exemptionReferences.ElementAt(2).ToString(),
-                ReferenceNumber4 = exemptionReferences.ElementAt(3).ToString(),
-                ReferenceNumber5 = exemptionReferences.ElementAt(4).ToString()
+                ExemptionReferencesVm = exemptionReferences.Select(x => new ExemptionReferenceViewModel
+                {
+                    Reference = x
+                }).ToList()
             };
         }
 
@@ -51,11 +52,11 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
             //viewModel.ExemptionReferences = exemptionReferences;
 
-            await _httpAccreditationSiteService.UpdateExemptionReferences(
-                viewModel.Id,
-                viewModel.SiteId,
-                viewModel.ExemptionReferences
-                );
+            //await _httpAccreditationSiteService.UpdateExemptionReferences(
+            //    viewModel.Id,
+            //    viewModel.SiteId,
+            //    viewModel.ExemptionReferences
+            //    );
         }
     }
 }

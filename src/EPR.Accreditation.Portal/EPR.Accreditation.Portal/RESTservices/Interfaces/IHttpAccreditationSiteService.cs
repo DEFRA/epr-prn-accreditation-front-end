@@ -1,16 +1,14 @@
-﻿using EPR.Accreditation.Portal.DTOs.AccreditationSite;
-
-namespace EPR.Accreditation.Portal.RESTservices.Interfaces
+﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
     public interface IHttpAccreditationSiteService
     {
-        Task<IEnumerable<ExemptionReference>> GetExemptionReferences(
+        Task<IEnumerable<string>> GetExemptionReferences(
             Guid id,
             Guid siteId);
 
         Task UpdateExemptionReferences(
             Guid id,
             Guid siteId,
-            IEnumerable<ExemptionReference> exemptionReferences);
+            IEnumerable<string> exemptionReferences);
     }
 }
