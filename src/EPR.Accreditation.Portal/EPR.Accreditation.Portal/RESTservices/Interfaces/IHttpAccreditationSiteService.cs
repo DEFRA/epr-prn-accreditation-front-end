@@ -11,6 +11,6 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task UpdateExemptionReferences(
             Guid id,
             Guid siteId,
-            IEnumerable<string> exemptionReferences);
+            IEnumerable<ExemptionReference> exemptionReferences);
     }
 }

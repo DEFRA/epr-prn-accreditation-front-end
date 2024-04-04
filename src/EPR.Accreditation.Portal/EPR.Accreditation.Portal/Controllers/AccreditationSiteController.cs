@@ -43,11 +43,11 @@ namespace EPR.Accreditation.Portal.Controllers
             if (siteId == null)
                 return NotFound();
 
-            //var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(
-            //    id.Value,
-            //    siteId.Value);
+            var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(
+                id.Value,
+                siteId.Value);
 
-            return View();
+            return View(viewModel);
         }
 
         [HttpPost("ExemptionReferences")]

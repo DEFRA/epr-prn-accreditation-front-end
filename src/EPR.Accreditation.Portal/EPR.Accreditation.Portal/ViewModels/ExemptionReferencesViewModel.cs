@@ -1,4 +1,5 @@
 ﻿using EPR.Accreditation.Portal.CustomValidations.ExemptionReferences;
+using EPR.Accreditation.Portal.DTOs.AccreditationSite;
 using EPR.Accreditation.Portal.Resources;
 using System.ComponentModel.DataAnnotations;
 
@@ -40,6 +41,6 @@ namespace EPR.Accreditation.Portal.ViewModels
         [UniqueReferenceNumber(ErrorMessageResourceType = typeof(ExemptionReferencesResources), ErrorMessageResourceName = "ErrorMessageDuplicate")]
         public string ReferenceNumber5 { get; set; }
 
-        public IEnumerable<string> ExemptionReferences { get; set; }
+        public IEnumerable<ExemptionReference> ExemptionReferences { get; set; }
     }
 }

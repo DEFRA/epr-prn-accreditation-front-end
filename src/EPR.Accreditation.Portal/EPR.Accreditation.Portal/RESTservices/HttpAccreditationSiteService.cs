@@ -1,6 +1,5 @@
 ﻿using EPR.Accreditation.Portal.DTOs.AccreditationSite;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
 
 namespace EPR.Accreditation.Portal.RESTservices
 {
@@ -24,7 +23,7 @@ namespace EPR.Accreditation.Portal.RESTservices
         public async Task UpdateExemptionReferences(
             Guid id,
             Guid siteId,
-            ExemptionReferencesViewModel exemptionReferences)
+            IEnumerable<ExemptionReference> exemptionReferences)
         {
             await Put($"{id}/Site/{siteId}/ExemptionReferences", exemptionReferences);
         }
