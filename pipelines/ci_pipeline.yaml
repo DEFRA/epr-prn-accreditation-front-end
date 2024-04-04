@@ -39,7 +39,7 @@ variables:
   - name: sonarQubeProjectName
     value: epr-prn-accreditation-front-end
   - name: runNugetTasks
-    value: false
+    value: true
 
 resources:
   repositories:
