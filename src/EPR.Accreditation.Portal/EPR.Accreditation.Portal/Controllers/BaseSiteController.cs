@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -15,7 +16,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected string SiteProductsProducedRouteName;
         protected string SiteNonWasteInputsRouteName;
         protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IUrlHelper _urlHelper;
+        protected readonly IUrlHelperWrapper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
@@ -23,7 +24,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
         protected BaseSiteController(
             IHttpContextAccessor httpContextAccessor,
-            IUrlHelper urlHelper,
+            IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel,
@@ -54,8 +55,8 @@ namespace EPR.Accreditation.Portal.Controllers
 
             var wasteSource = await _accreditationSiteMaterialService.GetWasteSource(
                 _siteType,
-                id.Value, 
-                siteId.Value, 
+                id.Value,
+                siteId.Value,
                 materialId.Value);
 
             return View(wasteSource);

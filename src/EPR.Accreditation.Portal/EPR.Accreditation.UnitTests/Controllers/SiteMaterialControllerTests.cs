@@ -1,7 +1,6 @@
-﻿using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Portal.Controllers;
+﻿using EPR.Accreditation.Portal.Controllers;
 using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +16,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         protected SiteMaterialController _siteMaterialController;
 
         protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<IUrlHelper> _mockUrlHelper;
+        protected Mock<IUrlHelperWrapper> _mockUrlHelper;
         protected Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
         protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         protected BackPageViewModel _backPageViewModel;
@@ -26,7 +25,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public void Init()
         {
             _mockContextAccessor = new Mock<IHttpContextAccessor>();
-            _mockUrlHelper = new Mock<IUrlHelper>();
+            _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _mockAccreditationSiteMaterialService = new Mock<IAccreditationSiteMaterialService>();
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _backPageViewModel = new BackPageViewModel();
@@ -71,8 +70,8 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Act
             var result = await _siteMaterialController.MaterialOutputs(
-                id, 
-                siteId, 
+                id,
+                siteId,
                 materialId);
 
             // Assert
@@ -320,7 +319,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Act
             var result = await _siteMaterialController.MaterialWasteSource(
-                viewModel, 
+                viewModel,
                 saveButton);
 
             // Assert
@@ -344,18 +343,18 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Act
             var result = await _siteMaterialController.MaterialWasteSource(
-                viewModel, 
+                viewModel,
                 saveButton) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(s => 
+            _mockAccreditationSiteMaterialService.Verify(s =>
                 s.UpdateWasteSource(
                     SiteType.Site,
-                    viewModel), 
+                    viewModel),
                 Times.Once());
-            _mockSaveAndComeBackService.Verify(x => 
+            _mockSaveAndComeBackService.Verify(x =>
                 x.AddSaveAndComeBack(
                     It.IsAny<Guid>(),
                     It.IsAny<RouteValueDictionary>()),
@@ -376,7 +375,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Assert
             _mockAccreditationSiteMaterialService.Verify(x => x.UpdateWasteSource(It.IsAny<SiteType>(), viewModel), Times.Once);
             _mockSaveAndComeBackService.Verify(x => x.AddSaveAndComeBack(
-                It.IsAny<Guid>(), 
+                It.IsAny<Guid>(),
                 It.IsAny<RouteValueDictionary>()), Times.Once);
         }
 
@@ -397,11 +396,11 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             var viewResult = (ViewResult)result;
             Assert.IsNull(viewResult.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(s => 
+            _mockAccreditationSiteMaterialService.Verify(s =>
                 s.GetMaterialOutputs(
                     It.IsAny<Guid>(),
                     It.IsAny<Guid>(),
-                    It.IsAny<Guid>()), 
+                    It.IsAny<Guid>()),
                 Times.Once);
         }
 

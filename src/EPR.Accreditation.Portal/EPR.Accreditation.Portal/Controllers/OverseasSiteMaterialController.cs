@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Helpers.ActionFilters;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace EPR.Accreditation.Portal.Controllers
     {
         public OverseasSiteMaterialController(
             IHttpContextAccessor httpContextAccessor,
-            IUrlHelper urlHelper,
+            IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel)
