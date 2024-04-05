@@ -14,7 +14,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected string SiteProcessingCapacityRouteName;
         protected string SiteProductsProducedRouteName;
         protected string SiteNonWasteInputsRouteName;
-        protected IHttpContextAccessor _httpContextAccessor;
+        protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IUrlHelper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
@@ -31,6 +31,7 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _siteType = siteType;
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
@@ -81,12 +82,69 @@ namespace EPR.Accreditation.Portal.Controllers
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
                 return View("_ApplicationSaved");
             }
             else
             {
                 return RedirectToRoute(SiteProcessingCapacityRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.SiteId,
+                        viewModel.MaterialId
+                    });
+            }
+        }
+
+        protected void PopulateBackModel(string action)
+        {
+            var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
+                id,
+                siteId,
+                materialId);
+
+            return View(materialOutputsViewModel);
+        }
+
+        protected async Task<IActionResult> SaveMaterialOutputs(
+            MaterialOutputsViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialOutputsResources.MaterialsNotProcessedBlank,
+                MaterialOutputsResources.ContaminentsBlank,
+                MaterialOutputsResources.ProcessLossBlank))
+            {
+                return await GetMaterialOutputs(
+                    viewModel.Id,
+                    viewModel.SiteId,
+                    viewModel.MaterialId);
+            }
+
+            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                _backPageViewModel.Url = _urlHelper.RouteUrl(
+                    SiteNonWasteInputsRouteName,
+                    new
+                    {
+                        Id = viewModel.Id,
+                        SiteId = viewModel.SiteId,
+                        materialId = viewModel.MaterialId
+                    });
+
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(SiteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,

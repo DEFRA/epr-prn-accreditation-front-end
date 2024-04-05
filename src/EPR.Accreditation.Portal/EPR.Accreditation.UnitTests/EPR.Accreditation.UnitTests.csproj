@@ -20,8 +20,4 @@
     <ProjectReference Include="..\EPR.Accreditation.Portal\EPR.Accreditation.Portal.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
