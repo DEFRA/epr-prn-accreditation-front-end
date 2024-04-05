@@ -26,6 +26,8 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             DTO.AccreditationMaterial accreditationMaterial);
 
         Task<Site> GetSite(Guid siteId);
+
+        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
     }
 }
 

@@ -60,12 +60,17 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId)
         {
+            var address = _httpAccreditationService.GetSite(id);
+            var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
+            var waste = taskStatus.Where(a => a.TaskNameId.ToString().Contains("Waste")).FirstOrDefault().TaskStatusId.ToString();
+
             var viewModel = new TaskListViewModel
             {
                 Id = id,    
                 SiteId = siteId,
                 MaterialId = materialId,
-                Address = _httpAccreditationService.GetSite(id).Result.Address1
+                //Address = address.Result.Address1.ToString()
+                //WasteLicensesStatus = waste.ToString(),
             };
             return viewModel;
         }

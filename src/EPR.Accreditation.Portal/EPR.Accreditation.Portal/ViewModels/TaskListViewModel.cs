@@ -12,5 +12,7 @@ namespace EPR.Accreditation.Portal.ViewModels
         public Guid MaterialId { get; set; }
 
         public string Address { get; set; }
+
+        public string WasteLicensesStatus { get; set; }
     }
 }

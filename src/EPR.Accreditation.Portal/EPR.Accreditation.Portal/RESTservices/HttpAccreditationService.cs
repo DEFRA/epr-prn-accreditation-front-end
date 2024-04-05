@@ -3,6 +3,7 @@ using EPR.Accreditation.Facade.Common.Enums;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
 using EPR.Accreditation.Portal.Common.Dtos;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
+using System.Collections.Generic;
 
 
 namespace EPR.Accreditation.Portal.RESTservices
@@ -62,6 +63,11 @@ namespace EPR.Accreditation.Portal.RESTservices
             Guid accreditationExternalId)
         {
             return await Get<Site>($"{accreditationExternalId}/Site");
+        }
+
+        public async Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId)
+        {
+            return await Get<List<AccreditationTaskProgress>> ($"{accreditationExternalId}/TaskProgress");
         }
     }
 }

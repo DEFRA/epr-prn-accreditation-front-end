@@ -182,7 +182,7 @@ namespace EPR.Accreditation.Portal.Controllers
                                                                         id.Value,
                                                                         siteId.Value,
                                                                         materialId.Value);
-                return View("TaskListSite", model);
+                return View(model);
             }
             return NotFound();
         }
