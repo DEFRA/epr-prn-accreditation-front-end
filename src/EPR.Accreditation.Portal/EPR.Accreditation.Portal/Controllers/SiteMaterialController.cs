@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
-    [Route("Accreditation/{id}/Site/{siteId}/Material/{materialId}")]
+    [Route("Accreditation/{id}/Site/Material/{materialId}")]
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class SiteMaterialController : BaseSiteController
     {
+        private string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
+        private string WasteLastYearRouteName = "WasteLastYear";
+
         public SiteMaterialController(
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
@@ -32,10 +35,12 @@ namespace EPR.Accreditation.Portal.Controllers
             SiteChooseMaterialRouteName = "SiteChooseMaterial";
         }
 
+        /// 
+        /// STUBBED METHOD
+        /// 
         [HttpGet("Material", Name = "SiteChooseMaterial")]
         public IActionResult ChooseMaterial(
             Guid? id,
-            Guid? siteId,
             Guid? materialId)
         {
             return NotFound();
@@ -44,13 +49,13 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpGet("WasteSource", Name = "SiteWasteSource")]
         public async Task<IActionResult> MaterialWasteSource(
             Guid? id,
-            Guid? siteId,
             Guid? materialId)
         {
-            if (id != null && siteId != null && materialId != null)
+            if (id != null &&
+                materialId != null)
                 return await GetMaterialWasteSource(
                     id.Value,
-                    siteId.Value,
+                    null,
                     materialId.Value);
             else
                 return NotFound();
@@ -69,7 +74,6 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpGet("ProcessingCapacity", Name = "SiteProcessingCapacity")]
         public IActionResult EnterProcessingCapacity(
             Guid? id,
-            Guid? siteId,
             Guid? materialId)
         {
             return NotFound();
@@ -78,28 +82,70 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
             Guid? id,
-            Guid? siteId,
             Guid? materialId)
         {
             if (id != null &&
-                siteId != null &&
                 materialId != null)
-                return await GetMaterialOutputs(
+            {
+                PopulateBackModel(WasteLastYearRouteName);
+
+                var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
                     id.Value,
-                    siteId.Value,
                     materialId.Value);
+
+                // if waste last year has not been set, then the user should not
+                // be on this page
+                if (materialOutputsViewModel.WasteLastYear == null)
+                    return NotFound();
+
+                // if waste last year is true then return the MaterialOutputs view
+                if (materialOutputsViewModel.WasteLastYear == true)
+                    return View("MaterialOutputsLastYear", materialOutputsViewModel);
+                // otherwise return the annual outputs
+                else
+                    return View("MaterialOutputsEstimated", materialOutputsViewModel);
+            }
             else
                 return NotFound();
         }
 
         [HttpPost("MaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
-            MaterialOutputsViewModel materialOutputsViewModel,
+            MaterialOutputsViewModel viewModel,
             SaveButton saveButton)
         {
-            return await SaveMaterialOutputs(
-                materialOutputsViewModel,
-                saveButton);
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
+                MaterialOutputsLastYearResources.ContaminentsBlank,
+                MaterialOutputsLastYearResources.ProcessLossBlank))
+            {
+                return await MaterialOutputs(
+                    viewModel.Id,
+                    viewModel.MaterialId);
+            }
+
+            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                PopulateBackModel(SiteNonWasteInputsRouteName);
+
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(SiteProductsProducedRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.MaterialId
+                    });
+            }
         }
 
         /// 
@@ -111,22 +157,28 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
-        [HttpGet("WasteLastYear")]
+        /// 
+        /// STUBBED METHOD
+        /// 
+        [HttpGet("EnterProcessingCapacity", Name = "EnterProcessingCapacity")]
+        public IActionResult EnterProcessingCapacity()
+        {
+            return NotFound();
+        }
+
+        [HttpGet("WasteLastYear", Name = "WasteLastYear")]
         public async Task<IActionResult> WasteLastYear(
             Guid? id,
-            Guid? siteId,
             Guid? materialId)
         {
-            // TODO: Need to add correct back link in the future
-            _backPageViewModel.Url = _urlHelper.ActionLink("EnterProcessingCapacity", "SiteMaterial");
+            PopulateBackModel("EnterProcessingCapacity");
 
-            if (id != null && siteId != null && materialId != null)
+            if (id != null &&
+                materialId != null)
             {
                 var viewModel = await _accreditationSiteMaterialService.GetReprocessedWasteLastYearViewModel(
-                id.Value,
-                siteId.Value,
-                materialId.Value
-                );
+                    id.Value,
+                    materialId.Value);
 
                 return View(viewModel);
             }
@@ -140,17 +192,20 @@ namespace EPR.Accreditation.Portal.Controllers
             SaveButton saveButton)
         {
             if (!ModelState.IsValidForSaveForLater(
-            saveButton,
+                saveButton,
                 PermitExemptionResources.ErrorMessage))
                 return View(viewModel);
 
             await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue && viewModel.HasReprocessedWasteLastYear.Value == true)
-                return RedirectToAction("EnterWasteInputs", "Accreditation");
-
-            else if (saveButton == SaveButton.SaveAndContinue && viewModel.HasReprocessedWasteLastYear.Value == false)
-                return RedirectToAction("EstimateAnnualWasteInputs", "Accreditation");
+            if (saveButton == SaveButton.SaveAndContinue)
+                return RedirectToRoute(
+                    SiteMaterialOutputsRouteName,
+                    new
+                    {
+                        id = viewModel.Id,
+                        viewModel.MaterialId
+                    });
 
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
