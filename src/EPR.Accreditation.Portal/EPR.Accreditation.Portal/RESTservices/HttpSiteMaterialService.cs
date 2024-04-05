@@ -33,7 +33,7 @@ namespace EPR.Accreditation.Portal.RESTservices
             Guid materialId)
         {
             var site = GetSiteName(
-                siteType, 
+                siteType,
                 siteId);
             return await Get<string>($"{id}/{site}/Material/{materialId}/WasteSource");
         }
@@ -46,7 +46,7 @@ namespace EPR.Accreditation.Portal.RESTservices
             string wasteSource)
         {
             var site = GetSiteName(siteType, siteId);
-            await Put($"{id}/{site}/{siteId}/Material/{materialId}/WasteSource", wasteSource);
+            await Put($"{id}/{site}/Material/{materialId}/WasteSource", wasteSource);
         }
 
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
