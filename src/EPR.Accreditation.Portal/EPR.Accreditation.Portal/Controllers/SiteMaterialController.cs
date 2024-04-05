@@ -115,9 +115,9 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                MaterialOutputsResources.MaterialsNotProcessedBlank,
-                MaterialOutputsResources.ContaminentsBlank,
-                MaterialOutputsResources.ProcessLossBlank))
+                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
+                MaterialOutputsLastYearResources.ContaminentsBlank,
+                MaterialOutputsLastYearResources.ProcessLossBlank))
             {
                 return await MaterialOutputs(
                     viewModel.Id,
