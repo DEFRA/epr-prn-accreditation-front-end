@@ -163,19 +163,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
         }
 
         [TestMethod]
-        public async Task WasteLastYear_ReturnsBadRequest_ForAnInvalidModelState()
-        {
-            // Arrange
-            _siteMaterialController.ModelState.AddModelError("key", "error message");
-
-            // Act
-            var result = await _siteMaterialController.WasteLastYear(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-        }
-
-        [TestMethod]
         public async Task WasteLastYear_CallsUrlHelper_WithCorrectParameters()
         {
             // Arrange
@@ -217,24 +204,16 @@ namespace EPR.Accreditation.UnitTests.Controllers
         }
 
         [TestMethod]
-        public async Task WasteLastYear_ReturnsNotFound_WhenServiceReturnsNull()
+        public async Task WasteLastYear_ReturnsNotFound_WhenAllThreeIdsAreNull()
         {
-            // Arrange
-            var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
-
-            _mockAccreditationSiteMaterialService.Setup(
-                s => s.GetReprocessedWasteLastYearViewModel(id, siteId, materialId)).ReturnsAsync((ReprocessedWasteLastYearViewModel)null);
-
             // Act
-            var result = await _siteMaterialController.WasteLastYear(id, siteId, materialId);
+            var result = await _siteMaterialController.WasteLastYear(null, null, null);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 
             _mockAccreditationSiteMaterialService.Verify(
-                service => service.GetReprocessedWasteLastYearViewModel(id, siteId, materialId), Times.Once);
+                service => service.GetReprocessedWasteLastYearViewModel(Guid.Empty, Guid.Empty, Guid.Empty), Times.Never);
         }
 
         [TestMethod]
@@ -254,31 +233,42 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
             var redirectToActionResult = result as RedirectToActionResult;
-            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("Accreditation", redirectToActionResult.ControllerName);
+            Assert.AreEqual("EnterWasteInputs", redirectToActionResult.ActionName);
 
             _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
         }
 
         [TestMethod]
-        public async Task WasteLastYear_SavesWithValidData_SaveAndComeBack()
+        public async Task WasteLastYear_ReturnsViewResult_ForSaveAndComeBack()
         {
             // Arrange
+            var saveButton = SaveButton.SaveAndComeBack;
             var viewModel = new ReprocessedWasteLastYearViewModel
             {
                 Id = Guid.NewGuid(),
                 HasReprocessedWasteLastYear = false
             };
 
+            _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
+
             // Act
-            var result = await _siteMaterialController.WasteLastYear(viewModel, SaveButton.SaveAndComeBack);
+            var result = await _siteMaterialController.WasteLastYear(viewModel, saveButton) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            var redirectToActionResult = result as RedirectToActionResult;
-            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("_ApplicationSaved", result.ViewName);
 
-            _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
+            _mockAccreditationSiteMaterialService.Verify(s =>
+            s.UpdateReprocessedWasteLastYear(
+                viewModel),
+                Times.Once);
+
+            _mockSaveAndComeBackService.Verify(x =>
+                x.AddSaveAndComeBack(
+                    It.IsAny<Guid>(),
+                    It.IsAny<RouteValueDictionary>()),
+                Times.Once());
         }
 
         [TestMethod]
