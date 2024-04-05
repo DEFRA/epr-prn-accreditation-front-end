@@ -31,15 +31,15 @@ variables:
   - name: solutionFolder
     value: src
   - name: projectFolder
-    value: FrontendSchemeRegistration.UI
+    value: EPR.Accreditation.Portal
   - name: testProjectFolder
-    value: FrontendSchemeRegistration.UI.UnitTests
+    value: EPR.Accreditation.UnitTests
   - name: sonarQubeProjectKey
     value: epr-prn-accreditation-front-end
   - name: sonarQubeProjectName
     value: epr-prn-accreditation-front-end
   - name: runNugetTasks
-    value: false
+    value: true
 
 resources:
   repositories:
