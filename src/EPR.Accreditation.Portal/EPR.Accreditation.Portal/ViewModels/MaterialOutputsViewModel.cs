@@ -7,9 +7,9 @@ namespace EPR.Accreditation.Portal.ViewModels
     {
         public Guid Id { get; set; }
 
-        public Guid SiteId { get; set; }
-
         public Guid MaterialId { get; set; }
+
+        public bool? WasteLastYear { get; set; }
 
         [Display(Name = "MaterialsNotProcessedField", ResourceType = typeof(MaterialOutputsResources))]
         [Required(ErrorMessageResourceType = typeof(MaterialOutputsResources), ErrorMessageResourceName = "MaterialsNotProcessedBlank")]

@@ -31,7 +31,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         /// </summary>
         public async Task<string> GetWasteName(
             Guid id,
-            Guid siteId,
+            Guid? siteId,
             Guid materialId)
         {
             // identify the language
@@ -54,7 +54,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         public async Task<WasteSourceViewModel> GetWasteSource(
             SiteType siteType,
             Guid id,
-            Guid siteId,
+            Guid? siteId,
             Guid materialId)
         {
             return new WasteSourceViewModel
@@ -87,12 +87,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
-            Guid siteId,
             Guid materialId)
         {
             var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
                 id,
-                siteId,
                 materialId);
 
             return _mapper.Map<MaterialOutputsViewModel>(materialOutputsDto);
@@ -105,14 +103,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
             await _httpSiteMaterialService.UpdateMaterialOutputs(
                 materialOutputsViewModel.Id,
-                materialOutputsViewModel.SiteId,
                 materialOutputsViewModel.MaterialId,
                 materialOutputsDto);
         }
 
         public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
             Guid id,
-            Guid siteId,
             Guid materialId)
         {
             return new ReprocessedWasteLastYearViewModel
@@ -120,7 +116,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 Id = id,
                 HasReprocessedWasteLastYear = await _httpSiteMaterialService.GetReprocessedWasteLastYear(
                     id,
-                    siteId,
                     materialId)
             };
         }
@@ -133,10 +128,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
             await _httpSiteMaterialService.UpdateReprocessedWasteLastYear(
                 reprocessedWasteLastYearViewModel.Id,
-                reprocessedWasteLastYearViewModel.SiteId,
                 reprocessedWasteLastYearViewModel.MaterialId,
-                reprocessedWasteLastYearDto
-                );
+                reprocessedWasteLastYearDto);
         }
     }
 }
