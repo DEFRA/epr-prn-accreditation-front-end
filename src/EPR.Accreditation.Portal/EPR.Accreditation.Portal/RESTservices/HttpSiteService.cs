@@ -14,10 +14,9 @@ namespace EPR.Accreditation.Portal.RESTservices
         }
 
         public async Task<Site> GetSite(
-            Guid id,
             Guid siteId)
         {
-           return await Get<Site>($"{id}/Site/{siteId}");
+           return await Get<Site>($"Site/{siteId}");
         }
     }
 }

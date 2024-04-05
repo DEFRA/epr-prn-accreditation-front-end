@@ -186,7 +186,7 @@ namespace EPR.Accreditation.Portal.Controllers
                                                                         siteId.Value,
                                                                         materialId.Value);
 
-                var site = _siteService.GetSite(id.Value, siteId.Value).Result;
+                var site = _siteService.GetSite(siteId.Value).Result;
                 if (site != null)
                     model.Address = site.Address1;
 

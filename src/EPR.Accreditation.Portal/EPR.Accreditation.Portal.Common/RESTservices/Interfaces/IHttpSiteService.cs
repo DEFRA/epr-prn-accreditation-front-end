@@ -4,6 +4,6 @@ namespace EPR.Accreditation.Facade.Common.RESTservices.Interfaces
 {
     public interface IHttpSiteService
     {
-        Task<Site> GetSite(Guid accreditationExternalId, Guid siteId);
+        Task<Site> GetSite(Guid siteId);
     }
 }

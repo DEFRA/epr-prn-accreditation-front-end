@@ -4,6 +4,7 @@ using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Moq;
 
 namespace EPR.Accreditation.UnitTests.Controllers
@@ -23,9 +24,15 @@ namespace EPR.Accreditation.UnitTests.Controllers
         [TestInitialize]
         public void Init()
         {
-            _mockSiteService = new Mock<ISiteService>();
-            _mockAccreditationService = new Mock<IAccreditationService>();
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService> { CallBase = true };
+            _mockhttpAccreditationService = new Mock<IHttpAccreditationService>();
+            _mockAccreditationService = new Mock<IAccreditationService>();
+            _mockWastePermitService = new Mock<IWastePermitService> { CallBase = true };
+            _mockSiteService = new Mock<ISiteService> { CallBase = true };
+            _mockUrlHelper = new Mock<IUrlHelper> { CallBase = true };
+            _backPageViewModel = new Mock<BackPageViewModel> { CallBase = true };
+            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService> { CallBase = true };
+
             _accreditationController = new AccreditationController(_mockWastePermitService.Object, _mockSaveAndComeBackService.Object, _mockAccreditationService.Object, _mockUrlHelper.Object, _backPageViewModel.Object, _mockSiteService.Object);
         }
 
@@ -37,7 +44,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             var viewModel = new WasteLicensesAndPermitsViewModel();
 
             _mockAccreditationService.Setup(service => service.GetWastePermitViewModel(id)).ReturnsAsync(viewModel);
-
+            
             // Act
             var result = _accreditationController.WasteLicensesAndPermits(id);
 

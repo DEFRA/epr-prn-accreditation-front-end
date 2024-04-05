@@ -21,9 +21,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         }
 
-        public async Task<Site> GetSite(Guid id, Guid siteId)
+        public async Task<Site> GetSite(Guid siteId)
         {
-            var site = await _httpSiteService.GetSite(id, siteId);
+            var site = await _httpSiteService.GetSite(siteId);
 
             return site;
         }
