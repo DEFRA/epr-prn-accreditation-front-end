@@ -400,9 +400,18 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public async Task MaterialOutputs_ModelStateInvalid_ReturnsViewResult()
         {
             // Arrange
-            var viewModel = new MaterialOutputsViewModel();
+            var viewModel = new MaterialOutputsViewModel
+            {
+                WasteLastYear = false
+            };
+
             var saveButton = SaveButton.SaveAndComeBack;
             _siteMaterialController.ModelState.AddModelError("PropertyName", "ErrorMessage");
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetMaterialOutputs(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>()))
+                .ReturnsAsync(viewModel);
 
             // Act
             var result = await _siteMaterialController.MaterialOutputs(
@@ -412,7 +421,8 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             var viewResult = (ViewResult)result;
-            Assert.IsNull(viewResult.ViewName);
+            Assert.AreEqual("MaterialOutputsEstimated", viewResult.ViewName);
+
             _mockAccreditationSiteMaterialService.Verify(s =>
                 s.GetMaterialOutputs(
                     It.IsAny<Guid>(),
@@ -424,7 +434,11 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public async Task MaterialOutputs_SaveAndComeBack_ReturnsViewResult()
         {
             // Arrange
-            var viewModel = new MaterialOutputsViewModel();
+            var viewModel = new MaterialOutputsViewModel
+            {
+                WasteLastYear = true
+            };
+
             var saveButton = SaveButton.SaveAndComeBack;
             _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
 
@@ -456,10 +470,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
             _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
 
             _mockAccreditationSiteMaterialService.Setup(x => x.UpdateMaterialOutputs(viewModel)).Returns(Task.CompletedTask);
-            _mockSaveAndComeBackService.Setup(x => x.AddSaveAndComeBack(
-                It.IsAny<Guid>(),
-                It.IsAny<RouteValueDictionary>()))
-            .Returns(Task.CompletedTask);
 
             // Act
             await _siteMaterialController.MaterialOutputs(viewModel, saveButton);
