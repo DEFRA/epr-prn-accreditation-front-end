@@ -57,5 +57,11 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             await Put($"{accreditationExternalId}/Site/{siteExternalId}/Material/{materialExternalId}", accreditationMaterial);
         }
+
+        public async Task<Site> GetSite(
+            Guid accreditationExternalId)
+        {
+            return await Get<Site>($"{accreditationExternalId}/Site");
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace EPR.Accreditation.Portal.Controllers
         private readonly IAccreditationService _accreditationService;
         protected readonly IWastePermitService _wastePermitService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
-        protected readonly ISiteService _siteService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelper _urlHelper;
 
@@ -23,15 +22,13 @@ namespace EPR.Accreditation.Portal.Controllers
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelper urlHelper,
-            BackPageViewModel backPageViewModel,
-            ISiteService siteService)
+            BackPageViewModel backPageViewModel)
         {
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
-            _siteService = siteService ?? throw new ArgumentNullException(nameof(siteService));
         }
 
         [HttpGet("PermitExemption")]
@@ -186,7 +183,7 @@ namespace EPR.Accreditation.Portal.Controllers
                                                                         siteId.Value,
                                                                         materialId.Value);
 
-                var site = _siteService.GetSite(siteId.Value).Result;
+                var site = await _accreditationService.GetSite(id.Value);
                 if (site != null)
                     model.Address = site.Address1;
 

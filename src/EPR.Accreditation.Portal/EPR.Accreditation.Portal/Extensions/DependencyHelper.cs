@@ -31,7 +31,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<ISaveAndComeBackService, SaveAndComeBackService>();
             services.AddScoped<IWastePermitService, WastePermitService>();
             services.AddScoped<IAccreditationService, AccreditationService>();
-            services.AddScoped<ISiteService, SiteService>();
+            
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
@@ -74,16 +74,6 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"
-                    )
-            );
-
-            services
-                .AddScoped<IHttpSiteService>(s =>
-                    new HttpSiteService(
-                        s.GetRequiredService<IHttpContextAccessor>(),
-                        s.GetRequiredService<IHttpClientFactory>(),
-                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Site"
                     )
             );
 

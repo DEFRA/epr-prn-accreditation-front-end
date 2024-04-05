@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EPR.Accreditation.Facade.Common.Dtos;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 
@@ -66,6 +67,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 MaterialId = materialId
             };
             return viewModel;
+        }
+
+        public async Task<Site> GetSite(Guid siteId)
+        {
+            var site = await _httpAccreditationService.GetSite(siteId);
+
+            return site;
         }
     }
 }
