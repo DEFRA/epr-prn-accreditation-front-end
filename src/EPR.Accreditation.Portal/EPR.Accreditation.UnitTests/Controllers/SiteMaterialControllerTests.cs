@@ -259,10 +259,9 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            var redirectToActionResult = result as RedirectToActionResult;
-            Assert.AreEqual("Accreditation", redirectToActionResult.ControllerName);
-            Assert.AreEqual("EnterWasteInputs", redirectToActionResult.ActionName);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            var redirectToRouteResult = result as RedirectToRouteResult;
+            Assert.AreEqual("SiteMaterialOutputs", redirectToRouteResult.RouteName);
 
             _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
         }
