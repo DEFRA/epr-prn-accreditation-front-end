@@ -182,11 +182,6 @@ namespace EPR.Accreditation.Portal.Controllers
                                                                         id.Value,
                                                                         siteId.Value,
                                                                         materialId.Value);
-
-                var site = await _accreditationService.GetSite(id.Value);
-                if (site != null)
-                    model.Address = site.Address1;
-
                 return View("TaskListSite", model);
             }
             return NotFound();

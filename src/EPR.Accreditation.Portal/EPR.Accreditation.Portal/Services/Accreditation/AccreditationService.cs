@@ -62,18 +62,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         {
             var viewModel = new TaskListViewModel
             {
-                Id = id,
+                Id = id,    
                 SiteId = siteId,
-                MaterialId = materialId
+                MaterialId = materialId,
+                Address = _httpAccreditationService.GetSite(id).Result.Address1
             };
             return viewModel;
-        }
-
-        public async Task<Site> GetSite(Guid siteId)
-        {
-            var site = await _httpAccreditationService.GetSite(siteId);
-
-            return site;
         }
     }
 }
