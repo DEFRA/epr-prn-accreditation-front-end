@@ -26,10 +26,11 @@ namespace EPR.Accreditation.Portal.Helpers.ActionFilters
             var idValue = context.HttpContext.Request.RouteValues["id"];
             var siteIdValue = context.HttpContext.Request.RouteValues["siteId"];
             var materialIdValue = context.HttpContext.Request.RouteValues["materialId"];
-
+            var siteId = default(Guid);
 
             if (!Guid.TryParse((string)idValue, out var id) ||
-                !Guid.TryParse((string)siteIdValue, out var siteId) ||
+                (!string.IsNullOrWhiteSpace((string)siteIdValue) && 
+                !Guid.TryParse((string)siteIdValue, out siteId)) ||
                 !Guid.TryParse((string)materialIdValue, out var materialId))
                 return;
 
@@ -37,7 +38,7 @@ namespace EPR.Accreditation.Portal.Helpers.ActionFilters
             {
                 var wasteName = Task.Run(async () => await _accreditationSiteMaterialService.GetWasteName(
                     id,
-                    siteId,
+                    string.IsNullOrWhiteSpace((string)siteIdValue) ? null : siteId,
                     materialId)).Result;
                 wasteCommonViewModel.Name = wasteName;
             }

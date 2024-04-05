@@ -167,17 +167,16 @@ namespace EPR.Accreditation.UnitTests.Services
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var materialOutputsDto = new MaterialOutputsDto(); // Assuming MaterialOutputsDto is defined
             var expectedViewModel = new MaterialOutputsViewModel(); // Assuming MaterialOutputsViewModel is defined
-            _mockHttpSiteMaterialService.Setup(x => x.GetMaterialOutputs(id, siteId, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetMaterialOutputs(id, materialId))
                 .ReturnsAsync(materialOutputsDto);
             _mockMapper.Setup(x => x.Map<MaterialOutputsViewModel>(materialOutputsDto))
                 .Returns(expectedViewModel);
 
             // Act
-            var result = await _accreditationSiteMaterialService.GetMaterialOutputs(id, siteId, materialId);
+            var result = await _accreditationSiteMaterialService.GetMaterialOutputs(id, materialId);
 
             // Assert
             Assert.AreEqual(expectedViewModel, result);
@@ -199,7 +198,6 @@ namespace EPR.Accreditation.UnitTests.Services
             _mockHttpSiteMaterialService.Verify(x => 
                 x.UpdateMaterialOutputs(
                     viewModel.Id, 
-                    viewModel.SiteId, 
                     viewModel.MaterialId, 
                     expectedDto), 
                 Times.Once);

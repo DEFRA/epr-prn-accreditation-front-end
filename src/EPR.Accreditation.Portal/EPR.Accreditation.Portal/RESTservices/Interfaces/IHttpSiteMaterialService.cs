@@ -6,44 +6,47 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
     public interface IHttpSiteMaterialService
     {
+        // available for both reprocessor and exporter
         Task<string> GetMeterialName(
             Guid id,
-            Guid siteId,
+            Guid? siteId,
             Guid materialId,
             Enums.Language language);
 
+        // available for both reprocessor and exporter
         Task<string> GetWasteSource(
             SiteType siteType,
             Guid id,
-            Guid siteId,
+            Guid? siteId,
             Guid materialId);
 
+        // available for both reprocessor and exporter
         Task UpdateWasteSource(
             SiteType siteType,
             Guid id,
-            Guid siteId,
+            Guid? siteId,
             Guid materialId,
             string wasteSource);
 
+        // only reprocessor
         Task<MaterialOutputsDto> GetMaterialOutputs(
             Guid id,
-            Guid siteId,
             Guid materialId);
 
+        // only reprocessor
         Task UpdateMaterialOutputs(
             Guid id,
-            Guid siteId,
             Guid materialId,
             MaterialOutputsDto materialOutputsDto);
 
+        // only reprocessor
         Task<bool?> GetReprocessedWasteLastYear(
             Guid id,
-            Guid siteId,
             Guid materialId);
 
+        // only reprocessor
         Task UpdateReprocessedWasteLastYear(
             Guid id,
-            Guid siteId,
             Guid materialId,
             ReprocessedWasteLastYear reprocessedWasteLastYear);
     }

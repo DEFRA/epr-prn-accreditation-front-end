@@ -37,6 +37,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
         [Ignore]
         [TestMethod]
+        [Ignore]
         public void WasteLicensesAndPermits_ReturnsCorrectly_WithValidId()
         {
             // Arrange

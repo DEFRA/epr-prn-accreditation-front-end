@@ -228,7 +228,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var expectedMaterialOutputsDto = new MaterialOutputsDto
             {
@@ -238,12 +237,11 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             };
             SetClientResponse(HttpStatusCode.OK, expectedMaterialOutputsDto);
 
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/MaterialOutputs";
 
             // Act
             var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
                 id,
-                siteId,
                 materialId);
 
             // Assert
@@ -257,7 +255,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var materialOutputsDto = new MaterialOutputsDto
             {
@@ -266,12 +263,11 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 TonnesProcessLoss = null
             };
 
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/MaterialOutputs";
 
             // Act
             await _httpSiteMaterialService.UpdateMaterialOutputs(
                 id,
-                siteId,
                 materialId,
                 materialOutputsDto);
 
