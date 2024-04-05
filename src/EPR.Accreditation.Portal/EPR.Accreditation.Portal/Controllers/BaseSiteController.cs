@@ -99,63 +99,6 @@ namespace EPR.Accreditation.Portal.Controllers
 
         protected void PopulateBackModel(string action)
         {
-            var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
-                id,
-                siteId,
-                materialId);
-
-            return View(materialOutputsViewModel);
-        }
-
-        protected async Task<IActionResult> SaveMaterialOutputs(
-            MaterialOutputsViewModel viewModel,
-            SaveButton saveButton)
-        {
-            if (!ModelState.IsValidForSaveForLater(
-                saveButton,
-                MaterialOutputsResources.MaterialsNotProcessedBlank,
-                MaterialOutputsResources.ContaminentsBlank,
-                MaterialOutputsResources.ProcessLossBlank))
-            {
-                return await GetMaterialOutputs(
-                    viewModel.Id,
-                    viewModel.SiteId,
-                    viewModel.MaterialId);
-            }
-
-            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
-
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                _backPageViewModel.Url = _urlHelper.RouteUrl(
-                    SiteNonWasteInputsRouteName,
-                    new
-                    {
-                        Id = viewModel.Id,
-                        SiteId = viewModel.SiteId,
-                        materialId = viewModel.MaterialId
-                    });
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(SiteProductsProducedRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.SiteId,
-                        viewModel.MaterialId
-                    });
-            }
-        }
-
-        protected void PopulateBackModel(string action)
-        {
             var idValue = _httpContextAccessor.HttpContext.Request.RouteValues["id"];
             var materialIdValue = _httpContextAccessor.HttpContext.Request.RouteValues["materialId"];
 

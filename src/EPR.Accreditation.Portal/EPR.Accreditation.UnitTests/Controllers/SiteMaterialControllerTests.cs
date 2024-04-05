@@ -122,14 +122,12 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Arrange
 
             // Act
-            var result = await _siteMaterialController.MaterialOutputs(null, Guid.NewGuid(), Guid.NewGuid());
-            var result2 = await _siteMaterialController.MaterialOutputs(Guid.NewGuid(), null, Guid.NewGuid());
-            var result3 = await _siteMaterialController.MaterialOutputs(Guid.NewGuid(), Guid.NewGuid(), null);
+            var result = await _siteMaterialController.MaterialOutputs(null, Guid.NewGuid());
+            var result2 = await _siteMaterialController.MaterialOutputs(Guid.NewGuid(), null);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
             Assert.IsInstanceOfType(result2, typeof(NotFoundResult));
-            Assert.IsInstanceOfType(result3, typeof(NotFoundResult));
             // You can add more specific assertions here based on the expected behavior
         }
 
@@ -433,7 +431,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsNull(viewResult.ViewName);
             _mockAccreditationSiteMaterialService.Verify(s => 
                 s.GetMaterialOutputs(
-                    It.IsAny<Guid>(),
                     It.IsAny<Guid>(),
                     It.IsAny<Guid>()), 
                 Times.Once);
