@@ -19,15 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\AnnualOutputsResources.Designer.cs">
+    <Compile Update="Resources\MaterialOutputsEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AnnualOutputsResources.resx</DependentUpon>
+      <DependentUpon>MaterialOutputsEstimatedResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\MaterialOutputsResources.Designer.cs">
+    <Compile Update="Resources\MaterialOutputsLastYearResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>MaterialOutputsResources.resx</DependentUpon>
+      <DependentUpon>MaterialOutputsLastYearResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
@@ -112,13 +112,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\AnnualOutputsResources.resx">
+    <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AnnualOutputsResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>MaterialOutputsEstimatedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\MaterialOutputsResources.resx">
+    <EmbeddedResource Update="Resources\MaterialOutputsLastYearResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MaterialOutputsResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>MaterialOutputsLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListResources.cy-GB.resx">
       <LastGenOutput>TaskListResources.cy-GB.Designer.cs</LastGenOutput>
