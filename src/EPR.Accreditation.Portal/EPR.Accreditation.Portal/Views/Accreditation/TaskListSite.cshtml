@@ -29,12 +29,12 @@
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="@Url.Action("WasteLicensesAndPermits","Accreditation", new { id = Model.Id })">@TaskListSiteResources.WasteLicencesHeading</a></td>
                             <td class="govuk-table__cell"></td>
-                            <td class="govuk-table__cell">Not Started</td>
+                            <td class="govuk-table__cell">@Model.WasteLicensesStatus</td>
                         </tr>
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = Model.Id })>@TaskListSiteResources.UploadBusinessPlan</a></td>
                             <td class="govuk-table__cell"></td>
-                            <td class="govuk-table__cell">Not Started</td>
+                            <td class="govuk-table__cell">@Model.UploadBusinessPlanStatus</td>
                         </tr>
                     </table>
                 </div>
@@ -49,14 +49,14 @@
                                     <a class="govuk-link govuk-link--no-visited-state" href="">@TaskListSiteResources.AboutMaterial</a>
                                 <td class="govuk-table__cell"></td>
                                 <td class="govuk-table__cell"></td>
-                                <td class="govuk-table__cell">Not Started</td>
+                            <td class="govuk-table__cell">@Model.AboutMaterialStatus</td>
                             </tr>
                             <tr class="govuk-table__row">
                                 <td class="govuk-table__cell">
                                     <a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Upload","Accreditation", new { id = Model.Id })>@TaskListSiteResources.UploadSupportingDocuments</a>
                                 </td>
                                 <td class="govuk-table__cell"></td>
-                                <td class="govuk-table__cell">Cannot start yet</td>
+                                <td class="govuk-table__cell">@Model.UploadSupportingDocumentStatus</td>
                             </tr>
                     </table>
                 </div>

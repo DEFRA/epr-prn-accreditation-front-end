@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Facade.Common.Dtos;
+using EPR.Accreditation.Facade.Common.Enums;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
+using System.Threading.Tasks;
 
 
 namespace EPR.Accreditation.Portal.Services.Accreditation
@@ -60,19 +62,30 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId)
         {
-            var address = _httpAccreditationService.GetSite(id);
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
-            var waste = taskStatus.Where(a => a.TaskNameId.ToString().Contains("Waste")).FirstOrDefault().TaskStatusId.ToString();
+            var address = await _httpAccreditationService.GetSite(siteId);
 
             var viewModel = new TaskListViewModel
             {
-                Id = id,    
+                Id = id,
                 SiteId = siteId,
                 MaterialId = materialId,
-                //Address = address.Result.Address1.ToString()
-                //WasteLicensesStatus = waste.ToString(),
+                Address = address.Address1.ToString(),
+                WasteLicensesStatus = returnStatusFromList(taskStatus, "Waste"),
+                UploadBusinessPlanStatus = returnStatusFromList(taskStatus, "Business"),
+                AboutMaterialStatus = returnStatusFromList(taskStatus, "Materail"),
+                UploadSupportingDocumentStatus = returnStatusFromList(taskStatus, "Supporting"),
             };
             return viewModel;
+        }
+
+        private string returnStatusFromList(List<AccreditationTaskProgress> accreditationsTaskProgress, string taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName)).ToList().Count > 0)
+            {
+                return accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName)).FirstOrDefault().TaskStatusId.ToString();
+            }
+            return "Not Started";
         }
     }
 }
