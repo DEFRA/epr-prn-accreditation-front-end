@@ -86,6 +86,15 @@ namespace EPR.Accreditation.Portal.Extensions
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            services
+                .AddScoped<Facade.Common.RESTservices.Interfaces.IHttpAccreditationService>(s =>
+                    new Facade.Common.RESTservices.HttpAccreditationService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation")
+                    );
+
             // control client validation based on configuration
             services.AddRazorPages()
                 .AddViewOptions(o =>
