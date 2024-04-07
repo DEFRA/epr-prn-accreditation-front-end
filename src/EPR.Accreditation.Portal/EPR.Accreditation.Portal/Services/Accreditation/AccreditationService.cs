@@ -25,6 +25,16 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         }
 
+        private Enums.TaskStatus returnStatusFromList(List<AccreditationTaskProgress> accreditationsTaskProgress,
+                                                Enums.TaskName taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).ToList().Count > 0)
+            {
+                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+            }
+            return Enums.TaskStatus.NotStarted;
+        }
+
         public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
             var result = await _httpAccreditationService.GetOperatorType(id);
@@ -60,7 +70,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
 
-        public async Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId)
+        public async Task<TaskListViewModel> GetTaskList(Guid id, 
+                                                        Guid siteId, 
+                                                        Guid materialId)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
             var address = await _httpAccreditationService.GetSite(siteId);
@@ -71,21 +83,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 SiteId = siteId,
                 MaterialId = materialId,
                 Address = address.Address1.ToString(),
-                WasteLicensesStatus = returnStatusFromList(taskStatus, "Waste"),
-                UploadBusinessPlanStatus = returnStatusFromList(taskStatus, "Business"),
-                AboutMaterialStatus = returnStatusFromList(taskStatus, "Materail"),
-                UploadSupportingDocumentStatus = returnStatusFromList(taskStatus, "Supporting"),
+                WasteLicensesStatus = returnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
+                UploadBusinessPlanStatus = returnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
+                AboutMaterialStatus = returnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
+                UploadSupportingDocumentStatus = returnStatusFromList(taskStatus, Enums.TaskName.UploadSupportingDocuments).ToString(),
             };
             return viewModel;
-        }
-
-        private string returnStatusFromList(List<AccreditationTaskProgress> accreditationsTaskProgress, string taskName)
-        {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName)).ToList().Count > 0)
-            {
-                return accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName)).FirstOrDefault().TaskStatusId.ToString();
-            }
-            return "Not Started";
         }
     }
 }
