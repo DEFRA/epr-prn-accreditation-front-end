@@ -25,7 +25,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         }
 
-        private Enums.TaskStatus returnStatusFromList(List<AccreditationTaskProgress> accreditationsTaskProgress,
+        private Enums.TaskStatus ReturnStatusFromList(List<AccreditationTaskProgress> accreditationsTaskProgress,
                                                 Enums.TaskName taskName)
         {
             if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).ToList().Count > 0)
@@ -83,10 +83,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 SiteId = siteId,
                 MaterialId = materialId,
                 Address = address.Address1.ToString(),
-                WasteLicensesStatus = returnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
-                UploadBusinessPlanStatus = returnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
-                AboutMaterialStatus = returnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
-                UploadSupportingDocumentStatus = returnStatusFromList(taskStatus, Enums.TaskName.UploadSupportingDocuments).ToString(),
+                WasteLicensesStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
+                UploadBusinessPlanStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
+                AboutMaterialStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
+                UploadSupportingDocumentStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadSupportingDocuments).ToString(),
             };
             return viewModel;
         }
