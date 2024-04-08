@@ -80,5 +80,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
             return siteAddressViewModel;
         }
+
+        public async Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel)
+        {
+            var siteAddress = _mapper.Map<DTOs.Site.Site>(siteAddressViewModel);
+        }
     }
 }
