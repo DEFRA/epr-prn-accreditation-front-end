@@ -1,14 +1,14 @@
 ﻿@model MaterialOutputsViewModel
 
 @{
-    ViewData["Title"] = MaterialOutputsResources.Title;
+    ViewData["Title"] = MaterialOutputsEstimatedResources.Title;
 }
 
 <form method="post">
     <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-                @MaterialOutputsResources.Title
+                @MaterialOutputsEstimatedResources.Title
             </h1>
         </legend>
         <div class="govuk-form-group">
@@ -17,11 +17,11 @@
             </p>
 
             <h1 class="govuk-heading-m">
-                @MaterialOutputsResources.MaterialsNotProcessedField
+                @MaterialOutputsEstimatedResources.MaterialsNotProcessedField
             </h1>
 
             <div id="event-name-hint" class="govuk-hint">
-                @MaterialOutputsResources.NotProcessedOnSiteHint
+                @MaterialOutputsEstimatedResources.NotProcessedOnSiteHint
             </div>
 
             <div class="govuk-input__wrapper">
@@ -35,11 +35,11 @@
             </p>
 
             <h1 class="govuk-heading-m">
-                @MaterialOutputsResources.ContaminentsField
+                @MaterialOutputsEstimatedResources.ContaminentsField
             </h1>
 
             <div id="event-name-hint" class="govuk-hint">
-                @MaterialOutputsResources.ContaminentsHint
+                @MaterialOutputsEstimatedResources.ContaminentsHint
             </div>
 
             <div class="govuk-input__wrapper">
@@ -53,11 +53,11 @@
             </p>
 
             <h1 class="govuk-heading-m">
-                @MaterialOutputsResources.ProcessLossField
+                @MaterialOutputsEstimatedResources.ProcessLossField
             </h1>
 
             <div id="event-name-hint" class="govuk-hint">
-                @MaterialOutputsResources.ProcessLossHint
+                @MaterialOutputsEstimatedResources.ProcessLossHint
             </div>
 
             <div class="govuk-input__wrapper">

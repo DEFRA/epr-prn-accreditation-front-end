@@ -1,21 +1,11 @@
-﻿using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Facade.Common.Dtos.Portal;
-using EPR.Accreditation.Facade.Common.Enums;
-using EPR.Accreditation.Portal.Common.Dtos.Portal;
+﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Enums = EPR.Accreditation.Portal.Enums;
 
 namespace EPR.Accreditation.UnitTests.RESTserviceTests
@@ -36,7 +26,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         public HttpSiteMaterialServiceTests()
         {
             _clientHandlerMock = new Mock<DelegatingHandler>();
-            
+
             _clientHandlerMock.As<IDisposable>().Setup(s => s.Dispose());
             _httpClient = new HttpClient(_clientHandlerMock.Object);
 
@@ -81,17 +71,16 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var language = Enums.Language.English;
             var materialName = "name";
             SetClientResponse(HttpStatusCode.OK, materialName);
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/{siteId}/material/{materialId}/Name?language={language}";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/material/{materialId}/Name?language={language}";
 
             // Act
             var name = await _httpSiteMaterialService.GetMeterialName(
                 id,
-                siteId,
+                null,
                 materialId,
                 language);
 
@@ -100,21 +89,21 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
         }
 
+        [TestMethod]
         public async Task GetMeterialName_WithWelsh_CallsEndpointSuccessfully()
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var language = Enums.Language.Welsh;
             var materialName = "name_in_welsh";
             SetClientResponse(HttpStatusCode.OK, materialName);
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/{siteId}/material/{materialId}/Name?language={language}";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/material/{materialId}/Name?language={language}";
 
             // Act
             var name = await _httpSiteMaterialService.GetMeterialName(
                 id,
-                siteId,
+                null,
                 materialId,
                 language);
 
@@ -129,17 +118,16 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             // Arrange
             var siteType = SiteType.Site;
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var wasteSource = "Site_Source";
             SetClientResponse(HttpStatusCode.OK, wasteSource);
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/{siteId}/Material/{materialId}/WasteSource";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/Material/{materialId}/WasteSource";
 
             // Act
             var result = await _httpSiteMaterialService.GetWasteSource(
                 siteType,
                 id,
-                siteId,
+                null,
                 materialId);
 
             // Assert
@@ -177,22 +165,21 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             // Arrange
             var siteType = SiteType.Site;
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var wasteSource = "Site_Source";
             SetClientResponse(HttpStatusCode.OK);
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/{siteId}/Material/{materialId}/WasteSource";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/site/Material/{materialId}/WasteSource";
 
             // Act
             await _httpSiteMaterialService.UpdateWasteSource(
                 siteType,
                 id,
-                siteId,
+                null,
                 materialId,
                 wasteSource);
 
             // Assert
-            _capturedPayload = JsonConvert.DeserializeObject<string>( _capturedPayload ); // comes back as json, so need to deserialize
+            _capturedPayload = JsonConvert.DeserializeObject<string>(_capturedPayload); // comes back as json, so need to deserialize
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.AreEqual(wasteSource, _capturedPayload);
         }
@@ -228,7 +215,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var expectedMaterialOutputsDto = new MaterialOutputsDto
             {
@@ -238,12 +224,11 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             };
             SetClientResponse(HttpStatusCode.OK, expectedMaterialOutputsDto);
 
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/MaterialOutputs";
 
             // Act
             var materialOutputsDto = await _httpSiteMaterialService.GetMaterialOutputs(
                 id,
-                siteId,
                 materialId);
 
             // Assert
@@ -257,7 +242,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var materialOutputsDto = new MaterialOutputsDto
             {
@@ -266,12 +250,11 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 TonnesProcessLoss = null
             };
 
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/{siteId}/Material/{materialId}/MaterialOutputs";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/MaterialOutputs";
 
             // Act
             await _httpSiteMaterialService.UpdateMaterialOutputs(
                 id,
-                siteId,
                 materialId,
                 materialOutputsDto);
 

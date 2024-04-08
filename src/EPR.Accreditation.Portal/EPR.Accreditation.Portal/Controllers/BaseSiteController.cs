@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -15,7 +16,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected string SiteProductsProducedRouteName;
         protected string SiteNonWasteInputsRouteName;
         protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IUrlHelper _urlHelper;
+        protected readonly IUrlHelperWrapper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
@@ -23,12 +24,13 @@ namespace EPR.Accreditation.Portal.Controllers
 
         protected BaseSiteController(
             IHttpContextAccessor httpContextAccessor,
-            IUrlHelper urlHelper,
+            IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel,
             SiteType siteType)
         {
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _siteType = siteType;
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
@@ -43,19 +45,12 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? materialId)
         {
             // need to add back link
-            _backPageViewModel.Url = _urlHelper.RouteUrl(
-                _siteType == SiteType.OverseasSite ? "OverseasSiteChooseMaterial" : "SiteChooseMaterial",
-                new
-                {
-                    id = id,
-                    siteId = siteId,
-                    materialId = materialId
-                });
+            PopulateBackModel(_siteType == SiteType.OverseasSite ? "OverseasSiteChooseMaterial" : "SiteChooseMaterial");
 
             var wasteSource = await _accreditationSiteMaterialService.GetWasteSource(
                 _siteType,
-                id.Value, 
-                siteId.Value, 
+                id.Value,
+                siteId,
                 materialId.Value);
 
             return View(wasteSource);
@@ -83,14 +78,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                _backPageViewModel.Url = _urlHelper.RouteUrl(
-                    SiteChooseMaterialRouteName,
-                    new
-                    {
-                        Id = viewModel.Id,
-                        SiteId = viewModel.SiteId,
-                        materialId = viewModel.MaterialId
-                    });
+                PopulateBackModel(SiteChooseMaterialRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -110,64 +98,18 @@ namespace EPR.Accreditation.Portal.Controllers
             }
         }
 
-        public async Task<IActionResult> GetMaterialOutputs(
-            Guid id,
-            Guid siteId,
-            Guid materialId)
+        protected void PopulateBackModel(string action)
         {
-            var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
-                id,
-                siteId,
-                materialId);
+            var idValue = _httpContextAccessor.HttpContext.Request.RouteValues["id"];
+            var materialIdValue = _httpContextAccessor.HttpContext.Request.RouteValues["materialId"];
 
-            return View(materialOutputsViewModel);
-        }
-
-        protected async Task<IActionResult> SaveMaterialOutputs(
-            MaterialOutputsViewModel viewModel,
-            SaveButton saveButton)
-        {
-            if (!ModelState.IsValidForSaveForLater(
-                saveButton,
-                MaterialOutputsResources.MaterialsNotProcessedBlank,
-                MaterialOutputsResources.ContaminentsBlank,
-                MaterialOutputsResources.ProcessLossBlank))
-            {
-                return await GetMaterialOutputs(
-                    viewModel.Id,
-                    viewModel.SiteId,
-                    viewModel.MaterialId);
-            }
-
-            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
-
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                _backPageViewModel.Url = _urlHelper.RouteUrl(
-                    SiteNonWasteInputsRouteName,
-                    new
-                    {
-                        Id = viewModel.Id,
-                        SiteId = viewModel.SiteId,
-                        materialId = viewModel.MaterialId
-                    });
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(SiteProductsProducedRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.SiteId,
-                        viewModel.MaterialId
-                    });
-            }
+            _backPageViewModel.Url = _urlHelper.RouteUrl(
+                action,
+                new
+                {
+                    id = idValue,
+                    materialId = materialIdValue
+                });
         }
     }
 }

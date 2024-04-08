@@ -19,21 +19,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\ExemptionReferencesResources.cy-GB.Designer.cs">
-      <DependentUpon>ExemptionReferencesResources.cy-GB.resx</DependentUpon>
+    <Compile Update="Resources\MaterialOutputsEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>MaterialOutputsEstimatedResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\MaterialOutputsResources.Designer.cs">
+    <Compile Update="Resources\MaterialOutputsLastYearResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>MaterialOutputsResources.resx</DependentUpon>
+      <DependentUpon>MaterialOutputsLastYearResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\ExemptionReferencesResources.Designer.cs">
       <DependentUpon>ExemptionReferencesResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+	<Compile Update="Resources\ExemptionReferencesResources.cy-GB.Designer.cs">
+		<DependentUpon>ExemptionReferencesResources.cy-GB.resx</DependentUpon>
+		<DesignTime>True</DesignTime>
+		<AutoGen>True</AutoGen>
+	</Compile>
     <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -117,13 +122,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\ExemptionReferencesResources.cy-GB.resx">
-      <LastGenOutput>ExemptionReferencesResources.cy-GB.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialOutputsEstimatedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\MaterialOutputsResources.resx">
+    <EmbeddedResource Update="Resources\MaterialOutputsLastYearResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MaterialOutputsResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>MaterialOutputsLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ExemptionReferencesResources.resx">
       <LastGenOutput>ExemptionReferencesResources.Designer.cs</LastGenOutput>
