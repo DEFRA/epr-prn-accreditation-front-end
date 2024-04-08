@@ -5,12 +5,12 @@ using EPR.Accreditation.Facade.Common.Dtos;
 
 namespace EPR.Accreditation.Portal.ViewModels
 {
-    public class OverseasAgentViewModel
+    public class HasOverseasAgentViewModel
     {
 
         public Guid ExternalId { get; set; }
 
-        [Required(ErrorMessageResourceName = "MissingSelectionErrorMessage", ErrorMessageResourceType = typeof(OverseasAgentResources))]
+        [Required(ErrorMessageResourceName = "MissingSelectionErrorMessage", ErrorMessageResourceType = typeof(HasOverseasAgentResources))]
         public bool? UseOverseasAgent { get; set; }
 
     }

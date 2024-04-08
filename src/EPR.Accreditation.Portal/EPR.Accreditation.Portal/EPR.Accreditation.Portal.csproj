@@ -44,10 +44,10 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Resources\OverseasAgentResources.Designer.cs">
+    <Compile Update="Resources\HasOverseasAgentResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>OverseasAgentResources.resx</DependentUpon>
+      <DependentUpon>HasOverseasAgentResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\PermitExemptionResources.cy-GB.Designer.cs">
       <DependentUpon>PermitExemptionResources.cy-GB.resx</DependentUpon>
@@ -124,9 +124,9 @@
       <LastGenOutput>TaskListResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\OverseasAgentResources.resx">
+    <EmbeddedResource Update="Resources\HasOverseasAgentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>OverseasAgentResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>HasOverseasAgentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\WasteLastYearResources.cy-GB.resx">
       <LastGenOutput>WasteLastYearResources.cy-GB.Designer.cs</LastGenOutput>

@@ -140,24 +140,24 @@ namespace EPR.Accreditation.Portal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
+        [HttpGet("OverseasAgent")]
         [ActionName("OverseasAgent")]
         public async Task<IActionResult> OverseasAgent(Guid? id)
         {
             if (id.HasValue)
             {
-                var overseasAgent = await _accreditationService.GetOverseasAgent(id.Value);
+                var overseasAgent = _accreditationService.GetHasOverseasAgent(id.Value);
 
-                return View(new OverseasAgentViewModel());  // TODO:
+                return View(new HasOverseasAgentViewModel { ExternalId = (Guid)id, UseOverseasAgent = overseasAgent }); 
             }
 
-            return View(new OverseasAgentViewModel());
+            return View(new HasOverseasAgentViewModel());
         }
 
-        [HttpPost]
-        [ActionName("OverseasAgent")]
-        public async Task<IActionResult> OverseasAgent(
-            OverseasAgentViewModel viewModel,
+        [HttpPost("HasOverseasAgent")]
+        [ActionName("HasOverseasAgent")]
+        public async Task<IActionResult> HasOverseasAgent(
+            HasOverseasAgentViewModel viewModel,
             SaveButton saveButton)
         {
             if (!ModelState.IsValid)

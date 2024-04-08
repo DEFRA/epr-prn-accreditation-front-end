@@ -67,5 +67,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             };
             return viewModel;
         }
+
+        public bool GetHasOverseasAgent(Guid id)
+        {
+            return true;
+        }
     }
 }
