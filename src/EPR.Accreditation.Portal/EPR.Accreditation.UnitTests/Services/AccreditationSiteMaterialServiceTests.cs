@@ -47,14 +47,14 @@ namespace EPR.Accreditation.UnitTests.Services
             featureCollection.Setup(f => f.Get<IRequestCultureFeature>()).Returns(cultureFeatureMock.Object);
 
             var httpContextMock = new DefaultHttpContext(featureCollection.Object);
-            
+
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _mockHttpSiteMaterialService.Setup(x => 
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
-                    id, 
-                    siteId, 
+                    id,
+                    siteId,
                     materialId,
                     It.IsAny<Language>()))
                 .ReturnsAsync(expectedWasteName);
@@ -64,11 +64,11 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _mockHttpSiteMaterialService.Verify(s => 
+            _mockHttpSiteMaterialService.Verify(s =>
                 s.GetMeterialName(
-                    id, 
-                    siteId, 
-                    materialId, 
+                    id,
+                    siteId,
+                    materialId,
                     Language.English),
                 Times.Once);
         }
@@ -106,12 +106,12 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _mockHttpSiteMaterialService.Verify(s => 
+            _mockHttpSiteMaterialService.Verify(s =>
                 s.GetMeterialName(
-                    id, 
-                    siteId, 
-                    materialId, 
-                    Language.Welsh), 
+                    id,
+                    siteId,
+                    materialId,
+                    Language.Welsh),
                 Times.Once);
         }
 
@@ -152,13 +152,13 @@ namespace EPR.Accreditation.UnitTests.Services
             await _accreditationSiteMaterialService.UpdateWasteSource(siteType, viewModel);
 
             // Assert
-            _mockHttpSiteMaterialService.Verify(x => 
+            _mockHttpSiteMaterialService.Verify(x =>
                 x.UpdateWasteSource(
-                    siteType, 
-                    viewModel.Id, 
-                    viewModel.SiteId, 
-                    viewModel.MaterialId, 
-                    viewModel.WasteSource), 
+                    siteType,
+                    viewModel.Id,
+                    viewModel.SiteId,
+                    viewModel.MaterialId,
+                    viewModel.WasteSource),
                 Times.Once);
         }
 
@@ -195,12 +195,33 @@ namespace EPR.Accreditation.UnitTests.Services
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
             // Assert
-            _mockHttpSiteMaterialService.Verify(x => 
+            _mockHttpSiteMaterialService.Verify(x =>
                 x.UpdateMaterialOutputs(
-                    viewModel.Id, 
-                    viewModel.MaterialId, 
-                    expectedDto), 
+                    viewModel.Id,
+                    viewModel.MaterialId,
+                    expectedDto),
                 Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetReprocessedWasteLastYearViewModel_WithValidParameters_ReturnsCorrectViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedWasteLastYear = true;
+
+            _mockHttpSiteMaterialService.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
+                .ReturnsAsync(expectedWasteLastYear);
+
+            // Act
+            var result = await _accreditationSiteMaterialService.GetReprocessedWasteLastYearViewModel(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedWasteLastYear, result.HasReprocessedWasteLastYear);
         }
     }
 }
