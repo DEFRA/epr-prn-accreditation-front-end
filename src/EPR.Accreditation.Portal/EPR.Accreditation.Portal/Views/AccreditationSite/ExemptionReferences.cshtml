@@ -15,12 +15,19 @@
         var value = Model.ExemptionReferencesVm.Count > i ? Model.ExemptionReferencesVm[i].Reference : string.Empty;
 
         <p class="govuk-error-message">
-            <span asp-validation-for="@value"></span>
+            <span asp-validation-for="@Model.ExemptionReferencesVm[i].Reference"></span>
         </p>
         <div class="govuk-form-group">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
-                    <input class="govuk-input govuk-input--width-30" type="text" asp-for="@Model.ExemptionReferencesVm[i].Reference" data-clear-duplicate='true'>
+                    @if (Model != null && Model.ExemptionReferencesVm != null && Model.ExemptionReferencesVm.Count() > i)
+                    {
+                        <input class="govuk-input govuk-input--width-30" type="text" asp-for="@Model.ExemptionReferencesVm[i].Reference" data-clear-duplicate='true'>
+                    }
+                    else
+                    {
+                        <input class="govuk-input govuk-input--width-30" type="text" name="@($"ExemptionReferencesVm[{i}].Reference")" data-clear-duplicate='true'>
+                    }
                 </div>
             </div>
         </div>

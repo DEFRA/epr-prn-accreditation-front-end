@@ -7,11 +7,14 @@ namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var list = value as IList<ExemptionReferenceViewModel>;
-
-            if (list != null && list.GroupBy(x => x.Reference).Any(g => g.Count() > 1))
+            if (value is IList<ExemptionReferenceViewModel> list)
             {
-                return new ValidationResult(ErrorMessage);
+                var nonEmptyReferences = list.Where(x => !string.IsNullOrWhiteSpace(x.Reference));
+
+                if (nonEmptyReferences.GroupBy(x => x.Reference).Any(g => g.Count() > 1))
+                {
+                    return new ValidationResult(ErrorMessage);
+                }
             }
             return ValidationResult.Success;
         }
