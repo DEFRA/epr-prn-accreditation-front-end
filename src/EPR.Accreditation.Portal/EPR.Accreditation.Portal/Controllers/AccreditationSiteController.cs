@@ -13,21 +13,24 @@ namespace EPR.Accreditation.Portal.Controllers
     {
         protected readonly IAccreditationSiteService _accreditationSiteService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
-        protected readonly BackPageViewModel _backPageViewModel;
+        protected readonly IHttpContextAccessor _httpContextAccessor;
         protected IUrlHelperWrapper _urlHelper;
+        protected readonly BackPageViewModel _backPageViewModel;
 
 
         public AccreditationSiteController(
             IAccreditationSiteService accreditationSiteService,
             ISaveAndComeBackService saveAndComeBackService,
-            BackPageViewModel backPageViewModel,
-            IUrlHelperWrapper urlHelper
+            IHttpContextAccessor httpContextAccessor,
+            IUrlHelperWrapper urlHelper,
+            BackPageViewModel backPageViewModel
             )
         {
-            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
-            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
-            _backPageViewModel = backPageViewModel;
             _accreditationSiteService = accreditationSiteService ?? throw new ArgumentNullException(nameof(accreditationSiteService));
+            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
+            _backPageViewModel = backPageViewModel;
         }
 
         [HttpGet("ExemptionReferences")]
@@ -64,7 +67,7 @@ namespace EPR.Accreditation.Portal.Controllers
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
                 viewModel.Id,
-                Request.HttpContext.GetRouteData().Values);
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
         }
     }
