@@ -37,23 +37,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
         public async Task UpdateExemptionReferences(ExemptionReferencesViewModel viewModel)
         {
+            var exemptionReferences = viewModel.ExemptionReferencesVm.Select(x => x.Reference);
 
-            //var exemptionReferences = new List<ExemptionReference>
-            //{
-            //    viewModel.ReferenceNumber1,
-            //    viewModel.ReferenceNumber2,
-            //    viewModel.ReferenceNumber3,
-            //    viewModel.ReferenceNumber4,
-            //    viewModel.ReferenceNumber5
-            //};
-
-            //viewModel.ExemptionReferences = exemptionReferences;
-
-            //await _httpAccreditationSiteService.UpdateExemptionReferences(
-            //    viewModel.Id,
-            //    viewModel.SiteId,
-            //    viewModel.ExemptionReferences
-            //    );
+            await _httpAccreditationSiteService.UpdateExemptionReferences(
+                viewModel.Id,
+                exemptionReferences
+                );
         }
     }
 }

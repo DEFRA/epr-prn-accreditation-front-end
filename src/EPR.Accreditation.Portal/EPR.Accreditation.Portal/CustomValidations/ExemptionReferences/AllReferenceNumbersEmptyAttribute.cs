@@ -1,19 +1,15 @@
-﻿using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.IdentityModel.Tokens;
+﻿using EPR.Accreditation.Portal.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
+namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences;
+public class AllReferenceNumbersEmptyAttribute : ValidationAttribute
 {
-    public class AllReferenceNumbersEmptyAttribute : ValidationAttribute
+    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            var viewModel = (ExemptionReferencesViewModel)validationContext.ObjectInstance;
+        if (value is IList<ExemptionReferenceViewModel> list
+            && list.All(item => string.IsNullOrWhiteSpace(item.Reference)))
+            return new ValidationResult(ErrorMessage);
 
-            return viewModel.ExemptionReferencesVm.All(x => x.Reference.IsNullOrEmpty()) ?
-                new ValidationResult(ErrorMessage ?? ExemptionReferencesResources.ErrorMessageBlank)
-                : ValidationResult.Success;
-        }
+        return ValidationResult.Success;
     }
 }

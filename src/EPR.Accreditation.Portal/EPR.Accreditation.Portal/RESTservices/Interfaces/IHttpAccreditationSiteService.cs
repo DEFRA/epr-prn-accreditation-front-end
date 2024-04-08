@@ -6,7 +6,6 @@
 
         Task UpdateExemptionReferences(
             Guid id,
-            Guid siteId,
             IEnumerable<string> exemptionReferences);
     }
 }

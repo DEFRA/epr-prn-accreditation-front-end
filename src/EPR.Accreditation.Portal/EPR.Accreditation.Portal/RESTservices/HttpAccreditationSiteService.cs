@@ -19,10 +19,9 @@ namespace EPR.Accreditation.Portal.RESTservices
 
         public async Task UpdateExemptionReferences(
             Guid id,
-            Guid siteId,
             IEnumerable<string> exemptionReferences)
         {
-            await Put($"{id}/Site/{siteId}/ExemptionReferences", exemptionReferences);
+            await Put($"{id}/Site/ExemptionReferences", exemptionReferences);
         }
     }
 }
