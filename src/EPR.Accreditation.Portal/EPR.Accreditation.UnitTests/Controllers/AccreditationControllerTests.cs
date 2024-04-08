@@ -82,7 +82,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Arrange
             var id = Guid.NewGuid();
             var expectedViewModel = new PermitExemptionViewModel();
-            var expectedUrl = "expectedUrl";
+            var expectedUrl = "Home/ApplyForAccreditation";
 
             _mockUrlHelper.Setup(helper => helper.ActionLink(
                 "ApplyForAccreditation", "Home", null, null, null, null)).Returns(expectedUrl);
