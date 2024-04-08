@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -13,14 +14,14 @@ namespace EPR.Accreditation.Portal.Controllers
         protected readonly IAccreditationSiteService _accreditationSiteService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
-        protected IUrlHelper _urlHelper;
+        protected IUrlHelperWrapper _urlHelper;
 
 
         public AccreditationSiteController(
             IAccreditationSiteService accreditationSiteService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel,
-            IUrlHelper urlHelper
+            IUrlHelperWrapper urlHelper
             )
         {
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
@@ -32,8 +33,7 @@ namespace EPR.Accreditation.Portal.Controllers
         [HttpGet("ExemptionReferences")]
         public async Task<IActionResult> ExemptionReferences(Guid? id)
         {
-            // TODO: Need to add correct back link in the future
-            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+            _backPageViewModel.Url = $"/Accreditation/{id}/PermitExemption";
 
             if (id == null)
                 return NotFound();
