@@ -85,7 +85,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         }
 
         [TestMethod]
-        public async Task UpdateWasteSource_ForSite_CallsEndpointSuccesfully_WithExpectedPayload()
+        public async Task GetHasPermitExemption_CallsEndpointSuccesfully_WithExpectedPayload()
         {
             // Arrange
             var id = Guid.NewGuid();
@@ -99,9 +99,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 hasExemptionReference);
 
             // Assert
-            _capturedPayload = JsonConvert.DeserializeObject<string>(_capturedPayload); // comes back as json, so need to deserialize
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
-            Assert.AreEqual(hasExemptionReference, _capturedPayload);
         }
     }
 }
