@@ -172,5 +172,33 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             return View("upload");
         }
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        public async Task<IActionResult> SiteAddress(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            // TODO: Need to add correct back link in the future
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
+            if (id == null)
+                return NotFound();
+
+            var viewModel = await _accreditationService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
+
+            return View(viewModel);
+        }
+
+        [HttpPost("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        public async Task<IActionResult> SiteAddress(SiteAddressViewModel vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            //var externalId = await _accreditationService.CreateAccreditation(vm);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

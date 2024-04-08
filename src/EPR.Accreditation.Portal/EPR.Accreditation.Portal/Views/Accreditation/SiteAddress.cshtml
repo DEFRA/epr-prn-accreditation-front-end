@@ -1,0 +1,81 @@
+﻿@using EPR.Accreditation.Portal.Resources;
+@using EPR.Accreditation.Portal.ViewModels;
+
+@model SiteAddressViewModel
+@{
+    ViewData["Title"] = SiteAddressResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+
+<form method="post">
+    <input id="Id" name="Id" type="hidden" value="@Model.Id"/>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-l">@SiteAddressResources.Heading</h1>
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="AddressLine1"></span>
+                    </p>
+                    <h2 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--s" for="AddressLine1">
+                            @SiteAddressResources.AddressLine1
+                        </label>
+                    </h2>
+                    <input class="govuk-input" id="AddressLine1" name="AddressLine1" type="text" aria-describedby="AddressLine1-hint">
+                </div>
+
+                <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="AddressLine2"></span>
+                    </p>
+                    <h2 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--s" for="AddressLine2">
+                            @SiteAddressResources.AddressLine2
+                        </label>
+                    </h2>
+                    <input class="govuk-input" id="AddressLine2" name="AddressLine2" type="text" aria-describedby="AddressLine2-hint">
+                </div>
+
+                <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="TownOrCity"></span>
+                    </p>
+                    <h2 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--s" for="TownOrCity">
+                            @SiteAddressResources.TownOrCity
+                        </label>
+                    </h2>
+                    <input class="govuk-input" id="TownOrCity" name="TownOrCity" type="text" aria-describedby="TownOrCity-hint">
+                </div>
+
+                <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="County"></span>
+                    </p>
+                    <h2 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--s" for="County">
+                            @SiteAddressResources.County
+                        </label>
+                    </h2>
+                    <input class="govuk-input" id="County" name="County" type="text" aria-describedby="County-hint">
+                </div>
+
+                <div class="govuk-form-group">
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="PostCode"></span>
+                    </p>
+                    <h2 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--s" for="PostCode">
+                            @SiteAddressResources.PostCode
+                        </label>
+                    </h2>
+                    <input class="govuk-input" id="PostCode" name="PostCode" type="text" aria-describedby="PostCode-hint">
+                </div>
+
+                <partial name="_SaveButtons" />
+            </fieldset>
+        </div>
+    </div>
+</form>

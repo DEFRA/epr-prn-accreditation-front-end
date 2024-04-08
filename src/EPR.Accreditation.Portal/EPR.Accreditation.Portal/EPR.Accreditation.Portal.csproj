@@ -99,6 +99,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApplicationSavedResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\SiteAddressResources.Designer.cs">
+      <DependentUpon>SiteAddressResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\WasteSourceResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -178,6 +183,10 @@
     <EmbeddedResource Update="Resources\ApplicationSavedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationSavedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SiteAddressResources.resx">
+      <LastGenOutput>SiteAddressResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\WasteSourceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
