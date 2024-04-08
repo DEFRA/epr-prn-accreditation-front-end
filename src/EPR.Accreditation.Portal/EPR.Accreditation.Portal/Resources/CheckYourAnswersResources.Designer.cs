@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MasterResources {
+    public class CheckYourAnswersResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MasterResources() {
+        internal CheckYourAnswersResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.MasterResources", typeof(MasterResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.CheckYourAnswersResources", typeof(CheckYourAnswersResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,110 +61,110 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Looks up a localized string similar to Change.
         /// </summary>
-        public static string BackLink {
+        public static string Change {
             get {
-                return ResourceManager.GetString("BackLink", resourceCulture);
+                return ResourceManager.GetString("Change", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm and continue.
+        ///   Looks up a localized string similar to Discharge consent number.
         /// </summary>
-        public static string ConfirmAndContinue {
+        public static string DischargeConsentNumber {
             get {
-                return ResourceManager.GetString("ConfirmAndContinue", resourceCulture);
+                return ResourceManager.GetString("DischargeConsentNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continue.
+        ///   Looks up a localized string similar to ErrorMessage.
         /// </summary>
-        public static string Continue {
+        public static string ErrorMessage {
             get {
-                return ResourceManager.GetString("Continue", resourceCulture);
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places.
+        ///   Looks up a localized string similar to Exemption reference.
         /// </summary>
-        public static string DecimalNumberFormatError {
+        public static string ExemptionReferenceNumber {
             get {
-                return ResourceManager.GetString("DecimalNumberFormatError", resourceCulture);
+                return ResourceManager.GetString("ExemptionReferenceNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For:.
+        ///   Looks up a localized string similar to Waste licences, PRNs and business plan.
         /// </summary>
-        public static string MaterialForLabel {
+        public static string Hint {
             get {
-                return ResourceManager.GetString("MaterialForLabel", resourceCulture);
+                return ResourceManager.GetString("Hint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to PPC &apos;Part A&apos; or non-waste EPR &apos;Part A1&apos; activity reference number.
         /// </summary>
-        public static string No {
+        public static string PartAReferenceNumber {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("PartAReferenceNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cymraeg.
+        ///   Looks up a localized string similar to PPC &apos;Part B or C&apos; or non-waste EPR &apos;Part A2 or B&apos; activity reference number.
         /// </summary>
-        public static string OppositeLanguage {
+        public static string PartBReferenceNumber {
             get {
-                return ResourceManager.GetString("OppositeLanguage", resourceCulture);
+                return ResourceManager.GetString("PartBReferenceNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and come back later.
+        ///   Looks up a localized string similar to People who have authority to issue PRNs.
         /// </summary>
-        public static string SaveAndComeBack {
+        public static string PeopleOfAuthority {
             get {
-                return ResourceManager.GetString("SaveAndComeBack", resourceCulture);
+                return ResourceManager.GetString("PeopleOfAuthority", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and continue.
+        ///   Looks up a localized string similar to Site Address.
         /// </summary>
-        public static string SaveAndContinue {
+        public static string SiteAddress {
             get {
-                return ResourceManager.GetString("SaveAndContinue", resourceCulture);
+                return ResourceManager.GetString("SiteAddress", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is a problem.
+        ///   Looks up a localized string similar to Check your answers before continuing.
         /// </summary>
-        public static string SummaryError {
+        public static string Title {
             get {
-                return ResourceManager.GetString("SummaryError", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tonnes.
+        ///   Looks up a localized string similar to Waste carrier, broker or dealer registration number.
         /// </summary>
-        public static string TonnesLabel {
+        public static string WasteCarrierRegistrationNumber {
             get {
-                return ResourceManager.GetString("TonnesLabel", resourceCulture);
+                return ResourceManager.GetString("WasteCarrierRegistrationNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to Waste management license or environmental permit number.
         /// </summary>
-        public static string Yes {
+        public static string WasteManagementLicenceNumber {
             get {
-                return ResourceManager.GetString("Yes", resourceCulture);
+                return ResourceManager.GetString("WasteManagementLicenceNumber", resourceCulture);
             }
         }
     }
