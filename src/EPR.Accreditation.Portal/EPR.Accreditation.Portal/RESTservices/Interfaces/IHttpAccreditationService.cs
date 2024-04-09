@@ -23,6 +23,12 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid siteExternalId,
             Guid materialExternalId,
             DTO.AccreditationMaterial accreditationMaterial);
+
+        Task<DTO.OverseasReprocessingSite> GetOverseasSite(
+            Guid accreditationExternalId,
+            Guid siteExternalId);
+
+        Task<bool?> GetHasOverseasAgent(Guid accreditationExternalId);
     }
 }
 

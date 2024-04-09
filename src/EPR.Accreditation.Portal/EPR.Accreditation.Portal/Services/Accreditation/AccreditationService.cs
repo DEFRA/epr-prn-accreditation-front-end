@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EPR.Accreditation.Facade.Common.Dtos;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 
@@ -68,9 +69,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return viewModel;
         }
 
-        public bool GetHasOverseasAgent(Guid id)
+        public async Task<HasOverseasAgentViewModel> GetHasOverseasAgent(Guid id)
         {
-            return true;
+            var result = await _httpAccreditationService.GetHasOverseasAgent(id);
+
+            return new HasOverseasAgentViewModel { ExternalId = id, UseOverseasAgent = result };
         }
+
     }
 }

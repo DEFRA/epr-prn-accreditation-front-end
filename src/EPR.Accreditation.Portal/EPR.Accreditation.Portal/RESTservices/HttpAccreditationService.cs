@@ -57,5 +57,18 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             await Put($"{accreditationExternalId}/Site/{siteExternalId}/Material/{materialExternalId}", accreditationMaterial);
         }
+
+        public async Task<EPR.Accreditation.Facade.Common.Dtos.OverseasReprocessingSite> GetOverseasSite(
+            Guid accreditationExternalId, 
+            Guid siteExternalId)
+        {
+            return await Get<OverseasReprocessingSite>($"{accreditationExternalId}/OverseasSite/{siteExternalId}");
+        }
+
+        public async Task<bool?> GetHasOverseasAgent(Guid accreditationExternalId)
+        {
+            var hasOverseasAgent = await Get<bool?>($"{accreditationExternalId}/HasOverseasAgent");
+            return hasOverseasAgent;
+        }
     }
 }

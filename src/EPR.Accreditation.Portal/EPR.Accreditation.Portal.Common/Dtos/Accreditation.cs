@@ -32,5 +32,7 @@ namespace EPR.Accreditation.Facade.Common.Dtos
         public IEnumerable<OverseasReprocessingSite> OverseasReprocessingSites { get; set; }
 
         public WastePermit WastePermit { get; set; }
+
+        public bool? HasOverseasAgent { get; set; }
     }
 }

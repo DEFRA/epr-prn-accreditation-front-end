@@ -143,15 +143,16 @@ namespace EPR.Accreditation.Portal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("OverseasAgent")]
-        [ActionName("OverseasAgent")]
-        public async Task<IActionResult> OverseasAgent(Guid? id)
+        [HttpGet("HasOverseasAgent")]
+        [ActionName("HasOverseasAgent")]
+        public async Task<IActionResult> HasOverseasAgent(Guid? id)
         {
             if (id.HasValue)
             {
-                var overseasAgent = _accreditationService.GetHasOverseasAgent(id.Value);
+                // var previouslySaved = await _saveAndComeBackService.GetSaveAndComeBack(id.Value); TODO:
+                var overseasAgent = await _accreditationService.GetHasOverseasAgent(id.Value);
 
-                return View(new HasOverseasAgentViewModel { ExternalId = (Guid)id, UseOverseasAgent = overseasAgent }); 
+                return View(overseasAgent); 
             }
 
             return View(new HasOverseasAgentViewModel());
