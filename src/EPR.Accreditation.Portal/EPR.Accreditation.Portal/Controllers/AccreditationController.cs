@@ -1,10 +1,12 @@
-﻿using EPR.Accreditation.Portal.Enums;
+﻿using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
@@ -171,6 +173,41 @@ namespace EPR.Accreditation.Portal.Controllers
         public async Task<IActionResult> Upload(Guid id)
         {
             return View("upload");
+        }
+
+        [HttpGet("CheckYourAnswers")]
+        public async Task<IActionResult> CheckYourAnswers(Guid? id)
+        {
+            if (!id.HasValue)
+                return BadRequest();
+
+            CheckYourAnswersViewModel vm = await _accreditationService.CheckYourAnswers(id.Value);
+            return View(vm);
+        }
+
+        [HttpPost("CheckYourAnswers")]
+        public async Task<IActionResult> CheckYourAnswers(CheckYourAnswersViewModel checkYourAnswersViewModel)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("CheckYourAnswers", new { id = checkYourAnswersViewModel.Id });
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            // Handle redirection to CheckYourAnswers if this is where we originally came from
+            if (context.HttpContext.Request.Query.ContainsKey(Strings.QueryStrings.ReturnToAnswers) &&
+                context.HttpContext.Request.Query[Strings.QueryStrings.ReturnToAnswers] == Strings.QueryStrings.ReturnToAnswersYes &&
+                context.Result is RedirectToActionResult)
+            {
+                var id = (context.Result as RedirectToActionResult).RouteValues["Id"].ToString();
+                context.Result = RedirectToAction("CheckYourAnswers", "Accreditation", new { id });
+            }
+
+            base.OnActionExecuted(context);
         }
 
         [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
