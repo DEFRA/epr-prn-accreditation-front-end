@@ -10,7 +10,6 @@ using Moq;
 
 namespace EPR.Accreditation.UnitTests.Controllers
 {
-    [Ignore]
     [TestClass]
     public class SiteMaterialControllerTests
     {

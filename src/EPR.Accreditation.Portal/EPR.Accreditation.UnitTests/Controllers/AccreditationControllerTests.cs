@@ -1,5 +1,4 @@
-﻿
-using EPR.Accreditation.Portal.Controllers;
+﻿using EPR.Accreditation.Portal.Controllers;
 using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
@@ -27,9 +26,24 @@ namespace EPR.Accreditation.UnitTests.Controllers
         [TestInitialize]
         public void Init()
         {
+            _mockContextAccessor = new Mock<IHttpContextAccessor>();
+            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
+            _mockhttpAccreditationService = new Mock<IHttpAccreditationService>();
             _mockAccreditationService = new Mock<IAccreditationService>();
-            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService> { CallBase = true };
-            _accreditationController = new AccreditationController(_mockWastePermitService.Object, _mockSaveAndComeBackService.Object, _mockAccreditationService.Object, _mockUrlHelper.Object, _backPageViewModel.Object);
+            _mockWastePermitService = new Mock<IWastePermitService>();
+            _mockUrlHelper = new Mock<IUrlHelperWrapper>();
+            _backPageViewModel = new BackPageViewModel();
+
+            _accreditationController = new AccreditationController(
+                _mockContextAccessor.Object,
+                _mockWastePermitService.Object,
+                _mockSaveAndComeBackService.Object,
+                _mockAccreditationService.Object,
+                _mockUrlHelper.Object,
+                _backPageViewModel);
+
+            var context = new DefaultHttpContext();
+            _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);
         }
 
         [TestMethod]
