@@ -1,7 +1,7 @@
 ﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,19 +11,22 @@ namespace EPR.Accreditation.Portal.Controllers
     [Route("[controller]/{id}")]
     public class AccreditationController : Controller
     {
+        protected readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAccreditationService _accreditationService;
         protected readonly IWastePermitService _wastePermitService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
-        protected IUrlHelper _urlHelper;
+        protected IUrlHelperWrapper _urlHelper;
 
         public AccreditationController(
+            IHttpContextAccessor httpContextAccessor,
             IWastePermitService wastePermitService,
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
-            IUrlHelper urlHelper,
+            IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel)
         {
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
@@ -66,7 +69,7 @@ namespace EPR.Accreditation.Portal.Controllers
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
                 viewModel.Id,
-                Request.HttpContext.GetRouteData().Values);
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
         }
 

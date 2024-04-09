@@ -1,6 +1,7 @@
 ﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Helpers.ActionFilters;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -17,7 +18,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
         public SiteMaterialController(
             IHttpContextAccessor httpContextAccessor,
-            IUrlHelper urlHelper,
+            IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
             ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel)
@@ -50,7 +51,7 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? id,
             Guid? materialId)
         {
-            if (id != null && 
+            if (id != null &&
                 materialId != null)
                 return await GetMaterialWasteSource(
                     id.Value,
@@ -83,7 +84,7 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? id,
             Guid? materialId)
         {
-            if (id != null && 
+            if (id != null &&
                 materialId != null)
             {
                 PopulateBackModel(WasteLastYearRouteName);
@@ -133,7 +134,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
                 return View("_ApplicationSaved");
             }
             else
@@ -172,7 +173,7 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             PopulateBackModel("EnterProcessingCapacity");
 
-            if (id != null && 
+            if (id != null &&
                 materialId != null)
             {
                 var viewModel = await _accreditationSiteMaterialService.GetReprocessedWasteLastYearViewModel(
@@ -199,7 +200,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
             if (saveButton == SaveButton.SaveAndContinue)
                 return RedirectToRoute(
-                    SiteMaterialOutputsRouteName, 
+                    SiteMaterialOutputsRouteName,
                     new
                     {
                         id = viewModel.Id,
@@ -209,7 +210,7 @@ namespace EPR.Accreditation.Portal.Controllers
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
                 viewModel.Id,
-                Request.HttpContext.GetRouteData().Values);
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
         }
     }

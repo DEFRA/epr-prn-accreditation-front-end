@@ -31,7 +31,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<ISaveAndComeBackService, SaveAndComeBackService>();
             services.AddScoped<IWastePermitService, WastePermitService>();
             services.AddScoped<IAccreditationService, AccreditationService>();
-            
+            services.AddScoped<IUrlHelperWrapper, UrlHelperWrapper>();
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
@@ -43,7 +43,7 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"
                     )
-                
+
             );
             services
                 .AddScoped<IAccreditationService, AccreditationService>()

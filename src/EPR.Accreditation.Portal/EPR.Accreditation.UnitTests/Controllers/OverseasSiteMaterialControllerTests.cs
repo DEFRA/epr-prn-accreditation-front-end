@@ -1,7 +1,6 @@
-﻿using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Portal.Controllers;
+﻿using EPR.Accreditation.Portal.Controllers;
 using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +16,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         protected OverseasSiteMaterialController _siteMaterialController;
 
         protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<IUrlHelper> _mockUrlHelper;
+        protected Mock<IUrlHelperWrapper> _mockUrlHelper;
         protected Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
         protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         protected BackPageViewModel _backPageViewModel;
@@ -26,7 +25,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public void Init()
         {
             _mockContextAccessor = new Mock<IHttpContextAccessor>();
-            _mockUrlHelper = new Mock<IUrlHelper>();
+            _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _mockAccreditationSiteMaterialService = new Mock<IAccreditationSiteMaterialService>();
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _backPageViewModel = new BackPageViewModel();

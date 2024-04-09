@@ -1,7 +1,6 @@
-﻿using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Portal.Controllers;
+﻿using EPR.Accreditation.Portal.Controllers;
 using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +17,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         protected SiteMaterialController _siteMaterialController;
 
         protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<IUrlHelper> _mockUrlHelper;
+        protected Mock<IUrlHelperWrapper> _mockUrlHelper;
         protected Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
         protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         protected BackPageViewModel _backPageViewModel;
@@ -27,11 +26,11 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public void Init()
         {
             _mockContextAccessor = new Mock<IHttpContextAccessor>();
-            _mockUrlHelper = new Mock<IUrlHelper>();
+            _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _mockAccreditationSiteMaterialService = new Mock<IAccreditationSiteMaterialService>();
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _backPageViewModel = new BackPageViewModel();
-            
+
             _siteMaterialController = new SiteMaterialController(
                 _mockContextAccessor.Object,
                 _mockUrlHelper.Object,
@@ -81,7 +80,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Act
             var result = await _siteMaterialController.MaterialOutputs(
-                id, 
+                id,
                 materialId);
 
             // Assert
@@ -195,22 +194,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         }
 
         [TestMethod]
-        [Ignore]
-        public async Task WasteLastYear_ReturnsBadRequest_ForAnInvalidModelState()
-        {
-            // Arrange
-            _siteMaterialController.ModelState.AddModelError("key", "error message");
-
-            // Act
-            var result = await _siteMaterialController.WasteLastYear(Guid.NewGuid(), Guid.NewGuid());
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-        }
-
-        [TestMethod]
-        [Ignore]
-        public async Task WasteLastYear_CallsUrlHelper_WithCorrectParameters()
+        public async Task WasteLastYear_CallsService_WithCorrectParameters()
         {
             // Arrange
             var id = Guid.NewGuid();
@@ -220,7 +204,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
             await _siteMaterialController.WasteLastYear(id, materialId);
 
             // Assert
-            _mockUrlHelper.Verify(u => u.ActionLink("EnterProcessingCapacity", "SiteMaterial", null, null, null, null), Times.Once);
             _mockAccreditationSiteMaterialService.Verify(
                 service => service.GetReprocessedWasteLastYearViewModel(id, materialId), Times.Once);
         }
@@ -249,28 +232,19 @@ namespace EPR.Accreditation.UnitTests.Controllers
         }
 
         [TestMethod]
-        [Ignore]
-        public async Task WasteLastYear_ReturnsNotFound_WhenServiceReturnsNull()
+        public async Task WasteLastYear_ReturnsNotFound_WhenAllThreeIdsAreNull()
         {
-            // Arrange
-            var id = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
-
-            _mockAccreditationSiteMaterialService.Setup(
-                s => s.GetReprocessedWasteLastYearViewModel(id, materialId)).ReturnsAsync((ReprocessedWasteLastYearViewModel)null);
-
             // Act
-            var result = await _siteMaterialController.WasteLastYear(id, materialId);
+            var result = await _siteMaterialController.WasteLastYear(null, null);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 
             _mockAccreditationSiteMaterialService.Verify(
-                service => service.GetReprocessedWasteLastYearViewModel(id, materialId), Times.Once);
+                service => service.GetReprocessedWasteLastYearViewModel(Guid.Empty, Guid.Empty), Times.Never);
         }
 
         [TestMethod]
-        [Ignore]
         public async Task WasteLastYear_SavesWithValidData_SaveAndContinue()
         {
             // Arrange
@@ -285,34 +259,43 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            var redirectToActionResult = result as RedirectToActionResult;
-            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            var redirectToRouteResult = result as RedirectToRouteResult;
+            Assert.AreEqual("SiteMaterialOutputs", redirectToRouteResult.RouteName);
 
             _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
         }
 
         [TestMethod]
-        [Ignore]
-        public async Task WasteLastYear_SavesWithValidData_SaveAndComeBack()
+        public async Task WasteLastYear_ReturnsViewResult_ForSaveAndComeBack()
         {
             // Arrange
+            var saveButton = SaveButton.SaveAndComeBack;
             var viewModel = new ReprocessedWasteLastYearViewModel
             {
                 Id = Guid.NewGuid(),
                 HasReprocessedWasteLastYear = false
             };
 
+            _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
+
             // Act
-            var result = await _siteMaterialController.WasteLastYear(viewModel, SaveButton.SaveAndComeBack);
+            var result = await _siteMaterialController.WasteLastYear(viewModel, saveButton) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            var redirectToActionResult = result as RedirectToActionResult;
-            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("_ApplicationSaved", result.ViewName);
 
-            _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
+            _mockAccreditationSiteMaterialService.Verify(s =>
+            s.UpdateReprocessedWasteLastYear(
+                viewModel),
+                Times.Once);
+
+            _mockSaveAndComeBackService.Verify(x =>
+                x.AddSaveAndComeBack(
+                    It.IsAny<Guid>(),
+                    It.IsAny<RouteValueDictionary>()),
+                Times.Once());
         }
 
         [TestMethod]
@@ -353,7 +336,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Act
             var result = await _siteMaterialController.MaterialWasteSource(
-                viewModel, 
+                viewModel,
                 saveButton);
 
             // Assert
@@ -377,18 +360,18 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Act
             var result = await _siteMaterialController.MaterialWasteSource(
-                viewModel, 
+                viewModel,
                 saveButton) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(s => 
+            _mockAccreditationSiteMaterialService.Verify(s =>
                 s.UpdateWasteSource(
                     SiteType.Site,
-                    viewModel), 
+                    viewModel),
                 Times.Once());
-            _mockSaveAndComeBackService.Verify(x => 
+            _mockSaveAndComeBackService.Verify(x =>
                 x.AddSaveAndComeBack(
                     It.IsAny<Guid>(),
                     It.IsAny<RouteValueDictionary>()),
@@ -409,7 +392,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Assert
             _mockAccreditationSiteMaterialService.Verify(x => x.UpdateWasteSource(It.IsAny<SiteType>(), viewModel), Times.Once);
             _mockSaveAndComeBackService.Verify(x => x.AddSaveAndComeBack(
-                It.IsAny<Guid>(), 
+                It.IsAny<Guid>(),
                 It.IsAny<RouteValueDictionary>()), Times.Once);
         }
 
@@ -417,9 +400,18 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public async Task MaterialOutputs_ModelStateInvalid_ReturnsViewResult()
         {
             // Arrange
-            var viewModel = new MaterialOutputsViewModel();
+            var viewModel = new MaterialOutputsViewModel
+            {
+                WasteLastYear = false
+            };
+
             var saveButton = SaveButton.SaveAndComeBack;
             _siteMaterialController.ModelState.AddModelError("PropertyName", "ErrorMessage");
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetMaterialOutputs(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>()))
+                .ReturnsAsync(viewModel);
 
             // Act
             var result = await _siteMaterialController.MaterialOutputs(
@@ -429,11 +421,12 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             var viewResult = (ViewResult)result;
-            Assert.IsNull(viewResult.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(s => 
+            Assert.AreEqual("MaterialOutputsEstimated", viewResult.ViewName);
+
+            _mockAccreditationSiteMaterialService.Verify(s =>
                 s.GetMaterialOutputs(
                     It.IsAny<Guid>(),
-                    It.IsAny<Guid>()), 
+                    It.IsAny<Guid>()),
                 Times.Once);
         }
 
@@ -441,7 +434,11 @@ namespace EPR.Accreditation.UnitTests.Controllers
         public async Task MaterialOutputs_SaveAndComeBack_ReturnsViewResult()
         {
             // Arrange
-            var viewModel = new MaterialOutputsViewModel();
+            var viewModel = new MaterialOutputsViewModel
+            {
+                WasteLastYear = true
+            };
+
             var saveButton = SaveButton.SaveAndComeBack;
             _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
 
@@ -473,10 +470,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
             _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
 
             _mockAccreditationSiteMaterialService.Setup(x => x.UpdateMaterialOutputs(viewModel)).Returns(Task.CompletedTask);
-            _mockSaveAndComeBackService.Setup(x => x.AddSaveAndComeBack(
-                It.IsAny<Guid>(),
-                It.IsAny<RouteValueDictionary>()))
-            .Returns(Task.CompletedTask);
 
             // Act
             await _siteMaterialController.MaterialOutputs(viewModel, saveButton);
