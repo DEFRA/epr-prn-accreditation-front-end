@@ -62,6 +62,7 @@ namespace EPR.Accreditation.Portal
                 });
 
             // Register configuration options
+            services.AddSingleton<IConfiguration>(Configuration);
             services.Configure<AppSettingsConfigOptions>(
                 Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
             );
@@ -108,7 +109,7 @@ namespace EPR.Accreditation.Portal
                 endpoints.MapControllers();
             });
 
-            
+
         }
     }
 }
