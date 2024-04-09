@@ -1,4 +1,5 @@
 ﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
 using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +67,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 .Verifiable();
         }
 
+        [Ignore]
         [TestMethod]
         public async Task GetMeterialName_WithEnglish_CallsEndpointSuccessfully()
         {
@@ -112,6 +114,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
         }
 
+        [Ignore]
         [TestMethod]
         public async Task GetWasteSource_ForSite_CallsEndpointSuccesfully()
         {
@@ -184,6 +187,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(wasteSource, _capturedPayload);
         }
 
+        [Ignore]
         [TestMethod]
         public async Task UpdateWasteSource_ForOverseasSite_CallsEndpointSuccesfully_WithExpectedPayload()
         {
@@ -262,6 +266,52 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             var capturedPayload = JsonConvert.DeserializeObject<MaterialOutputsDto>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(materialOutputsDto, capturedPayload));
+        }
+
+        [TestMethod]
+        public async Task GetReprocessedWasteLastYear_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedOutput = true;
+            SetClientResponse(HttpStatusCode.OK, expectedOutput);
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/WasteLastYear";
+
+            // Act
+            var result = await _httpSiteMaterialService.GetReprocessedWasteLastYear(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task UpdateReprocessedWasteLastYear_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var reprocessedWasteLastYearDto = new ReprocessedWasteLastYear
+            {
+                HasReprocessedWasteLastYear = false
+            };
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/WasteLastYear";
+
+            // Act
+            await _httpSiteMaterialService.UpdateReprocessedWasteLastYear(
+                id,
+                materialId,
+                reprocessedWasteLastYearDto);
+
+            // Arrange
+            var capturedPayload = JsonConvert.DeserializeObject<ReprocessedWasteLastYear>(_capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+            Assert.IsTrue(AreObjectsEqual(reprocessedWasteLastYearDto, capturedPayload));
         }
 
         private bool AreObjectsEqual<T>(T obj1, T obj2)

@@ -1,29 +1,34 @@
-﻿using EPR.Accreditation.Portal.Enums;
+﻿using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
     [Route("[controller]/{id}")]
     public class AccreditationController : Controller
     {
+        protected readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAccreditationService _accreditationService;
         protected readonly IWastePermitService _wastePermitService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
-        protected IUrlHelper _urlHelper;
+        protected IUrlHelperWrapper _urlHelper;
 
         public AccreditationController(
+            IHttpContextAccessor httpContextAccessor,
             IWastePermitService wastePermitService,
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
-            IUrlHelper urlHelper,
+            IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel)
         {
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
@@ -66,7 +71,7 @@ namespace EPR.Accreditation.Portal.Controllers
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
                 viewModel.Id,
-                Request.HttpContext.GetRouteData().Values);
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
         }
 
@@ -168,6 +173,58 @@ namespace EPR.Accreditation.Portal.Controllers
         public async Task<IActionResult> Upload(Guid id)
         {
             return View("upload");
+        }
+
+        [HttpGet("CheckYourAnswers")]
+        public async Task<IActionResult> CheckYourAnswers(Guid? id)
+        {
+            if (!id.HasValue)
+                return BadRequest();
+
+            CheckYourAnswersViewModel vm = await _accreditationService.CheckYourAnswers(id.Value);
+            return View(vm);
+        }
+
+        [HttpPost("CheckYourAnswers")]
+        public async Task<IActionResult> CheckYourAnswers(CheckYourAnswersViewModel checkYourAnswersViewModel)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("CheckYourAnswers", new { id = checkYourAnswersViewModel.Id });
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            // Handle redirection to CheckYourAnswers if this is where we originally came from
+            if (context.HttpContext.Request.Query.ContainsKey(Strings.QueryStrings.ReturnToAnswers) &&
+                context.HttpContext.Request.Query[Strings.QueryStrings.ReturnToAnswers] == Strings.QueryStrings.ReturnToAnswersYes &&
+                context.Result is RedirectToActionResult)
+            {
+                var id = (context.Result as RedirectToActionResult).RouteValues["Id"].ToString();
+                context.Result = RedirectToAction("CheckYourAnswers", "Accreditation", new { id });
+            }
+
+            base.OnActionExecuted(context);
+        }
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
+        public async Task<IActionResult> TaskListSite(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
+        {
+            if (id != null && siteId != null && materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                                                                        id.Value,
+                                                                        siteId.Value,
+                                                                        materialId.Value);
+                return View(model);
+            }
+            return NotFound();
         }
     }
 }

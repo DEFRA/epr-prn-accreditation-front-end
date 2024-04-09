@@ -109,7 +109,7 @@ namespace EPR.Accreditation.Portal
                 endpoints.MapControllers();
             });
 
-            
+
         }
     }
 }

@@ -117,40 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLink" xml:space="preserve">
-    <value>Back</value>
+  <data name="AboutMaterial" xml:space="preserve">
+    <value>About the material</value>
   </data>
-  <data name="ConfirmAndContinue" xml:space="preserve">
-    <value>Confirm and continue</value>
+  <data name="PageHeading" xml:space="preserve">
+    <value>This is your application task list. You can save your progress and come back to it at any time.</value>
   </data>
-  <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Apply for accreditation for:</value>
   </data>
-  <data name="DecimalNumberFormatError" xml:space="preserve">
-    <value>Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
+  <data name="UploadBusinessPlan" xml:space="preserve">
+    <value>Upload your business plan </value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>For:</value>
+  <data name="UploadSupportingDocuments" xml:space="preserve">
+    <value>Upload supporting documents for the material</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
+  <data name="WasteLicencesHeading" xml:space="preserve">
+    <value>Waste licences, PRNs and business plan</value>
   </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>Cymraeg</value>
+  <data name="WasteReprocessHeader" xml:space="preserve">
+    <value>About the waste you reprocess</value>
   </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>Save and come back later</value>
-  </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>Save and continue</value>
-  </data>
-  <data name="SummaryError" xml:space="preserve">
-    <value>There is a problem</value>
-  </data>
-  <data name="TonnesLabel" xml:space="preserve">
-    <value>Tonnes</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="WasteReprocessTitle" xml:space="preserve">
+    <value>Once you’ve completed one material you can add more materials.</value>
   </data>
 </root>

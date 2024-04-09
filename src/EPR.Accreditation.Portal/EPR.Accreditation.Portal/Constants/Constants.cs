@@ -12,10 +12,8 @@ public static class Strings
 {
     public static class ApiEndPoints
     {
-        public const string Journey = "Journey";
-        public const string Waste = "Waste";
-        public const string PRN = "PRN";
-        public const string Returns = "Returns";
+        public const string Application = "Application";
+
     }
 
     public static class Notifications

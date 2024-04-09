@@ -120,6 +120,9 @@
   <data name="BackLink" xml:space="preserve">
     <value>[Welsh]Back</value>
   </data>
+  <data name="ConfirmAndContinue" xml:space="preserve">
+    <value>[Welsh]Confirm and continue</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>[Welsh]Continue</value>
   </data>
