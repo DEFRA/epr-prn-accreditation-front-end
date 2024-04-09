@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EPR.Accreditation.Facade.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Constants;
 using EPR.Accreditation.Portal.Enums;
@@ -85,6 +86,8 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.WasteSource);
         }
 
+        // =====================================================
+
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
             Guid materialId)
@@ -106,6 +109,31 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 materialOutputsViewModel.MaterialId,
                 materialOutputsDto);
         }
+
+
+        public async Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(
+            Guid id,
+            Guid materialId)
+        {
+            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+                id,
+                materialId);
+
+            return this._mapper.Map<MaterialWasteOutputsViewModel>(materialWasteOutputsDto);
+        }
+
+        public async Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialOutputsViewModel)
+        {
+            var materialWasteOutputsDto = _mapper.Map<MaterialWasteOutputsDto>(materialOutputsViewModel);
+
+            await _httpSiteMaterialService.UpdateMaterialWasteOutputs(
+                materialOutputsViewModel.Id,
+                materialOutputsViewModel.MaterialId,
+                materialWasteOutputsDto);
+        }
+
+        // =====================================================
+
 
         public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
             Guid id,

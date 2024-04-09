@@ -1,4 +1,5 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
+﻿using EPR.Accreditation.Facade.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
 using EPR.Accreditation.Portal.Enums;
@@ -49,6 +50,8 @@ namespace EPR.Accreditation.Portal.RESTservices
             await Put($"{id}/{site}/Material/{materialId}/WasteSource", wasteSource);
         }
 
+        // =====================================================
+
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
             Guid id,
             Guid materialId)
@@ -63,6 +66,37 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             await Put($"{id}/Site/Material/{materialId}/MaterialOutputs", materialOutputsDto);
         }
+
+        /// <summary>
+        /// Gets material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>Material waste output dto.</returns>
+        public async Task<MaterialWasteOutputsDto> GetMaterialWasteOutputs(
+            Guid id,
+            Guid materialId)
+        {
+            return await this.Get<MaterialWasteOutputsDto>($"{id}/Site/Material/{materialId}/MaterialWasteOutputs");
+        }
+
+        /// <summary>
+        /// Updates material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <param name="materialWasteOutputsDto">Material waste output dto.</param>
+        /// <returns>Nothing.</returns>
+        public async Task UpdateMaterialWasteOutputs(
+            Guid id,
+            Guid materialId,
+            MaterialWasteOutputsDto materialWasteOutputsDto)
+        {
+            await this.Put($"{id}/Site/Material/{materialId}/MaterialWasteOutputs", materialWasteOutputsDto);
+        }
+
+        // =====================================================
+
 
         public async Task<bool?> GetReprocessedWasteLastYear(
             Guid id,

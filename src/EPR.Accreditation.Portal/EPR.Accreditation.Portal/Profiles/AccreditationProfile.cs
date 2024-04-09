@@ -1,25 +1,34 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.Common.Dtos;
-using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.ViewModels;
-
-namespace EPR.Accreditation.Portal.Profiles
+﻿namespace EPR.Accreditation.Portal.Profiles
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using EPR.Accreditation.Portal.ViewModels;
+
     public class AccreditationProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccreditationProfile"/> class.
+        /// </summary>
         public AccreditationProfile()
         {
-            CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
-                
-            CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
+            this.CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
 
-            CreateMap<PermitExemptionViewModel, PermitExemption>();
-            CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
-            CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
+            this.CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
+
+            this.CreateMap<PermitExemptionViewModel, PermitExemption>();
+
+            this.CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
+
+            this.CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
-            CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+
+            this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
+                .ReverseMap();
+
+            this.CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
         }
     }
 }

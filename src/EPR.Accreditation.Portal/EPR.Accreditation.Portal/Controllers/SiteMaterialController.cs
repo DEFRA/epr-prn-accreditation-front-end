@@ -79,6 +79,9 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
+
+        // =====================================================
+
         [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
             Guid? id,
@@ -147,6 +150,86 @@ namespace EPR.Accreditation.Portal.Controllers
                     });
             }
         }
+
+
+        /// <summary>
+        /// Returns a page containing annual waste (actual or estimated) data.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        [HttpGet("MaterialWasteOutputs", Name = "SiteMaterialWasteOutputs")]
+        public async Task<IActionResult> MaterialWasteOutputs(
+            Guid? id,
+            Guid? materialId)
+        {
+            if (id == null || materialId == null)
+            {
+                return this.NotFound();
+            }
+
+            this.PopulateBackModel(this.WasteLastYearRouteName);
+
+            MaterialWasteOutputsViewModel materialWasteOutputsViewModel = await this._accreditationSiteMaterialService.GetMaterialWasteOutputs(
+                id.Value,
+                materialId.Value);
+
+            // if waste last year has not been set, then the user should not
+            // be on this page
+            if (materialWasteOutputsViewModel.WasteLastYear == null)
+            {
+                return this.NotFound();
+            }
+
+            // if waste last year is true then return the MaterialWasteOutputs view
+            // otherwise, return the estimated view
+            return materialWasteOutputsViewModel.WasteLastYear == true ?
+                View("MaterialWasetOutputsLastYear", materialWasteOutputsViewModel) :
+                View("MaterialWasteOutputsEstimated", materialWasteOutputsViewModel);
+        }
+
+        [HttpPost("MaterialWasteOutputs")]
+        public async Task<IActionResult> MaterialWasteOutputs(
+            MaterialWasteOutputsViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
+                MaterialOutputsLastYearResources.ContaminentsBlank,
+                MaterialOutputsLastYearResources.ProcessLossBlank))
+            {
+                return await MaterialOutputs(
+                    viewModel.Id,
+                    viewModel.MaterialId);
+            }
+
+            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                PopulateBackModel(SiteNonWasteInputsRouteName);
+
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(SiteProductsProducedRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.MaterialId
+                    });
+            }
+        }
+
+
+        // =====================================================
+
 
         /// 
         /// STUBBED METHOD
