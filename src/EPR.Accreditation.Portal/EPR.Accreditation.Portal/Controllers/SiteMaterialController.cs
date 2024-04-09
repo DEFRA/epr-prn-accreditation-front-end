@@ -79,9 +79,6 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
-
-        // =====================================================
-
         [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
             Guid? id,
@@ -151,7 +148,6 @@ namespace EPR.Accreditation.Portal.Controllers
             }
         }
 
-
         /// <summary>
         /// Returns a page containing annual waste (actual or estimated) data.
         /// </summary>
@@ -184,8 +180,8 @@ namespace EPR.Accreditation.Portal.Controllers
             // if waste last year is true then return the MaterialWasteOutputs view
             // otherwise, return the estimated view
             return materialWasteOutputsViewModel.WasteLastYear == true ?
-                View("MaterialWasetOutputsLastYear", materialWasteOutputsViewModel) :
-                View("MaterialWasteOutputsEstimated", materialWasteOutputsViewModel);
+                this.View("MaterialWasetOutputsLastYear", materialWasteOutputsViewModel) :
+                this.View("MaterialWasteOutputsEstimated", materialWasteOutputsViewModel);
         }
 
         [HttpPost("MaterialWasteOutputs")]
@@ -193,43 +189,40 @@ namespace EPR.Accreditation.Portal.Controllers
             MaterialWasteOutputsViewModel viewModel,
             SaveButton saveButton)
         {
-            if (!ModelState.IsValidForSaveForLater(
+            if (!this.ModelState.IsValidForSaveForLater(
                 saveButton,
-                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
-                MaterialOutputsLastYearResources.ContaminentsBlank,
-                MaterialOutputsLastYearResources.ProcessLossBlank))
+                MaterialWasteOutputsLastYearResources.UkPackagingWasteBlank,
+                MaterialWasteOutputsLastYearResources.NonUkPackagingWasteBlank,
+                MaterialWasteOutputsLastYearResources.NonPackagingWasteBlank))
             {
-                return await MaterialOutputs(
+                return await this.MaterialWasteOutputs(
                     viewModel.Id,
                     viewModel.MaterialId);
             }
 
-            await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
+            await this._accreditationSiteMaterialService.UpdateMaterialWasteOutputs(viewModel);
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                this.PopulateBackModel(this.SiteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+                await this._saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
+                    this._httpContextAccessor.HttpContext.GetRouteData().Values);
+                return this.View("_ApplicationSaved");
             }
             else
             {
-                return RedirectToRoute(SiteProductsProducedRouteName,
+                return this.RedirectToRoute(
+                    this.SiteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,
-                        viewModel.MaterialId
+                        viewModel.MaterialId,
                     });
             }
         }
-
-
-        // =====================================================
-
 
         /// 
         /// STUBBED METHOD

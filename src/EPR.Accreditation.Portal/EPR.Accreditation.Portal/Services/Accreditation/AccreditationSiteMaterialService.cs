@@ -86,8 +86,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.WasteSource);
         }
 
-        // =====================================================
-
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
             Guid materialId)
@@ -110,7 +108,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 materialOutputsDto);
         }
 
-
+        /// <summary>
+        /// Gets material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>Material waste output dto.</returns>
         public async Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(
             Guid id,
             Guid materialId)
@@ -122,18 +125,20 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return this._mapper.Map<MaterialWasteOutputsViewModel>(materialWasteOutputsDto);
         }
 
+        /// <summary>
+        /// Updates material waste output.
+        /// </summary>
+        /// <param name="materialOutputsViewModel">Material waste output dto.</param>
+        /// <returns>Nothing.</returns>
         public async Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialOutputsViewModel)
         {
-            var materialWasteOutputsDto = _mapper.Map<MaterialWasteOutputsDto>(materialOutputsViewModel);
+            var materialWasteOutputsDto = this._mapper.Map<MaterialWasteOutputsDto>(materialOutputsViewModel);
 
-            await _httpSiteMaterialService.UpdateMaterialWasteOutputs(
+            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
                 materialOutputsViewModel.Id,
                 materialOutputsViewModel.MaterialId,
                 materialWasteOutputsDto);
         }
-
-        // =====================================================
-
 
         public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
             Guid id,
