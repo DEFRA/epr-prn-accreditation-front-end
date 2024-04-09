@@ -1,0 +1,46 @@
+﻿@model NonWasteInputsViewModel
+
+@{
+    ViewData["Title"] = NonWasteInputResources.Title;
+}
+
+<partial name="_WasteMaterialName" />
+<fieldset class="govuk-fieldset">
+    <h1 class="govuk-heading-l">@NonWasteInputResources.Title</h1>
+    <p class="govuk-body-m">@NonWasteInputResources.SubTitle</p>
+    
+    <form method="post">
+        <input type="hidden" asp-for="WasteLastYear" />
+        <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+            @for (var i = 0; i < 5; i++)
+            {
+            <div class="govuk-form-group">
+                <div class="govuk-input__wrapper">
+                @if (Model != null && Model.Rows.Count() > i)
+                {
+                    <input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" asp-for="Rows[i].Type">
+                    
+                    <div class="govuk-input__wrapper">
+                        <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="Rows[i].Tonnes" autocomplete="off" />
+                        <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+                    </div>
+                }
+                else
+                {
+                    @* @Html.TextBoxFor(m => m.Rows[i].Type) *@
+                    <input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" name="@($"Rows[{i}].Type")" type="text">
+                    
+                    <div class="govuk-input__wrapper">
+                        <input class="govuk-input govuk-input--width-10 3dp" name="@($"Rows[{i}].Tonnes")" type="text" autocomplete="off" />
+                        <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+                    </div>
+                }
+                </div>
+            </div>
+            }
+        </fieldset>
+        </div>
+        <partial name="_SaveButtons" />
+    </form>
+</fieldset>

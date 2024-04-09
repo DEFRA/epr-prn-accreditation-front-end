@@ -15,6 +15,7 @@ namespace EPR.Accreditation.Portal.Controllers
     {
         private string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
         private string WasteLastYearRouteName = "WasteLastYear";
+        private string NonWasteInputsRouteName = "NonWasteInputs";
 
         public SiteMaterialController(
             IHttpContextAccessor httpContextAccessor,
@@ -79,6 +80,76 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
+        [HttpGet("NonWasteInputs", Name = "NonWasteInputs")]
+        public async Task<IActionResult> NonWasteInputs(
+            Guid? id,
+            Guid? materialId)
+        {
+            if (id.HasValue &&
+                materialId.HasValue)
+            {
+                PopulateBackModel(WasteLastYearRouteName);
+
+                var nonWasteInputsViewModel = await _accreditationSiteMaterialService.GetNonWasteInputs(
+                    id.Value,
+                    materialId.Value);
+
+                // if waste last year has not been set, then the user should not
+                // be on this page
+                if (nonWasteInputsViewModel.WasteLastYear == null)
+                    return NotFound();
+
+                // if waste last year is true then return the MaterialOutputs view
+                if (nonWasteInputsViewModel.WasteLastYear == true)
+                    return View("NonWasteInputsLastYear", nonWasteInputsViewModel);
+                // otherwise return the annual outputs
+                else
+                    return View("NonWasteInputsEstimated", nonWasteInputsViewModel);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost("NonWasteInputs")]
+        public async Task<IActionResult> NonWasteInputs(
+            NonWasteInputsViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
+                MaterialOutputsLastYearResources.ContaminentsBlank,
+                MaterialOutputsLastYearResources.ProcessLossBlank))
+            {
+                if (viewModel.WasteLastYear == true)
+                    return View("NonWasteInputsLastYear", viewModel);
+                else
+                    return View("NonWasteInputsEstimated", viewModel);
+            }
+
+            await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                PopulateBackModel(SiteNonWasteInputsRouteName);
+
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(SiteMaterialOutputsRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.MaterialId
+                    });
+            }
+        }
+
         [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
         public async Task<IActionResult> MaterialOutputs(
             Guid? id,
@@ -87,7 +158,7 @@ namespace EPR.Accreditation.Portal.Controllers
             if (id != null &&
                 materialId != null)
             {
-                PopulateBackModel(WasteLastYearRouteName);
+                PopulateBackModel(NonWasteInputsRouteName);
 
                 var materialOutputsViewModel = await _accreditationSiteMaterialService.GetMaterialOutputs(
                     id.Value,
@@ -200,7 +271,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
             if (saveButton == SaveButton.SaveAndContinue)
                 return RedirectToRoute(
-                    SiteMaterialOutputsRouteName,
+                    NonWasteInputsRouteName,
                     new
                     {
                         id = viewModel.Id,

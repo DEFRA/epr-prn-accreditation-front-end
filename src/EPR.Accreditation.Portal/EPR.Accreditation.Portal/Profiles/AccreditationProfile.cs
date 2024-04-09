@@ -18,6 +18,13 @@ namespace EPR.Accreditation.Portal.Profiles
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
+
+            CreateMap<NonWasteInputsDto, NonWasteInputsViewModel>()
+                .ForMember(d => d.Rows, o => o.MapFrom(s => s.NonWasteInputRecords))
+                .ReverseMap();
+
+            CreateMap<NonWasteInputRecordDto, NonWasteInputRow>()
+                .ReverseMap();
         }
     }
 }

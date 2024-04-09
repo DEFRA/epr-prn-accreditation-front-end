@@ -85,6 +85,35 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.WasteSource);
         }
 
+        public async Task<NonWasteInputsViewModel> GetNonWasteInputs(Guid id, Guid materialId)
+        {
+            var nonWasteInputsDto = await _httpSiteMaterialService.GetNonWasteInputs(
+                id,
+                materialId);
+
+            return _mapper.Map<NonWasteInputsViewModel>(nonWasteInputsDto);
+        }
+
+        public async Task UpdateNonWasteInputs(NonWasteInputsViewModel nonWasteInputsViewModel)
+        {
+            if (nonWasteInputsViewModel.Rows != null &&
+                nonWasteInputsViewModel.Rows.Any())
+            {
+                // remove blank rows
+                nonWasteInputsViewModel.Rows = nonWasteInputsViewModel
+                    .Rows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Type) && r.Tonnes != null)
+                    .ToList();
+            }
+
+            var nonWasteInputsDto = _mapper.Map<NonWasteInputsDto>(nonWasteInputsViewModel);
+
+            await _httpSiteMaterialService.UpdateNonWasteInputs(
+                nonWasteInputsDto.Id,
+                nonWasteInputsDto.MaterialId,
+                nonWasteInputsDto);
+        }
+
         public async Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
             Guid materialId)

@@ -24,6 +24,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddHttpClient("HttpClient");
             services.AddScoped<WasteTypeActionFilter>();
             services.AddScoped<BackPageViewModel>();
+            services.AddScoped<IUrlHelperWrapper, UrlHelperWrapper>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<ICultureHelper, CultureHelper>();
             services.AddScoped<IQueryStringHelper, QueryStringHelper>();
@@ -53,7 +54,6 @@ namespace EPR.Accreditation.Portal.Extensions
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"
                     )
-
             );
 
             services
