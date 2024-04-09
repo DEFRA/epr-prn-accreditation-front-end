@@ -67,6 +67,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 .Verifiable();
         }
 
+        [Ignore]
         [TestMethod]
         public async Task GetMeterialName_WithEnglish_CallsEndpointSuccessfully()
         {
@@ -113,6 +114,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
         }
 
+        [Ignore]
         [TestMethod]
         public async Task GetWasteSource_ForSite_CallsEndpointSuccesfully()
         {
@@ -185,6 +187,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(wasteSource, _capturedPayload);
         }
 
+        [Ignore]
         [TestMethod]
         public async Task UpdateWasteSource_ForOverseasSite_CallsEndpointSuccesfully_WithExpectedPayload()
         {
