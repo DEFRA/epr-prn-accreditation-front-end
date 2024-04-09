@@ -57,7 +57,10 @@ namespace EPR.Accreditation.Portal.Controllers
             ExemptionReferencesResources.ErrorMessageDuplicate,
             ExemptionReferencesResources.ErrorMessageInvalidFormat,
             ExemptionReferencesResources.ErrorMessageTooLong))
+            {
+                _backPageViewModel.Url = $"/Accreditation/{viewModel.Id}/PermitExemption";
                 return View(viewModel);
+            }
 
             await _accreditationSiteService.UpdateExemptionReferences(viewModel);
 
