@@ -1,6 +1,7 @@
 ﻿using EPR.Accreditation.Portal.DTOs;
 using EPR.Accreditation.Facade.Common.Enums;
 using EPR.Accreditation.Portal.ViewModels;
+using EPR.Accreditation.Facade.Common.Dtos;
 
 namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
