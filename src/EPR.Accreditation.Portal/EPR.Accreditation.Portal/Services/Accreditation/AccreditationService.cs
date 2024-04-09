@@ -67,5 +67,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             };
             return viewModel;
         }
+
+        public async Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id)
+        {
+            var result = await _httpAccreditationService.GetCheckYourAnswers(id);
+            var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
+            return vm;
+        }
     }
 }

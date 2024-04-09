@@ -117,40 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLink" xml:space="preserve">
-    <value>Back</value>
+  <data name="Change" xml:space="preserve">
+    <value>[Welsh]Change</value>
   </data>
-  <data name="ConfirmAndContinue" xml:space="preserve">
-    <value>Confirm and continue</value>
+  <data name="DischargeConsentNumber" xml:space="preserve">
+    <value>[Welsh]Discharge consent number</value>
   </data>
-  <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>[Welsh]ErrorMessage</value>
   </data>
-  <data name="DecimalNumberFormatError" xml:space="preserve">
-    <value>Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
+  <data name="ExemptionReferenceNumber" xml:space="preserve">
+    <value>[Welsh]Exemption reference</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>For:</value>
+  <data name="Hint" xml:space="preserve">
+    <value>[Welsh]Waste licences, PRNs and business plan</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
+  <data name="PartAReferenceNumber" xml:space="preserve">
+    <value>[Welsh]PPC 'Part A' or non-waste EPR 'Part A1' activity reference number</value>
   </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>Cymraeg</value>
+  <data name="PartBReferenceNumber" xml:space="preserve">
+    <value>[Welsh]PPC 'Part B or C' or non-waste EPR 'Part A2 or B' activity reference number</value>
   </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>Save and come back later</value>
+  <data name="PeopleOfAuthority" xml:space="preserve">
+    <value>[Welsh]People who have authority to issue PRNs</value>
   </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>Save and continue</value>
+  <data name="SiteAddress" xml:space="preserve">
+    <value>[Welsh]Site Address</value>
   </data>
-  <data name="SummaryError" xml:space="preserve">
-    <value>There is a problem</value>
+  <data name="Title" xml:space="preserve">
+    <value>[Welsh]Check your answers before continuing</value>
   </data>
-  <data name="TonnesLabel" xml:space="preserve">
-    <value>Tonnes</value>
+  <data name="WasteCarrierRegistrationNumber" xml:space="preserve">
+    <value>[Welsh]Waste carrier, broker or dealer registration number</value>
   </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="WasteManagementLicenceNumber" xml:space="preserve">
+    <value>[Welsh]Waste management license or environmental permit number</value>
   </data>
 </root>
