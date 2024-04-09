@@ -23,7 +23,6 @@ import Accordian from "./common/overrides"
 import subTypes from "./pages/SubTypes"
 import prnCreate from "./pages/Prn-Create"
 import viewSentPrns from "./pages/ViewSentPrns"
-import exemptionReferences from "./pages/ExemptionReferences"
 
 $(document).ready(function () {
     initAll({
