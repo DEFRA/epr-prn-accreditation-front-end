@@ -226,5 +226,53 @@ namespace EPR.Accreditation.Portal.Controllers
             }
             return NotFound();
         }
+
+        #region Not implemented yet
+
+        [HttpGet("SiteAddress")]
+        public async Task<IActionResult> SiteAddress(
+            Guid? id)
+        {
+            return View("siteAddress");
+        }
+
+        [HttpGet("WasteCarrierRegistrationNumber")]
+        public async Task<IActionResult> WasteCarrierRegistrationNumber(
+            Guid? id)
+        {
+            return View("wasteCarrierRegistrationNumber");
+        }
+
+        [HttpGet("WasteManagementPermitNumber")]
+        public async Task<IActionResult> WasteManagementPermitNumber(
+            Guid? id)
+        {
+            return View("wasteManagementPermitNumber");
+        }
+
+        [HttpGet("PartABCReferenceNumber")]
+        public async Task<IActionResult> PartABCReferenceNumber(
+            Guid? id)
+        {
+            return View("partABCReferenceNumber");
+        }
+
+        [HttpGet("DischargeConsentNumber")]
+        public async Task<IActionResult> DischargeConsentNumber(
+            Guid? id)
+        {
+            return View("dischargeConsentNumber");
+        }
+
+        [HttpGet("ExemptionReference")]
+        public async Task<IActionResult> ExemptionReference(
+            Guid? id)
+        {
+            return View("exemptionReference");
+        }
+
+
+
+        #endregion
     }
 }

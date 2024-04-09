@@ -18,6 +18,10 @@
 <form method="post">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds-from-desktop">
+            <p class="govuk-body">
+                <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+            </p>
+
             <h1 class="govuk-heading-l">@CheckYourAnswersResources.Title</h1>
             <p class="govuk-hint">@CheckYourAnswersResources.Hint</p>
 
@@ -30,8 +34,8 @@
                         @Model.SiteAddress
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="SiteAddress"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
@@ -46,8 +50,8 @@
                         @Model.WasteCarrierRegistrationNumber
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="WasteCarrierRegistrationNumber"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
@@ -62,8 +66,8 @@
                         @Model.WasteManagementLicenceNumber
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="WasteManagementPermitNumber"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
@@ -78,8 +82,8 @@
                         @Model.PartAReferenceNumber
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="PartABCReferenceNumber"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
@@ -94,8 +98,8 @@
                         @Model.PartBReferenceNumber
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="PartABCReferenceNumber"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
@@ -110,8 +114,8 @@
                         @Model.DischargeConsentNumber
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="DischargeConsentNumber"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
@@ -126,8 +130,8 @@
                         @Model.ExemptionReferenceNumber
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a asp-action="Index"
-                           asp-controller="Home"
+                        <a asp-action="ExemptionReference"
+                           asp-controller="Accreditation"
                            asp-area=""
                            asp-all-route-data=queryStringRouteData
                            asp-route-action="check">@CheckYourAnswersResources.Change</a>
