@@ -1,5 +1,4 @@
-﻿
-using EPR.Accreditation.Portal.Controllers;
+﻿using EPR.Accreditation.Portal.Controllers;
 using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;

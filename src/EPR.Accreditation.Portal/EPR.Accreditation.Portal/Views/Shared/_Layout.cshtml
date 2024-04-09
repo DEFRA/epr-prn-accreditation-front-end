@@ -1,6 +1,9 @@
-﻿@using EPR.Accreditation.Portal.Helpers.Interfaces
+﻿@using EPR.Accreditation.Portal
+@using EPR.Accreditation.Portal.Helpers.Interfaces
 @using EPR.Accreditation.Portal.Resources
 @using EPR.Accreditation.Portal.ViewModels
+
+@inject Microsoft.Extensions.Configuration.IConfiguration configuration;
 @inject IQueryStringHelper queryStringHelper
 @inject ICultureHelper cultureHelper;
 @inject BackPageViewModel backPageViewModel;
@@ -74,6 +77,7 @@
                 </span>
             </p>
         </div>
+        <input id="jsValidationEnaled" type="hidden" value="@configuration["ClientValidationEnabled"]" />
         @if (backPageViewModel.HasBackLink)
         {
             <a href="@backPageViewModel.Url" class="govuk-back-link">@MasterResources.BackLink</a>

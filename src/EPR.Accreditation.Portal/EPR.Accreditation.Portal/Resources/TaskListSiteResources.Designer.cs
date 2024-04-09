@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MasterResources {
+    public class TaskListSiteResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MasterResources() {
+        internal TaskListSiteResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.MasterResources", typeof(MasterResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.TaskListSiteResources", typeof(TaskListSiteResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,110 +61,74 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Looks up a localized string similar to About the material.
         /// </summary>
-        public static string BackLink {
+        public static string AboutMaterial {
             get {
-                return ResourceManager.GetString("BackLink", resourceCulture);
+                return ResourceManager.GetString("AboutMaterial", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm and continue.
+        ///   Looks up a localized string similar to This is your application task list. You can save your progress and come back to it at any time..
         /// </summary>
-        public static string ConfirmAndContinue {
+        public static string PageHeading {
             get {
-                return ResourceManager.GetString("ConfirmAndContinue", resourceCulture);
+                return ResourceManager.GetString("PageHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continue.
+        ///   Looks up a localized string similar to Apply for accreditation for:.
         /// </summary>
-        public static string Continue {
+        public static string PageTitle {
             get {
-                return ResourceManager.GetString("Continue", resourceCulture);
+                return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places.
+        ///   Looks up a localized string similar to Upload your business plan .
         /// </summary>
-        public static string DecimalNumberFormatError {
+        public static string UploadBusinessPlan {
             get {
-                return ResourceManager.GetString("DecimalNumberFormatError", resourceCulture);
+                return ResourceManager.GetString("UploadBusinessPlan", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For:.
+        ///   Looks up a localized string similar to Upload supporting documents for the material.
         /// </summary>
-        public static string MaterialForLabel {
+        public static string UploadSupportingDocuments {
             get {
-                return ResourceManager.GetString("MaterialForLabel", resourceCulture);
+                return ResourceManager.GetString("UploadSupportingDocuments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to Waste licences, PRNs and business plan.
         /// </summary>
-        public static string No {
+        public static string WasteLicencesHeading {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("WasteLicencesHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cymraeg.
+        ///   Looks up a localized string similar to About the waste you reprocess.
         /// </summary>
-        public static string OppositeLanguage {
+        public static string WasteReprocessHeader {
             get {
-                return ResourceManager.GetString("OppositeLanguage", resourceCulture);
+                return ResourceManager.GetString("WasteReprocessHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and come back later.
+        ///   Looks up a localized string similar to Once you’ve completed one material you can add more materials..
         /// </summary>
-        public static string SaveAndComeBack {
+        public static string WasteReprocessTitle {
             get {
-                return ResourceManager.GetString("SaveAndComeBack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save and continue.
-        /// </summary>
-        public static string SaveAndContinue {
-            get {
-                return ResourceManager.GetString("SaveAndContinue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is a problem.
-        /// </summary>
-        public static string SummaryError {
-            get {
-                return ResourceManager.GetString("SummaryError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tonnes.
-        /// </summary>
-        public static string TonnesLabel {
-            get {
-                return ResourceManager.GetString("TonnesLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Yes.
-        /// </summary>
-        public static string Yes {
-            get {
-                return ResourceManager.GetString("Yes", resourceCulture);
+                return ResourceManager.GetString("WasteReprocessTitle", resourceCulture);
             }
         }
     }

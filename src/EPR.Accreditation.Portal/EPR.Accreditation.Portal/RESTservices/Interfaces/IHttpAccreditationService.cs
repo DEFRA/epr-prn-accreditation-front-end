@@ -1,7 +1,8 @@
 ﻿using EPR.Accreditation.Facade.Common.Enums;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Facade.Common.Enums;
 using DTO = EPR.Accreditation.Facade.Common.Dtos;
+using EPR.Accreditation.Facade.Common.Dtos;
+using EPR.Accreditation.Portal.Common.Dtos;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
@@ -23,6 +24,12 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid siteExternalId,
             Guid materialExternalId,
             DTO.AccreditationMaterial accreditationMaterial);
+
+        Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId);
+
+        Task<Site> GetSite(Guid siteId);
+
+        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
 
         Task<DTO.OverseasReprocessingSite> GetOverseasSite(
             Guid accreditationExternalId,
