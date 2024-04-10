@@ -15,5 +15,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
         Task<HasOverseasAgentViewModel> GetHasOverseasAgent(Guid id);
+        Task SetOverseasAgentFlag(HasOverseasAgentViewModel viewModel);
     }
 }

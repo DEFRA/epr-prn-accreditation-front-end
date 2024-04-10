@@ -87,5 +87,10 @@ namespace EPR.Accreditation.Portal.RESTservices
             var hasOverseasAgent = await Get<bool?>($"{accreditationExternalId}/HasOverseasAgent");
             return hasOverseasAgent;
         }
+
+        public async Task SetHasOverseasAgent(Guid accreditationExternalId, bool? hasOverseasAgent)
+        {
+            await Put($"{accreditationExternalId}/HasOverseasAgent", hasOverseasAgent);
+        }
     }
 }

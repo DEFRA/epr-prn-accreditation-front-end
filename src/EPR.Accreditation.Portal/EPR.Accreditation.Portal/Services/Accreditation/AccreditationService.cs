@@ -105,5 +105,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return new HasOverseasAgentViewModel { ExternalId = id, UseOverseasAgent = result };
         }
 
+        public async Task SetOverseasAgentFlag(HasOverseasAgentViewModel hasOverseasAgentViewModel)
+        {
+            await _httpAccreditationService.SetHasOverseasAgent(hasOverseasAgentViewModel.ExternalId, hasOverseasAgentViewModel.UseOverseasAgent);
+        }
     }
 }

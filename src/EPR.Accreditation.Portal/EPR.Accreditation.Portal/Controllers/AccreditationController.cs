@@ -154,7 +154,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 // var previouslySaved = await _saveAndComeBackService.GetSaveAndComeBack(id.Value); TODO:
                 var overseasAgent = await _accreditationService.GetHasOverseasAgent(id.Value);
 
-                return View(overseasAgent); 
+                return View(overseasAgent);
             }
 
             return View(new HasOverseasAgentViewModel());
@@ -167,15 +167,20 @@ namespace EPR.Accreditation.Portal.Controllers
             SaveButton saveButton)
         {
             if (!ModelState.IsValid)
+            {
                 return View(viewModel);
+            }
 
-            //await _accreditationService.UpdateOrverseasAgent(viewModel); // TODO:
+            await _accreditationService.SetOverseasAgentFlag(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue && viewModel.UseOverseasAgent.Value == true)
-                return RedirectToAction("Overseas", "Accreditation");
-
+            {
+                return RedirectToAction("Overseasagentdetails", "Accreditation", new { id = viewModel.ExternalId });
+            }
             else if (saveButton == SaveButton.SaveAndContinue && viewModel.UseOverseasAgent.Value == false)
-                return RedirectToAction("ListUkPorts", "Accreditation"); // TODO:
+            {
+                return RedirectToAction("OverseasPortsList", "Accreditation", new { id = viewModel.ExternalId });
+            }
 
             await _saveAndComeBackService.AddSaveAndComeBack(
                 viewModel.ExternalId,
@@ -264,6 +269,20 @@ namespace EPR.Accreditation.Portal.Controllers
                 return View(model);
             }
             return NotFound();
+        }
+
+        [HttpGet("OverseasAgentDetails")]
+        public async Task<IActionResult> OverseasAgentDetails(
+            Guid? id)
+        {
+            return View();
+        }
+
+        [HttpGet("OverseasPortsList")]
+        public async Task<IActionResult> OverseasPortsList(
+            Guid? id)
+        {
+            return View();
         }
     }
 }
