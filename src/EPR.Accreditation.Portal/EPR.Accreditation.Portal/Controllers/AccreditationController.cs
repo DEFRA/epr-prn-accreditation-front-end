@@ -151,7 +151,6 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             if (id.HasValue)
             {
-                // var previouslySaved = await _saveAndComeBackService.GetSaveAndComeBack(id.Value); TODO:
                 var overseasAgent = await _accreditationService.GetHasOverseasAgent(id.Value);
 
                 return View(overseasAgent);
@@ -181,10 +180,6 @@ namespace EPR.Accreditation.Portal.Controllers
             {
                 return RedirectToAction("OverseasPortsList", "Accreditation", new { id = viewModel.ExternalId });
             }
-
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.ExternalId,
-                Request.HttpContext.GetRouteData().Values);
 
             return View("_ApplicationSaved");
         }

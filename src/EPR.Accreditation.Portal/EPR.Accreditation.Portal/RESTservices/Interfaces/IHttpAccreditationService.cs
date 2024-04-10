@@ -3,6 +3,7 @@ using EPR.Accreditation.Portal.DTOs.WastePermit;
 using DTO = EPR.Accreditation.Facade.Common.Dtos;
 using EPR.Accreditation.Facade.Common.Dtos;
 using EPR.Accreditation.Portal.Common.Dtos;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
@@ -35,7 +36,7 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid accreditationExternalId,
             Guid siteExternalId);
 
-        Task<bool?> GetHasOverseasAgent(Guid accreditationExternalId);
+        Task<HasOverseasAgentDto> GetHasOverseasAgent(Guid accreditationExternalId);
 
         Task SetHasOverseasAgent(Guid accreditationExternalId, bool? hasOverseasAgent);
     }

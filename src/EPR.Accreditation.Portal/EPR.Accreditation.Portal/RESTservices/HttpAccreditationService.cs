@@ -4,6 +4,7 @@ using EPR.Accreditation.Portal.DTOs.WastePermit;
 using EPR.Accreditation.Portal.Common.Dtos;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using System.Collections.Generic;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 
 
 namespace EPR.Accreditation.Portal.RESTservices
@@ -82,9 +83,9 @@ namespace EPR.Accreditation.Portal.RESTservices
             return await Get<OverseasReprocessingSite>($"{accreditationExternalId}/OverseasSite/{siteExternalId}");
         }
 
-        public async Task<bool?> GetHasOverseasAgent(Guid accreditationExternalId)
+        public async Task<HasOverseasAgentDto> GetHasOverseasAgent(Guid accreditationExternalId)
         {
-            var hasOverseasAgent = await Get<bool?>($"{accreditationExternalId}/HasOverseasAgent");
+            var hasOverseasAgent = await Get<HasOverseasAgentDto>($"{accreditationExternalId}/HasOverseasAgent");
             return hasOverseasAgent;
         }
 
