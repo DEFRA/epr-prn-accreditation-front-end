@@ -5,6 +5,7 @@ using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
 using EPR.Accreditation.Portal.ViewModels;
+using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Localization;
@@ -237,9 +238,9 @@ namespace EPR.Accreditation.UnitTests.Services
                 .Returns(
                     new NonWasteInputsViewModel
                     {
-                        Rows = new List<NonWasteInputsRowViewModel>
+                        Rows = new List<TypeTonnesRowViewModel>
                         {
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
@@ -268,24 +269,24 @@ namespace EPR.Accreditation.UnitTests.Services
                 .Returns(
                     new NonWasteInputsViewModel
                     {
-                        Rows = new List<NonWasteInputsRowViewModel>
+                        Rows = new List<TypeTonnesRowViewModel>
                         {
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
                             },
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
                             },
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
                             },
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
@@ -309,13 +310,13 @@ namespace EPR.Accreditation.UnitTests.Services
                 .Returns(new NonWasteInputsDto());
             var viewModel = new NonWasteInputsViewModel
             {
-                Rows = new List<NonWasteInputsRowViewModel>
+                Rows = new List<TypeTonnesRowViewModel>
                 {
-                    new NonWasteInputsRowViewModel { Type = "Type1", Tonnes = 10 },
-                    new NonWasteInputsRowViewModel { Type = string.Empty, Tonnes = null },
-                    new NonWasteInputsRowViewModel { Type = "Type3", Tonnes = 20 },
-                    new NonWasteInputsRowViewModel { Type = "Type4", Tonnes = 30 },
-                    new NonWasteInputsRowViewModel { Type = string.Empty, Tonnes = null },
+                    new TypeTonnesRowViewModel { Type = "Type1", Tonnes = 10 },
+                    new TypeTonnesRowViewModel { Type = string.Empty, Tonnes = null },
+                    new TypeTonnesRowViewModel { Type = "Type3", Tonnes = 20 },
+                    new TypeTonnesRowViewModel { Type = "Type4", Tonnes = 30 },
+                    new TypeTonnesRowViewModel { Type = string.Empty, Tonnes = null },
                 }
             };
 

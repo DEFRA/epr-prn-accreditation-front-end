@@ -1,35 +1,22 @@
-﻿using EPR.Accreditation.Portal.Attributes.Validation;
-using EPR.Accreditation.Portal.Resources;
-
-namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.Portal.ViewModels
 {
+    using EPR.Accreditation.Portal.Attributes.Validation;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.ViewModels.Interfaces;
+
     /// <summary>
-    /// View model for Non Waste Inputs. Shared by estimated or last calender year.
+    /// Base class for view where there are multiple rows that can be added
     /// </summary>
-    public class NonWasteInputsViewModel
+    /// <typeparam name="T">The type that represents the rows in the view model</typeparam>
+    public abstract class BaseMultiRowView<T>
+        where T : IEntryMade
     {
-        /// <summary>
-        /// Gets or sets the Id of the accreditation populated from the route values.
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Id for the current material populated from the route values.
-        /// </summary>
-        public Guid MaterialId { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether waste was processed last year.
-        /// This is required so that we know which view to return.
-        /// </summary>
-        public bool? WasteLastYear { get; set; }
-
         /// <summary>
         /// Gets or sets the Rows that represent Rows in the view that contain the actual
         /// data.
         /// </summary>
         [ListMustBePopulated(ErrorMessageResourceName = "AtLeastOneEntryRequired", ErrorMessageResourceType = typeof(NonWasteInputLastYearResources))]
-        public IList<NonWasteInputsRowViewModel> Rows { get; set; }
+        public IList<T> Rows { get; set; }
 
         /// <summary>
         /// Gets or sets a value to help identify how many extra rows to add over the initial 3 when

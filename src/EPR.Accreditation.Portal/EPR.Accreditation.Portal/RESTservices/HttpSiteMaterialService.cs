@@ -64,6 +64,21 @@ namespace EPR.Accreditation.Portal.RESTservices
             await Put<NonWasteInputsDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
         }
 
+        public async Task<NonWasteInputsDto> GetProductsProduced(
+            Guid id,
+            Guid materialId)
+        {
+            return await Get<NonWasteInputsDto>($"{id}/Site/Material/{materialId}/ProductsProduced");
+        }
+
+        public async Task UpdateProductsProduced(
+            Guid id,
+            Guid materialId,
+            NonWasteInputsDto nonWasteInputsDto)
+        {
+            await Put<NonWasteInputsDto>($"{id}/Site/Material/{materialId}/ProductsProduced", nonWasteInputsDto);
+        }
+
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
             Guid id,
             Guid materialId)

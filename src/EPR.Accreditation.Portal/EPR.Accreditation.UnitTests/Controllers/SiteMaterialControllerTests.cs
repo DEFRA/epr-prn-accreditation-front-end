@@ -6,6 +6,7 @@
     using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
@@ -570,7 +571,7 @@
             // Arrange
             var viewModel = new NonWasteInputsViewModel
             {
-                Rows = new List<NonWasteInputsRowViewModel>(),
+                Rows = new List<TypeTonnesRowViewModel>(),
                 WasteLastYear = true
             };
             var saveButton = SaveButton.AddRow;

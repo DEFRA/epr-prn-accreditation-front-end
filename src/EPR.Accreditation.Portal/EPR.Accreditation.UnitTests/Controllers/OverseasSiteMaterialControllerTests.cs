@@ -3,6 +3,7 @@ using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
+using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;

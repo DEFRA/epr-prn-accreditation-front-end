@@ -3,6 +3,7 @@ using EPR.Accreditation.Portal.Helpers.ActionFilters;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
+using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPR.Accreditation.Portal.Controllers
@@ -26,7 +27,6 @@ namespace EPR.Accreditation.Portal.Controllers
                   SiteType.OverseasSite)
         {
             SiteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
-            SiteProductsProducedRouteName = "OverseasSiteProductsProduced";
             SiteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
         }
 

@@ -6,6 +6,7 @@
     using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -16,7 +17,6 @@
         // overriden in inheriting classes
         protected string SiteChooseMaterialRouteName;
         protected string SiteProcessingCapacityRouteName;
-        protected string SiteProductsProducedRouteName;
         protected string SiteNonWasteInputsRouteName;
         protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IUrlHelperWrapper _urlHelper;

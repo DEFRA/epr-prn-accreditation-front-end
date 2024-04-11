@@ -1,7 +1,7 @@
 ﻿using EPR.Accreditation.Portal.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace EPR.Accreditation.Portal.ViewModels
+namespace EPR.Accreditation.Portal.ViewModels.SiteMaterial
 {
     public class ReprocessedWasteLastYearViewModel
     {
