@@ -1,6 +1,6 @@
 ﻿export default (function () {
     // only do this if validation is turned on
-    if ($("jsValidationEnaled").val().toLowerCase() === "true") {
+    if ($("#jsValidationEnaled").val().toLowerCase() === "true") {
         var cancelSubmit = true;
         $('button[name="saveButton"][value="SaveAndComeBack"]').on('click', function (e) {
             if (cancelSubmit)

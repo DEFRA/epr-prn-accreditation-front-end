@@ -6,6 +6,7 @@ using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Localization;
+using static EPR.Accreditation.Portal.Constants.Strings;
 
 namespace EPR.Accreditation.Portal.Services.Accreditation
 {
@@ -45,9 +46,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 language = Enums.Language.Welsh;
 
             return await _httpSiteMaterialService.GetMeterialName(
-                id, 
-                siteId, 
-                materialId, 
+                id,
+                siteId,
+                materialId,
                 language);
         }
 
@@ -63,7 +64,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                     siteType,
                     id,
                     siteId,
-                    materialId)
+                    materialId),
             };
         }
 
@@ -85,15 +86,39 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 wasteSourceViewModel.WasteSource);
         }
 
+        /// <summary>
+        /// Gets the non waste inputs and performs any necessary manipulation before
+        /// returning it to the controller
+        /// </summary>
+        /// <param name="id">Accreditation Id</param>
+        /// <param name="materialId">Material Id</param>
+        /// <returns>The view model for non waste inputs</returns>
         public async Task<NonWasteInputsViewModel> GetNonWasteInputs(Guid id, Guid materialId)
         {
             var nonWasteInputsDto = await _httpSiteMaterialService.GetNonWasteInputs(
                 id,
                 materialId);
 
-            return _mapper.Map<NonWasteInputsViewModel>(nonWasteInputsDto);
+            var viewModel = _mapper.Map<NonWasteInputsViewModel>(nonWasteInputsDto);
+
+            if (viewModel != null &&
+                viewModel.Rows?.Count <= GenericConstants.MinimumMultiLineRecordNumber)
+            {
+                for (var i = viewModel.Rows.Count; i < GenericConstants.MinimumMultiLineRecordNumber; i++)
+                {
+                    viewModel.Rows.Add(new NonWasteInputsRowViewModel());
+                }
+            }
+
+            return viewModel;
         }
 
+        /// <summary>
+        /// Performs any necessary logic on the non waste inputs, then requests
+        /// the data is sent to be saved
+        /// </summary>
+        /// <param name="nonWasteInputsViewModel">View model from the view to be converted into a DTO</param>
+        /// <returns>Nothing (async Task)</returns>
         public async Task UpdateNonWasteInputs(NonWasteInputsViewModel nonWasteInputsViewModel)
         {
             if (nonWasteInputsViewModel.Rows != null &&

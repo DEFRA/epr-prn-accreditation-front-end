@@ -37,10 +37,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialOutputsLastYearResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\NonWasteInputResources.Designer.cs">
+    <Compile Update="Resources\NonWasteInputEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>NonWasteInputResources.resx</DependentUpon>
+      <DependentUpon>NonWasteInputEstimatedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\NonWasteInputLastYearResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonWasteInputLastYearResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
@@ -143,9 +148,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\NonWasteInputResources.resx">
+    <EmbeddedResource Update="Resources\NonWasteInputEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>NonWasteInputResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>NonWasteInputEstimatedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\NonWasteInputLastYearResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NonWasteInputLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
       <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>
@@ -226,6 +235,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPR.Accreditation.Portal.Common\EPR.Accreditation.Portal.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\js\pages\" />
   </ItemGroup>
 
 </Project>
