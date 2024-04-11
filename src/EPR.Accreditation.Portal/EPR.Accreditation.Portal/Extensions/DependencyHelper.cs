@@ -32,6 +32,7 @@ namespace EPR.Accreditation.Portal.Extensions
             services.AddScoped<IWastePermitService, WastePermitService>();
             services.AddScoped<IAccreditationService, AccreditationService>();
             services.AddScoped<IUrlHelperWrapper, UrlHelperWrapper>();
+            services.AddScoped<ISiteService, SiteService>();
             services
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
@@ -70,6 +71,16 @@ namespace EPR.Accreditation.Portal.Extensions
             services
                 .AddScoped<IHttpWastePermitService>(s =>
                     new HttpWastePermitService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"
+                    )
+            );
+
+            services
+                .AddScoped<IHttpSiteService>(s =>
+                    new HttpSiteService(
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,

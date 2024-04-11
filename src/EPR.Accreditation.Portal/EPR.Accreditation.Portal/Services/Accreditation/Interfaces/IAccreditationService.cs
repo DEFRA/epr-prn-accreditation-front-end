@@ -12,6 +12,5 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 
         Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
-        Task<SiteAddressViewModel> GetSiteAddressViewModel(Guid id, Guid siteId, Guid materialId);
     }
 }

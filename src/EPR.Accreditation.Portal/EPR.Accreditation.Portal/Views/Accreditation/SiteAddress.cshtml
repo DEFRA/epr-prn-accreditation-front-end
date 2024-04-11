@@ -14,6 +14,7 @@
         <div class="govuk-grid-column-two-thirds">
             <h1 class="govuk-heading-l">@SiteAddressResources.Heading</h1>
             <fieldset class="govuk-fieldset">
+                
                 <div class="govuk-form-group">
                     <p class="govuk-error-message">
                         <span asp-validation-for="AddressLine1"></span>
@@ -23,7 +24,7 @@
                             @SiteAddressResources.AddressLine1
                         </label>
                     </h2>
-                    <input class="govuk-input" id="AddressLine1" name="AddressLine1" type="text" aria-describedby="AddressLine1-hint">
+                    <input class="govuk-input" id="AddressLine1" name="AddressLine1" value="@Model.AddressLine1" type="text" aria-describedby="AddressLine1-hint">
                 </div>
 
                 <div class="govuk-form-group">
@@ -35,7 +36,7 @@
                             @SiteAddressResources.AddressLine2
                         </label>
                     </h2>
-                    <input class="govuk-input" id="AddressLine2" name="AddressLine2" type="text" aria-describedby="AddressLine2-hint">
+                    <input class="govuk-input" id="AddressLine2" name="AddressLine2" value="@Model.AddressLine2" type="text" aria-describedby="AddressLine2-hint">
                 </div>
 
                 <div class="govuk-form-group">
@@ -47,7 +48,7 @@
                             @SiteAddressResources.TownOrCity
                         </label>
                     </h2>
-                    <input class="govuk-input" id="TownOrCity" name="TownOrCity" type="text" aria-describedby="TownOrCity-hint">
+                    <input class="govuk-input" id="TownOrCity" name="TownOrCity" value="@Model.TownOrCity" type="text" aria-describedby="TownOrCity-hint">
                 </div>
 
                 <div class="govuk-form-group">
@@ -59,7 +60,7 @@
                             @SiteAddressResources.County
                         </label>
                     </h2>
-                    <input class="govuk-input" id="County" name="County" type="text" aria-describedby="County-hint">
+                    <input class="govuk-input" id="County" name="County" value="@Model.County" type="text" aria-describedby="County-hint">
                 </div>
 
                 <div class="govuk-form-group">
@@ -71,7 +72,7 @@
                             @SiteAddressResources.PostCode
                         </label>
                     </h2>
-                    <input class="govuk-input" id="PostCode" name="PostCode" type="text" aria-describedby="PostCode-hint">
+                    <input class="govuk-input" id="PostCode" name="PostCode" value="@Model.PostCode" type="text" aria-describedby="PostCode-hint">
                 </div>
 
                 <partial name="_SaveButtons" />

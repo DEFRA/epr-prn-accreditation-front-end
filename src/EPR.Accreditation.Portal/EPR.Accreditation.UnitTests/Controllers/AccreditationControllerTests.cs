@@ -23,6 +23,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         protected Mock<IUrlHelperWrapper> _mockUrlHelper;
         protected AccreditationController _accreditationController;
         protected BackPageViewModel _backPageViewModel;
+        protected Mock<ISiteService> _mockSiteService;
 
         [TestInitialize]
         public void Init()
@@ -34,6 +35,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             _mockWastePermitService = new Mock<IWastePermitService>();
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _backPageViewModel = new BackPageViewModel();
+            _mockSiteService = new Mock<ISiteService>();
 
             _accreditationController = new AccreditationController(
                 _mockContextAccessor.Object,
@@ -41,7 +43,8 @@ namespace EPR.Accreditation.UnitTests.Controllers
                 _mockSaveAndComeBackService.Object,
                 _mockAccreditationService.Object,
                 _mockUrlHelper.Object,
-                _backPageViewModel);
+                _backPageViewModel,
+                _mockSiteService.Object);
 
             var context = new DefaultHttpContext();
             _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);

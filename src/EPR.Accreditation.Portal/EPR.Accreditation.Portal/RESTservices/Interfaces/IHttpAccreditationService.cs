@@ -1,5 +1,6 @@
 ﻿using EPR.Accreditation.Facade.Common.Enums;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
+using EPR.Accreditation.Portal.DTOs.Site;
 using EPR.Accreditation.Facade.Common.Enums;
 using DTO = EPR.Accreditation.Facade.Common.Dtos;
 

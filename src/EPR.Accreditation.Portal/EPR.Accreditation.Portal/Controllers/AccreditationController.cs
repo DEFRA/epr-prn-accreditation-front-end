@@ -17,6 +17,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelperWrapper _urlHelper;
+        private readonly ISiteService _siteService;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
@@ -24,7 +25,8 @@ namespace EPR.Accreditation.Portal.Controllers
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            ISiteService siteSerivce)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
@@ -32,6 +34,7 @@ namespace EPR.Accreditation.Portal.Controllers
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
+            _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
         }
 
         [HttpGet("PermitExemption")]
@@ -185,20 +188,43 @@ namespace EPR.Accreditation.Portal.Controllers
             if (id == null)
                 return NotFound();
 
-            var viewModel = await _accreditationService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
+            var viewModel = await _siteService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
 
             return View(viewModel);
         }
 
         [HttpPost("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
-        public async Task<IActionResult> SiteAddress(SiteAddressViewModel vm)
+        public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
         {
             if (!ModelState.IsValid)
-                return View(vm);
+                return View(viewModel);
 
-            //var externalId = await _accreditationService.CreateAccreditation(vm);
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PermitExemptionResources.ErrorMessage))
+                return View(viewModel);
 
-            return RedirectToAction("Index", "Home");
+            await _siteService.SaveSiteAddress(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToAction("PermitExemption", "Accreditation",
+                    new
+                    {
+                        viewModel.Id
+                    });
+
+
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

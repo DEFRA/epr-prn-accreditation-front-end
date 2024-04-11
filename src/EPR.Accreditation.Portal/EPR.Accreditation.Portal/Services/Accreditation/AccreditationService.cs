@@ -69,21 +69,5 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return viewModel;
         }
 
-        public async Task<SiteAddressViewModel> GetSiteAddressViewModel(Guid id, Guid siteId, Guid materialId)
-        {
-            SiteAddressViewModel siteAddressViewModel = new SiteAddressViewModel();
-
-            if (siteAddressViewModel != null)
-            {
-                siteAddressViewModel.Id = id;
-            }
-
-            return siteAddressViewModel;
-        }
-
-        public async Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel)
-        {
-            var siteAddress = _mapper.Map<DTOs.Site.Site>(siteAddressViewModel);
-        }
     }
 }
