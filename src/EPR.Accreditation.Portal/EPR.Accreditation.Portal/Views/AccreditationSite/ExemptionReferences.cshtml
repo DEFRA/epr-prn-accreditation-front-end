@@ -9,28 +9,6 @@
     <h1 class="govuk-heading-l">@ExemptionReferencesResources.PageHeading</h1>
     <p class="govuk-body">@ExemptionReferencesResources.P1</p>
 
-    @for (int i = 0; i < 5; i++)
-    {
-        @* 
-        <p class="govuk-error-message">
-            <span asp-validation-for="@Model.ExemptionReferencesVm[i].Reference"></span>
-        </p>
-        <div class="govuk-form-group">
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-full">
-                    @if (Model != null && Model.ExemptionReferencesVm != null && Model.ExemptionReferencesVm.Count() > i)
-                    {
-                        <input class="govuk-input govuk-input--width-30" type="text" asp-for="@Model.ExemptionReferencesVm[i].Reference">
-                    }
-                    else
-                    {
-                        <input class="govuk-input govuk-input--width-30" type="text" name="@($"ExemptionReferencesVm[{i}].Reference")">
-                    }
-                </div>
-            </div>
-        </div> *@
-    }
-
     <p class="govuk-error-message">
         <span asp-validation-for="Reference1"></span>
     </p>

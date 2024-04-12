@@ -5,8 +5,6 @@
 namespace EPR.Accreditation.Portal.Controllers
 {
     using EPR.Accreditation.Portal.Enums;
-    using EPR.Accreditation.Portal.Extensions;
-    using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
@@ -50,12 +48,7 @@ namespace EPR.Accreditation.Portal.Controllers
             ExemptionReferencesViewModel viewModel,
             SaveButton saveButton)
         {
-            if (!ModelState.IsValidForSaveForLater(
-                saveButton,
-                ExemptionReferencesResources.ErrorMessageBlank,
-                ExemptionReferencesResources.ErrorMessageDuplicate,
-                ExemptionReferencesResources.ErrorMessageInvalidFormat,
-                ExemptionReferencesResources.ErrorMessageTooLong))
+            if (!ModelState.IsValid)
             {
                 _backPageViewModel.Url = $"/Accreditation/{viewModel.Id}/PermitExemption";
                 return View(viewModel);

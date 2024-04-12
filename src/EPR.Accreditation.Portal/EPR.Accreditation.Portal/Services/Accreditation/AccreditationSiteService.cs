@@ -41,26 +41,22 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 viewModel.Reference5 = references[4];
 
             return viewModel;
-
-
-            //return new ExemptionReferencesViewModel
-            //{
-            //    Id = id,
-            //    ExemptionReferencesVm = exemptionReferences.Select(x => new ExemptionReferenceViewModel
-            //    {
-            //        Reference = x
-            //    }).ToList()
-            //};
         }
 
         public async Task UpdateExemptionReferences(ExemptionReferencesViewModel viewModel)
         {
-            //var exemptionReferences = viewModel.ExemptionReferencesVm.Select(x => x.Reference);
+            IEnumerable<string> exemptionReferences = new List<string>
+            {
+                viewModel.Reference1,
+                viewModel.Reference2,
+                viewModel.Reference3,
+                viewModel.Reference4,
+                viewModel.Reference5
+            };
 
-            //await _httpAccreditationSiteService.UpdateExemptionReferences(
-            //    viewModel.Id,
-            //    exemptionReferences
-            //    );
+            await _httpAccreditationSiteService.UpdateExemptionReferences(
+                viewModel.Id,
+                exemptionReferences);
         }
     }
 }

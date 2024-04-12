@@ -7,12 +7,6 @@ public class AllReferenceNumbersEmptyAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        //if (value is IList<ExemptionReferenceViewModel> list
-        //    && list.All(item => string.IsNullOrWhiteSpace(item.Reference)))
-        //    return new ValidationResult(ErrorMessage);
-
-        //return ValidationResult.Success;
-
         var viewModel = (ExemptionReferencesViewModel)validationContext.ObjectInstance;
 
         // Check if all reference numbers are empty
