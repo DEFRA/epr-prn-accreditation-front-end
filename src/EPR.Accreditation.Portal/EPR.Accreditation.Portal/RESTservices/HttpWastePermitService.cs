@@ -10,7 +10,8 @@
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
             string baseUrl,
-            string endPointName) : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
+            string endPointName)
+            : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }
 

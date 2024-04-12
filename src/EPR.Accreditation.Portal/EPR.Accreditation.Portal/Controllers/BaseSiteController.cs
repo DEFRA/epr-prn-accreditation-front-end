@@ -101,7 +101,8 @@
             }
             else
             {
-                return RedirectToRoute(SiteProcessingCapacityRouteName,
+                return RedirectToRoute(
+                    SiteProcessingCapacityRouteName,
                     new
                     {
                         viewModel.Id,

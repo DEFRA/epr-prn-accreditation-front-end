@@ -34,7 +34,11 @@
             return selectList;
         }
 
-        public static List<SelectListItem> ToSelectList<TEnum>(Type enumType, string defaultItem, params TEnum[] members) where TEnum : Enum
+        public static List<SelectListItem> ToSelectList<TEnum>(
+            Type enumType,
+            string defaultItem,
+            params TEnum[] members)
+            where TEnum : Enum
         {
             var selectList = new List<SelectListItem>
             {

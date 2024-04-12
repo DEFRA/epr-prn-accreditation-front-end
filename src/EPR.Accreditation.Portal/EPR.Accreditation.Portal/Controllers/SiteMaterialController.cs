@@ -62,11 +62,11 @@
         /// <summary>
         /// Stubbed method
         /// </summary>
+        /// <param name="id">the id of the accreditation</param>
         /// <returns>NotFound</returns>
         [HttpGet("Material", Name = "SiteChooseMaterial")]
         public IActionResult ChooseMaterial(
-            Guid? id,
-            Guid? materialId)
+            Guid? id)
         {
             return NotFound();
         }
@@ -132,13 +132,19 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (nonWasteInputsViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (nonWasteInputsViewModel.WasteLastYear == true)
+                {
                     return View("NonWasteInputsLastYear", nonWasteInputsViewModel);
+                }
                 else // otherwise return the annual outputs
+                {
                     return View("NonWasteInputsEstimated", nonWasteInputsViewModel);
+                }
             }
 
             return NotFound();
@@ -183,9 +189,13 @@
                 MaterialOutputsLastYearResources.ProcessLossBlank))
             {
                 if (viewModel.WasteLastYear == true)
+                {
                     return View("NonWasteInputsLastYear", viewModel);
+                }
                 else
+                {
                     return View("NonWasteInputsEstimated", viewModel);
+                }
             }
 
             await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
@@ -202,7 +212,8 @@
             }
             else
             {
-                return RedirectToRoute(SiteMaterialOutputsRouteName,
+                return RedirectToRoute(
+                    SiteMaterialOutputsRouteName,
                     new
                     {
                         viewModel.Id,
@@ -228,17 +239,25 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (materialOutputsViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (materialOutputsViewModel.WasteLastYear == true)
+                {
                     return View("MaterialOutputsLastYear", materialOutputsViewModel);
-                // otherwise return the annual outputs
+                }
                 else
+                {
+                    // otherwise return the annual outputs
                     return View("MaterialOutputsEstimated", materialOutputsViewModel);
+                }
             }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("MaterialOutputs")]
