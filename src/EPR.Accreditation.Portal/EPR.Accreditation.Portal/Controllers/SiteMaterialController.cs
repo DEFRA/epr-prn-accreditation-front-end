@@ -180,10 +180,16 @@ namespace EPR.Accreditation.Portal.Controllers
             // if waste last year is true then return the MaterialWasteOutputs view
             // otherwise, return the estimated view
             return materialWasteOutputsViewModel.WasteLastYear == true ?
-                this.View("MaterialWasetOutputsLastYear", materialWasteOutputsViewModel) :
+                this.View("MaterialWasteOutputsLastYear", materialWasteOutputsViewModel) :
                 this.View("MaterialWasteOutputsEstimated", materialWasteOutputsViewModel);
         }
 
+        /// <summary>
+        /// Saves annual waste data.
+        /// </summary>
+        /// <param name="viewModel">View model used for data input.</param>
+        /// <param name="saveButton">Save button.</param>
+        /// <returns>Does a page redirect.</returns>
         [HttpPost("MaterialWasteOutputs")]
         public async Task<IActionResult> MaterialWasteOutputs(
             MaterialWasteOutputsViewModel viewModel,
