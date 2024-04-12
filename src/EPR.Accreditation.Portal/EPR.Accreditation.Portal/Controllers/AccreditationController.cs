@@ -149,6 +149,8 @@ namespace EPR.Accreditation.Portal.Controllers
         [ActionName("HasOverseasAgent")]
         public async Task<IActionResult> HasOverseasAgent(Guid? id)
         {
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
             if (id.HasValue)
             {
                 var overseasAgent = await _accreditationService.GetHasOverseasAgent(id.Value);
@@ -156,7 +158,7 @@ namespace EPR.Accreditation.Portal.Controllers
                 return View(overseasAgent);
             }
 
-            return View(new HasOverseasAgentViewModel());
+            return NotFound();
         }
 
         [HttpPost("HasOverseasAgent")]

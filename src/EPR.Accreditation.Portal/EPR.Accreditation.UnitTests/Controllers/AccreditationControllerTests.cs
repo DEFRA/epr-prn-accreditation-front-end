@@ -218,5 +218,155 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             _mockWastePermitService.Verify(s => s.UpdatePermitExemption(viewModel), Times.Never);
         }
+
+        [TestMethod]
+        public void HasOverseasAgent_ReturnsCorrectly_WithValidId()
+        {
+            // Arrange
+            Guid id = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
+            var viewModel = new HasOverseasAgentViewModel();
+
+            _mockAccreditationService.Setup(service => service.GetHasOverseasAgent(id)).ReturnsAsync(viewModel);
+
+            // Act
+            var result = _accreditationController.HasOverseasAgent(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result.Result, typeof(ViewResult));
+
+            var viewResult = result.Result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(HasOverseasAgentViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+            _mockAccreditationService.Verify(service => service.GetHasOverseasAgent(id), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task HasOverseasAgent_ReturnsViewWithViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var expectedViewModel = new HasOverseasAgentViewModel();
+            var expectedUrl = "Home/ApplyForAccreditation";
+
+            _mockUrlHelper.Setup(helper => helper.ActionLink(
+                "ApplyForAccreditation", "Home", null, null, null, null)).Returns(expectedUrl);
+
+            _mockAccreditationService.Setup(service => service.GetHasOverseasAgent(id)).ReturnsAsync(expectedViewModel);
+
+            // Act
+            var result = await _accreditationController.HasOverseasAgent(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(HasOverseasAgentViewModel));
+            Assert.IsNull(viewResult.ViewName);
+            _mockAccreditationService.Verify(service => service.GetHasOverseasAgent(id), Times.Once());
+        }
+
+        [TestMethod]
+        public async Task HasOverseasAgent_ReturnsNotFound_WhenIdIsNull()
+        {
+            // Act
+            var result = await _accreditationController.HasOverseasAgent(null);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            _mockAccreditationService.Verify(service => service.GetHasOverseasAgent(Guid.Empty), Times.Never());
+        }
+
+        [TestMethod]
+        public async Task HasOverseasAgent_CallsUrlHelper()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var expectedUrl = "expectedUrl";
+
+            _mockUrlHelper.Setup(helper => helper.ActionLink(
+                "ApplyForAccreditation", "Home", null, null, null, null)).Returns(expectedUrl);
+
+            // Act
+            var result = await _accreditationController.HasOverseasAgent(id);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            _mockUrlHelper.Verify(helper => helper.ActionLink("ApplyForAccreditation", "Home", null, null, null, null), Times.Once);
+            _mockAccreditationService.Verify(service => service.GetHasOverseasAgent(id), Times.Once());
+        }
+
+        [TestMethod]
+        public async Task HasOverseasAgent_SavesWithValidData_SaveAndContinue()
+        {
+            // Arrange
+            var viewModel = new HasOverseasAgentViewModel
+            {
+                ExternalId = Guid.NewGuid(),
+                UseOverseasAgent = true
+            };
+
+            // Act
+            var result = await _accreditationController.HasOverseasAgent(viewModel, SaveButton.SaveAndContinue);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.AreEqual("Overseasagentdetails", redirectToActionResult.ActionName);
+            _mockAccreditationService.Verify(service => service.SetOverseasAgentFlag(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task HasOverseasAgent_ReturnsViewResult_ForSaveAndComeBack()
+        {
+            // Arrange
+            var viewModel = new HasOverseasAgentViewModel
+            {
+                ExternalId = Guid.NewGuid(),
+                UseOverseasAgent = false,
+            };
+
+            _accreditationController.ModelState.Clear(); // Ensuring ModelState is valid
+
+            // Act
+            var result = await _accreditationController.HasOverseasAgent(viewModel, SaveButton.SaveAndComeBack) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_ApplicationSaved", result.ViewName);
+            _mockAccreditationService.Verify(service => service.SetOverseasAgentFlag(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task HasOverseasAgent_ReturnsCorrectView_WhenModelIsInvalid()
+        {
+            // Arrange
+            var viewModel = new HasOverseasAgentViewModel();
+            _accreditationController.ModelState.AddModelError("Error", "Error");
+
+            // Act
+            var result = await _accreditationController.HasOverseasAgent(viewModel, SaveButton.SaveAndContinue);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(HasOverseasAgentViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+            _mockAccreditationService.Verify(service => service.SetOverseasAgentFlag(viewModel), Times.Never);
+        }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 using EPR.Accreditation.Portal.Options;
+using EPR.Accreditation.Portal.RESTservices;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -80,6 +83,75 @@ namespace EPR.Accreditation.UnitTests.Services
                 Times.Once);
             _httpAccreditionService.Verify(s =>
                 s.GetWastePermit(id), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetHasOverseasAgent_ReturnsCorrectViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var expectedDto = new HasOverseasAgentDto
+            {
+                HasOverseasAgent = true,
+            };
+
+            _httpAccreditionService.Setup(service => service.GetHasOverseasAgent(id))
+                .ReturnsAsync(expectedDto);
+
+            // Act
+            var result = await _accreditationService?.GetHasOverseasAgent(id);
+
+            // Asset
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(HasOverseasAgentViewModel));
+        }
+
+        [TestMethod]
+        public void GetHasOverseasAgent_CheckService_Call()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var expectedViewModel = new HasOverseasAgentViewModel();
+
+            var expectedDto = new HasOverseasAgentDto()
+            {
+                HasOverseasAgent = true,
+            };
+
+            _httpAccreditionService.Setup(service => service.GetHasOverseasAgent(id))
+                .ReturnsAsync(expectedDto);
+
+            // Act
+            var result = _accreditationService?.GetHasOverseasAgent(id);
+
+            // Asset
+            Assert.IsNotNull(result);
+            _httpAccreditionService.Verify(s =>
+                s.GetHasOverseasAgent(
+                    It.Is<Guid>(p => p == id)),
+                Times.Once);
+            _httpAccreditionService.Verify(s =>
+                s.GetHasOverseasAgent(id), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task SetOverseasAgentFlag_WithValidParameters_CallsHttpService()
+        {
+            // Arrange
+            var viewModel = new HasOverseasAgentViewModel(); // Assuming MaterialOutputsViewModel is defined
+            var expectedDto = new HasOverseasAgentDto(); // Assuming MaterialOutputsDto is defined
+            _mockMapper.Setup(x => x.Map<HasOverseasAgentDto>(viewModel))
+                .Returns(expectedDto);
+
+            // Act
+            await _accreditationService.SetOverseasAgentFlag(viewModel);
+
+            // Assert
+            _httpAccreditionService.Verify(x =>
+                x.SetHasOverseasAgent(
+                    viewModel.ExternalId,
+                    viewModel.UseOverseasAgent),
+                Times.Once);
         }
     }
 }
