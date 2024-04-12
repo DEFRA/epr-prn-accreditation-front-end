@@ -1,0 +1,149 @@
+﻿@using EPR.Accreditation.Portal.Constants
+@model CheckYourAnswersViewModel
+
+@{
+    ViewData["Title"] = CheckYourAnswersResources.Title;
+
+    // create the route data for returning to previous pages and showing that
+    // completing those redirects back here
+    var queryStringRouteData = new Dictionary<string, string>
+    {
+        { "Id", Model.Id.ToString() },
+        { Strings.QueryStrings.ReturnToAnswers, Strings.QueryStrings.ReturnToAnswersYes }
+    };
+}
+
+<partial name="_ValidationSummary" />
+
+<form method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds-from-desktop">
+
+            <h1 class="govuk-heading-l">@CheckYourAnswersResources.Title</h1>
+            <p class="govuk-hint">@CheckYourAnswersResources.Hint</p>
+
+            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.SiteAddress
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.SiteAddress
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="SiteAddress"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.WasteCarrierRegistrationNumber
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.WasteCarrierRegistrationNumber
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="WasteCarrierRegistrationNumber"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.WasteManagementLicenceNumber
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.WasteManagementLicenceNumber
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="WasteManagementPermitNumber"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.PartAReferenceNumber
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.PartAReferenceNumber
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="PartABCReferenceNumber"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.PartBReferenceNumber
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.PartBReferenceNumber
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="PartABCReferenceNumber"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.DischargeConsentNumber
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.DischargeConsentNumber
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="DischargeConsentNumber"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @CheckYourAnswersResources.ExemptionReferenceNumber
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Model.ExemptionReferenceNumber
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a asp-action="ExemptionReference"
+                           asp-controller="Accreditation"
+                           asp-area=""
+                           asp-all-route-data=queryStringRouteData
+                           asp-route-action="check">@CheckYourAnswersResources.Change</a>
+                    </dd>
+                </div>
+
+            </dl>
+
+                <input type="hidden" value="@Model.Id" />
+                <input type="hidden" asp-for="@Model.Completed" />
+                <button class="govuk-button" data-module="govuk-button">
+                    @MasterResources.ConfirmAndContinue
+                </button>
+
+        </div>
+    </div>
+</form>
+

@@ -1,11 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace EPR.Accreditation.Portal.Options;
-
-[ExcludeFromCodeCoverage]
-public class AppSettingsConfigOptions
+﻿namespace EPR.Accreditation.Portal.Options
 {
-    public const string ConfigSection = "AppSettings";
+    using System.Diagnostics.CodeAnalysis;
 
-    public int? DaysUntilExpiration { get; set; }
+    [ExcludeFromCodeCoverage]
+    public class AppSettingsConfigOptions
+    {
+        public const string ConfigSection = "AppSettings";
+
+        /// <summary>
+        /// Gets or sets the maximum number of rows for multi
+        /// line records that can have extra rows added
+        /// </summary>
+        public int? MaximumMultiLineRecordNumber { get; set; }
+
+        public int? DaysUntilExpiration { get; set; }
+    }
 }

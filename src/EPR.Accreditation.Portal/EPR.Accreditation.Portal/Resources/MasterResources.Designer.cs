@@ -61,11 +61,29 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add another.
+        /// </summary>
+        public static string AddRow {
+            get {
+                return ResourceManager.GetString("AddRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string BackLink {
             get {
                 return ResourceManager.GetString("BackLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm and continue.
+        /// </summary>
+        public static string ConfirmAndContinue {
+            get {
+                return ResourceManager.GetString("ConfirmAndContinue", resourceCulture);
             }
         }
         

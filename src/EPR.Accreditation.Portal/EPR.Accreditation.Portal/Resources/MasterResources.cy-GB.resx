@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddRow" xml:space="preserve">
+    <value>[Welsh]Add another</value>
+  </data>
   <data name="BackLink" xml:space="preserve">
     <value>[Welsh]Back</value>
+  </data>
+  <data name="ConfirmAndContinue" xml:space="preserve">
+    <value>[Welsh]Confirm and continue</value>
   </data>
   <data name="Continue" xml:space="preserve">
     <value>[Welsh]Continue</value>

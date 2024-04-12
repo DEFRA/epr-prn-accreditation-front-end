@@ -12,10 +12,8 @@ public static class Strings
 {
     public static class ApiEndPoints
     {
-        public const string Journey = "Journey";
-        public const string Waste = "Waste";
-        public const string PRN = "PRN";
-        public const string Returns = "Returns";
+        public const string Application = "Application";
+
     }
 
     public static class Notifications
@@ -33,6 +31,18 @@ public static class Strings
     public static class RepoStrings
     {
         public const string DeleteDraft = "Deleted draft";
+    }
+
+    /// <summary>
+    /// AGeneric constants for use in the application
+    /// </summary>
+    public static class GenericConstants
+    {
+        /// <summary>
+        /// Some pages show a number of multiple lines of the same inputs. This
+        /// represents the minimum number to show
+        /// </summary>
+        public const int MinimumMultiLineRecordNumber = 3;
     }
 
     /// <summary>

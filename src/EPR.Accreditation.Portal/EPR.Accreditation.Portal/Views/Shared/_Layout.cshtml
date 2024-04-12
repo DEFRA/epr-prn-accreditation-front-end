@@ -1,6 +1,11 @@
-﻿@using EPR.Accreditation.Portal.Helpers.Interfaces
+﻿@using EPR.Accreditation.Portal
+@using EPR.Accreditation.Portal.Helpers.Interfaces
+@using EPR.Accreditation.Portal.Options
 @using EPR.Accreditation.Portal.Resources
 @using EPR.Accreditation.Portal.ViewModels
+@using Microsoft.Extensions.Options
+
+@inject IOptions<AppSettingsConfigOptions> appSettingsConfig;
 @inject IQueryStringHelper queryStringHelper
 @inject ICultureHelper cultureHelper;
 @inject BackPageViewModel backPageViewModel;
@@ -74,6 +79,7 @@
                 </span>
             </p>
         </div>
+        <input type="hidden" id="maxRows" value="@appSettingsConfig.Value.MaximumMultiLineRecordNumber.Value" />
         @if (backPageViewModel.HasBackLink)
         {
             <a href="@backPageViewModel.Url" class="govuk-back-link">@MasterResources.BackLink</a>
