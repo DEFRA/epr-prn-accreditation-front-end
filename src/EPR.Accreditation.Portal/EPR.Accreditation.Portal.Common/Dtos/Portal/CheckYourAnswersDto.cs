@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Portal.Common.Dtos
+﻿namespace EPR.Accreditation.Portal.Common.Dtos.Portal
 {
     public class CheckYourAnswersDto
     {

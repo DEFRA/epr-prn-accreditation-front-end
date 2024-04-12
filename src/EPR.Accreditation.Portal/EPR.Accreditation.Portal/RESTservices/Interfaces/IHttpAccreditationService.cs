@@ -2,7 +2,7 @@
 using EPR.Accreditation.Portal.DTOs.WastePermit;
 using DTO = EPR.Accreditation.Facade.Common.Dtos;
 using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Portal.Common.Dtos;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 
 namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {

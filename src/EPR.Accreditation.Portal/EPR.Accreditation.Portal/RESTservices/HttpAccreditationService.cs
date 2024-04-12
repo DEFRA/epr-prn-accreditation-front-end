@@ -1,9 +1,9 @@
 ﻿using EPR.Accreditation.Facade.Common.Dtos;
 using EPR.Accreditation.Facade.Common.Enums;
 using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.Common.Dtos;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using System.Collections.Generic;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
 
 
 namespace EPR.Accreditation.Portal.RESTservices

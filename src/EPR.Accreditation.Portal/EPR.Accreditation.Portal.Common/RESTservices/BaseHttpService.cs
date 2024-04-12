@@ -1,11 +1,11 @@
-﻿using EPR.Accreditation.Facade.Common.Exceptions;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Json;
-
-namespace EPR.Accreditation.Facade.Common.RESTservices
+﻿namespace EPR.Accreditation.Facade.Common.RESTservices
 {
+    using System.Net.Http.Json;
+    using EPR.Accreditation.Facade.Common.Exceptions;
+    using Microsoft.AspNetCore.Http;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public abstract class BaseHttpService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -219,6 +219,7 @@ namespace EPR.Accreditation.Facade.Common.RESTservices
                 return false;
             }
         }
+
         public static string BuildUrlWithQueryString(object dto)
         {
             var properties = dto.GetType().GetProperties()
