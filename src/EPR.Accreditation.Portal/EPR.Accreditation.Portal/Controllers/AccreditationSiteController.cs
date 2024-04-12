@@ -37,7 +37,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
             if (id == null)
                 return NotFound();
-            ;
+
             var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(id.Value);
 
             return View(viewModel);
