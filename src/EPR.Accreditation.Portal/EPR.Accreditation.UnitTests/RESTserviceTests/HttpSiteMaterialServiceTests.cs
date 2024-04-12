@@ -1,28 +1,28 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
-using System.Net;
-using Enums = EPR.Accreditation.Portal.Enums;
-
-namespace EPR.Accreditation.UnitTests.RESTserviceTests
+﻿namespace EPR.Accreditation.UnitTests.RESTserviceTests
 {
+    using System.Net;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices;
+    using Microsoft.AspNetCore.Http;
+    using Moq;
+    using Moq.Protected;
+    using Newtonsoft.Json;
+    using Enums = EPR.Accreditation.Portal.Enums;
+
     [TestClass]
     public class HttpSiteMaterialServiceTests
     {
-        protected HttpSiteMaterialService _httpSiteMaterialService;
-        protected Mock<IHttpContextAccessor> _contextAccessor;
-        protected Mock<IHttpClientFactory> _httpClientFactory;
-        protected HttpClient _httpClient;
-        protected Mock<DelegatingHandler> _clientHandlerMock;
-        protected string _baseUrl = "http://baseUrl";
-        protected string _endpointName = "endpointName";
-        protected string _capturedUrl;
-        protected string _capturedPayload;
+        private HttpSiteMaterialService _httpSiteMaterialService;
+        private Mock<IHttpContextAccessor> _contextAccessor;
+        private Mock<IHttpClientFactory> _httpClientFactory;
+        private HttpClient _httpClient;
+        private Mock<DelegatingHandler> _clientHandlerMock;
+        private string _baseUrl = "http://baseUrl";
+        private string _endpointName = "endpointName";
+        private string _capturedUrl;
+        private string _capturedPayload;
 
         public HttpSiteMaterialServiceTests()
         {
@@ -313,21 +313,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(reprocessedWasteLastYearDto, capturedPayload));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         [TestMethod]
         public async Task GetNonWasteInputs_CallsExpectedEndPoint_WithCorrectParameters()

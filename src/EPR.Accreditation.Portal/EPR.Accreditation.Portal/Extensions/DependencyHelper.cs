@@ -1,9 +1,9 @@
 ﻿namespace EPR.Accreditation.Portal.Extensions
 {
     using AutoMapper;
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
     using EPR.Accreditation.Portal.Configuration;
     using EPR.Accreditation.Portal.Helpers;
-    using EPR.Accreditation.Portal.Helpers.ActionFilters;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Profiles;
     using EPR.Accreditation.Portal.RESTservices;
@@ -55,7 +55,7 @@
             services
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IHttpAccreditationService>(s =>
-                    new HttpAccreditionService(
+                    new HttpAccreditationService(
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,

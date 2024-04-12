@@ -1,13 +1,11 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Facade.Common.Enums;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using System.Threading.Tasks;
-
-
-namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using AutoMapper;
+    using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using System.Threading.Tasks;
+
     public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;

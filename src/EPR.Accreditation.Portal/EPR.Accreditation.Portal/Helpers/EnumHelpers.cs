@@ -1,17 +1,17 @@
-﻿using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace EPR.Accreditation.Portal.Helpers
+﻿namespace EPR.Accreditation.Portal.Helpers
 {
+    using System.Resources;
+    using System.Text.RegularExpressions;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public static class EnumHelpers
     {
-
         public static List<SelectListItem> ToSelectList<TEnum>(
-            Type enumType, 
-            string defaultItem, 
-            ResourceManager resourceManager, 
-            params TEnum[] members) where TEnum : Enum
+            Type enumType,
+            string defaultItem,
+            ResourceManager resourceManager,
+            params TEnum[] members) 
+            where TEnum : Enum
         {
             var selectList = new List<SelectListItem>
             {
@@ -34,7 +34,6 @@ namespace EPR.Accreditation.Portal.Helpers
             return selectList;
         }
 
-
         public static List<SelectListItem> ToSelectList<TEnum>(Type enumType, string defaultItem, params TEnum[] members) where TEnum : Enum
         {
             var selectList = new List<SelectListItem>
@@ -45,26 +44,28 @@ namespace EPR.Accreditation.Portal.Helpers
                     Text = defaultItem
                 }
             };
-            
+
             var enumMembers = members.Length > 0 ? members : Enum.GetValues(enumType).Cast<TEnum>();
-            
+
             selectList.AddRange(enumMembers
                 .Select(e => new SelectListItem
                 {
                     Value = ((int)Convert.ChangeType(e, typeof(int))).ToString(),
                     Text = ToSentenceCase(e.ToString())
                 }));
-            
+
             return selectList;
         }
-        
+
         private static string ToSentenceCase(string str)
         {
             if (string.IsNullOrEmpty(str))
+            {
                 return str;
-            
+            }
+
             str = Regex.Replace(str, "(\\B[A-Z])", " $1").ToLower();
-            
+
             return char.ToUpper(str[0]) + str[1..];
         }
     }

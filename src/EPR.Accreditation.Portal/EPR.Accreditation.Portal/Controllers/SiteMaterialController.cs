@@ -1,8 +1,8 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
-    using EPR.Accreditation.Portal.Helpers.ActionFilters;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.Resources;
@@ -59,9 +59,10 @@
             _maximumMultiLineRecordNumber = appSettingsConfiguration.Value.MaximumMultiLineRecordNumber.Value;
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <returns>NotFound</returns>
         [HttpGet("Material", Name = "SiteChooseMaterial")]
         public IActionResult ChooseMaterial(
             Guid? id,
@@ -77,12 +78,16 @@
         {
             if (id != null &&
                 materialId != null)
+            {
                 return await GetMaterialWasteSource(
                     id.Value,
                     null,
                     materialId.Value);
+            }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("WasteSource")]
@@ -276,18 +281,20 @@
             }
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <returns>NotFound</returns>
         [HttpGet("ProductsProduced", Name = "SiteProductsProduced")]
         public IActionResult ProductsProduced()
         {
             return NotFound();
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <returns>NotFound</returns>
         [HttpGet("EnterProcessingCapacity", Name = "EnterProcessingCapacity")]
         public IActionResult EnterProcessingCapacity()
         {

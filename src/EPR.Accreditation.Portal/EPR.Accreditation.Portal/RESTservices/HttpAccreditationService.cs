@@ -7,13 +7,13 @@
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
-    public class HttpAccreditionService : BaseHttpService, IHttpAccreditationService
+    public class HttpAccreditationService : BaseHttpService, IHttpAccreditationService
     {
-        public HttpAccreditionService(
+        public HttpAccreditationService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
             string baseUrl,
-            string endPointName) 
+            string endPointName)
             : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }

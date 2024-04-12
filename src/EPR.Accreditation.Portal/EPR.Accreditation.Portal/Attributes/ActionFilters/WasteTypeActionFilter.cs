@@ -1,9 +1,9 @@
-﻿using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace EPR.Accreditation.Portal.Helpers.ActionFilters
+﻿namespace EPR.Accreditation.Portal.Attributes.ActionFilters
 {
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc.Filters;
+
     public class WasteTypeActionFilter : IActionFilter
     {
         private readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
@@ -28,11 +28,13 @@ namespace EPR.Accreditation.Portal.Helpers.ActionFilters
             var materialIdValue = context.HttpContext.Request.RouteValues["materialId"];
             var siteId = default(Guid);
 
-            if (!Guid.TryParse((string)idValue, out var id) ||
-                (!string.IsNullOrWhiteSpace((string)siteIdValue) && 
-                !Guid.TryParse((string)siteIdValue, out siteId)) ||
+            if ((!Guid.TryParse((string)idValue, out var id) ||
+                !string.IsNullOrWhiteSpace((string)siteIdValue)) &&
+                !Guid.TryParse((string)siteIdValue, out siteId) ||
                 !Guid.TryParse((string)materialIdValue, out var materialId))
+            {
                 return;
+            }
 
             try
             {

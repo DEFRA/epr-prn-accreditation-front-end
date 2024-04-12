@@ -1,13 +1,13 @@
-﻿using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.RESTservices;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
-using System.Net;
-
-namespace EPR.Accreditation.UnitTests.RESTserviceTests
+﻿namespace EPR.Accreditation.UnitTests.RESTserviceTests
 {
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using EPR.Accreditation.Portal.RESTservices;
+    using Microsoft.AspNetCore.Http;
+    using Moq;
+    using Moq.Protected;
+    using Newtonsoft.Json;
+    using System.Net;
+
     [TestClass]
     public class HttpWastePermitServiceTests
     {
