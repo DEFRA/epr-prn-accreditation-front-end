@@ -34,6 +34,7 @@
                 .AddScoped<IWastePermitService, WastePermitService>()
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
+                .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
             services.AddScoped<IHttpSiteMaterialService>(s =>
