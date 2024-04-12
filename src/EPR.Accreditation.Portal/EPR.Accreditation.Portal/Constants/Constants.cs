@@ -1,4 +1,6 @@
-﻿#pragma warning disable SA1649 // StyleCop error code you want to ignore
+﻿#pragma warning disable SA1649 // FileNameMustMatchTypeName
+#pragma warning disable SA1402 // File may only contain a single type
+
 namespace EPR.Accreditation.Portal.Constants
 {
     using System.Globalization;
@@ -46,4 +48,5 @@ namespace EPR.Accreditation.Portal.Constants
         }
     }
 }
+#pragma warning restore SA1402 // File may only contain a single type
 #pragma warning restore SA1649 // Restore StyleCop warnings

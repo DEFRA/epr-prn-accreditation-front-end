@@ -141,8 +141,9 @@
                 {
                     return View("NonWasteInputsLastYear", nonWasteInputsViewModel);
                 }
-                else // otherwise return the annual outputs
+                else
                 {
+                    // otherwise return the annual outputs
                     return View("NonWasteInputsEstimated", nonWasteInputsViewModel);
                 }
             }

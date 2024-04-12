@@ -1,4 +1,4 @@
-namespace EPR.Accreditation.Portal
+﻿namespace EPR.Accreditation.Portal
 {
     public class Program
     {

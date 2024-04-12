@@ -142,7 +142,6 @@
                 var operatorType = await _accreditationService.GetOperatorType(id.Value);
 
                 return View(operatorType);
-
             }
 
             return View(new OperatorTypeViewModel());
