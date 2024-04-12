@@ -266,7 +266,8 @@
             }
             else
             {
-                return RedirectToRoute(SiteProductsProducedRouteName,
+                return RedirectToRoute(
+                    SiteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,
@@ -310,7 +311,9 @@
                 return View(viewModel);
             }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("WasteLastYear")]
@@ -321,11 +324,14 @@
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
+            {
                 return View(viewModel);
+            }
 
             await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue)
+            {
                 return RedirectToRoute(
                     NonWasteInputsRouteName,
                     new
@@ -333,6 +339,7 @@
                         id = viewModel.Id,
                         viewModel.MaterialId
                     });
+            }
 
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(

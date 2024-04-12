@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Facade.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
@@ -9,7 +10,8 @@
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
             string baseUrl,
-            string endPointName) : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
+            string endPointName)
+            : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }
 

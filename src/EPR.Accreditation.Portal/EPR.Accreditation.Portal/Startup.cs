@@ -43,12 +43,13 @@ namespace EPR.Accreditation.Portal
             {
                     CultureConstants.English,
                     CultureConstants.Welsh
-                };
+            };
             services.AddLocalization(opts =>
             {
                 opts.ResourcesPath = "Resources";
             });
-            services.AddScoped<IUrlHelper>(x => {
+            services.AddScoped<IUrlHelper>(x =>
+            {
                 var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
                 var factory = x.GetRequiredService<IUrlHelperFactory>();
                 return factory.GetUrlHelper(actionContext);
@@ -64,8 +65,7 @@ namespace EPR.Accreditation.Portal
             // Register configuration options
             services.AddSingleton<IConfiguration>(Configuration);
             services.Configure<AppSettingsConfigOptions>(
-                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
-            );
+                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection));
 
             services.AddTransient<IAccreditationService, AccreditationService>();
         }
@@ -108,8 +108,6 @@ namespace EPR.Accreditation.Portal
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }

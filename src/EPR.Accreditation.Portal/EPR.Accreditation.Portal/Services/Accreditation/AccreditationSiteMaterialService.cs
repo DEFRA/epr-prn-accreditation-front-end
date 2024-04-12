@@ -41,9 +41,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var language = Enums.Language.Undefined;
 
             if (currentCulture.Name == CultureConstants.English.Name)
+            {
                 language = Enums.Language.English;
+            }
             else if (currentCulture.Name == CultureConstants.Welsh.Name)
+            {
                 language = Enums.Language.Welsh;
+            }
 
             return await _httpSiteMaterialService.GetMeterialName(
                 id,
@@ -76,7 +80,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             // then "Save and come back later" has been selected and we are letting
             // blank required fields through
             if (wasteSourceViewModel.WasteSource == null)
+            {
                 wasteSourceViewModel.WasteSource = string.Empty;
+            }
 
             await _httpSiteMaterialService.UpdateWasteSource(
                 siteType,

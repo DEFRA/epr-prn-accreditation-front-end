@@ -1,11 +1,12 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-
-namespace EPR.Accreditation.Portal.RESTservices
+﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Facade.Common.RESTservices;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+
     public class HttpSiteMaterialService : BaseHttpService, IHttpSiteMaterialService
     {
         public HttpSiteMaterialService(
