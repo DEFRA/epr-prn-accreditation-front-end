@@ -1,4 +1,8 @@
-﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
+﻿// <copyright file="IHttpAccreditationSiteService.cs" company="DEFRA">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
     public interface IHttpAccreditationSiteService
     {

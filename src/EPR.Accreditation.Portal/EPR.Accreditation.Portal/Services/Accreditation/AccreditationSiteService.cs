@@ -1,48 +1,66 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
+﻿// <copyright file="AccreditationSiteService.cs" company="DEFRA">
+// Copyright (c) DEFRA All rights reserved.
+// </copyright>
 
 namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+
     public class AccreditationSiteService : IAccreditationSiteService
     {
-        protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IHttpAccreditationSiteService _httpAccreditationSiteService;
-        private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpAccreditationSiteService _httpAccreditationSiteService;
 
         public AccreditationSiteService(
             IHttpContextAccessor httpContextAccessor,
-            IHttpAccreditationSiteService httpAccreditationSiteService,
-            IMapper mapper)
+            IHttpAccreditationSiteService httpAccreditationSiteService)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpAccreditationSiteService = httpAccreditationSiteService ?? throw new ArgumentNullException(nameof(httpAccreditationSiteService));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<ExemptionReferencesViewModel> GetExemptionReferencesViewModel(Guid id)
         {
             var exemptionReferences = await _httpAccreditationSiteService.GetExemptionReferences(id);
 
-            return new ExemptionReferencesViewModel
-            {
-                Id = id,
-                ExemptionReferencesVm = exemptionReferences.Select(x => new ExemptionReferenceViewModel
-                {
-                    Reference = x
-                }).ToList()
-            };
+            var viewModel = new ExemptionReferencesViewModel { Id = id };
+
+            var references = exemptionReferences.ToList();
+
+            if (references.Count >= 1)
+                viewModel.Reference1 = references[0];
+            if (references.Count >= 2)
+                viewModel.Reference2 = references[1];
+            if (references.Count >= 3)
+                viewModel.Reference3 = references[2];
+            if (references.Count >= 4)
+                viewModel.Reference4 = references[3];
+            if (references.Count >= 5)
+                viewModel.Reference5 = references[4];
+
+            return viewModel;
+
+
+            //return new ExemptionReferencesViewModel
+            //{
+            //    Id = id,
+            //    ExemptionReferencesVm = exemptionReferences.Select(x => new ExemptionReferenceViewModel
+            //    {
+            //        Reference = x
+            //    }).ToList()
+            //};
         }
 
         public async Task UpdateExemptionReferences(ExemptionReferencesViewModel viewModel)
         {
-            var exemptionReferences = viewModel.ExemptionReferencesVm.Select(x => x.Reference);
+            //var exemptionReferences = viewModel.ExemptionReferencesVm.Select(x => x.Reference);
 
-            await _httpAccreditationSiteService.UpdateExemptionReferences(
-                viewModel.Id,
-                exemptionReferences
-                );
+            //await _httpAccreditationSiteService.UpdateExemptionReferences(
+            //    viewModel.Id,
+            //    exemptionReferences
+            //    );
         }
     }
 }

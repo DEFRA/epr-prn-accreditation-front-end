@@ -1,5 +1,5 @@
 ﻿// <copyright file="AccreditationSiteController.cs" company="DEFRA">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// Copyright (c) DEFRA All rights reserved.
 // </copyright>
 
 namespace EPR.Accreditation.Portal.Controllers
