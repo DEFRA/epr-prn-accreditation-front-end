@@ -34,6 +34,18 @@ public static class Strings
     }
 
     /// <summary>
+    /// AGeneric constants for use in the application
+    /// </summary>
+    public static class GenericConstants
+    {
+        /// <summary>
+        /// Some pages show a number of multiple lines of the same inputs. This
+        /// represents the minimum number to show
+        /// </summary>
+        public const int MinimumMultiLineRecordNumber = 3;
+    }
+
+    /// <summary>
     /// This class should be used to store the values of areas, controllers and action names
     /// So we can use this instead of strings directly in controllers and views
     /// </summary>

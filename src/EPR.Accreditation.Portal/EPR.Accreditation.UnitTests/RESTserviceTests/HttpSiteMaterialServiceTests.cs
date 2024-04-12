@@ -314,6 +314,58 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.IsTrue(AreObjectsEqual(reprocessedWasteLastYearDto, capturedPayload));
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public async Task GetNonWasteInputs_CallsExpectedEndPoint_WithCorrectParameters()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
+
+            // Act
+            await _httpSiteMaterialService.GetNonWasteInputs(
+                id,
+                materialId);
+
+            // Assert
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task UpdateNonWasteInputs_CallsExpectedEndPoint_WithCorrectParametersAndPayload()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var nonWasteInputsDto = new NonWasteInputsDto();
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
+            // Act
+            await _httpSiteMaterialService.UpdateNonWasteInputs(
+                id,
+                materialId,
+                nonWasteInputsDto);
+
+            // Assert
+            var capturedPayload = JsonConvert.DeserializeObject<NonWasteInputsDto>(_capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+            Assert.IsTrue(AreObjectsEqual(nonWasteInputsDto, capturedPayload));
+        }
+
         private bool AreObjectsEqual<T>(T obj1, T obj2)
         {
             var obj1Json = JsonConvert.SerializeObject(obj1);
