@@ -28,9 +28,9 @@
             var materialIdValue = context.HttpContext.Request.RouteValues["materialId"];
             var siteId = default(Guid);
 
-            if ((!Guid.TryParse((string)idValue, out var id) ||
+            if (((!Guid.TryParse((string)idValue, out var id) ||
                 !string.IsNullOrWhiteSpace((string)siteIdValue)) &&
-                !Guid.TryParse((string)siteIdValue, out siteId) ||
+                !Guid.TryParse((string)siteIdValue, out siteId)) ||
                 !Guid.TryParse((string)materialIdValue, out var materialId))
             {
                 return;

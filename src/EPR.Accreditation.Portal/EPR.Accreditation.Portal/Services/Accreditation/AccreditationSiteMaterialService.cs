@@ -1,20 +1,20 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.Constants;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Localization;
-using static EPR.Accreditation.Portal.Constants.Strings;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.Constants;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Localization;
+    using static EPR.Accreditation.Portal.Constants.Strings;
+
     public class AccreditationSiteMaterialService : IAccreditationSiteMaterialService
     {
-        protected readonly IMapper _mapper;
-        protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IHttpSiteMaterialService _httpSiteMaterialService;
+        private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpSiteMaterialService _httpSiteMaterialService;
 
         public AccreditationSiteMaterialService(
             IMapper mapper,

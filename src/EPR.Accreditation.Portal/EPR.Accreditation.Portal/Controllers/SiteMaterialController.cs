@@ -18,10 +18,10 @@
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class SiteMaterialController : BaseSiteController
     {
-        private string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
-        private string WasteLastYearRouteName = "WasteLastYear";
-        private string NonWasteInputsRouteName = "NonWasteInputs";
-        private int _maximumMultiLineRecordNumber = 0;
+        private const string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
+        private const string WasteLastYearRouteName = "WasteLastYear";
+        private const string NonWasteInputsRouteName = "NonWasteInputs";
+        private readonly int _maximumMultiLineRecordNumber = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteMaterialController"/> class.
@@ -47,9 +47,9 @@
                   backPageViewModel,
                   SiteType.Site)
         {
-            SiteProcessingCapacityRouteName = "SiteProcessingCapacity";
-            SiteProductsProducedRouteName = "SiteProductsProduced";
-            SiteChooseMaterialRouteName = "SiteChooseMaterial";
+            _siteProcessingCapacityRouteName = "SiteProcessingCapacity";
+            _siteProductsProducedRouteName = "SiteProductsProduced";
+            _siteChooseMaterialRouteName = "SiteChooseMaterial";
 
             if (appSettingsConfiguration?.Value?.MaximumMultiLineRecordNumber == null)
             {
@@ -202,7 +202,7 @@
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -280,7 +280,7 @@
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -291,7 +291,7 @@
             else
             {
                 return RedirectToRoute(
-                    SiteProductsProducedRouteName,
+                    _siteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,

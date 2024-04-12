@@ -7,7 +7,7 @@
 
     public class SaveAndComeBackService : ISaveAndComeBackService
     {
-        protected IHttpSaveAndComeBackService _httpSaveAndComeBackService;
+        private readonly IHttpSaveAndComeBackService _httpSaveAndComeBackService;
 
         public SaveAndComeBackService(IHttpSaveAndComeBackService httpSaveAndComeBackService)
         {

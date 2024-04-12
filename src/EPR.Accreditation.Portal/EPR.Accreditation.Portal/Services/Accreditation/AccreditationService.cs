@@ -23,18 +23,6 @@
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
         }
 
-        private Enums.TaskStatus ReturnStatusFromList(
-            List<AccreditationTaskProgress> accreditationsTaskProgress,
-            Enums.TaskName taskName)
-        {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).ToList().Count > 0)
-            {
-                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
-            }
-
-            return Enums.TaskStatus.NotStarted;
-        }
-
         public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
             var result = await _httpAccreditationService.GetOperatorType(id);
@@ -97,6 +85,18 @@
             var result = await _httpAccreditationService.GetCheckYourAnswers(id);
             var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
             return vm;
+        }
+
+        private Enums.TaskStatus ReturnStatusFromList(
+            List<AccreditationTaskProgress> accreditationsTaskProgress,
+            Enums.TaskName taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
+            {
+                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+            }
+
+            return Enums.TaskStatus.NotStarted;
         }
     }
 }

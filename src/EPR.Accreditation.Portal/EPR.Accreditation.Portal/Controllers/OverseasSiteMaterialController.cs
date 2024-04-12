@@ -25,9 +25,9 @@ namespace EPR.Accreditation.Portal.Controllers
                   backPageViewModel,
                   SiteType.OverseasSite)
         {
-            SiteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
-            SiteProductsProducedRouteName = "OverseasSiteProductsProduced";
-            SiteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
+            _siteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
+            _siteProductsProducedRouteName = "OverseasSiteProductsProduced";
+            _siteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
         }
 
         [HttpGet("Material", Name = "OverseasSiteChooseMaterial")]

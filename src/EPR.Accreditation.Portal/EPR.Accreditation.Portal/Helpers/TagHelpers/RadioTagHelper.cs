@@ -8,6 +8,14 @@
     [HtmlTargetElement("radios", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class RadioTagHelper : TagHelper
     {
+        private readonly IHtmlGenerator _generator;
+
+        public RadioTagHelper(IHtmlGenerator generator)
+            : base()
+        {
+            _generator = generator;
+        }
+
         [HtmlAttributeName("asp-title")]
         public string Title { get; set; }
 
@@ -17,15 +25,7 @@
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        private readonly IHtmlGenerator _generator;
-
         public override int Order => 1;
-
-        public RadioTagHelper(IHtmlGenerator generator)
-            : base()
-        {
-            _generator = generator;
-        }
 
         public override async Task ProcessAsync(
             TagHelperContext context,
