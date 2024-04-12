@@ -91,7 +91,7 @@
         /// Performs an Http POST without returning any data
         /// </summary>
         protected async Task Post(
-            string url, 
+            string url,
             object payload = null)
         {
             CheckUrl(url);
@@ -105,7 +105,7 @@
         /// Performs an Http PUT returning the speicified object
         /// </summary>
         protected async Task<T> Put<T>(
-            string url, 
+            string url,
             object payload = null)
         {
             CheckUrl(url);
@@ -119,7 +119,7 @@
         /// Performs an Http PUT without returning any data
         /// </summary>
         protected async Task Put(
-            string url, 
+            string url,
             object payload = null)
         {
             CheckUrl(url);
@@ -133,7 +133,7 @@
         /// Performs an Http DELETE returning the speicified object
         /// </summary>
         protected async Task<T> Delete<T>(
-            string url, 
+            string url,
             object payload = null)
         {
             CheckUrl(url);
@@ -147,7 +147,7 @@
         /// Performs an Http DELETE without returning any data
         /// </summary>
         protected async Task Delete(
-            string url, 
+            string url,
             object payload = null)
         {
             CheckUrl(url);
