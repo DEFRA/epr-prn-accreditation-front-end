@@ -30,6 +30,17 @@
             string wasteSource);
 
         // only reprocessor
+        Task<NonWasteInputsDto> GetNonWasteInputs(
+            Guid id,
+            Guid materialId);
+
+        // only reprocessor
+        Task UpdateNonWasteInputs(
+            Guid id,
+            Guid materialId,
+            NonWasteInputsDto nonWasteInputsDto);
+
+        // only reprocessor
         Task<MaterialOutputsDto> GetMaterialOutputs(
             Guid id,
             Guid materialId);

@@ -15,13 +15,13 @@
             <span asp-validation-for="HasReprocessedWasteLastYear"></span>
         </p>
         <div class="govuk-radios__item">
-            <input class="govuk-radios__input" type="radio" asp-for="HasReprocessedWasteLastYear" value="@true" aria-describedby="@MasterResources.Yes">
+            <input class="govuk-radios__input" type="radio" id="a" asp-for="HasReprocessedWasteLastYear" value="@true" aria-describedby="@MasterResources.Yes">
             <label class="govuk-label govuk-radios__label" for="@MasterResources.Yes">
                 @MasterResources.Yes
             </label>
         </div>
         <div class="govuk-radios__item">
-            <input class="govuk-radios__input" type="radio" asp-for="HasReprocessedWasteLastYear" value="@false" aria-describedby="@MasterResources.No">
+            <input class="govuk-radios__input" type="radio" id="b" asp-for="HasReprocessedWasteLastYear" value="@false" aria-describedby="@MasterResources.No">
             <label class="govuk-label govuk-radios__label" for="@MasterResources.No">
                 @MasterResources.No
             </label>

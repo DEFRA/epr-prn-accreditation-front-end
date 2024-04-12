@@ -37,6 +37,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialOutputsLastYearResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\NonWasteInputEstimatedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonWasteInputEstimatedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\NonWasteInputLastYearResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonWasteInputLastYearResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\MaterialWasteOutputsEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -148,6 +158,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\NonWasteInputEstimatedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NonWasteInputEstimatedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\NonWasteInputLastYearResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NonWasteInputLastYearResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\MaterialWasteOutputsEstimatedResources.cy-GB.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -241,6 +259,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPR.Accreditation.Portal.Common\EPR.Accreditation.Portal.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\js\pages\" />
   </ItemGroup>
 
 </Project>

@@ -117,43 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddRow" xml:space="preserve">
-    <value>[Welsh]Add another</value>
+  <data name="AtLeastOneEntryRequired" xml:space="preserve">
+    <value>Enter non-waste inputs before moving</value>
   </data>
-  <data name="BackLink" xml:space="preserve">
-    <value>[Welsh]Back</value>
+  <data name="SubTitle" xml:space="preserve">
+    <value>Specify the type and quantity of each non-waste material used, in tonnes. For example, sandstone, limestones or dolomite</value>
   </data>
-  <data name="ConfirmAndContinue" xml:space="preserve">
-    <value>[Welsh]Confirm and continue</value>
+  <data name="Title" xml:space="preserve">
+    <value>Enter your non-waste inputs for the last calender year</value>
   </data>
-  <data name="Continue" xml:space="preserve">
-    <value>[Welsh]Continue</value>
+  <data name="TonnesRequired" xml:space="preserve">
+    <value>Tonnes field is required when type has been entered</value>
   </data>
-  <data name="DecimalNumberFormatError" xml:space="preserve">
-    <value>[Welsh]Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
-  </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>[Welsh]For:</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>[Welsh]No</value>
-  </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>[Welsh]Save and come back later</value>
-  </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>[Welsh]Save and continue</value>
-  </data>
-  <data name="SummaryError" xml:space="preserve">
-    <value>[Welsh]There is a problem</value>
-  </data>
-  <data name="TonnesLabel" xml:space="preserve">
-    <value>[Welsh]Tonnes</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>[Welsh]Yes</value>
+  <data name="TypeRequired" xml:space="preserve">
+    <value>Type field is required when tonnes has been entered</value>
   </data>
 </root>

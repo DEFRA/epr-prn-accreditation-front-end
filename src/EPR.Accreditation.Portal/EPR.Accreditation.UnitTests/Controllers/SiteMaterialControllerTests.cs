@@ -1,25 +1,27 @@
-﻿using EPR.Accreditation.Portal.Controllers;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Moq;
-
-namespace EPR.Accreditation.UnitTests.Controllers
+﻿namespace EPR.Accreditation.UnitTests.Controllers
 {
+    using EPR.Accreditation.Portal.Controllers;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.Options;
+    using Moq;
+
     [TestClass]
     public class SiteMaterialControllerTests
     {
-        protected SiteMaterialController _siteMaterialController;
-
-        protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<IUrlHelperWrapper> _mockUrlHelper;
-        protected Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
-        protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
-        protected BackPageViewModel _backPageViewModel;
+        private SiteMaterialController _siteMaterialController;
+        private Mock<IHttpContextAccessor> _mockContextAccessor;
+        private Mock<IUrlHelperWrapper> _mockUrlHelper;
+        private Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
+        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
+        private Mock<IOptions<AppSettingsConfigOptions>> _mockAppSettingsConfiguration;
+        private BackPageViewModel _backPageViewModel;
 
         [TestInitialize]
         public void Init()
@@ -28,13 +30,24 @@ namespace EPR.Accreditation.UnitTests.Controllers
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _mockAccreditationSiteMaterialService = new Mock<IAccreditationSiteMaterialService>();
             _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
+            _mockAppSettingsConfiguration = new Mock<IOptions<AppSettingsConfigOptions>>();
             _backPageViewModel = new BackPageViewModel();
+
+            var config = new AppSettingsConfigOptions
+            {
+                MaximumMultiLineRecordNumber = 10
+            };
+
+            _mockAppSettingsConfiguration
+                .Setup(o => o.Value)
+                .Returns(config);
 
             _siteMaterialController = new SiteMaterialController(
                 _mockContextAccessor.Object,
                 _mockUrlHelper.Object,
                 _mockAccreditationSiteMaterialService.Object,
                 _mockSaveAndComeBackService.Object,
+                _mockAppSettingsConfiguration.Object,
                 _backPageViewModel);
 
             var context = new DefaultHttpContext();
@@ -348,7 +361,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
             var redirectToRouteResult = result as RedirectToRouteResult;
-            Assert.AreEqual("SiteMaterialOutputs", redirectToRouteResult.RouteName);
+            Assert.AreEqual("NonWasteInputs", redirectToRouteResult.RouteName);
 
             _mockAccreditationSiteMaterialService.Verify(service => service.UpdateReprocessedWasteLastYear(viewModel), Times.Once);
         }
@@ -563,9 +576,99 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             _mockAccreditationSiteMaterialService.Verify(x => x.UpdateMaterialOutputs(viewModel), Times.Once);
-            _mockSaveAndComeBackService.Verify(x => x.AddSaveAndComeBack(
-                It.IsAny<Guid>(),
-                It.IsAny<RouteValueDictionary>()), Times.Once);
+            _mockSaveAndComeBackService.Verify(x =>
+                x.AddSaveAndComeBack(
+                    It.IsAny<Guid>(),
+                    It.IsAny<RouteValueDictionary>()),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task NonWasteInputs_Returns_NotFound_When_Id_Or_MaterialId_Not_Provided()
+        {
+            // Arrange
+            var id = (Guid?)null;
+            var materialId = (Guid?)null;
+
+            // Act
+            var result = await _siteMaterialController.NonWasteInputs(id, materialId) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task NonWasteInputs_Returns_View_When_Valid_Id_And_MaterialId_Provided()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            var nonWasteInputsViewModel = new NonWasteInputsViewModel { WasteLastYear = true };
+            _mockAccreditationSiteMaterialService.Setup(x => x.GetNonWasteInputs(id, materialId)).ReturnsAsync(nonWasteInputsViewModel);
+
+            // Act
+            var result = await _siteMaterialController.NonWasteInputs(id, materialId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("NonWasteInputsLastYear", result.ViewName);
+            Assert.AreEqual(nonWasteInputsViewModel, result.Model);
+        }
+
+        [TestMethod]
+        public async Task NonWasteInputs_Returns_NotFound_When_WasteLastYear_Null()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            var nonWasteInputsViewModel = new NonWasteInputsViewModel { WasteLastYear = null };
+            _mockAccreditationSiteMaterialService.Setup(x => x.GetNonWasteInputs(id, materialId)).ReturnsAsync(nonWasteInputsViewModel);
+
+            // Act
+            var result = await _siteMaterialController.NonWasteInputs(id, materialId) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task NonWasteInputs_Returns_View_When_WasteLastYear_False()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            var nonWasteInputsViewModel = new NonWasteInputsViewModel { WasteLastYear = false };
+            _mockAccreditationSiteMaterialService.Setup(x => x.GetNonWasteInputs(id, materialId)).ReturnsAsync(nonWasteInputsViewModel);
+
+            // Act
+            var result = await _siteMaterialController.NonWasteInputs(id, materialId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("NonWasteInputsEstimated", result.ViewName);
+            Assert.AreEqual(nonWasteInputsViewModel, result.Model);
+        }
+
+        [TestMethod]
+        public async Task NonWasteInputs_Post_Returns_View_With_New_Row_On_SaveButton_AddRow()
+        {
+            // Arrange
+            var viewModel = new NonWasteInputsViewModel
+            {
+                Rows = new List<NonWasteInputsRowViewModel>(),
+                WasteLastYear = true
+            };
+            var saveButton = SaveButton.AddRow;
+
+            // Act
+            var result = await _siteMaterialController.NonWasteInputs(viewModel, saveButton) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, ((NonWasteInputsViewModel)result.Model).RowsToAdd);
         }
     }
 }
