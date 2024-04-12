@@ -1,35 +1,34 @@
-﻿using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Extensions;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Mvc;
+﻿// <copyright file="AccreditationSiteController.cs" company="DEFRA">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Extensions;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("[controller]/{id}/Site/")]
     public class AccreditationSiteController : Controller
     {
-        protected readonly IAccreditationSiteService _accreditationSiteService;
-        protected readonly ISaveAndComeBackService _saveAndComeBackService;
-        protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected IUrlHelperWrapper _urlHelper;
-        protected readonly BackPageViewModel _backPageViewModel;
-
+        private readonly IAccreditationSiteService _accreditationSiteService;
+        private readonly ISaveAndComeBackService _saveAndComeBackService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly BackPageViewModel _backPageViewModel;
 
         public AccreditationSiteController(
             IAccreditationSiteService accreditationSiteService,
             ISaveAndComeBackService saveAndComeBackService,
             IHttpContextAccessor httpContextAccessor,
-            IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel
             )
         {
             _accreditationSiteService = accreditationSiteService ?? throw new ArgumentNullException(nameof(accreditationSiteService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _backPageViewModel = backPageViewModel;
         }
 
@@ -53,10 +52,10 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-            ExemptionReferencesResources.ErrorMessageBlank,
-            ExemptionReferencesResources.ErrorMessageDuplicate,
-            ExemptionReferencesResources.ErrorMessageInvalidFormat,
-            ExemptionReferencesResources.ErrorMessageTooLong))
+                ExemptionReferencesResources.ErrorMessageBlank,
+                ExemptionReferencesResources.ErrorMessageDuplicate,
+                ExemptionReferencesResources.ErrorMessageInvalidFormat,
+                ExemptionReferencesResources.ErrorMessageTooLong))
             {
                 _backPageViewModel.Url = $"/Accreditation/{viewModel.Id}/PermitExemption";
                 return View(viewModel);
