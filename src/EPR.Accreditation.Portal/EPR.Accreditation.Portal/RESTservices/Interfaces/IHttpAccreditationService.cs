@@ -34,4 +34,3 @@
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
     }
 }
-

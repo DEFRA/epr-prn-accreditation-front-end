@@ -1,10 +1,10 @@
-﻿using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using Newtonsoft.Json;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using Newtonsoft.Json;
+
     public class SaveAndComeBackService : ISaveAndComeBackService
     {
         protected IHttpSaveAndComeBackService _httpSaveAndComeBackService;
@@ -12,11 +12,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         public SaveAndComeBackService(IHttpSaveAndComeBackService httpSaveAndComeBackService)
         {
             _httpSaveAndComeBackService = httpSaveAndComeBackService ?? throw new ArgumentNullException(nameof(httpSaveAndComeBackService));
-        }
-
-        public async Task<SaveAndComeBack> GetSaveAndComeBack(Guid accreditationExternalId)
-        {
-            return await _httpSaveAndComeBackService.GetSaveAndComeBack(accreditationExternalId);
         }
 
         public async Task AddSaveAndComeBack(

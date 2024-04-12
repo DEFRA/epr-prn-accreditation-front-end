@@ -1,9 +1,9 @@
-﻿using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Facade.Common.RESTservices.Interfaces;
-using Microsoft.AspNetCore.Http;
-
-namespace EPR.Accreditation.Facade.Common.RESTservices
+﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using Microsoft.AspNetCore.Http;
+
     public class HttpMaterialService : BaseHttpService, IHttpMaterialService
     {
         public HttpMaterialService(
