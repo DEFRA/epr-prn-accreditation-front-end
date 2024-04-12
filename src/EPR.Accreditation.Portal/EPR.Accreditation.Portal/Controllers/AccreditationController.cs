@@ -66,7 +66,7 @@
 
             await _wastePermitService.UpdatePermitExemption(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue && 
+            if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.HasPermitExemption.Value == true)
             {
                 return RedirectToAction("ExemptionReferences", "Accreditation");
@@ -148,7 +148,6 @@
             return View(new OperatorTypeViewModel());
         }
 
-
         [HttpPost]
         [ActionName("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
@@ -179,6 +178,7 @@
                     materialId.Value);
                 return View(model);
             }
+
             return NotFound();
         }
 

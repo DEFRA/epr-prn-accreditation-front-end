@@ -10,7 +10,7 @@
             Type enumType,
             string defaultItem,
             ResourceManager resourceManager,
-            params TEnum[] members) 
+            params TEnum[] members)
             where TEnum : Enum
         {
             var selectList = new List<SelectListItem>

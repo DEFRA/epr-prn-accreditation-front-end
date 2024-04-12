@@ -18,7 +18,6 @@ namespace EPR.Accreditation.Portal.Extensions
     using CookieOptions = EPR.Accreditation.Portal.Options.CookieOptions;
     using SessionOptions = EPR.Accreditation.Portal.Options.SessionOptions;
 
-
     [ExcludeFromCodeCoverage]
     public static class ServiceProviderExtension
     {

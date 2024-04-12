@@ -1,10 +1,10 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using System.Threading.Tasks;
     using AutoMapper;
     using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
-    using System.Threading.Tasks;
 
     public class AccreditationService : IAccreditationService
     {

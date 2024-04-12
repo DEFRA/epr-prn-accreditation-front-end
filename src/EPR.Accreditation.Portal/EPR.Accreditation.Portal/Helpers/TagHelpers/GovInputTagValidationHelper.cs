@@ -6,7 +6,7 @@
 
     /// <summary>
     /// If the form fails validation:
-    /// This class goes through each of the specified tags specified below 
+    /// This class goes through each of the specified tags specified below
     /// checks to see if they are a govuk-form-group class, and if so
     /// adds the govuk-form-group--error class to the div for appropriate validation
     /// failure cases
