@@ -179,6 +179,9 @@
         /// <returns>Nothing (async Task)</returns>
         public async Task UpdateProductsProduced(ProductsProducedViewModel productsProducedViewModel)
         {
+            if (productsProducedViewModel == null)
+                throw new NullReferenceException(nameof(productsProducedViewModel));
+
             if (productsProducedViewModel.Rows != null &&
                 productsProducedViewModel.Rows.Any())
             {

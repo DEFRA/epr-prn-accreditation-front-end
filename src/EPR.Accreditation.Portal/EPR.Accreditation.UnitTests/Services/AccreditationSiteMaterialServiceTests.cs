@@ -1,37 +1,38 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.Configuration;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation;
-using EPR.Accreditation.Portal.ViewModels;
-using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Localization;
-using Moq;
-using static EPR.Accreditation.Portal.Constants.Strings;
-
-namespace EPR.Accreditation.UnitTests.Services
+﻿namespace EPR.Accreditation.UnitTests.Services
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.Configuration;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation;
+    using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Http.Features;
+    using Microsoft.AspNetCore.Localization;
+    using Moq;
+    using static EPR.Accreditation.Portal.Constants.Strings;
+
     [TestClass]
     public class AccreditationSiteMaterialServiceTests
     {
-        protected AccreditationSiteMaterialService _accreditationSiteMaterialService;
-        protected Mock<IMapper> _mockMapper;
-        protected Mock<IHttpContextAccessor> _mockHttpContextAccessor;
-        protected Mock<IHttpSiteMaterialService> _httpSiteMaterialServiceMock;
+        private AccreditationSiteMaterialService _accreditationSiteMaterialService;
+        private Mock<IMapper> _mockMapper;
+        private Mock<IHttpContextAccessor> _mockHttpContextAccessor;
+        private Mock<IHttpSiteMaterialService> _mockHttpSiteMaterialService;
 
         [TestInitialize]
         public void Init()
         {
             _mockMapper = new Mock<IMapper>();
             _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
-            _httpSiteMaterialServiceMock = new Mock<IHttpSiteMaterialService>();
+            _mockHttpSiteMaterialService = new Mock<IHttpSiteMaterialService>();
             _accreditationSiteMaterialService = new AccreditationSiteMaterialService(
                 _mockMapper.Object,
                 _mockHttpContextAccessor.Object,
-                _httpSiteMaterialServiceMock.Object);
+                _mockHttpSiteMaterialService.Object);
         }
 
         [TestMethod]
@@ -54,7 +55,7 @@ namespace EPR.Accreditation.UnitTests.Services
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _httpSiteMaterialServiceMock.Setup(x =>
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
                     id,
                     siteId,
@@ -67,7 +68,7 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(s =>
+            _mockHttpSiteMaterialService.Verify(s =>
                 s.GetMeterialName(
                     id,
                     siteId,
@@ -96,7 +97,7 @@ namespace EPR.Accreditation.UnitTests.Services
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _httpSiteMaterialServiceMock.Setup(x =>
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
                     id,
                     siteId,
@@ -109,7 +110,7 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(s =>
+            _mockHttpSiteMaterialService.Verify(s =>
                 s.GetMeterialName(
                     id,
                     siteId,
@@ -127,7 +128,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var expectedWasteSource = "SomeWasteSource";
-            _httpSiteMaterialServiceMock.Setup(x => x.GetWasteSource(siteType, id, siteId, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetWasteSource(siteType, id, siteId, materialId))
                 .ReturnsAsync(expectedWasteSource);
 
             // Act
@@ -155,7 +156,7 @@ namespace EPR.Accreditation.UnitTests.Services
             await _accreditationSiteMaterialService.UpdateWasteSource(siteType, viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(x =>
+            _mockHttpSiteMaterialService.Verify(x =>
                 x.UpdateWasteSource(
                     siteType,
                     viewModel.Id,
@@ -173,7 +174,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var materialId = Guid.NewGuid();
             var materialOutputsDto = new MaterialOutputsDto(); // Assuming MaterialOutputsDto is defined
             var expectedViewModel = new MaterialOutputsViewModel(); // Assuming MaterialOutputsViewModel is defined
-            _httpSiteMaterialServiceMock.Setup(x => x.GetMaterialOutputs(id, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetMaterialOutputs(id, materialId))
                 .ReturnsAsync(materialOutputsDto);
             _mockMapper.Setup(x => x.Map<MaterialOutputsViewModel>(materialOutputsDto))
                 .Returns(expectedViewModel);
@@ -198,7 +199,7 @@ namespace EPR.Accreditation.UnitTests.Services
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(x =>
+            _mockHttpSiteMaterialService.Verify(x =>
                 x.UpdateMaterialOutputs(
                     viewModel.Id,
                     viewModel.MaterialId,
@@ -214,7 +215,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var materialId = Guid.NewGuid();
             var expectedWasteLastYear = true;
 
-            _httpSiteMaterialServiceMock.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
                 .ReturnsAsync(expectedWasteLastYear);
 
             // Act
@@ -334,6 +335,62 @@ namespace EPR.Accreditation.UnitTests.Services
                         p.Rows[1].Tonnes == 20 &&
                         p.Rows[2].Type == "Type4" &&
                         p.Rows[2].Tonnes == 30)),
+                Times.Once);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public async Task UpdateProductsProduced_WithNullViewModel_ThrowsException()
+        {
+            // Arrange
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateProductsProduced(null);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public async Task UpdateProductsProduced_WithBlankRowsPresent_RemovesBlankRowsAndUpdates()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var productsProducedViewModel = new ProductsProducedViewModel
+            {
+                Id = id,
+                MaterialId = materialId,
+                Rows = new List<TypeTonnesRowViewModel>
+                {
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 10,
+                    },
+                    new TypeTonnesRowViewModel()
+                }
+            };
+            _mockMapper.Setup(m => m.Map<NonWasteInputsDto>(It.IsAny<ProductsProducedViewModel>())).Returns(new NonWasteInputsDto
+            {
+                Id = id,
+                MaterialId = materialId,
+            });
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateProductsProduced(productsProducedViewModel);
+
+            // Assert
+            _mockMapper.Verify(m =>
+                m.Map<NonWasteInputsDto>(
+                    It.Is<ProductsProducedViewModel>(p => 
+                        p.Rows.Count == 1 &&
+                        p.Rows[0].Tonnes == 10)),
+                Times.Once);
+            _mockHttpSiteMaterialService.Verify(s =>
+                s.UpdateProductsProduced(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>(),
+                    It.IsAny<NonWasteInputsDto>()),
                 Times.Once);
         }
     }
