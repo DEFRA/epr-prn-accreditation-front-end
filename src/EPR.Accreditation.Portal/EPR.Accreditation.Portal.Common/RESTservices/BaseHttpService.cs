@@ -19,20 +19,27 @@
             string endPointName)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+
             // do basic checks on parameters
             _baseUrl = string.IsNullOrWhiteSpace(baseUrl) ? throw new ArgumentNullException(nameof(baseUrl)) : baseUrl;
 
             if (httpClientFactory == null)
+            {
                 throw new ArgumentNullException(nameof(httpClientFactory));
+            }
 
             if (string.IsNullOrWhiteSpace(endPointName))
+            {
                 throw new ArgumentNullException(nameof(endPointName));
+            }
 
             _httpClient = httpClientFactory.CreateClient();
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
 
             if (_baseUrl.EndsWith("/"))
+            {
                 _baseUrl = _baseUrl.TrimEnd('/');
+            }
 
             _baseUrl = $"{_baseUrl}/{endPointName}";
         }
@@ -40,7 +47,12 @@
         /// <summary>
         /// Performs an Http GET returning the specified object
         /// </summary>
-        protected async Task<T> Get<T>(string url, bool includeTrailingSlash = true)
+        /// <param name="url">URL to send the post request to</param>
+        /// <typeparam name="T">The type of object to return</typeparam>
+        /// <returns>A <see cref="Task"/>Async object of type T returned</returns>
+        protected async Task<T> Get<T>(
+            string url, 
+            bool includeTrailingSlash = true)
         {
             url = includeTrailingSlash ? $"{_baseUrl}/{url}/" : $"{_baseUrl}/{url}";
 
@@ -50,10 +62,18 @@
         /// <summary>
         /// Performs an Http POST returning the speicified object
         /// </summary>
-        protected async Task<T> Post<T>(string url, object payload = null)
+        /// <param name="url">URL to send the post request to</param>
+        /// <param name="payload">The object payload to send</param>
+        /// <typeparam name="T">The type of object to return</typeparam>
+        /// <returns>A <see cref="Task"/>Async object of type T returned</returns>
+        protected async Task<T> Post<T>(
+            string url,
+            object payload = null)
         {
             if (string.IsNullOrWhiteSpace(url))
+            {
                 throw new ArgumentNullException(nameof(url));
+            }
 
             url = $"{_baseUrl}/{url}/";
 
@@ -165,7 +185,9 @@
                 var content = await streamReader.ReadToEndAsync();
 
                 if (string.IsNullOrWhiteSpace(content))
+                {
                     return default!;
+                }
 
                 return ReturnValue<T>(content);
             }
@@ -205,9 +227,13 @@
         private T ReturnValue<T>(string value)
         {
             if (IsValidJson(value))
+            {
                 return JsonConvert.DeserializeObject<T>(value)!;
+            }
             else
+            {
                 return (T)Convert.ChangeType(value, typeof(T));
+            }
         }
 
         private bool IsValidJson(string stringValue)
