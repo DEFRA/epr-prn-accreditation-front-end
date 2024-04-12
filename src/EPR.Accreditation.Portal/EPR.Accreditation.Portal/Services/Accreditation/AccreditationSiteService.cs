@@ -10,14 +10,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
     public class AccreditationSiteService : IAccreditationSiteService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpAccreditationSiteService _httpAccreditationSiteService;
 
-        public AccreditationSiteService(
-            IHttpContextAccessor httpContextAccessor,
-            IHttpAccreditationSiteService httpAccreditationSiteService)
+        public AccreditationSiteService(IHttpAccreditationSiteService httpAccreditationSiteService)
         {
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpAccreditationSiteService = httpAccreditationSiteService ?? throw new ArgumentNullException(nameof(httpAccreditationSiteService));
         }
 
