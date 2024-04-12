@@ -145,6 +145,94 @@ namespace EPR.Accreditation.UnitTests.Controllers
         }
 
         [TestMethod]
+        public async Task MaterialWasteOutputs_AllParametersNotNull_WithNullWasteLastYear_ReturnsNotFound()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+                id,
+                materialId)).ReturnsAsync(new MaterialWasteOutputsViewModel());
+
+            // Act
+            var result = await this._siteMaterialController.MaterialWasteOutputs(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+        [TestMethod]
+        public async Task MaterialWasteOutputs_AllParametersNotNull_WithWasteLastYearTrue_ReturnsExpectedResult()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            {
+                WasteLastYear = true,
+            };
+
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+                id,
+                materialId)).ReturnsAsync(materialWasteOutputsViewModel);
+
+            // Act
+            var result = await this._siteMaterialController.MaterialWasteOutputs(
+                id,
+                materialId);
+
+            // Assert
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult);
+            Assert.AreEqual("MaterialWasteOutputsLastYear", viewResult.ViewName);
+        }
+
+        [TestMethod]
+        public async Task MaterialWasteOutputs_AllParametersNotNull_WithWasteLastYearFalse_ReturnsExpectedResult()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            {
+                WasteLastYear = false,
+            };
+
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+                id,
+                materialId)).ReturnsAsync(materialWasteOutputsViewModel);
+
+            // Act
+            var result = await this._siteMaterialController.MaterialWasteOutputs(
+                id,
+                materialId);
+
+            // Assert
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult);
+            Assert.AreEqual("MaterialWasteOutputsEstimated", viewResult.ViewName);
+        }
+
+        [TestMethod]
+        public async Task MaterialWasteOutputs_AnyParameterNull_ReturnsNotFound()
+        {
+            // Arrange
+
+            // Act
+            var result = await this._siteMaterialController.MaterialWasteOutputs(null, Guid.NewGuid());
+            var result2 = await this._siteMaterialController.MaterialWasteOutputs(Guid.NewGuid(), null);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsInstanceOfType(result2, typeof(NotFoundResult));
+        }
+
+        [TestMethod]
         public async Task WasteLastYear_ReturnsView_ForValidIds()
         {
             // Arrange

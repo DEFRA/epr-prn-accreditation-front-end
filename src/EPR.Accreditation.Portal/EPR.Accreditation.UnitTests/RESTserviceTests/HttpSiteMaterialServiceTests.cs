@@ -242,6 +242,60 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         }
 
         [TestMethod]
+        public async Task GetMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedMaterialWasteOutputsDto = new MaterialWasteOutputsDto
+            {
+                UkPackagingWaste = 1.2M,
+                NonUkPackagingWaste = 4.5M,
+                NonPackagingWaste = 56.3M,
+            };
+            this.SetClientResponse(HttpStatusCode.OK, expectedMaterialWasteOutputsDto);
+
+            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Site/Material/{materialId}/MaterialWasteOutputs";
+
+            // Act
+            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(materialWasteOutputsDto);
+            Assert.IsTrue(this.AreObjectsEqual(expectedMaterialWasteOutputsDto, materialWasteOutputsDto)); // check to ensure what is returned from the HttpClient is returned by the service
+            Assert.AreEqual(expectedUrl.ToLower(), this._capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task UpdateMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var materialWasteOutputsDto = new MaterialWasteOutputsDto
+            {
+                UkPackagingWaste = 8.65M,
+                NonUkPackagingWaste = 5.09M,
+                NonPackagingWaste = null,
+            };
+
+            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Site/Material/{materialId}/MaterialWasteOutputs";
+
+            // Act
+            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
+                id,
+                materialId,
+                materialWasteOutputsDto);
+
+            // Arrange
+            var capturedPayload = JsonConvert.DeserializeObject<MaterialWasteOutputsDto>(this._capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), this._capturedUrl.ToLower());
+            Assert.IsTrue(this.AreObjectsEqual(materialWasteOutputsDto, capturedPayload));
+        }
+
+        [TestMethod]
         public async Task UpdateMaterialOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
         {
             // Arrange
