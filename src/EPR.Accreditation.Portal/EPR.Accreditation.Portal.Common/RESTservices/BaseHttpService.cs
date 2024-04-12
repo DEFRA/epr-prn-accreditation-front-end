@@ -51,7 +51,7 @@
         /// <typeparam name="T">The type of object to return</typeparam>
         /// <returns>A <see cref="Task"/>Async object of type T returned</returns>
         protected async Task<T> Get<T>(
-            string url, 
+            string url,
             bool includeTrailingSlash = true)
         {
             url = includeTrailingSlash ? $"{_baseUrl}/{url}/" : $"{_baseUrl}/{url}";
@@ -70,10 +70,7 @@
             string url,
             object payload = null)
         {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            CheckUrl(url);
 
             url = $"{_baseUrl}/{url}/";
 
@@ -97,10 +94,7 @@
             string url, 
             object payload = null)
         {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            CheckUrl(url);
 
             url = $"{_baseUrl}/{url}/";
 
@@ -114,10 +108,7 @@
             string url, 
             object payload = null)
         {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            CheckUrl(url);
 
             url = $"{_baseUrl}/{url}/";
 
@@ -131,10 +122,7 @@
             string url, 
             object payload = null)
         {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            CheckUrl(url);
 
             url = $"{_baseUrl}/{url}/";
 
@@ -148,10 +136,7 @@
             string url, 
             object payload = null)
         {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            CheckUrl(url);
 
             url = $"{_baseUrl}/{url}/";
 
@@ -165,10 +150,7 @@
             string url, 
             object payload = null)
         {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            CheckUrl(url);
 
             url = $"{_baseUrl}/{url}/";
 
@@ -269,12 +251,17 @@
             }
         }
 
-        public static string BuildUrlWithQueryString(object dto)
+        /// <summary>
+        /// Checks that the string url passed in actually has a valid existing string
+        /// If not, it throws an exception
+        /// </summary>
+        /// <param name="url">The url to check</param>
+        private void CheckUrl(string url)
         {
-            var properties = dto.GetType().GetProperties()
-                .Where(p => p.GetValue(dto, null) != null)
-                .Select(p => p.Name + "=" + Uri.EscapeDataString(p.GetValue(dto, null).ToString()));
-            return "?" + string.Join("&", properties);
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
         }
     }
 }
