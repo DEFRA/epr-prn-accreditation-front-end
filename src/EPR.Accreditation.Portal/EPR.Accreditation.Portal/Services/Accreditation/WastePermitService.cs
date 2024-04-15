@@ -1,15 +1,14 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+
     public class WastePermitService : IWastePermitService
     {
-
-        protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IHttpWastePermitService _httpWastePermitService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpWastePermitService _httpWastePermitService;
         private readonly IMapper _mapper;
 
         public WastePermitService(
@@ -37,8 +36,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
 
             await _httpWastePermitService.UpdatePermitExemption(
                 permitExemptionViewModel.Id,
-                permitExemptionDto
-                );
+                permitExemptionDto);
         }
     }
 }

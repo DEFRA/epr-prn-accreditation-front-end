@@ -1,8 +1,4 @@
-﻿using EPR.Accreditation.Portal.Resources;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-
-namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.Portal.ViewModels
 {
     public class TaskListViewModel
     {

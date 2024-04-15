@@ -1,24 +1,24 @@
-﻿using EPR.Accreditation.Portal.Constants;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Extensions;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace EPR.Accreditation.Portal.Controllers
+﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Constants;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Extensions;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
+
     [Route("[controller]/{id}")]
     public class AccreditationController : Controller
     {
-        protected readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAccreditationService _accreditationService;
-        protected readonly IWastePermitService _wastePermitService;
-        protected readonly ISaveAndComeBackService _saveAndComeBackService;
-        protected readonly BackPageViewModel _backPageViewModel;
-        protected IUrlHelperWrapper _urlHelper;
+        private readonly IWastePermitService _wastePermitService;
+        private readonly ISaveAndComeBackService _saveAndComeBackService;
+        private readonly BackPageViewModel _backPageViewModel;
+        private readonly IUrlHelperWrapper _urlHelper;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
@@ -43,7 +43,9 @@ namespace EPR.Accreditation.Portal.Controllers
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)
+            {
                 return NotFound();
+            }
 
             var viewModel = await _wastePermitService.GetPermitExemptionViewModel(id.Value);
 
@@ -58,15 +60,22 @@ namespace EPR.Accreditation.Portal.Controllers
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
+            {
                 return View(viewModel);
+            }
 
             await _wastePermitService.UpdatePermitExemption(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue && viewModel.HasPermitExemption.Value == true)
+            if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.HasPermitExemption.Value == true)
+            {
                 return RedirectToAction("ExemptionReferences", "Accreditation");
-
-            else if (saveButton == SaveButton.SaveAndContinue && viewModel.HasPermitExemption.Value == false)
+            }
+            else if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.HasPermitExemption.Value == false)
+            {
                 return RedirectToAction("AuthorityToIssues", "Accreditation");
+            }
 
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
@@ -82,7 +91,9 @@ namespace EPR.Accreditation.Portal.Controllers
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)
+            {
                 return NotFound();
+            }
 
             var viewModel = await _accreditationService.GetWastePermitViewModel(id.Value);
 
@@ -95,7 +106,9 @@ namespace EPR.Accreditation.Portal.Controllers
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
+            {
                 return View(viewModel);
+            }
 
             await _accreditationService.SaveWastePermit(viewModel);
 
@@ -105,11 +118,14 @@ namespace EPR.Accreditation.Portal.Controllers
                 await _saveAndComeBackService.AddSaveAndComeBack(
                     viewModel.Id,
                     Request.HttpContext.GetRouteData().Values);
+
                 return View("_ApplicationSaved");
             }
             else
             {
-                return RedirectToAction("PermitExemption", "Accreditation",
+                return RedirectToAction(
+                    "PermitExemption",
+                    "Accreditation",
                     new
                     {
                         viewModel.Id
@@ -126,19 +142,19 @@ namespace EPR.Accreditation.Portal.Controllers
                 var operatorType = await _accreditationService.GetOperatorType(id.Value);
 
                 return View(operatorType);
-
             }
 
             return View(new OperatorTypeViewModel());
         }
-
 
         [HttpPost]
         [ActionName("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
         {
             if (!ModelState.IsValid)
+            {
                 return View(vm);
+            }
 
             var externalId = await _accreditationService.CreateAccreditation(vm);
 
@@ -151,14 +167,17 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? siteId,
             Guid? materialId)
         {
-            if (id != null && siteId != null && materialId != null)
+            if (id != null &&
+                siteId != null &&
+                materialId != null)
             {
                 TaskListViewModel model = await _accreditationService.GetTaskList(
-                                                                        id.Value,
-                                                                        siteId.Value,
-                                                                        materialId.Value);
+                    id.Value,
+                    siteId.Value,
+                    materialId.Value);
                 return View(model);
             }
+
             return NotFound();
         }
 
@@ -179,7 +198,9 @@ namespace EPR.Accreditation.Portal.Controllers
         public async Task<IActionResult> CheckYourAnswers(Guid? id)
         {
             if (!id.HasValue)
+            {
                 return BadRequest();
+            }
 
             CheckYourAnswersViewModel vm = await _accreditationService.CheckYourAnswers(id.Value);
             return View(vm);
@@ -189,12 +210,12 @@ namespace EPR.Accreditation.Portal.Controllers
         public async Task<IActionResult> CheckYourAnswers(CheckYourAnswersViewModel checkYourAnswersViewModel)
         {
             if (!ModelState.IsValid)
+            {
                 return RedirectToAction("CheckYourAnswers", new { id = checkYourAnswersViewModel.Id });
+            }
 
             return RedirectToAction("Index", "Home");
         }
-
-
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
@@ -216,17 +237,19 @@ namespace EPR.Accreditation.Portal.Controllers
             Guid? siteId,
             Guid? materialId)
         {
-            if (id != null && siteId != null && materialId != null)
+            if (id != null &&
+                siteId != null &&
+                materialId != null)
             {
                 TaskListViewModel model = await _accreditationService.GetTaskList(
-                                                                        id.Value,
-                                                                        siteId.Value,
-                                                                        materialId.Value);
+                    id.Value,
+                    siteId.Value,
+                    materialId.Value);
                 return View(model);
             }
+
             return NotFound();
         }
-
 
         [HttpGet("SiteAddress")]
         public async Task<IActionResult> SiteAddress(
