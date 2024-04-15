@@ -1,13 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.ComponentModel.DataAnnotations;
-
-namespace EPR.Accreditation.Portal.Helpers.TagHelpers
+﻿namespace EPR.Accreditation.Portal.Helpers.TagHelpers
 {
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
+
     [HtmlTargetElement("radios", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class RadioTagHelper : TagHelper
     {
+        private readonly IHtmlGenerator _generator;
+
+        public RadioTagHelper(IHtmlGenerator generator)
+            : base()
+        {
+            _generator = generator;
+        }
+
         [HtmlAttributeName("asp-title")]
         public string Title { get; set; }
 
@@ -17,20 +25,16 @@ namespace EPR.Accreditation.Portal.Helpers.TagHelpers
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        private readonly IHtmlGenerator _generator;
-
         public override int Order => 1;
 
-        public RadioTagHelper(
-            IHtmlGenerator generator) : base()
-        {
-            _generator = generator;
-        }
-
-        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        public override async Task ProcessAsync(
+            TagHelperContext context,
+            TagHelperOutput output)
         {
             if (AspFor == null)
+            {
                 return;
+            }
 
             output.TagName = "div";
             output.Attributes.Add("class", "govuk-form-group");

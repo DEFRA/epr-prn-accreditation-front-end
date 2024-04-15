@@ -10,11 +10,4 @@
 
         public IEnumerable<NonWasteInputRecordDto> NonWasteInputRecords { get; set; }
     }
-
-    public class NonWasteInputRecordDto
-    {
-        public string Type { get; set; }
-
-        public decimal? Tonnes { get; set; }
-    }
 }

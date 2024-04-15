@@ -1,8 +1,8 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
-    using EPR.Accreditation.Portal.Helpers.ActionFilters;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.Resources;
@@ -18,10 +18,10 @@
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class SiteMaterialController : BaseSiteController
     {
-        private string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
-        private string WasteLastYearRouteName = "WasteLastYear";
-        private string NonWasteInputsRouteName = "NonWasteInputs";
-        private int _maximumMultiLineRecordNumber = 0;
+        private const string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
+        private const string WasteLastYearRouteName = "WasteLastYear";
+        private const string NonWasteInputsRouteName = "NonWasteInputs";
+        private readonly int _maximumMultiLineRecordNumber = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteMaterialController"/> class.
@@ -47,9 +47,9 @@
                   backPageViewModel,
                   SiteType.Site)
         {
-            SiteProcessingCapacityRouteName = "SiteProcessingCapacity";
-            SiteProductsProducedRouteName = "SiteProductsProduced";
-            SiteChooseMaterialRouteName = "SiteChooseMaterial";
+            _siteProcessingCapacityRouteName = "SiteProcessingCapacity";
+            _siteProductsProducedRouteName = "SiteProductsProduced";
+            _siteChooseMaterialRouteName = "SiteChooseMaterial";
 
             if (appSettingsConfiguration?.Value?.MaximumMultiLineRecordNumber == null)
             {
@@ -59,13 +59,14 @@
             _maximumMultiLineRecordNumber = appSettingsConfiguration.Value.MaximumMultiLineRecordNumber.Value;
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <param name="id">the id of the accreditation</param>
+        /// <returns>NotFound</returns>
         [HttpGet("Material", Name = "SiteChooseMaterial")]
         public IActionResult ChooseMaterial(
-            Guid? id,
-            Guid? materialId)
+            Guid? id)
         {
             return NotFound();
         }
@@ -77,12 +78,16 @@
         {
             if (id != null &&
                 materialId != null)
+            {
                 return await GetMaterialWasteSource(
                     id.Value,
                     null,
                     materialId.Value);
+            }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("WasteSource")]
@@ -127,13 +132,20 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (nonWasteInputsViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (nonWasteInputsViewModel.WasteLastYear == true)
+                {
                     return View("NonWasteInputsLastYear", nonWasteInputsViewModel);
-                else // otherwise return the annual outputs
+                }
+                else
+                {
+                    // otherwise return the annual outputs
                     return View("NonWasteInputsEstimated", nonWasteInputsViewModel);
+                }
             }
 
             return NotFound();
@@ -178,16 +190,20 @@
                 MaterialOutputsLastYearResources.ProcessLossBlank))
             {
                 if (viewModel.WasteLastYear == true)
+                {
                     return View("NonWasteInputsLastYear", viewModel);
+                }
                 else
+                {
                     return View("NonWasteInputsEstimated", viewModel);
+                }
             }
 
             await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -197,7 +213,8 @@
             }
             else
             {
-                return RedirectToRoute(SiteMaterialOutputsRouteName,
+                return RedirectToRoute(
+                    SiteMaterialOutputsRouteName,
                     new
                     {
                         viewModel.Id,
@@ -223,17 +240,25 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (materialOutputsViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (materialOutputsViewModel.WasteLastYear == true)
+                {
                     return View("MaterialOutputsLastYear", materialOutputsViewModel);
-                // otherwise return the annual outputs
+                }
                 else
+                {
+                    // otherwise return the annual outputs
                     return View("MaterialOutputsEstimated", materialOutputsViewModel);
+                }
             }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("MaterialOutputs")]
@@ -256,7 +281,7 @@
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -266,7 +291,8 @@
             }
             else
             {
-                return RedirectToRoute(SiteProductsProducedRouteName,
+                return RedirectToRoute(
+                    _siteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,
@@ -275,18 +301,20 @@
             }
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <returns>NotFound</returns>
         [HttpGet("ProductsProduced", Name = "SiteProductsProduced")]
         public IActionResult ProductsProduced()
         {
             return NotFound();
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <returns>NotFound</returns>
         [HttpGet("EnterProcessingCapacity", Name = "EnterProcessingCapacity")]
         public IActionResult EnterProcessingCapacity()
         {
@@ -310,7 +338,9 @@
                 return View(viewModel);
             }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("WasteLastYear")]
@@ -321,11 +351,14 @@
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
+            {
                 return View(viewModel);
+            }
 
             await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue)
+            {
                 return RedirectToRoute(
                     NonWasteInputsRouteName,
                     new
@@ -333,6 +366,7 @@
                         id = viewModel.Id,
                         viewModel.MaterialId
                     });
+            }
 
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(

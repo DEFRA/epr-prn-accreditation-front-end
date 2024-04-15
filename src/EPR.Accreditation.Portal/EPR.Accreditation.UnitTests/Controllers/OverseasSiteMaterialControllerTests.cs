@@ -1,25 +1,24 @@
-﻿using EPR.Accreditation.Portal.Controllers;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Moq;
-
-namespace EPR.Accreditation.UnitTests.Controllers
+﻿namespace EPR.Accreditation.UnitTests.Controllers
 {
+    using EPR.Accreditation.Portal.Controllers;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
+    using Moq;
+
     [TestClass]
     public class OverseasSiteMaterialControllerTests
     {
-        protected OverseasSiteMaterialController _siteMaterialController;
-
-        protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<IUrlHelperWrapper> _mockUrlHelper;
-        protected Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
-        protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
-        protected BackPageViewModel _backPageViewModel;
+        private OverseasSiteMaterialController _siteMaterialController;
+        private Mock<IHttpContextAccessor> _mockContextAccessor;
+        private Mock<IUrlHelperWrapper> _mockUrlHelper;
+        private Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
+        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
+        private BackPageViewModel _backPageViewModel;
 
         [TestInitialize]
         public void Init()
@@ -100,15 +99,17 @@ namespace EPR.Accreditation.UnitTests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(s =>
-                s.UpdateWasteSource(
-                    SiteType.OverseasSite,
-                    viewModel),
+            _mockAccreditationSiteMaterialService.Verify(
+                s =>
+                    s.UpdateWasteSource(
+                        SiteType.OverseasSite,
+                        viewModel),
                 Times.Once());
-            _mockSaveAndComeBackService.Verify(x =>
-                x.AddSaveAndComeBack(
-                    It.IsAny<Guid>(),
-                    It.IsAny<RouteValueDictionary>()),
+            _mockSaveAndComeBackService.Verify(
+                x =>
+                    x.AddSaveAndComeBack(
+                        It.IsAny<Guid>(),
+                        It.IsAny<RouteValueDictionary>()),
                 Times.Once());
         }
 
@@ -125,9 +126,12 @@ namespace EPR.Accreditation.UnitTests.Controllers
 
             // Assert
             _mockAccreditationSiteMaterialService.Verify(x => x.UpdateWasteSource(It.IsAny<SiteType>(), viewModel), Times.Once);
-            _mockSaveAndComeBackService.Verify(x => x.AddSaveAndComeBack(
-                It.IsAny<Guid>(),
-                It.IsAny<RouteValueDictionary>()), Times.Once);
+            _mockSaveAndComeBackService.Verify(
+                x =>
+                    x.AddSaveAndComeBack(
+                        It.IsAny<Guid>(),
+                        It.IsAny<RouteValueDictionary>()),
+                Times.Once);
         }
     }
 }

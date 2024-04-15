@@ -1,11 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace EPR.Accreditation.Portal.DTOs.UserAccount;
-
-[ExcludeFromCodeCoverage]
-public record AcceptNominationRequest
+﻿namespace EPR.Accreditation.Portal.DTOs.UserAccount
 {
-    public string Telephone { get; set; }
+    using System.Diagnostics.CodeAnalysis;
 
-    public string NomineeDeclaration { get; set; }
+    [ExcludeFromCodeCoverage]
+    public record AcceptNominationRequest
+    {
+        public string Telephone { get; set; }
+
+        public string NomineeDeclaration { get; set; }
+    }
 }

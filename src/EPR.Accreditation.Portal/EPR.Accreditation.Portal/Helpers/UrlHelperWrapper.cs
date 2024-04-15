@@ -30,5 +30,4 @@ namespace EPR.Accreditation.Portal.Helpers
             return _urlHelper.RouteUrl(routeName, values, protocol: null, host: null, fragment: null);
         }
     }
-
 }
