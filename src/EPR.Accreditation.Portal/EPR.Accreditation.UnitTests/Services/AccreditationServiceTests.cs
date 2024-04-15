@@ -82,7 +82,7 @@
 
             _httpAccreditionService.Verify(
                 s =>
-                    s.GetWastePermit(id), 
+                    s.GetWastePermit(id),
                 Times.Once);
         }
     }
