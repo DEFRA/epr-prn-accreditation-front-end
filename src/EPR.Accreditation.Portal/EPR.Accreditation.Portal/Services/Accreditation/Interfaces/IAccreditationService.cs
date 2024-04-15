@@ -1,10 +1,10 @@
-﻿using EPR.Accreditation.Portal.DTOs;
-using EPR.Accreditation.Facade.Common.Enums;
-using EPR.Accreditation.Portal.ViewModels;
-using EPR.Accreditation.Facade.Common.Dtos;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Facade.Common.Enums;
+    using EPR.Accreditation.Portal.DTOs;
+    using EPR.Accreditation.Portal.ViewModels;
+
     public interface IAccreditationService
     {
         Task<OperatorTypeViewModel> GetOperatorType(Guid id);
@@ -14,5 +14,12 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
         Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId);
+        Task UpdateOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            OverseasReprocessingSiteOutputsViewModel overseasSiteOutputs);
     }
 }

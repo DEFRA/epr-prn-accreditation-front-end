@@ -74,5 +74,19 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             return await Get<List<AccreditationTaskProgress>> ($"{accreditationExternalId}/TaskProgress");
         }
+
+        public async Task<OverseasReprocessingSiteOutputs> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId)
+        {
+            return await Get<OverseasReprocessingSiteOutputs>($"{accreditationExternalId}/OverseasSite/{overseasSiteExternalId}/Outputs");
+        }
+
+        public async Task UpdateOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId, 
+            OverseasReprocessingSiteOutputs overseasSiteOutputs)
+        {
+            await Put($"{accreditationExternalId}/OverseasSite/{overseasSiteOutputs.ExternalId}", overseasSiteOutputs);
+        }
     }
 }

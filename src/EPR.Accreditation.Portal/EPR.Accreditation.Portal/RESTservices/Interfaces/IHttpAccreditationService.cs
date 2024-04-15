@@ -1,11 +1,11 @@
-﻿using EPR.Accreditation.Facade.Common.Enums;
-using EPR.Accreditation.Portal.DTOs.WastePermit;
-using DTO = EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Portal.Common.Dtos;
-
-namespace EPR.Accreditation.Portal.RESTservices.Interfaces
+﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Facade.Common.Enums;
+    using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using DTO = Facade.Common.Dtos;
+
     public interface IHttpAccreditationService
     {
         Task CreateWastePermit(Guid accreditationId, LicensesAndPermitsReferences wastePermit);
@@ -30,6 +30,13 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+
+        Task<OverseasReprocessingSiteOutputs> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId);
+        Task UpdateOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            OverseasReprocessingSiteOutputs overseasSiteOutputs);
     }
 }
 

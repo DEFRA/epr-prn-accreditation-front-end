@@ -6,6 +6,8 @@
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Facade.Common.Dtos;
+
     public class AccreditationProfile : Profile
     {
         /// <summary>
@@ -32,6 +34,9 @@
 
             this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
                 .ReverseMap();
-    }
+
+            this.CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
+                .ReverseMap();
+        }
     }
 }

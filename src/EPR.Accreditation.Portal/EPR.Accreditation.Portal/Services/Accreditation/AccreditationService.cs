@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Facade.Common.Dtos;
-using EPR.Accreditation.Facade.Common.Enums;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using System.Threading.Tasks;
-
-
-namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Facade.Common.Enums;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+
     public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;
@@ -96,6 +95,24 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var result = await _httpAccreditationService.GetCheckYourAnswers(id);
             var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
             return vm;
+        }
+
+        public async Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId)
+        {
+            var overseasSiteOutputs = await _httpAccreditationService.GetOverseasReprocessingSiteOutputs(
+                accreditationExternalId,
+                overseasSiteExternalId);
+            return _mapper.Map<OverseasReprocessingSiteOutputsViewModel>(overseasSiteOutputs);
+        }
+
+        public async Task UpdateOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            OverseasReprocessingSiteOutputsViewModel overseasSiteOutputsViewModel)
+        {
+            var overseasSiteOutputs = _mapper.Map<OverseasReprocessingSiteOutputs>(overseasSiteOutputsViewModel);
+            await _httpAccreditationService.UpdateOverseasReprocessingSiteOutputs(accreditationExternalId, overseasSiteOutputs);
         }
     }
 }

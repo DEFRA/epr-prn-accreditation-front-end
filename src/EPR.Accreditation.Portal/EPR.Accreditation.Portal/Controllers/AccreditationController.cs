@@ -269,5 +269,12 @@ namespace EPR.Accreditation.Portal.Controllers
         {
             return NotFound();
         }
+
+        [HttpGet("RejectedWastePlans")]
+        public async Task<IActionResult> RejectedWastePlans(
+            Guid? id)
+        {
+            return NotFound();
+        }
     }
 }
