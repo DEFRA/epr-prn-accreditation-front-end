@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Overseas reprocessor details";
+}
+
+<partial name="_ValidationSummary" />
+<form method="post">
+    <h1 class="govuk-heading-l">
+        Overseas reprocessor details
+    </h1>
+    <div class="govuk-form-group">
+        <label class="govuk-label" style="font-weight: bold" for="event-name">
+            Organisation name
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" id="event-name" name="eventName" type="text">
+    </div>
+
+    <div class="govuk-form-group">
+        <label class="govuk-label" style="font-weight: bold" for="sort">
+            Select country
+        </label>
+        <select class="govuk-select" id="sort" name="sort">
+            <option value="published" selected>Choose a country</option>
+            <option value="updated">Recently updated</option>
+            <option value="views">Most views</option>
+            <option value="comments">Most comments</option>
+        </select>
+    </div>
+
+    <div class="govuk-form-group">
+        <label class="govuk-label" style="font-weight: bold" for="more-detail">
+            Address
+        </label>
+        <textarea class="govuk-textarea govuk-!-width-two-thirds" id="more-detail" name="moreDetail" rows="5"></textarea>
+    </div>
+    
+    <partial name="_SaveButtons" />
+</form>
