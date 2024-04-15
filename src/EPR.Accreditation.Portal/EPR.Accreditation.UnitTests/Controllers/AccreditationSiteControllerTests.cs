@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.UnitTests.Controllers
 {
-
     using EPR.Accreditation.Portal.Controllers;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;

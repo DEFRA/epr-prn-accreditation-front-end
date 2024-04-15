@@ -394,17 +394,19 @@
             await _accreditationSiteMaterialService.UpdateProductsProduced(productsProducedViewModel);
 
             // Assert
-            _mockMapper.Verify(m =>
-                m.Map<NonWasteInputsDto>(
-                    It.Is<ProductsProducedViewModel>(p => 
-                        p.Rows.Count == 1 &&
-                        p.Rows[0].Tonnes == 10)),
+            _mockMapper.Verify(
+                m =>
+                    m.Map<NonWasteInputsDto>(
+                        It.Is<ProductsProducedViewModel>(p =>
+                            p.Rows.Count == 1 &&
+                            p.Rows[0].Tonnes == 10)),
                 Times.Once);
-            _mockHttpSiteMaterialService.Verify(s =>
-                s.UpdateProductsProduced(
-                    It.IsAny<Guid>(),
-                    It.IsAny<Guid>(),
-                    It.IsAny<NonWasteInputsDto>()),
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                    s.UpdateProductsProduced(
+                        It.IsAny<Guid>(),
+                        It.IsAny<Guid>(),
+                        It.IsAny<NonWasteInputsDto>()),
                 Times.Once);
         }
     }

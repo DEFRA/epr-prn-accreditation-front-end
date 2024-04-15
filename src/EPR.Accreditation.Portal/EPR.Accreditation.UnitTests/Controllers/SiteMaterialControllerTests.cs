@@ -823,7 +823,8 @@
                         Type = "A",
                         Tonnes = 1
                     },
-                    new TypeTonnesRowViewModel{
+                    new TypeTonnesRowViewModel
+                    {
                         Type = "A",
                         Tonnes = 1
                     }
@@ -912,11 +913,16 @@
             // Assert
             Assert.IsNotNull(result);
             Assert.IsTrue(result.ViewName == "_ApplicationSaved");
-            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Once);
-            _mockSaveAndComeBackService.Verify(s =>
-                s.AddSaveAndComeBack(
-                    It.Is<Guid>(p => p == accreditationId),
-                    It.IsAny<RouteValueDictionary>()),
+            _mockAccreditationSiteMaterialService.Verify(
+                s =>
+                    s.UpdateProductsProduced(
+                        It.IsAny<ProductsProducedViewModel>()),
+                Times.Once);
+            _mockSaveAndComeBackService.Verify(
+                s =>
+                    s.AddSaveAndComeBack(
+                        It.Is<Guid>(p => p == accreditationId),
+                        It.IsAny<RouteValueDictionary>()),
                 Times.Once);
         }
 
@@ -943,10 +949,11 @@
             Assert.IsNotNull(result);
             Assert.IsTrue(result.RouteName == "Authority");
             _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Once);
-            _mockSaveAndComeBackService.Verify(s =>
-                s.AddSaveAndComeBack(
-                    It.IsAny<Guid>(),
-                    It.IsAny<RouteValueDictionary>()),
+            _mockSaveAndComeBackService.Verify(
+                s =>
+                    s.AddSaveAndComeBack(
+                        It.IsAny<Guid>(),
+                        It.IsAny<RouteValueDictionary>()),
                 Times.Never);
         }
     }
