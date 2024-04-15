@@ -70,11 +70,20 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What are teh outputs from reprocessing?.
+        ///   Looks up a localized string similar to What are the outputs from reprocessing?.
         /// </summary>
         public static string InfoText {
             get {
                 return ResourceManager.GetString("InfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter outputs from reprocessing before moving.
+        /// </summary>
+        public static string NoOutputsSupplied {
+            get {
+                return ResourceManager.GetString("NoOutputsSupplied", resourceCulture);
             }
         }
         

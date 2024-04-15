@@ -104,15 +104,15 @@
             var overseasSiteOutputs = await _httpAccreditationService.GetOverseasReprocessingSiteOutputs(
                 accreditationExternalId,
                 overseasSiteExternalId);
-            return _mapper.Map<OverseasReprocessingSiteOutputsViewModel>(overseasSiteOutputs);
+            var vm = _mapper.Map<OverseasReprocessingSiteOutputsViewModel>(overseasSiteOutputs);
+            vm.Id = accreditationExternalId;
+            return vm;
         }
 
-        public async Task UpdateOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId,
-            OverseasReprocessingSiteOutputsViewModel overseasSiteOutputsViewModel)
+        public async Task UpdateOverseasReprocessingSiteOutputs(OverseasReprocessingSiteOutputsViewModel overseasSiteOutputsViewModel)
         {
             var overseasSiteOutputs = _mapper.Map<OverseasReprocessingSiteOutputs>(overseasSiteOutputsViewModel);
-            await _httpAccreditationService.UpdateOverseasReprocessingSiteOutputs(accreditationExternalId, overseasSiteOutputs);
+            await _httpAccreditationService.UpdateOverseasReprocessingSiteOutputs(overseasSiteOutputsViewModel.Id, overseasSiteOutputs);
         }
     }
 }

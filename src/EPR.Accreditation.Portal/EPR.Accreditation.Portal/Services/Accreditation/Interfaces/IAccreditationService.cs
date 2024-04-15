@@ -18,8 +18,8 @@
         Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
             Guid accreditationExternalId,
             Guid overseasSiteExternalId);
+
         Task UpdateOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId,
             OverseasReprocessingSiteOutputsViewModel overseasSiteOutputs);
     }
 }

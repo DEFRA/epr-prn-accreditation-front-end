@@ -121,7 +121,10 @@
     <value>You can enter up to 500 characters</value>
   </data>
   <data name="InfoText" xml:space="preserve">
-    <value>What are teh outputs from reprocessing?</value>
+    <value>What are the outputs from reprocessing?</value>
+  </data>
+  <data name="NoOutputsSupplied" xml:space="preserve">
+    <value>Enter outputs from reprocessing before moving</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Reprocessing outputs</value>

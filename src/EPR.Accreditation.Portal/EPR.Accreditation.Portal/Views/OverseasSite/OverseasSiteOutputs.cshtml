@@ -5,32 +5,28 @@
 }
 
 <partial name="_ValidationSummary" />
-<form method="post">
-    <partial name="_WasteMaterialName" />
-    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
-        <div class="govuk-form-group">
-            <p class="govuk-error-message">
-                <span asp-validation-for="Outputs"></span>
-            </p>
 
-            <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
+<form method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds-from-desktop">
+
+            <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="500">
                 <div class="govuk-form-group">
                     <h1 class="govuk-label-wrapper">
                         <label class="govuk-label govuk-label--l" for="with-hint">
-                            @OverseasSiteOutputsResources.PageTitle
+                            @OverseasSiteOutputsResources.InfoText
                         </label>
                     </h1>
-                    <div id="with-hint-hint" class="govuk-hint">
-                        @OverseasSiteOutputsResources.InfoText
-                    </div>
                     <textarea class="govuk-textarea govuk-js-character-count" asp-for="Outputs" rows="5" aria-describedby="with-hint-info with-hint-hint"></textarea>
-                </div>
-                <div id="WasteSource-info" class="govuk-hint govuk-character-count__message">
-                    
+                    <div id="with-hint-hint" class="govuk-hint">
+                        @OverseasSiteOutputsResources.Hint
+                    </div>
                 </div>
             </div>
 
+            <input type="hidden" asp-for="@Model.Id" />
+            <input type="hidden" asp-for="@Model.ExternalId" />
+            <partial name="_SaveButtons" />
         </div>
     </div>
-    <partial name="_SaveButtons" />
 </form>

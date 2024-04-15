@@ -1,12 +1,15 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
     using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Extensions;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("Accreditation/{accreditationExternalId}/[controller]")]
+    [Route("Accreditation/{accreditationExternalId}/[controller]/")]
     public class OverseasSiteController : Controller
     {
         protected readonly IHttpContextAccessor _httpContextAccessor;
@@ -43,7 +46,6 @@
         /// <param name="siteExternalId">Site external Id.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet("{siteExternalId}/Outputs")]
-        [ActionName("Outputs")]
         public async Task<IActionResult> OverseasSiteOutputs(Guid? accreditationExternalId, Guid? siteExternalId)
         {
             if (accreditationExternalId.HasValue && siteExternalId.HasValue)
@@ -61,39 +63,28 @@
         /// <summary>
         /// Updates the Outputs value for the given accreditation and site.
         /// </summary>
-        /// <param name="accreditationExternalId">Accreditation external Id.</param>
         /// <param name="overseasReprocessingSiteOutputsViewModel">View model containing data to be saved.</param>
         /// <param name="saveButton">Determines the next step in the journey.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpPut("Outputs")]
-        [ActionName("Outputs")]
+        [HttpPost("{siteExternalId}/Outputs")]
         public async Task<IActionResult> OverseasSiteOutputs(
-            Guid accreditationExternalId,
-            [FromBody] OverseasReprocessingSiteOutputsViewModel overseasReprocessingSiteOutputsViewModel,
+            OverseasReprocessingSiteOutputsViewModel overseasReprocessingSiteOutputsViewModel,
             SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                OverseasSiteOutputsResources.NoOutputsSupplied))
                 return View(overseasReprocessingSiteOutputsViewModel);
 
-            await _accreditationService.UpdateOverseasReprocessingSiteOutputs(
-                accreditationExternalId,
-                overseasReprocessingSiteOutputsViewModel);
+            await _accreditationService.UpdateOverseasReprocessingSiteOutputs(overseasReprocessingSiteOutputsViewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue)
-            {
-                if (string.IsNullOrWhiteSpace(overseasReprocessingSiteOutputsViewModel.Outputs))
-                {
-                    return RedirectToAction("Outputs", "OverseasSite", new {});
-                }
-                else
-                {
-                    return RedirectToAction("RejectedWastePlans", "Accreditation");
-                }
-            }
+            if (saveButton == SaveButton.SaveAndContinue && string.IsNullOrWhiteSpace(overseasReprocessingSiteOutputsViewModel.Outputs))
+                return RedirectToAction("OverseasSiteOutput", "OverseasSite");
+            else if (saveButton == SaveButton.SaveAndContinue && !string.IsNullOrWhiteSpace(overseasReprocessingSiteOutputsViewModel.Outputs))
+                return RedirectToAction("RejectedWastePlans", "Accreditation");
 
-            // this is all the data we require to save and come back later
             await _saveAndComeBackService.AddSaveAndComeBack(
-                accreditationExternalId,
+                overseasReprocessingSiteOutputsViewModel.Id,
                 _httpContextAccessor.HttpContext.GetRouteData().Values);
 
             return View("_ApplicationSaved");

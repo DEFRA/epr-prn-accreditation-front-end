@@ -83,10 +83,11 @@ namespace EPR.Accreditation.Portal.RESTservices
         }
 
         public async Task UpdateOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId, 
+            Guid accreditationExternalId,
             OverseasReprocessingSiteOutputs overseasSiteOutputs)
         {
-            await Put($"{accreditationExternalId}/OverseasSite/{overseasSiteOutputs.ExternalId}", overseasSiteOutputs);
+            await Put($"{accreditationExternalId}/OverseasSite/Outputs", overseasSiteOutputs);
+
         }
     }
 }
