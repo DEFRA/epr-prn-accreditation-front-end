@@ -26,15 +26,29 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var references = exemptionReferences.ToList();
 
             if (references.Count >= 1)
+            {
                 viewModel.Reference1 = references[0];
+            }
+
             if (references.Count >= 2)
+            {
                 viewModel.Reference2 = references[1];
+            }
+
             if (references.Count >= 3)
+            {
                 viewModel.Reference3 = references[2];
+            }
+
             if (references.Count >= 4)
+            {
                 viewModel.Reference4 = references[3];
+            }
+
             if (references.Count >= 5)
+            {
                 viewModel.Reference5 = references[4];
+            }
 
             return viewModel;
         }

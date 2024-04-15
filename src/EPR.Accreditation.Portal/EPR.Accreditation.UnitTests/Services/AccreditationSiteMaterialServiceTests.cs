@@ -6,6 +6,7 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.AspNetCore.Localization;
@@ -18,7 +19,7 @@
         private AccreditationSiteMaterialService _accreditationSiteMaterialService;
         private Mock<IMapper> _mockMapper;
         private Mock<IHttpContextAccessor> _mockHttpContextAccessor;
-        private Mock<IHttpSiteMaterialService> _httpSiteMaterialServiceMock;
+        private Mock<IHttpSiteMaterialService> _mockHttpSiteMaterialService;
 
         [TestInitialize]
         public void Init()
@@ -65,7 +66,7 @@
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 s =>
                     s.GetMeterialName(
                         id,
@@ -108,7 +109,7 @@
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 s =>
                     s.GetMeterialName(
                         id,
@@ -127,7 +128,7 @@
             var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var expectedWasteSource = "SomeWasteSource";
-            _httpSiteMaterialServiceMock.Setup(
+            _mockHttpSiteMaterialService.Setup(
                 x =>
                     x.GetWasteSource(
                         siteType,
@@ -165,7 +166,7 @@
             await _accreditationSiteMaterialService.UpdateWasteSource(siteType, viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 x =>
                     x.UpdateWasteSource(
                         siteType,
@@ -209,7 +210,7 @@
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 x =>
                     x.UpdateMaterialOutputs(
                         viewModel.Id,

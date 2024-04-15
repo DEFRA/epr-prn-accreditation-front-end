@@ -338,13 +338,19 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (productsProducedViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (productsProducedViewModel.WasteLastYear == true)
+                {
                     return View(ProductsProducedLastYearView, productsProducedViewModel);
+                }
                 else // otherwise return the annual outputs
+                {
                     return View(ProductsProducedEstimatedView, productsProducedViewModel);
+                }
             }
 
             return NotFound();
@@ -389,16 +395,20 @@
                 MaterialOutputsLastYearResources.ProcessLossBlank))
             {
                 if (viewModel.WasteLastYear == true)
+                {
                     return View(ProductsProducedLastYearView, viewModel);
+                }
                 else
+                {
                     return View(ProductsProducedEstimatedView, viewModel);
+                }
             }
 
             await _accreditationSiteMaterialService.UpdateProductsProduced(viewModel);
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(

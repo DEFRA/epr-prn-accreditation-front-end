@@ -1,6 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
     using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 
     public interface IAccreditationSiteMaterialService
