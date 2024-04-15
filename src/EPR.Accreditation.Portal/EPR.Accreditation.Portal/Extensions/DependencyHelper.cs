@@ -34,6 +34,7 @@
                 .AddScoped<IWastePermitService, WastePermitService>()
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
+                .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
             services.AddScoped<IHttpSiteMaterialService>(s =>
@@ -69,6 +70,16 @@
             services
                 .AddScoped<IHttpWastePermitService>(s =>
                     new HttpWastePermitService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"
+                    )
+            );
+
+            services
+                .AddScoped<IHttpAccreditationSiteService>(s =>
+                    new HttpAccreditationSiteService(
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
