@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using EPR.Accreditation.Portal.Resources;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class ReprocessorDetailsViewModel
     {
@@ -11,7 +12,7 @@
         [StringLength(100)]
         public string OrganisationName { get; set; }
 
-        public IEnumerable<string> Countries { get; set; }
+        public IEnumerable<SelectListItem> Countries { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
         public string SelectedCountry { get; set; }

@@ -20,13 +20,7 @@
         <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.SelectCountry">
             @ReprocessorDetailsResources.SelectCountry
         </label>
-        <select class="govuk-select" id="sort" name="sort" asp-for="@Model.SelectedCountry">
-            <option value="published" selected>@ReprocessorDetailsResources.DefaultOption</option>
-            @foreach(var country in Model.Countries)
-            {
-                <option value="@country">@country</option>
-            }
-        </select>
+        <select class="govuk-select" id="SelectedCountry" name="SelectedCountry" asp-for="SelectedCountry" asp-items="@Model.Countries"></select>
     </div>
 
     <div class="govuk-form-group">

@@ -1,6 +1,9 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Extensions;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
@@ -43,36 +46,32 @@
             return View(viewModel);
         }
 
-        //[HttpPost("OverseasSiteAddress")]
-        //public async Task<IActionResult> OverseasSiteAddress(
-        //    PermitExemptionViewModel viewModel,
-        //    SaveButton saveButton)
-        //{
-        //    if (!ModelState.IsValidForSaveForLater(
-        //    saveButton,
-        //        PermitExemptionResources.ErrorMessage))
-        //    {
-        //        return View(viewModel);
-        //    }
+        [HttpPost("ReprocessorDetails")]
+        public async Task<IActionResult> ReprocessorDetails(
+            ReprocessorDetailsViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                ReprocessorDetailsResources.ErrorOrgName,
+                ReprocessorDetailsResources.ErrorCountry,
+                ReprocessorDetailsResources.Address))
+            {
+                return View(viewModel);
+            }
 
-        //    await _wastePermitService.UpdatePermitExemption(viewModel);
+            //await _overseasSiteService.UpdateReprocessorDetails(viewModel);
 
-        //    if (saveButton == SaveButton.SaveAndContinue &&
-        //        viewModel.HasPermitExemption.Value == true)
-        //    {
-        //        return RedirectToAction("ExemptionReferences", "Accreditation");
-        //    }
-        //    else if (saveButton == SaveButton.SaveAndContinue &&
-        //        viewModel.HasPermitExemption.Value == false)
-        //    {
-        //        return RedirectToAction("AuthorityToIssues", "Accreditation");
-        //    }
+            if (saveButton == SaveButton.SaveAndContinue)
+            {
+                return RedirectToAction("ExemptionReferences", "Accreditation");
+            }
 
-        //    // this is all the data we require to save for come back later
-        //    await _saveAndComeBackService.AddSaveAndComeBack(
-        //        viewModel.Id,
-        //        _httpContextAccessor.HttpContext.GetRouteData().Values);
-        //    return View("_ApplicationSaved");
-        //}
+            // this is all the data we require to save for come back later
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.Id,
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
+            return View("_ApplicationSaved");
+        }
     }
 }
