@@ -66,7 +66,7 @@ public class UserDataCheckerMiddleware : IMiddleware
     {
         var endpoint = context.GetEndpoint();
 
-        if(endpoint != null)
+        if (endpoint != null)
         {
             return endpoint.Metadata.GetMetadata<ControllerActionDescriptor>()?.ControllerName ?? string.Empty;
         }

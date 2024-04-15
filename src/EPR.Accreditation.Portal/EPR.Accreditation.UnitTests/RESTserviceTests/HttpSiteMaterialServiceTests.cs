@@ -44,29 +44,6 @@
             SetClientResponse();
         }
 
-        private void SetClientResponse(
-            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
-            object content = null)
-        {
-            var response = new HttpResponseMessage(httpStatusCode);
-
-            if (content != null)
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(content));
-            }
-
-            _clientHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
-                {
-                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
-                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
-                })
-                .ReturnsAsync(response)
-                .Verifiable();
-        }
-
         [Ignore]
         [TestMethod]
         public async Task GetMeterialName_WithEnglish_CallsEndpointSuccessfully()
@@ -339,6 +316,7 @@
             var materialId = Guid.NewGuid();
             var nonWasteInputsDto = new NonWasteInputsDto();
             var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
+
             // Act
             await _httpSiteMaterialService.UpdateNonWasteInputs(
                 id,
@@ -357,6 +335,29 @@
             var obj2Json = JsonConvert.SerializeObject(obj2);
 
             return obj1Json == obj2Json;
+        }
+
+        private void SetClientResponse(
+            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
+            object content = null)
+        {
+            var response = new HttpResponseMessage(httpStatusCode);
+
+            if (content != null)
+            {
+                response.Content = new StringContent(JsonConvert.SerializeObject(content));
+            }
+
+            _clientHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
+                {
+                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
+                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
+                })
+                .ReturnsAsync(response)
+                .Verifiable();
         }
     }
 }

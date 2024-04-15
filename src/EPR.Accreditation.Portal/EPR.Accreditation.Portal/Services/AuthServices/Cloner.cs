@@ -1,14 +1,15 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
-using EPR.Accreditation.Portal.Services.AuthServices.Interfaces;
-
-namespace EPR.Accreditation.Portal.Services.AuthServices;
-
-[ExcludeFromCodeCoverage]
-public class Cloner : ICloner
+﻿namespace EPR.Accreditation.Portal.Services.AuthServices
 {
-    public T Clone<T>(T source)
+    using System.Diagnostics.CodeAnalysis;
+    using System.Text.Json;
+    using EPR.Accreditation.Portal.Services.AuthServices.Interfaces;
+
+    [ExcludeFromCodeCoverage]
+    public class Cloner : ICloner
     {
-        return JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(source));
+        public T Clone<T>(T source)
+        {
+            return JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(source));
+        }
     }
 }

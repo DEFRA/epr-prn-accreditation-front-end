@@ -25,6 +25,5 @@ public class RegistrationSession
     public bool? UsingAComplianceScheme { get; set; }
 
     // public ChangeComplianceSchemeOptions? ChangeComplianceSchemeOptions { get; set; }
-
     public string NotificationMessage { get; set; }
 }

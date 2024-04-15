@@ -101,7 +101,6 @@
             Assert.IsNull(viewResult.ViewName);
 
             _mockWastePermitService.Verify(service => service.GetPermitExemptionViewModel(id), Times.Once());
-
         }
 
         [TestMethod]
@@ -114,7 +113,6 @@
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 
             _mockWastePermitService.Verify(service => service.GetPermitExemptionViewModel(Guid.Empty), Times.Never());
-
         }
 
         [TestMethod]
@@ -179,15 +177,17 @@
             Assert.IsNotNull(result);
             Assert.AreEqual("_ApplicationSaved", result.ViewName);
 
-            _mockWastePermitService.Verify(s =>
-            s.UpdatePermitExemption(
-                viewModel),
+            _mockWastePermitService.Verify(
+                s =>
+                    s.UpdatePermitExemption(
+                        viewModel),
                 Times.Once);
 
-            _mockSaveAndComeBackService.Verify(x =>
-                x.AddSaveAndComeBack(
-                    It.IsAny<Guid>(),
-                    It.IsAny<RouteValueDictionary>()),
+            _mockSaveAndComeBackService.Verify(
+                x =>
+                    x.AddSaveAndComeBack(
+                        It.IsAny<Guid>(),
+                        It.IsAny<RouteValueDictionary>()),
                 Times.Once());
         }
 
@@ -196,7 +196,7 @@
         {
             // Arrange
             var viewModel = new PermitExemptionViewModel();
-            var saveButton = new SaveButton();
+            var saveButton = SaveButton.Undefined;
 
             _accreditationController.ModelState.AddModelError("Error", "Error");
 
