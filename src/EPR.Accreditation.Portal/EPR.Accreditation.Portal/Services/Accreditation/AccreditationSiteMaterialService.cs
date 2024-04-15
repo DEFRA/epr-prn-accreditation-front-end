@@ -7,15 +7,14 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
-    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Localization;
     using static EPR.Accreditation.Portal.Constants.Strings;
 
     public class AccreditationSiteMaterialService : IAccreditationSiteMaterialService
     {
-        protected readonly IMapper _mapper;
-        protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IHttpSiteMaterialService _httpSiteMaterialService;
+        private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpSiteMaterialService _httpSiteMaterialService;
 
         public AccreditationSiteMaterialService(
             IMapper mapper,
@@ -42,9 +41,13 @@
             var language = Enums.Language.Undefined;
 
             if (currentCulture.Name == CultureConstants.English.Name)
+            {
                 language = Enums.Language.English;
+            }
             else if (currentCulture.Name == CultureConstants.Welsh.Name)
+            {
                 language = Enums.Language.Welsh;
+            }
 
             return await _httpSiteMaterialService.GetMeterialName(
                 id,
@@ -77,7 +80,9 @@
             // then "Save and come back later" has been selected and we are letting
             // blank required fields through
             if (wasteSourceViewModel.WasteSource == null)
+            {
                 wasteSourceViewModel.WasteSource = string.Empty;
+            }
 
             await _httpSiteMaterialService.UpdateWasteSource(
                 siteType,

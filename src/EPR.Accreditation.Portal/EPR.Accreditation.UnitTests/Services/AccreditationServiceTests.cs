@@ -1,14 +1,14 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.Options;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Moq;
-
-namespace EPR.Accreditation.UnitTests.Services
+﻿namespace EPR.Accreditation.UnitTests.Services
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Options;
+    using Moq;
+
     [TestClass]
     public class AccreditationServiceTests
     {
@@ -74,12 +74,16 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Asset
             Assert.IsNotNull(result);
-            _httpAccreditionService.Verify(s =>
-                s.GetWastePermit(
-                    It.Is<Guid>(p => p == id)),
+            _httpAccreditionService.Verify(
+                s =>
+                    s.GetWastePermit(
+                        It.Is<Guid>(p => p == id)),
                 Times.Once);
-            _httpAccreditionService.Verify(s =>
-                s.GetWastePermit(id), Times.Once);
+
+            _httpAccreditionService.Verify(
+                s =>
+                    s.GetWastePermit(id),
+                Times.Once);
         }
     }
 }

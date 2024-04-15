@@ -1,8 +1,8 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
-    using EPR.Accreditation.Portal.Helpers.ActionFilters;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.Resources;
@@ -60,8 +60,9 @@
                   backPageViewModel,
                   SiteType.Site)
         {
-            SiteProcessingCapacityRouteName = "SiteProcessingCapacity";
-            SiteChooseMaterialRouteName = "SiteChooseMaterial";
+            _siteProcessingCapacityRouteName = "SiteProcessingCapacity";
+            _siteProductsProducedRouteName = "SiteProductsProduced";
+            _siteChooseMaterialRouteName = "SiteChooseMaterial";
 
             if (appSettingsConfiguration?.Value?.MaximumMultiLineRecordNumber == null)
             {
@@ -71,13 +72,14 @@
             _maximumMultiLineRecordNumber = appSettingsConfiguration.Value.MaximumMultiLineRecordNumber.Value;
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method
+        /// </summary>
+        /// <param name="id">the id of the accreditation</param>
+        /// <returns>NotFound</returns>
         [HttpGet("Material", Name = "SiteChooseMaterial")]
         public IActionResult ChooseMaterial(
-            Guid? id,
-            Guid? materialId)
+            Guid? id)
         {
             return NotFound();
         }
@@ -89,12 +91,16 @@
         {
             if (id != null &&
                 materialId != null)
+            {
                 return await GetMaterialWasteSource(
                     id.Value,
                     null,
                     materialId.Value);
+            }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("WasteSource")]
@@ -139,13 +145,20 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (nonWasteInputsViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (nonWasteInputsViewModel.WasteLastYear == true)
+                {
                     return View(NonWasteInputsLastYearView, nonWasteInputsViewModel);
-                else // otherwise return the annual outputs
+                }
+                else
+                {
+                    // otherwise return the annual outputs
                     return View(NonWasteInputsEstimatedView, nonWasteInputsViewModel);
+                }
             }
 
             return NotFound();
@@ -190,16 +203,20 @@
                 MaterialOutputsLastYearResources.ProcessLossBlank))
             {
                 if (viewModel.WasteLastYear == true)
+                {
                     return View(NonWasteInputsLastYearView, viewModel);
+                }
                 else
+                {
                     return View(NonWasteInputsEstimatedView, viewModel);
+                }
             }
 
             await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -236,17 +253,25 @@
                 // if waste last year has not been set, then the user should not
                 // be on this page
                 if (materialOutputsViewModel.WasteLastYear == null)
+                {
                     return NotFound();
+                }
 
                 // if waste last year is true then return the MaterialOutputs view
                 if (materialOutputsViewModel.WasteLastYear == true)
+                {
                     return View(MaterialOutputsLastYearView, materialOutputsViewModel);
-                // otherwise return the annual outputs
+                }
                 else
+                {
+                    // otherwise return the annual outputs
                     return View(MaterialOutputsEstimatedView, materialOutputsViewModel);
+                }
             }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("MaterialOutputs")]
@@ -269,7 +294,7 @@
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteNonWasteInputsRouteName);
+                PopulateBackModel(_siteNonWasteInputsRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -280,7 +305,7 @@
             else
             {
                 return RedirectToRoute(
-                    ProductsProducedRouteName,
+                    _siteProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,
@@ -419,7 +444,9 @@
                 return View(viewModel);
             }
             else
+            {
                 return NotFound();
+            }
         }
 
         [HttpPost("WasteLastYear")]
@@ -430,11 +457,14 @@
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
+            {
                 return View(viewModel);
+            }
 
             await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue)
+            {
                 return RedirectToRoute(
                     NonWasteInputsRouteName,
                     new
@@ -442,6 +472,7 @@
                         id = viewModel.Id,
                         viewModel.MaterialId
                     });
+            }
 
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(

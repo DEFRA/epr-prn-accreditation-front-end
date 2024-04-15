@@ -1,9 +1,23 @@
 ﻿namespace EPR.Accreditation.Facade.Common.Enums
 {
+    /// <summary>
+    /// Enumeration for the different reprocessor supporting information available
+    /// </summary>
     public enum ReprocessorSupportingInformationType
     {
+        /// <summary>
+        /// This is a default value and should not be found to be used
+        /// </summary>
         Undefined,
-        NonWasteInputs, // Enter your non-waste inputs for the last calendar year
-        ProductsProduced  //Products produced from reprocessing in the last calendar year
+
+        /// <summary>
+        /// Non waste inputs
+        /// </summary>
+        NonWasteInputs,
+
+        /// <summary>
+        /// Products produced from reproccessing
+        /// </summary>
+        ProductsProduced
     }
 }

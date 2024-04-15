@@ -1,129 +1,52 @@
-﻿using System.Globalization;
+﻿#pragma warning disable SA1649 // FileNameMustMatchTypeName
+#pragma warning disable SA1402 // File may only contain a single type
 
-namespace EPR.Accreditation.Portal.Constants;
-
-public static class CultureConstants
+namespace EPR.Accreditation.Portal.Constants
 {
-    public static readonly CultureInfo English = new("en-GB");
-    public static readonly CultureInfo Welsh = new("cy-GB");
-}
+    using System.Globalization;
 
-public static class Strings
-{
-    public static class ApiEndPoints
+    public static class CultureConstants
     {
-        public const string Application = "Application";
-
+        public static readonly CultureInfo English = new("en-GB");
+        public static readonly CultureInfo Welsh = new("cy-GB");
     }
 
-    public static class Notifications
+    public static class Strings
     {
-        public const string QuarterlyReturnDue = "QuarterlyReturnDue";
-        public const string QuarterlyReturnLate = "QuarterlyReturnLate";
-    }
+        public static class ApiEndPoints
+        {
+            public const string Application = "Application";
+        }
 
-    public static class QueryStrings
-    {
-        public const string ReturnToAnswers = "rtap";
-        public const string ReturnToAnswersYes = "y";
-    }
+        public static class Notifications
+        {
+            public const string QuarterlyReturnDue = "QuarterlyReturnDue";
+            public const string QuarterlyReturnLate = "QuarterlyReturnLate";
+        }
 
-    public static class RepoStrings
-    {
-        public const string DeleteDraft = "Deleted draft";
-    }
+        public static class QueryStrings
+        {
+            public const string ReturnToAnswers = "rtap";
+            public const string ReturnToAnswersYes = "y";
+        }
 
-    /// <summary>
-    /// AGeneric constants for use in the application
-    /// </summary>
-    public static class GenericConstants
-    {
+        public static class RepoStrings
+        {
+            public const string DeleteDraft = "Deleted draft";
+        }
+
         /// <summary>
-        /// Some pages show a number of multiple lines of the same inputs. This
-        /// represents the minimum number to show
+        /// AGeneric constants for use in the application
         /// </summary>
-        public const int MinimumMultiLineRecordNumber = 3;
-    }
-
-    /// <summary>
-    /// This class should be used to store the values of areas, controllers and action names
-    /// So we can use this instead of strings directly in controllers and views
-    /// </summary>
-    public static class Routes
-    {
-        public static class Areas
+        public static class GenericConstants
         {
-            public const string Exporter = "Exporter";
-            public const string Reprocessor = "Reprocessor";
-
-            public static class Controllers
-            {
-                public static class Exporter
-                {
-                    public const string PRNS = "PRNS";
-                }
-
-                public static class Reprocessor
-                {
-                    public const string PRNS = "PRNS";
-                }
-            }
-
-            public static class Actions
-            {
-                public static class PRNS
-                {
-                    public const string Tonnes = "Tonnes";
-                    public const string CreatePrn = "CreatePrn";
-                    public const string Confirmation = "Confirmation";
-                    public const string CheckYourAnswers = "CheckYourAnswers";
-                    public const string SentTo = "SentTo";
-                    public const string WhatToDo = "WhatToDo";
-                    public const string Cancel = "Cancel";
-                    public const string RequestCancel = "RequestCancel";
-                    public const string Cancelled = "Cancelled";
-                    public const string RequestCancelConfirmed = "RequestCancelConfirmed";
-                    public const string DecemberWaste = "DecemberWaste";
-                    public const string DeleteDraft = "DeleteDraft";
-                    public const string DraftConfirmation = "DraftConfirmation";
-                    public const string PrnSavedAsDraftConfirmation = "PrnSavedAsDraftConfirmation";
-                    public const string DraftPrns = "DraftPrns";
-                }
-            }
-        }
-
-        public static class Controllers
-        {
-            public const string Home = "Home";
-            public const string PRNS = "Prns";
-            public const string Waste = "Waste";
-        }
-
-        public static class Actions
-        {
-            public static class PRNS
-            {
-                public const string Create = "Create";
-                public const string View = "View";
-                public const string ViewSentPrns = "ViewSentPrns";
-                public const string PrnSavedAsDraftConfirmation = "PrnSavedAsDraftConfirmation";
-            }
-
-            public static class Waste
-            {
-                public const string Create = "Create";
-                public const string Done = "Done";
-                public const string Month = "Month";
-                public const string RecordWaste = "RecordWaste";
-                public const string SubTypes = "SubTypes";
-                public const string WasteRecordStatus = "WasteRecordStatus";
-                public const string Tonnes = "Tonnes";
-                public const string Baled = "Baled";
-                public const string ReProcessorExport = "ReProcessorExport";
-                public const string Note = "Note";
-                public const string DecemberWaste = "DecemberWaste";
-                public const string AccredidationLimit = "AccredidationLimit";
-            }
+            /// <summary>
+            /// Some pages show a number of multiple lines of the same inputs. This
+            /// represents the minimum number to show
+            /// </summary>
+            public const int MinimumMultiLineRecordNumber = 3;
         }
     }
 }
+#pragma warning restore SA1402 // File may only contain a single type
+#pragma warning restore SA1649 // Restore StyleCop warnings

@@ -1,5 +1,5 @@
-﻿using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Helpers.ActionFilters;
+﻿using EPR.Accreditation.Portal.Attributes.ActionFilters;
+using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
@@ -26,8 +26,9 @@ namespace EPR.Accreditation.Portal.Controllers
                   backPageViewModel,
                   SiteType.OverseasSite)
         {
-            SiteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
-            SiteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
+            _siteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
+            _siteProductsProducedRouteName = "OverseasSiteProductsProduced";
+            _siteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
         }
 
         [HttpGet("Material", Name = "OverseasSiteChooseMaterial")]

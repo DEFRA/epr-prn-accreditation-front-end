@@ -1,91 +1,92 @@
-﻿using EPR.Accreditation.Portal.Options;
-using EPR.Accreditation.Portal.Services.AuthServices.Interfaces;
-using Microsoft.Extensions.Options;
-using CookieOptions = EPR.Accreditation.Portal.Options.CookieOptions;
-
-namespace EPR.Accreditation.Portal.Services.AuthServices;
-
-
-public class CookieService : ICookieService
+﻿namespace EPR.Accreditation.Portal.Services.AuthServices
 {
-    private readonly ILogger<CookieService> _logger;
-    private readonly CookieOptions _eprCookieOptions;
-    private readonly GoogleAnalyticsOptions _googleAnalyticsOptions;
+    using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Services.AuthServices.Interfaces;
+    using Microsoft.Extensions.Options;
+    using CookieOptions = EPR.Accreditation.Portal.Options.CookieOptions;
 
-    public CookieService(
-        ILogger<CookieService> logger,
-        IOptions<CookieOptions> eprCookieOptions,
-        IOptions<GoogleAnalyticsOptions> googleAnalyticsOptions)
+    public class CookieService : ICookieService
     {
-        _logger = logger;
-        _eprCookieOptions = eprCookieOptions.Value;
-        _googleAnalyticsOptions = googleAnalyticsOptions.Value;
-    }
+        private readonly ILogger<CookieService> _logger;
+        private readonly CookieOptions _eprCookieOptions;
+        private readonly GoogleAnalyticsOptions _googleAnalyticsOptions;
 
-    public void SetCookieAcceptance(bool accept, IRequestCookieCollection cookies, IResponseCookies responseCookies)
-    {
-        try
+        public CookieService(
+            ILogger<CookieService> logger,
+            IOptions<CookieOptions> eprCookieOptions,
+            IOptions<GoogleAnalyticsOptions> googleAnalyticsOptions)
         {
-            if (!accept)
-            {
-                var existingCookies = cookies?.Where(c => c.Key.StartsWith(_googleAnalyticsOptions.CookiePrefix)).ToList();
+            _logger = logger;
+            _eprCookieOptions = eprCookieOptions.Value;
+            _googleAnalyticsOptions = googleAnalyticsOptions.Value;
+        }
 
-                if (existingCookies != null)
+        public void SetCookieAcceptance(bool accept, IRequestCookieCollection cookies, IResponseCookies responseCookies)
+        {
+            try
+            {
+                if (!accept)
                 {
-                    foreach (var cookie in existingCookies)
+                    var existingCookies = cookies?.Where(c => c.Key.StartsWith(_googleAnalyticsOptions.CookiePrefix)).ToList();
+
+                    if (existingCookies != null)
                     {
-                        responseCookies.Append(
-                            key: cookie.Key,
-                            value: cookie.Value,
-                            options: new Microsoft.AspNetCore.Http.CookieOptions
-                            {
-                                Expires = DateTimeOffset.UtcNow.AddYears(-1),
-                                HttpOnly = true,
-                                Secure = true,
-                                SameSite = SameSiteMode.Strict,
-                            });
+                        foreach (var cookie in existingCookies)
+                        {
+                            responseCookies.Append(
+                                key: cookie.Key,
+                                value: cookie.Value,
+                                options: new Microsoft.AspNetCore.Http.CookieOptions
+                                {
+                                    Expires = DateTimeOffset.UtcNow.AddYears(-1),
+                                    HttpOnly = true,
+                                    Secure = true,
+                                    SameSite = SameSiteMode.Strict,
+                                });
+                        }
                     }
                 }
+
+                var cookieName = _eprCookieOptions.CookiePolicyCookieName;
+                ArgumentNullException.ThrowIfNull(cookieName);
+
+                responseCookies.Append(
+                    key: cookieName,
+                    value: accept.ToString(),
+                    options: new Microsoft.AspNetCore.Http.CookieOptions
+                    {
+                        Expires = DateTimeOffset.UtcNow.AddMonths(_eprCookieOptions.CookiePolicyDurationInMonths),
+                        HttpOnly = true,
+                        Secure = true,
+                        SameSite = SameSiteMode.Lax,
+                    });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error setting cookie acceptance to '{S}'", accept.ToString());
+                throw;
+            }
+        }
+
+        public bool HasUserAcceptedCookies(IRequestCookieCollection cookies)
+        {
+            bool cookieAcceptedResult;
+
+            try
+            {
+                var cookieName = _eprCookieOptions.CookiePolicyCookieName;
+                ArgumentNullException.ThrowIfNull(cookieName);
+
+                var cookie = cookies[cookieName];
+                cookieAcceptedResult = bool.TryParse(cookie, out bool cookieAccepted) && cookieAccepted;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error reading cookie acceptance");
+                throw;
             }
 
-            var cookieName = _eprCookieOptions.CookiePolicyCookieName;
-            ArgumentNullException.ThrowIfNull(cookieName);
-
-            responseCookies.Append(
-                key: cookieName,
-                value: accept.ToString(),
-                options: new Microsoft.AspNetCore.Http.CookieOptions
-                {
-                    Expires = DateTimeOffset.UtcNow.AddMonths(_eprCookieOptions.CookiePolicyDurationInMonths),
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Lax,
-                });
+            return cookieAcceptedResult;
         }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error setting cookie acceptance to '{S}'", accept.ToString());
-            throw;
-        }
-    }
-
-    public bool HasUserAcceptedCookies(IRequestCookieCollection cookies)
-    {
-        bool cookieAcceptedResult;
-        try
-        {
-            var cookieName = _eprCookieOptions.CookiePolicyCookieName;
-            ArgumentNullException.ThrowIfNull(cookieName);
-
-            var cookie = cookies[cookieName];
-            cookieAcceptedResult = bool.TryParse(cookie, out bool cookieAccepted) && cookieAccepted;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error reading cookie acceptance");
-            throw;
-        }
-
-        return cookieAcceptedResult;
     }
 }
