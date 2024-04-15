@@ -145,8 +145,11 @@ namespace EPR.Accreditation.Portal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Displays the Use overseas agent question screen.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("HasOverseasAgent")]
-        [ActionName("HasOverseasAgent")]
         public async Task<IActionResult> HasOverseasAgent(Guid? id)
         {
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
@@ -161,8 +164,10 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Submits answer from the Use overseas agent screen.
+        /// </summary>
         [HttpPost("HasOverseasAgent")]
-        [ActionName("HasOverseasAgent")]
         public async Task<IActionResult> HasOverseasAgent(
             HasOverseasAgentViewModel viewModel,
             SaveButton saveButton)
