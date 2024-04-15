@@ -31,7 +31,6 @@
         [HttpGet("ReprocessorDetails")]
         public async Task<IActionResult> ReprocessorDetails(Guid? id)
         {
-            // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("AddOverseasReprocessingSites", "OverseasSite");
 
             if (id == null)

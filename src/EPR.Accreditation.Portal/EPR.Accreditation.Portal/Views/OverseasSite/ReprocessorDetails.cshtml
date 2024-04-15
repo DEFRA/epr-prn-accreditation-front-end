@@ -1,27 +1,27 @@
 ﻿@model ReprocessorDetailsViewModel
 
 @{
-    ViewData["Title"] = "Overseas reprocessor details";
+    ViewData["Title"] = ReprocessorDetailsResources.PageTitle;
 }
 
 <partial name="_ValidationSummary" />
 <form method="post">
     <h1 class="govuk-heading-l">
-        Overseas reprocessor details
+        @ReprocessorDetailsResources.PageHeading
     </h1>
     <div class="govuk-form-group">
-        <label class="govuk-label" style="font-weight: bold">
-            Organisation name
+        <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.OrgName">
+            @ReprocessorDetailsResources.OrgName
         </label>
         <input class="govuk-input govuk-!-width-two-thirds" type="text" asp-for="@Model.OrganisationName">
     </div>
 
     <div class="govuk-form-group">
-        <label class="govuk-label" style="font-weight: bold" for="sort">
-            Select country
+        <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.SelectCountry">
+            @ReprocessorDetailsResources.SelectCountry
         </label>
         <select class="govuk-select" id="sort" name="sort" asp-for="@Model.SelectedCountry">
-            <option value="published" selected>Choose a country</option>
+            <option value="published" selected>@ReprocessorDetailsResources.DefaultOption</option>
             @foreach(var country in Model.Countries)
             {
                 <option value="@country">@country</option>
@@ -30,11 +30,11 @@
     </div>
 
     <div class="govuk-form-group">
-        <label class="govuk-label" style="font-weight: bold" for="more-detail">
+        <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.Address">
             Address
         </label>
-        <textarea class="govuk-textarea govuk-!-width-two-thirds" id="address" name="address" rows="5" asp-for="@Model.Address"></textarea>
+        <textarea class="govuk-textarea govuk-!-width-two-thirds" id="address" name="@ReprocessorDetailsResources.Address" rows="5" asp-for="@Model.Address"></textarea>
     </div>
-    
+
     <partial name="_SaveButtons" />
 </form>

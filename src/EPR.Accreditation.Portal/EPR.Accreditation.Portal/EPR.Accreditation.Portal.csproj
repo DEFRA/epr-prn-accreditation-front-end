@@ -47,6 +47,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>NonWasteInputLastYearResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\ReprocessorDetailsResources.cy-GB.Designer.cs">
+      <DependentUpon>ReprocessorDetailsResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ReprocessorDetailsResources.Designer.cs">
+      <DependentUpon>ReprocessorDetailsResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -165,6 +175,14 @@
     <EmbeddedResource Update="Resources\NonWasteInputLastYearResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NonWasteInputLastYearResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ReprocessorDetailsResources.cy-GB.resx">
+      <LastGenOutput>ReprocessorDetailsResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ReprocessorDetailsResources.resx">
+      <LastGenOutput>ReprocessorDetailsResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
       <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>
