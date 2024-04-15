@@ -1,4 +1,4 @@
-namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.Portal.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
     using EPR.Accreditation.Portal.Resources;

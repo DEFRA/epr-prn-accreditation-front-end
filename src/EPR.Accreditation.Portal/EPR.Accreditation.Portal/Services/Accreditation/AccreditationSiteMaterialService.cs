@@ -101,7 +101,7 @@
         /// <param name="materialId">Material Id</param>
         /// <returns>The view model for non waste inputs</returns>
         public async Task<NonWasteInputsViewModel> GetNonWasteInputs(
-            Guid id, 
+            Guid id,
             Guid materialId)
         {
             var nonWasteInputsDto = await _httpSiteMaterialService.GetNonWasteInputs(
@@ -186,7 +186,9 @@
         public async Task UpdateProductsProduced(ProductsProducedViewModel productsProducedViewModel)
         {
             if (productsProducedViewModel == null)
+            {
                 throw new NullReferenceException(nameof(productsProducedViewModel));
+            }
 
             if (productsProducedViewModel.Rows != null &&
                 productsProducedViewModel.Rows.Any())

@@ -2,7 +2,7 @@
 using EPR.Accreditation.Portal.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
+namespace EPR.Accreditation.Portal.Attributes.Validation
 {
     public class UniqueReferenceNumberAttribute : ValidationAttribute
     {

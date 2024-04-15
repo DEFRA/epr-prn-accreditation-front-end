@@ -39,15 +39,6 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid materialId,
             NonWasteInputsDto nonWasteInputsDto);
 
-
-
-
-
-
-
-
-
-
         Task<NonWasteInputsDto> GetProductsProduced(
             Guid id,
             Guid materialId);
@@ -56,16 +47,6 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid id,
             Guid materialId,
             NonWasteInputsDto nonWasteInputsDto);
-
-
-
-
-
-
-
-
-
-
 
         // only reprocessor
         Task<MaterialOutputsDto> GetMaterialOutputs(

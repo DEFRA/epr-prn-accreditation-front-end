@@ -347,8 +347,9 @@
                 {
                     return View(ProductsProducedLastYearView, productsProducedViewModel);
                 }
-                else // otherwise return the annual outputs
+                else
                 {
+                    // otherwise return the annual outputs
                     return View(ProductsProducedEstimatedView, productsProducedViewModel);
                 }
             }
@@ -428,9 +429,10 @@
             }
         }
 
-        /// 
-        /// STUBBED METHOD
-        /// 
+        /// <summary>
+        /// Stubbed method for entering processing capacity
+        /// </summary>
+        /// <returns>Not found view for the moment</returns>
         [HttpGet("EnterProcessingCapacity", Name = "EnterProcessingCapacity")]
         public IActionResult EnterProcessingCapacity()
         {
