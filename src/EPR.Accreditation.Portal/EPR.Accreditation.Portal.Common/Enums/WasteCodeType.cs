@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Enums
+﻿namespace EPR.Accreditation.Portal.Common.Enums
 {
     // The table WasteCode records records of both
     // Material Commodity Codes and Waste Description Codes

@@ -1,7 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
-    using EPR.Accreditation.Facade.Common.RESTservices;
+    using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using Microsoft.AspNetCore.Http;
 

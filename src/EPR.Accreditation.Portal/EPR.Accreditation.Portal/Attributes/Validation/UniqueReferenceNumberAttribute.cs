@@ -1,9 +1,9 @@
-﻿using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.ViewModels;
-using System.ComponentModel.DataAnnotations;
-
-namespace EPR.Accreditation.Portal.Attributes.Validation
+﻿namespace EPR.Accreditation.Portal.Attributes.Validation
 {
+    using System.ComponentModel.DataAnnotations;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.ViewModels;
+
     public class UniqueReferenceNumberAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)

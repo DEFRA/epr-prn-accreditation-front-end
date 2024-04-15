@@ -30,9 +30,10 @@
             _mockConfigSettings = new Mock<IOptions<AppSettingsConfigOptions>>();
             _httpAccreditionService = new Mock<IHttpAccreditationService>();
             _mockConfigSettings.Setup(o => o.Value).Returns(mockConfig);
-            _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
 
-            _accreditationService = new AccreditationService(_mockMapper.Object, _httpAccreditionService.Object, _mockHttpContextAccessor.Object);
+            _accreditationService = new AccreditationService(
+                _mockMapper.Object,
+                _httpAccreditionService.Object);
         }
 
         [TestMethod]

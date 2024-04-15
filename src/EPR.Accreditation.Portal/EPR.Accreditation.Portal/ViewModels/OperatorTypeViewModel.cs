@@ -1,7 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
-    using EPR.Accreditation.Facade.Common.Enums;
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.Resources;
 
     public class OperatorTypeViewModel

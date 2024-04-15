@@ -1,6 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
-    using EPR.Accreditation.Facade.Common.RESTservices;
+    using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
     public class HttpAccreditationSiteService : BaseHttpService, IHttpAccreditationSiteService
