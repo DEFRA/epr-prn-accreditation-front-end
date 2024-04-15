@@ -1,4 +1,5 @@
-﻿
+﻿@model ReprocessorDetailsViewModel
+
 @{
     ViewData["Title"] = "Overseas reprocessor details";
 }
@@ -9,21 +10,22 @@
         Overseas reprocessor details
     </h1>
     <div class="govuk-form-group">
-        <label class="govuk-label" style="font-weight: bold" for="event-name">
+        <label class="govuk-label" style="font-weight: bold">
             Organisation name
         </label>
-        <input class="govuk-input govuk-!-width-two-thirds" id="event-name" name="eventName" type="text">
+        <input class="govuk-input govuk-!-width-two-thirds" type="text" asp-for="@Model.OrganisationName">
     </div>
 
     <div class="govuk-form-group">
         <label class="govuk-label" style="font-weight: bold" for="sort">
             Select country
         </label>
-        <select class="govuk-select" id="sort" name="sort">
+        <select class="govuk-select" id="sort" name="sort" asp-for="@Model.SelectedCountry">
             <option value="published" selected>Choose a country</option>
-            <option value="updated">Recently updated</option>
-            <option value="views">Most views</option>
-            <option value="comments">Most comments</option>
+            @foreach(var country in Model.Countries)
+            {
+                <option value="@country">@country</option>
+            }
         </select>
     </div>
 
@@ -31,7 +33,7 @@
         <label class="govuk-label" style="font-weight: bold" for="more-detail">
             Address
         </label>
-        <textarea class="govuk-textarea govuk-!-width-two-thirds" id="more-detail" name="moreDetail" rows="5"></textarea>
+        <textarea class="govuk-textarea govuk-!-width-two-thirds" id="address" name="address" rows="5" asp-for="@Model.Address"></textarea>
     </div>
     
     <partial name="_SaveButtons" />

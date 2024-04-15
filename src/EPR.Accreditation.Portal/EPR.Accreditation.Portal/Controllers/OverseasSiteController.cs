@@ -8,24 +8,23 @@
     [Route("Accreditation/{id}/[controller]/{siteId}")]
     public class OverseasSiteController : Controller
     {
-        private readonly IAccreditationService _accreditationService;
+        private readonly IOverseasSiteService _overseasSiteService;
         private readonly ISaveAndComeBackService _saveAndComeBackService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUrlHelperWrapper _urlHelper;
         private readonly BackPageViewModel _backPageViewModel;
 
         public OverseasSiteController(
-            IAccreditationService accreditationService,
+            IOverseasSiteService overseasSiteService,
             ISaveAndComeBackService saveAndComeBackService,
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel
-            )
+            BackPageViewModel backPageViewModel)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
-            _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
+            _overseasSiteService = overseasSiteService ?? throw new ArgumentNullException(nameof(overseasSiteService));
             _backPageViewModel = backPageViewModel;
         }
 
@@ -33,16 +32,16 @@
         public async Task<IActionResult> ReprocessorDetails(Guid? id)
         {
             // TODO: Need to add correct back link in the future
-            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+            _backPageViewModel.Url = _urlHelper.ActionLink("AddOverseasReprocessingSites", "OverseasSite");
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            //var viewModel = await _wastePermitService.GetPermitExemptionViewModel(id.Value);
+            var viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(id.Value);
 
-            return View();
+            return View(viewModel);
         }
 
         //[HttpPost("OverseasSiteAddress")]

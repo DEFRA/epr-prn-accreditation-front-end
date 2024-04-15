@@ -44,6 +44,7 @@
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
                 .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
+                .AddScoped<IOverseasSiteService, OverseasSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
             services.AddScoped<IHttpSiteMaterialService>(s =>
