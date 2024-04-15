@@ -1,1 +1,1 @@
-npm run gulp
+npm run gulp %1

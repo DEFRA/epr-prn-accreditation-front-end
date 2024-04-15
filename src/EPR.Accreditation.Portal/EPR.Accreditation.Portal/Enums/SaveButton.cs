@@ -4,6 +4,11 @@
     {
         Undefined,
         SaveAndContinue,
-        SaveAndComeBack
+        SaveAndComeBack,
+
+        /// <summary>
+        /// Instructs the form to add a new row upon a POST.
+        /// </summary>
+        AddRow,
     }
 }

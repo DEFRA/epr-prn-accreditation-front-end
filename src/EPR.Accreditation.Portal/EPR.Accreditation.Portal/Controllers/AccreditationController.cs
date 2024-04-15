@@ -273,6 +273,49 @@ namespace EPR.Accreditation.Portal.Controllers
             return NotFound();
         }
 
+
+        [HttpGet("SiteAddress")]
+        public async Task<IActionResult> SiteAddress(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("WasteCarrierRegistrationNumber")]
+        public async Task<IActionResult> WasteCarrierRegistrationNumber(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("WasteManagementPermitNumber")]
+        public async Task<IActionResult> WasteManagementPermitNumber(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("PartABCReferenceNumber")]
+        public async Task<IActionResult> PartABCReferenceNumber(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("DischargeConsentNumber")]
+        public async Task<IActionResult> DischargeConsentNumber(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("ExemptionReference")]
+        public async Task<IActionResult> ExemptionReference(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
         [HttpGet("OverseasAgentDetails")]
         public async Task<IActionResult> OverseasAgentDetails(
             Guid? id)

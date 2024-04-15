@@ -1,13 +1,16 @@
-﻿using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Extensions;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace EPR.Accreditation.Portal.Controllers
+﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Extensions;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
+    /// <summary>
+    /// Base class for Sites and Overseas Sites
+    /// </summary>
     public abstract class BaseSiteController : Controller
     {
         // overriden in inheriting classes
@@ -20,8 +23,18 @@ namespace EPR.Accreditation.Portal.Controllers
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
-        protected SiteType _siteType;
+        private SiteType _siteType;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseSiteController"/> class.
+        /// </summary>
+        /// <param name="httpContextAccessor">httpContextAccessor</param>
+        /// <param name="urlHelper">urlHelper</param>
+        /// <param name="accreditationSiteMaterialService">Service layer for accreditation site materials</param>
+        /// <param name="saveAndComeBackService">service layer for save and come back later</param>
+        /// <param name="backPageViewModel">View model for using the back button</param>
+        /// <param name="siteType">The site of type this instance is being created for</param>
+        /// <exception cref="ArgumentNullException">Throws if any of the parameters have not been intialized</exception>
         protected BaseSiteController(
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
