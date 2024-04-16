@@ -95,6 +95,14 @@
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"));
 
+            services
+                .AddScoped<IHttpCountryService>(s =>
+                    new HttpCountryService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Country"));
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AccreditationProfile());

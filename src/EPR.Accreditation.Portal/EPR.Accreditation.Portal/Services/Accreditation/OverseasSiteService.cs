@@ -15,6 +15,7 @@
     public class OverseasSiteService : IOverseasSiteService
     {
         private readonly IHttpOverseasSiteService _httpOverseasSiteService;
+        private readonly IHttpCountryService _httpCountryService;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -22,11 +23,16 @@
         /// Constructor for OverseasSiteService
         /// </summary>
         /// <param name="httpOverseasSiteService">httpOverseasSiteService object</param>
+        /// <param name="httpCountryService">httpCountryService object</param>
         /// <param name="mapper">An instance of the mapper</param>
-        public OverseasSiteService(IHttpOverseasSiteService httpOverseasSiteService, IMapper mapper)
+        public OverseasSiteService(
+            IHttpOverseasSiteService httpOverseasSiteService,
+            IHttpCountryService httpCountryService,
+            IMapper mapper)
         {
-            _httpOverseasSiteService = httpOverseasSiteService;
-            _mapper = mapper;
+            _httpOverseasSiteService = httpOverseasSiteService ?? throw new ArgumentNullException(nameof(httpOverseasSiteService));
+            _httpCountryService = httpCountryService ?? throw new ArgumentNullException(nameof(httpCountryService));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         /// <summary>
@@ -40,6 +46,8 @@
             Guid overseasSiteId)
         {
             var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
+
+            var listOfCountries = await _httpCountryService.GetCountryList();
 
             return new ReprocessorDetailsViewModel
             {
