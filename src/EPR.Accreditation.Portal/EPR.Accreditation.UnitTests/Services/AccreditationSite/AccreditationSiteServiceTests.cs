@@ -64,7 +64,8 @@
 
             // Assert
             _mockHttpAccreditationSiteService
-                .Verify(s =>
+                .Verify(
+                    s =>
                     s.UpdateExemptionReferences(
                         viewModel.Id,
                         It.Is<IEnumerable<string>>(references =>
