@@ -61,6 +61,5 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
         /// <param name="materialWasteOutputsViewModel"> Material waste output view model.</param>
         /// <returns>A <see cref="Task{TResult}"/> Nothing returned.</returns>
         Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialWasteOutputsViewModel);
-
     }
 }
