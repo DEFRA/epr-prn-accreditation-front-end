@@ -1,11 +1,11 @@
 ﻿namespace EPR.Accreditation.UnitTests.RESTserviceTests
 {
+    using System.Net;
     using EPR.Accreditation.Portal.RESTservices;
     using Microsoft.AspNetCore.Http;
     using Moq;
     using Moq.Protected;
     using Newtonsoft.Json;
-    using System.Net;
 
     [TestClass]
     public class HttpAccreditationSiteServiceTest
@@ -39,29 +39,6 @@
                 _endpointName);
 
             SetClientResponse();
-        }
-
-        private void SetClientResponse(
-            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
-            object content = null)
-        {
-            var response = new HttpResponseMessage(httpStatusCode);
-
-            if (content != null)
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(content));
-            }
-
-            _clientHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
-                {
-                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
-                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
-                })
-                .ReturnsAsync(response)
-                .Verifiable();
         }
 
         [TestMethod]
@@ -108,6 +85,29 @@
 
             // Assert
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        private void SetClientResponse(
+            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
+            object content = null)
+        {
+            var response = new HttpResponseMessage(httpStatusCode);
+
+            if (content != null)
+            {
+                response.Content = new StringContent(JsonConvert.SerializeObject(content));
+            }
+
+            _clientHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
+                {
+                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
+                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
+                })
+                .ReturnsAsync(response)
+                .Verifiable();
         }
     }
 }

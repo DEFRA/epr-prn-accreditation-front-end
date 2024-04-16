@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Dtos
+﻿namespace EPR.Accreditation.Portal.Common.Dtos
 {
     public class AccreditationTaskProgress
     {

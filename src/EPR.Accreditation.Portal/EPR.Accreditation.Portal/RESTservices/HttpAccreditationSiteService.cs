@@ -1,14 +1,20 @@
-﻿// <copyright file="HttpAccreditationSiteService.cs" company="DEFRA">
-// Copyright (c) DEFRA All rights reserved.
-// </copyright>
-
-namespace EPR.Accreditation.Portal.RESTservices
+﻿namespace EPR.Accreditation.Portal.RESTservices
 {
-    using EPR.Accreditation.Facade.Common.RESTservices;
+    using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
+    /// <summary>
+    /// Service that connects to the Facade
+    /// </summary>
     public class HttpAccreditationSiteService : BaseHttpService, IHttpAccreditationSiteService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpAccreditationSiteService"/> class.
+        /// </summary>
+        /// <param name="httpContextAccessor"></param>
+        /// <param name="httpClientFactory"></param>
+        /// <param name="baseUrl"></param>
+        /// <param name="endPointName"></param>
         public HttpAccreditationSiteService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,

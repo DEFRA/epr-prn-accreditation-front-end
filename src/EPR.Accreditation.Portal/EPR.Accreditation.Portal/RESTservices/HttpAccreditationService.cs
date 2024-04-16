@@ -1,9 +1,9 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
-    using EPR.Accreditation.Facade.Common.Enums;
-    using EPR.Accreditation.Facade.Common.RESTservices;
+    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.Common.Enums;
+    using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 

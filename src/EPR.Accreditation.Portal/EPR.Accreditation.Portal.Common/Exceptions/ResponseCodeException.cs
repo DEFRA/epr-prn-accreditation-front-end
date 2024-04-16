@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Exceptions
+﻿namespace EPR.Accreditation.Portal.Common.Exceptions
 {
     using System.Net;
 
