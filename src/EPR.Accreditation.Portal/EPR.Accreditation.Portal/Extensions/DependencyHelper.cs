@@ -95,7 +95,6 @@
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            // control client validation based on configuration
             services.AddRazorPages()
                 .AddViewOptions(o =>
                 {

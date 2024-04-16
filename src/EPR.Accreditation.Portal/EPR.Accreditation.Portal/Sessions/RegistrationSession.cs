@@ -10,10 +10,8 @@ public class RegistrationSession
 
     public Guid? FileId { get; set; }
 
-    // public ComplianceSchemeDto? SelectedComplianceScheme { get; set; }
     public bool? IsSelectedComplianceSchemeFirstCreated { get; set; }
 
-    // public ProducerComplianceSchemeDto? CurrentComplianceScheme { get; set; }
     public bool IsUpdateJourney { get; set; }
 
     public string SubmissionPeriod { get; set; }
@@ -24,6 +22,5 @@ public class RegistrationSession
 
     public bool? UsingAComplianceScheme { get; set; }
 
-    // public ChangeComplianceSchemeOptions? ChangeComplianceSchemeOptions { get; set; }
     public string NotificationMessage { get; set; }
 }

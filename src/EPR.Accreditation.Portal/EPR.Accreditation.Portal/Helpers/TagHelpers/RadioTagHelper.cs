@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.Helpers.TagHelpers
 {
-    using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -46,14 +45,6 @@
             var radioOptionContainer = new TagBuilder("div");
             radioOptionContainer.AddCssClass("govuk-radios");
             radioOptionContainer.Attributes.Add("data-module", "govuk-radios");
-
-            // see if we have a required attribute for the property we're saving into
-            var requiredAttribute = AspFor
-                .Metadata?
-                .ContainerType?
-                .GetProperty(AspFor.Name)?
-                .GetCustomAttributes(typeof(RequiredAttribute), false)
-                .FirstOrDefault() as RequiredAttribute;
 
             var children = await output.GetChildContentAsync();
             string content = children.GetContent();

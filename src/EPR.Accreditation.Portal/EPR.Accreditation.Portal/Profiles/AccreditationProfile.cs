@@ -9,6 +9,9 @@
 
     public class AccreditationProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccreditationProfile"/> class.
+        /// </summary>
         public AccreditationProfile()
         {
             CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
@@ -24,6 +27,11 @@
                 .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
 
             CreateMap<ReprocessingSupportingInformationRecordDto, TypeTonnesRowViewModel>()
+                .ReverseMap();
+
+            this.CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+
+            this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
                 .ReverseMap();
 
             CreateMap<ReprocessingSupportingInformationDto, ProductsProducedViewModel>()

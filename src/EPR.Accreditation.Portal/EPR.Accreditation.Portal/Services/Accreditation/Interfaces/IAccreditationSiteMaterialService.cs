@@ -55,5 +55,20 @@
 
         Task UpdateReprocessedWasteLastYear(
             ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel);
+
+        /// <summary>
+        /// Returns annual waste (actual or estimated) data.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(Guid id, Guid materialId);
+
+        /// <summary>
+        /// Updates annual waste (actual or estimated) data.
+        /// </summary>
+        /// <param name="materialWasteOutputsViewModel"> Material waste output view model.</param>
+        /// <returns>A <see cref="Task{TResult}"/> Nothing returned.</returns>
+        Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialWasteOutputsViewModel);
     }
 }
