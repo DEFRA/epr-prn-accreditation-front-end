@@ -13,14 +13,14 @@
         <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.OrgName">
             @ReprocessorDetailsResources.OrgName
         </label>
-        <input class="govuk-input govuk-!-width-two-thirds" type="text" asp-for="@Model.OrganisationName">
+        <input class="govuk-input govuk-!-width-two-thirds" type="text" asp-for="@Model.Name">
     </div>
 
     <div class="govuk-form-group">
         <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.SelectCountry">
             @ReprocessorDetailsResources.SelectCountry
         </label>
-        <select class="govuk-select" id="SelectedCountryId" name="SelectedCountryId" asp-for="SelectedCountryId" asp-items="@Model.Countries"></select>
+        <select class="govuk-select" id="CountryId" name="CountryId" asp-for="CountryId" asp-items="@Model.Countries"></select>
     </div>
 
     <div class="govuk-form-group">

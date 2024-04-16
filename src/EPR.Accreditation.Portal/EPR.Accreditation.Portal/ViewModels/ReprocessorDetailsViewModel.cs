@@ -12,14 +12,12 @@
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorOrgName")]
         [MaxLength(100)]
-        public string OrganisationName { get; set; }
+        public string Name { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
-        public string SelectedCountry { get; set; }
-
-        public int SelectedCountryId { get; set; }
+        public int CountryId { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorAddress")]
         [MaxLength(500)]

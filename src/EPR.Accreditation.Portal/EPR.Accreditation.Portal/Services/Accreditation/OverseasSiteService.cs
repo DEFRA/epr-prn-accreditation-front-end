@@ -59,11 +59,10 @@
             return new ReprocessorDetailsViewModel
             {
                 Id = id,
-                OrganisationName = reprocessorDetailsDto.Name,
+                Name = reprocessorDetailsDto.Name,
                 Countries = countries,
                 Address = reprocessorDetailsDto.Address,
-                SelectedCountry = reprocessorDetailsDto.Country,
-                SelectedCountryId = reprocessorDetailsDto.CountryId
+                CountryId = reprocessorDetailsDto.CountryId
             };
         }
 

@@ -15,14 +15,9 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the selected country
-        /// </summary>
-        [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
-        public string Country { get; set; }
-
-        /// <summary>
         /// Gets or sets the selected country ID
         /// </summary>
+        [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
         public int CountryId { get; set; }
 
         /// <summary>
