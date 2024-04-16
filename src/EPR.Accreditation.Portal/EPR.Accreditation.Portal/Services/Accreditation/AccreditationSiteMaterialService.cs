@@ -140,7 +140,7 @@
                     .ToList();
             }
 
-            var nonWasteInputsDto = _mapper.Map<NonWasteInputsDto>(nonWasteInputsViewModel);
+            var nonWasteInputsDto = _mapper.Map<ReprocessingSupportingInformationDto>(nonWasteInputsViewModel);
 
             await _httpSiteMaterialService.UpdateNonWasteInputs(
                 nonWasteInputsDto.Id,
@@ -200,7 +200,7 @@
                     .ToList();
             }
 
-            var nonWasteInputsDto = _mapper.Map<NonWasteInputsDto>(productsProducedViewModel);
+            var nonWasteInputsDto = _mapper.Map<ReprocessingSupportingInformationDto>(productsProducedViewModel);
 
             await _httpSiteMaterialService.UpdateProductsProduced(
                 nonWasteInputsDto.Id,

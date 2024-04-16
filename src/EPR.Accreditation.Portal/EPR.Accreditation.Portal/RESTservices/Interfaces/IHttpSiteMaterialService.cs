@@ -29,7 +29,7 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             string wasteSource);
 
         // only reprocessor
-        Task<NonWasteInputsDto> GetNonWasteInputs(
+        Task<ReprocessingSupportingInformationDto> GetNonWasteInputs(
             Guid id,
             Guid materialId);
 
@@ -37,16 +37,16 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task UpdateNonWasteInputs(
             Guid id,
             Guid materialId,
-            NonWasteInputsDto nonWasteInputsDto);
+            ReprocessingSupportingInformationDto nonWasteInputsDto);
 
-        Task<NonWasteInputsDto> GetProductsProduced(
+        Task<ReprocessingSupportingInformationDto> GetProductsProduced(
             Guid id,
             Guid materialId);
 
         Task UpdateProductsProduced(
             Guid id,
             Guid materialId,
-            NonWasteInputsDto nonWasteInputsDto);
+            ReprocessingSupportingInformationDto nonWasteInputsDto);
 
         // only reprocessor
         Task<MaterialOutputsDto> GetMaterialOutputs(

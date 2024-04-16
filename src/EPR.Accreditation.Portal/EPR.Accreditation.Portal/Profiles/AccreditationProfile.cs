@@ -18,18 +18,18 @@
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
 
-            CreateMap<NonWasteInputsDto, NonWasteInputsViewModel>()
-                .ForMember(d => d.Rows, o => o.MapFrom(s => s.NonWasteInputRecords ?? new List<NonWasteInputRecordDto>()))
+            CreateMap<ReprocessingSupportingInformationDto, NonWasteInputsViewModel>()
+                .ForMember(d => d.Rows, o => o.MapFrom(s => s.Records ?? new List<ReprocessingSupportingInformationRecordDto>()))
                 .ReverseMap()
-                .ForMember(d => d.NonWasteInputRecords, o => o.MapFrom(s => s.Rows));
+                .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
 
-            CreateMap<NonWasteInputRecordDto, TypeTonnesRowViewModel>()
+            CreateMap<ReprocessingSupportingInformationRecordDto, TypeTonnesRowViewModel>()
                 .ReverseMap();
 
-            CreateMap<NonWasteInputsDto, ProductsProducedViewModel>()
-                .ForMember(d => d.Rows, o => o.MapFrom(s => s.NonWasteInputRecords ?? new List<NonWasteInputRecordDto>()))
+            CreateMap<ReprocessingSupportingInformationDto, ProductsProducedViewModel>()
+                .ForMember(d => d.Rows, o => o.MapFrom(s => s.Records ?? new List<ReprocessingSupportingInformationRecordDto>()))
                 .ReverseMap()
-                .ForMember(d => d.NonWasteInputRecords, o => o.MapFrom(s => s.Rows));
+                .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
         }
     }
 }

@@ -6,7 +6,6 @@
     using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
-    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -23,7 +22,6 @@
         protected readonly BackPageViewModel _backPageViewModel;
         protected string _siteChooseMaterialRouteName;
         protected string _siteProcessingCapacityRouteName;
-        protected string _siteProductsProducedRouteName;
         protected string _siteNonWasteInputsRouteName;
 #pragma warning restore SA1401 // FieldsMustBePrivate
         private SiteType _siteType;

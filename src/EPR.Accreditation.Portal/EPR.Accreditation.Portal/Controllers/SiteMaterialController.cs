@@ -1,17 +1,17 @@
-﻿namespace EPR.Accreditation.Portal.Controllers
-{
-    using EPR.Accreditation.Portal.Attributes.ActionFilters;
-    using EPR.Accreditation.Portal.Enums;
-    using EPR.Accreditation.Portal.Extensions;
-    using EPR.Accreditation.Portal.Helpers.Interfaces;
-    using EPR.Accreditation.Portal.Options;
-    using EPR.Accreditation.Portal.Resources;
-    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-    using EPR.Accreditation.Portal.ViewModels;
-    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Options;
+﻿using EPR.Accreditation.Portal.Attributes.ActionFilters;
+using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
+using EPR.Accreditation.Portal.Options;
+using EPR.Accreditation.Portal.Resources;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+using EPR.Accreditation.Portal.ViewModels;
+using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
+namespace EPR.Accreditation.Portal.Controllers
+{
     /// <summary>
     /// Controller for Site (Not overseas sites) materials
     /// </summary>
@@ -34,7 +34,7 @@
         private const string NonWasteInputsLastYearView = "NonWasteInputsLastYear";
         private const string NonWasteInputsEstimatedView = "NonWasteInputsEstimated";
 
-        private int _maximumMultiLineRecordNumber = 0;
+        private readonly int _maximumMultiLineRecordNumber = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteMaterialController"/> class.
@@ -61,7 +61,6 @@
                   SiteType.Site)
         {
             _siteProcessingCapacityRouteName = "SiteProcessingCapacity";
-            _siteProductsProducedRouteName = "SiteProductsProduced";
             _siteChooseMaterialRouteName = "SiteChooseMaterial";
 
             if (appSettingsConfiguration?.Value?.MaximumMultiLineRecordNumber == null)
@@ -305,7 +304,7 @@
             else
             {
                 return RedirectToRoute(
-                    _siteProductsProducedRouteName,
+                    ProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,
@@ -329,7 +328,7 @@
             if (id.HasValue &&
                 materialId.HasValue)
             {
-                PopulateBackModel(WasteLastYearRouteName);
+                PopulateBackModel(SiteMaterialOutputsRouteName);
 
                 var productsProducedViewModel = await _accreditationSiteMaterialService.GetProductsProduced(
                     id.Value,
@@ -370,7 +369,7 @@
             ProductsProducedViewModel viewModel,
             SaveButton saveButton)
         {
-            PopulateBackModel(WasteLastYearRouteName);
+            PopulateBackModel(SiteMaterialOutputsRouteName);
 
             if (saveButton == SaveButton.AddRow)
             {

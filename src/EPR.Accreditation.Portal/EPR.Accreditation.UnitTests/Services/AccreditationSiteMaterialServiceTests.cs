@@ -247,7 +247,7 @@
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             _mockMapper
-                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<NonWasteInputsDto>()))
+                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<ReprocessingSupportingInformationDto>()))
                 .Returns(
                     new NonWasteInputsViewModel
                     {
@@ -278,7 +278,7 @@
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             _mockMapper
-                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<NonWasteInputsDto>()))
+                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<ReprocessingSupportingInformationDto>()))
                 .Returns(
                     new NonWasteInputsViewModel
                     {
@@ -319,8 +319,8 @@
         public async Task UpdateNonWasteInputs_Removes_Blank_Rows_Before_Mapping()
         {
             // Arrange
-            _mockMapper.Setup(m => m.Map<NonWasteInputsDto>(It.IsAny<NonWasteInputsViewModel>()))
-                .Returns(new NonWasteInputsDto());
+            _mockMapper.Setup(m => m.Map<ReprocessingSupportingInformationDto>(It.IsAny<NonWasteInputsViewModel>()))
+                .Returns(new ReprocessingSupportingInformationDto());
             var viewModel = new NonWasteInputsViewModel
             {
                 Rows = new List<TypeTonnesRowViewModel>
@@ -339,7 +339,7 @@
             // Assert
             _mockMapper.Verify(
                 m =>
-                    m.Map<NonWasteInputsDto>(
+                    m.Map<ReprocessingSupportingInformationDto>(
                         It.Is<NonWasteInputsViewModel>(
                             p =>
                                 p.Rows.Count == 3 &&
@@ -384,7 +384,7 @@
                     new TypeTonnesRowViewModel()
                 }
             };
-            _mockMapper.Setup(m => m.Map<NonWasteInputsDto>(It.IsAny<ProductsProducedViewModel>())).Returns(new NonWasteInputsDto
+            _mockMapper.Setup(m => m.Map<ReprocessingSupportingInformationDto>(It.IsAny<ProductsProducedViewModel>())).Returns(new ReprocessingSupportingInformationDto
             {
                 Id = id,
                 MaterialId = materialId,
@@ -396,7 +396,7 @@
             // Assert
             _mockMapper.Verify(
                 m =>
-                    m.Map<NonWasteInputsDto>(
+                    m.Map<ReprocessingSupportingInformationDto>(
                         It.Is<ProductsProducedViewModel>(p =>
                             p.Rows.Count == 1 &&
                             p.Rows[0].Tonnes == 10)),
@@ -406,7 +406,7 @@
                     s.UpdateProductsProduced(
                         It.IsAny<Guid>(),
                         It.IsAny<Guid>(),
-                        It.IsAny<NonWasteInputsDto>()),
+                        It.IsAny<ReprocessingSupportingInformationDto>()),
                 Times.Once);
         }
     }
