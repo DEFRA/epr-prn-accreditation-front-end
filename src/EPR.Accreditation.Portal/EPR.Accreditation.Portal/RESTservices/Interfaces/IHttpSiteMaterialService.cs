@@ -1,10 +1,10 @@
-﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
-{
-    using EPR.Accreditation.Facade.Common.Dtos.Portal;
-    using EPR.Accreditation.Portal.Common.Dtos.Portal;
-    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-    using EPR.Accreditation.Portal.Enums;
+﻿using EPR.Accreditation.Facade.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+using EPR.Accreditation.Portal.Enums;
 
+namespace EPR.Accreditation.Portal.RESTservices.Interfaces
+{
     public interface IHttpSiteMaterialService
     {
         // available for both reprocessor and exporter
@@ -83,6 +83,5 @@
             Guid id,
             Guid materialId,
             ReprocessedWasteLastYear reprocessedWasteLastYear);
-
     }
 }

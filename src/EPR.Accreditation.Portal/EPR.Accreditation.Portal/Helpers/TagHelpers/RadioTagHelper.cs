@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.Helpers.TagHelpers
 {
-    using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Microsoft.AspNetCore.Razor.TagHelpers;

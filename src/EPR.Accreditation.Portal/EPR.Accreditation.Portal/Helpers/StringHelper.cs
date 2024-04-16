@@ -2,7 +2,7 @@
 {
     using System.Globalization;
 
-    public class StringHelper
+    public static class StringHelper
     {
         public static string ToTitleCase(string str)
         {

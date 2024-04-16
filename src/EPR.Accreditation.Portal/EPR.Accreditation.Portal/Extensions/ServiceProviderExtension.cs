@@ -49,8 +49,6 @@ namespace EPR.Accreditation.Portal.Extensions
         /// <returns>IServiceCollection.</returns>
         public static IServiceCollection ConfigureMsalDistributedTokenOptions(this IServiceCollection services)
         {
-            // var loggerFactory = LoggerFactory.Create(builder => builder.AddApplicationInsights());
-            // var buildLogger = loggerFactory.CreateLogger<Program>();
             services.Configure<MsalDistributedTokenCacheAdapterOptions>(options =>
             {
                 var msalOptions = services.BuildServiceProvider().GetRequiredService<IOptions<MsalOptions>>().Value;

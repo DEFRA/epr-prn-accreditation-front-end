@@ -2,12 +2,12 @@
 // Copyright (c) DEFRA All rights reserved.
 // </copyright>
 
-using EPR.Accreditation.Portal.CustomValidations.ExemptionReferences;
-using EPR.Accreditation.Portal.Resources;
-using System.ComponentModel.DataAnnotations;
-
 namespace EPR.Accreditation.Portal.ViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+    using EPR.Accreditation.Portal.CustomValidations.ExemptionReferences;
+    using EPR.Accreditation.Portal.Resources;
+
     public class ExemptionReferencesViewModel
     {
         public Guid Id { get; set; }

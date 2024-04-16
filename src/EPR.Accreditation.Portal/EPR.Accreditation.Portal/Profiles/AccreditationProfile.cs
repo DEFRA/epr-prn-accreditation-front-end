@@ -5,7 +5,7 @@
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
-    using EPR.Accreditation.Portal.Common.Dtos;
+
     public class AccreditationProfile : Profile
     {
         /// <summary>
