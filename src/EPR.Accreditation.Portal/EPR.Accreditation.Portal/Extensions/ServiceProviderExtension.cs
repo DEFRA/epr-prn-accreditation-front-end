@@ -18,13 +18,21 @@ namespace EPR.Accreditation.Portal.Extensions
     using CookieOptions = EPR.Accreditation.Portal.Options.CookieOptions;
     using SessionOptions = EPR.Accreditation.Portal.Options.SessionOptions;
 
+    /// <summary>
+    /// Class definition.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public static class ServiceProviderExtension
     {
+        /// <summary>
+        /// Register web components
+        /// </summary>
+        /// <param name="services">Service collection.</param>
+        /// <param name="configuration">Configuration.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection RegisterWebComponents(this IServiceCollection services, IConfiguration configuration)
         {
             ConfigureOptions(services, configuration);
-            //ConfigureLocalization(services);
             ConfigureAuthentication(services, configuration);
             ConfigureAuthorization(services, configuration);
             ConfigureSession(services);
@@ -34,6 +42,11 @@ namespace EPR.Accreditation.Portal.Extensions
             return services;
         }
 
+        /// <summary>
+        /// Configure Msal distributed token options
+        /// </summary>
+        /// <param name="services">Service collection.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection ConfigureMsalDistributedTokenOptions(this IServiceCollection services)
         {
             // var loggerFactory = LoggerFactory.Create(builder => builder.AddApplicationInsights());
@@ -49,11 +62,9 @@ namespace EPR.Accreditation.Portal.Extensions
                 {
                     if (exception is RedisConnectionException)
                     {
-                        // buildLogger.LogError(exception, "L2 Cache Failure Redis connection exception: {message}", exception.Message);
                         return true;
                     }
 
-                    // buildLogger.LogError(exception, "L2 Cache Failure: {message}", exception.Message);
                     return false;
                 };
             });
@@ -104,21 +115,10 @@ namespace EPR.Accreditation.Portal.Extensions
 
         private static void RegisterAccountManagementServices(IServiceCollection services)
         {
-            //services.AddScoped<IComplianceSchemeMemberService, ComplianceSchemeMemberService>();
             services.AddScoped<ICookieService, CookieService>();
-            //services.AddScoped<INotificationService, NotificationService>();
-            //services.AddScoped<IComplianceSchemeService, ComplianceSchemeService>();
             services.AddScoped<IUserAccountService, UserAccountService>();
             services.AddScoped<IRoleManagementService, RoleManagementService>();
-            //services.AddScoped<IFileUploadService, FileUploadService>();
-            //services.AddScoped<IErrorReportService, ErrorReportService>();
-            //services.AddScoped<ICloner, Cloner>();
             services.AddScoped<IRoleManagementService, RoleManagementService>();
-            // services.AddScoped<IRegulatorService, RegulatorService>();
-            //services.AddScoped<ISubmissionService, SubmissionService>();
-            //services.AddTransient<IDateTimeProvider, SystemDateTimeProvider>();
-            //services.AddSingleton<IPatchService, PatchService>();
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<UserDataCheckerMiddleware>();
             services.AddSingleton<ICorrelationIdProvider, CorrelationIdProvider>();
         }
@@ -134,22 +134,6 @@ namespace EPR.Accreditation.Portal.Extensions
                 client.Timeout = TimeSpan.FromSeconds(httpClientOptions.TimeoutSeconds);
             });
         }
-
-        //private static void ConfigureLocalization(IServiceCollection services)
-        //{
-        //    services.AddLocalization(options => options.ResourcesPath = "Resources")
-        //        .Configure<RequestLocalizationOptions>(options =>
-        //        {
-        //            var cultureList = new[] { Language.English, Language.Welsh };
-        //            options.SetDefaultCulture(Language.English);
-        //            options.AddSupportedCultures(cultureList);
-        //            options.AddSupportedUICultures(cultureList);
-        //            options.RequestCultureProviders = new IRequestCultureProvider[]
-        //            {
-        //                new SessionRequestCultureProvider(),
-        //            };
-        //        });
-        //}
 
         private static void ConfigureSession(IServiceCollection services)
         {

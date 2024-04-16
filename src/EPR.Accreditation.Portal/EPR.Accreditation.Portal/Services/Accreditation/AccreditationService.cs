@@ -26,12 +26,20 @@
         public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
             var result = await _httpAccreditationService.GetOperatorType(id);
-            return new OperatorTypeViewModel { ExternalId = id, OperatorType = result };
+            return new OperatorTypeViewModel
+            {
+                ExternalId = id,
+                OperatorType = result
+            };
         }
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Facade.Common.Dtos.Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var accreditation = new Facade.Common.Dtos.Accreditation
+            {
+                OperatorTypeId = viewModel.OperatorType.Value
+            };
+
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }

@@ -21,8 +21,7 @@ namespace EPR.Accreditation.Portal.Controllers
             IAccreditationSiteService accreditationSiteService,
             ISaveAndComeBackService saveAndComeBackService,
             IHttpContextAccessor httpContextAccessor,
-            BackPageViewModel backPageViewModel
-            )
+            BackPageViewModel backPageViewModel)
         {
             _accreditationSiteService = accreditationSiteService ?? throw new ArgumentNullException(nameof(accreditationSiteService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
