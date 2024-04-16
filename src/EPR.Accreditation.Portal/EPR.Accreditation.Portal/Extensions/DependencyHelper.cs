@@ -1,9 +1,9 @@
 ﻿namespace EPR.Accreditation.Portal.Extensions
 {
     using AutoMapper;
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
     using EPR.Accreditation.Portal.Configuration;
     using EPR.Accreditation.Portal.Helpers;
-    using EPR.Accreditation.Portal.Helpers.ActionFilters;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Profiles;
     using EPR.Accreditation.Portal.RESTservices;
@@ -14,8 +14,17 @@
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Options;
 
-    public static class ExtensionMethods
+    /// <summary>
+    /// Static class for dependency helpers
+    /// </summary>
+    public static class DependencyHelper
     {
+        /// <summary>
+        /// Extension method for adding dependencies specific to our Portal code
+        /// </summary>
+        /// <param name="services">The IServiceCollection required to add more DI services and object</param>
+        /// <param name="configuration">The system configuration</param>
+        /// <returns>The IServiceCollection that was passed in</returns>
         public static IServiceCollection AddPortalDependencies(
             this IServiceCollection services,
             IConfiguration configuration)
@@ -34,6 +43,7 @@
                 .AddScoped<IWastePermitService, WastePermitService>()
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
+                .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
             services.AddScoped<IHttpSiteMaterialService>(s =>
@@ -41,20 +51,16 @@
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation"
-                    )
+                        "Accreditation"));
 
-            );
             services
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IHttpAccreditationService>(s =>
-                    new HttpAccreditionService(
+                    new HttpAccreditationService(
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation"
-                    )
-            );
+                        "Accreditation"));
 
             services
                 .AddScoped<IHttpSaveAndComeBackService>(s =>
@@ -62,9 +68,7 @@
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "SaveAndComeBack"
-                    )
-            );
+                        "SaveAndComeBack"));
 
             services
                 .AddScoped<IHttpWastePermitService>(s =>
@@ -72,9 +76,15 @@
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation"
-                    )
-            );
+                        "Accreditation"));
+
+            services
+                .AddScoped<IHttpAccreditationSiteService>(s =>
+                    new HttpAccreditationSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"));
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -85,16 +95,6 @@
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services
-                .AddScoped<Facade.Common.RESTservices.Interfaces.IHttpAccreditationService>(s =>
-                    new Facade.Common.RESTservices.HttpAccreditationService(
-                        s.GetRequiredService<IHttpContextAccessor>(),
-                        s.GetRequiredService<IHttpClientFactory>(),
-                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation")
-                    );
-
-            // control client validation based on configuration
             services.AddRazorPages()
                 .AddViewOptions(o =>
                 {

@@ -1,19 +1,20 @@
-﻿using EPR.Accreditation.Facade.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-
-namespace EPR.Accreditation.Portal.RESTservices
+﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.Common.RESTservices;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+
     public class HttpSiteMaterialService : BaseHttpService, IHttpSiteMaterialService
     {
         public HttpSiteMaterialService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
             string baseUrl,
-            string endPointName) : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
+            string endPointName)
+            : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }
 
@@ -50,19 +51,34 @@ namespace EPR.Accreditation.Portal.RESTservices
             await Put($"{id}/{site}/Material/{materialId}/WasteSource", wasteSource);
         }
 
-        public async Task<NonWasteInputsDto> GetNonWasteInputs(
+        public async Task<ReprocessingSupportingInformationDto> GetNonWasteInputs(
             Guid id,
             Guid materialId)
         {
-            return await Get<NonWasteInputsDto>($"{id}/Site/Material/{materialId}/NonWasteInputs");
+            return await Get<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs");
         }
 
         public async Task UpdateNonWasteInputs(
             Guid id,
             Guid materialId,
-            NonWasteInputsDto nonWasteInputsDto)
+            ReprocessingSupportingInformationDto nonWasteInputsDto)
         {
-            await Put<NonWasteInputsDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
+        }
+
+        public async Task<ReprocessingSupportingInformationDto> GetProductsProduced(
+            Guid id,
+            Guid materialId)
+        {
+            return await Get<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/ProductsProduced");
+        }
+
+        public async Task UpdateProductsProduced(
+            Guid id,
+            Guid materialId,
+            ReprocessingSupportingInformationDto nonWasteInputsDto)
+        {
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/ProductsProduced", nonWasteInputsDto);
         }
 
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
@@ -107,9 +123,6 @@ namespace EPR.Accreditation.Portal.RESTservices
         {
             await this.Put($"{id}/Site/Material/{materialId}/MaterialWasteOutputs", materialWasteOutputsDto);
         }
-
-        // =====================================================
-
 
         public async Task<bool?> GetReprocessedWasteLastYear(
             Guid id,

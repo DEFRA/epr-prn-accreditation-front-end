@@ -1,21 +1,21 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Facade.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.Constants;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Localization;
-using static EPR.Accreditation.Portal.Constants.Strings;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.Constants;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+    using Microsoft.AspNetCore.Localization;
+    using static EPR.Accreditation.Portal.Constants.Strings;
+
     public class AccreditationSiteMaterialService : IAccreditationSiteMaterialService
     {
-        protected readonly IMapper _mapper;
-        protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IHttpSiteMaterialService _httpSiteMaterialService;
+        private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpSiteMaterialService _httpSiteMaterialService;
 
         public AccreditationSiteMaterialService(
             IMapper mapper,
@@ -42,9 +42,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             var language = Enums.Language.Undefined;
 
             if (currentCulture.Name == CultureConstants.English.Name)
+            {
                 language = Enums.Language.English;
+            }
             else if (currentCulture.Name == CultureConstants.Welsh.Name)
+            {
                 language = Enums.Language.Welsh;
+            }
 
             return await _httpSiteMaterialService.GetMeterialName(
                 id,
@@ -77,7 +81,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             // then "Save and come back later" has been selected and we are letting
             // blank required fields through
             if (wasteSourceViewModel.WasteSource == null)
+            {
                 wasteSourceViewModel.WasteSource = string.Empty;
+            }
 
             await _httpSiteMaterialService.UpdateWasteSource(
                 siteType,
@@ -94,7 +100,9 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
         /// <param name="id">Accreditation Id</param>
         /// <param name="materialId">Material Id</param>
         /// <returns>The view model for non waste inputs</returns>
-        public async Task<NonWasteInputsViewModel> GetNonWasteInputs(Guid id, Guid materialId)
+        public async Task<NonWasteInputsViewModel> GetNonWasteInputs(
+            Guid id,
+            Guid materialId)
         {
             var nonWasteInputsDto = await _httpSiteMaterialService.GetNonWasteInputs(
                 id,
@@ -107,7 +115,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             {
                 for (var i = viewModel.Rows.Count; i < GenericConstants.MinimumMultiLineRecordNumber; i++)
                 {
-                    viewModel.Rows.Add(new NonWasteInputsRowViewModel());
+                    viewModel.Rows.Add(new TypeTonnesRowViewModel());
                 }
             }
 
@@ -132,9 +140,69 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                     .ToList();
             }
 
-            var nonWasteInputsDto = _mapper.Map<NonWasteInputsDto>(nonWasteInputsViewModel);
+            var nonWasteInputsDto = _mapper.Map<ReprocessingSupportingInformationDto>(nonWasteInputsViewModel);
 
             await _httpSiteMaterialService.UpdateNonWasteInputs(
+                nonWasteInputsDto.Id,
+                nonWasteInputsDto.MaterialId,
+                nonWasteInputsDto);
+        }
+
+        /// <summary>
+        /// Gets the products produced and performs any necessary manipulation before
+        /// returning it to the controller
+        /// </summary>
+        /// <param name="id">Accreditation Id</param>
+        /// <param name="materialId">Material Id</param>
+        /// <returns>The view model for products produced</returns>
+        public async Task<ProductsProducedViewModel> GetProductsProduced(
+            Guid id,
+            Guid materialId)
+        {
+            var productsProducedDto = await _httpSiteMaterialService.GetProductsProduced(
+                id,
+                materialId);
+
+            var viewModel = _mapper.Map<ProductsProducedViewModel>(productsProducedDto);
+
+            if (viewModel != null &&
+                viewModel.Rows?.Count <= GenericConstants.MinimumMultiLineRecordNumber)
+            {
+                for (var i = viewModel.Rows.Count; i < GenericConstants.MinimumMultiLineRecordNumber; i++)
+                {
+                    viewModel.Rows.Add(new TypeTonnesRowViewModel());
+                }
+            }
+
+            return viewModel;
+        }
+
+        /// <summary>
+        /// Performs any necessary logic on the products produced, then requests
+        /// the data is sent to be saved
+        /// </summary>
+        /// <param name="productsProducedViewModel">View model from the view to be converted into a DTO</param>
+        /// <returns>Nothing (async Task)</returns>
+        public async Task UpdateProductsProduced(ProductsProducedViewModel productsProducedViewModel)
+        {
+            if (productsProducedViewModel == null)
+            {
+                throw new NullReferenceException(nameof(productsProducedViewModel));
+            }
+
+            if (productsProducedViewModel.Rows != null &&
+                productsProducedViewModel.Rows.Any())
+            {
+                // remove blank rows
+                productsProducedViewModel.Rows = productsProducedViewModel
+                    .Rows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Type) && r.Tonnes != null)
+                    .ToList();
+            }
+
+            var nonWasteInputsDto = _mapper.Map<ReprocessingSupportingInformationDto>(productsProducedViewModel);
+
+            await _httpSiteMaterialService.UpdateProductsProduced(
                 nonWasteInputsDto.Id,
                 nonWasteInputsDto.MaterialId,
                 nonWasteInputsDto);

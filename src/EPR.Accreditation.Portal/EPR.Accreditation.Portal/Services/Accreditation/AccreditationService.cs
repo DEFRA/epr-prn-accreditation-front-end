@@ -3,46 +3,36 @@
     using System.Threading.Tasks;
     using AutoMapper;
     using EPR.Accreditation.Facade.Common.Dtos;
-    using EPR.Accreditation.Facade.Common.Enums;
+    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
 
     public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;
-        protected readonly EPR.Accreditation.Portal.RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;
-        protected readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;
 
-        public AccreditationService(IMapper mapper,
-            EPR.Accreditation.Portal.RESTservices.Interfaces.IHttpAccreditationService httpAccreditationService,
-            IHttpContextAccessor httpContextAccessor)
+        public AccreditationService(
+            IMapper mapper,
+            RESTservices.Interfaces.IHttpAccreditationService httpAccreditationService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
-
-        }
-
-        private Enums.TaskStatus ReturnStatusFromList(List<AccreditationTaskProgress> accreditationsTaskProgress,
-                                                Enums.TaskName taskName)
-        {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).ToList().Count > 0)
-            {
-                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
-            }
-            return Enums.TaskStatus.NotStarted;
         }
 
         public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
             var result = await _httpAccreditationService.GetOperatorType(id);
-            return new OperatorTypeViewModel { ExternalId = id, OperatorType = result };
+            return new OperatorTypeViewModel
+            {
+                ExternalId = id,
+                OperatorType = result
+            };
         }
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Facade.Common.Dtos.Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var accreditation = new Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }
@@ -69,9 +59,10 @@
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
 
-        public async Task<TaskListViewModel> GetTaskList(Guid id, 
-                                                        Guid siteId, 
-                                                        Guid materialId)
+        public async Task<TaskListViewModel> GetTaskList(
+            Guid id,
+            Guid siteId,
+            Guid materialId)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
             var address = await _httpAccreditationService.GetSite(siteId);
@@ -95,6 +86,18 @@
             var result = await _httpAccreditationService.GetCheckYourAnswers(id);
             var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
             return vm;
+        }
+
+        private Enums.TaskStatus ReturnStatusFromList(
+            List<AccreditationTaskProgress> accreditationsTaskProgress,
+            Enums.TaskName taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
+            {
+                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+            }
+
+            return Enums.TaskStatus.NotStarted;
         }
 
         public async Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(

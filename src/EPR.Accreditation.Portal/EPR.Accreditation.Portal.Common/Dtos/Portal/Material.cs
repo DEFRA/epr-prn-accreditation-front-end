@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Dtos.Portal
+﻿namespace EPR.Accreditation.Portal.Common.Dtos.Portal
 {
     public class Material
     {
