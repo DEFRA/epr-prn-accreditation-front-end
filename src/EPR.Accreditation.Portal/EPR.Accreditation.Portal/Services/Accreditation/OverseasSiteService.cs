@@ -39,11 +39,12 @@
             Guid id,
             Guid overseasSiteId)
         {
-            // var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
+            var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
+
             return new ReprocessorDetailsViewModel
             {
                 Id = id,
-                OrganisationName = "Sample Ltd",
+                OrganisationName = reprocessorDetailsDto.Name,
                 Countries = new List<SelectListItem>
                 {
                     new() { Value = string.Empty, Text = ReprocessorDetailsResources.DefaultOption },
@@ -53,7 +54,9 @@
                     new() { Value = "4", Text = "Spain" },
                     new() { Value = "5", Text = "Switzerland" }
                 },
-                Address = "123 High street, London, WC1 6UH"
+                Address = reprocessorDetailsDto.Address,
+                SelectedCountry = reprocessorDetailsDto.Country
+                //SelectedCountryId = reprocessorDetailsDto.CountryId
             };
         }
 

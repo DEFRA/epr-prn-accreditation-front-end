@@ -12,13 +12,13 @@
         /// Gets or sets the organisation name
         /// </summary>
         [MaxLength(100)]
-        public string OrganisationName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the selected country
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
-        public string SelectedCountry { get; set; }
+        public string Country { get; set; }
 
         /// <summary>
         /// Gets or sets the address
