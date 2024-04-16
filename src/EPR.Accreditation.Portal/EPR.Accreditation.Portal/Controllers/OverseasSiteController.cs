@@ -74,14 +74,20 @@
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 OverseasSiteOutputsResources.NoOutputsSupplied))
+            {
                 return View(overseasReprocessingSiteOutputsViewModel);
+            }
 
             await _accreditationService.UpdateOverseasReprocessingSiteOutputs(overseasReprocessingSiteOutputsViewModel);
 
             if (saveButton == SaveButton.SaveAndContinue && string.IsNullOrWhiteSpace(overseasReprocessingSiteOutputsViewModel.Outputs))
+            {
                 return RedirectToAction("OverseasSiteOutput", "OverseasSite");
+            }
             else if (saveButton == SaveButton.SaveAndContinue && !string.IsNullOrWhiteSpace(overseasReprocessingSiteOutputsViewModel.Outputs))
+            {
                 return RedirectToAction("RejectedWastePlans", "Accreditation");
+            }
 
             await _saveAndComeBackService.AddSaveAndComeBack(
                 overseasReprocessingSiteOutputsViewModel.Id,
