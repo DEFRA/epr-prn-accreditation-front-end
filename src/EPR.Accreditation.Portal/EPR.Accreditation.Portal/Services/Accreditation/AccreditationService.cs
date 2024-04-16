@@ -88,18 +88,6 @@
             return vm;
         }
 
-        private Enums.TaskStatus ReturnStatusFromList(
-            List<AccreditationTaskProgress> accreditationsTaskProgress,
-            Enums.TaskName taskName)
-        {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
-            {
-                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
-            }
-
-            return Enums.TaskStatus.NotStarted;
-        }
-
         public async Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
             Guid accreditationExternalId,
             Guid overseasSiteExternalId)
@@ -116,6 +104,18 @@
         {
             var overseasSiteOutputs = _mapper.Map<OverseasReprocessingSiteOutputs>(overseasSiteOutputsViewModel);
             await _httpAccreditationService.UpdateOverseasReprocessingSiteOutputs(overseasSiteOutputsViewModel.Id, overseasSiteOutputs);
+        }
+
+        private Enums.TaskStatus ReturnStatusFromList(
+            List<AccreditationTaskProgress> accreditationsTaskProgress,
+            Enums.TaskName taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
+            {
+                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+            }
+
+            return Enums.TaskStatus.NotStarted;
         }
     }
 }

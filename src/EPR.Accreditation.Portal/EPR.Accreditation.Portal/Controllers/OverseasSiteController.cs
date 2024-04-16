@@ -12,11 +12,11 @@
     [Route("Accreditation/{accreditationExternalId}/[controller]/")]
     public class OverseasSiteController : Controller
     {
-        protected readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAccreditationService _accreditationService;
-        protected readonly ISaveAndComeBackService _saveAndComeBackService;
-        protected readonly BackPageViewModel _backPageViewModel;
-        protected IUrlHelperWrapper _urlHelper;
+        private readonly ISaveAndComeBackService _saveAndComeBackService;
+        private readonly BackPageViewModel _backPageViewModel;
+        private IUrlHelperWrapper _urlHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OverseasSiteController"/> class.
@@ -24,7 +24,8 @@
         /// <param name="httpContextAccessor">Injected http context accessor service.</param>
         /// <param name="saveAndComeBackService">Injected save and come back service.</param>
         /// <param name="accreditationService">Injected accreditation service.</param>
-        /// <param name="backPageViewModel"></param>
+        /// <param name="urlHelper">Url helper service.</param>
+        /// <param name="backPageViewModel">Handles back page control.</param>
         public OverseasSiteController(
             IHttpContextAccessor httpContextAccessor,
             ISaveAndComeBackService saveAndComeBackService,

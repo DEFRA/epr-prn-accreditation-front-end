@@ -1,13 +1,12 @@
 ﻿namespace EPR.Accreditation.Portal.Profiles
 {
     using AutoMapper;
+    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
-    using EPR.Accreditation.Portal.Common.Dtos;
-    using EPR.Accreditation.Facade.Common.Dtos;
 
     public class AccreditationProfile : Profile
     {

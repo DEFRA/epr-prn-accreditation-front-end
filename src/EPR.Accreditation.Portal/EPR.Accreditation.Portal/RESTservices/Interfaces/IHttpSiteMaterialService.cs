@@ -91,6 +91,5 @@
             Guid id,
             Guid materialId,
             ReprocessedWasteLastYear reprocessedWasteLastYear);
-
     }
 }
