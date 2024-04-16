@@ -15,5 +15,9 @@
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid externalId);
+
+        Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm);
     }
 }

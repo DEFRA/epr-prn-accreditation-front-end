@@ -290,5 +290,39 @@
         {
             return NotFound();
         }
+
+        [HttpGet]
+        [ActionName("/PrnTonnesPlanned")]
+        public async Task<IActionResult> PrnTonnesPlanned(Guid? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            PrnTonnesPlannedViewModel vm = await _accreditationService.GetPrnTonnesPlanned(id.Value);
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ActionName("/PrnTonnesPlanned")]
+        public async Task<IActionResult> PrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            await _accreditationService.UpdatePrnTonnesPlanned(vm);
+
+            return RedirectToAction("Declaration");
+        }
+
+        [HttpGet("Declaration")]
+        public async Task<IActionResult> Declaration(
+            Guid? id)
+        {
+            return NotFound();
+        }
     }
 }

@@ -98,5 +98,15 @@
 
             return Enums.TaskStatus.NotStarted;
         }
+
+        public async Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid externalId)
+        {
+            return new PrnTonnesPlannedViewModel { ExternalId = externalId, PrnPlannedTonnesType = Common.Enums.PrnPlannedTonnesType.Upto};
+        }
+
+        public Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
