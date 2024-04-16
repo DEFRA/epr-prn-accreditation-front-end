@@ -19,7 +19,7 @@ namespace EPR.Accreditation.Portal.Extensions
     using SessionOptions = EPR.Accreditation.Portal.Options.SessionOptions;
 
     /// <summary>
-    /// Class definition.
+    /// Extension methods class for service collection provider
     /// </summary>
     [ExcludeFromCodeCoverage]
     public static class ServiceProviderExtension

@@ -10,6 +10,7 @@ public class AllReferenceNumbersEmptyAttribute : ValidationAttribute
     {
         var viewModel = (ExemptionReferencesViewModel)validationContext.ObjectInstance;
 
+        // Check if all reference numbers are empty
         if (string.IsNullOrEmpty(viewModel.Reference1) &&
             string.IsNullOrEmpty(viewModel.Reference2) &&
             string.IsNullOrEmpty(viewModel.Reference3) &&

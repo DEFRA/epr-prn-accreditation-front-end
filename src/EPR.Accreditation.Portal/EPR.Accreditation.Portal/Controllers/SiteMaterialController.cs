@@ -444,9 +444,9 @@ namespace EPR.Accreditation.Portal.Controllers
         /// or a redirect to the next step</returns>
         [HttpPost("ProductsProduced")]
         public async Task<IActionResult> ProductsProduced(
-                ProductsProducedViewModel viewModel,
-                SaveButton saveButton)
-            {
+            ProductsProducedViewModel viewModel,
+            SaveButton saveButton)
+        {
             PopulateBackModel(SiteMaterialOutputsRouteName);
 
             if (saveButton == SaveButton.AddRow)
