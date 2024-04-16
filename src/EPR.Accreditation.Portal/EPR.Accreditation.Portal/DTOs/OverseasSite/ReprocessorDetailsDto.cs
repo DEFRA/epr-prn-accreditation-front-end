@@ -21,6 +21,11 @@
         public string Country { get; set; }
 
         /// <summary>
+        /// Gets or sets the selected country ID
+        /// </summary>
+        public int CountryId { get; set; }
+
+        /// <summary>
         /// Gets or sets the address
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorAddress")]

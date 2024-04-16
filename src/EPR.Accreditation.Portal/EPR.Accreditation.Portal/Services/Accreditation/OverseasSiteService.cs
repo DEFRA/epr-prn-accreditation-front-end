@@ -49,22 +49,21 @@
 
             var listOfCountries = await _httpCountryService.GetCountryList();
 
+            var countries = new List<SelectListItem> { new() { Value = string.Empty, Text = ReprocessorDetailsResources.DefaultOption } };
+
+            foreach (var country in listOfCountries)
+            {
+                countries.Add(new() { Value = country.CountryId.ToString(), Text = country.Name });
+            }
+
             return new ReprocessorDetailsViewModel
             {
                 Id = id,
                 OrganisationName = reprocessorDetailsDto.Name,
-                Countries = new List<SelectListItem>
-                {
-                    new() { Value = string.Empty, Text = ReprocessorDetailsResources.DefaultOption },
-                    new() { Value = "1", Text = "Albania" },
-                    new() { Value = "2", Text = "France" },
-                    new() { Value = "3", Text = "Holland" },
-                    new() { Value = "4", Text = "Spain" },
-                    new() { Value = "5", Text = "Switzerland" }
-                },
+                Countries = countries,
                 Address = reprocessorDetailsDto.Address,
-                SelectedCountry = reprocessorDetailsDto.Country
-                //SelectedCountryId = reprocessorDetailsDto.CountryId
+                SelectedCountry = reprocessorDetailsDto.Country,
+                SelectedCountryId = reprocessorDetailsDto.CountryId
             };
         }
 
