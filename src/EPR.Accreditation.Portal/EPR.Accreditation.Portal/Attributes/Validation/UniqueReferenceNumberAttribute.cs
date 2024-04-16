@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
+﻿namespace EPR.Accreditation.Portal.Attributes.Validation
 {
     using System.ComponentModel.DataAnnotations;
     using EPR.Accreditation.Portal.Resources;

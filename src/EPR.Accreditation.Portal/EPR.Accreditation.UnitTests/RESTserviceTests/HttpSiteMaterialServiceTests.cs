@@ -368,7 +368,7 @@
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            var nonWasteInputsDto = new NonWasteInputsDto();
+            var nonWasteInputsDto = new ReprocessingSupportingInformationDto();
             var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
 
             // Act
@@ -378,7 +378,7 @@
                 nonWasteInputsDto);
 
             // Assert
-            var capturedPayload = JsonConvert.DeserializeObject<NonWasteInputsDto>(_capturedPayload);
+            var capturedPayload = JsonConvert.DeserializeObject<ReprocessingSupportingInformationDto>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(nonWasteInputsDto, capturedPayload));
         }

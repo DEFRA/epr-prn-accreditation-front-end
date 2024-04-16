@@ -1,16 +1,17 @@
-﻿namespace EPR.Accreditation.Portal.Controllers
-{
-    using EPR.Accreditation.Portal.Attributes.ActionFilters;
-    using EPR.Accreditation.Portal.Enums;
-    using EPR.Accreditation.Portal.Extensions;
-    using EPR.Accreditation.Portal.Helpers.Interfaces;
-    using EPR.Accreditation.Portal.Options;
-    using EPR.Accreditation.Portal.Resources;
-    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-    using EPR.Accreditation.Portal.ViewModels;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Options;
+﻿using EPR.Accreditation.Portal.Attributes.ActionFilters;
+using EPR.Accreditation.Portal.Enums;
+using EPR.Accreditation.Portal.Extensions;
+using EPR.Accreditation.Portal.Helpers.Interfaces;
+using EPR.Accreditation.Portal.Options;
+using EPR.Accreditation.Portal.Resources;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+using EPR.Accreditation.Portal.ViewModels;
+using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
+namespace EPR.Accreditation.Portal.Controllers
+{
     /// <summary>
     /// Controller for Site (Not overseas sites) materials
     /// </summary>
@@ -18,9 +19,21 @@
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class SiteMaterialController : BaseSiteController
     {
+        // Routename string constants
         private const string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
         private const string WasteLastYearRouteName = "WasteLastYear";
         private const string NonWasteInputsRouteName = "NonWasteInputs";
+        private const string ProductsProducedRouteName = "ProductsProduced";
+        private const string AuthorityRouteName = "Authority";
+
+        // Viewname string constants
+        private const string MaterialOutputsLastYearView = "MaterialOutputsLastYear";
+        private const string MaterialOutputsEstimatedView = "MaterialOutputsEstimated";
+        private const string ProductsProducedLastYearView = "ProductsProducedLastYear";
+        private const string ProductsProducedEstimatedView = "ProductsProducedEstimated";
+        private const string NonWasteInputsLastYearView = "NonWasteInputsLastYear";
+        private const string NonWasteInputsEstimatedView = "NonWasteInputsEstimated";
+
         private readonly int _maximumMultiLineRecordNumber = 0;
 
         /// <summary>
@@ -48,7 +61,6 @@
                   SiteType.Site)
         {
             _siteProcessingCapacityRouteName = "SiteProcessingCapacity";
-            _siteProductsProducedRouteName = "SiteProductsProduced";
             _siteChooseMaterialRouteName = "SiteChooseMaterial";
 
             if (appSettingsConfiguration?.Value?.MaximumMultiLineRecordNumber == null)
@@ -139,12 +151,12 @@
                 // if waste last year is true then return the MaterialOutputs view
                 if (nonWasteInputsViewModel.WasteLastYear == true)
                 {
-                    return View("NonWasteInputsLastYear", nonWasteInputsViewModel);
+                    return View(NonWasteInputsLastYearView, nonWasteInputsViewModel);
                 }
                 else
                 {
                     // otherwise return the annual outputs
-                    return View("NonWasteInputsEstimated", nonWasteInputsViewModel);
+                    return View(NonWasteInputsEstimatedView, nonWasteInputsViewModel);
                 }
             }
 
@@ -179,7 +191,7 @@
                 }
 
                 return View(
-                    viewModel.WasteLastYear.Value ? "NonWasteInputsLastYear" : "NonWasteInputsEstimated",
+                    viewModel.WasteLastYear.Value ? NonWasteInputsLastYearView : NonWasteInputsEstimatedView,
                     viewModel);
             }
 
@@ -191,11 +203,11 @@
             {
                 if (viewModel.WasteLastYear == true)
                 {
-                    return View("NonWasteInputsLastYear", viewModel);
+                    return View(NonWasteInputsLastYearView, viewModel);
                 }
                 else
                 {
-                    return View("NonWasteInputsEstimated", viewModel);
+                    return View(NonWasteInputsEstimatedView, viewModel);
                 }
             }
 
@@ -247,12 +259,12 @@
                 // if waste last year is true then return the MaterialOutputs view
                 if (materialOutputsViewModel.WasteLastYear == true)
                 {
-                    return View("MaterialOutputsLastYear", materialOutputsViewModel);
+                    return View(MaterialOutputsLastYearView, materialOutputsViewModel);
                 }
                 else
                 {
                     // otherwise return the annual outputs
-                    return View("MaterialOutputsEstimated", materialOutputsViewModel);
+                    return View(MaterialOutputsEstimatedView, materialOutputsViewModel);
                 }
             }
             else
@@ -292,7 +304,7 @@
             else
             {
                 return RedirectToRoute(
-                    _siteProductsProducedRouteName,
+                    ProductsProducedRouteName,
                     new
                     {
                         viewModel.Id,
@@ -379,17 +391,125 @@
             }
         }
 
-        /// <returns>NotFound</returns>
-        [HttpGet("ProductsProduced", Name = "SiteProductsProduced")]
-        public IActionResult ProductsProduced()
+        /// <summary>
+        /// Get method for displaying the products produced (Both estimated and
+        /// last calender year
+        /// </summary>
+        /// <param name="id">Accreditation id</param>
+        /// <param name="materialId">material id</param>
+        /// <returns>View result or other relevant result (NotFound, etc)</returns>
+        [HttpGet("ProductsProduced", Name = "ProductsProduced")]
+        public async Task<IActionResult> ProductsProduced(
+            Guid? id,
+            Guid? materialId)
         {
+            if (id.HasValue &&
+                materialId.HasValue)
+            {
+                PopulateBackModel(SiteMaterialOutputsRouteName);
+
+                var productsProducedViewModel = await _accreditationSiteMaterialService.GetProductsProduced(
+                    id.Value,
+                    materialId.Value);
+
+                // if waste last year has not been set, then the user should not
+                // be on this page
+                if (productsProducedViewModel.WasteLastYear == null)
+                {
+                    return NotFound();
+                }
+
+                // if waste last year is true then return the MaterialOutputs view
+                if (productsProducedViewModel.WasteLastYear == true)
+                {
+                    return View(ProductsProducedLastYearView, productsProducedViewModel);
+                }
+                else
+                {
+                    // otherwise return the annual outputs
+                    return View(ProductsProducedEstimatedView, productsProducedViewModel);
+                }
+            }
+
             return NotFound();
         }
 
         /// <summary>
-        /// Stubbed method
+        /// Post method for updating the Non waste inputs for an exporter.
         /// </summary>
-        /// <returns>NotFound</returns>
+        /// <param name="viewModel">The view model for non waste inputs</param>
+        /// <param name="saveButton">The value of the button used to post the data</param>
+        /// <returns>Either the original view with a new row (if javascript is turned off),
+        /// original view with validation errors, a view signfying that progress has been saved
+        /// or a redirect to the next step</returns>
+        [HttpPost("ProductsProduced")]
+        public async Task<IActionResult> ProductsProduced(
+                ProductsProducedViewModel viewModel,
+                SaveButton saveButton)
+            {
+            PopulateBackModel(SiteMaterialOutputsRouteName);
+
+            if (saveButton == SaveButton.AddRow)
+            {
+                // We're adding a new row, therefore we do not want to perform any validation
+                ModelState.Clear();
+
+                // user is adding a new row (without javascript) and therefore we need to
+                // return the view with a new row added
+                if (viewModel.RowsToDisplay < _maximumMultiLineRecordNumber)
+                {
+                    viewModel.RowsToAdd++;
+                }
+
+                return View(
+                    viewModel.WasteLastYear.Value ? ProductsProducedLastYearView : ProductsProducedEstimatedView,
+                    viewModel);
+            }
+
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
+                MaterialOutputsLastYearResources.ContaminentsBlank,
+                MaterialOutputsLastYearResources.ProcessLossBlank))
+            {
+                if (viewModel.WasteLastYear == true)
+                {
+                    return View(ProductsProducedLastYearView, viewModel);
+                }
+                else
+                {
+                    return View(ProductsProducedEstimatedView, viewModel);
+                }
+            }
+
+            await _accreditationSiteMaterialService.UpdateProductsProduced(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                PopulateBackModel(_siteNonWasteInputsRouteName);
+
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    _httpContextAccessor.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(
+                    AuthorityRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.MaterialId
+                    });
+            }
+        }
+
+        /// <summary>
+        /// Stubbed method for entering processing capacity
+        /// </summary>
+        /// <returns>Not found view for the moment</returns>
         [HttpGet("EnterProcessingCapacity", Name = "EnterProcessingCapacity")]
         public IActionResult EnterProcessingCapacity()
         {
@@ -448,6 +568,12 @@
                 viewModel.Id,
                 _httpContextAccessor.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
+        }
+
+        [HttpGet("Authority", Name = "Authority")]
+        public Task<IActionResult> Authority()
+        {
+            return null;
         }
     }
 }

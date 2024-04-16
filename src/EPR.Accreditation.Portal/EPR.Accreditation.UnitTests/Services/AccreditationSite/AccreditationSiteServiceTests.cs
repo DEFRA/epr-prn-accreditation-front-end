@@ -63,16 +63,15 @@
             await _accreditationSiteService.UpdateExemptionReferences(viewModel);
 
             // Assert
-            _mockHttpAccreditationSiteService
-                .Verify(
-                    s =>
+            _mockHttpAccreditationSiteService.Verify(
+                s =>
                     s.UpdateExemptionReferences(
                         viewModel.Id,
                         It.Is<IEnumerable<string>>(references =>
                             VerifyExemptionReferencesMatchViewModel(
                                 references,
                                 viewModel))),
-                    Times.Once);
+                Times.Once);
         }
 
         private bool VerifyExemptionReferencesMatchViewModel(

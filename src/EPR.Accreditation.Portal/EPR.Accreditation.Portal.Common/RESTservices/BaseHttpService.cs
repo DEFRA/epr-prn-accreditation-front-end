@@ -1,7 +1,7 @@
-﻿namespace EPR.Accreditation.Facade.Common.RESTservices
+﻿namespace EPR.Accreditation.Portal.Common.RESTservices
 {
     using System.Net.Http.Json;
-    using EPR.Accreditation.Facade.Common.Exceptions;
+    using EPR.Accreditation.Portal.Common.Exceptions;
     using Microsoft.AspNetCore.Http;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;

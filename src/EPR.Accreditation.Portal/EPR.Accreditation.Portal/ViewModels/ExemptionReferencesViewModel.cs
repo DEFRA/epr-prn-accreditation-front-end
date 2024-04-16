@@ -1,11 +1,7 @@
-﻿// <copyright file="ExemptionReferencesViewModel.cs" company="DEFRA">
-// Copyright (c) DEFRA All rights reserved.
-// </copyright>
-
-namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.Portal.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
-    using EPR.Accreditation.Portal.CustomValidations.ExemptionReferences;
+    using EPR.Accreditation.Portal.Attributes.Validation;
     using EPR.Accreditation.Portal.Resources;
 
     public class ExemptionReferencesViewModel

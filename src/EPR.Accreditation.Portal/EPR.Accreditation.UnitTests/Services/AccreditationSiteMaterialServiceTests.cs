@@ -6,6 +6,7 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.AspNetCore.Localization;
@@ -18,18 +19,18 @@
         private AccreditationSiteMaterialService _accreditationSiteMaterialService;
         private Mock<IMapper> _mockMapper;
         private Mock<IHttpContextAccessor> _mockHttpContextAccessor;
-        private Mock<IHttpSiteMaterialService> _httpSiteMaterialServiceMock;
+        private Mock<IHttpSiteMaterialService> _mockHttpSiteMaterialService;
 
         [TestInitialize]
         public void Init()
         {
             _mockMapper = new Mock<IMapper>();
             _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
-            _httpSiteMaterialServiceMock = new Mock<IHttpSiteMaterialService>();
+            _mockHttpSiteMaterialService = new Mock<IHttpSiteMaterialService>();
             _accreditationSiteMaterialService = new AccreditationSiteMaterialService(
                 _mockMapper.Object,
                 _mockHttpContextAccessor.Object,
-                _httpSiteMaterialServiceMock.Object);
+                _mockHttpSiteMaterialService.Object);
         }
 
         [TestMethod]
@@ -52,7 +53,7 @@
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _httpSiteMaterialServiceMock.Setup(x =>
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
                     id,
                     siteId,
@@ -65,7 +66,7 @@
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 s =>
                     s.GetMeterialName(
                         id,
@@ -95,7 +96,7 @@
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _httpSiteMaterialServiceMock.Setup(x =>
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
                     id,
                     siteId,
@@ -108,7 +109,7 @@
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 s =>
                     s.GetMeterialName(
                         id,
@@ -127,7 +128,7 @@
             var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var expectedWasteSource = "SomeWasteSource";
-            _httpSiteMaterialServiceMock.Setup(
+            _mockHttpSiteMaterialService.Setup(
                 x =>
                     x.GetWasteSource(
                         siteType,
@@ -165,7 +166,7 @@
             await _accreditationSiteMaterialService.UpdateWasteSource(siteType, viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 x =>
                     x.UpdateWasteSource(
                         siteType,
@@ -184,7 +185,7 @@
             var materialId = Guid.NewGuid();
             var materialOutputsDto = new MaterialOutputsDto(); // Assuming MaterialOutputsDto is defined
             var expectedViewModel = new MaterialOutputsViewModel(); // Assuming MaterialOutputsViewModel is defined
-            _httpSiteMaterialServiceMock.Setup(x => x.GetMaterialOutputs(id, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetMaterialOutputs(id, materialId))
                 .ReturnsAsync(materialOutputsDto);
             _mockMapper.Setup(x => x.Map<MaterialOutputsViewModel>(materialOutputsDto))
                 .Returns(expectedViewModel);
@@ -209,7 +210,7 @@
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(
+            _mockHttpSiteMaterialService.Verify(
                 x =>
                     x.UpdateMaterialOutputs(
                         viewModel.Id,
@@ -226,7 +227,7 @@
             var materialId = Guid.NewGuid();
             var expectedWasteLastYear = true;
 
-            _httpSiteMaterialServiceMock.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
                 .ReturnsAsync(expectedWasteLastYear);
 
             // Act
@@ -246,13 +247,13 @@
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             _mockMapper
-                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<NonWasteInputsDto>()))
+                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<ReprocessingSupportingInformationDto>()))
                 .Returns(
                     new NonWasteInputsViewModel
                     {
-                        Rows = new List<NonWasteInputsRowViewModel>
+                        Rows = new List<TypeTonnesRowViewModel>
                         {
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
@@ -277,28 +278,28 @@
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             _mockMapper
-                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<NonWasteInputsDto>()))
+                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<ReprocessingSupportingInformationDto>()))
                 .Returns(
                     new NonWasteInputsViewModel
                     {
-                        Rows = new List<NonWasteInputsRowViewModel>
+                        Rows = new List<TypeTonnesRowViewModel>
                         {
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
                             },
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
                             },
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
                             },
-                            new NonWasteInputsRowViewModel
+                            new TypeTonnesRowViewModel
                             {
                                 Type = "ABC",
                                 Tonnes = 123
@@ -318,17 +319,17 @@
         public async Task UpdateNonWasteInputs_Removes_Blank_Rows_Before_Mapping()
         {
             // Arrange
-            _mockMapper.Setup(m => m.Map<NonWasteInputsDto>(It.IsAny<NonWasteInputsViewModel>()))
-                .Returns(new NonWasteInputsDto());
+            _mockMapper.Setup(m => m.Map<ReprocessingSupportingInformationDto>(It.IsAny<NonWasteInputsViewModel>()))
+                .Returns(new ReprocessingSupportingInformationDto());
             var viewModel = new NonWasteInputsViewModel
             {
-                Rows = new List<NonWasteInputsRowViewModel>
+                Rows = new List<TypeTonnesRowViewModel>
                 {
-                    new NonWasteInputsRowViewModel { Type = "Type1", Tonnes = 10 },
-                    new NonWasteInputsRowViewModel { Type = string.Empty, Tonnes = null },
-                    new NonWasteInputsRowViewModel { Type = "Type3", Tonnes = 20 },
-                    new NonWasteInputsRowViewModel { Type = "Type4", Tonnes = 30 },
-                    new NonWasteInputsRowViewModel { Type = string.Empty, Tonnes = null },
+                    new TypeTonnesRowViewModel { Type = "Type1", Tonnes = 10 },
+                    new TypeTonnesRowViewModel { Type = string.Empty, Tonnes = null },
+                    new TypeTonnesRowViewModel { Type = "Type3", Tonnes = 20 },
+                    new TypeTonnesRowViewModel { Type = "Type4", Tonnes = 30 },
+                    new TypeTonnesRowViewModel { Type = string.Empty, Tonnes = null },
                 }
             };
 
@@ -338,7 +339,7 @@
             // Assert
             _mockMapper.Verify(
                 m =>
-                    m.Map<NonWasteInputsDto>(
+                    m.Map<ReprocessingSupportingInformationDto>(
                         It.Is<NonWasteInputsViewModel>(
                             p =>
                                 p.Rows.Count == 3 &&
@@ -348,6 +349,64 @@
                                 p.Rows[1].Tonnes == 20 &&
                                 p.Rows[2].Type == "Type4" &&
                                 p.Rows[2].Tonnes == 30)),
+                Times.Once);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public async Task UpdateProductsProduced_WithNullViewModel_ThrowsException()
+        {
+            // Arrange
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateProductsProduced(null);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public async Task UpdateProductsProduced_WithBlankRowsPresent_RemovesBlankRowsAndUpdates()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var productsProducedViewModel = new ProductsProducedViewModel
+            {
+                Id = id,
+                MaterialId = materialId,
+                Rows = new List<TypeTonnesRowViewModel>
+                {
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 10,
+                    },
+                    new TypeTonnesRowViewModel()
+                }
+            };
+            _mockMapper.Setup(m => m.Map<ReprocessingSupportingInformationDto>(It.IsAny<ProductsProducedViewModel>())).Returns(new ReprocessingSupportingInformationDto
+            {
+                Id = id,
+                MaterialId = materialId,
+            });
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateProductsProduced(productsProducedViewModel);
+
+            // Assert
+            _mockMapper.Verify(
+                m =>
+                    m.Map<ReprocessingSupportingInformationDto>(
+                        It.Is<ProductsProducedViewModel>(p =>
+                            p.Rows.Count == 1 &&
+                            p.Rows[0].Tonnes == 10)),
+                Times.Once);
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                    s.UpdateProductsProduced(
+                        It.IsAny<Guid>(),
+                        It.IsAny<Guid>(),
+                        It.IsAny<ReprocessingSupportingInformationDto>()),
                 Times.Once);
         }
     }

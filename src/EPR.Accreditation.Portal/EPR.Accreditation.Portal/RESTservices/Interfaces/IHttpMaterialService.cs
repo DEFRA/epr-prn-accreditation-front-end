@@ -2,6 +2,6 @@
 {
     public interface IHttpMaterialService
     {
-        Task<IEnumerable<Facade.Common.Dtos.Material>> GetAllMaterials();
+        Task<IEnumerable<Portal.Common.Dtos.Material>> GetAllMaterials();
     }
 }

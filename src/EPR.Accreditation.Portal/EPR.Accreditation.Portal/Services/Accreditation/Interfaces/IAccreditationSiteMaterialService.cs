@@ -1,8 +1,9 @@
-﻿using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.ViewModels;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+
     public interface IAccreditationSiteMaterialService
     {
         // available for both reprocessor and exporter
@@ -30,6 +31,14 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 
         // only reprocessor
         Task UpdateNonWasteInputs(NonWasteInputsViewModel nonWasteInputsViewModel);
+
+        // only reprocessor
+        Task<ProductsProducedViewModel> GetProductsProduced(
+            Guid id,
+            Guid materialId);
+
+        // only reprocessor
+        Task UpdateProductsProduced(ProductsProducedViewModel nonWasteInputsViewModel);
 
         // only reprocessor
         Task<MaterialOutputsViewModel> GetMaterialOutputs(
