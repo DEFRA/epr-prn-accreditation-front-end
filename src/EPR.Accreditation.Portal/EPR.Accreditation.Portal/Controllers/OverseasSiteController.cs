@@ -57,6 +57,8 @@
                 ReprocessorDetailsResources.ErrorCountry,
                 ReprocessorDetailsResources.Address))
             {
+                viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(viewModel.Id);
+
                 return View(viewModel);
             }
 
