@@ -15,7 +15,7 @@ ARG PAT=localhost
 RUN sed -i "s|</configuration>|<packageSourceCredentials><epr-packaging-common><add key=\"Username\" value=\"PAT\" /><add key=\"ClearTextPassword\" value=\"${PAT}\" /></epr-packaging-common></packageSourceCredentials></configuration>|" NuGet.Config
 
 # Restore as distinct layers
-COPY EPR.Accreditation.Portal/Directory.Build.props ./
+COPY Directory.Build.props ./
 RUN dotnet restore "EPR.Accreditation.Portal/EPR.Accreditation.Portal.csproj" --configfile "NuGet.Config"
 
 # Install NPM
