@@ -10,6 +10,9 @@
         @ReprocessorDetailsResources.PageHeading
     </h1>
     <div class="govuk-form-group">
+        <p class="govuk-error-message">
+            <span asp-validation-for="@Model.Name"></span>
+        </p>
         <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.OrgName">
             @ReprocessorDetailsResources.OrgName
         </label>
@@ -17,6 +20,9 @@
     </div>
 
     <div class="govuk-form-group">
+        <p class="govuk-error-message">
+            <span asp-validation-for="@Model.CountryId"></span>
+        </p>
         <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.SelectCountry">
             @ReprocessorDetailsResources.SelectCountry
         </label>
@@ -24,6 +30,9 @@
     </div>
 
     <div class="govuk-form-group">
+        <p class="govuk-error-message">
+            <span asp-validation-for="@Model.Address"></span>
+        </p>
         <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.Address">
             Address
         </label>

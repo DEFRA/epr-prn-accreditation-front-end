@@ -62,7 +62,7 @@
                 Name = reprocessorDetailsDto.Name,
                 Countries = countries,
                 Address = reprocessorDetailsDto.Address,
-                CountryId = reprocessorDetailsDto.CountryId
+                CountryId = reprocessorDetailsDto.CountryId.ToString()
             };
         }
 

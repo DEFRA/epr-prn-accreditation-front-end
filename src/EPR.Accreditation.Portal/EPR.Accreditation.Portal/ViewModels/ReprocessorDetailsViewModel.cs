@@ -17,7 +17,7 @@
         public IEnumerable<SelectListItem> Countries { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
-        public int CountryId { get; set; }
+        public string CountryId { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorAddress")]
         [MaxLength(500)]
