@@ -9,17 +9,37 @@
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
+    /// <summary>
+    /// This service provides the controller with a view model for the GET and updates reprocessor details for the POST
+    /// </summary>
     public class OverseasSiteService : IOverseasSiteService
     {
         private readonly IHttpOverseasSiteService _httpOverseasSiteService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OverseasSiteService"/> class.
+        /// Constructor for OverseasSiteService
+        /// </summary>
+        /// <param name="httpOverseasSiteService">httpOverseasSiteService object</param>
+        /// <param name="mapper">An instance of the mapper</param>
+        public OverseasSiteService(IHttpOverseasSiteService httpOverseasSiteService, IMapper mapper)
+        {
+            _httpOverseasSiteService = httpOverseasSiteService;
+            _mapper = mapper;
+        }
+
+        /// <summary>
+        /// GET request to retrive the view model to drive the view
+        /// </summary>
+        /// <param name="id">This is the ID of the accreditation</param>
+        /// <param name="overseasSiteId">This is the overseas reprocessing site ID</param>
+        /// <returns>Returns the view model asynchronously</returns>
         public async Task<ReprocessorDetailsViewModel> GetReprocessorDetailsViewModel(
             Guid id,
             Guid overseasSiteId)
         {
-            //var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
-
+            // var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
             return new ReprocessorDetailsViewModel
             {
                 Id = id,
@@ -37,6 +57,11 @@
             };
         }
 
+        /// <summary>
+        /// POST method to update the reprocessor details based on the submitted forms view model
+        /// </summary>
+        /// <param name="reprocessorDetailsViewModel">The view model that comes from the form</param>
+        /// <returns>>An Ok result</returns>
         public async Task UpdateReprocessorDetails(ReprocessorDetailsViewModel reprocessorDetailsViewModel)
         {
             var reprocessorDetailsDto = _mapper.Map<DTOs.OverseasSite.ReprocessorDetailsDto>(reprocessorDetailsViewModel);
