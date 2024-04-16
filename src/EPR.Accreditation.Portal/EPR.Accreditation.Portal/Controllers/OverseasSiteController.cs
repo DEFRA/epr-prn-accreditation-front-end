@@ -8,7 +8,7 @@
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("Accreditation/{id}/[controller]/{siteId}")]
+    [Route("Accreditation/{id}/[controller]/{overseasSiteId}")]
     public class OverseasSiteController : Controller
     {
         private readonly IOverseasSiteService _overseasSiteService;
@@ -32,7 +32,9 @@
         }
 
         [HttpGet("ReprocessorDetails")]
-        public async Task<IActionResult> ReprocessorDetails(Guid? id)
+        public async Task<IActionResult> ReprocessorDetails(
+            Guid? id,
+            Guid? overseasSiteId)
         {
             _backPageViewModel.Url = _urlHelper.ActionLink("AddOverseasReprocessingSites", "OverseasSite");
 
@@ -41,7 +43,9 @@
                 return NotFound();
             }
 
-            var viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(id.Value);
+            var viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(
+                id.Value,
+                overseasSiteId.Value);
 
             return View(viewModel);
         }
@@ -57,12 +61,14 @@
                 ReprocessorDetailsResources.ErrorCountry,
                 ReprocessorDetailsResources.Address))
             {
-                viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(viewModel.Id);
+                viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(
+                    viewModel.Id,
+                    viewModel.OverseasSiteId);
 
                 return View(viewModel);
             }
 
-            //await _overseasSiteService.UpdateReprocessorDetails(viewModel);
+            await _overseasSiteService.UpdateReprocessorDetails(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue)
             {

@@ -1,20 +1,12 @@
-﻿namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.Portal.DTOs.OverseasSite
 {
-    using System.ComponentModel.DataAnnotations;
     using EPR.Accreditation.Portal.Resources;
-    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.ComponentModel.DataAnnotations;
 
-    public class ReprocessorDetailsViewModel
+    public class ReprocessorDetailsDto
     {
-        public Guid Id { get; set; }
-
-        public Guid OverseasSiteId { get; set; }
-
-        [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorOrgName")]
         [MaxLength(100)]
         public string OrganisationName { get; set; }
-
-        public IEnumerable<SelectListItem> Countries { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
         public string SelectedCountry { get; set; }

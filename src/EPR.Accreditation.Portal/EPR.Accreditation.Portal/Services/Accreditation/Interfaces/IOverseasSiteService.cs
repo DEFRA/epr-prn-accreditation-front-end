@@ -4,7 +4,9 @@
 
     public interface IOverseasSiteService
     {
-        Task<ReprocessorDetailsViewModel> GetReprocessorDetailsViewModel(Guid id);
+        Task<ReprocessorDetailsViewModel> GetReprocessorDetailsViewModel(
+            Guid id,
+            Guid overseasSiteId);
 
         Task UpdateReprocessorDetails(ReprocessorDetailsViewModel reprocessorDetailsViewModel);
     }

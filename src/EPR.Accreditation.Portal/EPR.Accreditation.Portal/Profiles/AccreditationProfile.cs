@@ -3,6 +3,7 @@
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.OverseasSite;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -14,6 +15,7 @@
             this.CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             this.CreateMap<PermitExemptionViewModel, PermitExemption>();
             this.CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
+            this.CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             this.CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
 

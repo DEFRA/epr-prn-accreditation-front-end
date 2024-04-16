@@ -85,9 +85,15 @@
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation"
-                    )
-            );
+                        "Accreditation"));
+
+            services
+                .AddScoped<IHttpOverseasSiteService>(s =>
+                    new HttpOverseasSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"));
 
             var mapperConfig = new MapperConfiguration(mc =>
             {

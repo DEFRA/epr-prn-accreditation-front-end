@@ -1,17 +1,24 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using System;
+    using System.Threading.Tasks;
+    using AutoMapper;
     using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using System;
-    using System.Threading.Tasks;
 
     public class OverseasSiteService : IOverseasSiteService
     {
-        public async Task<ReprocessorDetailsViewModel> GetReprocessorDetailsViewModel(Guid id)
+        private readonly IHttpOverseasSiteService _httpOverseasSiteService;
+        private readonly IMapper _mapper;
+
+        public async Task<ReprocessorDetailsViewModel> GetReprocessorDetailsViewModel(
+            Guid id,
+            Guid overseasSiteId)
         {
-            //var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id);
+            //var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
 
             return new ReprocessorDetailsViewModel
             {
@@ -30,9 +37,14 @@
             };
         }
 
-        public Task UpdateReprocessorDetails(ReprocessorDetailsViewModel reprocessorDetailsViewModel)
+        public async Task UpdateReprocessorDetails(ReprocessorDetailsViewModel reprocessorDetailsViewModel)
         {
-            throw new NotImplementedException();
+            var reprocessorDetailsDto = _mapper.Map<DTOs.OverseasSite.ReprocessorDetailsDto>(reprocessorDetailsViewModel);
+
+            await _httpOverseasSiteService.UpdateReprocessorDetails(
+                reprocessorDetailsViewModel.Id,
+                reprocessorDetailsViewModel.OverseasSiteId,
+                reprocessorDetailsDto);
         }
     }
 }
