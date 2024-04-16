@@ -291,8 +291,8 @@
             return NotFound();
         }
 
-        [HttpGet]
-        [ActionName("/PrnTonnesPlanned")]
+        [HttpGet("PrnTonnesPlanned")]
+        [Route("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(Guid? id)
         {
             if (!id.HasValue)
@@ -305,7 +305,7 @@
         }
 
         [HttpPost]
-        [ActionName("/PrnTonnesPlanned")]
+        [Route("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -315,10 +315,11 @@
 
             await _accreditationService.UpdatePrnTonnesPlanned(vm);
 
-            return RedirectToAction("Declaration");
+            return RedirectToAction("Declaration", new { id = vm.ExternalId });
         }
 
         [HttpGet("Declaration")]
+        [Route("Declaration")]
         public async Task<IActionResult> Declaration(
             Guid? id)
         {
