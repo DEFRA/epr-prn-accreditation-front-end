@@ -72,7 +72,7 @@
                             VerifyExemptionReferencesMatchViewModel(
                                 references,
                                 viewModel))),
-                                Times.Once);
+                    Times.Once);
         }
 
         private bool VerifyExemptionReferencesMatchViewModel(
