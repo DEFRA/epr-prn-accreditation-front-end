@@ -4,8 +4,10 @@
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
@@ -646,7 +648,7 @@
             // Arrange
             var viewModel = new NonWasteInputsViewModel
             {
-                Rows = new List<NonWasteInputsRowViewModel>(),
+                Rows = new List<TypeTonnesRowViewModel>(),
                 WasteLastYear = true
             };
             var saveButton = SaveButton.AddRow;
@@ -657,6 +659,302 @@
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(1, ((NonWasteInputsViewModel)result.Model).RowsToAdd);
+        }
+
+        [TestMethod]
+        public async Task ProductsProduced_ReturnsNotFound_WhenNullIdsPassed()
+        {
+            // Arrange
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(null, null) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductsProduced_ReturnsLastYearView_WhenWasteLastYearProduced()
+        {
+            // Arrange
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetProductsProduced(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>())).ReturnsAsync(new ProductsProducedViewModel
+                    {
+                        WasteLastYear = true
+                    });
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                Guid.NewGuid(),
+                Guid.NewGuid()) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ViewName == "ProductsProducedLastYear");
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductsProduced_ReturnsEstimatedView_WhenWasteLastYearNotProduced()
+        {
+            // Arrange
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetProductsProduced(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>())).ReturnsAsync(new ProductsProducedViewModel
+                    {
+                        WasteLastYear = false
+                    });
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                Guid.NewGuid(),
+                Guid.NewGuid()) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ViewName == "ProductsProducedEstimated");
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductsProduced_ReturnsNotFound_WhenWasteLastYearNotPresent()
+        {
+            // Arrange
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetProductsProduced(
+                    It.IsAny<Guid>(),
+                    It.IsAny<Guid>())).ReturnsAsync(new ProductsProducedViewModel
+                    {
+                        WasteLastYear = null
+                    });
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                Guid.NewGuid(),
+                Guid.NewGuid()) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductProduced_AddsNewRow_WhenAddRowButtonAndRowsToDisplayIsLessThanMax()
+        {
+            // Arrange
+            var viewModel = new ProductsProducedViewModel
+            {
+                WasteLastYear = false,
+                RowsToAdd = 0,
+                Rows = new List<TypeTonnesRowViewModel>
+                {
+                    new TypeTonnesRowViewModel(),
+                    new TypeTonnesRowViewModel(),
+                    new TypeTonnesRowViewModel(),
+                }
+            };
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                viewModel,
+                SaveButton.AddRow) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            var model = result.Model as ProductsProducedViewModel;
+            Assert.IsNotNull(model);
+            Assert.IsTrue(model.RowsToAdd == 1);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductProduced_DoesNotAddNewRow_WhenAddRowButtonAndRowsToDisplayIsAtMax()
+        {
+            // Arrange
+            var config = new AppSettingsConfigOptions
+            {
+                MaximumMultiLineRecordNumber = 5,
+            };
+
+            _mockAppSettingsConfiguration
+                .Setup(o => o.Value)
+                .Returns(config);
+
+            _siteMaterialController = new SiteMaterialController(
+                _mockContextAccessor.Object,
+                _mockUrlHelper.Object,
+                _mockAccreditationSiteMaterialService.Object,
+                _mockSaveAndComeBackService.Object,
+                _mockAppSettingsConfiguration.Object,
+                _backPageViewModel);
+
+            var viewModel = new ProductsProducedViewModel
+            {
+                WasteLastYear = true,
+                RowsToAdd = 0,
+                Rows = new List<TypeTonnesRowViewModel>
+                {
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 1
+                    },
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 1
+                    },
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 1
+                    },
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 1
+                    },
+                    new TypeTonnesRowViewModel
+                    {
+                        Type = "A",
+                        Tonnes = 1
+                    }
+                }
+            };
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                viewModel,
+                SaveButton.AddRow) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            var model = result.Model as ProductsProducedViewModel;
+            Assert.IsNotNull(model);
+            Assert.IsTrue(model.RowsToAdd == 0);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductProduced_ReturnsLastYearView_WhenValidationErrorsOccur()
+        {
+            // Arrange
+            var viewModel = new ProductsProducedViewModel
+            {
+                WasteLastYear = true
+            };
+
+            _siteMaterialController.ModelState.AddModelError("Error", "Error");
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                viewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ViewName == "ProductsProducedLastYear");
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductProduced_ReturnsEstimatedView_WhenValidationErrorsOccur()
+        {
+            // Arrange
+            var viewModel = new ProductsProducedViewModel
+            {
+                WasteLastYear = false
+            };
+
+            _siteMaterialController.ModelState.AddModelError("Error", "Error");
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                viewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ViewName == "ProductsProducedEstimated");
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task ProductsProduced_ReturnsApplicationSavedView_WhenSaveAndComeBackLater()
+        {
+            // Arrange
+            var accreditationId = Guid.NewGuid();
+            var viewModel = new ProductsProducedViewModel
+            {
+                Id = accreditationId,
+                WasteLastYear = false
+            };
+
+            var defaultContext = new DefaultHttpContext();
+            _mockContextAccessor.Setup(c => c.HttpContext).Returns(defaultContext);
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                viewModel,
+                SaveButton.SaveAndComeBack) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ViewName == "_ApplicationSaved");
+            _mockAccreditationSiteMaterialService.Verify(
+                s =>
+                    s.UpdateProductsProduced(
+                        It.IsAny<ProductsProducedViewModel>()),
+                Times.Once);
+            _mockSaveAndComeBackService.Verify(
+                s =>
+                    s.AddSaveAndComeBack(
+                        It.Is<Guid>(p => p == accreditationId),
+                        It.IsAny<RouteValueDictionary>()),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task ProductsProduced_ReturnsRedirectResult_WhenSaveAndContinue()
+        {
+            // Arrange
+            var accreditationId = Guid.NewGuid();
+            var viewModel = new ProductsProducedViewModel
+            {
+                Id = accreditationId,
+                WasteLastYear = false
+            };
+
+            var defaultContext = new DefaultHttpContext();
+            _mockContextAccessor.Setup(c => c.HttpContext).Returns(defaultContext);
+
+            // Act
+            var result = await _siteMaterialController.ProductsProduced(
+                viewModel,
+                SaveButton.SaveAndContinue) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.RouteName == "Authority");
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Once);
+            _mockSaveAndComeBackService.Verify(
+                s =>
+                    s.AddSaveAndComeBack(
+                        It.IsAny<Guid>(),
+                        It.IsAny<RouteValueDictionary>()),
+                Times.Never);
         }
     }
 }

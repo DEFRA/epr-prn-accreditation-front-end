@@ -5,9 +5,9 @@
     using EPR.Accreditation.Portal.ViewModels.Interfaces;
 
     /// <summary>
-    /// View model to represent a row of data.
+    /// View model to represent a row of data for Type and Tonnes
     /// </summary>
-    public class NonWasteInputsRowViewModel : IEntryMade
+    public class TypeTonnesRowViewModel : IEntryMade
     {
         /// <summary>
         /// Gets or sets the Type value for the current row.
