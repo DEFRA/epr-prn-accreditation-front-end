@@ -1,11 +1,20 @@
-﻿using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.ViewModels;
-using System.ComponentModel.DataAnnotations;
-
-namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
+﻿namespace EPR.Accreditation.Portal.CustomValidations.ExemptionReferences
 {
+    using System.ComponentModel.DataAnnotations;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.ViewModels;
+
+    /// <summary>
+    /// Custom validation to check if each reference number entered is unique
+    /// </summary>
     public class UniqueReferenceNumberAttribute : ValidationAttribute
     {
+        /// <summary>
+        /// Checking if the model state is valid according to the below condition
+        /// </summary>
+        /// <param name="value">Value data being passed</param>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Success or Fail</returns>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var viewModel = (ExemptionReferencesViewModel)validationContext.ObjectInstance;
