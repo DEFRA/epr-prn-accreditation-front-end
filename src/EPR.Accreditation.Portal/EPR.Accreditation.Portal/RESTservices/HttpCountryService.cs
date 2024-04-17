@@ -17,7 +17,7 @@
 
         public async Task<IEnumerable<Country>> GetCountryList()
         {
-            return await Get<IEnumerable<Country>>("", false);
+            return await Get<IEnumerable<Country>>(string.Empty, false);
         }
     }
 }
