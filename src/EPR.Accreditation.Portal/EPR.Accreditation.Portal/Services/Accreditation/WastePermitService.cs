@@ -7,16 +7,13 @@
 
     public class WastePermitService : IWastePermitService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpWastePermitService _httpWastePermitService;
         private readonly IMapper _mapper;
 
         public WastePermitService(
-            IHttpContextAccessor httpContextAccessor,
             IHttpWastePermitService httpWastePermitService,
             IMapper mapper)
         {
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpWastePermitService = httpWastePermitService ?? throw new ArgumentNullException(nameof(httpWastePermitService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }

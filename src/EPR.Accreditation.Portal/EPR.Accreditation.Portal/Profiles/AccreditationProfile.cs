@@ -8,6 +8,9 @@
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 
+    /// <summary>
+    /// Class to describe mappings of view models and DTOs
+    /// </summary>
     public class AccreditationProfile : Profile
     {
         /// <summary>

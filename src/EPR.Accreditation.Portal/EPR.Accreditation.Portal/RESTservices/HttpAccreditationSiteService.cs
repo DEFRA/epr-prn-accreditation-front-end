@@ -11,10 +11,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpAccreditationSiteService"/> class.
         /// </summary>
-        /// <param name="httpContextAccessor"></param>
-        /// <param name="httpClientFactory"></param>
-        /// <param name="baseUrl"></param>
-        /// <param name="endPointName"></param>
+        /// <param name="httpContextAccessor">Injecting the context accessor</param>
+        /// <param name="httpClientFactory">Injecting the client factory</param>
+        /// <param name="baseUrl">Declaring base URL</param>
+        /// <param name="endPointName">Declaring the endpoint name</param>
         public HttpAccreditationSiteService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
@@ -24,11 +24,22 @@
         {
         }
 
+        /// <summary>
+        /// Gets a list of Exemption references from the Facade
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>The list of references</returns>
         public async Task<IEnumerable<string>> GetExemptionReferences(Guid id)
         {
             return await Get<IEnumerable<string>>($"{id}/Site/ExemptionReferences");
         }
 
+        /// <summary>
+        /// Updates the list of exemption references and passes to the Facade
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="exemptionReferences">The list of updated references</param>
+        /// <returns>Completed Task asynchronously</returns>
         public async Task UpdateExemptionReferences(
             Guid id,
             IEnumerable<string> exemptionReferences)

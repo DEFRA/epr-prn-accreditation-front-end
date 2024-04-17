@@ -8,6 +8,9 @@
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// Controller for the overseas site
+    /// </summary>
     [Route("Accreditation/{id}/[controller]/{overseasSiteId}")]
     public class OverseasSiteController : Controller
     {
@@ -17,6 +20,15 @@
         private readonly IUrlHelperWrapper _urlHelper;
         private readonly BackPageViewModel _backPageViewModel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OverseasSiteController"/> class.
+        /// </summary>
+        /// <param name="overseasSiteService">Dependency injection for the overseas site service</param>
+        /// <param name="saveAndComeBackService">Dependency injection for the save and come back service</param>
+        /// <param name="httpContextAccessor">Dependency injection for the context accessor</param>
+        /// <param name="urlHelper">Dependency injection for the URL helper</param>
+        /// <param name="backPageViewModel">Dependency injection for the back link view model</param>
+        /// <exception cref="ArgumentNullException">Checks if any are null</exception>
         public OverseasSiteController(
             IOverseasSiteService overseasSiteService,
             ISaveAndComeBackService saveAndComeBackService,
@@ -31,6 +43,12 @@
             _backPageViewModel = backPageViewModel;
         }
 
+        /// <summary>
+        /// Gets the reprocesesor details view
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="overseasSiteId">Overseas site ID</param>
+        /// <returns>The view result</returns>
         [HttpGet("ReprocessorDetails")]
         public async Task<IActionResult> ReprocessorDetails(
             Guid? id,
@@ -50,6 +68,12 @@
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Submits the reprocessor details
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <param name="saveButton">Enum of the save button</param>
+        /// <returns>Task completed asynchronously</returns>
         [HttpPost("ReprocessorDetails")]
         public async Task<IActionResult> ReprocessorDetails(
             ReprocessorDetailsViewModel viewModel,
