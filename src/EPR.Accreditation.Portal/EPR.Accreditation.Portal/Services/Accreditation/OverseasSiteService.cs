@@ -47,11 +47,9 @@
         {
             var reprocessorDetailsDto = await _httpOverseasSiteService.GetReprocessorDetails(id, overseasSiteId);
 
-            var listOfCountries = await _httpCountryService.GetCountryList();
-
             var countries = new List<SelectListItem> { new() { Value = string.Empty, Text = ReprocessorDetailsResources.DefaultOption } };
 
-            foreach (var country in listOfCountries)
+            foreach (var country in reprocessorDetailsDto.CountryList)
             {
                 countries.Add(new() { Value = country.CountryId.ToString(), Text = country.Name });
             }

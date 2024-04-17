@@ -39,16 +39,15 @@
             {
                 Name = "Reprocessor Name",
                 Address = "Reprocessor Address",
-                CountryId = 1
-            };
-            var listOfCountries = new List<Country>
-            {
-                new Country { CountryId = 1, Name = "Country 1" },
-                new Country { CountryId = 2, Name = "Country 2" }
+                CountryId = 1,
+                CountryList = new List<Country>
+                {
+                    new Country { CountryId = 1, Name = "Country 1" },
+                    new Country { CountryId = 2, Name = "Country 2" }
+                }
             };
 
             _mockHttpOverseasSiteService.Setup(s => s.GetReprocessorDetails(id, overseasSiteId)).ReturnsAsync(reprocessorDetailsDto);
-            _mockHttpCountryService.Setup(s => s.GetCountryList()).ReturnsAsync(listOfCountries);
 
             // Act
             var viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(id, overseasSiteId);
@@ -62,7 +61,6 @@
             Assert.AreEqual(3, viewModel.Countries.Count());
 
             _mockHttpOverseasSiteService.Verify(s => s.GetReprocessorDetails(id, overseasSiteId), Times.Once());
-            _mockHttpCountryService.Verify(s => s.GetCountryList(), Times.Once());
         }
 
         [TestMethod]

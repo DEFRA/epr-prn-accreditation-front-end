@@ -56,7 +56,8 @@
         {
             _backPageViewModel.Url = _urlHelper.ActionLink("AddOverseasReprocessingSites", "OverseasSite");
 
-            if (id == null)
+            if (id == null ||
+                overseasSiteId == null)
             {
                 return NotFound();
             }

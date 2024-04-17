@@ -21,6 +21,11 @@
         public int CountryId { get; set; }
 
         /// <summary>
+        /// Gets or sets the list of countries
+        /// </summary>
+        public IEnumerable<DTOs.Country.Country> CountryList { get; set; }
+
+        /// <summary>
         /// Gets or sets the address
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorAddress")]
