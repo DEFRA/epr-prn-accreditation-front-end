@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Facade.Common.Dtos
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
     using System.ComponentModel.DataAnnotations;
 
     public class Accreditation

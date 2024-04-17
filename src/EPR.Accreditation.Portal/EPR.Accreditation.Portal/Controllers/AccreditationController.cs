@@ -133,8 +133,7 @@
             }
         }
 
-        [HttpGet]
-        [ActionName("OperatorType")]
+        [HttpGet("OperatorType")]
         public async Task<IActionResult> OperatorType(Guid? id)
         {
             if (id.HasValue)
@@ -147,8 +146,7 @@
             return View(new OperatorTypeViewModel());
         }
 
-        [HttpPost]
-        [ActionName("OperatorType")]
+        [HttpPost("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
         {
             if (!ModelState.IsValid)

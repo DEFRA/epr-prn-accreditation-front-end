@@ -1,6 +1,7 @@
 ﻿namespace EPR.Accreditation.UnitTests.Services
 {
     using AutoMapper;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
