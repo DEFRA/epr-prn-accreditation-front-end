@@ -230,6 +230,38 @@
                 materialOutputsDto);
         }
 
+        /// <summary>
+        /// Gets material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>Material waste output dto.</returns>
+        public async Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(
+            Guid id,
+            Guid materialId)
+        {
+            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+                id,
+                materialId);
+
+            return this._mapper.Map<MaterialWasteOutputsViewModel>(materialWasteOutputsDto);
+        }
+
+        /// <summary>
+        /// Updates material waste output.
+        /// </summary>
+        /// <param name="materialOutputsViewModel">Material waste output dto.</param>
+        /// <returns>Nothing.</returns>
+        public async Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialOutputsViewModel)
+        {
+            var materialWasteOutputsDto = this._mapper.Map<MaterialWasteOutputsDto>(materialOutputsViewModel);
+
+            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
+                materialOutputsViewModel.Id,
+                materialOutputsViewModel.MaterialId,
+                materialWasteOutputsDto);
+        }
+
         public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(
             Guid id,
             Guid materialId)
