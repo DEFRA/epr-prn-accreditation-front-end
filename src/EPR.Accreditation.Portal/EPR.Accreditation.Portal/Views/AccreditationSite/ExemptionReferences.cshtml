@@ -1,0 +1,67 @@
+﻿@model ExemptionReferencesViewModel
+
+@{
+    ViewData["Title"] = ExemptionReferencesResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+<form method="post">
+    <h1 class="govuk-heading-l">@ExemptionReferencesResources.PageHeading</h1>
+    <p class="govuk-body">@ExemptionReferencesResources.P1</p>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="Reference1"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="Reference1">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="Reference2"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="Reference2">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="Reference3"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="Reference3">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="Reference4"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="Reference4">
+            </div>
+        </div>
+    </div>
+
+    <p class="govuk-error-message">
+        <span asp-validation-for="Reference5"></span>
+    </p>
+    <div class="govuk-form-group">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <input class="govuk-input govuk-input--width-30" type="text" asp-for="Reference5">
+            </div>
+        </div>
+    </div>
+    <partial name="_SaveButtons" />
+</form>

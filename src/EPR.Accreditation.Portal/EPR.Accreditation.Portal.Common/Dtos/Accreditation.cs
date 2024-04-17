@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EPR.Accreditation.Facade.Common.Dtos
+﻿namespace EPR.Accreditation.Facade.Common.Dtos
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Accreditation
     {
         public Guid? ExternalId { get; set; } // This has a unique key added via the dbcontext
-        
+
         public Enums.OperatorType OperatorTypeId { get; set; }
 
         [MaxLength(12)]

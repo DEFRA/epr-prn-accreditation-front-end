@@ -1,9 +1,9 @@
-﻿using EPR.Accreditation.Portal.Constants;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using Microsoft.AspNetCore.Localization;
-
-namespace EPR.Accreditation.Portal.Helpers
+﻿namespace EPR.Accreditation.Portal.Helpers
 {
+    using EPR.Accreditation.Portal.Constants;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using Microsoft.AspNetCore.Localization;
+
     public class CultureHelper : ICultureHelper
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -12,6 +12,7 @@ namespace EPR.Accreditation.Portal.Helpers
         {
                 _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
+
         public string GetCultureInfo()
         {
             var requestCultureInfo = _httpContextAccessor.HttpContext.Features.Get<IRequestCultureFeature>()?.RequestCulture?.Culture;

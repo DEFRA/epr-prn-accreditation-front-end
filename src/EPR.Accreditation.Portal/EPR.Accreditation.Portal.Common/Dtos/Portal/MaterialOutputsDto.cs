@@ -7,7 +7,7 @@
         public decimal? TonnesNotProcessedOnSite { get; set; }
 
         public decimal? TonnesContaminents { get; set; }
-        
+
         public decimal? TonnesProcessLoss { get; set; }
     }
 }

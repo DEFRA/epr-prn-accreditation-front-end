@@ -57,6 +57,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\ExemptionReferencesResources.Designer.cs">
+      <DependentUpon>ExemptionReferencesResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+	<Compile Update="Resources\ExemptionReferencesResources.cy-GB.Designer.cs">
+		<DependentUpon>ExemptionReferencesResources.cy-GB.resx</DependentUpon>
+		<DesignTime>True</DesignTime>
+		<AutoGen>True</AutoGen>
+	</Compile>
     <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -167,6 +177,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.resx">
       <LastGenOutput>TaskListSiteResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ExemptionReferencesResources.resx">
+      <LastGenOutput>ExemptionReferencesResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListResources.cy-GB.resx">

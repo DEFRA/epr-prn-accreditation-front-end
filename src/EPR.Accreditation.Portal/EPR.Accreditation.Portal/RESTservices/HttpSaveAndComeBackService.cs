@@ -1,25 +1,35 @@
-﻿using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-
-namespace EPR.Accreditation.Portal.RESTservices
+﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Facade.Common.RESTservices;
+    using EPR.Accreditation.Portal.DTOs.SaveAndComeBack;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+
     public class HttpSaveAndComeBackService : BaseHttpService, IHttpSaveAndComeBackService
     {
         public HttpSaveAndComeBackService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
             string baseUrl,
-            string endPointName) : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
+            string endPointName)
+            : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }
 
-        public async Task AddSaveAndComeBack(Guid accreditationExternalId, SaveAndComeBack saveAndComeBack)
+        public async Task AddSaveAndComeBack(
+            Guid accreditationExternalId,
+            SaveAndComeBack saveAndBack)
         {
-            await Post($"{accreditationExternalId}", saveAndComeBack);
+            await Post($"{accreditationExternalId}", saveAndBack);
         }
-        public Task<SaveAndComeBack> GetSaveAndComeBack(Guid accreditationExternalId)
+
+        public async Task DeleteSaveAndComeBack(Guid accreditationExternalId)
         {
-            throw new NotImplementedException();
+            await Delete($"{accreditationExternalId}");
+        }
+
+        public async Task<SaveAndComeBack> GetSaveAndComeBack(Guid accreditationExternalId)
+        {
+            return await Get<SaveAndComeBack>($"{accreditationExternalId}");
         }
     }
 }

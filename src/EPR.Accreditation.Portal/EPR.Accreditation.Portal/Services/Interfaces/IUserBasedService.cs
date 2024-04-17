@@ -2,6 +2,6 @@
 {
     public interface IUserBasedService
     {
-        //Task<HomePageViewModel> GetHomePage();
+        // Task<HomePageViewModel> GetHomePage();
     }
 }

@@ -14,15 +14,17 @@
     public abstract class BaseSiteController : Controller
     {
         // overriden in inheriting classes
-        protected string SiteChooseMaterialRouteName;
-        protected string SiteProcessingCapacityRouteName;
-        protected string SiteProductsProducedRouteName;
-        protected string SiteNonWasteInputsRouteName;
+#pragma warning disable SA1401 // FieldsMustBePrivate
         protected readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly IUrlHelperWrapper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
+        protected string _siteChooseMaterialRouteName;
+        protected string _siteProcessingCapacityRouteName;
+        protected string _siteProductsProducedRouteName;
+        protected string _siteNonWasteInputsRouteName;
+#pragma warning restore SA1401 // FieldsMustBePrivate
         private SiteType _siteType;
 
         /// <summary>
@@ -91,7 +93,7 @@
 
             if (saveButton == SaveButton.SaveAndComeBack)
             {
-                PopulateBackModel(SiteChooseMaterialRouteName);
+                PopulateBackModel(_siteChooseMaterialRouteName);
 
                 // this is all the data we require to save for come back later
                 await _saveAndComeBackService.AddSaveAndComeBack(
@@ -101,7 +103,8 @@
             }
             else
             {
-                return RedirectToRoute(SiteProcessingCapacityRouteName,
+                return RedirectToRoute(
+                    _siteProcessingCapacityRouteName,
                     new
                     {
                         viewModel.Id,
