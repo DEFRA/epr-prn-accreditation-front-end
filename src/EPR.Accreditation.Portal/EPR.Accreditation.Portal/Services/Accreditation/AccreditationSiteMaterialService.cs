@@ -7,6 +7,7 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Localization;
     using static EPR.Accreditation.Portal.Constants.Strings;
 
@@ -99,7 +100,9 @@
         /// <param name="id">Accreditation Id</param>
         /// <param name="materialId">Material Id</param>
         /// <returns>The view model for non waste inputs</returns>
-        public async Task<NonWasteInputsViewModel> GetNonWasteInputs(Guid id, Guid materialId)
+        public async Task<NonWasteInputsViewModel> GetNonWasteInputs(
+            Guid id,
+            Guid materialId)
         {
             var nonWasteInputsDto = await _httpSiteMaterialService.GetNonWasteInputs(
                 id,
@@ -112,7 +115,7 @@
             {
                 for (var i = viewModel.Rows.Count; i < GenericConstants.MinimumMultiLineRecordNumber; i++)
                 {
-                    viewModel.Rows.Add(new NonWasteInputsRowViewModel());
+                    viewModel.Rows.Add(new TypeTonnesRowViewModel());
                 }
             }
 
@@ -137,9 +140,69 @@
                     .ToList();
             }
 
-            var nonWasteInputsDto = _mapper.Map<NonWasteInputsDto>(nonWasteInputsViewModel);
+            var nonWasteInputsDto = _mapper.Map<ReprocessingSupportingInformationDto>(nonWasteInputsViewModel);
 
             await _httpSiteMaterialService.UpdateNonWasteInputs(
+                nonWasteInputsDto.Id,
+                nonWasteInputsDto.MaterialId,
+                nonWasteInputsDto);
+        }
+
+        /// <summary>
+        /// Gets the products produced and performs any necessary manipulation before
+        /// returning it to the controller
+        /// </summary>
+        /// <param name="id">Accreditation Id</param>
+        /// <param name="materialId">Material Id</param>
+        /// <returns>The view model for products produced</returns>
+        public async Task<ProductsProducedViewModel> GetProductsProduced(
+            Guid id,
+            Guid materialId)
+        {
+            var productsProducedDto = await _httpSiteMaterialService.GetProductsProduced(
+                id,
+                materialId);
+
+            var viewModel = _mapper.Map<ProductsProducedViewModel>(productsProducedDto);
+
+            if (viewModel != null &&
+                viewModel.Rows?.Count <= GenericConstants.MinimumMultiLineRecordNumber)
+            {
+                for (var i = viewModel.Rows.Count; i < GenericConstants.MinimumMultiLineRecordNumber; i++)
+                {
+                    viewModel.Rows.Add(new TypeTonnesRowViewModel());
+                }
+            }
+
+            return viewModel;
+        }
+
+        /// <summary>
+        /// Performs any necessary logic on the products produced, then requests
+        /// the data is sent to be saved
+        /// </summary>
+        /// <param name="productsProducedViewModel">View model from the view to be converted into a DTO</param>
+        /// <returns>Nothing (async Task)</returns>
+        public async Task UpdateProductsProduced(ProductsProducedViewModel productsProducedViewModel)
+        {
+            if (productsProducedViewModel == null)
+            {
+                throw new NullReferenceException(nameof(productsProducedViewModel));
+            }
+
+            if (productsProducedViewModel.Rows != null &&
+                productsProducedViewModel.Rows.Any())
+            {
+                // remove blank rows
+                productsProducedViewModel.Rows = productsProducedViewModel
+                    .Rows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Type) && r.Tonnes != null)
+                    .ToList();
+            }
+
+            var nonWasteInputsDto = _mapper.Map<ReprocessingSupportingInformationDto>(productsProducedViewModel);
+
+            await _httpSiteMaterialService.UpdateProductsProduced(
                 nonWasteInputsDto.Id,
                 nonWasteInputsDto.MaterialId,
                 nonWasteInputsDto);
@@ -165,6 +228,38 @@
                 materialOutputsViewModel.Id,
                 materialOutputsViewModel.MaterialId,
                 materialOutputsDto);
+        }
+
+        /// <summary>
+        /// Gets material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>Material waste output dto.</returns>
+        public async Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(
+            Guid id,
+            Guid materialId)
+        {
+            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+                id,
+                materialId);
+
+            return this._mapper.Map<MaterialWasteOutputsViewModel>(materialWasteOutputsDto);
+        }
+
+        /// <summary>
+        /// Updates material waste output.
+        /// </summary>
+        /// <param name="materialOutputsViewModel">Material waste output dto.</param>
+        /// <returns>Nothing.</returns>
+        public async Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialOutputsViewModel)
+        {
+            var materialWasteOutputsDto = this._mapper.Map<MaterialWasteOutputsDto>(materialOutputsViewModel);
+
+            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
+                materialOutputsViewModel.Id,
+                materialOutputsViewModel.MaterialId,
+                materialWasteOutputsDto);
         }
 
         public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(

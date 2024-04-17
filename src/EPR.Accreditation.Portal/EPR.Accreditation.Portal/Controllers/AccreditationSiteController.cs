@@ -21,8 +21,7 @@ namespace EPR.Accreditation.Portal.Controllers
             IAccreditationSiteService accreditationSiteService,
             ISaveAndComeBackService saveAndComeBackService,
             IHttpContextAccessor httpContextAccessor,
-            BackPageViewModel backPageViewModel
-            )
+            BackPageViewModel backPageViewModel)
         {
             _accreditationSiteService = accreditationSiteService ?? throw new ArgumentNullException(nameof(accreditationSiteService));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
@@ -36,7 +35,9 @@ namespace EPR.Accreditation.Portal.Controllers
             _backPageViewModel.Url = $"/Accreditation/{id}/PermitExemption";
 
             if (id == null)
+            {
                 return NotFound();
+            }
 
             var viewModel = await _accreditationSiteService.GetExemptionReferencesViewModel(id.Value);
 
@@ -57,7 +58,9 @@ namespace EPR.Accreditation.Portal.Controllers
             await _accreditationSiteService.UpdateExemptionReferences(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue)
+            {
                 return RedirectToAction("HowManyTonnes", "Accreditation");
+            }
 
             // this is all the data we require to save for come back later
             await _saveAndComeBackService.AddSaveAndComeBack(

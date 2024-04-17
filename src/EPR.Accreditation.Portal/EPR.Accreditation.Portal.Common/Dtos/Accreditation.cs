@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Dtos
+﻿namespace EPR.Accreditation.Portal.Common.Dtos
 {
     using EPR.Accreditation.Facade.Common.Dtos;
     using System.ComponentModel.DataAnnotations;

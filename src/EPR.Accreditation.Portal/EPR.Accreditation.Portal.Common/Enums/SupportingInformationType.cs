@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Enums
+﻿namespace EPR.Accreditation.Portal.Common.Enums
 {
     // This enum is only required for Reprocessors
     public enum SupportingInformationType

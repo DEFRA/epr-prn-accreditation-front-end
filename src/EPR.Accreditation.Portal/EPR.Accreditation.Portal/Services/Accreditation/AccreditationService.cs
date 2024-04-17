@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using AutoMapper;
-    using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -10,28 +10,28 @@
     {
         private readonly IMapper _mapper;
         private readonly RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AccreditationService(
             IMapper mapper,
-            RESTservices.Interfaces.IHttpAccreditationService httpAccreditationService,
-            IHttpContextAccessor httpContextAccessor)
+            RESTservices.Interfaces.IHttpAccreditationService httpAccreditationService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _httpAccreditationService = httpAccreditationService ?? throw new ArgumentNullException(nameof(httpAccreditationService));
         }
 
         public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
             var result = await _httpAccreditationService.GetOperatorType(id);
-            return new OperatorTypeViewModel { ExternalId = id, OperatorType = result };
+            return new OperatorTypeViewModel
+            {
+                ExternalId = id,
+                OperatorType = result
+            };
         }
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Facade.Common.Dtos.Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var accreditation = new Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }

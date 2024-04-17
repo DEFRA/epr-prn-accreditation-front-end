@@ -1,6 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Common.Dtos.Portal
 {
-    public class NonWasteInputRecordDto
+    public class ReprocessingSupportingInformationRecordDto
     {
         public string Type { get; set; }
 
