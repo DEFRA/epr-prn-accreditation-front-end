@@ -339,14 +339,14 @@
         public async Task<IActionResult> OverseasAgentDetails(
             Guid? id)
         {
-            return View();
+            return NotFound();
         }
 
         [HttpGet("OverseasPortsList")]
         public async Task<IActionResult> OverseasPortsList(
             Guid? id)
         {
-            return View();
+            return NotFound();
         }
     }
 }
