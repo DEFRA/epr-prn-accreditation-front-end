@@ -33,10 +33,6 @@
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
 
-        Task<DTO.OverseasReprocessingSite> GetOverseasSite(
-            Guid accreditationExternalId,
-            Guid siteExternalId);
-
         Task<HasOverseasAgentDto> GetHasOverseasAgent(Guid accreditationExternalId);
 
         Task SetHasOverseasAgent(Guid accreditationExternalId, bool? hasOverseasAgent);

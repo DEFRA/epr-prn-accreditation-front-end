@@ -1,13 +1,10 @@
-﻿using EPR.Accreditation.Facade.Common.Enums;
-using System.ComponentModel.DataAnnotations;
-using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Facade.Common.Dtos;
-
-namespace EPR.Accreditation.Portal.ViewModels
+﻿namespace EPR.Accreditation.Portal.ViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+    using EPR.Accreditation.Portal.Resources;
+
     public class HasOverseasAgentViewModel
     {
-
         public Guid ExternalId { get; set; }
 
         [Required(ErrorMessageResourceName = "MissingSelectionErrorMessage", ErrorMessageResourceType = typeof(HasOverseasAgentResources))]

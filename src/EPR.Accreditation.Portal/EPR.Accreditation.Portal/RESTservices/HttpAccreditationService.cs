@@ -76,13 +76,6 @@
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
         }
 
-        public async Task<EPR.Accreditation.Facade.Common.Dtos.OverseasReprocessingSite> GetOverseasSite(
-            Guid accreditationExternalId, 
-            Guid siteExternalId)
-        {
-            return await Get<OverseasReprocessingSite>($"{accreditationExternalId}/OverseasSite/{siteExternalId}");
-        }
-
         /// <summary>
         /// Calls facade endpoint to get answer to whether the accreditation uses an overseas agent.
         /// </summary>
