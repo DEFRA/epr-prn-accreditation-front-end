@@ -6,8 +6,8 @@ ENV ASPNETCORE_URLS=http://*:${PORT}
 EXPOSE ${PORT}
 
 # Copy everything
-COPY --chown=dotnet EPR.Accreditation.Portal/*.csproj ./EPR.Accreditation.Portal/
-COPY --chown=dotnet EPR.Accreditation.Portal.Common/*.csproj ./EPR.Accreditation.Portal.Common/
+COPY --chown=dotnet EPR.Accreditation.Portal/EPR.Accreditation.Portal/*.csproj ./EPR.Accreditation.Portal/
+COPY --chown=dotnet EPR.Accreditation.Portal/EPR.Accreditation.Portal.Common/*.csproj ./EPR.Accreditation.Portal.Common/
 COPY --chown=dotnet NuGet.Config ./
 
 # Use Build Argument to insert PAT into Nuget file
