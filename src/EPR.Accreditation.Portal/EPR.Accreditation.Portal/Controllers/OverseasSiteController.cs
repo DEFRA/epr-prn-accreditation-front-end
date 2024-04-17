@@ -72,7 +72,7 @@
 
             if (saveButton == SaveButton.SaveAndContinue)
             {
-                return RedirectToAction("ExemptionReferences", "Accreditation");
+                return RedirectToAction("PersonWeCanContact", "Accreditation");
             }
 
             // this is all the data we require to save for come back later
