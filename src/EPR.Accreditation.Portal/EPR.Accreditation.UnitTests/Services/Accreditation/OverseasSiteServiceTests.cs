@@ -13,19 +13,16 @@
     {
         private OverseasSiteService _overseasSiteService;
         private Mock<IHttpOverseasSiteService> _mockHttpOverseasSiteService;
-        private Mock<IHttpCountryService> _mockHttpCountryService;
         private Mock<IMapper> _mockMapper;
 
         [TestInitialize]
         public void Init()
         {
             _mockHttpOverseasSiteService = new Mock<IHttpOverseasSiteService>();
-            _mockHttpCountryService = new Mock<IHttpCountryService>();
             _mockMapper = new Mock<IMapper>();
 
             _overseasSiteService = new OverseasSiteService(
                 _mockHttpOverseasSiteService.Object,
-                _mockHttpCountryService.Object,
                 _mockMapper.Object);
         }
 
