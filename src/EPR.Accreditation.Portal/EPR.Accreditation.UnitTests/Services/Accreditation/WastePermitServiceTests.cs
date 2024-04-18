@@ -5,31 +5,24 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.ViewModels;
-    using Microsoft.AspNetCore.Http;
     using Moq;
 
     [TestClass]
     public class WastePermitServiceTests
     {
         private WastePermitService _wastePermitService;
-        private Mock<IHttpContextAccessor> _mockContextAccessor;
         private Mock<IHttpWastePermitService> _mockHttpWastePermitService;
         private Mock<IMapper> _mockMapper;
 
         [TestInitialize]
         public void Init()
         {
-            _mockContextAccessor = new Mock<IHttpContextAccessor>();
             _mockMapper = new Mock<IMapper>();
             _mockHttpWastePermitService = new Mock<IHttpWastePermitService>();
 
             _wastePermitService = new WastePermitService(
-                _mockContextAccessor.Object,
                 _mockHttpWastePermitService.Object,
                 _mockMapper.Object);
-
-            var context = new DefaultHttpContext();
-            _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);
         }
 
         [TestMethod]

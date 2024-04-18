@@ -3,10 +3,14 @@
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.OverseasSite;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 
+    /// <summary>
+    /// Class to describe mappings of view models and DTOs
+    /// </summary>
     public class AccreditationProfile : Profile
     {
         /// <summary>
@@ -18,6 +22,7 @@
             CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
+            CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
 

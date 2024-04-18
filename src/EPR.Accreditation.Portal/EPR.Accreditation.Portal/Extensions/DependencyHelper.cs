@@ -44,6 +44,7 @@
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
                 .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
+                .AddScoped<IOverseasSiteService, OverseasSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
 
             services.AddScoped<IHttpSiteMaterialService>(s =>
@@ -81,6 +82,14 @@
             services
                 .AddScoped<IHttpAccreditationSiteService>(s =>
                     new HttpAccreditationSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"));
+
+            services
+                .AddScoped<IHttpOverseasSiteService>(s =>
+                    new HttpOverseasSiteService(
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
