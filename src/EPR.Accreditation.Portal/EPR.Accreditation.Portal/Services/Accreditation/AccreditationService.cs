@@ -1,4 +1,7 @@
-﻿namespace EPR.Accreditation.Portal.Services.Accreditation
+﻿using EPR.Accreditation.Portal.Constants;
+using EPR.Accreditation.Portal.ViewModels.CheckAnswers;
+
+namespace EPR.Accreditation.Portal.Services.Accreditation
 {
     using System.Threading.Tasks;
     using AutoMapper;
@@ -87,16 +90,61 @@
             return vm;
         }
 
-        private Enums.TaskStatus ReturnStatusFromList(
-            List<AccreditationTaskProgress> accreditationsTaskProgress,
-            Enums.TaskName taskName)
+        public async Task<CheckAnswersViewModel> CheckAnswers(Guid id, string section)
         {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
-            {
-                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
-            }
+	        var viewModel = GetMockCheckAnswersViewModel();
 
-            return Enums.TaskStatus.NotStarted;
+			return viewModel;
         }
-    }
+        
+        // TODO -- REMOVE AND IMPLEMENT THROUGH DB
+        public CheckAnswersViewModel GetMockCheckAnswersViewModel()
+        {
+	        var queryStringRouteData = new Dictionary<string, string>
+	        {
+		        { "Id", "3575A70A-E27D-43FA-AFFA-4EE6571925D3" },
+		        { Strings.QueryStrings.ReturnToAnswers, Strings.QueryStrings.ReturnToAnswersYes }
+	        };
+	        var viewModel = new CheckAnswersViewModel
+	        {
+		        Id = Guid.Parse("3575A70A-E27D-43FA-AFFA-4EE6571925D3"),
+		        Completed = false, // or true, depending on your needs
+		        SiteAddress = "Mock Site Address",
+		        SectionRows = new List<CheckAnswersRowViewModel>
+		        {
+			        // Populate with mock CheckAnswersRowViewModel instances
+			        new()
+			        {
+				        Controller = "controller",
+				        ControllerAction = "someaction",
+				        ListKey = "",
+				        ListValue = "",
+				        RouteData = queryStringRouteData
+			        },
+			        new()
+			        {
+				        Controller = "controller",
+				        ControllerAction = "someaction",
+				        ListKey = "",
+				        ListValue = "",
+				        RouteData = queryStringRouteData
+			        },                
+			        // Add more mock rows as needed
+		        },
+	        };
+	        return viewModel;
+        }
+		private Enums.TaskStatus ReturnStatusFromList(
+
+			List<AccreditationTaskProgress> accreditationsTaskProgress,
+			Enums.TaskName taskName)
+		{
+			if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
+			{
+				return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+			}
+
+			return Enums.TaskStatus.NotStarted;
+		}
+	}
 }

@@ -215,6 +215,18 @@
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet("CheckAnswers/{section}")]
+        public async Task<IActionResult> CheckAnswers(Guid? id, string section)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            var vm = await _accreditationService.CheckAnswers(id.Value, section);
+            return View("~/Views/CheckAnswers/CheckAnswers.cshtml", vm);
+        }
+
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             // Handle redirection to CheckYourAnswers if this is where we originally came from

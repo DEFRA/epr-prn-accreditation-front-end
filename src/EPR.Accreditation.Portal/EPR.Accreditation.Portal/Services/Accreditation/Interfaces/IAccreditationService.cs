@@ -1,4 +1,6 @@
-﻿namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
+﻿using EPR.Accreditation.Portal.ViewModels.CheckAnswers;
+
+namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -15,5 +17,7 @@
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+        
+        Task<CheckAnswersViewModel> CheckAnswers(Guid id, string section);
     }
 }

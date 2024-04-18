@@ -1,0 +1,16 @@
+﻿@model EPR.Accreditation.Portal.ViewModels.CheckAnswers.CheckAnswersRowViewModel
+<div class="govuk-summary-list__row">
+	<dt class="govuk-summary-list__key">
+		@Model.ListKey
+	</dt>
+	<dd class="govuk-summary-list__value">
+		@Model.ListValue
+	</dd>
+	<dd class="govuk-summary-list__actions">
+		<a asp-action="@Model.ControllerAction"
+		   asp-controller="@Model.Controller"
+		   asp-area="@Model.Area"
+		   asp-all-route-data="@Model.RouteData"
+		   asp-route-action="@Model.RouteAction">Change</a>
+	</dd>
+</div>
