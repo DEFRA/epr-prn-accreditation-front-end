@@ -75,5 +75,22 @@
         {
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
         }
+
+        /// <summary>
+        /// Calls facade endpoint to get answer to whether the accreditation uses an overseas agent.
+        /// </summary>
+        public async Task<HasOverseasAgentDto> GetHasOverseasAgent(Guid accreditationExternalId)
+        {
+            var hasOverseasAgent = await Get<HasOverseasAgentDto>($"{accreditationExternalId}/HasOverseasAgent");
+            return hasOverseasAgent;
+        }
+
+        /// <summary>
+        /// Calls facade endpoint to get answer to set whether the accreditation uses an overseas agent.
+        /// </summary>
+        public async Task SetHasOverseasAgent(Guid accreditationExternalId, bool? hasOverseasAgent)
+        {
+            await Put($"{accreditationExternalId}/HasOverseasAgent", hasOverseasAgent);
+        }
     }
 }

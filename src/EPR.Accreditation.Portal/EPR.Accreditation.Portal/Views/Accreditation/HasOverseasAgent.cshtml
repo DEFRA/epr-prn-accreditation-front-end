@@ -1,0 +1,37 @@
+﻿@model EPR.Accreditation.Portal.ViewModels.HasOverseasAgentViewModel
+@using EPR.Accreditation.Portal.Resources;
+@using EPR.Accreditation.Portal.Common.Enums
+
+@{
+    ViewData["Title"] = HasOverseasAgentResources.PageTitle;
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form method="post">
+            <input type="hidden" asp-for="ExternalId" />
+            <radios asp-for="UseOverseasAgent" asp-title="@HasOverseasAgentResources.PageTitle">
+                <p class="govuk-error-message">
+                    <span asp-validation-for="UseOverseasAgent"></span>
+                </p>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="UseOverseasAgent" value="@true" aria-describedby="@MasterResources.Yes">
+                    <label class="govuk-label govuk-radios__label" for="@MasterResources.Yes">
+                        @MasterResources.Yes
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="UseOverseasAgent" value="@false" aria-describedby="@MasterResources.No">
+                    <label class="govuk-label govuk-radios__label" for="@MasterResources.No">
+                        @MasterResources.No
+                    </label>
+                </div>
+            </radios>
+
+            <partial name="_SaveButtons" />
+        </form>
+    </div>
+</div>

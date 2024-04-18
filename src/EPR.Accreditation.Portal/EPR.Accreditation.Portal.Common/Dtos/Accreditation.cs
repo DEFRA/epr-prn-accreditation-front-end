@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Common.Dtos
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
     using System.ComponentModel.DataAnnotations;
 
     public class Accreditation
@@ -26,5 +27,13 @@
         public Guid? UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+
+        public Site Site { get; set; }
+
+        public IEnumerable<OverseasReprocessingSite> OverseasReprocessingSites { get; set; }
+
+        public WastePermit WastePermit { get; set; }
+
+        public bool? HasOverseasAgent { get; set; }
     }
 }

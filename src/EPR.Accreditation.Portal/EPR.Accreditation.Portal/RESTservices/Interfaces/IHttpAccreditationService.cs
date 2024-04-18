@@ -32,5 +32,9 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+
+        Task<HasOverseasAgentDto> GetHasOverseasAgent(Guid accreditationExternalId);
+
+        Task SetHasOverseasAgent(Guid accreditationExternalId, bool? hasOverseasAgent);
     }
 }

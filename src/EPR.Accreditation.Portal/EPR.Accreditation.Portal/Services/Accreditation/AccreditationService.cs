@@ -87,6 +87,29 @@
             return vm;
         }
 
+        /// <summary>
+        /// Gets answer to whether the accreditation uses an overseas agent.
+        /// </summary>
+        /// <param name="id">Accreditation External Id.</param>
+        public async Task<HasOverseasAgentViewModel> GetHasOverseasAgent(Guid id)
+        {
+            var result = await _httpAccreditationService.GetHasOverseasAgent(id);
+
+            return new HasOverseasAgentViewModel
+            {
+                ExternalId = id,
+                UseOverseasAgent = result.HasOverseasAgent,
+            };
+        }
+
+        /// <summary>
+        /// Set the Use overseas agent flag for the accreditation.
+        /// </summary>
+        public async Task SetOverseasAgentFlag(HasOverseasAgentViewModel hasOverseasAgentViewModel)
+        {
+            await _httpAccreditationService.SetHasOverseasAgent(hasOverseasAgentViewModel.ExternalId, hasOverseasAgentViewModel.UseOverseasAgent);
+        }
+
         private Enums.TaskStatus ReturnStatusFromList(
             List<AccreditationTaskProgress> accreditationsTaskProgress,
             Enums.TaskName taskName)

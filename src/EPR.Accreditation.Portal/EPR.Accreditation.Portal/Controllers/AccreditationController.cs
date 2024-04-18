@@ -131,8 +131,7 @@
             }
         }
 
-        [HttpGet]
-        [ActionName("OperatorType")]
+        [HttpGet("OperatorType")]
         public async Task<IActionResult> OperatorType(Guid? id)
         {
             if (id.HasValue)
@@ -145,8 +144,7 @@
             return View(new OperatorTypeViewModel());
         }
 
-        [HttpPost]
-        [ActionName("OperatorType")]
+        [HttpPost("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -157,6 +155,52 @@
             var externalId = await _accreditationService.CreateAccreditation(vm);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        /// <summary>
+        /// Displays the Use overseas agent question screen.
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpGet("HasOverseasAgent")]
+        public async Task<IActionResult> HasOverseasAgent(Guid? id)
+        {
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
+            if (id.HasValue)
+            {
+                var overseasAgent = await _accreditationService.GetHasOverseasAgent(id.Value);
+
+                return View(overseasAgent);
+            }
+
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Submits answer from the Use overseas agent screen.
+        /// </summary>
+        [HttpPost("HasOverseasAgent")]
+        public async Task<IActionResult> HasOverseasAgent(
+            HasOverseasAgentViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            await _accreditationService.SetOverseasAgentFlag(viewModel);
+
+            if (saveButton == SaveButton.SaveAndContinue && viewModel.UseOverseasAgent.Value == true)
+            {
+                return RedirectToAction("Overseasagentdetails", "Accreditation", new { id = viewModel.ExternalId });
+            }
+            else if (saveButton == SaveButton.SaveAndContinue && viewModel.UseOverseasAgent.Value == false)
+            {
+                return RedirectToAction("OverseasPortsList", "Accreditation", new { id = viewModel.ExternalId });
+            }
+
+            return View("_ApplicationSaved");
         }
 
         [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
@@ -286,6 +330,20 @@
 
         [HttpGet("ExemptionReference")]
         public async Task<IActionResult> ExemptionReference(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("OverseasAgentDetails")]
+        public async Task<IActionResult> OverseasAgentDetails(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
+        [HttpGet("OverseasPortsList")]
+        public async Task<IActionResult> OverseasPortsList(
             Guid? id)
         {
             return NotFound();
