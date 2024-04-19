@@ -6,6 +6,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
     using System.Threading.Tasks;
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -90,50 +91,14 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return vm;
         }
 
-        public async Task<CheckAnswersViewModel> CheckAnswers(Guid id, string section)
+        public async Task<CheckAnswersViewModel> CheckAnswers(Guid id, CheckAnswersSection section)
         {
-	        var viewModel = GetMockCheckAnswersViewModel();
-
-			return viewModel;
+	        var result = await _httpAccreditationService.GetCheckAnswers(id, section);
+	        var vm = _mapper.Map<CheckAnswersViewModel>(result);
+			
+	        return vm;
         }
         
-        // TODO -- REMOVE AND IMPLEMENT THROUGH DB
-        public CheckAnswersViewModel GetMockCheckAnswersViewModel()
-        {
-	        var queryStringRouteData = new Dictionary<string, string>
-	        {
-		        { "Id", "3575A70A-E27D-43FA-AFFA-4EE6571925D3" },
-		        { Strings.QueryStrings.ReturnToAnswers, Strings.QueryStrings.ReturnToAnswersYes }
-	        };
-	        var viewModel = new CheckAnswersViewModel
-	        {
-		        Id = Guid.Parse("3575A70A-E27D-43FA-AFFA-4EE6571925D3"),
-		        Completed = false, // or true, depending on your needs
-		        SiteAddress = "Mock Site Address",
-		        SectionRows = new List<CheckAnswersRowViewModel>
-		        {
-			        // Populate with mock CheckAnswersRowViewModel instances
-			        new()
-			        {
-				        Controller = "controller",
-				        ControllerAction = "someaction",
-				        ListKey = "",
-				        ListValue = "",
-				        RouteData = queryStringRouteData
-			        },
-			        new()
-			        {
-				        Controller = "controller",
-				        ControllerAction = "someaction",
-				        ListKey = "",
-				        ListValue = "",
-				        RouteData = queryStringRouteData
-			        },                
-			        // Add more mock rows as needed
-		        },
-	        };
-	        return viewModel;
-        }
 		private Enums.TaskStatus ReturnStatusFromList(
 
 			List<AccreditationTaskProgress> accreditationsTaskProgress,

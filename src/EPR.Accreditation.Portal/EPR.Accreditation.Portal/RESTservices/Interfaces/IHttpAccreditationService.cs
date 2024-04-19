@@ -28,6 +28,8 @@
             DTO.AccreditationMaterial accreditationMaterial);
 
         Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId);
+        
+        Task<CheckAnswersDto> GetCheckAnswers(Guid accreditationExternalId, CheckAnswersSection section);        
 
         Task<Site> GetSite(Guid siteId);
 

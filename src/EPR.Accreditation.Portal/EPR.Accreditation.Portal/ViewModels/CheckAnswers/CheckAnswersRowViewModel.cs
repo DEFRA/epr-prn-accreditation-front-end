@@ -13,6 +13,7 @@
         public string Area { get; set; }
         
         public IDictionary<string, string> RouteData { get; set; }
+        
 	    public IDictionary<string, string> RouteAction { get; set; }      
     }
 }

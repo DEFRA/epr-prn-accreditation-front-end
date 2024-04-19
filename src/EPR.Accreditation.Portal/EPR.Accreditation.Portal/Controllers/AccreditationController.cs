@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.Constants;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
@@ -216,18 +217,21 @@
         }
 
         [HttpGet("CheckAnswers/{section}")]
-        public async Task<IActionResult> CheckAnswers(Guid? id, string section)
+        public async Task<IActionResult> CheckAnswers(Guid? id, CheckAnswersSection section)
         {
-            if (!id.HasValue)
-            {
-                return BadRequest();
-            }
-
-            var vm = await _accreditationService.CheckAnswers(id.Value, section);
-            return View("~/Views/CheckAnswers/CheckAnswers.cshtml", vm);
+	        if (!id.HasValue)
+		        return BadRequest();
+	        
+	        var vm = await _accreditationService.CheckAnswers(id.Value, section);
+	        
+	        if (vm == null)
+		        return NotFound();
+	        
+	        return View($"{nameof(CheckAnswers)}/{nameof(CheckAnswers)}", vm);
         }
 
-        public override void OnActionExecuted(ActionExecutedContext context)
+
+		public override void OnActionExecuted(ActionExecutedContext context)
         {
             // Handle redirection to CheckYourAnswers if this is where we originally came from
             if (context.HttpContext.Request.Query.ContainsKey(Strings.QueryStrings.ReturnToAnswers) &&

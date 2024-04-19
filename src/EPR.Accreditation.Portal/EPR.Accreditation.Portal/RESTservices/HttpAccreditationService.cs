@@ -65,6 +65,11 @@
             return await Get<CheckYourAnswersDto>($"{accreditationExternalId}/CheckYourAnswers");
         }
 
+        public async Task<CheckAnswersDto> GetCheckAnswers(Guid accreditationExternalId, CheckAnswersSection section)
+        {
+            return await Get<CheckAnswersDto>($"{accreditationExternalId}/CheckAnswers/{section}");
+		}
+
         public async Task<Site> GetSite(
             Guid accreditationExternalId)
         {

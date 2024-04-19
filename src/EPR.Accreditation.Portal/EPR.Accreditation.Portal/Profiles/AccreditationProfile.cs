@@ -1,12 +1,14 @@
-﻿namespace EPR.Accreditation.Portal.Profiles
+﻿using EPR.Accreditation.Portal.ViewModels.CheckAnswers;
+
+namespace EPR.Accreditation.Portal.Profiles
 {
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
-    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-    using EPR.Accreditation.Portal.DTOs.OverseasSite;
-    using EPR.Accreditation.Portal.DTOs.WastePermit;
-    using EPR.Accreditation.Portal.ViewModels;
-    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+    using DTOs.MaterialReprocessorDetails;
+    using DTOs.OverseasSite;
+    using DTOs.WastePermit;
+    using ViewModels;
+    using ViewModels.SiteMaterial;
 
     /// <summary>
     /// Class to describe mappings of view models and DTOs
@@ -34,9 +36,11 @@
             CreateMap<ReprocessingSupportingInformationRecordDto, TypeTonnesRowViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+            CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+            
+            CreateMap<CheckAnswersDto, CheckAnswersViewModel>();            
 
-            this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
+            CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
                 .ReverseMap();
 
             CreateMap<ReprocessingSupportingInformationDto, ProductsProducedViewModel>()

@@ -2,6 +2,7 @@
 
 namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.ViewModels;
 
     public interface IAccreditationService
@@ -18,6 +19,6 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
         
-        Task<CheckAnswersViewModel> CheckAnswers(Guid id, string section);
+        Task<CheckAnswersViewModel> CheckAnswers(Guid id, CheckAnswersSection section);
     }
 }
