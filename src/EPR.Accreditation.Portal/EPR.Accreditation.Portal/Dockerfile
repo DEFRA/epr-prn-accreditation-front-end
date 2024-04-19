@@ -1,7 +1,7 @@
 FROM defradigital/dotnetcore-development:latest AS build-env
 
 # Expose the app on a defined port, configurable via a build argument
-ARG PORT=3000
+ARG PORT=8080
 ENV ASPNETCORE_URLS=http://*:${PORT}
 EXPOSE ${PORT}
 
@@ -47,7 +47,7 @@ USER dotnet
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
 
 # Expose the app on a defined port, configurable via a build argument
-ARG PORT=3000
+ARG PORT=8080
 ENV ASPNETCORE_URLS=http://*:${PORT}
 EXPOSE ${PORT}
 
