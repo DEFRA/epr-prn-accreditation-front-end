@@ -43,6 +43,9 @@
                 .ForMember(d => d.Rows, o => o.MapFrom(s => s.Records ?? new List<ReprocessingSupportingInformationRecordDto>()))
                 .ReverseMap()
                 .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
+
+            CreateMap<string, WasteDescriptionCodeRowViewModel>()
+                .ForMember(d => d.WasteDescriptionCode, o => o.MapFrom(s => s));
         }
     }
 }

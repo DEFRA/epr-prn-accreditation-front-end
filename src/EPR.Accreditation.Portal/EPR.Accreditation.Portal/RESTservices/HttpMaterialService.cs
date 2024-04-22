@@ -10,7 +10,8 @@
         public HttpMaterialService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
-            string baseUrl, string endPointName)
+            string baseUrl,
+            string endPointName)
             : base(httpContextAccessor, httpClientFactory, baseUrl, endPointName)
         {
         }
