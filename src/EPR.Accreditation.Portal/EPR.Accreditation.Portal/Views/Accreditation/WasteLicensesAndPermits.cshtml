@@ -26,7 +26,7 @@
                     <div id="registration-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="DealerRegistrationNumber" name="DealerRegistrationNumber" type="text" aria-describedby="registration-number-hint">
+                    <input class="govuk-input" id="DealerRegistrationNumber" name="DealerRegistrationNumber" type="text" value="@Model.DealerRegistrationNumber" aria-describedby="registration-number-hint">
                 </div>
                 <div class="govuk-form-group">
                     <p class="govuk-error-message">
@@ -40,7 +40,7 @@
                     <div id="permit-number-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="EnvironmentalPermitNumber" name="EnvironmentalPermitNumber" type="text" aria-describedby="permit-number-hint">
+                    <input class="govuk-input" id="EnvironmentalPermitNumber" name="EnvironmentalPermitNumber" type="text" value="@Model.EnvironmentalPermitNumber" aria-describedby="permit-number-hint">
                 </div>
                 <div class="govuk-form-group">
                     <p class="govuk-error-message">
@@ -54,7 +54,7 @@
                     <div id="activity-number-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="PartBActivityReferenceNumber" name="PartBActivityReferenceNumber" type="text" aria-describedby="activity-number-hint">
+                    <input class="govuk-input" id="PartBActivityReferenceNumber" name="PartBActivityReferenceNumber" type="text" value="@Model.PartBActivityReferenceNumber" aria-describedby="activity-number-hint">
                 </div>
                 <div class="govuk-form-group">
                     <p class="govuk-error-message">
@@ -68,7 +68,7 @@
                     <div id="activity-reference-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="PartAActivityReferenceNumber" name="PartAActivityReferenceNumber" type="text" aria-describedby="activity-reference-number-hint">
+                    <input class="govuk-input" id="PartAActivityReferenceNumber" name="PartAActivityReferenceNumber" type="text" value="@Model.PartAActivityReferenceNumber" aria-describedby="activity-reference-number-hint">
                 </div>
                 <div class="govuk-form-group">
                     <p class="govuk-error-message">
@@ -82,7 +82,7 @@
                     <div id="discharge-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="DischargeConsentNumber" name="DischargeConsentNumber" type="text" aria-describedby="discharge-number-hint">
+                    <input class="govuk-input" id="DischargeConsentNumber" name="DischargeConsentNumber" type="text" value="@Model.DealerRegistrationNumber" aria-describedby=" discharge-number-hint">
                 </div>
                 <partial name="_SaveButtons" />
             </fieldset>
