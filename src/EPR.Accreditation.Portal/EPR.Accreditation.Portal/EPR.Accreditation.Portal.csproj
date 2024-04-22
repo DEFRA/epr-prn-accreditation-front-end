@@ -77,6 +77,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\SiteAddressResources.cy-GB.Designer.cs">
+      <DependentUpon>SiteAddressResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\SiteAddressResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -229,6 +234,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ReprocessorDetailsResources.resx">
       <LastGenOutput>ReprocessorDetailsResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SiteAddressResources.cy-GB.resx">
+      <LastGenOutput>SiteAddressResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\SiteAddressResources.resx">
