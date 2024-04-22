@@ -116,7 +116,7 @@
         protected void PopulateBackModel(string action)
         {
             var idValue = _httpContextAccessor.HttpContext.Request.RouteValues["id"];
-            var siteId = _httpContextAccessor.HttpContext.Request.RouteValues["id"];
+            var siteId = _httpContextAccessor.HttpContext.Request.RouteValues["siteId"];
             var materialIdValue = _httpContextAccessor.HttpContext.Request.RouteValues["materialId"];
 
             _backPageViewModel.Url = _urlHelper.RouteUrl(
