@@ -75,7 +75,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                                                         Guid materialId)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
-            var address = await _httpAccreditationService.GetSite(siteId);
+            var address = await _httpAccreditationService.GetSite(siteId, id);
 
             var viewModel = new TaskListViewModel
             {
