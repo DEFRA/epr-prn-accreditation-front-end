@@ -45,7 +45,7 @@
             var html =
                 '<div class="govuk-form-group">' +
                 '<div class="govuk-input__wrapper">' +
-                `<input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" asp-for="Rows[${currentRows}].WasteDescriptionCode">` +
+                `<input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" name="Rows[${currentRows}].WasteDescriptionCode">` +
                 '</div>' +
                 '</div>';
             $('form .govuk-form-group fieldset.govuk-fieldset').append(html);
