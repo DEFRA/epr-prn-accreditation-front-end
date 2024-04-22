@@ -2,6 +2,7 @@
 using EPR.Accreditation.Portal.Options;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -14,9 +15,11 @@ namespace EPR.Accreditation.UnitTests.Services
     {
         private Mock<IMapper> _mockMapper = null;
         private Mock<IHttpAccreditationService> _httpAccreditionService;
+        private Mock<IHttpSiteService> _httpSiteService;
         private AccreditationService _accreditationService;
         private Mock<IOptions<AppSettingsConfigOptions>> _mockConfigSettings;
         private Mock<IHttpContextAccessor> _mockHttpContextAccessor;
+        private SiteService _siteService;
 
         [TestInitialize]
         public void Init()
@@ -31,8 +34,9 @@ namespace EPR.Accreditation.UnitTests.Services
             _httpAccreditionService = new Mock<IHttpAccreditationService>();
             _mockConfigSettings.Setup(o => o.Value).Returns(mockConfig);
             _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
-
+            _httpSiteService = new Mock<IHttpSiteService>();
             _accreditationService = new AccreditationService(_mockMapper.Object, _httpAccreditionService.Object, _mockHttpContextAccessor.Object);
+            _siteService = new SiteService(_mockMapper.Object, _httpSiteService.Object, _mockHttpContextAccessor.Object);
         }
 
         [TestMethod]

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.Configuration;
 using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.RESTservices.Interfaces;
 using EPR.Accreditation.Portal.Services.Accreditation;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Localization;
 using Moq;
-using static EPR.Accreditation.Portal.Constants.Strings;
 
 namespace EPR.Accreditation.UnitTests.Services
 {
@@ -19,18 +17,18 @@ namespace EPR.Accreditation.UnitTests.Services
         protected AccreditationSiteMaterialService _accreditationSiteMaterialService;
         protected Mock<IMapper> _mockMapper;
         protected Mock<IHttpContextAccessor> _mockHttpContextAccessor;
-        protected Mock<IHttpSiteMaterialService> _httpSiteMaterialServiceMock;
+        protected Mock<IHttpSiteMaterialService> _mockHttpSiteMaterialService;
 
         [TestInitialize]
         public void Init()
         {
             _mockMapper = new Mock<IMapper>();
             _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
-            _httpSiteMaterialServiceMock = new Mock<IHttpSiteMaterialService>();
+            _mockHttpSiteMaterialService = new Mock<IHttpSiteMaterialService>();
             _accreditationSiteMaterialService = new AccreditationSiteMaterialService(
                 _mockMapper.Object,
                 _mockHttpContextAccessor.Object,
-                _httpSiteMaterialServiceMock.Object);
+                _mockHttpSiteMaterialService.Object);
         }
 
         [TestMethod]
@@ -53,7 +51,7 @@ namespace EPR.Accreditation.UnitTests.Services
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _httpSiteMaterialServiceMock.Setup(x =>
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
                     id,
                     siteId,
@@ -66,7 +64,7 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(s =>
+            _mockHttpSiteMaterialService.Verify(s =>
                 s.GetMeterialName(
                     id,
                     siteId,
@@ -95,7 +93,7 @@ namespace EPR.Accreditation.UnitTests.Services
             _mockHttpContextAccessor.SetupGet(h => h.HttpContext).Returns(httpContextMock);
 
             var expectedWasteName = "SomeWasteName";
-            _httpSiteMaterialServiceMock.Setup(x =>
+            _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
                     id,
                     siteId,
@@ -108,7 +106,7 @@ namespace EPR.Accreditation.UnitTests.Services
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
-            _httpSiteMaterialServiceMock.Verify(s =>
+            _mockHttpSiteMaterialService.Verify(s =>
                 s.GetMeterialName(
                     id,
                     siteId,
@@ -126,7 +124,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var siteId = Guid.NewGuid();
             var materialId = Guid.NewGuid();
             var expectedWasteSource = "SomeWasteSource";
-            _httpSiteMaterialServiceMock.Setup(x => x.GetWasteSource(siteType, id, siteId, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetWasteSource(siteType, id, siteId, materialId))
                 .ReturnsAsync(expectedWasteSource);
 
             // Act
@@ -154,7 +152,7 @@ namespace EPR.Accreditation.UnitTests.Services
             await _accreditationSiteMaterialService.UpdateWasteSource(siteType, viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(x =>
+            _mockHttpSiteMaterialService.Verify(x =>
                 x.UpdateWasteSource(
                     siteType,
                     viewModel.Id,
@@ -172,7 +170,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var materialId = Guid.NewGuid();
             var materialOutputsDto = new MaterialOutputsDto(); // Assuming MaterialOutputsDto is defined
             var expectedViewModel = new MaterialOutputsViewModel(); // Assuming MaterialOutputsViewModel is defined
-            _httpSiteMaterialServiceMock.Setup(x => x.GetMaterialOutputs(id, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetMaterialOutputs(id, materialId))
                 .ReturnsAsync(materialOutputsDto);
             _mockMapper.Setup(x => x.Map<MaterialOutputsViewModel>(materialOutputsDto))
                 .Returns(expectedViewModel);
@@ -197,7 +195,7 @@ namespace EPR.Accreditation.UnitTests.Services
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
             // Assert
-            _httpSiteMaterialServiceMock.Verify(x =>
+            _mockHttpSiteMaterialService.Verify(x =>
                 x.UpdateMaterialOutputs(
                     viewModel.Id,
                     viewModel.MaterialId,
@@ -213,7 +211,7 @@ namespace EPR.Accreditation.UnitTests.Services
             var materialId = Guid.NewGuid();
             var expectedWasteLastYear = true;
 
-            _httpSiteMaterialServiceMock.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
+            _mockHttpSiteMaterialService.Setup(x => x.GetReprocessedWasteLastYear(id, materialId))
                 .ReturnsAsync(expectedWasteLastYear);
 
             // Act
@@ -224,116 +222,6 @@ namespace EPR.Accreditation.UnitTests.Services
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(expectedWasteLastYear, result.HasReprocessedWasteLastYear);
-        }
-
-        [TestMethod]
-        public async Task GetNonWasteInputs_Returns_NonWasteInputsViewModel_With_Minimum_Rows_If_Less_Than_Minimum()
-        {
-            // Arrange
-            var id = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
-            _mockMapper
-                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<NonWasteInputsDto>()))
-                .Returns(
-                    new NonWasteInputsViewModel
-                    {
-                        Rows = new List<NonWasteInputsRowViewModel>
-                        {
-                            new NonWasteInputsRowViewModel
-                            {
-                                Type = "ABC",
-                                Tonnes = 123
-                            }
-                        }
-                    });
-
-            // Act
-            var result = await _accreditationSiteMaterialService.GetNonWasteInputs(id, materialId);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(GenericConstants.MinimumMultiLineRecordNumber, result.Rows.Count);
-            Assert.AreEqual("ABC", result.Rows[0].Type);
-            Assert.AreEqual(123, result.Rows[0].Tonnes);
-        }
-
-        [TestMethod]
-        public async Task GetNonWasteInputs_Returns_NonWasteInputsViewModel_With_CorrectNumberOfRows()
-        {
-            // Arrange
-            var id = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
-            _mockMapper
-                .Setup(m => m.Map<NonWasteInputsViewModel>(It.IsAny<NonWasteInputsDto>()))
-                .Returns(
-                    new NonWasteInputsViewModel
-                    {
-                        Rows = new List<NonWasteInputsRowViewModel>
-                        {
-                            new NonWasteInputsRowViewModel
-                            {
-                                Type = "ABC",
-                                Tonnes = 123
-                            },
-                            new NonWasteInputsRowViewModel
-                            {
-                                Type = "ABC",
-                                Tonnes = 123
-                            },
-                            new NonWasteInputsRowViewModel
-                            {
-                                Type = "ABC",
-                                Tonnes = 123
-                            },
-                            new NonWasteInputsRowViewModel
-                            {
-                                Type = "ABC",
-                                Tonnes = 123
-                            }
-                        }
-                    });
-
-            // Act
-            var result = await _accreditationSiteMaterialService.GetNonWasteInputs(id, materialId);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(4, result.Rows.Count);
-        }
-
-        [TestMethod]
-        public async Task UpdateNonWasteInputs_Removes_Blank_Rows_Before_Mapping()
-        {
-            // Arrange
-            _mockMapper.Setup(m => m.Map<NonWasteInputsDto>(It.IsAny<NonWasteInputsViewModel>()))
-                .Returns(new NonWasteInputsDto());
-            var viewModel = new NonWasteInputsViewModel
-            {
-                Rows = new List<NonWasteInputsRowViewModel>
-                {
-                    new NonWasteInputsRowViewModel { Type = "Type1", Tonnes = 10 },
-                    new NonWasteInputsRowViewModel { Type = string.Empty, Tonnes = null },
-                    new NonWasteInputsRowViewModel { Type = "Type3", Tonnes = 20 },
-                    new NonWasteInputsRowViewModel { Type = "Type4", Tonnes = 30 },
-                    new NonWasteInputsRowViewModel { Type = string.Empty, Tonnes = null },
-                }
-            };
-
-            // Act
-            await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
-
-            // Assert
-            _mockMapper.Verify(m =>
-                m.Map<NonWasteInputsDto>(
-                    It.Is<NonWasteInputsViewModel>(p =>
-                        p.Rows.Count == 3 &&
-                        p.Rows[0].Type == "Type1" &&
-                        p.Rows[0].Tonnes == 10 &&
-                        p.Rows[1].Type == "Type3" &&
-                        p.Rows[1].Tonnes == 20 &&
-                        p.Rows[2].Type == "Type4" &&
-                        p.Rows[2].Tonnes == 30)),
-                Times.Once);
         }
     }
 }

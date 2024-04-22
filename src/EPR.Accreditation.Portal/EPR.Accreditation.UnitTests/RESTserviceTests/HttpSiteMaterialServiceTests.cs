@@ -67,7 +67,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 .Verifiable();
         }
 
-        [Ignore]
         [TestMethod]
         public async Task GetMeterialName_WithEnglish_CallsEndpointSuccessfully()
         {
@@ -114,7 +113,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
         }
 
-        [Ignore]
         [TestMethod]
         public async Task GetWasteSource_ForSite_CallsEndpointSuccesfully()
         {
@@ -187,7 +185,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.AreEqual(wasteSource, _capturedPayload);
         }
 
-        [Ignore]
         [TestMethod]
         public async Task UpdateWasteSource_ForOverseasSite_CallsEndpointSuccesfully_WithExpectedPayload()
         {
@@ -312,58 +309,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             var capturedPayload = JsonConvert.DeserializeObject<ReprocessedWasteLastYear>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(reprocessedWasteLastYearDto, capturedPayload));
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        [TestMethod]
-        public async Task GetNonWasteInputs_CallsExpectedEndPoint_WithCorrectParameters()
-        {
-            // Arrange
-            var id = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
-
-            // Act
-            await _httpSiteMaterialService.GetNonWasteInputs(
-                id,
-                materialId);
-
-            // Assert
-            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
-        }
-
-        [TestMethod]
-        public async Task UpdateNonWasteInputs_CallsExpectedEndPoint_WithCorrectParametersAndPayload()
-        {
-            // Arrange
-            var id = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
-            var nonWasteInputsDto = new NonWasteInputsDto();
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
-            // Act
-            await _httpSiteMaterialService.UpdateNonWasteInputs(
-                id,
-                materialId,
-                nonWasteInputsDto);
-
-            // Assert
-            var capturedPayload = JsonConvert.DeserializeObject<NonWasteInputsDto>(_capturedPayload);
-            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
-            Assert.IsTrue(AreObjectsEqual(nonWasteInputsDto, capturedPayload));
         }
 
         private bool AreObjectsEqual<T>(T obj1, T obj2)

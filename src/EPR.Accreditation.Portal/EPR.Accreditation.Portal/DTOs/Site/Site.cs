@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Dtos
+﻿namespace EPR.Accreditation.Portal.DTOs.Site
 {
     public class Site
     {
@@ -18,6 +18,6 @@
 
         public Guid OrganisationId { get; set; }
 
-        public IEnumerable<SiteAuthority> SiteAuthorties { get; set; }
+        public IEnumerable<SiteAuthority> SiteAuthorties { get; set;}
     }
 }

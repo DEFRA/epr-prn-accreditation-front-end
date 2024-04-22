@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MasterResources {
+    public class SiteAddressResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MasterResources() {
+        internal SiteAddressResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.MasterResources", typeof(MasterResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.SiteAddressResources", typeof(SiteAddressResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,101 +61,101 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Looks up a localized string similar to Address Line 1.
         /// </summary>
-        public static string BackLink {
+        public static string AddressLine1 {
             get {
-                return ResourceManager.GetString("BackLink", resourceCulture);
+                return ResourceManager.GetString("AddressLine1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continue.
+        ///   Looks up a localized string similar to Address Line 1 Missing.
         /// </summary>
-        public static string Continue {
+        public static string AddressLine1Missing {
             get {
-                return ResourceManager.GetString("Continue", resourceCulture);
+                return ResourceManager.GetString("AddressLine1Missing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places.
+        ///   Looks up a localized string similar to Address Line 2 (optional).
         /// </summary>
-        public static string DecimalNumberFormatError {
+        public static string AddressLine2 {
             get {
-                return ResourceManager.GetString("DecimalNumberFormatError", resourceCulture);
+                return ResourceManager.GetString("AddressLine2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For:.
+        ///   Looks up a localized string similar to Address Line not in range.
         /// </summary>
-        public static string MaterialForLabel {
+        public static string AddressLineNumberNotInRange {
             get {
-                return ResourceManager.GetString("MaterialForLabel", resourceCulture);
+                return ResourceManager.GetString("AddressLineNumberNotInRange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to County (optional).
         /// </summary>
-        public static string No {
+        public static string County {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("County", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cymraeg.
+        ///   Looks up a localized string similar to What is the address of the reprocessing site?.
         /// </summary>
-        public static string OppositeLanguage {
+        public static string Heading {
             get {
-                return ResourceManager.GetString("OppositeLanguage", resourceCulture);
+                return ResourceManager.GetString("Heading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and come back later.
+        ///   Looks up a localized string similar to Site Address.
         /// </summary>
-        public static string SaveAndComeBack {
+        public static string PageTitle {
             get {
-                return ResourceManager.GetString("SaveAndComeBack", resourceCulture);
+                return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and continue.
+        ///   Looks up a localized string similar to Post Code.
         /// </summary>
-        public static string SaveAndContinue {
+        public static string PostCode {
             get {
-                return ResourceManager.GetString("SaveAndContinue", resourceCulture);
+                return ResourceManager.GetString("PostCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is a problem.
+        ///   Looks up a localized string similar to PostCode missing.
         /// </summary>
-        public static string SummaryError {
+        public static string PostCodeMissing {
             get {
-                return ResourceManager.GetString("SummaryError", resourceCulture);
+                return ResourceManager.GetString("PostCodeMissing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tonnes.
+        ///   Looks up a localized string similar to Town or City.
         /// </summary>
-        public static string TonnesLabel {
+        public static string TownOrCity {
             get {
-                return ResourceManager.GetString("TonnesLabel", resourceCulture);
+                return ResourceManager.GetString("TownOrCity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to Town or city missing.
         /// </summary>
-        public static string Yes {
+        public static string TownOrCityMisssing {
             get {
-                return ResourceManager.GetString("Yes", resourceCulture);
+                return ResourceManager.GetString("TownOrCityMisssing", resourceCulture);
             }
         }
     }

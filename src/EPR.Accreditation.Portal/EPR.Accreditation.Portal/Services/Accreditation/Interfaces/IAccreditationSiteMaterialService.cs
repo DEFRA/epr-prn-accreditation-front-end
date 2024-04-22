@@ -24,20 +24,13 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
             WasteSourceViewModel wasteSourceViewModel);
 
         // only reprocessor
-        Task<NonWasteInputsViewModel> GetNonWasteInputs(
-            Guid id,
-            Guid materialId);
-
-        // only reprocessor
-        Task UpdateNonWasteInputs(NonWasteInputsViewModel nonWasteInputsViewModel);
-
-        // only reprocessor
         Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
             Guid materialId);
 
         // only reprocessor
-        Task UpdateMaterialOutputs(MaterialOutputsViewModel materialOutputsViewModel);
+        Task UpdateMaterialOutputs(
+            MaterialOutputsViewModel materialOutputsViewModel);
 
         // only reprocessor
         Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(

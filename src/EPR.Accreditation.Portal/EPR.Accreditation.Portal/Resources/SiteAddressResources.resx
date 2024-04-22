@@ -117,37 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLink" xml:space="preserve">
-    <value>Back</value>
+  <data name="AddressLine1" xml:space="preserve">
+    <value>Address Line 1</value>
   </data>
-  <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+  <data name="AddressLine1Missing" xml:space="preserve">
+    <value>Address Line 1 Missing</value>
   </data>
-  <data name="DecimalNumberFormatError" xml:space="preserve">
-    <value>Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
+  <data name="AddressLine2" xml:space="preserve">
+    <value>Address Line 2 (optional)</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>For:</value>
+  <data name="AddressLineNumberNotInRange" xml:space="preserve">
+    <value>Address Line not in range</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
+  <data name="County" xml:space="preserve">
+    <value>County (optional)</value>
   </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>Cymraeg</value>
+  <data name="Heading" xml:space="preserve">
+    <value>What is the address of the reprocessing site?</value>
   </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>Save and come back later</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Site Address</value>
   </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>Save and continue</value>
+  <data name="PostCode" xml:space="preserve">
+    <value>Post Code</value>
   </data>
-  <data name="SummaryError" xml:space="preserve">
-    <value>There is a problem</value>
+  <data name="PostCodeMissing" xml:space="preserve">
+    <value>PostCode missing</value>
   </data>
-  <data name="TonnesLabel" xml:space="preserve">
-    <value>Tonnes</value>
+  <data name="TownOrCity" xml:space="preserve">
+    <value>Town or City</value>
   </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="TownOrCityMisssing" xml:space="preserve">
+    <value>Town or city missing</value>
   </data>
 </root>

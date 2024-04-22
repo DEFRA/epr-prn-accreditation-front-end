@@ -1,12 +1,10 @@
-﻿using EPR.Accreditation.Portal.Constants;
-using EPR.Accreditation.Portal.Enums;
+﻿using EPR.Accreditation.Portal.Enums;
 using EPR.Accreditation.Portal.Extensions;
 using EPR.Accreditation.Portal.Helpers.Interfaces;
 using EPR.Accreditation.Portal.Resources;
 using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
 using EPR.Accreditation.Portal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EPR.Accreditation.Portal.Controllers
 {
@@ -19,6 +17,7 @@ namespace EPR.Accreditation.Portal.Controllers
         protected readonly ISaveAndComeBackService _saveAndComeBackService;
         protected readonly BackPageViewModel _backPageViewModel;
         protected IUrlHelperWrapper _urlHelper;
+        private readonly ISiteService _siteService;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
@@ -26,7 +25,8 @@ namespace EPR.Accreditation.Portal.Controllers
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            ISiteService siteSerivce)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
@@ -34,6 +34,7 @@ namespace EPR.Accreditation.Portal.Controllers
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
+            _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
         }
 
         [HttpGet("PermitExemption")]
@@ -175,99 +176,58 @@ namespace EPR.Accreditation.Portal.Controllers
             return View("upload");
         }
 
-        [HttpGet("CheckYourAnswers")]
-        public async Task<IActionResult> CheckYourAnswers(Guid? id)
-        {
-            if (!id.HasValue)
-                return BadRequest();
-
-            CheckYourAnswersViewModel vm = await _accreditationService.CheckYourAnswers(id.Value);
-            return View(vm);
-        }
-
-        [HttpPost("CheckYourAnswers")]
-        public async Task<IActionResult> CheckYourAnswers(CheckYourAnswersViewModel checkYourAnswersViewModel)
-        {
-            if (!ModelState.IsValid)
-                return RedirectToAction("CheckYourAnswers", new { id = checkYourAnswersViewModel.Id });
-
-            return RedirectToAction("Index", "Home");
-        }
-
-
-
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            // Handle redirection to CheckYourAnswers if this is where we originally came from
-            if (context.HttpContext.Request.Query.ContainsKey(Strings.QueryStrings.ReturnToAnswers) &&
-                context.HttpContext.Request.Query[Strings.QueryStrings.ReturnToAnswers] == Strings.QueryStrings.ReturnToAnswersYes &&
-                context.Result is RedirectToActionResult)
-            {
-                var id = (context.Result as RedirectToActionResult).RouteValues["Id"].ToString();
-                context.Result = RedirectToAction("CheckYourAnswers", "Accreditation", new { id });
-            }
-
-            base.OnActionExecuted(context);
-        }
-
-        [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
-        public async Task<IActionResult> TaskListSite(
+        [HttpGet("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        public async Task<IActionResult> SiteAddress(
             Guid? id,
             Guid? siteId,
             Guid? materialId)
         {
-            if (id != null && siteId != null && materialId != null)
+            // TODO: Need to add correct back link in the future
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
+            if (id == null)
+                return NotFound();
+
+            if (siteId == null)
+                siteId = Guid.Empty;
+
+            var viewModel = await _siteService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
+
+            return View(viewModel);
+        }
+
+        [HttpPost("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PermitExemptionResources.ErrorMessage))
+                return View(viewModel);
+
+            await _siteService.SaveSiteAddress(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
             {
-                TaskListViewModel model = await _accreditationService.GetTaskList(
-                                                                        id.Value,
-                                                                        siteId.Value,
-                                                                        materialId.Value);
-                return View(model);
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
             }
-            return NotFound();
-        }
+            else
+            {
+                return RedirectToAction("PermitExemption", "Accreditation",
+                    new
+                    {
+                        viewModel.Id
+                    });
 
 
-        [HttpGet("SiteAddress")]
-        public async Task<IActionResult> SiteAddress(
-            Guid? id)
-        {
-            return NotFound();
-        }
-
-        [HttpGet("WasteCarrierRegistrationNumber")]
-        public async Task<IActionResult> WasteCarrierRegistrationNumber(
-            Guid? id)
-        {
-            return NotFound();
-        }
-
-        [HttpGet("WasteManagementPermitNumber")]
-        public async Task<IActionResult> WasteManagementPermitNumber(
-            Guid? id)
-        {
-            return NotFound();
-        }
-
-        [HttpGet("PartABCReferenceNumber")]
-        public async Task<IActionResult> PartABCReferenceNumber(
-            Guid? id)
-        {
-            return NotFound();
-        }
-
-        [HttpGet("DischargeConsentNumber")]
-        public async Task<IActionResult> DischargeConsentNumber(
-            Guid? id)
-        {
-            return NotFound();
-        }
-
-        [HttpGet("ExemptionReference")]
-        public async Task<IActionResult> ExemptionReference(
-            Guid? id)
-        {
-            return NotFound();
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

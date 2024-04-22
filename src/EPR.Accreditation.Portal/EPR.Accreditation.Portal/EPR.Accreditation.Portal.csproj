@@ -7,14 +7,6 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet />
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet />
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="EPR.Common.Authorization" Version="1.0.14" />
@@ -36,26 +28,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialOutputsLastYearResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\NonWasteInputEstimatedResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>NonWasteInputEstimatedResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\NonWasteInputLastYearResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>NonWasteInputLastYearResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
-      <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\TaskListSiteResources.Designer.cs">
-      <DependentUpon>TaskListSiteResources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
@@ -127,6 +99,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApplicationSavedResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\SiteAddressResources.Designer.cs">
+      <DependentUpon>SiteAddressResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\WasteSourceResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -147,22 +124,6 @@
     <EmbeddedResource Update="Resources\MaterialOutputsLastYearResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsLastYearResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\NonWasteInputEstimatedResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>NonWasteInputEstimatedResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\NonWasteInputLastYearResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>NonWasteInputLastYearResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
-      <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\TaskListSiteResources.resx">
-      <LastGenOutput>TaskListSiteResources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListResources.cy-GB.resx">
       <LastGenOutput>TaskListResources.cy-GB.Designer.cs</LastGenOutput>
@@ -223,6 +184,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationSavedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SiteAddressResources.resx">
+      <LastGenOutput>SiteAddressResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\WasteSourceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteSourceResources.Designer.cs</LastGenOutput>
@@ -235,10 +200,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPR.Accreditation.Portal.Common\EPR.Accreditation.Portal.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\js\pages\" />
   </ItemGroup>
 
 </Project>
