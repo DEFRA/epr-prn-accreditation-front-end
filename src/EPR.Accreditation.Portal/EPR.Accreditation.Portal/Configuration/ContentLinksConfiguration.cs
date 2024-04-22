@@ -1,8 +1,11 @@
 ﻿namespace EPR.Accreditation.Portal.Configuration
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// Configuration class defining the section of content links from the app settings
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ContentLinksConfiguration
     {
         /// <summary>
