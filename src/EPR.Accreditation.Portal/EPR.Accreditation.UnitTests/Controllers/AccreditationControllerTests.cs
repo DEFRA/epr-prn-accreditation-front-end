@@ -221,5 +221,85 @@
 
             _mockWastePermitService.Verify(s => s.UpdatePermitExemption(viewModel), Times.Never);
         }
+
+        [TestMethod]
+        public async Task CheckSiteAddress_ReturnsViewWithViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var siteId = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedViewModel = new SiteAddressViewModel();
+            var expectedUrl = "Home/ApplyForAccreditation";
+
+            expectedViewModel.Address1 = "New Street1";
+
+            _mockUrlHelper.Setup(helper => helper.ActionLink(
+                "ApplyForAccreditation", "Home", null, null, null, null)).Returns(expectedUrl);
+
+            _mockSiteService.Setup(service => service.GetSiteAddressViewModel(id, siteId, materialId)).ReturnsAsync(expectedViewModel);
+
+            // Act
+            var result = await _accreditationController.SiteAddress(id, siteId, materialId);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SiteAddressViewModel));
+            Assert.IsNull(viewResult.ViewName);
+
+            _mockSiteService.Verify(service => service.GetSiteAddressViewModel(id, siteId, materialId), Times.Once());
+        }
+
+        [TestMethod]
+        public async Task CheckSiteAddress_ReturnsCorrectView_WhenModelIsInvalid()
+        {
+            // Arrange
+            var viewModel = new SiteAddressViewModel();
+            var saveButton = new SaveButton();
+
+            _accreditationController.ModelState.AddModelError("Error", "Error");
+
+            // Act
+            var result = await _accreditationController.SiteAddress(viewModel, saveButton);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SiteAddressViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+        }
+
+        [TestMethod]
+        public async Task CheckSiteAddress_SavesWithValidData_SaveAndContinue()
+        {
+            // Arrange
+            var viewModel = new SiteAddressViewModel
+            {
+                Id = Guid.NewGuid(),
+                Address1 = "New Street"
+            };
+
+            // Act
+            var result = await _accreditationController.SiteAddress(viewModel, SaveButton.SaveAndContinue);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.AreEqual("PermitExemption", redirectToActionResult.ActionName);
+
+            _mockSiteService.Verify(service => service.SaveSiteAddress(viewModel), Times.Once);
+        }
     }
 }
