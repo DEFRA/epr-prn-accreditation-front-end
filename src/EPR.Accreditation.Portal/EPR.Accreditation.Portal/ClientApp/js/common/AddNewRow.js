@@ -24,13 +24,13 @@
 
             var html =
                 '<div class="govuk-form-group">' +
-                '<div class="govuk-input__wrapper">' +
-                `<input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" name="Rows[${currentRows}].Type">` +
-                '<div class="govuk-input__wrapper">' +
-                `<input class="govuk-input govuk-input--width-10 3dp" type="text" name="Rows[${currentRows}].Tonnes" autocomplete="off" />` +
-                `<div class="govuk-input__suffix" aria-hidden="true">${tonnesLabel}</div>` +
-                '</div >' +
-                '</div > ' +
+                    '<div class="govuk-input__wrapper">' +
+                        `<input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" name="Rows[${currentRows}].Type">` +
+                        '<div class="govuk-input__wrapper">' +
+                            `<input class="govuk-input govuk-input--width-10 3dp" type="text" name="Rows[${currentRows}].Tonnes" autocomplete="off" />` +
+                            `<div class="govuk-input__suffix" aria-hidden="true">${tonnesLabel}</div>` +
+                        '</div >' +
+                    '</div > ' +
                 '</div > ';
             $('form .govuk-form-group fieldset.govuk-fieldset').append(html);
 
@@ -42,12 +42,12 @@
             // since indexes are zero based, the length will be the index for the next row
             var currentRows = $('form .govuk-form-group fieldset.govuk-fieldset > .govuk-form-group').length;
 
-            var html = 
+            var html =
                 '<div class="govuk-form-group">' +
                 '<div class="govuk-input__wrapper">' +
                 `<input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" asp-for="Rows[${currentRows}].WasteDescriptionCode">` +
-                '</div>'
-                '</div>'
+                '</div>' +
+                '</div>';
             $('form .govuk-form-group fieldset.govuk-fieldset').append(html);
 
             return currentRows;
