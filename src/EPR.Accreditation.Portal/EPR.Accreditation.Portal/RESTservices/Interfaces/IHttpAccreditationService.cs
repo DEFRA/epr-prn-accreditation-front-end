@@ -29,7 +29,7 @@
 
         Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId);
 
-        Task<Site> GetSite(Guid siteId);
+        Task<Site> GetSite(Guid accreditationExternalId, Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
     }

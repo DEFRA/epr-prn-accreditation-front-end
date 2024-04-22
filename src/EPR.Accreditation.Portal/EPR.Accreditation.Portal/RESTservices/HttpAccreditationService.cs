@@ -66,9 +66,10 @@
         }
 
         public async Task<Site> GetSite(
-            Guid accreditationExternalId)
+            Guid accreditationExternalId,
+            Guid siteExternalId)
         {
-            return await Get<Site>($"{accreditationExternalId}/Site");
+            return await Get<Site>($"{accreditationExternalId}/Site?SiteExternalId={siteExternalId}", false);
         }
 
         public async Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId)

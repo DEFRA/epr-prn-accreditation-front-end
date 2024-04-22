@@ -64,7 +64,7 @@
             Guid materialId)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
-            var address = await _httpAccreditationService.GetSite(siteId);
+            var address = await _httpAccreditationService.GetSite(id, id);
 
             var viewModel = new TaskListViewModel
             {
