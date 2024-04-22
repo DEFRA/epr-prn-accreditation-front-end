@@ -287,11 +287,6 @@
         /// <returns>Async task</returns>
         public async Task UpdateWasteDescriptionCodeViewModel(WasteDescriptionCodeViewModel wasteDescriptionCodeViewModel)
         {
-            if (wasteDescriptionCodeViewModel == null)
-            {
-                throw new ArgumentNullException(nameof(wasteDescriptionCodeViewModel));
-            }
-
             // Remove any blank rows
             var wasteDescriptionCodes = wasteDescriptionCodeViewModel
                 .Rows
