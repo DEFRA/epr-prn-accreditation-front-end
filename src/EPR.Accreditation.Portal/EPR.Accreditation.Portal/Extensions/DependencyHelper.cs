@@ -43,6 +43,7 @@
                 .AddScoped<IWastePermitService, WastePermitService>()
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
+                .AddScoped<ISiteService, SiteService>()
                 .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
                 .AddScoped<IOverseasSiteService, OverseasSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName));
@@ -94,6 +95,15 @@
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"));
+
+            services
+                .AddScoped<IHttpSiteService>(s =>
+                    new HttpSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"
+                    ));
 
             var mapperConfig = new MapperConfiguration(mc =>
             {

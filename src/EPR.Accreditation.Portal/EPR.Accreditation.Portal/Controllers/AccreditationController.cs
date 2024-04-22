@@ -19,6 +19,7 @@
         private readonly ISaveAndComeBackService _saveAndComeBackService;
         private readonly BackPageViewModel _backPageViewModel;
         private readonly IUrlHelperWrapper _urlHelper;
+        private readonly ISiteService _siteService;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
@@ -26,7 +27,8 @@
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            ISiteService siteSerivce)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
@@ -34,6 +36,7 @@
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
+            _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
         }
 
         [HttpGet("PermitExemption")]
@@ -289,6 +292,56 @@
             Guid? id)
         {
             return NotFound();
+        }
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        public async Task<IActionResult> SiteAddress(
+    Guid? id,
+    Guid? siteId,
+    Guid? materialId)
+        {
+            // TODO: Need to add correct back link in the future
+            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
+            if (id == null)
+                return NotFound();
+
+            if (siteId == null)
+                siteId = Guid.Empty;
+
+            var viewModel = await _siteService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
+
+            return View(viewModel);
+        }
+
+        [HttpPost("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PermitExemptionResources.ErrorMessage))
+            {
+                return View(viewModel);
+            }
+
+            await _siteService.SaveSiteAddress(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                // this is all the data we require to save for come back later
+                await _saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    Request.HttpContext.GetRouteData().Values);
+                return View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToAction("PermitExemption", "Accreditation", new { viewModel.Id });
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
         public int Id { get; set; }
 
         public Enums.TaskStatus TaskStatusId { get; set; }
-
+        
         public Enums.TaskName TaskNameId { get; set; }
     }
 }

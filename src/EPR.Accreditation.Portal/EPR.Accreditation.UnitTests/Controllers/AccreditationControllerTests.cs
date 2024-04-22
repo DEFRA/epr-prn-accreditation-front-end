@@ -19,6 +19,7 @@
         private Mock<IHttpAccreditationService> _mockhttpAccreditationService;
         private Mock<IAccreditationService> _mockAccreditationService;
         private Mock<IWastePermitService> _mockWastePermitService;
+        private Mock<ISiteService> _mockSiteService;
         private Mock<IUrlHelperWrapper> _mockUrlHelper;
         private AccreditationController _accreditationController;
         private BackPageViewModel _backPageViewModel;
@@ -31,6 +32,7 @@
             _mockhttpAccreditationService = new Mock<IHttpAccreditationService>();
             _mockAccreditationService = new Mock<IAccreditationService>();
             _mockWastePermitService = new Mock<IWastePermitService>();
+            _mockSiteService = new Mock<ISiteService>();
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _backPageViewModel = new BackPageViewModel();
 
@@ -40,7 +42,8 @@
                 _mockSaveAndComeBackService.Object,
                 _mockAccreditationService.Object,
                 _mockUrlHelper.Object,
-                _backPageViewModel);
+                _backPageViewModel,
+                _mockSiteService.Object);
 
             var context = new DefaultHttpContext();
             _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);
