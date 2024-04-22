@@ -1,0 +1,43 @@
+﻿@model ReprocessorDetailsViewModel
+
+@{
+    ViewData["Title"] = ReprocessorDetailsResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+<form method="post">
+    <h1 class="govuk-heading-l">
+        @ReprocessorDetailsResources.PageHeading
+    </h1>
+    <div class="govuk-form-group">
+        <p class="govuk-error-message">
+            <span asp-validation-for="@Model.Name"></span>
+        </p>
+        <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.OrgName">
+            @ReprocessorDetailsResources.OrgName
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" type="text" asp-for="@Model.Name">
+    </div>
+
+    <div class="govuk-form-group">
+        <p class="govuk-error-message">
+            <span asp-validation-for="@Model.CountryId"></span>
+        </p>
+        <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.SelectCountry">
+            @ReprocessorDetailsResources.SelectCountry
+        </label>
+        <select class="govuk-select" id="CountryId" name="CountryId" asp-for="CountryId" asp-items="@Model.Countries"></select>
+    </div>
+
+    <div class="govuk-form-group">
+        <p class="govuk-error-message">
+            <span asp-validation-for="@Model.Address"></span>
+        </p>
+        <label class="govuk-label" style="font-weight: bold" for="@ReprocessorDetailsResources.Address">
+            Address
+        </label>
+        <textarea class="govuk-textarea govuk-!-width-two-thirds" id="Address" name="Address" rows="5" asp-for="@Model.Address"></textarea>
+    </div>
+
+    <partial name="_SaveButtons" />
+</form>

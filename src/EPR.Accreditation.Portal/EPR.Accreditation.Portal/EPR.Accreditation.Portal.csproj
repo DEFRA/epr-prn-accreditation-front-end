@@ -54,6 +54,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>NonWasteInputLastYearResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\MaterialWasteOutputsEstimatedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MaterialWasteOutputsEstimatedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\MaterialWasteOutputsLastYearResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MaterialWasteOutputsLastYearResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\ProductsProducedLastYearResources.Designer.cs">
       <DependentUpon>ProductsProducedLastYearResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -63,6 +73,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductsProducedEstimatedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\ReprocessorDetailsResources.cy-GB.Designer.cs">
+      <DependentUpon>ReprocessorDetailsResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ReprocessorDetailsResources.Designer.cs">
+      <DependentUpon>ReprocessorDetailsResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
@@ -188,6 +208,20 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NonWasteInputLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsEstimatedResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsEstimatedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialWasteOutputsEstimatedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsLastYearResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsLastYearResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialWasteOutputsLastYearResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\ProductsProducedLastYearResources.resx">
       <LastGenOutput>ProductsProducedLastYearResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -195,6 +229,14 @@
     <EmbeddedResource Update="Resources\ProductsProducedEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProductsProducedEstimatedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ReprocessorDetailsResources.cy-GB.resx">
+      <LastGenOutput>ReprocessorDetailsResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ReprocessorDetailsResources.resx">
+      <LastGenOutput>ReprocessorDetailsResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
       <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>

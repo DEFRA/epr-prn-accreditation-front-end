@@ -321,6 +321,84 @@
         }
 
         /// <summary>
+        /// Returns a page containing annual waste (actual or estimated) data.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        [HttpGet("MaterialWasteOutputs", Name = "SiteMaterialWasteOutputs")]
+        public async Task<IActionResult> MaterialWasteOutputs(
+            Guid? id,
+            Guid? materialId)
+        {
+            if (id == null || materialId == null)
+            {
+                return this.NotFound();
+            }
+
+            MaterialWasteOutputsViewModel materialWasteOutputsViewModel = await this._accreditationSiteMaterialService.GetMaterialWasteOutputs(
+                id.Value,
+                materialId.Value);
+
+            // if waste last year has not been set, then the user should not
+            // be on this page
+            if (materialWasteOutputsViewModel.WasteLastYear == null)
+            {
+                return this.NotFound();
+            }
+
+            // if waste last year is true then return the MaterialWasteOutputs view
+            // otherwise, return the estimated view
+            return materialWasteOutputsViewModel.WasteLastYear == true ?
+                this.View("MaterialWasteOutputsLastYear", materialWasteOutputsViewModel) :
+                this.View("MaterialWasteOutputsEstimated", materialWasteOutputsViewModel);
+        }
+
+        /// <summary>
+        /// Saves annual waste data.
+        /// </summary>
+        /// <param name="viewModel">View model used for data input.</param>
+        /// <param name="saveButton">Save button.</param>
+        /// <returns>Does a page redirect.</returns>
+        [HttpPost("MaterialWasteOutputs")]
+        public async Task<IActionResult> MaterialWasteOutputs(
+            MaterialWasteOutputsViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!this.ModelState.IsValidForSaveForLater(
+                saveButton,
+                MaterialWasteOutputsLastYearResources.UkPackagingWasteBlank,
+                MaterialWasteOutputsLastYearResources.NonUkPackagingWasteBlank,
+                MaterialWasteOutputsLastYearResources.NonPackagingWasteBlank))
+            {
+                return await this.MaterialWasteOutputs(
+                    viewModel.Id,
+                    viewModel.MaterialId);
+            }
+
+            await this._accreditationSiteMaterialService.UpdateMaterialWasteOutputs(viewModel);
+
+            if (saveButton == SaveButton.SaveAndComeBack)
+            {
+                // this is all the data we require to save for come back later
+                await this._saveAndComeBackService.AddSaveAndComeBack(
+                    viewModel.Id,
+                    this._httpContextAccessor.HttpContext.GetRouteData().Values);
+                return this.View("_ApplicationSaved");
+            }
+            else
+            {
+                return RedirectToRoute(
+                    NonWasteInputsRouteName,
+                    new
+                    {
+                        viewModel.Id,
+                        viewModel.MaterialId
+                    });
+            }
+        }
+
+        /// <summary>
         /// Get method for displaying the products produced (Both estimated and
         /// last calender year
         /// </summary>

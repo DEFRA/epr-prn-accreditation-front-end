@@ -39,7 +39,6 @@
         [HttpGet("PermitExemption")]
         public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
         {
-            // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)
@@ -87,7 +86,6 @@
         [HttpGet("WasteLicensesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
-            // TODO: Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)

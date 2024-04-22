@@ -44,6 +44,7 @@
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
                 .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
+                .AddScoped<IOverseasSiteService, OverseasSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName))
                 .Configure<ContentLinksConfiguration>(configuration.GetSection(ContentLinksConfiguration.SectionName));
 
@@ -87,6 +88,14 @@
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
                         "Accreditation"));
 
+            services
+                .AddScoped<IHttpOverseasSiteService>(s =>
+                    new HttpOverseasSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"));
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AccreditationProfile());
@@ -96,7 +105,6 @@
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            // control client validation based on configuration
             services.AddRazorPages()
                 .AddViewOptions(o =>
                 {

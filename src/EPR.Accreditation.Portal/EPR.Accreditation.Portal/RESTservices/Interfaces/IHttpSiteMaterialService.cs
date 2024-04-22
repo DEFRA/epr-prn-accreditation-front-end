@@ -60,6 +60,28 @@
             Guid materialId,
             MaterialOutputsDto materialOutputsDto);
 
+        /// <summary>
+        /// Gets material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>Material waste output dto.</returns>
+        Task<MaterialWasteOutputsDto> GetMaterialWasteOutputs(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <param name="materialWasteOutputsDto">Material waste output dto.</param>
+        /// <returns>Nothing.</returns>
+        Task UpdateMaterialWasteOutputs(
+            Guid id,
+            Guid materialId,
+            MaterialWasteOutputsDto materialWasteOutputsDto);
+
         // only reprocessor
         Task<bool?> GetReprocessedWasteLastYear(
             Guid id,

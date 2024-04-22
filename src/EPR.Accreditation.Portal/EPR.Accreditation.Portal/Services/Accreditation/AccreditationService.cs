@@ -22,7 +22,11 @@
         public async Task<OperatorTypeViewModel> GetOperatorType(Guid id)
         {
             var result = await _httpAccreditationService.GetOperatorType(id);
-            return new OperatorTypeViewModel { ExternalId = id, OperatorType = result };
+            return new OperatorTypeViewModel
+            {
+                ExternalId = id,
+                OperatorType = result
+            };
         }
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
