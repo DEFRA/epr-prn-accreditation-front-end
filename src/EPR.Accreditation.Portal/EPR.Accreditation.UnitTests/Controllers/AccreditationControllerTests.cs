@@ -1,27 +1,27 @@
-﻿using EPR.Accreditation.Portal.Controllers;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Moq;
-
-namespace EPR.Accreditation.UnitTests.Controllers
+﻿namespace EPR.Accreditation.UnitTests.Controllers
 {
+    using EPR.Accreditation.Portal.Controllers;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
+    using Moq;
+
     [TestClass]
     public class AccreditationControllerTests
     {
-        protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
-        protected Mock<IHttpAccreditationService> _mockhttpAccreditationService;
-        protected Mock<IAccreditationService> _mockAccreditationService;
-        protected Mock<IWastePermitService> _mockWastePermitService;
-        protected Mock<IUrlHelperWrapper> _mockUrlHelper;
-        protected AccreditationController _accreditationController;
-        protected BackPageViewModel _backPageViewModel;
+        private Mock<IHttpContextAccessor> _mockContextAccessor;
+        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
+        private Mock<IHttpAccreditationService> _mockhttpAccreditationService;
+        private Mock<IAccreditationService> _mockAccreditationService;
+        private Mock<IWastePermitService> _mockWastePermitService;
+        private Mock<IUrlHelperWrapper> _mockUrlHelper;
+        private AccreditationController _accreditationController;
+        private BackPageViewModel _backPageViewModel;
 
         [TestInitialize]
         public void Init()
@@ -101,7 +101,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsNull(viewResult.ViewName);
 
             _mockWastePermitService.Verify(service => service.GetPermitExemptionViewModel(id), Times.Once());
-
         }
 
         [TestMethod]
@@ -114,7 +113,6 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 
             _mockWastePermitService.Verify(service => service.GetPermitExemptionViewModel(Guid.Empty), Times.Never());
-
         }
 
         [TestMethod]
@@ -179,15 +177,17 @@ namespace EPR.Accreditation.UnitTests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual("_ApplicationSaved", result.ViewName);
 
-            _mockWastePermitService.Verify(s =>
-            s.UpdatePermitExemption(
-                viewModel),
+            _mockWastePermitService.Verify(
+                s =>
+                    s.UpdatePermitExemption(
+                        viewModel),
                 Times.Once);
 
-            _mockSaveAndComeBackService.Verify(x =>
-                x.AddSaveAndComeBack(
-                    It.IsAny<Guid>(),
-                    It.IsAny<RouteValueDictionary>()),
+            _mockSaveAndComeBackService.Verify(
+                x =>
+                    x.AddSaveAndComeBack(
+                        It.IsAny<Guid>(),
+                        It.IsAny<RouteValueDictionary>()),
                 Times.Once());
         }
 
@@ -196,7 +196,7 @@ namespace EPR.Accreditation.UnitTests.Controllers
         {
             // Arrange
             var viewModel = new PermitExemptionViewModel();
-            var saveButton = new SaveButton();
+            var saveButton = SaveButton.Undefined;
 
             _accreditationController.ModelState.AddModelError("Error", "Error");
 

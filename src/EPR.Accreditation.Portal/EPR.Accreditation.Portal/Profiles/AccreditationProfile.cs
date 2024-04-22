@@ -3,27 +3,46 @@
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.OverseasSite;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 
+    /// <summary>
+    /// Class to describe mappings of view models and DTOs
+    /// </summary>
     public class AccreditationProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccreditationProfile"/> class.
+        /// </summary>
         public AccreditationProfile()
         {
-            this.CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
-            this.CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
-            this.CreateMap<PermitExemptionViewModel, PermitExemption>();
-            this.CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
-            this.CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
+            CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
+            CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
+            CreateMap<PermitExemptionViewModel, PermitExemption>();
+            CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
+            CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
+            CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<NonWasteInputsDto, NonWasteInputsViewModel>()
-                    .ForMember(d => d.Rows, o => o.MapFrom(s => s.NonWasteInputRecords ?? new List<NonWasteInputRecordDto>()))
-                    .ReverseMap()
-                    .ForMember(d => d.NonWasteInputRecords, o => o.MapFrom(s => s.Rows));
+            CreateMap<ReprocessingSupportingInformationDto, NonWasteInputsViewModel>()
+                .ForMember(d => d.Rows, o => o.MapFrom(s => s.Records ?? new List<ReprocessingSupportingInformationRecordDto>()))
+                .ReverseMap()
+                .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
 
-            this.CreateMap<NonWasteInputRecordDto, NonWasteInputsRowViewModel>()
+            CreateMap<ReprocessingSupportingInformationRecordDto, TypeTonnesRowViewModel>()
                 .ReverseMap();
+
+            this.CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+
+            this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
+                .ReverseMap();
+
+            CreateMap<ReprocessingSupportingInformationDto, ProductsProducedViewModel>()
+                .ForMember(d => d.Rows, o => o.MapFrom(s => s.Records ?? new List<ReprocessingSupportingInformationRecordDto>()))
+                .ReverseMap()
+                .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
         }
     }
 }

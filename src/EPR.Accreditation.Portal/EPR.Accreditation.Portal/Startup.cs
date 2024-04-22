@@ -1,18 +1,15 @@
-﻿using EPR.Accreditation.Portal.Constants;
-using EPR.Accreditation.Portal.Extensions;
-using EPR.Accreditation.Portal.Helpers;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Middleware;
-using EPR.Accreditation.Portal.Options;
-using EPR.Accreditation.Portal.Services.Accreditation;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
-
-namespace EPR.Accreditation.Portal
+﻿namespace EPR.Accreditation.Portal
 {
+    using EPR.Accreditation.Portal.Constants;
+    using EPR.Accreditation.Portal.Extensions;
+    using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Services.Accreditation;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using Microsoft.AspNetCore.Localization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.Routing;
+
     public class Startup
     {
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
@@ -22,6 +19,7 @@ namespace EPR.Accreditation.Portal
         }
 
         public IConfiguration Configuration { get; }
+
         public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
@@ -43,12 +41,13 @@ namespace EPR.Accreditation.Portal
             {
                     CultureConstants.English,
                     CultureConstants.Welsh
-                };
+            };
             services.AddLocalization(opts =>
             {
                 opts.ResourcesPath = "Resources";
             });
-            services.AddScoped<IUrlHelper>(x => {
+            services.AddScoped<IUrlHelper>(x =>
+            {
                 var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
                 var factory = x.GetRequiredService<IUrlHelperFactory>();
                 return factory.GetUrlHelper(actionContext);
@@ -64,8 +63,7 @@ namespace EPR.Accreditation.Portal
             // Register configuration options
             services.AddSingleton<IConfiguration>(Configuration);
             services.Configure<AppSettingsConfigOptions>(
-                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection)
-            );
+                Configuration.GetSection(AppSettingsConfigOptions.ConfigSection));
 
             services.AddTransient<IAccreditationService, AccreditationService>();
         }
@@ -93,7 +91,6 @@ namespace EPR.Accreditation.Portal
                 app.UseStaticFiles();
             }
 
-            //app.UsePrnMiddleware();
             app.UseRequestLocalization();
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -108,8 +105,6 @@ namespace EPR.Accreditation.Portal
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }

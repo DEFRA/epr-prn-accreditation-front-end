@@ -8,7 +8,7 @@
     /// </summary>
     public class RequiredIfOtherAttribute : ValidationAttribute
     {
-        public string PropertyName;
+        private readonly string _propertyName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiredIfOtherAttribute"/> class.
@@ -17,7 +17,7 @@
         /// <param name="propertyName">the name of the other property on the model to check.</param>
         public RequiredIfOtherAttribute(string propertyName)
         {
-            PropertyName = propertyName;
+            _propertyName = propertyName;
         }
 
         /// <summary>
@@ -41,14 +41,14 @@
             object value,
             ValidationContext validationContext)
         {
-            var otherPropertyValue = validationContext.ObjectType.GetProperty(PropertyName)?.GetValue(validationContext.ObjectInstance, null);
+            var otherPropertyValue = validationContext.ObjectType.GetProperty(_propertyName)?.GetValue(validationContext.ObjectInstance, null);
 
             if (value != null)
             {
                 if (otherPropertyValue == null || string.IsNullOrWhiteSpace(otherPropertyValue.ToString()))
                 {
                     var errorMessage = FormatErrorMessage(validationContext.DisplayName);
-                    return new ValidationResult(ErrorMessage ?? $"{validationContext.DisplayName} requires {PropertyName} to have a value.");
+                    return new ValidationResult(ErrorMessage ?? $"{validationContext.DisplayName} requires {_propertyName} to have a value.");
                 }
             }
 

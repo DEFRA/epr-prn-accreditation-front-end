@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EPR.Accreditation.Facade.Common.Dtos
+﻿namespace EPR.Accreditation.Portal.Common.Dtos
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Accreditation
     {
         public Guid? ExternalId { get; set; } // This has a unique key added via the dbcontext
-        
+
         public Enums.OperatorType OperatorTypeId { get; set; }
 
         [MaxLength(12)]
@@ -26,11 +26,5 @@ namespace EPR.Accreditation.Facade.Common.Dtos
         public Guid? UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
-
-        public Site Site { get; set; }
-
-        public IEnumerable<OverseasReprocessingSite> OverseasReprocessingSites { get; set; }
-
-        public WastePermit WastePermit { get; set; }
     }
 }

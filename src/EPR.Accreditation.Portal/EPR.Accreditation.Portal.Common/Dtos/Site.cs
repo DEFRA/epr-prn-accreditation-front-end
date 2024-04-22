@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Dtos
+﻿namespace EPR.Accreditation.Portal.Common.Dtos
 {
     public class Site
     {
@@ -17,7 +17,5 @@
         public string Postcode { get; set; }
 
         public Guid OrganisationId { get; set; }
-
-        public IEnumerable<SiteAuthority> SiteAuthorties { get; set;}
     }
 }

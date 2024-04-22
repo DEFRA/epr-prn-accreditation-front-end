@@ -1,36 +1,28 @@
-﻿using AutoMapper;
-using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.RESTservices.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Moq;
-
-namespace EPR.Accreditation.UnitTests.Services.Accreditation
+﻿namespace EPR.Accreditation.UnitTests.Services.Accreditation
 {
+    using AutoMapper;
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Moq;
+
     [TestClass]
     public class WastePermitServiceTests
     {
-        protected WastePermitService _wastePermitService;
-        protected Mock<IHttpContextAccessor> _mockContextAccessor;
-        protected Mock<IHttpWastePermitService> _mockHttpWastePermitService;
-        protected Mock<IMapper> _mockMapper;
-
+        private WastePermitService _wastePermitService;
+        private Mock<IHttpWastePermitService> _mockHttpWastePermitService;
+        private Mock<IMapper> _mockMapper;
 
         [TestInitialize]
         public void Init()
         {
-            _mockContextAccessor = new Mock<IHttpContextAccessor>();
             _mockMapper = new Mock<IMapper>();
             _mockHttpWastePermitService = new Mock<IHttpWastePermitService>();
 
             _wastePermitService = new WastePermitService(
-                _mockContextAccessor.Object,
                 _mockHttpWastePermitService.Object,
                 _mockMapper.Object);
-
-            var context = new DefaultHttpContext();
-            _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);
         }
 
         [TestMethod]
@@ -107,11 +99,12 @@ namespace EPR.Accreditation.UnitTests.Services.Accreditation
             await _wastePermitService.UpdatePermitExemption(permitExemptionViewModel);
 
             // Assert
-            _mockHttpWastePermitService.Verify(m =>
-                m.UpdatePermitExemption(
-                    permitExemptionViewModel.Id,
-                    permitExemptionDto),
-                    Times.Once);
+            _mockHttpWastePermitService.Verify(
+                m =>
+                    m.UpdatePermitExemption(
+                        permitExemptionViewModel.Id,
+                        permitExemptionDto),
+                Times.Once);
         }
 
         [TestMethod]
@@ -127,10 +120,12 @@ namespace EPR.Accreditation.UnitTests.Services.Accreditation
             await _wastePermitService.UpdatePermitExemption(permitExemptionViewModel);
 
             // Assert
-            _mockHttpWastePermitService.Verify(m =>
-                m.UpdatePermitExemption(
-                    It.IsAny<Guid>(),
-                    It.IsAny<PermitExemption>()), Times.Once);
+            _mockHttpWastePermitService.Verify(
+                m =>
+                    m.UpdatePermitExemption(
+                        It.IsAny<Guid>(),
+                        It.IsAny<PermitExemption>()),
+                Times.Once);
         }
 
         [TestMethod]
@@ -146,10 +141,12 @@ namespace EPR.Accreditation.UnitTests.Services.Accreditation
             await _wastePermitService.UpdatePermitExemption(permitExemptionViewModel);
 
             // Assert
-            _mockHttpWastePermitService.Verify(m =>
-                m.UpdatePermitExemption(
-                    permitExemptionViewModel.Id,
-                    permitExemptionDto), Times.Once);
+            _mockHttpWastePermitService.Verify(
+                m =>
+                    m.UpdatePermitExemption(
+                        permitExemptionViewModel.Id,
+                        permitExemptionDto),
+                Times.Once);
         }
     }
 }

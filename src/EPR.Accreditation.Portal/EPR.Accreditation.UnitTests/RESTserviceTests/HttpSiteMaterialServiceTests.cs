@@ -1,28 +1,28 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.RESTservices;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
-using System.Net;
-using Enums = EPR.Accreditation.Portal.Enums;
-
-namespace EPR.Accreditation.UnitTests.RESTserviceTests
+﻿namespace EPR.Accreditation.UnitTests.RESTserviceTests
 {
+    using System.Net;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices;
+    using Microsoft.AspNetCore.Http;
+    using Moq;
+    using Moq.Protected;
+    using Newtonsoft.Json;
+    using Enums = EPR.Accreditation.Portal.Enums;
+
     [TestClass]
     public class HttpSiteMaterialServiceTests
     {
-        protected HttpSiteMaterialService _httpSiteMaterialService;
-        protected Mock<IHttpContextAccessor> _contextAccessor;
-        protected Mock<IHttpClientFactory> _httpClientFactory;
-        protected HttpClient _httpClient;
-        protected Mock<DelegatingHandler> _clientHandlerMock;
-        protected string _baseUrl = "http://baseUrl";
-        protected string _endpointName = "endpointName";
-        protected string _capturedUrl;
-        protected string _capturedPayload;
+        private HttpSiteMaterialService _httpSiteMaterialService;
+        private Mock<IHttpContextAccessor> _contextAccessor;
+        private Mock<IHttpClientFactory> _httpClientFactory;
+        private HttpClient _httpClient;
+        private Mock<DelegatingHandler> _clientHandlerMock;
+        private string _baseUrl = "http://baseUrl";
+        private string _endpointName = "endpointName";
+        private string _capturedUrl;
+        private string _capturedPayload;
 
         public HttpSiteMaterialServiceTests()
         {
@@ -42,29 +42,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 _endpointName);
 
             SetClientResponse();
-        }
-
-        private void SetClientResponse(
-            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
-            object content = null)
-        {
-            var response = new HttpResponseMessage(httpStatusCode);
-
-            if (content != null)
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(content));
-            }
-
-            _clientHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
-                {
-                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
-                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
-                })
-                .ReturnsAsync(response)
-                .Verifiable();
         }
 
         [Ignore]
@@ -242,6 +219,60 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
         }
 
         [TestMethod]
+        public async Task GetMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedMaterialWasteOutputsDto = new MaterialWasteOutputsDto
+            {
+                UkPackagingWaste = 1.2M,
+                NonUkPackagingWaste = 4.5M,
+                NonPackagingWaste = 56.3M,
+            };
+            this.SetClientResponse(HttpStatusCode.OK, expectedMaterialWasteOutputsDto);
+
+            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Site/Material/{materialId}/MaterialWasteOutputs";
+
+            // Act
+            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(materialWasteOutputsDto);
+            Assert.IsTrue(this.AreObjectsEqual(expectedMaterialWasteOutputsDto, materialWasteOutputsDto)); // check to ensure what is returned from the HttpClient is returned by the service
+            Assert.AreEqual(expectedUrl.ToLower(), this._capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task UpdateMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var materialWasteOutputsDto = new MaterialWasteOutputsDto
+            {
+                UkPackagingWaste = 8.65M,
+                NonUkPackagingWaste = 5.09M,
+                NonPackagingWaste = null,
+            };
+
+            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Site/Material/{materialId}/MaterialWasteOutputs";
+
+            // Act
+            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
+                id,
+                materialId,
+                materialWasteOutputsDto);
+
+            // Arrange
+            var capturedPayload = JsonConvert.DeserializeObject<MaterialWasteOutputsDto>(this._capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), this._capturedUrl.ToLower());
+            Assert.IsTrue(this.AreObjectsEqual(materialWasteOutputsDto, capturedPayload));
+        }
+
+        [TestMethod]
         public async Task UpdateMaterialOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
         {
             // Arrange
@@ -314,21 +345,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             Assert.IsTrue(AreObjectsEqual(reprocessedWasteLastYearDto, capturedPayload));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         [TestMethod]
         public async Task GetNonWasteInputs_CallsExpectedEndPoint_WithCorrectParameters()
         {
@@ -352,8 +368,9 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            var nonWasteInputsDto = new NonWasteInputsDto();
+            var nonWasteInputsDto = new ReprocessingSupportingInformationDto();
             var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/NonWasteInputs";
+
             // Act
             await _httpSiteMaterialService.UpdateNonWasteInputs(
                 id,
@@ -361,7 +378,7 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 nonWasteInputsDto);
 
             // Assert
-            var capturedPayload = JsonConvert.DeserializeObject<NonWasteInputsDto>(_capturedPayload);
+            var capturedPayload = JsonConvert.DeserializeObject<ReprocessingSupportingInformationDto>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(nonWasteInputsDto, capturedPayload));
         }
@@ -372,6 +389,29 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
             var obj2Json = JsonConvert.SerializeObject(obj2);
 
             return obj1Json == obj2Json;
+        }
+
+        private void SetClientResponse(
+            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
+            object content = null)
+        {
+            var response = new HttpResponseMessage(httpStatusCode);
+
+            if (content != null)
+            {
+                response.Content = new StringContent(JsonConvert.SerializeObject(content));
+            }
+
+            _clientHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
+                {
+                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
+                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
+                })
+                .ReturnsAsync(response)
+                .Verifiable();
         }
     }
 }

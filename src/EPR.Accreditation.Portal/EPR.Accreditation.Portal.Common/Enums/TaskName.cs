@@ -1,4 +1,4 @@
-﻿namespace EPR.Accreditation.Facade.Common.Enums
+﻿namespace EPR.Accreditation.Portal.Common.Enums
 {
     // this is used to represent the particular tasks for the task progress page
     // each record for an accreditation in the TaskProgress table will have a Task name id

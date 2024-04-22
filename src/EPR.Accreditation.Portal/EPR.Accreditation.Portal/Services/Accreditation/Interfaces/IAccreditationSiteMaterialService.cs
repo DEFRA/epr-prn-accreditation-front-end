@@ -1,8 +1,9 @@
-﻿using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.ViewModels;
-
-namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
+﻿namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+
     public interface IAccreditationSiteMaterialService
     {
         // available for both reprocessor and exporter
@@ -32,6 +33,14 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
         Task UpdateNonWasteInputs(NonWasteInputsViewModel nonWasteInputsViewModel);
 
         // only reprocessor
+        Task<ProductsProducedViewModel> GetProductsProduced(
+            Guid id,
+            Guid materialId);
+
+        // only reprocessor
+        Task UpdateProductsProduced(ProductsProducedViewModel nonWasteInputsViewModel);
+
+        // only reprocessor
         Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
             Guid materialId);
@@ -46,5 +55,20 @@ namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 
         Task UpdateReprocessedWasteLastYear(
             ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel);
+
+        /// <summary>
+        /// Returns annual waste (actual or estimated) data.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(Guid id, Guid materialId);
+
+        /// <summary>
+        /// Updates annual waste (actual or estimated) data.
+        /// </summary>
+        /// <param name="materialWasteOutputsViewModel"> Material waste output view model.</param>
+        /// <returns>A <see cref="Task{TResult}"/> Nothing returned.</returns>
+        Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialWasteOutputsViewModel);
     }
 }

@@ -1,9 +1,9 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.Enums;
-
-namespace EPR.Accreditation.Portal.RESTservices.Interfaces
+﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.Enums;
+
     public interface IHttpSiteMaterialService
     {
         // available for both reprocessor and exporter
@@ -29,7 +29,7 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             string wasteSource);
 
         // only reprocessor
-        Task<NonWasteInputsDto> GetNonWasteInputs(
+        Task<ReprocessingSupportingInformationDto> GetNonWasteInputs(
             Guid id,
             Guid materialId);
 
@@ -37,7 +37,16 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
         Task UpdateNonWasteInputs(
             Guid id,
             Guid materialId,
-            NonWasteInputsDto nonWasteInputsDto);
+            ReprocessingSupportingInformationDto nonWasteInputsDto);
+
+        Task<ReprocessingSupportingInformationDto> GetProductsProduced(
+            Guid id,
+            Guid materialId);
+
+        Task UpdateProductsProduced(
+            Guid id,
+            Guid materialId,
+            ReprocessingSupportingInformationDto nonWasteInputsDto);
 
         // only reprocessor
         Task<MaterialOutputsDto> GetMaterialOutputs(
@@ -49,6 +58,28 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid id,
             Guid materialId,
             MaterialOutputsDto materialOutputsDto);
+
+        /// <summary>
+        /// Gets material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <returns>Material waste output dto.</returns>
+        Task<MaterialWasteOutputsDto> GetMaterialWasteOutputs(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates material waste output.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="materialId">Material id.</param>
+        /// <param name="materialWasteOutputsDto">Material waste output dto.</param>
+        /// <returns>Nothing.</returns>
+        Task UpdateMaterialWasteOutputs(
+            Guid id,
+            Guid materialId,
+            MaterialWasteOutputsDto materialWasteOutputsDto);
 
         // only reprocessor
         Task<bool?> GetReprocessedWasteLastYear(

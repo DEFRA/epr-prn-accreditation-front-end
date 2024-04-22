@@ -1,12 +1,12 @@
-﻿using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Helpers.ActionFilters;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace EPR.Accreditation.Portal.Controllers
+﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("Accreditation/{id}/OverseasSite/{siteId}/Material/{materialId}")]
     [ServiceFilter(typeof(WasteTypeActionFilter))]
     public class OverseasSiteMaterialController : BaseSiteController
@@ -25,9 +25,8 @@ namespace EPR.Accreditation.Portal.Controllers
                   backPageViewModel,
                   SiteType.OverseasSite)
         {
-            SiteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
-            SiteProductsProducedRouteName = "OverseasSiteProductsProduced";
-            SiteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
+            _siteProcessingCapacityRouteName = "OverseasSiteProcessingCapacity";
+            _siteChooseMaterialRouteName = "OverseasSiteChooseMaterial";
         }
 
         [HttpGet("Material", Name = "OverseasSiteChooseMaterial")]
