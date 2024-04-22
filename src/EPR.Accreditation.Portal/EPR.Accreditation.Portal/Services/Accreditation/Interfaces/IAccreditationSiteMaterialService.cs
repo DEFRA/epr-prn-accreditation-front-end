@@ -55,5 +55,25 @@
 
         Task UpdateReprocessedWasteLastYear(
             ReprocessedWasteLastYearViewModel reprocessedWasteLastYearViewModel);
+
+        /// <summary>
+        /// Gets the view model and any relevant data fore the waste description code page
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <param name="overseasSiteId">The id of the overseas site</param>
+        /// <param name="materialId">The id of the material that the waste codes are for</param>
+        /// <returns>An async WasteDescriptionCodeViewModel</returns>
+        Task<WasteDescriptionCodeViewModel> GetWasteDescriptionCodeViewModel(
+            Guid id,
+            Guid overseasSiteId,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates the waste description codes for the material associated to the accreditation
+        /// </summary>
+        /// <param name="wasteDescriptionCodeViewModel">The view model posted from the view</param>
+        /// <returns>Async task</returns>
+        Task UpdateWasteDescriptionCodeViewModel(
+            WasteDescriptionCodeViewModel wasteDescriptionCodeViewModel);
     }
 }

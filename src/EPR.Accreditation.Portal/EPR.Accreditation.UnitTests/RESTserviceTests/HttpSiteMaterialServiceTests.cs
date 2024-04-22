@@ -329,6 +329,54 @@
             Assert.IsTrue(AreObjectsEqual(nonWasteInputsDto, capturedPayload));
         }
 
+        [TestMethod]
+        public async Task GetWasteDescriptionCodes_CallsEndPointWithParameters()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var siteId = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes";
+
+            // Act
+            await _httpSiteMaterialService.GetWasteDescriptionCodes(
+                id,
+                siteId,
+                materialId);
+
+            // Assert
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task SaveWasteDescriptionCodes_CallEndPointWithParameters()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var siteId = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes";
+
+            var wasteDecriptionCodes = new List<string>
+            {
+                "ABC",
+                "DEF"
+            };
+
+            // Act
+            await _httpSiteMaterialService.SaveWasteDescriptionCodes(
+                id,
+                siteId,
+                materialId,
+                wasteDecriptionCodes);
+
+            // Assert
+            var capturedPayload = JsonConvert.DeserializeObject<List<string>>(_capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+            Assert.IsTrue(AreObjectsEqual(wasteDecriptionCodes, capturedPayload));
+        }
+
         private bool AreObjectsEqual<T>(T obj1, T obj2)
         {
             var obj1Json = JsonConvert.SerializeObject(obj1);

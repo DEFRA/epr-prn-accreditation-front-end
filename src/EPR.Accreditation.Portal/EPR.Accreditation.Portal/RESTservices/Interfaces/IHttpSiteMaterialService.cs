@@ -1,9 +1,10 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
-using EPR.Accreditation.Portal.Enums;
-
-namespace EPR.Accreditation.Portal.RESTservices.Interfaces
+﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
+    using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.Enums;
+
     public interface IHttpSiteMaterialService
     {
         // available for both reprocessor and exporter
@@ -69,5 +70,32 @@ namespace EPR.Accreditation.Portal.RESTservices.Interfaces
             Guid id,
             Guid materialId,
             ReprocessedWasteLastYear reprocessedWasteLastYear);
+
+        /// <summary>
+        /// Gets the waste description codes for the accreditation material
+        /// </summary>
+        /// <param name="id">The accreditation id</param>
+        /// <param name="siteId">The id of the overseas site</param>
+        /// <param name="materialId">The material id</param>
+        /// <returns>The waste description code dto</returns>
+        Task<List<string>> GetWasteDescriptionCodes(
+            Guid id,
+            Guid siteId,
+            Guid materialId);
+
+        /// <summary>
+        /// Calls the Facade to save the waste description codes for the accreditation
+        /// material
+        /// </summary>
+        /// <param name="id">The id of the accreditation application</param>
+        /// <param name="siteId">The id of the overseas site</param>
+        /// <param name="materialId">The id of the material</param>
+        /// <param name="wasteDecriptionCodes">List of the waste description codes to save</param>
+        /// <returns>Async task</returns>
+        Task SaveWasteDescriptionCodes(
+            Guid id,
+            Guid siteId,
+            Guid materialId,
+            IEnumerable<string> wasteDecriptionCodes);
     }
 }

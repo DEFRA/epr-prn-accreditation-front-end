@@ -4,6 +4,7 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Constants;
     using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
@@ -253,6 +254,55 @@
                 reprocessedWasteLastYearViewModel.Id,
                 reprocessedWasteLastYearViewModel.MaterialId,
                 reprocessedWasteLastYearDto);
+        }
+
+        /// <summary>
+        /// Gets the view model and any relevant data fore the waste description code page
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <param name="overseasSiteId">The id of the overseas site</param>
+        /// <param name="materialId">The id of the material that the waste codes are for</param>
+        /// <returns>An async WasteDescriptionCodeViewModel</returns>
+        public async Task<WasteDescriptionCodeViewModel> GetWasteDescriptionCodeViewModel(
+            Guid id,
+            Guid overseasSiteId,
+            Guid materialId)
+        {
+            var wadsteDescriptionCodeList = await _httpSiteMaterialService.GetWasteDescriptionCodes(
+                id,
+                overseasSiteId,
+                materialId);
+
+            return new WasteDescriptionCodeViewModel
+            {
+                Id = id,
+                Rows = _mapper.Map<List<WasteDescriptionCodeRowViewModel>>(wadsteDescriptionCodeList)
+            };
+        }
+
+        /// <summary>
+        /// Updates the waste description codes for the material associated to the accreditation
+        /// </summary>
+        /// <param name="wasteDescriptionCodeViewModel">The view model posted from the view</param>
+        /// <returns>Async task</returns>
+        public async Task UpdateWasteDescriptionCodeViewModel(WasteDescriptionCodeViewModel wasteDescriptionCodeViewModel)
+        {
+            if (wasteDescriptionCodeViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(wasteDescriptionCodeViewModel));
+            }
+
+            // Remove any blank rows
+            var wasteDescriptionCodes = wasteDescriptionCodeViewModel
+                .Rows
+                .Where(r => r.EntryMade)
+                .Select(r => r.WasteDescriptionCode);
+
+            await _httpSiteMaterialService.SaveWasteDescriptionCodes(
+                wasteDescriptionCodeViewModel.Id,
+                wasteDescriptionCodeViewModel.SiteId,
+                wasteDescriptionCodeViewModel.MaterialId,
+                wasteDescriptionCodes);
         }
     }
 }
