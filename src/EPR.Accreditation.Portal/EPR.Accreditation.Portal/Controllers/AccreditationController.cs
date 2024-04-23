@@ -179,11 +179,23 @@
             return NotFound();
         }
 
-        [HttpGet("Overseas")]
-        public async Task<IActionResult> Overseas(
+        /// <summary>
+        /// Returns the Overseas reprocessors view
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous IActionResult.</returns>
+        [HttpGet("OverseasReprocessors")]
+        public async Task<IActionResult> OverseasReprocessors(
             Guid? id)
         {
-            return View("overseas");
+            if (id.HasValue)
+            {
+                var viewModel = await _accreditationService.GetOverseasReprocessorViewModel(id.Value);
+
+                return View(viewModel);
+            }
+
+            return NotFound();
         }
 
         [HttpGet("Upload")]

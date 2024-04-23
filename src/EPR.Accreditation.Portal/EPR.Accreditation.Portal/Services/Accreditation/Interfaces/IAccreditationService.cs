@@ -15,5 +15,13 @@
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        /// <summary>
+        /// Defines the function for getting the view model for
+        /// the overseas reprocessor view model
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation that contains the view model</returns>
+        Task<object> GetOverseasReprocessorViewModel(Guid id);
     }
 }
