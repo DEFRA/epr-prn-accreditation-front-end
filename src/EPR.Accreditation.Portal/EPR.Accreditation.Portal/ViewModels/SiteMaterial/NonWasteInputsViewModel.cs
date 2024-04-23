@@ -20,20 +20,5 @@
         /// This is required so that we know which view to return.
         /// </summary>
         public bool? WasteLastYear { get; set; }
-
-        /*
-                /// <summary>
-                /// Gets or sets the Rows that represent Rows in the view that contain the actual
-                /// data.
-                /// </summary>
-                [ListMustBePopulated(ErrorMessageResourceName = "AtLeastOneEntryRequired", ErrorMessageResourceType = typeof(NonWasteInputLastYearResources))]
-                public IList<NonWasteInputsRowViewModel> Rows { get; set; }
-
-                /// <summary>
-                /// Gets or sets a value to help identify how many extra rows to add over the initial 3 when
-                /// adding rows without javascript.
-                /// </summary>
-                public int RowsToAdd { get; set; }
-        */
     }
 }

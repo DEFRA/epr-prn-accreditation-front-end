@@ -48,6 +48,9 @@
             CreateMap<SiteAddressViewModel, Site>().
                 ForMember(x => x.Id, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<string, WasteDescriptionCodeRowViewModel>()
+                .ForMember(d => d.WasteDescriptionCode, o => o.MapFrom(s => s));
         }
     }
 }

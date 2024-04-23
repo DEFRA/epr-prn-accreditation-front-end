@@ -1,0 +1,57 @@
+﻿@using EPR.Accreditation.Portal.Configuration
+@using EPR.Accreditation.Portal.Options
+@using EPR.Accreditation.Portal.ViewModels
+@using Microsoft.Extensions.Options
+@inject IOptions<AppSettingsConfigOptions> appSettings;
+@inject IOptions<ContentLinksConfiguration> contentLinksSettings;
+@model WasteDescriptionCodeViewModel
+
+@{
+    ViewData["Title"] = WasteDescriptionCodeResources.PageTitle;
+    var intialRows = appSettings.Value.InitialWasteCodesRows.Value;
+}
+
+<partial name="_ValidationSummary" />
+<partial name="_WasteMaterialName" />
+<fieldset class="govuk-fieldset">
+    <h1 class="govuk-heading-l">
+        @WasteDescriptionCodeResources.PageTitle
+    </h1>
+    <p class="govuk-body-m">
+        @Html.Raw(string.Format(WasteDescriptionCodeResources.MainText, contentLinksSettings.Value.ConsolidatedWasteList));
+    </p>
+
+    <form method="post">
+        @* .net appears to cache this if i use asp-for *@
+        <input type="hidden" name="RowsToAdd" value="@Model.RowsToAdd" />
+        <div class="govuk-form-group">
+                           
+            <span class="govuk-caption-m" style="padding-top: 10px">@WasteDescriptionCodeResources.SubText</span>
+            <span class="govuk-caption-m" style="padding-top: 10px">@WasteDescriptionCodeResources.SubTextExample</span>
+
+            <fieldset class="govuk-fieldset">
+                @for (var i = 0; i < Model.RowsToDisplay(intialRows); i++)
+                {
+                    <div class="govuk-form-group">
+                        <div class="govuk-input__wrapper">
+                            
+                            @if (Model != null && Model.Rows.Count() > i)
+                            {
+                                <input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" type="text" asp-for="Rows[i].WasteDescriptionCode">
+                            }
+                            else
+                            {
+                                <input class="govuk-input govuk-input--width-10 govuk-!-margin-right-4" name="@($"Rows[{i}].WasteDescriptionCode")" type="text">
+                            }
+                        </div>
+                    </div>
+                }
+            </fieldset>
+            @if (Model.RowsToDisplay(intialRows) < appSettings.Value.MaximumMultiLineRecordNumber.Value)
+            {
+                <partial name="_AddRowButton" model='"wasteDescription"'/>
+            }
+        </div>
+        <partial name="_SaveButtons" />
+    </form>
+</fieldset>

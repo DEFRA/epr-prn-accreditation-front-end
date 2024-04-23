@@ -3,6 +3,7 @@
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.ViewModels;
@@ -407,6 +408,110 @@
                         It.IsAny<Guid>(),
                         It.IsAny<Guid>(),
                         It.IsAny<ReprocessingSupportingInformationDto>()),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetWasteDescriptionCodeViewModel_CallsServiceWithParameters()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var siteId = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+
+            // Act
+            await _accreditationSiteMaterialService.GetWasteDescriptionCodeViewModel(
+                id,
+                siteId,
+                materialId);
+
+            // Assert
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                    s.GetWasteDescriptionCodes(
+                        id,
+                        siteId,
+                        materialId),
+                Times.Once);
+            _mockMapper.Verify(
+                m =>
+                    m.Map<List<WasteDescriptionCodeRowViewModel>>(It.IsAny<List<string>>()),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateWasteDescriptionCodeViewModel_CallsServiceWithParameters()
+        {
+            // Arrange
+            var viewModel = new WasteDescriptionCodeViewModel
+            {
+                Id = Guid.NewGuid(),
+                SiteId = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid(),
+                Rows = new List<WasteDescriptionCodeRowViewModel>
+                {
+                    new()
+                    {
+                        WasteDescriptionCode = "ABC"
+                    }
+                }
+            };
+
+            // act
+            await _accreditationSiteMaterialService.UpdateWasteDescriptionCodeViewModel(viewModel);
+
+            // Assert
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                    s.SaveWasteDescriptionCodes(
+                        viewModel.Id,
+                        viewModel.SiteId,
+                        viewModel.MaterialId,
+                        It.Is<IEnumerable<string>>(
+                            p =>
+                                p.ToList().Count == 1 &&
+                                p.ToList()[0] == "ABC")),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateWasteDescriptionCodeViewModel_WithBlankEntry_CallsServiceWithParametersWithoutBlankEntries()
+        {
+            // Arrange
+            var viewModel = new WasteDescriptionCodeViewModel
+            {
+                Id = Guid.NewGuid(),
+                SiteId = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid(),
+                Rows = new List<WasteDescriptionCodeRowViewModel>
+                {
+                    new()
+                    {
+                        WasteDescriptionCode = "ABC"
+                    },
+                    new(),
+                    new()
+                    {
+                        WasteDescriptionCode = "DEF"
+                    }
+                }
+            };
+
+            // act
+            await _accreditationSiteMaterialService.UpdateWasteDescriptionCodeViewModel(viewModel);
+
+            // Assert
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                    s.SaveWasteDescriptionCodes(
+                        viewModel.Id,
+                        viewModel.SiteId,
+                        viewModel.MaterialId,
+                        It.Is<IEnumerable<string>>(
+                            p =>
+                                p.ToList().Count == 2 &&
+                                p.ToList()[0] == "ABC" &&
+                                p.ToList()[1] == "DEF")),
                 Times.Once);
         }
     }
