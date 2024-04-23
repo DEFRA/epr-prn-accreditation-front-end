@@ -1,6 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
     using AutoMapper;
+    using EPR.Accreditation.Portal.DTOs.Site;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -55,12 +56,20 @@
             Guid siteId,
             Guid materialId)
         {
-            SiteAddressViewModel siteAddressViewModel = new SiteAddressViewModel()
+            SiteAddressViewModel siteAddressViewModel = new SiteAddressViewModel();
+
+            try
             {
-                Id = id,
-                SiteId = siteId,
-                MaterialId = materialId
-            };
+                var site = await _httpSiteService.GetSite(id, siteId);
+                siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            siteAddressViewModel.Id = id;
+            siteAddressViewModel.SiteId = siteId;
+            siteAddressViewModel.MaterialId = materialId;
 
             return siteAddressViewModel;
         }
@@ -72,8 +81,17 @@
         /// <returns>Task</returns>
         public async Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel)
         {
-            var siteAddress = _mapper.Map<DTOs.Site.Site>(siteAddressViewModel);
-            if (siteAddress.Id == 0)
+            Site site = null;
+            try
+            {
+                site = await _httpSiteService.GetSite(siteAddressViewModel.Id, siteAddressViewModel.SiteId);
+            }
+            catch
+            {
+            }
+
+            var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
+            if (site == null)
             {
                 siteAddress.OrganisationId = Guid.NewGuid();
                 await _httpSiteService.CreateSite(siteAddressViewModel.Id, siteAddress);
