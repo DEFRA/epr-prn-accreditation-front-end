@@ -15,12 +15,5 @@
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
-
-        Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId,
-            Guid overseasSiteExternalId);
-
-        Task UpdateOverseasReprocessingSiteOutputs(
-            OverseasReprocessingSiteOutputsViewModel overseasSiteOutputs);
     }
 }

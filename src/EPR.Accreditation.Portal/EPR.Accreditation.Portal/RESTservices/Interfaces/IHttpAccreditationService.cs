@@ -22,13 +22,5 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
-
-        Task<OverseasReprocessingSiteOutputs> GetOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId,
-            Guid overseasSiteExternalId);
-
-        Task UpdateOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId,
-            OverseasReprocessingSiteOutputs overseasSiteOutputs);
     }
 }

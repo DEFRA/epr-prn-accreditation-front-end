@@ -88,24 +88,6 @@
             return vm;
         }
 
-        public async Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
-            Guid accreditationExternalId,
-            Guid overseasSiteExternalId)
-        {
-            var overseasSiteOutputs = await _httpAccreditationService.GetOverseasReprocessingSiteOutputs(
-                accreditationExternalId,
-                overseasSiteExternalId);
-            var vm = _mapper.Map<OverseasReprocessingSiteOutputsViewModel>(overseasSiteOutputs);
-            vm.Id = accreditationExternalId;
-            return vm;
-        }
-
-        public async Task UpdateOverseasReprocessingSiteOutputs(OverseasReprocessingSiteOutputsViewModel overseasSiteOutputsViewModel)
-        {
-            var overseasSiteOutputs = _mapper.Map<OverseasReprocessingSiteOutputs>(overseasSiteOutputsViewModel);
-            await _httpAccreditationService.UpdateOverseasReprocessingSiteOutputs(overseasSiteOutputsViewModel.Id, overseasSiteOutputs);
-        }
-
         private Enums.TaskStatus ReturnStatusFromList(
             List<AccreditationTaskProgress> accreditationsTaskProgress,
             Enums.TaskName taskName)
