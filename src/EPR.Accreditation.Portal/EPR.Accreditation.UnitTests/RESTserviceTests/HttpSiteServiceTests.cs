@@ -1,26 +1,26 @@
-﻿using EPR.Accreditation.Portal.DTOs.Site;
-using EPR.Accreditation.Portal.DTOs.WastePermit;
-using EPR.Accreditation.Portal.RESTservices;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
-using System.Net;
-
-namespace EPR.Accreditation.UnitTests.RESTserviceTests
+﻿namespace EPR.Accreditation.UnitTests.RESTserviceTests
 {
+    using System.Net;
+    using EPR.Accreditation.Portal.DTOs.Site;
+    using EPR.Accreditation.Portal.DTOs.WastePermit;
+    using EPR.Accreditation.Portal.RESTservices;
+    using Microsoft.AspNetCore.Http;
+    using Moq;
+    using Moq.Protected;
+    using Newtonsoft.Json;
+
     [TestClass]
     public class HttpSiteServiceTests
     {
-        protected HttpSiteService _httpSiteService;
-        protected Mock<IHttpContextAccessor> _contextAccessor;
-        protected Mock<IHttpClientFactory> _httpClientFactory;
-        protected HttpClient _httpClient;
-        protected Mock<DelegatingHandler> _clientHandlerMock;
-        protected string _baseUrl = "http://baseUrl";
-        protected string _endpointName = "endpointName";
-        protected string _capturedUrl;
-        protected string _capturedPayload;
+        private HttpSiteService _httpSiteService;
+        private Mock<IHttpContextAccessor> _contextAccessor;
+        private Mock<IHttpClientFactory> _httpClientFactory;
+        private HttpClient _httpClient;
+        private Mock<DelegatingHandler> _clientHandlerMock;
+        private string _baseUrl = "http://baseUrl";
+        private string _endpointName = "endpointName";
+        private string _capturedUrl;
+        private string _capturedPayload;
 
         [TestInitialize]
         public void Init()
@@ -41,30 +41,6 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
                 _endpointName);
 
             SetClientResponse();
-
-        }
-
-        private void SetClientResponse(
-            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
-            object content = null)
-        {
-            var response = new HttpResponseMessage(httpStatusCode);
-
-            if (content != null)
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(content));
-            }
-
-            _clientHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
-                {
-                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
-                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
-                })
-                .ReturnsAsync(response)
-                .Verifiable();
         }
 
         [TestMethod]
@@ -102,6 +78,29 @@ namespace EPR.Accreditation.UnitTests.RESTserviceTests
 
             // Assert
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        private void SetClientResponse(
+    HttpStatusCode httpStatusCode = HttpStatusCode.OK,
+    object content = null)
+        {
+            var response = new HttpResponseMessage(httpStatusCode);
+
+            if (content != null)
+            {
+                response.Content = new StringContent(JsonConvert.SerializeObject(content));
+            }
+
+            _clientHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
+                {
+                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
+                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
+                })
+                .ReturnsAsync(response)
+                .Verifiable();
         }
     }
 }

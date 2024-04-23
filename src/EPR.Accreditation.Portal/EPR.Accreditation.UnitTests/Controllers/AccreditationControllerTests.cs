@@ -259,7 +259,7 @@
         {
             // Arrange
             var viewModel = new SiteAddressViewModel();
-            var saveButton = new SaveButton();
+            var saveButton = SaveButton.Undefined;
 
             _accreditationController.ModelState.AddModelError("Error", "Error");
 
