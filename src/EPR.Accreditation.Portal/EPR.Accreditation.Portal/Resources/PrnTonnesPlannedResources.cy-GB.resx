@@ -121,12 +121,12 @@
     <value>[Welsh]Please select a radio button</value>
   </data>
   <data name="Over" xml:space="preserve">
-    <value>[Welsh]Over 400 tonnes: £2,616.00</value>
+    <value>[Welsh]Over 400 tonnes</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>[Welsh]How many tonnes of PRNs do you plan to issue?</value>
   </data>
   <data name="Upto" xml:space="preserve">
-    <value>[Welsh]Up to 400 tonnes: £505.00</value>
+    <value>[Welsh]Up to 400 tonnes</value>
   </data>
 </root>

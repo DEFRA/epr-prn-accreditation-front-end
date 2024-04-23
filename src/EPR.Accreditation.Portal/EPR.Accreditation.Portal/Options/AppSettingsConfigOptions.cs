@@ -31,5 +31,9 @@
         public int? MaximumMultiLineRecordNumber { get; set; }
 
         public int? DaysUntilExpiration { get; set; }
+
+        public decimal? PrnTonnageUpto400Fee { get; set; }
+
+        public decimal? PrnTonnageOver400Fee { get; set; }
     }
 }

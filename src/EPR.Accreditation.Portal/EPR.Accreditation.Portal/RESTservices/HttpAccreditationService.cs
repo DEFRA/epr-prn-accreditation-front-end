@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
@@ -58,6 +57,18 @@
         public async Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId)
         {
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
+        }
+
+        public async Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId)
+        {
+            return new PrnTonnesPlannedDto { ExternalId = accreditationExternalId, PrnPlannedTonnesType = PrnPlannedTonnesType.Over, PrnPlannedTonnesFee = 2616 };
+            return await Get<PrnTonnesPlannedDto>($"{accreditationExternalId}/PrnTonnesPlanned");
+        }
+
+        public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto)
+        {
+            return;
+            await Put($"{accreditationExternalId}/PrnTonnesPlannedDto", dto);
         }
     }
 }

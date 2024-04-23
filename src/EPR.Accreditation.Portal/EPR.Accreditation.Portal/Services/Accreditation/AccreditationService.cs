@@ -1,12 +1,13 @@
-﻿namespace EPR.Accreditation.Portal.Services.Accreditation
-{
-    using System.Threading.Tasks;
-    using AutoMapper;
-    using EPR.Accreditation.Facade.Common.Dtos;
-    using EPR.Accreditation.Portal.Common.Dtos;
-    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-    using EPR.Accreditation.Portal.ViewModels;
+﻿using System.Threading.Tasks;
+using AutoMapper;
+using EPR.Accreditation.Facade.Common.Dtos;
+using EPR.Accreditation.Portal.Common.Dtos;
+using EPR.Accreditation.Portal.Common.Dtos.Portal;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+using EPR.Accreditation.Portal.ViewModels;
 
+namespace EPR.Accreditation.Portal.Services.Accreditation
+{
     public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;
@@ -32,7 +33,7 @@
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var accreditation = new Common.Dtos.Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }
@@ -100,14 +101,17 @@
             return Enums.TaskStatus.NotStarted;
         }
 
-        public async Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid externalId)
+        public async Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId)
         {
-            return new PrnTonnesPlannedViewModel { ExternalId = externalId, PrnPlannedTonnesType = Common.Enums.PrnPlannedTonnesType.Upto};
+            var result = await _httpAccreditationService.GetPrnTonnesPlanned(accreditationExternalId);
+            var vm = _mapper.Map<PrnTonnesPlannedViewModel>(result);
+            return vm;
         }
 
-        public Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
+        public async Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
         {
-            return Task.CompletedTask;
+            var dto = _mapper.Map<PrnTonnesPlannedDto>(vm);
+            await _httpAccreditationService.UpdatePrnTonnesPlanned(vm.ExternalId, dto);
         }
     }
 }

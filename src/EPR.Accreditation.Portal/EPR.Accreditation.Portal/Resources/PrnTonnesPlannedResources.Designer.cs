@@ -70,7 +70,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Over 400 tonnes: £2,616.00.
+        ///   Looks up a localized string similar to Over 400 tonnes.
         /// </summary>
         public static string Over {
             get {
@@ -88,7 +88,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Up to 400 tonnes: £505.00.
+        ///   Looks up a localized string similar to Up to 400 tonnes.
         /// </summary>
         public static string Upto {
             get {

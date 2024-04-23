@@ -50,6 +50,9 @@
 
             this.CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
                 .ReverseMap();
+
+            this.CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()
+                .ReverseMap();
         }
     }
 }

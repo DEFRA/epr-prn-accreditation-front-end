@@ -16,7 +16,7 @@
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
 
-        Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid externalId);
+        Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
         Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm);
     }

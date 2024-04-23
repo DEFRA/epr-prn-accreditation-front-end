@@ -121,12 +121,12 @@
     <value>Please select a radio button</value>
   </data>
   <data name="Over" xml:space="preserve">
-    <value>Over 400 tonnes: £2,616.00</value>
+    <value>Over 400 tonnes</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>How many tonnes of PRNs do you plan to issue?</value>
   </data>
   <data name="Upto" xml:space="preserve">
-    <value>Up to 400 tonnes: £505.00</value>
+    <value>Up to 400 tonnes</value>
   </data>
 </root>

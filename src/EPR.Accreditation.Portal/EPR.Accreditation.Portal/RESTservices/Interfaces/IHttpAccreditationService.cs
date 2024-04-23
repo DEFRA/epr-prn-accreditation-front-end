@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
@@ -22,5 +21,9 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+
+        Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
+
+        Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
     }
 }

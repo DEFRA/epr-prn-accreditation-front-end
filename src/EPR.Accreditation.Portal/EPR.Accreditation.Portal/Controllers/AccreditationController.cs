@@ -4,11 +4,13 @@
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.Extensions.Options;
 
     [Route("[controller]/{id}")]
     public class AccreditationController : Controller
@@ -19,6 +21,7 @@
         private readonly ISaveAndComeBackService _saveAndComeBackService;
         private readonly BackPageViewModel _backPageViewModel;
         private readonly IUrlHelperWrapper _urlHelper;
+        private readonly IOptions<AppSettingsConfigOptions> _appSettings;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
@@ -26,7 +29,8 @@
             ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            IOptions<AppSettingsConfigOptions> appSettings)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
@@ -34,6 +38,7 @@
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
+            _appSettings = appSettings ?? throw new ArgumentNullException(nameof(appSettings));
         }
 
         [HttpGet("PermitExemption")]
@@ -311,7 +316,7 @@
         {
             if (!id.HasValue)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             PrnTonnesPlannedViewModel vm = await _accreditationService.GetPrnTonnesPlanned(id.Value);
@@ -327,6 +332,9 @@
                 return View(vm);
             }
 
+            vm.PrnPlannedTonnesFee = vm.PrnPlannedTonnesType == Common.Enums.PrnPlannedTonnesType.Upto ?
+                _appSettings.Value.PrnTonnageUpto400Fee :
+                _appSettings.Value.PrnTonnageOver400Fee.Value;
             await _accreditationService.UpdatePrnTonnesPlanned(vm);
 
             return RedirectToAction("Declaration", new { id = vm.ExternalId });

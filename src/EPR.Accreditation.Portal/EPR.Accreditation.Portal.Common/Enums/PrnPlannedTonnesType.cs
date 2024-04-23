@@ -2,7 +2,7 @@
 {
     public enum PrnPlannedTonnesType
     {
-        Upto,
-        Over
+        Upto = 0,
+        Over = 1
     }
 }

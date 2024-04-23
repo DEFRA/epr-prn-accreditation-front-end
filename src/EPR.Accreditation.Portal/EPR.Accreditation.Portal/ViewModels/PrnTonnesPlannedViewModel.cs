@@ -10,5 +10,7 @@
 
         [Required(ErrorMessageResourceName = "MissingSelectionErrorMessage", ErrorMessageResourceType = typeof(PrnTonnesPlannedResources))]
         public PrnPlannedTonnesType? PrnPlannedTonnesType { get; set; }
+
+        public decimal? PrnPlannedTonnesFee { get; set; }
     }
 }
