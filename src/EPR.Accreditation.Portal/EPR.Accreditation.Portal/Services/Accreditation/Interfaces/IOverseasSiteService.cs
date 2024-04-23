@@ -23,5 +23,23 @@
         /// <param name="reprocessorDetailsViewModel">The view model submitted</param>
         /// <returns>Task completed asynchronously</returns>
         Task UpdateReprocessorDetails(ReprocessorDetailsViewModel reprocessorDetailsViewModel);
+
+        /// <summary>
+        /// Gets the view model to drive the view
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation Id.</param>
+        /// <param name="overseasSiteExternalId">Overseas site Id.</param>
+        /// <returns>The view model to the view.</returns>
+        Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId);
+
+        /// <summary>
+        /// Updates the overseas reprocessor output using the view model.
+        /// </summary>
+        /// <param name="overseasSiteOutputs">The view model submitted.</param>
+        /// <returns>Task completed asynchronously.</returns>
+        Task UpdateOverseasReprocessingSiteOutputs(
+            OverseasReprocessingSiteOutputsViewModel overseasSiteOutputs);
     }
 }

@@ -1,0 +1,32 @@
+﻿@model OverseasReprocessingSiteOutputsViewModel
+
+@{
+    ViewData["Title"] = @OverseasSiteOutputsResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+
+<form method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds-from-desktop">
+
+            <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="500">
+                <div class="govuk-form-group">
+                    <h1 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--l" for="with-hint">
+                            @OverseasSiteOutputsResources.InfoText
+                        </label>
+                    </h1>
+                    <textarea class="govuk-textarea govuk-js-character-count" asp-for="Outputs" rows="5" aria-describedby="with-hint-info with-hint-hint"></textarea>
+                    <div id="with-hint-hint" class="govuk-hint">
+                        @OverseasSiteOutputsResources.Hint
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="@Model.Id" />
+            <input type="hidden" asp-for="@Model.ExternalId" />
+            <partial name="_SaveButtons" />
+        </div>
+    </div>
+</form>

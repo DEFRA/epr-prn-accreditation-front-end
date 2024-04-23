@@ -18,7 +18,7 @@
         /// Gets or sets the selected country ID
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(ReprocessorDetailsResources), ErrorMessageResourceName = "ErrorCountry")]
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
 
         /// <summary>
         /// Gets or sets the list of countries

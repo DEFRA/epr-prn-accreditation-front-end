@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
@@ -51,6 +52,20 @@
             ReprocessorDetailsDto reprocessorDetails)
         {
             await Put($"{id}/OverseasSite/{overseasSiteId}/ReprocessorDetails", reprocessorDetails);
+        }
+
+        public async Task<OverseasReprocessingSiteOutputs> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId)
+        {
+            return await Get<OverseasReprocessingSiteOutputs>($"{accreditationExternalId}/OverseasSite/{overseasSiteExternalId}/Outputs");
+        }
+
+        public async Task UpdateOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            OverseasReprocessingSiteOutputs overseasSiteOutputs)
+        {
+            await Put($"{accreditationExternalId}/OverseasSite/Outputs", overseasSiteOutputs);
         }
     }
 }

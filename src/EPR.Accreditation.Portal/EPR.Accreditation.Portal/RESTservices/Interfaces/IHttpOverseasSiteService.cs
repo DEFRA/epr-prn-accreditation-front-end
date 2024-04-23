@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
 
     /// <summary>
@@ -28,5 +29,13 @@
             Guid id,
             Guid overseasSiteId,
             ReprocessorDetailsDto reprocessorDetails);
+
+        Task<OverseasReprocessingSiteOutputs> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId);
+
+        Task UpdateOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            OverseasReprocessingSiteOutputs overseasSiteOutputs);
     }
 }
