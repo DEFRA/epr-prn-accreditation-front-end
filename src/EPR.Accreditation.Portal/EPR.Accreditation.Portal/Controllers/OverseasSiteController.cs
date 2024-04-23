@@ -85,7 +85,7 @@
                 saveButton,
                 ReprocessorDetailsResources.ErrorOrgName,
                 ReprocessorDetailsResources.ErrorCountry,
-                ReprocessorDetailsResources.Address))
+                ReprocessorDetailsResources.ErrorAddress))
             {
                 viewModel = await _overseasSiteService.GetReprocessorDetailsViewModel(
                     viewModel.Id,
