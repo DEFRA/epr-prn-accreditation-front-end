@@ -307,14 +307,18 @@
     Guid? siteId,
     Guid? materialId)
         {
-            // TODO: Need to add correct back link in the future
+            // Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
 
             if (id == null)
+            {
                 return NotFound();
+            }
 
             if (siteId == null)
+            {
                 siteId = Guid.Empty;
+            }
 
             var viewModel = await _siteService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
 
@@ -328,6 +332,7 @@
             {
                 return View(viewModel);
             }
+
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
