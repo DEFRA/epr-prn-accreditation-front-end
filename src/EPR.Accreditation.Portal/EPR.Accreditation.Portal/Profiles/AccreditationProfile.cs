@@ -1,6 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.Profiles
 {
     using AutoMapper;
+    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
@@ -46,6 +47,9 @@
 
             CreateMap<string, WasteDescriptionCodeRowViewModel>()
                 .ForMember(d => d.WasteDescriptionCode, o => o.MapFrom(s => s));
+
+            this.CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
+                .ReverseMap();
         }
     }
 }
