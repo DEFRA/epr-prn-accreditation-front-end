@@ -103,8 +103,7 @@
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
-                        "Accreditation"
-                    ));
+                        "Accreditation"));
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
