@@ -16,7 +16,7 @@
         private readonly IAccreditationService _accreditationService;
         private readonly ISaveAndComeBackService _saveAndComeBackService;
         private readonly BackPageViewModel _backPageViewModel;
-        private IUrlHelperWrapper _urlHelper;
+        private readonly IUrlHelperWrapper _urlHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OverseasSiteController"/> class.
@@ -49,16 +49,16 @@
         [HttpGet("{siteExternalId}/Outputs")]
         public async Task<IActionResult> OverseasSiteOutputs(Guid? accreditationExternalId, Guid? siteExternalId)
         {
-            if (accreditationExternalId.HasValue && siteExternalId.HasValue)
+            if (accreditationExternalId == null || siteExternalId == null)
             {
-                var overseasSiteOutputsViewModel = await _accreditationService.GetOverseasReprocessingSiteOutputs(
-                    accreditationExternalId.Value,
-                    siteExternalId.Value);
-
-                return View(overseasSiteOutputsViewModel);
+                return NotFound();
             }
 
-            return BadRequest("Missing over seas site ids");
+            var overseasSiteOutputsViewModel = await _accreditationService.GetOverseasReprocessingSiteOutputs(
+                accreditationExternalId.Value,
+                siteExternalId.Value);
+
+            return View(overseasSiteOutputsViewModel);
         }
 
         /// <summary>
