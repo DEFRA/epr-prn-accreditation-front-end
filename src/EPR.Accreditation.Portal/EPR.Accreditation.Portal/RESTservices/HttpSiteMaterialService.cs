@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
@@ -147,6 +148,57 @@
         public async Task UpdatePermitExemption(Guid id, PermitExemption permitExemption)
         {
             await Put($"{id}/WastePermitExemption", permitExemption);
+        }
+
+        public async Task<AccreditationMaterial> GetAccreditationMaterial(
+            Guid id,
+            Guid siteId,
+            Guid materialExternalId)
+        {
+            return await Get<AccreditationMaterial>($"{id}/Site/{siteId}/Material/{materialExternalId}");
+        }
+
+        public async Task UpdateAccreditationMaterial(
+            Guid accreditationExternalId,
+            Guid siteId,
+            Guid materialExternalId,
+            AccreditationMaterial accreditationMaterial)
+        {
+            await Put($"{accreditationExternalId}/Site/{siteId}/Material/{materialExternalId}", accreditationMaterial);
+        }
+
+        /// <summary>
+        /// Gets the waste description codes for the accreditation material
+        /// from the facade API
+        /// </summary>
+        /// <param name="id">The accreditation id</param>
+        /// <param name="siteId">The id of the overseas site</param>
+        /// <param name="materialId">The material id</param>
+        /// <returns>The waste description code dto</returns>
+        public async Task<List<string>> GetWasteDescriptionCodes(
+            Guid id,
+            Guid siteId,
+            Guid materialId)
+        {
+            return await Get<List<string>>($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes");
+        }
+
+        /// <summary>
+        /// Posts the waste description codes to the facade API for adding or removing
+        /// to the material for an accreditation
+        /// </summary>
+        /// <param name="id">Id of the accreditation</param>
+        /// <param name="siteId">The id of the overseas site</param>
+        /// <param name="materialId">Id of the material that the waste description codes are for</param>
+        /// <param name="wasteDecriptionCodes">The list of waste description codes</param>
+        /// <returns>Async task</returns>
+        public async Task SaveWasteDescriptionCodes(
+            Guid id,
+            Guid siteId,
+            Guid materialId,
+            IEnumerable<string> wasteDecriptionCodes)
+        {
+            await Post($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
         }
 
         private string GetSiteName(

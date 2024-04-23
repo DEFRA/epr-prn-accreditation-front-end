@@ -31,9 +31,9 @@ variables:
   - name: solutionFolder
     value: src
   - name: projectFolder
-    value: EPR.Accreditation.Portal
+    value: EPR.Accreditation.Portal/EPR.Accreditation.Portal
   - name: testProjectFolder
-    value: EPR.Accreditation.UnitTests
+    value: EPR.Accreditation.Portal/EPR.Accreditation.UnitTests
   - name: sonarQubeProjectKey
     value: epr-prn-accreditation-front-end
   - name: sonarQubeProjectName

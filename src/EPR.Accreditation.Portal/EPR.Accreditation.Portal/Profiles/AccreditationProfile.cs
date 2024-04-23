@@ -4,10 +4,14 @@
     using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.OverseasSite;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
 
+    /// <summary>
+    /// Class to describe mappings of view models and DTOs
+    /// </summary>
     public class AccreditationProfile : Profile
     {
         /// <summary>
@@ -19,6 +23,7 @@
             CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
+            CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
                 .ReverseMap();
 
@@ -39,6 +44,9 @@
                 .ForMember(d => d.Rows, o => o.MapFrom(s => s.Records ?? new List<ReprocessingSupportingInformationRecordDto>()))
                 .ReverseMap()
                 .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
+
+            CreateMap<string, WasteDescriptionCodeRowViewModel>()
+                .ForMember(d => d.WasteDescriptionCode, o => o.MapFrom(s => s));
 
             this.CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
                 .ReverseMap();

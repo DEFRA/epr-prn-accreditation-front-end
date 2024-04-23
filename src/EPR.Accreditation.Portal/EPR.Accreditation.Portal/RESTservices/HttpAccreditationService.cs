@@ -44,23 +44,6 @@
             return externalId;
         }
 
-        public async Task<AccreditationMaterial> GetAccreditationMaterial(
-            Guid accreditationExternalId,
-            Guid siteExternalId,
-            Guid materialExternalId)
-        {
-            return await Get<AccreditationMaterial>($"{accreditationExternalId}/Site/{siteExternalId}/Material/{materialExternalId}");
-        }
-
-        public async Task UpdateAccreditationMaterial(
-            Guid accreditationExternalId,
-            Guid siteExternalId,
-            Guid materialExternalId,
-            AccreditationMaterial accreditationMaterial)
-        {
-            await Put($"{accreditationExternalId}/Site/{siteExternalId}/Material/{materialExternalId}", accreditationMaterial);
-        }
-
         public async Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId)
         {
             return await Get<CheckYourAnswersDto>($"{accreditationExternalId}/CheckYourAnswers");

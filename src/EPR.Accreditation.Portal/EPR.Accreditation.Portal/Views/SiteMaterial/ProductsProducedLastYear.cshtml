@@ -6,6 +6,7 @@
 
 @{
     ViewData["Title"] = ProductsProducedLastYearResources.Title;
+    var initialRows = appSettings.Value.InitialTypeTonnesRows.Value;
 }
 <partial name="_ValidationSummary" />
 <partial name="_WasteMaterialName" />
@@ -22,7 +23,7 @@
         <h3 class="govuk-heading-m">@ProductsProducedLastYearResources.TableHeading</h3>
         <div class="govuk-form-group">
             <fieldset class="govuk-fieldset">
-                @for (var i = 0; i < Model.RowsToDisplay; i++)
+                @for (var i = 0; i < Model.RowsToDisplay(initialRows); i++)
                 {
                     <div class="govuk-form-group">
                         @if (Model != null && Model.Rows.Count() > i)
@@ -57,9 +58,9 @@
 
                 }
             </fieldset>
-            @if (Model.RowsToDisplay < appSettings.Value.MaximumMultiLineRecordNumber.Value)
+            @if (Model.RowsToDisplay(initialRows) < appSettings.Value.MaximumMultiLineRecordNumber.Value)
             {
-                <partial name="_AddRowButton" />
+                <partial name="_AddRowButton" model='"reprocessorSupportingInformation"' />
             }
         </div>
         <partial name="_SaveButtons" />

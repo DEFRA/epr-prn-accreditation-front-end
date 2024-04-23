@@ -1,17 +1,17 @@
-﻿using EPR.Accreditation.Portal.Attributes.ActionFilters;
-using EPR.Accreditation.Portal.Enums;
-using EPR.Accreditation.Portal.Extensions;
-using EPR.Accreditation.Portal.Helpers.Interfaces;
-using EPR.Accreditation.Portal.Options;
-using EPR.Accreditation.Portal.Resources;
-using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-using EPR.Accreditation.Portal.ViewModels;
-using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-
-namespace EPR.Accreditation.Portal.Controllers
+﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Attributes.ActionFilters;
+    using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Extensions;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Resources;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
+
     /// <summary>
     /// Controller for Site (Not overseas sites) materials
     /// </summary>
@@ -34,6 +34,7 @@ namespace EPR.Accreditation.Portal.Controllers
         private const string NonWasteInputsLastYearView = "NonWasteInputsLastYear";
         private const string NonWasteInputsEstimatedView = "NonWasteInputsEstimated";
 
+        private readonly int _initialTypeTonnesRows = 0;
         private readonly int _maximumMultiLineRecordNumber = 0;
 
         /// <summary>
@@ -65,9 +66,15 @@ namespace EPR.Accreditation.Portal.Controllers
 
             if (appSettingsConfiguration?.Value?.MaximumMultiLineRecordNumber == null)
             {
-                throw new ArgumentNullException(nameof(appSettingsConfiguration));
+                throw new ArgumentNullException(nameof(appSettingsConfiguration.Value.MaximumMultiLineRecordNumber));
             }
 
+            if (appSettingsConfiguration?.Value?.InitialTypeTonnesRows == null)
+            {
+                throw new ArgumentNullException(nameof(appSettingsConfiguration.Value.InitialTypeTonnesRows));
+            }
+
+            _initialTypeTonnesRows = appSettingsConfiguration.Value.InitialTypeTonnesRows.Value;
             _maximumMultiLineRecordNumber = appSettingsConfiguration.Value.MaximumMultiLineRecordNumber.Value;
         }
 
@@ -185,7 +192,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
                 // user is adding a new row (without javascript) and therefore we need to
                 // return the view with a new row added
-                if (viewModel.RowsToDisplay < _maximumMultiLineRecordNumber)
+                if (viewModel.RowsToDisplay(_initialTypeTonnesRows) < _maximumMultiLineRecordNumber)
                 {
                     viewModel.RowsToAdd++;
                 }
@@ -456,7 +463,7 @@ namespace EPR.Accreditation.Portal.Controllers
 
                 // user is adding a new row (without javascript) and therefore we need to
                 // return the view with a new row added
-                if (viewModel.RowsToDisplay < _maximumMultiLineRecordNumber)
+                if (viewModel.RowsToDisplay(_initialTypeTonnesRows) < _maximumMultiLineRecordNumber)
                 {
                     viewModel.RowsToAdd++;
                 }

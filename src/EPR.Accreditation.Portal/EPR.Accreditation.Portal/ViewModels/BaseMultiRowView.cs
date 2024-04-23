@@ -27,8 +27,10 @@
         /// <summary>
         /// Gets the number of rows that have been populated.
         /// </summary>
-        public int RowsToDisplay => this
-            .Rows
+        /// <param name="initialRowsToDisplay">The number of rows to display intially</param>
+        /// <returns>The number of rows to display</returns>
+        public int RowsToDisplay(int initialRowsToDisplay) =>
+            Rows
             .Select((entry, index) => new
             {
                 Entry = entry,
@@ -37,6 +39,6 @@
             .Where(r => r.Entry.EntryMade)
             .Select(e => e.Index + 1)
             .DefaultIfEmpty()
-            .Max() <= 3 ? 3 + this.RowsToAdd : this.Rows.Count;
+            .Max() <= initialRowsToDisplay ? initialRowsToDisplay + RowsToAdd : Rows.Count;
     }
 }
