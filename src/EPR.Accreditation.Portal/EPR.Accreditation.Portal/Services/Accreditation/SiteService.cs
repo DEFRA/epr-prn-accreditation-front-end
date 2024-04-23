@@ -63,7 +63,7 @@
                 var site = await _httpSiteService.GetSite(id, siteId);
                 siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
             }
-            catch (Exception ex)
+            catch
             {
             }
 
@@ -82,6 +82,8 @@
         public async Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel)
         {
             Site site = null;
+
+            var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
             try
             {
                 site = await _httpSiteService.GetSite(siteAddressViewModel.Id, siteAddressViewModel.SiteId);
@@ -90,7 +92,6 @@
             {
             }
 
-            var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
             if (site == null)
             {
                 siteAddress.OrganisationId = Guid.NewGuid();
@@ -98,8 +99,6 @@
             }
             else
             {
-                siteAddress.OrganisationId = siteAddress.OrganisationId;
-                siteAddress.SiteAuthorties = siteAddress.SiteAuthorties;
                 await _httpSiteService.UpdateSite(siteAddressViewModel.Id, siteAddress);
             }
         }
