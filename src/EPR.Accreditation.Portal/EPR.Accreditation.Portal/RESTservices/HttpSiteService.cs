@@ -29,11 +29,10 @@
         /// GetSite.
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="siteId">siteid</param>
         /// <returns>Task<DTOs.Site.Site></returns>
-        public async Task<DTOs.Site.Site> GetSite(Guid id, Guid siteId)
+        public async Task<DTOs.Site.Site> GetSite(Guid id)
         {
-            return await Get<DTOs.Site.Site>($"{id}/Site?siteExternalId={siteId}", false);
+            return await Get<DTOs.Site.Site>($"{id}/Site?siteExternalId={id}", false);
         }
 
         /// <summary>

@@ -60,7 +60,7 @@
 
             try
             {
-                var site = await _httpSiteService.GetSite(id, siteId);
+                var site = await _httpSiteService.GetSite(id);
                 siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
             }
             catch
@@ -86,7 +86,7 @@
             var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
             try
             {
-                site = await _httpSiteService.GetSite(siteAddressViewModel.Id, siteAddressViewModel.SiteId);
+                site = await _httpSiteService.GetSite(siteAddressViewModel.Id);
             }
             catch
             {

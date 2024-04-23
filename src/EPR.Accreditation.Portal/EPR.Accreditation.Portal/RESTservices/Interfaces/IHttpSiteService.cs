@@ -11,9 +11,8 @@
         /// GetSite.
         /// </summary>
         /// <param name="accredititionId">accredititionId</param>
-        /// <param name="siteExternalId">siteExternalId</param>
         /// <returns>Site</returns>
-        Task<Site> GetSite(Guid accredititionId, Guid siteExternalId);
+        Task<Site> GetSite(Guid accredititionId);
 
         /// <summary>
         /// CreateSite.

@@ -54,7 +54,7 @@
             SetClientResponse(HttpStatusCode.OK, new Site());
 
             // Act
-            var result = await _httpSiteService.GetSite(id, siteId);
+            var result = await _httpSiteService.GetSite(id);
 
             // Assert
             Assert.IsNotNull(result);
