@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
+    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
@@ -41,23 +42,6 @@
                 string.Empty,
                 accreditation);
             return externalId;
-        }
-
-        public async Task<AccreditationMaterial> GetAccreditationMaterial(
-            Guid accreditationExternalId,
-            Guid siteExternalId,
-            Guid materialExternalId)
-        {
-            return await Get<AccreditationMaterial>($"{accreditationExternalId}/Site/{siteExternalId}/Material/{materialExternalId}");
-        }
-
-        public async Task UpdateAccreditationMaterial(
-            Guid accreditationExternalId,
-            Guid siteExternalId,
-            Guid materialExternalId,
-            AccreditationMaterial accreditationMaterial)
-        {
-            await Put($"{accreditationExternalId}/Site/{siteExternalId}/Material/{materialExternalId}", accreditationMaterial);
         }
 
         public async Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId)

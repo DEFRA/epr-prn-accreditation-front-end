@@ -36,7 +36,8 @@
 
             var config = new AppSettingsConfigOptions
             {
-                MaximumMultiLineRecordNumber = 10
+                MaximumMultiLineRecordNumber = 10,
+                InitialTypeTonnesRows = 1
             };
 
             _mockAppSettingsConfiguration
@@ -870,6 +871,7 @@
             var config = new AppSettingsConfigOptions
             {
                 MaximumMultiLineRecordNumber = 5,
+                InitialTypeTonnesRows = 1
             };
 
             _mockAppSettingsConfiguration

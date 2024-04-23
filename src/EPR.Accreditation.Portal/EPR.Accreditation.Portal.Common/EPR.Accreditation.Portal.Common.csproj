@@ -13,15 +13,17 @@
     <CodeAnalysisRuleSet />
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="RESTservices\Interfaces\**" />
+    <EmbeddedResource Remove="RESTservices\Interfaces\**" />
+    <None Remove="RESTservices\Interfaces\**" />
+  </ItemGroup>
+
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="RESTservices\Interfaces\" />
     </ItemGroup>
 </Project>

@@ -16,6 +16,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\js\pages\**" />
+    <Content Remove="ClientApp\js\pages\**" />
+    <EmbeddedResource Remove="ClientApp\js\pages\**" />
+    <None Remove="ClientApp\js\pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="EPR.Common.Authorization" Version="1.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.3" />
@@ -72,6 +79,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductsProducedEstimatedResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\ReprocessorDetailsResources.cy-GB.Designer.cs">
+      <DependentUpon>ReprocessorDetailsResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ReprocessorDetailsResources.Designer.cs">
+      <DependentUpon>ReprocessorDetailsResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+	  <Compile Update="Resources\OverseasSiteOutputsResources.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>OverseasSiteOutputsResources.resx</DependentUpon>
+	  </Compile>
     <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -101,6 +123,11 @@
       <DependentUpon>TaskListResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\WasteDescriptionCodeResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WasteDescriptionCodeResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\WasteLastYearResources.cy-GB.Designer.cs">
       <DependentUpon>WasteLastYearResources.cy-GB.resx</DependentUpon>
@@ -220,6 +247,32 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProductsProducedEstimatedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsEstimatedResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsEstimatedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialWasteOutputsEstimatedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsLastYearResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MaterialWasteOutputsLastYearResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialWasteOutputsLastYearResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\OverseasSiteOutputsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OverseasSiteOutputsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ReprocessorDetailsResources.cy-GB.resx">
+      <LastGenOutput>ReprocessorDetailsResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ReprocessorDetailsResources.resx">
+      <LastGenOutput>ReprocessorDetailsResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
       <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -239,6 +292,10 @@
     <EmbeddedResource Update="Resources\TaskListResources.resx">
       <LastGenOutput>TaskListResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WasteDescriptionCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteDescriptionCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\WasteLastYearResources.cy-GB.resx">
       <LastGenOutput>WasteLastYearResources.cy-GB.Designer.cs</LastGenOutput>
@@ -303,10 +360,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPR.Accreditation.Portal.Common\EPR.Accreditation.Portal.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\js\pages\" />
   </ItemGroup>
 
 </Project>
