@@ -15,5 +15,12 @@
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        /// <summary>
+        /// Gets the view model to drive the view
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(Guid id);
     }
 }

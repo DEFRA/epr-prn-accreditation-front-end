@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
@@ -22,5 +21,22 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool?> GetHasAccreditationNum(Guid id);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="hasAccreditationNum"></param>
+        /// <returns></returns>
+        Task UpdateHasAccreditationNum(
+            Guid id,
+            bool hasAccreditationNum);
     }
 }

@@ -64,6 +64,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialWasteOutputsLastYearResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\HasNpwdAccrNumResources.Designer.cs">
+      <DependentUpon>HasNpwdAccrNumResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\ProductsProducedLastYearResources.Designer.cs">
       <DependentUpon>ProductsProducedLastYearResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -226,6 +231,10 @@
     <EmbeddedResource Update="Resources\MaterialWasteOutputsLastYearResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialWasteOutputsLastYearResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\HasNpwdAccrNumResources.resx">
+      <LastGenOutput>HasNpwdAccrNumResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ProductsProducedLastYearResources.resx">
       <LastGenOutput>ProductsProducedLastYearResources.Designer.cs</LastGenOutput>

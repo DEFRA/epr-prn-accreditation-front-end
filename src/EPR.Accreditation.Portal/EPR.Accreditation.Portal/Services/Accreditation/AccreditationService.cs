@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using AutoMapper;
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
@@ -98,6 +97,22 @@
             }
 
             return Enums.TaskStatus.NotStarted;
+        }
+
+        /// <summary>
+        /// Concrete implementation to get the view model that drives the view
+        /// </summary>
+        /// <param name="id">Accrediation ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(Guid id)
+        {
+            return new HasNpwdAccreditationNumViewModel
+            {
+                Id = id,
+                Has2024NPWDAccreditation = true
+
+                // Has2024NPWDAccreditation = await _httpAccreditationService.GetHasAccreditationNum(id)
+            };
         }
     }
 }

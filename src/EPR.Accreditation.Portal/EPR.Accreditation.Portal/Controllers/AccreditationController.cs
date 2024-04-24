@@ -304,5 +304,25 @@
         {
             return NotFound();
         }
+
+        /// <summary>
+        /// Checks if a 2024 NPWD accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>The view result</returns>
+        [HttpGet("HasNpwdAccreditationNumber")]
+        public async Task<IActionResult> CheckNpwdAccreditationNumber(Guid? id)
+        {
+            _backPageViewModel.Url = _urlHelper.ActionLink("AuthorityToIssuePrn", "Home");
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = await _accreditationService.GetHasAccreditationNumViewModel(id.Value);
+
+            return View(viewModel);
+        }
     }
 }

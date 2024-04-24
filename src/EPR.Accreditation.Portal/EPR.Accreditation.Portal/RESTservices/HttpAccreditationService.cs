@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
@@ -28,7 +27,7 @@
 
         public async Task<LicensesAndPermitsReferences> GetWastePermit(Guid id)
         {
-           return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
+            return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
         }
 
         public async Task<OperatorType> GetOperatorType(Guid accreditationExternalId)
@@ -58,6 +57,18 @@
         public async Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId)
         {
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
+        }
+
+        public async Task<bool?> GetHasAccreditationNum(Guid id)
+        {
+            return await Get<bool?>($"{id}/HasAccreditationNum");
+        }
+
+        public Task UpdateHasAccreditationNum(
+            Guid id,
+            bool hasAccreditationNum)
+        {
+            throw new NotImplementedException();
         }
     }
 }
