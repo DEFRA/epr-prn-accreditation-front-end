@@ -2,6 +2,7 @@
 {
     using EPR.Accreditation.Portal.Controllers;
     using EPR.Accreditation.Portal.Enums;
+    using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Http;
@@ -14,22 +15,22 @@
     {
         private AccreditationSiteController _accreditationSiteController;
         private Mock<IAccreditationSiteService> _mockAccreditationSiteService;
-        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         private Mock<IHttpContextAccessor> _mockHttpContextAccessor;
+        private Mock<IUrlHelperWrapper> _mockUrlHelper;
         private BackPageViewModel _backPageViewModel;
 
         [TestInitialize]
         public void Init()
         {
             _mockAccreditationSiteService = new Mock<IAccreditationSiteService>();
-            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
+            _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _backPageViewModel = new BackPageViewModel();
 
             _accreditationSiteController = new AccreditationSiteController(
                 _mockAccreditationSiteService.Object,
-                _mockSaveAndComeBackService.Object,
                 _mockHttpContextAccessor.Object,
+                _mockUrlHelper.Object,
                 _backPageViewModel);
 
             var context = new DefaultHttpContext();
@@ -105,24 +106,6 @@
             Assert.AreEqual("HowManyTonnes", result.ActionName);
             Assert.AreEqual("Accreditation", result.ControllerName);
 
-            _mockAccreditationSiteService.Verify(s => s.UpdateExemptionReferences(viewModel), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task ExemptionReferences_WithValidModelStateAndSaveButtonNotSaveAndContinue_SavesDataAndReturnsApplicationSavedView()
-        {
-            // Arrange
-            var viewModel = new ExemptionReferencesViewModel();
-            var saveButton = SaveButton.SaveAndComeBack;
-
-            // Act
-            var result = await _accreditationSiteController.ExemptionReferences(viewModel, saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-
-            _mockSaveAndComeBackService.Verify(s => s.AddSaveAndComeBack(viewModel.Id, It.IsAny<RouteValueDictionary>()), Times.Once);
             _mockAccreditationSiteService.Verify(s => s.UpdateExemptionReferences(viewModel), Times.Once);
         }
     }

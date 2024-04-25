@@ -73,7 +73,7 @@
             // Act
             var result = _accreditationService?.GetWastePermitViewModel(id);
 
-            // Asset
+            // Assert
             Assert.IsNotNull(result);
             _httpAccreditionService.Verify(
                 s =>
@@ -85,6 +85,34 @@
                 s =>
                     s.GetWastePermit(id),
                 Times.Once);
+        }
+
+        [TestMethod]
+        public async Task IsExporter_ReturnsTrue()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            _httpAccreditionService.Setup(s => s.GetOperatorType(id)).ReturnsAsync(Portal.Common.Enums.OperatorType.Exporter);
+
+            // Act
+            var result = await _accreditationService.IsExporter(id);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task IsExporter_ReturnsFalse()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            _httpAccreditionService.Setup(s => s.GetOperatorType(id)).ReturnsAsync(Portal.Common.Enums.OperatorType.Reprocessor);
+
+            // Act
+            var result = await _accreditationService.IsExporter(id);
+
+            // Assert
+            Assert.IsFalse(result);
         }
     }
 }

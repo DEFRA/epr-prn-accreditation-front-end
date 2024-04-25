@@ -30,9 +30,9 @@
            return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
         }
 
-        public async Task<OperatorType> GetOperatorType(Guid accreditationExternalId)
+        public async Task<OperatorType> GetOperatorType(Guid id)
         {
-            return await Get<OperatorType>($"{accreditationExternalId}/OperatorType");
+            return await Get<OperatorType>($"{id}/OperatorType");
         }
 
         public async Task<Guid> CreateAccreditation(Accreditation accreditation)
@@ -43,20 +43,20 @@
             return externalId;
         }
 
-        public async Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId)
+        public async Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid id)
         {
-            return await Get<CheckYourAnswersDto>($"{accreditationExternalId}/CheckYourAnswers");
+            return await Get<CheckYourAnswersDto>($"{id}/CheckYourAnswers");
         }
 
         public async Task<Site> GetSite(
-            Guid accreditationExternalId)
+            Guid id)
         {
-            return await Get<Site>($"{accreditationExternalId}/Site");
+            return await Get<Site>($"{id}/Site");
         }
 
-        public async Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId)
+        public async Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id)
         {
-            return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
+            return await Get<List<AccreditationTaskProgress>>($"{id}/TaskProgress");
         }
     }
 }
