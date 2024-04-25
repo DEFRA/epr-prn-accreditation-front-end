@@ -3,6 +3,7 @@
     using System.Net;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.RESTservices;
     using Microsoft.AspNetCore.Http;
@@ -460,6 +461,52 @@
                 })
                 .ReturnsAsync(response)
                 .Verifiable();
+        }
+
+        [TestMethod]
+        public async Task GetHasNpwdAccreditationNumber_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedOutput = true;
+            SetClientResponse(HttpStatusCode.OK, expectedOutput);
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber";
+
+            // Act
+            var result = await _httpSiteMaterialService.GetHasNpwdAccreditationNumber(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task UpdateHasNpwdAccreditationNumber_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var npwdAccredidtaionNumberDto = new NpwdAccreditationNumber
+            {
+                Has2024NPWDAccreditation = false
+            };
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber";
+
+            // Act
+            await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
+                id,
+                materialId,
+                npwdAccredidtaionNumberDto);
+
+            // Arrange
+            var capturedPayload = JsonConvert.DeserializeObject<NpwdAccreditationNumber>(_capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+            Assert.IsTrue(AreObjectsEqual(npwdAccredidtaionNumberDto, capturedPayload));
         }
     }
 }

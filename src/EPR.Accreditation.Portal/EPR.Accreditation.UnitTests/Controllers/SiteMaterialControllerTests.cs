@@ -1045,5 +1045,136 @@
                         It.IsAny<RouteValueDictionary>()),
                 Times.Never);
         }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsViewResult_WithViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var viewModel = new HasNpwdAccreditationNumViewModel();
+
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetHasAccreditationNumViewModel(
+                    id,
+                    materialId))
+                .ReturnsAsync(viewModel);
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(id, materialId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(viewModel, result.Model);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.GetHasAccreditationNumViewModel(id, materialId), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsNotFound_WhenIdOrMaterialIdIsNull()
+        {
+            // Arrange
+            Guid? id = null;
+            Guid? materialId = Guid.NewGuid();
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(id, materialId) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.GetHasAccreditationNumViewModel(Guid.Empty, materialId.Value), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsViewResult_WhenModelStateIsNotValid()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel();
+
+            _siteMaterialController.ModelState.AddModelError("Has2024NPWDAccreditation", "ErrorMessage");
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(viewModel, result.Model);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_RedirectsToNpwdAccreditationNumber_WhenSaveAndContinueAndHas2024NPWDAccreditationIsTrue()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel
+            {
+                Has2024NPWDAccreditation = true,
+                Id = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid()
+            };
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndContinue) as RedirectToActionResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("NpwdAccreditationNumber", result.ActionName);
+            Assert.AreEqual("Accreditation", result.ControllerName);
+            Assert.AreEqual(viewModel.Id, result.RouteValues["Id"]);
+            Assert.AreEqual(viewModel.MaterialId, result.RouteValues["MaterialId"]);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_RedirectsToCheckYourAnswers_WhenSaveAndContinueAndHas2024NPWDAccreditationIsFalse()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel
+            {
+                Has2024NPWDAccreditation = false,
+                Id = Guid.NewGuid()
+            };
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndContinue) as RedirectToActionResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("CheckYourAnswers", result.ActionName);
+            Assert.AreEqual("Accreditation", result.ControllerName);
+            Assert.AreEqual(viewModel.Id, result.RouteValues["Id"]);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsViewResult_WhenSaveAndComeBack()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel
+            {
+                Has2024NPWDAccreditation = null
+            };
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndComeBack) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_ApplicationSaved", result.ViewName);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Once);
+        }
     }
 }
