@@ -227,8 +227,6 @@
         {
             // Arrange
             var id = Guid.NewGuid();
-            var siteId = Guid.NewGuid();
-            var materialId = Guid.NewGuid();
             var expectedViewModel = new SiteAddressViewModel();
             var expectedUrl = "Home/ApplyForAccreditation";
 
@@ -237,10 +235,10 @@
             _mockUrlHelper.Setup(helper => helper.ActionLink(
                 "ApplyForAccreditation", "Home", null, null, null, null)).Returns(expectedUrl);
 
-            _mockSiteService.Setup(service => service.GetSiteAddressViewModel(id, siteId, materialId)).ReturnsAsync(expectedViewModel);
+            _mockSiteService.Setup(service => service.GetSiteAddressViewModel(id)).ReturnsAsync(expectedViewModel);
 
             // Act
-            var result = await _accreditationController.SiteAddress(id, siteId, materialId);
+            var result = await _accreditationController.SiteAddress(id);
 
             // Assert
             Assert.IsNotNull(result);
@@ -251,7 +249,7 @@
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SiteAddressViewModel));
             Assert.IsNull(viewResult.ViewName);
 
-            _mockSiteService.Verify(service => service.GetSiteAddressViewModel(id, siteId, materialId), Times.Once());
+            _mockSiteService.Verify(service => service.GetSiteAddressViewModel(id), Times.Once());
         }
 
         [TestMethod]

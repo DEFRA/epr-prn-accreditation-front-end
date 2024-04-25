@@ -15,16 +15,6 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets siteId.
-        /// </summary>
-        public Guid SiteId { get; set; }
-
-        /// <summary>
-        /// Gets or sets materialId.
-        /// </summary>
-        public Guid MaterialId { get; set; }
-
-        /// <summary>
         /// Gets or sets externalId.
         /// </summary>
         public Guid ExternalId { get; set; }
@@ -62,10 +52,5 @@
         /// Gets or sets organisationId.
         /// </summary>
         public Guid OrganisationId { get; set; }
-
-        /// <summary>
-        /// Gets or sets siteAuthorties.
-        /// </summary>
-        public IEnumerable<SiteAuthority> SiteAuthorties { get; set; }
     }
 }

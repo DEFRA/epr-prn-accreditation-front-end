@@ -17,7 +17,5 @@
         public string Postcode { get; set; }
 
         public Guid OrganisationId { get; set; }
-
-        public IEnumerable<SiteAuthority> SiteAuthorties { get; set; }
     }
 }

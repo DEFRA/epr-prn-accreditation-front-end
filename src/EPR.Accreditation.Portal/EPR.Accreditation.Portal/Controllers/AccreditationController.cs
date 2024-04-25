@@ -327,7 +327,7 @@
                 siteId = Guid.Empty;
             }
 
-            var viewModel = await _siteService.GetSiteAddressViewModel(id.Value, siteId.Value, materialId.Value);
+            var viewModel = await _siteService.GetSiteAddressViewModel(id.Value);
 
             return View(viewModel);
         }

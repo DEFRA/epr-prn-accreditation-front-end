@@ -4,7 +4,7 @@
 
     public interface ISiteService
     {
-        Task<SiteAddressViewModel> GetSiteAddressViewModel(Guid id, Guid siteId, Guid materialId);
+        Task<SiteAddressViewModel> GetSiteAddressViewModel(Guid id);
 
         Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel);
     }

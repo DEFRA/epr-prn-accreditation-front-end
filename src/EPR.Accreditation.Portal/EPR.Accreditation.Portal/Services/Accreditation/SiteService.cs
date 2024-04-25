@@ -48,13 +48,9 @@
         /// GetSiteAddressViewModel
         /// </summary>
         /// <param name="id">id.</param>
-        /// <param name="siteId">siteId</param>
-        /// <param name="materialId">materialid</param>
         /// <returns>Task<SiteAddressViewModel></returns>
         public async Task<SiteAddressViewModel> GetSiteAddressViewModel(
-            Guid id,
-            Guid siteId,
-            Guid materialId)
+            Guid id)
         {
             SiteAddressViewModel siteAddressViewModel = new SiteAddressViewModel();
 
@@ -63,13 +59,10 @@
                 var site = await _httpSiteService.GetSite(id);
                 siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
             }
-            catch
+            finally
             {
+                siteAddressViewModel.Id = id;
             }
-
-            siteAddressViewModel.Id = id;
-            siteAddressViewModel.SiteId = siteId;
-            siteAddressViewModel.MaterialId = materialId;
 
             return siteAddressViewModel;
         }
@@ -82,24 +75,23 @@
         public async Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel)
         {
             Site site = null;
-
             var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
             try
             {
                 site = await _httpSiteService.GetSite(siteAddressViewModel.Id);
             }
-            catch
+            finally
             {
-            }
-
-            if (site == null)
-            {
-                siteAddress.OrganisationId = Guid.NewGuid();
-                await _httpSiteService.CreateSite(siteAddressViewModel.Id, siteAddress);
-            }
-            else
-            {
-                await _httpSiteService.UpdateSite(siteAddressViewModel.Id, siteAddress);
+                if (site == null)
+                {
+                    // This has to be updated when org Id is retrieved at login
+                    siteAddress.OrganisationId = Guid.NewGuid();
+                    await _httpSiteService.CreateSite(siteAddressViewModel.Id, siteAddress);
+                }
+                else
+                {
+                    await _httpSiteService.UpdateSite(siteAddressViewModel.Id, siteAddress);
+                }
             }
         }
     }

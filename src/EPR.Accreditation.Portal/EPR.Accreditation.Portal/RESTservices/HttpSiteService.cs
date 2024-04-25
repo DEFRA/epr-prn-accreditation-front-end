@@ -1,6 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices
 {
     using EPR.Accreditation.Portal.Common.RESTservices;
+    using EPR.Accreditation.Portal.DTOs.Site;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
     /// <summary>
@@ -30,9 +31,9 @@
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>Task<DTOs.Site.Site></returns>
-        public async Task<DTOs.Site.Site> GetSite(Guid id)
+        public async Task<Site> GetSite(Guid id)
         {
-            return await Get<DTOs.Site.Site>($"{id}/Site?siteExternalId={id}", false);
+            return await Get<DTOs.Site.Site>($"{id}/Site", false);
         }
 
         /// <summary>
