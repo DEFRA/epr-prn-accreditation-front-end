@@ -2,6 +2,7 @@
 {
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.Enums;
 
     public interface IHttpSiteMaterialService
@@ -134,11 +135,11 @@
         /// </summary>
         /// <param name="id">Accreditation ID</param>
         /// <param name="materialId">Material ID</param>
-        /// <param name="hasAccreditationNum">The boolean value</param>
+        /// <param name="npwdAccreditationNumber">The boolean value within the DTO</param>
         /// <returns>Task completed asynchronously</returns>
         Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
-            bool hasAccreditationNum);
+            NpwdAccreditationNumber npwdAccreditationNumber);
     }
 }

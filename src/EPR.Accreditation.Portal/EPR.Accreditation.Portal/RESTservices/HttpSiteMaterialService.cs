@@ -4,6 +4,7 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
@@ -224,14 +225,14 @@
         /// </summary>
         /// <param name="id">Accreditation ID</param>
         /// <param name="materialId">Material ID</param>
-        /// <param name="hasAccreditationNum">True or false value</param>
+        /// <param name="npwdAccreditationNumber">True or false value from with the DTO</param>
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
-            bool hasAccreditationNum)
+            NpwdAccreditationNumber npwdAccreditationNumber)
         {
-            await Put($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber", hasAccreditationNum);
+            await Put($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
         }
     }
 }

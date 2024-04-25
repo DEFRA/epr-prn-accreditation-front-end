@@ -356,10 +356,12 @@
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel)
         {
+            var hasNpwdAccreditationNumberDto = _mapper.Map<DTOs.SiteMaterial.NpwdAccreditationNumber>(viewModel);
+
             await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
                 viewModel.Id,
                 viewModel.MaterialId,
-                viewModel.Has2024NPWDAccreditation.Value);
+                hasNpwdAccreditationNumberDto);
         }
     }
 }
