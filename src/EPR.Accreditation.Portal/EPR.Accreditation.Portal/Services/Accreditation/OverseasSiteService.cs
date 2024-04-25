@@ -1,14 +1,16 @@
-﻿namespace EPR.Accreditation.Portal.Services.Accreditation
-{
-    using System;
-    using System.Threading.Tasks;
-    using AutoMapper;
-    using EPR.Accreditation.Portal.Resources;
-    using EPR.Accreditation.Portal.RESTservices.Interfaces;
-    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-    using EPR.Accreditation.Portal.ViewModels;
-    using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using EPR.Accreditation.Facade.Common.Dtos;
+using EPR.Accreditation.Portal.Resources;
+using EPR.Accreditation.Portal.RESTservices;
+using EPR.Accreditation.Portal.RESTservices.Interfaces;
+using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+using EPR.Accreditation.Portal.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
+namespace EPR.Accreditation.Portal.Services.Accreditation
+{
     /// <summary>
     /// This service provides the controller with a view model for the GET and updates reprocessor details for the POST
     /// </summary>
@@ -86,6 +88,35 @@
                 reprocessorDetailsViewModel.Id,
                 reprocessorDetailsViewModel.OverseasSiteId,
                 reprocessorDetailsDto);
+        }
+
+        /// <summary>
+        /// GET request to retrive the view model to drive the view
+        /// </summary>
+        /// <param name="accreditationExternalId">This is the accreditation Id.</param>
+        /// <param name="overseasSiteExternalId">This is the overseas reprocessing site Id.</param>
+        /// <returns>Returns the view model asynchronously.</returns>
+        public async Task<OverseasReprocessingSiteOutputsViewModel> GetOverseasReprocessingSiteOutputs(
+            Guid accreditationExternalId,
+            Guid overseasSiteExternalId)
+        {
+            var overseasSiteOutputs = await _httpOverseasSiteService.GetOverseasReprocessingSiteOutputs(
+                accreditationExternalId,
+                overseasSiteExternalId);
+            var vm = _mapper.Map<OverseasReprocessingSiteOutputsViewModel>(overseasSiteOutputs);
+            vm.Id = accreditationExternalId;
+            return vm;
+        }
+
+        /// <summary>
+        /// Update method to update the reprocessor site output.
+        /// </summary>
+        /// <param name="overseasSiteOutputsViewModel">The view model that comes from the form.</param>
+        /// <returns>An Ok result.</returns>
+        public async Task UpdateOverseasReprocessingSiteOutputs(OverseasReprocessingSiteOutputsViewModel overseasSiteOutputsViewModel)
+        {
+            var overseasSiteOutputs = _mapper.Map<OverseasReprocessingSiteOutputs>(overseasSiteOutputsViewModel);
+            await _httpOverseasSiteService.UpdateOverseasReprocessingSiteOutputs(overseasSiteOutputsViewModel.Id, overseasSiteOutputs);
         }
     }
 }

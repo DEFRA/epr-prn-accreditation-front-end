@@ -325,6 +325,13 @@
             return NotFound();
         }
 
+        [HttpGet("RejectedWastePlans")]
+        public async Task<IActionResult> RejectedWastePlans(
+            Guid? id)
+        {
+            return NotFound();
+        }
+
         [HttpGet("OverseasAgentChoice", Name = "OverseasAgentChoice")]
         public async Task<IActionResult> OverseasAgentChoice(
             Guid? id)
