@@ -583,7 +583,6 @@
             return null;
         }
 
-
         /// <summary>
         /// Checks if a 2024 NPWD accreditation number is present
         /// </summary>
@@ -595,7 +594,14 @@
             Guid? id,
             Guid? materialId)
         {
-            _backPageViewModel.Url = _urlHelper.ActionLink("AuthorityToIssuePrn", "Home");
+            _backPageViewModel.Url = _urlHelper.ActionLink(
+                "AuthorityToIssuePrn",
+                "Accreditation",
+                new
+                {
+                    Id = id,
+                    MaterialId = materialId
+                });
 
             if (id != null &&
                 materialId != null)
