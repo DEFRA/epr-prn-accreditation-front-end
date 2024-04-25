@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
-    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.Enums;
@@ -119,5 +118,27 @@
             Guid siteId,
             Guid materialId,
             IEnumerable<string> wasteDecriptionCodes);
+
+        /// <summary>
+        /// Gets whether a 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>A boolean value</returns>
+        Task<bool?> GetHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates the 2024 NPWD Accreditation Number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="hasAccreditationNum">The boolean value</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            bool hasAccreditationNum);
     }
 }

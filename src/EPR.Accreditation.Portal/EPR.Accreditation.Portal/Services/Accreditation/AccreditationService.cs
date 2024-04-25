@@ -87,32 +87,6 @@
             return vm;
         }
 
-        /// <summary>
-        /// Concrete implementation to get the view model that drives the view
-        /// </summary>
-        /// <param name="id">Accrediation ID</param>
-        /// <returns>Task completed asynchronously</returns>
-        public async Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(Guid id)
-        {
-            return new HasNpwdAccreditationNumViewModel
-            {
-                Id = id,
-                Has2024NPWDAccreditation = await _httpAccreditationService.GetHasNpwdAccreditationNumber(id)
-            };
-        }
-
-        /// <summary>
-        /// Concrete implementation of interface action
-        /// </summary>
-        /// <param name="viewModel">The relevant view model</param>
-        /// <returns>Task completed asynchronously</returns>
-        public async Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel)
-        {
-            await _httpAccreditationService.UpdateHasNpwdAccreditationNumber(
-                viewModel.Id,
-                viewModel.Has2024NPWDAccreditation.Value);
-        }
-
         private Enums.TaskStatus ReturnStatusFromList(
             List<AccreditationTaskProgress> accreditationsTaskProgress,
             Enums.TaskName taskName)

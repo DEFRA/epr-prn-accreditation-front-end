@@ -582,5 +582,76 @@
         {
             return null;
         }
+
+
+        /// <summary>
+        /// Checks if a 2024 NPWD accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>The view result</returns>
+        [HttpGet("HasNpwdAccreditationNumber")]
+        public async Task<IActionResult> CheckNpwdAccreditationNumber(
+            Guid? id,
+            Guid? materialId)
+        {
+            _backPageViewModel.Url = _urlHelper.ActionLink("AuthorityToIssuePrn", "Home");
+
+            if (id != null &&
+                materialId != null)
+            {
+                var viewModel = await _accreditationSiteMaterialService.GetHasAccreditationNumViewModel(
+                    id.Value,
+                    materialId.Value);
+
+                return View(viewModel);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        /// <summary>
+        /// Updates the 2024 NPWD accreditation number
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <param name="saveButton">Enum for if it's continue or come back</param>
+        /// <returns>Task completed asynchronously</returns>
+        [HttpPost("HasNpwdAccreditationNumber")]
+        public async Task<IActionResult> CheckNpwdAccreditationNumber(
+            HasNpwdAccreditationNumViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                HasNpwdAccrNumResources.ErrorMessage))
+            {
+                return View(viewModel);
+            }
+
+            await _accreditationSiteMaterialService.UpdateHasNpwdAccreditationNumber(viewModel);
+
+            if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.Has2024NPWDAccreditation.Value == true)
+            {
+                return RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
+                {
+                    viewModel.Id,
+                    viewModel.MaterialId
+                });
+            }
+            else if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.Has2024NPWDAccreditation.Value == false)
+            {
+                return RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
+            }
+
+            // this is all the data we require to save for come back later
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.Id,
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
+            return View("_ApplicationSaved");
+        }
     }
 }

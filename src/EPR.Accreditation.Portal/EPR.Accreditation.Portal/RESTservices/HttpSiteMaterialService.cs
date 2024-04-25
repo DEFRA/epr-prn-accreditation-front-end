@@ -204,5 +204,34 @@
         private string GetSiteName(
             SiteType siteType,
             Guid? siteId) => siteType == SiteType.Site ? "Site" : $"OverseasSite/{siteId}";
+
+
+        /// <summary>
+        /// Gets a bool if 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>True or false</returns>
+        public async Task<bool?> GetHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId)
+        {
+            return await Get<bool?>($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber");
+        }
+
+        /// <summary>
+        /// Updated the 2024 NPWD Accreditation number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="hasAccreditationNum">True or false value</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            bool hasAccreditationNum)
+        {
+            await Put($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber", hasAccreditationNum);
+        }
     }
 }
