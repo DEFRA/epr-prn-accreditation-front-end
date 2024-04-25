@@ -324,5 +324,41 @@
 
             return View(viewModel);
         }
+
+        [HttpPost("HasNpwdAccreditationNumber")]
+        public async Task<IActionResult> CheckNpwdAccreditationNumber(
+            HasNpwdAccreditationNumViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                HasNpwdAccrNumResources.ErrorMessage))
+            {
+                return View(viewModel);
+            }
+
+            //await _accreditationService.UpdateHasNpwdAccreditationNumber(viewModel);
+
+            if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.Has2024NPWDAccreditation.Value == true)
+            {
+                return RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
+                {
+                    viewModel.Id,
+                    viewModel.MaterialId
+                });
+            }
+            else if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.Has2024NPWDAccreditation.Value == false)
+            {
+                return RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
+            }
+
+            // this is all the data we require to save for come back later
+            await _saveAndComeBackService.AddSaveAndComeBack(
+                viewModel.Id,
+                _httpContextAccessor.HttpContext.GetRouteData().Values);
+            return View("_ApplicationSaved");
+        }
     }
 }

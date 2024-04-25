@@ -1,5 +1,8 @@
 ﻿namespace EPR.Accreditation.Portal.ViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+    using EPR.Accreditation.Portal.Resources;
+
     /// <summary>
     /// Class for the view model that drives the view
     /// </summary>
@@ -18,6 +21,7 @@
         /// <summary>
         /// Gets or sets whether or not NPWD number is present
         /// </summary>
+        [Required(ErrorMessageResourceType = typeof(HasNpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessage")]
         public bool? Has2024NPWDAccreditation { get; set; }
     }
 }

@@ -23,19 +23,19 @@
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
 
         /// <summary>
-        /// 
+        /// Gets whether a 2024 NPWD Accreditation number is present
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<bool?> GetHasAccreditationNum(Guid id);
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>A boolean value</returns>
+        Task<bool?> GetHasNpwdAccreditationNumber(Guid id);
 
         /// <summary>
-        /// 
+        /// Updates the 2024 NPWD Accreditation Number
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="hasAccreditationNum"></param>
-        /// <returns></returns>
-        Task UpdateHasAccreditationNum(
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="hasAccreditationNum">The boolean value</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             bool hasAccreditationNum);
     }

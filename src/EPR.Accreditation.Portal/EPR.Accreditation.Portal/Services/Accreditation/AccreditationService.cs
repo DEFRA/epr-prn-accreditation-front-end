@@ -108,11 +108,22 @@
         {
             return new HasNpwdAccreditationNumViewModel
             {
-                Id = id,
-                Has2024NPWDAccreditation = true
+                Id = id
 
-                // Has2024NPWDAccreditation = await _httpAccreditationService.GetHasAccreditationNum(id)
+                // Has2024NPWDAccreditation = await _httpAccreditationService.GetHasNpwdAccreditationNumber(id)
             };
+        }
+
+        /// <summary>
+        /// Concrete implementation of interface action
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel)
+        {
+            await _httpAccreditationService.UpdateHasNpwdAccreditationNumber(
+                viewModel.Id,
+                viewModel.Has2024NPWDAccreditation.Value);
         }
     }
 }

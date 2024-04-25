@@ -22,5 +22,12 @@
         /// <param name="id">Accreditation ID</param>
         /// <returns>Task completed asynchronously</returns>
         Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(Guid id);
+
+        /// <summary>
+        /// Saves the data from the submitted view model
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel);
     }
 }

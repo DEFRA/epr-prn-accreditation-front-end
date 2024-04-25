@@ -59,16 +59,16 @@
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
         }
 
-        public async Task<bool?> GetHasAccreditationNum(Guid id)
+        public async Task<bool?> GetHasNpwdAccreditationNumber(Guid id)
         {
-            return await Get<bool?>($"{id}/HasAccreditationNum");
+            return await Get<bool?>($"{id}/HasNpwdAccreditationNumber");
         }
 
-        public Task UpdateHasAccreditationNum(
+        public async Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             bool hasAccreditationNum)
         {
-            throw new NotImplementedException();
+            await Put($"{id}/HasNpwdAccreditationNumber", hasAccreditationNum);
         }
     }
 }
