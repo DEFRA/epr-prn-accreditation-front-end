@@ -252,13 +252,6 @@
             return NotFound();
         }
 
-        [HttpGet("SiteAddress")]
-        public async Task<IActionResult> SiteAddress(
-            Guid? id)
-        {
-            return NotFound();
-        }
-
         [HttpGet("WasteCarrierRegistrationNumber")]
         public async Task<IActionResult> WasteCarrierRegistrationNumber(
             Guid? id)
@@ -308,11 +301,8 @@
             return NotFound();
         }
 
-        [HttpGet("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
-        public async Task<IActionResult> SiteAddress(
-    Guid? id,
-    Guid? siteId,
-    Guid? materialId)
+        [HttpGet("SiteAddressView", Name = "SiteAddressView")]
+        public async Task<IActionResult> SiteAddress(Guid? id)
         {
             // Need to add correct back link in the future
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
@@ -322,17 +312,12 @@
                 return NotFound();
             }
 
-            if (siteId == null)
-            {
-                siteId = Guid.Empty;
-            }
-
             var viewModel = await _siteService.GetSiteAddressViewModel(id.Value);
 
             return View(viewModel);
         }
 
-        [HttpPost("Site/{siteId}/Material/{materialId}/SiteAddress", Name = "SiteAddress")]
+        [HttpPost("SiteAddressView", Name = "SiteAddressView")]
         public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
         {
             if (!ModelState.IsValid)

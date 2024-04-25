@@ -53,17 +53,9 @@
             Guid id)
         {
             SiteAddressViewModel siteAddressViewModel = new SiteAddressViewModel();
-
-            try
-            {
-                var site = await _httpSiteService.GetSite(id);
-                siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
-            }
-            finally
-            {
-                siteAddressViewModel.Id = id;
-            }
-
+            var site = await _httpSiteService.GetSite(id);
+            siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
+            siteAddressViewModel.Id = id;
             return siteAddressViewModel;
         }
 
@@ -76,22 +68,16 @@
         {
             Site site = null;
             var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
-            try
+            site = await _httpSiteService.GetSite(siteAddressViewModel.Id);
+            if (site == null)
             {
-                site = await _httpSiteService.GetSite(siteAddressViewModel.Id);
+                // This has to be updated when org Id is retrieved at login
+                siteAddress.OrganisationId = Guid.NewGuid();
+                await _httpSiteService.CreateSite(siteAddressViewModel.Id, siteAddress);
             }
-            finally
+            else
             {
-                if (site == null)
-                {
-                    // This has to be updated when org Id is retrieved at login
-                    siteAddress.OrganisationId = Guid.NewGuid();
-                    await _httpSiteService.CreateSite(siteAddressViewModel.Id, siteAddress);
-                }
-                else
-                {
-                    await _httpSiteService.UpdateSite(siteAddressViewModel.Id, siteAddress);
-                }
+                await _httpSiteService.UpdateSite(siteAddressViewModel.Id, siteAddress);
             }
         }
     }
