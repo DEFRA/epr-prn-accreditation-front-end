@@ -33,9 +33,9 @@
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Accreditation 
+            var accreditation = new Accreditation
             {
-                OperatorTypeId = viewModel.OperatorType.Value 
+                OperatorTypeId = viewModel.OperatorType.Value
             };
 
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
@@ -74,7 +74,8 @@
             {
                 Id = id,
                 MaterialId = materialId,
-                //Address = need the address from legal contacts and contact details
+
+                // Address = need the address from legal contacts and contact details
                 WasteLicensesStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
                 UploadBusinessPlanStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
                 AboutMaterialStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
