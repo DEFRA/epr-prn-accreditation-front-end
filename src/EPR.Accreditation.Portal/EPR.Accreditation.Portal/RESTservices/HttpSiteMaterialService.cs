@@ -202,11 +202,6 @@
             await Post($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
         }
 
-        private string GetSiteName(
-            SiteType siteType,
-            Guid? siteId) => siteType == SiteType.Site ? "Site" : $"OverseasSite/{siteId}";
-
-
         /// <summary>
         /// Gets a bool if 2024 NPWD Accreditation number is present
         /// </summary>
@@ -234,5 +229,9 @@
         {
             await Put($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
         }
+
+        private string GetSiteName(
+            SiteType siteType,
+            Guid? siteId) => siteType == SiteType.Site ? "Site" : $"OverseasSite/{siteId}";
     }
 }

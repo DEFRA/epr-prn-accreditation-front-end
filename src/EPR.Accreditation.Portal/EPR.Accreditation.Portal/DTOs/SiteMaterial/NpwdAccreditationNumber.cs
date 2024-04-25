@@ -1,7 +1,7 @@
 ﻿namespace EPR.Accreditation.Portal.DTOs.SiteMaterial
 {
     /// <summary>
-    /// DTO created to avoid UnsupportedMediaType error 
+    /// DTO created to avoid UnsupportedMediaType error
     /// </summary>
     public class NpwdAccreditationNumber
     {
