@@ -15,5 +15,7 @@
         Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        Task<CompletionViewModel> Completion(Guid id);
     }
 }

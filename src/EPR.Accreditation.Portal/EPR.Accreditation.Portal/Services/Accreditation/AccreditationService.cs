@@ -99,5 +99,19 @@
 
             return Enums.TaskStatus.NotStarted;
         }
+
+        public async Task<CompletionViewModel> Completion(Guid id)
+        {
+            //var result = await _httpAccreditationService.GetCheckYourAnswers(id);
+            //var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
+            //return vm;
+
+            var result = new CompletionViewModel()
+            {
+                Id = id
+            };
+
+            return result;
+        }
     }
 }

@@ -89,6 +89,11 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>OverseasSiteOutputsResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Resources\CompletionResources.Designer.cs">
+	    <DependentUpon>CompletionResources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
     <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
       <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -259,6 +264,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ReprocessorDetailsResources.resx">
       <LastGenOutput>ReprocessorDetailsResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CompletionResources.resx">
+      <LastGenOutput>CompletionResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">

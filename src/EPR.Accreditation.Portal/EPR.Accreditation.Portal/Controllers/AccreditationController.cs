@@ -304,5 +304,18 @@
         {
             return NotFound();
         }
+
+        [HttpGet("Completion")]
+        public async Task<IActionResult> Completion(Guid? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            CompletionViewModel vm = await _accreditationService.Completion(id.Value);
+            return View(vm);
+        }
+
     }
 }
