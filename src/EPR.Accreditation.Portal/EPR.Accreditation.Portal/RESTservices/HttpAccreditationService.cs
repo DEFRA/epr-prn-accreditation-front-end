@@ -59,11 +59,22 @@
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
         }
 
+        /// <summary>
+        /// Gets a bool if 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>True or false</returns>
         public async Task<bool?> GetHasNpwdAccreditationNumber(Guid id)
         {
             return await Get<bool?>($"{id}/HasNpwdAccreditationNumber");
         }
 
+        /// <summary>
+        /// Updated the 2024 NPWD Accreditation number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="hasAccreditationNum">True or false value</param>
+        /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             bool hasAccreditationNum)

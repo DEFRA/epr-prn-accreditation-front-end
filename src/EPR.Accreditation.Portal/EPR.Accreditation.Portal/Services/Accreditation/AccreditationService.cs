@@ -87,18 +87,6 @@
             return vm;
         }
 
-        private Enums.TaskStatus ReturnStatusFromList(
-            List<AccreditationTaskProgress> accreditationsTaskProgress,
-            Enums.TaskName taskName)
-        {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
-            {
-                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
-            }
-
-            return Enums.TaskStatus.NotStarted;
-        }
-
         /// <summary>
         /// Concrete implementation to get the view model that drives the view
         /// </summary>
@@ -108,9 +96,8 @@
         {
             return new HasNpwdAccreditationNumViewModel
             {
-                Id = id
-
-                // Has2024NPWDAccreditation = await _httpAccreditationService.GetHasNpwdAccreditationNumber(id)
+                Id = id,
+                Has2024NPWDAccreditation = await _httpAccreditationService.GetHasNpwdAccreditationNumber(id)
             };
         }
 
@@ -124,6 +111,18 @@
             await _httpAccreditationService.UpdateHasNpwdAccreditationNumber(
                 viewModel.Id,
                 viewModel.Has2024NPWDAccreditation.Value);
+        }
+
+        private Enums.TaskStatus ReturnStatusFromList(
+            List<AccreditationTaskProgress> accreditationsTaskProgress,
+            Enums.TaskName taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
+            {
+                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+            }
+
+            return Enums.TaskStatus.NotStarted;
         }
     }
 }

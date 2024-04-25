@@ -325,6 +325,12 @@
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Updates the 2024 NPWD accreditation number
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <param name="saveButton">Enum for if it's continue or come back</param>
+        /// <returns>Task completed asynchronously</returns>
         [HttpPost("HasNpwdAccreditationNumber")]
         public async Task<IActionResult> CheckNpwdAccreditationNumber(
             HasNpwdAccreditationNumViewModel viewModel,
@@ -337,7 +343,7 @@
                 return View(viewModel);
             }
 
-            //await _accreditationService.UpdateHasNpwdAccreditationNumber(viewModel);
+            await _accreditationService.UpdateHasNpwdAccreditationNumber(viewModel);
 
             if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.Has2024NPWDAccreditation.Value == true)
