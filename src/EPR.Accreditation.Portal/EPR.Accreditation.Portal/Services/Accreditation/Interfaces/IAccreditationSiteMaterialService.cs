@@ -40,18 +40,6 @@
         // only reprocessor
         Task UpdateProductsProduced(ProductsProducedViewModel nonWasteInputsViewModel);
 
-        /// <summary>
-        /// Gets the waste inputs view model for the current accreditation
-        ///
-        /// This is a reproecessor only page
-        /// </summary>
-        /// <param name="id">Id of the accreditation</param>
-        /// <param name="materialId">Idof the material</param>
-        /// <returns>The WasteInputsViewModel</returns>
-        //Task<WasteInputsViewModel> GetWasteInputs(
-        //    Guid id,
-        //    Guid materialId);
-
         // only reprocessor
         Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
