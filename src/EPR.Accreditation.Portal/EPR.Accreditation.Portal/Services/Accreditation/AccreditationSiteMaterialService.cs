@@ -4,7 +4,6 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Constants;
     using EPR.Accreditation.Portal.Enums;
-    using EPR.Accreditation.Portal.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
@@ -330,6 +329,39 @@
                 wasteDescriptionCodeViewModel.SiteId,
                 wasteDescriptionCodeViewModel.MaterialId,
                 wasteDescriptionCodes);
+        }
+
+        /// <summary>
+        /// Concrete implementation to get the view model that drives the view
+        /// </summary>
+        /// <param name="id">Accrediation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(
+            Guid id,
+            Guid materialId)
+        {
+            return new HasNpwdAccreditationNumViewModel
+            {
+                Id = id,
+                MaterialId = materialId,
+                Has2024NPWDAccreditation = await _httpSiteMaterialService.GetHasNpwdAccreditationNumber(id, materialId)
+            };
+        }
+
+        /// <summary>
+        /// Concrete implementation of interface action
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel)
+        {
+            var hasNpwdAccreditationNumberDto = _mapper.Map<DTOs.SiteMaterial.NpwdAccreditationNumber>(viewModel);
+
+            await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
+                viewModel.Id,
+                viewModel.MaterialId,
+                hasNpwdAccreditationNumberDto);
         }
     }
 }

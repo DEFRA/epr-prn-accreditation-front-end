@@ -4,6 +4,7 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
@@ -199,6 +200,34 @@
             IEnumerable<string> wasteDecriptionCodes)
         {
             await Post($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
+        }
+
+        /// <summary>
+        /// Gets a bool if 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>True or false</returns>
+        public async Task<bool?> GetHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId)
+        {
+            return await Get<bool?>($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber");
+        }
+
+        /// <summary>
+        /// Updated the 2024 NPWD Accreditation number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="npwdAccreditationNumber">True or false value from with the DTO</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            NpwdAccreditationNumber npwdAccreditationNumber)
+        {
+            await Put($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
         }
 
         private string GetSiteName(

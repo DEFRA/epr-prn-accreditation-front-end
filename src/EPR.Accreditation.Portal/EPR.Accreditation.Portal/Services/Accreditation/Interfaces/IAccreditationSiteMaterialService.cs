@@ -90,5 +90,22 @@
         /// <returns>Async task</returns>
         Task UpdateWasteDescriptionCodeViewModel(
             WasteDescriptionCodeViewModel wasteDescriptionCodeViewModel);
+
+        /// <summary>
+        /// Gets the view model to drive the view
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Saves the data from the submitted view model
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel);
     }
 }

@@ -2,8 +2,8 @@
 {
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.Enums;
-    using EPR.Accreditation.Portal.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.ViewModels;
@@ -512,6 +512,61 @@
                                 p.ToList().Count == 2 &&
                                 p.ToList()[0] == "ABC" &&
                                 p.ToList()[1] == "DEF")),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetHasAccreditationNumViewModel_ReturnsViewModelWithCorrectProperties()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedValue = true;
+
+            _mockHttpSiteMaterialService.Setup(s =>
+                s.GetHasNpwdAccreditationNumber(
+                    id,
+                    materialId))
+                .ReturnsAsync(expectedValue);
+
+            // Act
+            var viewModel = await _accreditationSiteMaterialService.GetHasAccreditationNumViewModel(id, materialId);
+
+            // Assert
+            Assert.IsNotNull(viewModel);
+            Assert.AreEqual(id, viewModel.Id);
+            Assert.AreEqual(materialId, viewModel.MaterialId);
+            Assert.AreEqual(expectedValue, viewModel.Has2024NPWDAccreditation);
+
+            _mockHttpSiteMaterialService.Verify(s => s.GetHasNpwdAccreditationNumber(id, materialId), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateHasNpwdAccreditationNumber_CallsHttpServiceWithCorrectParameters()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel
+            {
+                Id = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid(),
+                Has2024NPWDAccreditation = true
+            };
+            var dto = new NpwdAccreditationNumber();
+
+            _mockMapper.Setup(m =>
+                m.Map<NpwdAccreditationNumber>(viewModel))
+            .Returns(dto);
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateHasNpwdAccreditationNumber(viewModel);
+
+            // Assert
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                s.UpdateHasNpwdAccreditationNumber(
+                    viewModel.Id,
+                    viewModel.MaterialId,
+                    dto),
                 Times.Once);
         }
     }
