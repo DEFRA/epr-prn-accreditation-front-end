@@ -18,13 +18,15 @@
         private const string CreateOverseasSiteRouteName = "CreateOverseasSite";
         private readonly IAccreditationService _accreditationService;
         private readonly IWastePermitService _wastePermitService;
+        private readonly ISiteService _siteService;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
             IWastePermitService wastePermitService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            ISiteService siteSerivce)
             : base(
                   httpContextAccessor,
                   urlHelper,
@@ -32,6 +34,7 @@
         {
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
+            _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
         }
 
         [HttpGet("PermitExemption")]
@@ -288,10 +291,22 @@
             base.OnActionExecuted(context);
         }
 
-        [HttpGet("SiteAddress")]
-        public async Task<IActionResult> SiteAddress(
-            Guid? id)
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
+        public async Task<IActionResult> TaskListSite(
+            Guid? id,
+            Guid? siteId,
+            Guid? materialId)
         {
+            if (id != null &&
+                siteId != null &&
+                materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                    id.Value,
+                    materialId.Value);
+                return View(model);
+            }
+
             return NotFound();
         }
 
@@ -342,6 +357,38 @@
             Guid? id)
         {
             return NotFound();
+        }
+
+        [HttpGet("SiteAddressView", Name = "SiteAddressView")]
+        public async Task<IActionResult> SiteAddress(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = await _siteService.GetSiteAddressViewModel(id.Value);
+
+            return View(viewModel);
+        }
+
+        [HttpPost("SiteAddressView", Name = "SiteAddressView")]
+        public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PermitExemptionResources.ErrorMessage))
+            {
+                return View(viewModel);
+            }
+
+            await _siteService.SaveSiteAddress(viewModel);
+            return RedirectToAction("PermitExemption", "Accreditation", new { viewModel.Id });
         }
     }
 }
