@@ -147,7 +147,6 @@
             return RedirectToAction("Index", "Home");
         }
 
-
         [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
         public async Task<IActionResult> TaskList(
             Guid? id,
