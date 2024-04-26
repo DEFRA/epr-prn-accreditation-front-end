@@ -6,7 +6,7 @@
 
     public class PrnTonnesPlannedViewModel
     {
-        public Guid ExternalId { get; set; }
+        public Guid? Id { get; set; }
 
         [Required(ErrorMessageResourceName = "MissingSelectionErrorMessage", ErrorMessageResourceType = typeof(PrnTonnesPlannedResources))]
         public PrnPlannedTonnesType? PrnPlannedTonnesType { get; set; }

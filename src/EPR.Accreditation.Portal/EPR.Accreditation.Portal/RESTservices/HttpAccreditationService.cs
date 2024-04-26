@@ -61,14 +61,12 @@
 
         public async Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId)
         {
-            return new PrnTonnesPlannedDto { ExternalId = accreditationExternalId, PrnPlannedTonnesType = PrnPlannedTonnesType.Over, PrnPlannedTonnesFee = 2616 };
             return await Get<PrnTonnesPlannedDto>($"{accreditationExternalId}/PrnTonnesPlanned");
         }
 
         public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto)
         {
-            return;
-            await Put($"{accreditationExternalId}/PrnTonnesPlannedDto", dto);
+            await Put($"{accreditationExternalId}/PrnTonnesPlanned", dto);
         }
     }
 }

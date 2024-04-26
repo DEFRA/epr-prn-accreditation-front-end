@@ -323,10 +323,15 @@
             return View(vm);
         }
 
-        [HttpPost]
+        [HttpPost("PrnTonnesPlanned")]
         [Route("PrnTonnesPlanned")]
-        public async Task<IActionResult> PrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
+        public async Task<IActionResult> PrnTonnesPlanned(Guid? id, PrnTonnesPlannedViewModel vm)
         {
+            if (!id.HasValue)
+            {
+                return NotFound();
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(vm);
@@ -335,9 +340,9 @@
             vm.PrnPlannedTonnesFee = vm.PrnPlannedTonnesType == Common.Enums.PrnPlannedTonnesType.Upto ?
                 _appSettings.Value.PrnTonnageUpto400Fee :
                 _appSettings.Value.PrnTonnageOver400Fee.Value;
-            await _accreditationService.UpdatePrnTonnesPlanned(vm);
+            await _accreditationService.UpdatePrnTonnesPlanned(id.Value, vm);
 
-            return RedirectToAction("Declaration", new { id = vm.ExternalId });
+            return RedirectToAction("Declaration", new { id = id.Value });
         }
 
         [HttpGet("Declaration")]

@@ -3,12 +3,14 @@
     using EPR.Accreditation.Portal.Controllers;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.Options;
     using Moq;
 
     [TestClass]
@@ -22,6 +24,7 @@
         private Mock<IUrlHelperWrapper> _mockUrlHelper;
         private AccreditationController _accreditationController;
         private BackPageViewModel _backPageViewModel;
+        private Mock<IOptions<AppSettingsConfigOptions>> _mockAppSettings;
 
         [TestInitialize]
         public void Init()
@@ -33,6 +36,7 @@
             _mockWastePermitService = new Mock<IWastePermitService>();
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _backPageViewModel = new BackPageViewModel();
+            _mockAppSettings = new Mock<IOptions<AppSettingsConfigOptions>>();
 
             _accreditationController = new AccreditationController(
                 _mockContextAccessor.Object,
@@ -40,7 +44,8 @@
                 _mockSaveAndComeBackService.Object,
                 _mockAccreditationService.Object,
                 _mockUrlHelper.Object,
-                _backPageViewModel);
+                _backPageViewModel,
+                _mockAppSettings.Object);
 
             var context = new DefaultHttpContext();
             _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);

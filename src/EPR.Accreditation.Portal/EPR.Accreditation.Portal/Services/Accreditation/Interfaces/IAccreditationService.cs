@@ -18,6 +18,6 @@
 
         Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
-        Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm);
+        Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm);
     }
 }

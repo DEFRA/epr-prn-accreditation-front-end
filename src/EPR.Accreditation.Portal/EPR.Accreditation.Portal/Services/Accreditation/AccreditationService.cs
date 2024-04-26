@@ -108,10 +108,10 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return vm;
         }
 
-        public async Task UpdatePrnTonnesPlanned(PrnTonnesPlannedViewModel vm)
+        public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm)
         {
             var dto = _mapper.Map<PrnTonnesPlannedDto>(vm);
-            await _httpAccreditationService.UpdatePrnTonnesPlanned(vm.ExternalId, dto);
+            await _httpAccreditationService.UpdatePrnTonnesPlanned(accreditationExternalId, dto);
         }
     }
 }
