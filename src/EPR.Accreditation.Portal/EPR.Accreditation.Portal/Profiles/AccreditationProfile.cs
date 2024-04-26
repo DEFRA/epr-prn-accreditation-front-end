@@ -5,6 +5,7 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.Site;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
@@ -23,6 +24,7 @@
             CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
             CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
+            CreateMap<HasNpwdAccreditationNumViewModel, NpwdAccreditationNumber>();
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
             CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()

@@ -60,7 +60,8 @@
                 return;
             }
 
-            if (resultContext.Result is not RedirectToRouteResult &&
+            if (resultContext.Result is not EmptyResult &&
+                resultContext.Result is not RedirectToRouteResult &&
                 resultContext.Result is not RedirectToActionResult)
             {
                 return;
