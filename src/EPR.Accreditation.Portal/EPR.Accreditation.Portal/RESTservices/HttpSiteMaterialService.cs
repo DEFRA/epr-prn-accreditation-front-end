@@ -210,7 +210,7 @@
             Guid id,
             Guid materialId)
         {
-            return await Get<bool?>($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber");
+            return await Get<bool?>($"{id}/Material/{materialId}/HasNpwdAccreditationNumber");
         }
 
         /// <summary>
