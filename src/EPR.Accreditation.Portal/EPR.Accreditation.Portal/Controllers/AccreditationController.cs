@@ -349,6 +349,11 @@
             return NotFound();
         }
 
+        /// <summary>
+        /// Returns PRN tonnage data view.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <returns>PRN tonnage data view.</returns>
         [HttpGet("PrnTonnesPlanned")]
         [Route("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(Guid? id)
@@ -362,9 +367,17 @@
             return View(vm);
         }
 
+        /// <summary>
+        /// Updates PRN tonnage data.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="vm">View model for PRN tonnage data.</param>
+        /// <returns>Redirects to Declaration page.</returns>
         [HttpPost("PrnTonnesPlanned")]
         [Route("PrnTonnesPlanned")]
-        public async Task<IActionResult> PrnTonnesPlanned(Guid? id, PrnTonnesPlannedViewModel vm)
+        public async Task<IActionResult> PrnTonnesPlanned(
+            Guid? id, 
+            PrnTonnesPlannedViewModel vm)
         {
             if (!id.HasValue)
             {

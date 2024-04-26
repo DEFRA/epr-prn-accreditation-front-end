@@ -3,16 +3,12 @@
     using System.Threading.Tasks;
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos;
-        using System.Threading.Tasks;
-        using AutoMapper;
-        using EPR.Accreditation.Facade.Common.Dtos;
-        using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
-        using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-        using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels;
 
-        public class AccreditationService : IAccreditationService
+    public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;
         private readonly RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;
@@ -107,6 +103,30 @@
             return operatorType == OperatorType.Exporter;
         }
 
+        /// <summary>
+        /// Gets PRN tonnage data view.
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation id.</param>
+        /// <returns>PRN tonnage data view model.</returns>
+        public async Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId)
+        {
+            var result = await _httpAccreditationService.GetPrnTonnesPlanned(accreditationExternalId);
+            var vm = _mapper.Map<PrnTonnesPlannedViewModel>(result);
+            return vm;
+        }
+
+        /// <summary>
+        /// Updates PRN tonnage data.
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation id.</param>
+        /// <param name="vm">View model for PRN tonnage data.</param>
+        /// <returns>Returns completed Task.</returns>
+        public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm)
+        {
+            var dto = _mapper.Map<PrnTonnesPlannedDto>(vm);
+            await _httpAccreditationService.UpdatePrnTonnesPlanned(accreditationExternalId, dto);
+        }
+
         private Enums.TaskStatus ReturnStatusFromList(
             List<AccreditationTaskProgress> accreditationsTaskProgress,
             Enums.TaskName taskName)
@@ -117,19 +137,6 @@
             }
 
             return Enums.TaskStatus.NotStarted;
-        }
-
-        public async Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId)
-        {
-            var result = await _httpAccreditationService.GetPrnTonnesPlanned(accreditationExternalId);
-            var vm = _mapper.Map<PrnTonnesPlannedViewModel>(result);
-            return vm;
-        }
-
-        public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm)
-        {
-            var dto = _mapper.Map<PrnTonnesPlannedDto>(vm);
-            await _httpAccreditationService.UpdatePrnTonnesPlanned(accreditationExternalId, dto);
         }
     }
 }

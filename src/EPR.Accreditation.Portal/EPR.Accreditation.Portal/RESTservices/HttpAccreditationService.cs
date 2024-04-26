@@ -59,12 +59,25 @@
             return await Get<List<AccreditationTaskProgress>>($"{id}/TaskProgress");
         }
 
+        /// <summary>
+        /// Gets PRN tonnage data for given accreditation.
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation id.</param>
+        /// <returns>PRN tonnage data dto.</returns>
         public async Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId)
         {
             return await Get<PrnTonnesPlannedDto>($"{accreditationExternalId}/PrnTonnesPlanned");
         }
 
-        public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto)
+        /// <summary>
+        /// Updates PRN tonnage data for given accreditation.
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation id.</param>
+        /// <param name="dto">PRN data dto.</param>
+        /// <returns>Completed Task.</returns>
+        public async Task UpdatePrnTonnesPlanned(
+            Guid accreditationExternalId,
+            PrnTonnesPlannedDto dto)
         {
             await Put($"{accreditationExternalId}/PrnTonnesPlanned", dto);
         }
