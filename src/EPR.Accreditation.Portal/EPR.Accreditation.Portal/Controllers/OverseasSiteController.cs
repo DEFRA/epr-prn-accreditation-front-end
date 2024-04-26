@@ -13,7 +13,7 @@
     /// Controller for the overseas site
     /// </summary>
     [Route("Accreditation/{id}/[controller]/{overseasSiteId}")]
-    public class OverseasSiteController : Controller
+    public class OverseasSiteController : BaseController
     {
         private readonly IOverseasSiteService _overseasSiteService;
         private readonly ISaveAndComeBackService _saveAndComeBackService;
@@ -36,12 +36,24 @@
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel)
+            : base(httpContextAccessor, urlHelper, backPageViewModel)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _overseasSiteService = overseasSiteService ?? throw new ArgumentNullException(nameof(overseasSiteService));
             _backPageViewModel = backPageViewModel;
+        }
+
+        /// <summary>
+        /// STUBBED method for Create overseas site
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("/Accreditation/{id}/[controller]/Create", Name = "CreateOverseasSite")]
+        public async Task<IActionResult> CreateSite(Guid? id)
+        {
+            return NotFound();
         }
 
         /// <summary>
@@ -96,16 +108,7 @@
 
             await _overseasSiteService.UpdateReprocessorDetails(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue)
-            {
-                return RedirectToAction("PersonWeCanContact", "Accreditation");
-            }
-
-            // this is all the data we require to save for come back later
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.Id,
-                _httpContextAccessor.HttpContext.GetRouteData().Values);
-            return View("_ApplicationSaved");
+            return RedirectToAction("PersonWeCanContact", "Accreditation");
         }
 
         /// <summary>

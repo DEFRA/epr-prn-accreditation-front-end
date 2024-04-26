@@ -4,6 +4,7 @@
     using AutoMapper;
     using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -25,14 +26,18 @@
             var result = await _httpAccreditationService.GetOperatorType(id);
             return new OperatorTypeViewModel
             {
-                ExternalId = id,
+                Id = id,
                 OperatorType = result
             };
         }
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var accreditation = new Accreditation
+            {
+                OperatorTypeId = viewModel.OperatorType.Value
+            };
+
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }
@@ -61,18 +66,16 @@
 
         public async Task<TaskListViewModel> GetTaskList(
             Guid id,
-            Guid siteId,
             Guid materialId)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
-            var address = await _httpAccreditationService.GetSite(siteId);
 
             var viewModel = new TaskListViewModel
             {
                 Id = id,
-                SiteId = siteId,
                 MaterialId = materialId,
-                Address = address.Address1.ToString(),
+
+                // Address = need the address from legal contacts and contact details
                 WasteLicensesStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
                 UploadBusinessPlanStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
                 AboutMaterialStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
@@ -86,6 +89,18 @@
             var result = await _httpAccreditationService.GetCheckYourAnswers(id);
             var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
             return vm;
+        }
+
+        /// <summary>
+        /// Determines if the ID is for an exporter or not
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>true if an exporter, otherwise false</returns>
+        public async Task<bool> IsExporter(Guid id)
+        {
+            var operatorType = await _httpAccreditationService.GetOperatorType(id);
+
+            return operatorType == OperatorType.Exporter;
         }
 
         private Enums.TaskStatus ReturnStatusFromList(

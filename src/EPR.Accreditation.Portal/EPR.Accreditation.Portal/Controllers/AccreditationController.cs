@@ -7,13 +7,15 @@
     using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.Accreditation;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
     [Route("[controller]/{id}")]
-    public class AccreditationController : Controller
+    public class AccreditationController : BaseController
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private const string TaskListRouteName = "TaskList";
+        private const string CreateOverseasSiteRouteName = "CreateOverseasSite";
         private readonly IAccreditationService _accreditationService;
         private readonly IWastePermitService _wastePermitService;
         private readonly ISaveAndComeBackService _saveAndComeBackService;
@@ -24,16 +26,17 @@
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
             IWastePermitService wastePermitService,
-            ISaveAndComeBackService saveAndComeBackService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
+            BackPageViewModel backPageViewModel)
+            : base(
+                  httpContextAccessor,
+                  urlHelper,
+                  backPageViewModel)
             BackPageViewModel backPageViewModel,
             ISiteService siteSerivce)
         {
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
-            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _backPageViewModel = backPageViewModel;
             _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
@@ -67,23 +70,20 @@
             }
 
             await _wastePermitService.UpdatePermitExemption(viewModel);
+            var actionResult = default(ActionResult);
 
             if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.HasPermitExemption.Value == true)
             {
-                return RedirectToAction("ExemptionReferences", "Accreditation");
+                actionResult = RedirectToAction("ExemptionReferences", "Accreditation");
             }
             else if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.HasPermitExemption.Value == false)
             {
-                return RedirectToAction("AuthorityToIssues", "Accreditation");
+                actionResult = RedirectToAction("AuthorityToIssues", "Accreditation");
             }
 
-            // this is all the data we require to save for come back later
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.Id,
-                _httpContextAccessor.HttpContext.GetRouteData().Values);
-            return View("_ApplicationSaved");
+            return actionResult;
         }
 
         [HttpGet("WasteLicensesAndPermits")]
@@ -113,25 +113,13 @@
 
             await _accreditationService.SaveWastePermit(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
-
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToAction(
-                    "PermitExemption",
-                    "Accreditation",
-                    new
-                    {
-                        viewModel.Id
-                    });
-            }
+            return RedirectToAction(
+                "PermitExemption",
+                "Accreditation",
+                new
+                {
+                    viewModel.Id
+                });
         }
 
         [HttpGet]
@@ -162,19 +150,16 @@
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
+        [HttpGet("Material/{materialId}/TaskList", Name = "TaskList")]
         public async Task<IActionResult> TaskList(
             Guid? id,
-            Guid? siteId,
             Guid? materialId)
         {
             if (id != null &&
-                siteId != null &&
                 materialId != null)
             {
                 TaskListViewModel model = await _accreditationService.GetTaskList(
                     id.Value,
-                    siteId.Value,
                     materialId.Value);
                 return View(model);
             }
@@ -182,11 +167,85 @@
             return NotFound();
         }
 
-        [HttpGet("Overseas")]
-        public async Task<IActionResult> Overseas(
+        /// <summary>
+        /// Returns the Overseas reprocessors view
+        ///
+        /// This may need moving to a different controller in the long term. It'll do for now
+        /// though.
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous IActionResult.</returns>
+        [HttpGet("Material/{materialId}/OverseasReprocessors")]
+        public async Task<IActionResult> OverseasReprocessors(
             Guid? id)
         {
-            return View("overseas");
+            PopulateBackModel(TaskListRouteName);
+
+            if (id.HasValue)
+            {
+                if (await _accreditationService.IsExporter(id.Value))
+                {
+                    return View();
+                }
+            }
+
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Returns the Overseas reprocessors view
+        ///
+        /// This may need moving to a different controller in the long term. It'll do for now
+        /// though.
+        /// </summary>
+        /// <param name="materialId">the material id that this journey is part of</param>
+        /// <param name="viewModel">The view model for the page</param>
+        /// <param name="saveButton">The save button selection</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous IActionResult.</returns>
+        [HttpPost("Material/{materialId}/OverseasReprocessors")]
+        public async Task<IActionResult> OverseasReprocessors(
+            Guid? materialId,
+            OverseasReprocessorViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (materialId == null)
+            {
+                return NotFound();
+            }
+
+            if (!await _accreditationService.IsExporter(viewModel.Id))
+            {
+                return NotFound();
+            }
+
+            PopulateBackModel(TaskListRouteName);
+
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                WasteDescriptionCodeResources.AtLeastOneEntryRequired))
+            {
+                return View(viewModel);
+            }
+
+            if (viewModel.AddOverseasReprocessor.Value)
+            {
+                // redirect to Add overeas reprocessing site
+                return RedirectToRoute(
+                    CreateOverseasSiteRouteName,
+                    new
+                    {
+                        id = viewModel.Id
+                    });
+            }
+
+            // redirect back to the task list
+            return RedirectToRoute(
+                TaskListRouteName,
+                new
+                {
+                    id = viewModel.Id,
+                    materialId = materialId
+                });
         }
 
         [HttpGet("Upload")]
