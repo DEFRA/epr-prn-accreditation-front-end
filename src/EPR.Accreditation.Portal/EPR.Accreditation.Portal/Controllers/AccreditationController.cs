@@ -376,7 +376,7 @@
         [HttpPost("PrnTonnesPlanned")]
         [Route("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(
-            Guid? id, 
+            Guid? id,
             PrnTonnesPlannedViewModel vm)
         {
             if (!id.HasValue)
@@ -397,6 +397,11 @@
             return RedirectToAction("Declaration", new { id = id.Value });
         }
 
+        /// <summary>
+        /// Placeholder for Declaration page.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <returns>Declaration view.</returns>
         [HttpGet("Declaration")]
         [Route("Declaration")]
         public async Task<IActionResult> Declaration(
