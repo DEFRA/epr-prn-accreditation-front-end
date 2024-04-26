@@ -575,11 +575,12 @@
             }
 
             await _accreditationSiteMaterialService.UpdateHasNpwdAccreditationNumber(viewModel);
+            var actionResult = default(ActionResult);
 
             if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.Has2024NPWDAccreditation.Value == true)
             {
-                return RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
+                actionResult = RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
                 {
                     viewModel.Id,
                     viewModel.MaterialId
@@ -588,10 +589,10 @@
             else if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.Has2024NPWDAccreditation.Value == false)
             {
-                return RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
+                actionResult = RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
             }
 
-            return View("_ApplicationSaved");
+            return actionResult;
         }
     }
 }
