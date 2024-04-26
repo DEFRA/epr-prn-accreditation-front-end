@@ -220,12 +220,12 @@
         }
 
         [TestMethod]
-        public async Task GetMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
+        public async Task GetMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedInput()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            var expectedMaterialWasteOutputsDto = new MaterialWasteOutputsDto
+            var expectedMaterialWasteOutputsDto = new MaterialWasteInputsDto
             {
                 UkPackagingWaste = 1.2M,
                 NonUkPackagingWaste = 4.5M,
@@ -233,10 +233,10 @@
             };
             this.SetClientResponse(HttpStatusCode.OK, expectedMaterialWasteOutputsDto);
 
-            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Material/{materialId}/MaterialWasteOutputs";
+            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Material/{materialId}/MaterialWasteInputs";
 
             // Act
-            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteInputs(
                 id,
                 materialId);
 
@@ -247,28 +247,28 @@
         }
 
         [TestMethod]
-        public async Task UpdateMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedOutput()
+        public async Task UpdateMaterialWasteOutputs_CallsEndPointSuccesfully_WithExpectedInput()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            var materialWasteOutputsDto = new MaterialWasteOutputsDto
+            var materialWasteOutputsDto = new MaterialWasteInputsDto
             {
                 UkPackagingWaste = 8.65M,
                 NonUkPackagingWaste = 5.09M,
                 NonPackagingWaste = null,
             };
 
-            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Material/{materialId}/MaterialWasteOutputs";
+            var expectedUrl = $"{this._baseUrl}/{this._endpointName}/{id}/Material/{materialId}/MaterialWasteInputs";
 
             // Act
-            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
+            await this._httpSiteMaterialService.UpdateMaterialWasteInputs(
                 id,
                 materialId,
                 materialWasteOutputsDto);
 
             // Arrange
-            var capturedPayload = JsonConvert.DeserializeObject<MaterialWasteOutputsDto>(this._capturedPayload);
+            var capturedPayload = JsonConvert.DeserializeObject<MaterialWasteInputsDto>(this._capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), this._capturedUrl.ToLower());
             Assert.IsTrue(this.AreObjectsEqual(materialWasteOutputsDto, capturedPayload));
         }
