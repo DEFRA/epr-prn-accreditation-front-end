@@ -383,15 +383,7 @@
             }
 
             await _siteService.SaveSiteAddress(viewModel);
-
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToAction("PermitExemption", "Accreditation", new { viewModel.Id });
-            }
+            return RedirectToAction("PermitExemption", "Accreditation", new { viewModel.Id });
         }
     }
 }

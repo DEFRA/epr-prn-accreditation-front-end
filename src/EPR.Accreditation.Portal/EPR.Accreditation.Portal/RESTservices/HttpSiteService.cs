@@ -5,7 +5,7 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
     /// <summary>
-    /// HttpSiteService.
+    /// HttpSiteService for accesing site services.
     /// </summary>
     public class HttpSiteService : BaseHttpService, IHttpSiteService
     {
@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// GetSite.
+        /// Get a site dto from the backend.
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>Task<DTOs.Site.Site></returns>

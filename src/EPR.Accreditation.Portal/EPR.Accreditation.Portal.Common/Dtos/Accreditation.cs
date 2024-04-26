@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Accreditation.
+    /// Accreditation class.
     /// </summary>
     public class Accreditation
     {
