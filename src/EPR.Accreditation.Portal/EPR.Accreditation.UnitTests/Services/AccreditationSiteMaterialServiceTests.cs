@@ -56,22 +56,22 @@
             var expectedWasteName = "SomeWasteName";
             _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
+                    SiteType.OverseasSite,
                     id,
-                    siteId,
                     materialId,
                     It.IsAny<Language>()))
                 .ReturnsAsync(expectedWasteName);
 
             // Act
-            var result = await _accreditationSiteMaterialService.GetWasteName(id, siteId, materialId);
+            var result = await _accreditationSiteMaterialService.GetWasteName(SiteType.OverseasSite, id, materialId);
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
             _mockHttpSiteMaterialService.Verify(
                 s =>
                     s.GetMeterialName(
+                        SiteType.OverseasSite,
                         id,
-                        siteId,
                         materialId,
                         Language.English),
                 Times.Once);
@@ -99,22 +99,22 @@
             var expectedWasteName = "SomeWasteName";
             _mockHttpSiteMaterialService.Setup(x =>
                 x.GetMeterialName(
+                    SiteType.OverseasSite,
                     id,
-                    siteId,
                     materialId,
                     It.IsAny<Language>()))
                 .ReturnsAsync(expectedWasteName);
 
             // Act
-            var result = await _accreditationSiteMaterialService.GetWasteName(id, siteId, materialId);
+            var result = await _accreditationSiteMaterialService.GetWasteName(SiteType.OverseasSite, id, materialId);
 
             // Assert
             Assert.AreEqual(expectedWasteName, result);
             _mockHttpSiteMaterialService.Verify(
                 s =>
                     s.GetMeterialName(
+                        SiteType.OverseasSite,
                         id,
-                        siteId,
                         materialId,
                         Language.Welsh),
                 Times.Once);

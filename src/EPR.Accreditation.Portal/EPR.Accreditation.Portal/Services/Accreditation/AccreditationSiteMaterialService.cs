@@ -32,8 +32,8 @@
         /// accreditation, site and material
         /// </summary>
         public async Task<string> GetWasteName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId)
         {
             // identify the language
@@ -51,8 +51,8 @@
             }
 
             return await _httpSiteMaterialService.GetMeterialName(
+                siteType,
                 id,
-                siteId,
                 materialId,
                 language);
         }
