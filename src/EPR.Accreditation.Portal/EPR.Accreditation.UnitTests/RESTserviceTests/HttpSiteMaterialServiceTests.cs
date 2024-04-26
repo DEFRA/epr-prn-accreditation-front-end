@@ -432,37 +432,6 @@
             Assert.IsTrue(AreObjectsEqual(wasteDecriptionCodes, capturedPayload));
         }
 
-        private bool AreObjectsEqual<T>(T obj1, T obj2)
-        {
-            var obj1Json = JsonConvert.SerializeObject(obj1);
-            var obj2Json = JsonConvert.SerializeObject(obj2);
-
-            return obj1Json == obj2Json;
-        }
-
-        private void SetClientResponse(
-            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
-            object content = null)
-        {
-            var response = new HttpResponseMessage(httpStatusCode);
-
-            if (content != null)
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(content));
-            }
-
-            _clientHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
-                {
-                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
-                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
-                })
-                .ReturnsAsync(response)
-                .Verifiable();
-        }
-
         [TestMethod]
         public async Task GetHasNpwdAccreditationNumber_CallsEndPointSuccesfully_WithExpectedOutput()
         {
@@ -507,6 +476,37 @@
             var capturedPayload = JsonConvert.DeserializeObject<NpwdAccreditationNumber>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(npwdAccredidtaionNumberDto, capturedPayload));
+        }
+
+        private bool AreObjectsEqual<T>(T obj1, T obj2)
+        {
+            var obj1Json = JsonConvert.SerializeObject(obj1);
+            var obj2Json = JsonConvert.SerializeObject(obj2);
+
+            return obj1Json == obj2Json;
+        }
+
+        private void SetClientResponse(
+            HttpStatusCode httpStatusCode = HttpStatusCode.OK,
+            object content = null)
+        {
+            var response = new HttpResponseMessage(httpStatusCode);
+
+            if (content != null)
+            {
+                response.Content = new StringContent(JsonConvert.SerializeObject(content));
+            }
+
+            _clientHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>((request, cancellationToken) =>
+                {
+                    _capturedUrl = request.RequestUri.ToString().TrimEnd('/');
+                    _capturedPayload = request.Content?.ReadAsStringAsync().Result; // Read the content as string
+                })
+                .ReturnsAsync(response)
+                .Verifiable();
         }
     }
 }
