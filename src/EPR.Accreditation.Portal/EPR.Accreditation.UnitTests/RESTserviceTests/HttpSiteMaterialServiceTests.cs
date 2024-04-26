@@ -464,7 +464,7 @@
                 Has2024NPWDAccreditation = false
             };
 
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Material/{materialId}/HasNpwdAccreditationNumber";
 
             // Act
             await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
