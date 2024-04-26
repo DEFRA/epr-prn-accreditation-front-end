@@ -50,7 +50,7 @@
             var id = Guid.NewGuid();
             var siteId = Guid.NewGuid();
             SetClientResponse(HttpStatusCode.OK);
-            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site?siteexternalid={siteId}";
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Site";
             SetClientResponse(HttpStatusCode.OK, new Site());
 
             // Act
