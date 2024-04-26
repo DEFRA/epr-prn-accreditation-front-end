@@ -303,7 +303,7 @@
             Guid? id,
             Guid? materialId)
         {
-            if (id == null || 
+            if (id == null ||
                 materialId == null)
             {
                 return NotFound();
