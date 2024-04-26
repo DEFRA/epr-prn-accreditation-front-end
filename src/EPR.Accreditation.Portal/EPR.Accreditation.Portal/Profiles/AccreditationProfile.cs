@@ -5,8 +5,8 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
-    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.Site;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
@@ -49,7 +49,7 @@
                 .ForMember(d => d.Records, o => o.MapFrom(s => s.Rows));
 
             CreateMap<SiteAddressViewModel, Site>();
-                
+
             CreateMap<Site, SiteAddressViewModel>().
                 ForMember(x => x.Id, opt => opt.Ignore());
 
