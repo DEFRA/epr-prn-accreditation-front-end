@@ -141,23 +141,5 @@
 
             _mockOverseasSiteService.Verify(s => s.UpdateReprocessorDetails(viewModel), Times.Once);
         }
-
-        [TestMethod]
-        public async Task ReprocessorDetails_WithValidModelStateAndSaveButtonNotSaveAndContinue_SavesDataAndReturnsApplicationSavedView()
-        {
-            // Arrange
-            var viewModel = new ReprocessorDetailsViewModel();
-            var saveButton = SaveButton.SaveAndComeBack;
-
-            // Act
-            var result = await _overseasSiteController.ReprocessorDetails(viewModel, saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-
-            _mockSaveAndComeBackService.Verify(s => s.AddSaveAndComeBack(viewModel.Id, It.IsAny<RouteValueDictionary>()), Times.Once);
-            _mockOverseasSiteService.Verify(s => s.UpdateReprocessorDetails(viewModel), Times.Once);
-        }
     }
 }

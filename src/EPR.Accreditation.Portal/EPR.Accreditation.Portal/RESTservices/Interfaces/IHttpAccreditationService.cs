@@ -8,18 +8,20 @@
 
     public interface IHttpAccreditationService
     {
-        Task CreateWastePermit(Guid accreditationId, LicensesAndPermitsReferences wastePermit);
+        Task CreateWastePermit(
+            Guid id,
+            LicensesAndPermitsReferences wastePermit);
 
-        Task<LicensesAndPermitsReferences> GetWastePermit(Guid accreditationId);
+        Task<LicensesAndPermitsReferences> GetWastePermit(Guid id);
 
-        Task<OperatorType> GetOperatorType(Guid accreditationExternalId);
+        Task<OperatorType> GetOperatorType(Guid id);
 
         Task<Guid> CreateAccreditation(DTO.Accreditation accreditation);
 
-        Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId);
+        Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid id);
 
         Task<Site> GetSite(Guid siteId);
 
-        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
     }
 }

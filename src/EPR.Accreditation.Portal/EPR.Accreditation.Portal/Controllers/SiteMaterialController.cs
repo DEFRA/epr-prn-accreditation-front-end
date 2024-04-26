@@ -43,21 +43,18 @@
         /// <param name="httpContextAccessor">The http context accessor</param>
         /// <param name="urlHelper">Wrapper to the IUrlHelper - makes testing easier</param>
         /// <param name="accreditationSiteMaterialService">The service for performing any busines logic for accreditation site materials</param>
-        /// <param name="saveAndComeBackService">The service for save and continue</param>
         /// <param name="appSettingsConfiguration">The app settings configuration</param>
         /// <param name="backPageViewModel">The view model for populating the back button/link</param>
         public SiteMaterialController(
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
-            ISaveAndComeBackService saveAndComeBackService,
             IOptions<AppSettingsConfigOptions> appSettingsConfiguration,
             BackPageViewModel backPageViewModel)
             : base(
                   httpContextAccessor,
                   urlHelper,
                   accreditationSiteMaterialService,
-                  saveAndComeBackService,
                   backPageViewModel,
                   SiteType.Site)
         {
@@ -220,26 +217,13 @@
 
             await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteNonWasteInputsRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                SiteMaterialOutputsRouteName,
+                new
+                {
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    SiteMaterialOutputsRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
@@ -298,26 +282,13 @@
 
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteNonWasteInputsRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                ProductsProducedRouteName,
+                new
+                {
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    ProductsProducedRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         /// <summary>
@@ -376,26 +347,15 @@
                     viewModel.MaterialId);
             }
 
-            await this._accreditationSiteMaterialService.UpdateMaterialWasteOutputs(viewModel);
+            await _accreditationSiteMaterialService.UpdateMaterialWasteOutputs(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                // this is all the data we require to save for come back later
-                await this._saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                NonWasteInputsRouteName,
+                new
+                {
                     viewModel.Id,
-                    this._httpContextAccessor.HttpContext.GetRouteData().Values);
-                return this.View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    NonWasteInputsRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         /// <summary>
@@ -491,26 +451,13 @@
 
             await _accreditationSiteMaterialService.UpdateProductsProduced(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteNonWasteInputsRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                AuthorityRouteName,
+                new
+                {
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    AuthorityRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         /// <summary>
@@ -559,22 +506,13 @@
 
             await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue)
-            {
-                return RedirectToRoute(
-                    NonWasteInputsRouteName,
-                    new
-                    {
-                        id = viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
-
-            // this is all the data we require to save for come back later
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.Id,
-                _httpContextAccessor.HttpContext.GetRouteData().Values);
-            return View("_ApplicationSaved");
+            return RedirectToRoute(
+                NonWasteInputsRouteName,
+                new
+                {
+                    id = viewModel.Id,
+                    viewModel.MaterialId
+                });
         }
 
         [HttpGet("Authority", Name = "Authority")]
@@ -653,10 +591,6 @@
                 return RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
             }
 
-            // this is all the data we require to save for come back later
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.Id,
-                _httpContextAccessor.HttpContext.GetRouteData().Values);
             return View("_ApplicationSaved");
         }
     }
