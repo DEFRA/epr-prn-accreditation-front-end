@@ -147,8 +147,26 @@
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("Material/{materialId}/TaskList", Name = "TaskList")]
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskList", Name = "TaskList")]
         public async Task<IActionResult> TaskList(
+            Guid? id,
+            Guid? materialId)
+        {
+            if (id != null &&
+                materialId != null)
+            {
+                TaskListViewModel model = await _accreditationService.GetTaskList(
+                    id.Value,
+                    materialId.Value);
+                return View(model);
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
+        public async Task<IActionResult> TaskListSite(
             Guid? id,
             Guid? materialId)
         {
