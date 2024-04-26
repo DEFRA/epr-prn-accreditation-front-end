@@ -58,8 +58,8 @@
 
             // Act
             var name = await _httpSiteMaterialService.GetMeterialName(
+                SiteType.Site,
                 id,
-                null,
                 materialId,
                 language);
 
@@ -81,8 +81,8 @@
 
             // Act
             var name = await _httpSiteMaterialService.GetMeterialName(
+                SiteType.Site,
                 id,
-                null,
                 materialId,
                 language);
 

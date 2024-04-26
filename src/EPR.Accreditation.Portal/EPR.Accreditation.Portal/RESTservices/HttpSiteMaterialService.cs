@@ -20,13 +20,13 @@
         }
 
         public async Task<string> GetMeterialName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId,
             Enums.Language language)
         {
-            var sitePart = siteId.HasValue ? $"OverseasSite/{siteId}" : "Site";
-            return await Get<string>($"{id}/{sitePart}/Material/{materialId}/Name?language={language}", false);
+            var site = GetSiteName(siteType);
+            return await Get<string>($"{id}/{site}/{materialId}/Name?language={language}", false);
         }
 
         public async Task<string> GetWasteSource(
@@ -35,10 +35,8 @@
             Guid? siteId,
             Guid materialId)
         {
-            var site = GetSiteName(
-                siteType,
-                siteId);
-            return await Get<string>($"{id}/{site}/Material/{materialId}/WasteSource");
+            var site = GetSiteName(siteType);
+            return await Get<string>($"{id}/{site}/{materialId}/WasteSource");
         }
 
         public async Task UpdateWasteSource(
@@ -48,15 +46,15 @@
             Guid materialId,
             string wasteSource)
         {
-            var site = GetSiteName(siteType, siteId);
-            await Put($"{id}/{site}/Material/{materialId}/WasteSource", wasteSource);
+            var site = GetSiteName(siteType);
+            await Put($"{id}/{site}/{materialId}/WasteSource", wasteSource);
         }
 
         public async Task<ReprocessingSupportingInformationDto> GetNonWasteInputs(
             Guid id,
             Guid materialId)
         {
-            return await Get<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs");
+            return await Get<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/NonWasteInputs");
         }
 
         public async Task UpdateNonWasteInputs(
@@ -64,14 +62,14 @@
             Guid materialId,
             ReprocessingSupportingInformationDto nonWasteInputsDto)
         {
-            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
         }
 
         public async Task<ReprocessingSupportingInformationDto> GetProductsProduced(
             Guid id,
             Guid materialId)
         {
-            return await Get<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/ProductsProduced");
+            return await Get<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/ProductsProduced");
         }
 
         public async Task UpdateProductsProduced(
@@ -79,14 +77,14 @@
             Guid materialId,
             ReprocessingSupportingInformationDto nonWasteInputsDto)
         {
-            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/ProductsProduced", nonWasteInputsDto);
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/ProductsProduced", nonWasteInputsDto);
         }
 
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
             Guid id,
             Guid materialId)
         {
-            return await Get<MaterialOutputsDto>($"{id}/Site/Material/{materialId}/MaterialOutputs");
+            return await Get<MaterialOutputsDto>($"{id}/Material/{materialId}/MaterialOutputs");
         }
 
         public async Task UpdateMaterialOutputs(
@@ -94,7 +92,7 @@
             Guid materialId,
             MaterialOutputsDto materialOutputsDto)
         {
-            await Put($"{id}/Site/Material/{materialId}/MaterialOutputs", materialOutputsDto);
+            await Put($"{id}/Material/{materialId}/MaterialOutputs", materialOutputsDto);
         }
 
         /// <summary>
@@ -107,7 +105,7 @@
             Guid id,
             Guid materialId)
         {
-            return await this.Get<MaterialWasteOutputsDto>($"{id}/Site/Material/{materialId}/MaterialWasteOutputs");
+            return await this.Get<MaterialWasteOutputsDto>($"{id}/Material/{materialId}/MaterialWasteOutputs");
         }
 
         /// <summary>
@@ -122,14 +120,14 @@
             Guid materialId,
             MaterialWasteOutputsDto materialWasteOutputsDto)
         {
-            await this.Put($"{id}/Site/Material/{materialId}/MaterialWasteOutputs", materialWasteOutputsDto);
+            await this.Put($"{id}/Material/{materialId}/MaterialWasteOutputs", materialWasteOutputsDto);
         }
 
         public async Task<bool?> GetReprocessedWasteLastYear(
             Guid id,
             Guid materialId)
         {
-            return await Get<bool?>($"{id}/Site/Material/{materialId}/WasteLastYear");
+            return await Get<bool?>($"{id}/Material/{materialId}/WasteLastYear");
         }
 
         public async Task UpdateReprocessedWasteLastYear(
@@ -137,7 +135,7 @@
             Guid materialId,
             ReprocessedWasteLastYear reprocessedWasteLastYear)
         {
-            await Put($"{id}/Site/Material/{materialId}/WasteLastYear", reprocessedWasteLastYear);
+            await Put($"{id}/Material/{materialId}/WasteLastYear", reprocessedWasteLastYear);
         }
 
         public async Task<bool?> GetHasPermitExemption(Guid id)
@@ -155,7 +153,7 @@
             Guid siteId,
             Guid materialExternalId)
         {
-            return await Get<AccreditationMaterial>($"{id}/Site/{siteId}/Material/{materialExternalId}");
+            return await Get<AccreditationMaterial>($"{id}/Material/{materialExternalId}");
         }
 
         public async Task UpdateAccreditationMaterial(
@@ -180,7 +178,7 @@
             Guid siteId,
             Guid materialId)
         {
-            return await Get<List<string>>($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes");
+            return await Get<List<string>>($"{id}/OverseasMaterial/{materialId}/WasteDescriptionCodes");
         }
 
         /// <summary>
@@ -198,11 +196,10 @@
             Guid materialId,
             IEnumerable<string> wasteDecriptionCodes)
         {
-            await Post($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
+            await Post($"{id}/OverseasMaterial/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
         }
 
         private string GetSiteName(
-            SiteType siteType,
-            Guid? siteId) => siteType == SiteType.Site ? "Site" : $"OverseasSite/{siteId}";
+            SiteType siteType) => siteType == SiteType.Site ? "Material" : $"OverseasMaterial";
     }
 }

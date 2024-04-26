@@ -75,7 +75,12 @@
                 actionResult = RedirectToAction("AuthorityToIssues", "Accreditation");
             }
 
-            return actionResult;
+            if (actionResult != null)
+            {
+                return actionResult;
+            }
+
+            return new EmptyResult();
         }
 
         [HttpGet("WasteLicensesAndPermits")]

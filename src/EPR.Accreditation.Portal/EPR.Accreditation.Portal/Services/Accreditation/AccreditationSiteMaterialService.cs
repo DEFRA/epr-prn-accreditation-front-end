@@ -4,7 +4,6 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Constants;
     using EPR.Accreditation.Portal.Enums;
-    using EPR.Accreditation.Portal.RESTservices;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
@@ -33,8 +32,8 @@
         /// accreditation, site and material
         /// </summary>
         public async Task<string> GetWasteName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId)
         {
             // identify the language
@@ -52,8 +51,8 @@
             }
 
             return await _httpSiteMaterialService.GetMeterialName(
+                siteType,
                 id,
-                siteId,
                 materialId,
                 language);
         }

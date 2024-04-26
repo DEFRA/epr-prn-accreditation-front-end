@@ -8,8 +8,8 @@
     {
         // available for both reprocessor and exporter
         Task<string> GetWasteName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId);
 
         // available for both reprocessor and exporter

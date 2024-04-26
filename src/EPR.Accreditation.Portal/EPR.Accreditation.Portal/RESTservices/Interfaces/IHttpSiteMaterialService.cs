@@ -9,8 +9,8 @@
     {
         // available for both reprocessor and exporter
         Task<string> GetMeterialName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId,
             Enums.Language language);
 
