@@ -1,0 +1,70 @@
+﻿@model MaterialWasteInputsViewModel
+
+@{
+    ViewData["Title"] = MaterialWasteInputsLastYearResources.Title;
+}
+
+<form method="post">
+    <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+                @MaterialWasteInputsLastYearResources.Title
+            </h1>
+        </legend>
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="UkPackagingWaste"></span>
+            </p>
+
+            <h1 class="govuk-heading-m">
+                @MaterialWasteInputsLastYearResources.UkPackagingWasteField
+            </h1>
+
+            <div id="event-name-hint" class="govuk-hint">
+                @MaterialWasteInputsLastYearResources.UkPackagingWasteHint
+            </div>
+
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="UkPackagingWaste" autocomplete="off" />
+                <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+            </div>
+        </div>
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="NonUkPackagingWaste"></span>
+            </p>
+
+            <h1 class="govuk-heading-m">
+                @MaterialWasteInputsLastYearResources.NonUkPackagingWasteField
+            </h1>
+
+            <div id="event-name-hint" class="govuk-hint">
+                @MaterialWasteInputsLastYearResources.NonUkPackagingWasteHint
+            </div>
+
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="NonUkPackagingWaste" autocomplete="off" />
+                <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+            </div>
+        </div>
+        <div class="govuk-form-group">
+            <p class="govuk-error-message">
+                <span asp-validation-for="NonPackagingWaste"></span>
+            </p>
+
+            <h1 class="govuk-heading-m">
+                @MaterialWasteInputsLastYearResources.NonPackagingWasteField
+            </h1>
+
+            <div id="event-name-hint" class="govuk-hint">
+                @MaterialWasteInputsLastYearResources.NonPackagingWasteHint
+            </div>
+
+            <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-10 3dp" type="text" asp-for="NonPackagingWaste" autocomplete="off" />
+                <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
+            </div>
+        </div>
+    </fieldset>
+    <partial name="_SaveButtons" />
+</form>

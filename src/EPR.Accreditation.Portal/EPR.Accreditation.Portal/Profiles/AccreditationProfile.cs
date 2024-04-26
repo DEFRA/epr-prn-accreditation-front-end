@@ -5,6 +5,7 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
@@ -22,6 +23,7 @@
             CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
             CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
+            CreateMap<HasNpwdAccreditationNumViewModel, NpwdAccreditationNumber>();
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
             CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
@@ -35,9 +37,9 @@
             CreateMap<ReprocessingSupportingInformationRecordDto, TypeTonnesRowViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+            CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
 
-            this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
+            CreateMap<MaterialWasteInputsDto, MaterialWasteInputsViewModel>()
                 .ReverseMap();
 
             CreateMap<ReprocessingSupportingInformationDto, ProductsProducedViewModel>()
@@ -48,7 +50,7 @@
             CreateMap<string, WasteDescriptionCodeRowViewModel>()
                 .ForMember(d => d.WasteDescriptionCode, o => o.MapFrom(s => s));
 
-            this.CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
+            CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
                 .ReverseMap();
 
             this.CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()

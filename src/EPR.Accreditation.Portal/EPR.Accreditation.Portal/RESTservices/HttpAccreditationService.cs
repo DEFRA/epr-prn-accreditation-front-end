@@ -27,7 +27,7 @@
 
         public async Task<LicensesAndPermitsReferences> GetWastePermit(Guid id)
         {
-           return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
+            return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
         }
 
         public async Task<OperatorType> GetOperatorType(Guid id)

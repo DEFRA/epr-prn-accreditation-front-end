@@ -4,6 +4,7 @@
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
@@ -20,13 +21,13 @@
         }
 
         public async Task<string> GetMeterialName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId,
             Enums.Language language)
         {
-            var sitePart = siteId.HasValue ? $"OverseasSite/{siteId}" : "Site";
-            return await Get<string>($"{id}/{sitePart}/Material/{materialId}/Name?language={language}", false);
+            var site = GetSiteName(siteType);
+            return await Get<string>($"{id}/{site}/{materialId}/Name?language={language}", false);
         }
 
         public async Task<string> GetWasteSource(
@@ -35,10 +36,8 @@
             Guid? siteId,
             Guid materialId)
         {
-            var site = GetSiteName(
-                siteType,
-                siteId);
-            return await Get<string>($"{id}/{site}/Material/{materialId}/WasteSource");
+            var site = GetSiteName(siteType);
+            return await Get<string>($"{id}/{site}/{materialId}/WasteSource");
         }
 
         public async Task UpdateWasteSource(
@@ -48,15 +47,15 @@
             Guid materialId,
             string wasteSource)
         {
-            var site = GetSiteName(siteType, siteId);
-            await Put($"{id}/{site}/Material/{materialId}/WasteSource", wasteSource);
+            var site = GetSiteName(siteType);
+            await Put($"{id}/{site}/{materialId}/WasteSource", wasteSource);
         }
 
         public async Task<ReprocessingSupportingInformationDto> GetNonWasteInputs(
             Guid id,
             Guid materialId)
         {
-            return await Get<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs");
+            return await Get<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/NonWasteInputs");
         }
 
         public async Task UpdateNonWasteInputs(
@@ -64,14 +63,14 @@
             Guid materialId,
             ReprocessingSupportingInformationDto nonWasteInputsDto)
         {
-            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
         }
 
         public async Task<ReprocessingSupportingInformationDto> GetProductsProduced(
             Guid id,
             Guid materialId)
         {
-            return await Get<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/ProductsProduced");
+            return await Get<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/ProductsProduced");
         }
 
         public async Task UpdateProductsProduced(
@@ -79,14 +78,14 @@
             Guid materialId,
             ReprocessingSupportingInformationDto nonWasteInputsDto)
         {
-            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/ProductsProduced", nonWasteInputsDto);
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Material/{materialId}/ProductsProduced", nonWasteInputsDto);
         }
 
         public async Task<MaterialOutputsDto> GetMaterialOutputs(
             Guid id,
             Guid materialId)
         {
-            return await Get<MaterialOutputsDto>($"{id}/Site/Material/{materialId}/MaterialOutputs");
+            return await Get<MaterialOutputsDto>($"{id}/Material/{materialId}/MaterialOutputs");
         }
 
         public async Task UpdateMaterialOutputs(
@@ -94,7 +93,7 @@
             Guid materialId,
             MaterialOutputsDto materialOutputsDto)
         {
-            await Put($"{id}/Site/Material/{materialId}/MaterialOutputs", materialOutputsDto);
+            await Put($"{id}/Material/{materialId}/MaterialOutputs", materialOutputsDto);
         }
 
         /// <summary>
@@ -103,33 +102,33 @@
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>Material waste output dto.</returns>
-        public async Task<MaterialWasteOutputsDto> GetMaterialWasteOutputs(
+        public async Task<MaterialWasteInputsDto> GetMaterialWasteInputs(
             Guid id,
             Guid materialId)
         {
-            return await this.Get<MaterialWasteOutputsDto>($"{id}/Site/Material/{materialId}/MaterialWasteOutputs");
+            return await Get<MaterialWasteInputsDto>($"{id}/Material/{materialId}/MaterialWasteInputs");
         }
 
         /// <summary>
-        /// Updates material waste output.
+        /// Updates material waste input.
         /// </summary>
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
-        /// <param name="materialWasteOutputsDto">Material waste output dto.</param>
+        /// <param name="materialWasteInputsDto">Material waste input dto.</param>
         /// <returns>Nothing.</returns>
-        public async Task UpdateMaterialWasteOutputs(
+        public async Task UpdateMaterialWasteInputs(
             Guid id,
             Guid materialId,
-            MaterialWasteOutputsDto materialWasteOutputsDto)
+            MaterialWasteInputsDto materialWasteInputsDto)
         {
-            await this.Put($"{id}/Site/Material/{materialId}/MaterialWasteOutputs", materialWasteOutputsDto);
+            await this.Put($"{id}/Material/{materialId}/MaterialWasteInputs", materialWasteInputsDto);
         }
 
         public async Task<bool?> GetReprocessedWasteLastYear(
             Guid id,
             Guid materialId)
         {
-            return await Get<bool?>($"{id}/Site/Material/{materialId}/WasteLastYear");
+            return await Get<bool?>($"{id}/Material/{materialId}/WasteLastYear");
         }
 
         public async Task UpdateReprocessedWasteLastYear(
@@ -137,7 +136,7 @@
             Guid materialId,
             ReprocessedWasteLastYear reprocessedWasteLastYear)
         {
-            await Put($"{id}/Site/Material/{materialId}/WasteLastYear", reprocessedWasteLastYear);
+            await Put($"{id}/Material/{materialId}/WasteLastYear", reprocessedWasteLastYear);
         }
 
         public async Task<bool?> GetHasPermitExemption(Guid id)
@@ -155,7 +154,7 @@
             Guid siteId,
             Guid materialExternalId)
         {
-            return await Get<AccreditationMaterial>($"{id}/Site/{siteId}/Material/{materialExternalId}");
+            return await Get<AccreditationMaterial>($"{id}/Material/{materialExternalId}");
         }
 
         public async Task UpdateAccreditationMaterial(
@@ -180,7 +179,7 @@
             Guid siteId,
             Guid materialId)
         {
-            return await Get<List<string>>($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes");
+            return await Get<List<string>>($"{id}/OverseasMaterial/{materialId}/WasteDescriptionCodes");
         }
 
         /// <summary>
@@ -198,11 +197,38 @@
             Guid materialId,
             IEnumerable<string> wasteDecriptionCodes)
         {
-            await Post($"{id}/OverseasSite/{siteId}/Material/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
+            await Post($"{id}/OverseasMaterial/{materialId}/WasteDescriptionCodes", wasteDecriptionCodes);
+        }
+
+        /// <summary>
+        /// Gets a bool if 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>True or false</returns>
+        public async Task<bool?> GetHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId)
+        {
+            return await Get<bool?>($"{id}/Material/{materialId}/HasNpwdAccreditationNumber");
+        }
+
+        /// <summary>
+        /// Updated the 2024 NPWD Accreditation number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="npwdAccreditationNumber">True or false value from with the DTO</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            NpwdAccreditationNumber npwdAccreditationNumber)
+        {
+            await Put($"{id}/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
         }
 
         private string GetSiteName(
-            SiteType siteType,
-            Guid? siteId) => siteType == SiteType.Site ? "Site" : $"OverseasSite/{siteId}";
+            SiteType siteType) => siteType == SiteType.Site ? "Material" : $"OverseasMaterial";
     }
 }

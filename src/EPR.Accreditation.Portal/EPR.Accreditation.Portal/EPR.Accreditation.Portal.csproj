@@ -69,6 +69,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>OverseasReprocessorResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\HasNpwdAccrNumResources.Designer.cs">
+      <DependentUpon>HasNpwdAccrNumResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\PrnTonnesPlannedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -240,6 +245,10 @@
     <EmbeddedResource Update="Resources\OverseasReprocessorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>OverseasReprocessorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\HasNpwdAccrNumResources.resx">
+      <LastGenOutput>HasNpwdAccrNumResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PrnTonnesPlannedResources.cy-GB.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

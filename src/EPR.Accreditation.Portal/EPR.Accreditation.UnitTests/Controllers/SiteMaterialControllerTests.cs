@@ -9,7 +9,6 @@
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Options;
     using Moq;
 
@@ -160,17 +159,17 @@
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AllParametersNotNull_WithNullWasteLastYear_ReturnsNotFound()
+        public async Task MaterialWasteInputs_AllParametersNotNull_WithNullWasteLastYear_ReturnsNotFound()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
-                materialId)).ReturnsAsync(new MaterialWasteOutputsViewModel());
+                materialId)).ReturnsAsync(new MaterialWasteInputsViewModel());
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
@@ -180,67 +179,67 @@
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AllParametersNotNull_WithWasteLastYearTrue_ReturnsExpectedResult()
+        public async Task MaterialWasteInputs_AllParametersNotNull_WithWasteLastYearTrue_ReturnsExpectedResult()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
 
-            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            var materialWasteOutputsViewModel = new MaterialWasteInputsViewModel
             {
                 WasteLastYear = true,
             };
 
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
                 materialId)).ReturnsAsync(materialWasteOutputsViewModel);
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
             // Assert
             var viewResult = result as ViewResult;
             Assert.IsNotNull(viewResult);
-            Assert.AreEqual("MaterialWasteOutputsLastYear", viewResult.ViewName);
+            Assert.AreEqual("MaterialWasteInputsLastYear", viewResult.ViewName);
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AllParametersNotNull_WithWasteLastYearFalse_ReturnsExpectedResult()
+        public async Task MaterialWasteInputs_AllParametersNotNull_WithWasteLastYearFalse_ReturnsExpectedResult()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
 
-            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            var materialWasteOutputsViewModel = new MaterialWasteInputsViewModel
             {
                 WasteLastYear = false,
             };
 
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            _mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
                 materialId)).ReturnsAsync(materialWasteOutputsViewModel);
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await _siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
             // Assert
             var viewResult = result as ViewResult;
             Assert.IsNotNull(viewResult);
-            Assert.AreEqual("MaterialWasteOutputsEstimated", viewResult.ViewName);
+            Assert.AreEqual("MaterialWasteInputsEstimated", viewResult.ViewName);
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AnyParameterNull_ReturnsNotFound()
+        public async Task MaterialWasteInputs_AnyParameterNull_ReturnsNotFound()
         {
             // Arrange
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(null, Guid.NewGuid());
-            var result2 = await this._siteMaterialController.MaterialWasteOutputs(Guid.NewGuid(), null);
+            var result = await _siteMaterialController.MaterialWasteInputs(null, Guid.NewGuid());
+            var result2 = await _siteMaterialController.MaterialWasteInputs(Guid.NewGuid(), null);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -393,7 +392,7 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
             var redirectToRouteResult = result as RedirectToRouteResult;
-            Assert.AreEqual("NonWasteInputs", redirectToRouteResult.RouteName);
+            Assert.AreEqual("MaterialWasteInputs", redirectToRouteResult.RouteName);
 
             _mockAccreditationSiteMaterialService.Verify(
                 service =>
@@ -890,6 +889,116 @@
             Assert.IsNotNull(result);
             Assert.IsTrue(result.RouteName == "Authority");
             _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsViewResult_WithViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var viewModel = new HasNpwdAccreditationNumViewModel();
+
+            _mockAccreditationSiteMaterialService.Setup(s =>
+                s.GetHasAccreditationNumViewModel(
+                    id,
+                    materialId))
+                .ReturnsAsync(viewModel);
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(id, materialId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(viewModel, result.Model);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.GetHasAccreditationNumViewModel(id, materialId), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsNotFound_WhenIdOrMaterialIdIsNull()
+        {
+            // Arrange
+            Guid? id = null;
+            Guid? materialId = Guid.NewGuid();
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(id, materialId) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.GetHasAccreditationNumViewModel(Guid.Empty, materialId.Value), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_ReturnsViewResult_WhenModelStateIsNotValid()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel();
+
+            _siteMaterialController.ModelState.AddModelError("Has2024NPWDAccreditation", "ErrorMessage");
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(viewModel, result.Model);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_RedirectsToNpwdAccreditationNumber_WhenSaveAndContinueAndHas2024NPWDAccreditationIsTrue()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel
+            {
+                Has2024NPWDAccreditation = true,
+                Id = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid()
+            };
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndContinue) as RedirectToActionResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("NpwdAccreditationNumber", result.ActionName);
+            Assert.AreEqual("Accreditation", result.ControllerName);
+            Assert.AreEqual(viewModel.Id, result.RouteValues["Id"]);
+            Assert.AreEqual(viewModel.MaterialId, result.RouteValues["MaterialId"]);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CheckNpwdAccreditationNumber_RedirectsToCheckYourAnswers_WhenSaveAndContinueAndHas2024NPWDAccreditationIsFalse()
+        {
+            // Arrange
+            var viewModel = new HasNpwdAccreditationNumViewModel
+            {
+                Has2024NPWDAccreditation = false,
+                Id = Guid.NewGuid()
+            };
+
+            // Act
+            var result = await _siteMaterialController.CheckNpwdAccreditationNumber(
+                viewModel,
+                SaveButton.SaveAndContinue) as RedirectToActionResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("CheckYourAnswers", result.ActionName);
+            Assert.AreEqual("Accreditation", result.ControllerName);
+            Assert.AreEqual(viewModel.Id, result.RouteValues["Id"]);
+
+            _mockAccreditationSiteMaterialService.Verify(s => s.UpdateHasNpwdAccreditationNumber(viewModel), Times.Once);
         }
     }
 }

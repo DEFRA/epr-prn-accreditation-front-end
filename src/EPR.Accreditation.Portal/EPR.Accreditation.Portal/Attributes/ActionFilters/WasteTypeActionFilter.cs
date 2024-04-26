@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Attributes.ActionFilters
 {
+    using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc.Filters;
@@ -38,9 +39,10 @@
 
             try
             {
+                var siteType = string.IsNullOrWhiteSpace((string)siteIdValue) ? SiteType.Site : SiteType.OverseasSite;
                 var wasteName = Task.Run(async () => await _accreditationSiteMaterialService.GetWasteName(
+                    siteType,
                     id,
-                    string.IsNullOrWhiteSpace((string)siteIdValue) ? null : siteId,
                     materialId)).Result;
                 wasteCommonViewModel.Name = wasteName;
             }
