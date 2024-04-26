@@ -20,7 +20,6 @@
         private Mock<IHttpContextAccessor> _mockContextAccessor;
         private Mock<IUrlHelperWrapper> _mockUrlHelper;
         private Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
-        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         private Mock<IOptions<AppSettingsConfigOptions>> _mockAppSettingsConfiguration;
         private BackPageViewModel _backPageViewModel;
 
@@ -30,7 +29,6 @@
             _mockContextAccessor = new Mock<IHttpContextAccessor>();
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _mockAccreditationSiteMaterialService = new Mock<IAccreditationSiteMaterialService>();
-            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _mockAppSettingsConfiguration = new Mock<IOptions<AppSettingsConfigOptions>>();
             _backPageViewModel = new BackPageViewModel();
 
@@ -48,7 +46,6 @@
                 _mockContextAccessor.Object,
                 _mockUrlHelper.Object,
                 _mockAccreditationSiteMaterialService.Object,
-                _mockSaveAndComeBackService.Object,
                 _mockAppSettingsConfiguration.Object,
                 _backPageViewModel);
 
@@ -405,40 +402,6 @@
         }
 
         [TestMethod]
-        public async Task WasteLastYear_ReturnsViewResult_ForSaveAndComeBack()
-        {
-            // Arrange
-            var saveButton = SaveButton.SaveAndComeBack;
-            var viewModel = new ReprocessedWasteLastYearViewModel
-            {
-                Id = Guid.NewGuid(),
-                HasReprocessedWasteLastYear = false
-            };
-
-            _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
-
-            // Act
-            var result = await _siteMaterialController.WasteLastYear(viewModel, saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-
-            _mockAccreditationSiteMaterialService.Verify(
-                s =>
-                    s.UpdateReprocessedWasteLastYear(
-                        viewModel),
-                Times.Once);
-
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once());
-        }
-
-        [TestMethod]
         public async Task WasteLastYear_ReturnsCorrectView_WhenModelIsInvalid()
         {
             // Arrange
@@ -497,36 +460,6 @@
         }
 
         [TestMethod]
-        public async Task SaveMaterialWasteSource_SaveAndComeBack_ReturnsViewResult()
-        {
-            // Arrange
-            var viewModel = new WasteSourceViewModel();
-            var saveButton = SaveButton.SaveAndComeBack;
-            _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
-
-            // Act
-            var result = await _siteMaterialController.MaterialWasteSource(
-                viewModel,
-                saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(
-                s =>
-                    s.UpdateWasteSource(
-                        SiteType.Site,
-                        viewModel),
-                Times.Once());
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once());
-        }
-
-        [TestMethod]
         public async Task SaveMaterialWasteSource_SaveAndComeBack_CallsServicesCorrectly()
         {
             // Arrange
@@ -543,12 +476,6 @@
                     x.UpdateWasteSource(
                         It.IsAny<SiteType>(),
                         viewModel),
-                Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
                 Times.Once);
         }
 
@@ -588,39 +515,6 @@
         }
 
         [TestMethod]
-        public async Task MaterialOutputs_SaveAndComeBack_ReturnsViewResult()
-        {
-            // Arrange
-            var viewModel = new MaterialOutputsViewModel
-            {
-                WasteLastYear = true
-            };
-
-            var saveButton = SaveButton.SaveAndComeBack;
-            _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
-
-            // Act
-            var result = await _siteMaterialController.MaterialOutputs(
-                viewModel,
-                saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(
-                s =>
-                    s.UpdateMaterialOutputs(
-                        viewModel),
-                Times.Once());
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once());
-        }
-
-        [TestMethod]
         public async Task MaterialOutputs_SaveAndComeBack_CallsServicesCorrectly()
         {
             // Arrange
@@ -637,12 +531,6 @@
             _mockAccreditationSiteMaterialService.Verify(
                 x =>
                     x.UpdateMaterialOutputs(viewModel),
-                Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
                 Times.Once);
         }
 
@@ -882,7 +770,6 @@
                 _mockContextAccessor.Object,
                 _mockUrlHelper.Object,
                 _mockAccreditationSiteMaterialService.Object,
-                _mockSaveAndComeBackService.Object,
                 _mockAppSettingsConfiguration.Object,
                 _backPageViewModel);
 
@@ -981,41 +868,6 @@
         }
 
         [TestMethod]
-        public async Task ProductsProduced_ReturnsApplicationSavedView_WhenSaveAndComeBackLater()
-        {
-            // Arrange
-            var accreditationId = Guid.NewGuid();
-            var viewModel = new ProductsProducedViewModel
-            {
-                Id = accreditationId,
-                WasteLastYear = false
-            };
-
-            var defaultContext = new DefaultHttpContext();
-            _mockContextAccessor.Setup(c => c.HttpContext).Returns(defaultContext);
-
-            // Act
-            var result = await _siteMaterialController.ProductsProduced(
-                viewModel,
-                SaveButton.SaveAndComeBack) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.ViewName == "_ApplicationSaved");
-            _mockAccreditationSiteMaterialService.Verify(
-                s =>
-                    s.UpdateProductsProduced(
-                        It.IsAny<ProductsProducedViewModel>()),
-                Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                s =>
-                    s.AddSaveAndComeBack(
-                        It.Is<Guid>(p => p == accreditationId),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once);
-        }
-
-        [TestMethod]
         public async Task ProductsProduced_ReturnsRedirectResult_WhenSaveAndContinue()
         {
             // Arrange
@@ -1038,12 +890,6 @@
             Assert.IsNotNull(result);
             Assert.IsTrue(result.RouteName == "Authority");
             _mockAccreditationSiteMaterialService.Verify(s => s.UpdateProductsProduced(It.IsAny<ProductsProducedViewModel>()), Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                s =>
-                    s.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Never);
         }
     }
 }

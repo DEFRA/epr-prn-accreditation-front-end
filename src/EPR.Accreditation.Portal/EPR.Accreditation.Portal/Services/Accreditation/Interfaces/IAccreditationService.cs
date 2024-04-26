@@ -12,9 +12,18 @@
 
         Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
 
-        Task<TaskListViewModel> GetTaskList(Guid id, Guid siteId, Guid materialId);
+        Task<TaskListViewModel> GetTaskList(
+            Guid id,
+            Guid materialId);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        /// <summary>
+        /// Determines if the ID is for an exporter or not
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation that contains the view model</returns>
+        Task<bool> IsExporter(Guid id);
 
         Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId);
 

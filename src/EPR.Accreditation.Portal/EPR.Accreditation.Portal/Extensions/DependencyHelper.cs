@@ -33,6 +33,7 @@
             services
                 .AddScoped<MaterialTypeViewModel>()
                 .AddScoped<WasteTypeActionFilter>()
+                .AddTransient<SaveAndComeBackLaterFilter>()
                 .AddScoped<BackPageViewModel>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()

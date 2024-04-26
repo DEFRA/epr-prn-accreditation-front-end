@@ -20,7 +20,6 @@
         private Mock<IOptions<AppSettingsConfigOptions>> _mockOptions;
         private Mock<IUrlHelperWrapper> _mockUrlHelper;
         private Mock<IAccreditationSiteMaterialService> _mockAccreditationSiteMaterialService;
-        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         private BackPageViewModel _backPageViewModel;
         private AppSettingsConfigOptions _appSettingsConfig;
 
@@ -31,7 +30,6 @@
             _mockOptions = new Mock<IOptions<AppSettingsConfigOptions>>();
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _mockAccreditationSiteMaterialService = new Mock<IAccreditationSiteMaterialService>();
-            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _backPageViewModel = new BackPageViewModel();
 
             _appSettingsConfig = new AppSettingsConfigOptions
@@ -47,7 +45,6 @@
                 _mockOptions.Object,
                 _mockUrlHelper.Object,
                 _mockAccreditationSiteMaterialService.Object,
-                _mockSaveAndComeBackService.Object,
                 _backPageViewModel);
 
             var httpContext = new DefaultHttpContext();
@@ -98,36 +95,6 @@
         }
 
         [TestMethod]
-        public async Task SaveMaterialWasteSource_SaveAndComeBack_ReturnsViewResult()
-        {
-            // Arrange
-            var viewModel = new WasteSourceViewModel();
-            var saveButton = SaveButton.SaveAndComeBack;
-            _siteMaterialController.ModelState.Clear(); // Ensuring ModelState is valid
-
-            // Act
-            var result = await _siteMaterialController.MaterialWasteSource(
-                viewModel,
-                saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(
-                s =>
-                    s.UpdateWasteSource(
-                        SiteType.OverseasSite,
-                        viewModel),
-                Times.Once());
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once());
-        }
-
-        [TestMethod]
         public async Task SaveMaterialWasteSource_SaveAndComeBack_CallsServicesCorrectly()
         {
             // Arrange
@@ -140,12 +107,6 @@
 
             // Assert
             _mockAccreditationSiteMaterialService.Verify(x => x.UpdateWasteSource(It.IsAny<SiteType>(), viewModel), Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once);
         }
 
         [TestMethod]
@@ -281,33 +242,6 @@
         }
 
         [TestMethod]
-        public async Task WasteDescription_SaveAndComeBackLaterButton_CallsServices()
-        {
-            // Arrange
-            var viewModel = new WasteDescriptionCodeViewModel();
-
-            // Act
-            var result = await _siteMaterialController.WasteDescription(
-                viewModel,
-                SaveButton.SaveAndComeBack) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-            _mockAccreditationSiteMaterialService.Verify(
-                s =>
-                    s.UpdateWasteDescriptionCodeViewModel(
-                        viewModel),
-                Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                s =>
-                    s.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once);
-        }
-
-        [TestMethod]
         public async Task WasteDescription_SaveAndContinueButton_CallsServices()
         {
             // Arrange
@@ -325,12 +259,6 @@
                     s.UpdateWasteDescriptionCodeViewModel(
                         viewModel),
                 Times.Once);
-            _mockSaveAndComeBackService.Verify(
-                s =>
-                    s.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Never);
         }
     }
 }

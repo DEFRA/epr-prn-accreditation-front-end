@@ -17,7 +17,6 @@
     public class AccreditationControllerTests
     {
         private Mock<IHttpContextAccessor> _mockContextAccessor;
-        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         private Mock<IHttpAccreditationService> _mockhttpAccreditationService;
         private Mock<IAccreditationService> _mockAccreditationService;
         private Mock<IWastePermitService> _mockWastePermitService;
@@ -30,7 +29,6 @@
         public void Init()
         {
             _mockContextAccessor = new Mock<IHttpContextAccessor>();
-            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _mockhttpAccreditationService = new Mock<IHttpAccreditationService>();
             _mockAccreditationService = new Mock<IAccreditationService>();
             _mockWastePermitService = new Mock<IWastePermitService>();
@@ -41,7 +39,6 @@
             _accreditationController = new AccreditationController(
                 _mockContextAccessor.Object,
                 _mockWastePermitService.Object,
-                _mockSaveAndComeBackService.Object,
                 _mockAccreditationService.Object,
                 _mockUrlHelper.Object,
                 _backPageViewModel,
@@ -160,40 +157,6 @@
             Assert.AreEqual("ExemptionReferences", redirectToActionResult.ActionName);
 
             _mockWastePermitService.Verify(service => service.UpdatePermitExemption(viewModel), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task CheckWastePermitExemption_ReturnsViewResult_ForSaveAndComeBack()
-        {
-            // Arrange
-            var saveButton = SaveButton.SaveAndComeBack;
-            var viewModel = new PermitExemptionViewModel
-            {
-                Id = Guid.NewGuid(),
-                HasPermitExemption = false
-            };
-
-            _accreditationController.ModelState.Clear(); // Ensuring ModelState is valid
-
-            // Act
-            var result = await _accreditationController.CheckWastePermitExemption(viewModel, saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-
-            _mockWastePermitService.Verify(
-                s =>
-                    s.UpdatePermitExemption(
-                        viewModel),
-                Times.Once);
-
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once());
         }
 
         [TestMethod]
