@@ -311,7 +311,7 @@
 
             PopulateBackModel(WasteLastYearRouteName);
 
-            MaterialWasteInputsViewModel materialWasteInputsViewModel = await _accreditationSiteMaterialService.GetMaterialWasteInputs(
+            var materialWasteInputsViewModel = await _accreditationSiteMaterialService.GetMaterialWasteInputs(
                 id.Value,
                 materialId.Value);
 
