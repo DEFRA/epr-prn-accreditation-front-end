@@ -1,16 +1,15 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
-    using System.Threading.Tasks;
-    using AutoMapper;
-    using EPR.Accreditation.Facade.Common.Dtos;
-    using EPR.Accreditation.Portal.Common.Dtos;
+        using System.Threading.Tasks;
+        using AutoMapper;
+        using EPR.Accreditation.Facade.Common.Dtos;
+        using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
-    using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
-    using EPR.Accreditation.Portal.ViewModels;
+        using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+        using EPR.Accreditation.Portal.ViewModels;
 
-namespace EPR.Accreditation.Portal.Services.Accreditation
-{
-    public class AccreditationService : IAccreditationService
+        public class AccreditationService : IAccreditationService
     {
         private readonly IMapper _mapper;
         private readonly RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;

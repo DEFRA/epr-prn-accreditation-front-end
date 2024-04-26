@@ -23,7 +23,6 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
-        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
 
         Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
 

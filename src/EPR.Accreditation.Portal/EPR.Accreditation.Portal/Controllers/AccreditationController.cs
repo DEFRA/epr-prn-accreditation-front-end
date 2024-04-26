@@ -27,12 +27,12 @@
             IWastePermitService wastePermitService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            IOptions<AppSettingsConfigOptions> appSettings)
             : base(
                   httpContextAccessor,
                   urlHelper,
-                  backPageViewModel,
-                  IOptions < AppSettingsConfigOptions > appSettings)
+                  backPageViewModel)
         {
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
