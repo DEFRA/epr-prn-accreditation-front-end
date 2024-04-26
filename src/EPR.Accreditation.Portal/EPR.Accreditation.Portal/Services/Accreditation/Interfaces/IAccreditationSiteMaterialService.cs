@@ -40,6 +40,18 @@
         // only reprocessor
         Task UpdateProductsProduced(ProductsProducedViewModel nonWasteInputsViewModel);
 
+        /// <summary>
+        /// Gets the waste inputs view model for the current accreditation
+        ///
+        /// This is a reproecessor only page
+        /// </summary>
+        /// <param name="id">Id of the accreditation</param>
+        /// <param name="materialId">Idof the material</param>
+        /// <returns>The WasteInputsViewModel</returns>
+        //Task<WasteInputsViewModel> GetWasteInputs(
+        //    Guid id,
+        //    Guid materialId);
+
         // only reprocessor
         Task<MaterialOutputsViewModel> GetMaterialOutputs(
             Guid id,
@@ -62,14 +74,16 @@
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(Guid id, Guid materialId);
+        Task<MaterialWasteInputsViewModel> GetMaterialWasteInputs(
+            Guid id,
+            Guid materialId);
 
         /// <summary>
         /// Updates annual waste (actual or estimated) data.
         /// </summary>
-        /// <param name="materialWasteOutputsViewModel"> Material waste output view model.</param>
+        /// <param name="materialWasteInputsViewModel"> Material waste input view model.</param>
         /// <returns>A <see cref="Task{TResult}"/> Nothing returned.</returns>
-        Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialWasteOutputsViewModel);
+        Task UpdateMaterialWasteInputs(MaterialWasteInputsViewModel materialWasteInputsViewModel);
 
         /// <summary>
         /// Gets the view model and any relevant data fore the waste description code page

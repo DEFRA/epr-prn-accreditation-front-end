@@ -164,12 +164,12 @@
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
-                materialId)).ReturnsAsync(new MaterialWasteOutputsViewModel());
+                materialId)).ReturnsAsync(new MaterialWasteInputsViewModel());
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
@@ -185,17 +185,17 @@
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
 
-            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            var materialWasteOutputsViewModel = new MaterialWasteInputsViewModel
             {
                 WasteLastYear = true,
             };
 
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
                 materialId)).ReturnsAsync(materialWasteOutputsViewModel);
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
@@ -212,17 +212,17 @@
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
 
-            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            var materialWasteOutputsViewModel = new MaterialWasteInputsViewModel
             {
                 WasteLastYear = false,
             };
 
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
                 materialId)).ReturnsAsync(materialWasteOutputsViewModel);
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
@@ -238,8 +238,8 @@
             // Arrange
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(null, Guid.NewGuid());
-            var result2 = await this._siteMaterialController.MaterialWasteOutputs(Guid.NewGuid(), null);
+            var result = await this._siteMaterialController.MaterialWasteInputs(null, Guid.NewGuid());
+            var result2 = await this._siteMaterialController.MaterialWasteInputs(Guid.NewGuid(), null);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));

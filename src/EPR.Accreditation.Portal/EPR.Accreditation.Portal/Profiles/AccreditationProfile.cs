@@ -37,9 +37,9 @@
             CreateMap<ReprocessingSupportingInformationRecordDto, TypeTonnesRowViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
+            CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
 
-            this.CreateMap<MaterialWasteOutputsDto, MaterialWasteOutputsViewModel>()
+            CreateMap<MaterialWasteInputsDto, MaterialWasteInputsViewModel>()
                 .ReverseMap();
 
             CreateMap<ReprocessingSupportingInformationDto, ProductsProducedViewModel>()
@@ -50,7 +50,7 @@
             CreateMap<string, WasteDescriptionCodeRowViewModel>()
                 .ForMember(d => d.WasteDescriptionCode, o => o.MapFrom(s => s));
 
-            this.CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
+            CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
                 .ReverseMap();
         }
     }

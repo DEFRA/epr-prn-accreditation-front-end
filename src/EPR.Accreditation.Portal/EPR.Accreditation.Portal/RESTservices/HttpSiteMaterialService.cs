@@ -102,26 +102,26 @@
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>Material waste output dto.</returns>
-        public async Task<MaterialWasteOutputsDto> GetMaterialWasteOutputs(
+        public async Task<MaterialWasteInputsDto> GetMaterialWasteInputs(
             Guid id,
             Guid materialId)
         {
-            return await this.Get<MaterialWasteOutputsDto>($"{id}/Material/{materialId}/MaterialWasteOutputs");
+            return await Get<MaterialWasteInputsDto>($"{id}/Material/{materialId}/MaterialWasteInputs");
         }
 
         /// <summary>
-        /// Updates material waste output.
+        /// Updates material waste input.
         /// </summary>
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
-        /// <param name="materialWasteOutputsDto">Material waste output dto.</param>
+        /// <param name="materialWasteInputsDto">Material waste input dto.</param>
         /// <returns>Nothing.</returns>
-        public async Task UpdateMaterialWasteOutputs(
+        public async Task UpdateMaterialWasteInputs(
             Guid id,
             Guid materialId,
-            MaterialWasteOutputsDto materialWasteOutputsDto)
+            MaterialWasteInputsDto materialWasteInputsDto)
         {
-            await this.Put($"{id}/Material/{materialId}/MaterialWasteOutputs", materialWasteOutputsDto);
+            await this.Put($"{id}/Material/{materialId}/MaterialWasteInputs", materialWasteInputsDto);
         }
 
         public async Task<bool?> GetReprocessedWasteLastYear(
