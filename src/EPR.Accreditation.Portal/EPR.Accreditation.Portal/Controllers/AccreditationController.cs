@@ -18,9 +18,6 @@
         private const string CreateOverseasSiteRouteName = "CreateOverseasSite";
         private readonly IAccreditationService _accreditationService;
         private readonly IWastePermitService _wastePermitService;
-        private readonly ISaveAndComeBackService _saveAndComeBackService;
-        private readonly BackPageViewModel _backPageViewModel;
-        private readonly IUrlHelperWrapper _urlHelper;
         private readonly ISiteService _siteService;
 
         public AccreditationController(
@@ -37,7 +34,6 @@
         {
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
-            _backPageViewModel = backPageViewModel;
             _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
         }
 
@@ -391,9 +387,9 @@
             if (saveButton == SaveButton.SaveAndComeBack)
             {
                 // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    Request.HttpContext.GetRouteData().Values);
+                //await _saveAndComeBackService.AddSaveAndComeBack(
+                //    viewModel.Id,
+                //    Request.HttpContext.GetRouteData().Values);
                 return View("_ApplicationSaved");
             }
             else
