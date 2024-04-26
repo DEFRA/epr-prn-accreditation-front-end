@@ -592,7 +592,12 @@
                 actionResult = RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
             }
 
-            return actionResult;
+            if (actionResult != null)
+            {
+                return actionResult;
+            }
+
+            return new EmptyResult();
         }
     }
 }

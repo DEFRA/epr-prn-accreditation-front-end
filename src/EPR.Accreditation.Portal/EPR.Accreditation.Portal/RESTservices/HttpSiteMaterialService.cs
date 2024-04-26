@@ -225,7 +225,7 @@
             Guid materialId,
             NpwdAccreditationNumber npwdAccreditationNumber)
         {
-            await Put($"{id}/Site/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
+            await Put($"{id}/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
         }
 
         private string GetSiteName(
