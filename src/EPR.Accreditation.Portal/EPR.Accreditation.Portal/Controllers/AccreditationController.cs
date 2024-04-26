@@ -28,13 +28,12 @@
             IWastePermitService wastePermitService,
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
-            BackPageViewModel backPageViewModel)
+            BackPageViewModel backPageViewModel,
+            ISiteService siteSerivce)
             : base(
                   httpContextAccessor,
                   urlHelper,
                   backPageViewModel)
-            BackPageViewModel backPageViewModel,
-            ISiteService siteSerivce)
         {
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
@@ -303,7 +302,6 @@
             {
                 TaskListViewModel model = await _accreditationService.GetTaskList(
                     id.Value,
-                    siteId.Value,
                     materialId.Value);
                 return View(model);
             }
@@ -363,9 +361,6 @@
         [HttpGet("SiteAddressView", Name = "SiteAddressView")]
         public async Task<IActionResult> SiteAddress(Guid? id)
         {
-            // Need to add correct back link in the future
-            _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
-
             if (id == null)
             {
                 return NotFound();
