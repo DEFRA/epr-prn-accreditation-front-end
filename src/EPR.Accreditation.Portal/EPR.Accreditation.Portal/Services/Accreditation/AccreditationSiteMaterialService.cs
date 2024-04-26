@@ -236,30 +236,30 @@
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>Material waste output dto.</returns>
-        public async Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(
+        public async Task<MaterialWasteInputsViewModel> GetMaterialWasteInputs(
             Guid id,
             Guid materialId)
         {
-            var materialWasteOutputsDto = await this._httpSiteMaterialService.GetMaterialWasteOutputs(
+            var materialWasteInputsDto = await this._httpSiteMaterialService.GetMaterialWasteInputs(
                 id,
                 materialId);
 
-            return this._mapper.Map<MaterialWasteOutputsViewModel>(materialWasteOutputsDto);
+            return _mapper.Map<MaterialWasteInputsViewModel>(materialWasteInputsDto);
         }
 
         /// <summary>
         /// Updates material waste output.
         /// </summary>
-        /// <param name="materialOutputsViewModel">Material waste output dto.</param>
+        /// <param name="materialInputsViewModel">Material waste output dto.</param>
         /// <returns>Nothing.</returns>
-        public async Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialOutputsViewModel)
+        public async Task UpdateMaterialWasteInputs(MaterialWasteInputsViewModel materialInputsViewModel)
         {
-            var materialWasteOutputsDto = this._mapper.Map<MaterialWasteOutputsDto>(materialOutputsViewModel);
+            var materialWasteInputsDto = _mapper.Map<MaterialWasteInputsDto>(materialInputsViewModel);
 
-            await this._httpSiteMaterialService.UpdateMaterialWasteOutputs(
-                materialOutputsViewModel.Id,
-                materialOutputsViewModel.MaterialId,
-                materialWasteOutputsDto);
+            await _httpSiteMaterialService.UpdateMaterialWasteInputs(
+                materialInputsViewModel.Id,
+                materialInputsViewModel.MaterialId,
+                materialWasteInputsDto);
         }
 
         public async Task<ReprocessedWasteLastYearViewModel> GetReprocessedWasteLastYearViewModel(

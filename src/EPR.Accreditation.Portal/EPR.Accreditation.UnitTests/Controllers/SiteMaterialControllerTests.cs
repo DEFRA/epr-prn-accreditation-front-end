@@ -159,17 +159,17 @@
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AllParametersNotNull_WithNullWasteLastYear_ReturnsNotFound()
+        public async Task MaterialWasteInputs_AllParametersNotNull_WithNullWasteLastYear_ReturnsNotFound()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
-                materialId)).ReturnsAsync(new MaterialWasteOutputsViewModel());
+                materialId)).ReturnsAsync(new MaterialWasteInputsViewModel());
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
@@ -179,67 +179,67 @@
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AllParametersNotNull_WithWasteLastYearTrue_ReturnsExpectedResult()
+        public async Task MaterialWasteInputs_AllParametersNotNull_WithWasteLastYearTrue_ReturnsExpectedResult()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
 
-            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            var materialWasteOutputsViewModel = new MaterialWasteInputsViewModel
             {
                 WasteLastYear = true,
             };
 
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
                 materialId)).ReturnsAsync(materialWasteOutputsViewModel);
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await this._siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
             // Assert
             var viewResult = result as ViewResult;
             Assert.IsNotNull(viewResult);
-            Assert.AreEqual("MaterialWasteOutputsLastYear", viewResult.ViewName);
+            Assert.AreEqual("MaterialWasteInputsLastYear", viewResult.ViewName);
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AllParametersNotNull_WithWasteLastYearFalse_ReturnsExpectedResult()
+        public async Task MaterialWasteInputs_AllParametersNotNull_WithWasteLastYearFalse_ReturnsExpectedResult()
         {
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
 
-            var materialWasteOutputsViewModel = new MaterialWasteOutputsViewModel
+            var materialWasteOutputsViewModel = new MaterialWasteInputsViewModel
             {
                 WasteLastYear = false,
             };
 
-            this._mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteOutputs(
+            _mockAccreditationSiteMaterialService.Setup(a => a.GetMaterialWasteInputs(
                 id,
                 materialId)).ReturnsAsync(materialWasteOutputsViewModel);
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(
+            var result = await _siteMaterialController.MaterialWasteInputs(
                 id,
                 materialId);
 
             // Assert
             var viewResult = result as ViewResult;
             Assert.IsNotNull(viewResult);
-            Assert.AreEqual("MaterialWasteOutputsEstimated", viewResult.ViewName);
+            Assert.AreEqual("MaterialWasteInputsEstimated", viewResult.ViewName);
         }
 
         [TestMethod]
-        public async Task MaterialWasteOutputs_AnyParameterNull_ReturnsNotFound()
+        public async Task MaterialWasteInputs_AnyParameterNull_ReturnsNotFound()
         {
             // Arrange
 
             // Act
-            var result = await this._siteMaterialController.MaterialWasteOutputs(null, Guid.NewGuid());
-            var result2 = await this._siteMaterialController.MaterialWasteOutputs(Guid.NewGuid(), null);
+            var result = await _siteMaterialController.MaterialWasteInputs(null, Guid.NewGuid());
+            var result2 = await _siteMaterialController.MaterialWasteInputs(Guid.NewGuid(), null);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -392,7 +392,7 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
             var redirectToRouteResult = result as RedirectToRouteResult;
-            Assert.AreEqual("NonWasteInputs", redirectToRouteResult.RouteName);
+            Assert.AreEqual("MaterialWasteInputs", redirectToRouteResult.RouteName);
 
             _mockAccreditationSiteMaterialService.Verify(
                 service =>
