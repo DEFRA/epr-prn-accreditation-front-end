@@ -1,0 +1,29 @@
+﻿@model List<EPR.Accreditation.Portal.ViewModels.Files.FileUploadRecordViewModel>
+
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Uploaded files</th>
+            <th scope="col" class="govuk-table__header">Date uploaded</th>
+            <th scope="col" class="govuk-table__header">Uploaded by</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        @foreach(var file in Model)
+        {
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@file.Filename</td>
+            </tr>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@file.DateUploaded</td>
+            </tr>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@file.UploadedBy</td>
+            </tr>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Delete</td>
+            </tr>
+        }
+    </tbody>
+</table>

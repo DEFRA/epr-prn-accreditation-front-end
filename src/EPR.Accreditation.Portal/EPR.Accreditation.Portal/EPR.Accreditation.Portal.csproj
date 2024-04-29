@@ -34,6 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\FileUploadResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileUploadResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\MaterialOutputsEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -222,6 +227,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\FileUploadResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\FileUploadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileUploadResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsEstimatedResources.Designer.cs</LastGenOutput>

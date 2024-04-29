@@ -10,6 +10,7 @@
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
+    using EPR.Accreditation.Portal.Services.FileService;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Options;
@@ -47,6 +48,7 @@
                 .AddScoped<ISiteService, SiteService>()
                 .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
                 .AddScoped<IOverseasSiteService, OverseasSiteService>()
+                .AddScoped<IFileService, FileService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName))
                 .Configure<ContentLinksConfiguration>(configuration.GetSection(ContentLinksConfiguration.SectionName));
 

@@ -1,0 +1,69 @@
+﻿@model EPR.Accreditation.Portal.ViewModels.Files.FileUploadRecordsViewModel
+
+<partial name="_ValidationSummary" />
+
+<form method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds-from-desktop">
+
+            <h1 class="govuk-heading-l">@FileUploadResources.Title</h1>
+            <p class="govuk-hint">@FileUploadResources.Hint_Header
+                <ul>
+                    <li>@FileUploadResources.Hint_Item1</li>
+                    <li>@FileUploadResources.Hint_Item2</li>
+                    <li>@FileUploadResources.Hint_Item3</li>
+                </ul>
+            </p>
+
+            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @FileUploadResources.FlowChart_Title
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Html.Partial("_fileUploadButton")
+                    </dd>
+                    <dd class="govuk-summary-list__value">
+                        @Html.Partial("_fileUploadedList", Model.FlowCharts)
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @FileUploadResources.RecordingSystems_Title
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Html.PartialAsync("_fileUploadButton")
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @FileUploadResources.PlantsAndEquipment_Title
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Html.PartialAsync("_fileUploadButton")
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        @FileUploadResources.SamplingAndInspection_Title
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        @Html.PartialAsync("_fileUploadButton")
+                    </dd>
+                </div>
+            </dl>
+
+            <input type="hidden" value="@Model.AccreditationId" />
+            <button class="govuk-button" data-module="govuk-button">
+                @MasterResources.SaveAndContinue
+            </button>
+            <button class="govuk-button" data-module="govuk-button">
+                @MasterResources.SaveAndComeBack
+            </button>
+
+        </div>
+    </div>
+</form>
