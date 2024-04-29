@@ -402,7 +402,6 @@
         /// <param name="id">Accreditation id.</param>
         /// <returns>PRN tonnage data view.</returns>
         [HttpGet("PrnTonnesPlanned")]
-        [Route("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(Guid? id)
         {
             if (!id.HasValue)
@@ -421,7 +420,6 @@
         /// <param name="vm">View model for PRN tonnage data.</param>
         /// <returns>Redirects to Declaration page.</returns>
         [HttpPost("PrnTonnesPlanned")]
-        [Route("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(
             Guid? id,
             PrnTonnesPlannedViewModel vm)
