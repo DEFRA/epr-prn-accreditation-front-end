@@ -364,7 +364,7 @@
             return NotFound();
         }
 
-        [HttpGet("SiteAddressView", Name = "SiteAddressView")]
+        [HttpGet("SiteAddress", Name = "SiteAddress")]
         public async Task<IActionResult> SiteAddress(Guid? id)
         {
             if (id == null)
@@ -377,7 +377,7 @@
             return View(viewModel);
         }
 
-        [HttpPost("SiteAddressView", Name = "SiteAddressView")]
+        [HttpPost("SiteAddress", Name = "SiteAddress")]
         public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
         {
             if (!ModelState.IsValid)
