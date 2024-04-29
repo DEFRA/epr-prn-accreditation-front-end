@@ -34,6 +34,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\NpwdAccrNumResources.cy-GB.Designer.cs">
+      <DependentUpon>NpwdAccrNumResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\NpwdAccrNumResources.Designer.cs">
+      <DependentUpon>NpwdAccrNumResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\HasNpwdAccrNumResources.cy-GB.Designer.cs">
+      <DependentUpon>HasNpwdAccrNumResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\MaterialOutputsEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -217,6 +232,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\NpwdAccrNumResources.cy-GB.resx">
+      <LastGenOutput>NpwdAccrNumResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\NpwdAccrNumResources.resx">
+      <LastGenOutput>NpwdAccrNumResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\HasNpwdAccrNumResources.cy-GB.resx">
+      <LastGenOutput>HasNpwdAccrNumResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsEstimatedResources.Designer.cs</LastGenOutput>

@@ -363,5 +363,38 @@
                 viewModel.MaterialId,
                 hasNpwdAccreditationNumberDto);
         }
+
+        /// <summary>
+        /// Concrete implementation to get the view model that drives the view
+        /// </summary>
+        /// <param name="id">Accrediation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task<NpwdAccreditationNumViewModel> GetAccreditationNumViewModel(
+            Guid id,
+            Guid materialId)
+        {
+            return new NpwdAccreditationNumViewModel
+            {
+                Id = id,
+                MaterialId = materialId,
+                NpwdAccreditationNumber = await _httpSiteMaterialService.GetNpwdAccreditationNumber(id, materialId)
+            };
+        }
+
+        /// <summary>
+        /// Concrete implementation of interface action
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateNpwdAccreditationNumber(NpwdAccreditationNumViewModel viewModel)
+        {
+            var npwdAccreditationNumberDto = viewModel.NpwdAccreditationNumber;
+
+            await _httpSiteMaterialService.UpdateNpwdAccreditationNumber(
+                viewModel.Id,
+                viewModel.MaterialId,
+                npwdAccreditationNumberDto);
+        }
     }
 }
