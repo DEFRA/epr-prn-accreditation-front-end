@@ -643,14 +643,15 @@
         /// <param name="viewModel">The relevant view model</param>
         /// <param name="saveButton">Enum for if it's continue or come back</param>
         /// <returns>Task completed asynchronously</returns>
-        [HttpPost("HasNpwdAccreditationNumber")]
+        [HttpPost("NpwdAccreditationNumber")]
         public async Task<IActionResult> NpwdAccreditationNumber(
             NpwdAccreditationNumViewModel viewModel,
             SaveButton saveButton)
         {
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                HasNpwdAccrNumResources.ErrorMessage))
+                NpwdAccrNumResources.ErrorMessage,
+                NpwdAccrNumResources.ErrorMessageInvalidFormat))
             {
                 return View(viewModel);
             }

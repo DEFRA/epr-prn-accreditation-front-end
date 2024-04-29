@@ -63,9 +63,18 @@ namespace EPR.Accreditation.Portal.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enter your NPWD number in the correct format.
         /// </summary>
-        public static string ErrorMessageTooShort {
+        public static string ErrorMessage {
             get {
-                return ResourceManager.GetString("ErrorMessageTooShort", resourceCulture);
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NPWD number must only includes letters a to z, or numbers.
+        /// </summary>
+        public static string ErrorMessageInvalidFormat {
+            get {
+                return ResourceManager.GetString("ErrorMessageInvalidFormat", resourceCulture);
             }
         }
         
