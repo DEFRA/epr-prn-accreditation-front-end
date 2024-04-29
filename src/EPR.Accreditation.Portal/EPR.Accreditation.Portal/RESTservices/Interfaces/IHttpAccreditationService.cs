@@ -23,5 +23,9 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
+
+        Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
+
+        Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
     }
 }

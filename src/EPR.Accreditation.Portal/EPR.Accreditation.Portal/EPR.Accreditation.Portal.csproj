@@ -74,6 +74,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\PrnTonnesPlannedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrnTonnesPlannedResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\ProductsProducedLastYearResources.Designer.cs">
       <DependentUpon>ProductsProducedLastYearResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -254,6 +259,13 @@
     <EmbeddedResource Update="Resources\HasNpwdAccrNumResources.resx">
       <LastGenOutput>HasNpwdAccrNumResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PrnTonnesPlannedResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PrnTonnesPlannedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrnTonnesPlannedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ProductsProducedLastYearResources.resx">
       <LastGenOutput>ProductsProducedLastYearResources.Designer.cs</LastGenOutput>
