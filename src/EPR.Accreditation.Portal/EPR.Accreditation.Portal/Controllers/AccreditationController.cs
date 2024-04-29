@@ -4,12 +4,14 @@
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using EPR.Accreditation.Portal.ViewModels.Accreditation;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.Extensions.Options;
 
     [Route("[controller]/{id}")]
     public class AccreditationController : BaseController
@@ -19,6 +21,7 @@
         private readonly IAccreditationService _accreditationService;
         private readonly IWastePermitService _wastePermitService;
         private readonly ISiteService _siteService;
+        private readonly IOptions<AppSettingsConfigOptions> _appSettings;
 
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
@@ -26,7 +29,8 @@
             IAccreditationService accreditationService,
             IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel,
-            ISiteService siteSerivce)
+            ISiteService siteSerivce,
+            IOptions<AppSettingsConfigOptions> appSettings)
             : base(
                   httpContextAccessor,
                   urlHelper,
@@ -35,6 +39,7 @@
             _wastePermitService = wastePermitService ?? throw new ArgumentNullException(nameof(wastePermitService));
             _accreditationService = accreditationService ?? throw new ArgumentNullException(nameof(accreditationService));
             _siteService = siteSerivce ?? throw new ArgumentNullException(nameof(siteSerivce));
+            _appSettings = appSettings ?? throw new ArgumentNullException(nameof(appSettings));
         }
 
         [HttpGet("PermitExemption")]
@@ -389,6 +394,65 @@
 
             await _siteService.SaveSiteAddress(viewModel);
             return RedirectToAction("PermitExemption", "Accreditation", new { viewModel.Id });
+        }
+
+        /// <summary>
+        /// Returns PRN tonnage data view.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <returns>PRN tonnage data view.</returns>
+        [HttpGet("PrnTonnesPlanned")]
+        public async Task<IActionResult> PrnTonnesPlanned(Guid? id)
+        {
+            if (!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            PrnTonnesPlannedViewModel vm = await _accreditationService.GetPrnTonnesPlanned(id.Value);
+            return View(vm);
+        }
+
+        /// <summary>
+        /// Updates PRN tonnage data.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <param name="vm">View model for PRN tonnage data.</param>
+        /// <returns>Redirects to Declaration page.</returns>
+        [HttpPost("PrnTonnesPlanned")]
+        public async Task<IActionResult> PrnTonnesPlanned(
+            Guid? id,
+            PrnTonnesPlannedViewModel vm)
+        {
+            if (!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            vm.PrnPlannedTonnesFee = vm.PrnPlannedTonnesType == Common.Enums.PrnPlannedTonnesType.Upto ?
+                _appSettings.Value.PrnTonnageUpto400Fee :
+                _appSettings.Value.PrnTonnageOver400Fee.Value;
+            await _accreditationService.UpdatePrnTonnesPlanned(id.Value, vm);
+
+            return RedirectToAction("Declaration", new { id = id.Value });
+        }
+
+        /// <summary>
+        /// Placeholder for Declaration page.
+        /// </summary>
+        /// <param name="id">Accreditation id.</param>
+        /// <returns>Declaration view.</returns>
+        [HttpGet("Declaration")]
+        [Route("Declaration")]
+        public async Task<IActionResult> Declaration(
+            Guid? id)
+        {
+            return NotFound();
         }
     }
 }

@@ -24,5 +24,9 @@
         /// <param name="id">The id of the accreditation</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation that contains the view model</returns>
         Task<bool> IsExporter(Guid id);
+
+        Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId);
+
+        Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm);
     }
 }
