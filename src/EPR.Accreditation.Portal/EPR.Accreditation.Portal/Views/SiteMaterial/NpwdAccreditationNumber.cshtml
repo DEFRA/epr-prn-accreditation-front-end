@@ -1,5 +1,10 @@
 ﻿@using EPR.Accreditation.Portal.ViewModels.SiteMaterial
+@using EPR.Accreditation.Portal.Configuration
+@using EPR.Accreditation.Portal.Options
+@using Microsoft.Extensions.Options
 @inject MaterialTypeViewModel materialTypeViewModel;
+@inject IOptions<AppSettingsConfigOptions> appSettings;
+@inject IOptions<ContentLinksConfiguration> contentLinksSettings;
 @model NpwdAccreditationNumViewModel
 
 @{
@@ -16,8 +21,7 @@
                     @NpwdAccrNumResources.PageTitle @materialTypeViewModel.Name
                 </h1>
                 <p class="govuk-body">@NpwdAccrNumResources.P1
-                    <a
-                        href="https://npwd.environment-agency.gov.uk/PublicRegister.aspx"
+                    <a href="@contentLinksSettings.Value.NationalPackagingWasteDb"
                         target="_blank">@NpwdAccrNumResources.LinkText
                     </a>
                 </p>
