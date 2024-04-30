@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorMessageBlank" xml:space="preserve">
-    <value>Enter your NPWD number</value>
+    <value>[Welsh]Enter your NPWD number</value>
   </data>
   <data name="ErrorMessageInvalidFormat" xml:space="preserve">
-    <value>NPWD number must be between 9 and 12 characters and only include letters A-Z, and numbers</value>
+    <value>[Welsh]NPWD number must be between 9 and 12 characters and only include letters A-Z, and numbers</value>
   </data>
   <data name="H2" xml:space="preserve">
-    <value>Enter your accreditation number for:</value>
+    <value>[Welsh]Enter your accreditation number for:</value>
   </data>
   <data name="HintText" xml:space="preserve">
-    <value>It starts with 2 letters, followed by up to 10 numbers.</value>
+    <value>[Welsh]It starts with 2 letters, followed by up to 10 numbers.</value>
   </data>
   <data name="LinkText" xml:space="preserve">
-    <value>public register (opens in a new tab)</value>
+    <value>[Welsh]public register (opens in a new tab)</value>
   </data>
   <data name="P1" xml:space="preserve">
-    <value>You can find it on the</value>
+    <value>[Welsh]You can find it on the</value>
   </data>
   <data name="PageHeading" xml:space="preserve">
-    <value>Your NPWD accreditation number</value>
+    <value>[Welsh]Your NPWD accreditation number</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Your NPWD accreditation number</value>
+    <value>[Welsh]Your NPWD accreditation number</value>
   </data>
 </root>

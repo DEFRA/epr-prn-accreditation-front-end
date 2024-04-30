@@ -650,7 +650,7 @@
         {
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                NpwdAccrNumResources.ErrorMessage))
+                NpwdAccrNumResources.ErrorMessageBlank))
             {
                 return View(viewModel);
             }

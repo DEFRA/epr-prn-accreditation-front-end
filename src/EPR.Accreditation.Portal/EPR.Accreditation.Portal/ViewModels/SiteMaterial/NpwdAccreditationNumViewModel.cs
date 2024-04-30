@@ -21,9 +21,8 @@
         /// <summary>
         /// Gets or sets whether or not NPWD number is present
         /// </summary>
-        [Required(ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessage")]
-        [StringLength(12, MinimumLength = 9, ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessage")]
-        [RegularExpression(@"^[A-Za-z]{2}\d{0,10}$", ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessageInvalidFormat")]
+        [Required(ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessageBlank")]
+        [RegularExpression(@"^[A-Za-z]{2}\d{7,10}$", ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessageInvalidFormat")]
         public string AccreditationNumber { get; set; }
     }
 }

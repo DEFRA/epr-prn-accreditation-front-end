@@ -34,6 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\NpwdAccrNumResources.cy-GB.Designer.cs">
+      <DependentUpon>NpwdAccrNumResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\NpwdAccrNumResources.Designer.cs">
       <DependentUpon>NpwdAccrNumResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -232,6 +237,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\NpwdAccrNumResources.cy-GB.resx">
+      <LastGenOutput>NpwdAccrNumResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\NpwdAccrNumResources.resx">
       <LastGenOutput>NpwdAccrNumResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
