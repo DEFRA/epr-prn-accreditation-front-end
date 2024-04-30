@@ -124,15 +124,21 @@
     <value>NPWD number must only includes letters a to z, or numbers</value>
   </data>
   <data name="H2" xml:space="preserve">
-    <value>Enter your accreditation number for this material</value>
+    <value>Enter your accreditation number for:</value>
   </data>
   <data name="HintText" xml:space="preserve">
-    <value>Your 2024 accreditation number will start with ‘ER24’.</value>
+    <value>It starts with 2 letters, followed by up to 10 numbers.</value>
+  </data>
+  <data name="LinkText" xml:space="preserve">
+    <value>public register (opens in a new tab)</value>
+  </data>
+  <data name="P1" xml:space="preserve">
+    <value>You can find it on the</value>
   </data>
   <data name="PageHeading" xml:space="preserve">
-    <value>What was your 2024 NPWD accreditation number for</value>
+    <value>Your NPWD accreditation number</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>What was your 2024 NPWD accreditation number for</value>
+    <value>Your NPWD accreditation number</value>
   </data>
 </root>

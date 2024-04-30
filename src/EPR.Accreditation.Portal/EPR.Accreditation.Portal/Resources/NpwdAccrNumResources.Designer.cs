@@ -79,7 +79,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your accreditation number for this material.
+        ///   Looks up a localized string similar to Enter your accreditation number for:.
         /// </summary>
         public static string H2 {
             get {
@@ -88,7 +88,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your 2024 accreditation number will start with ‘ER24’..
+        ///   Looks up a localized string similar to It starts with 2 letters, followed by up to 10 numbers..
         /// </summary>
         public static string HintText {
             get {
@@ -97,7 +97,25 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What was your 2024 NPWD accreditation number for.
+        ///   Looks up a localized string similar to public register (opens in a new tab).
+        /// </summary>
+        public static string LinkText {
+            get {
+                return ResourceManager.GetString("LinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can find it on the.
+        /// </summary>
+        public static string P1 {
+            get {
+                return ResourceManager.GetString("P1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your NPWD accreditation number.
         /// </summary>
         public static string PageHeading {
             get {
@@ -106,7 +124,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What was your 2024 NPWD accreditation number for.
+        ///   Looks up a localized string similar to Your NPWD accreditation number.
         /// </summary>
         public static string PageTitle {
             get {

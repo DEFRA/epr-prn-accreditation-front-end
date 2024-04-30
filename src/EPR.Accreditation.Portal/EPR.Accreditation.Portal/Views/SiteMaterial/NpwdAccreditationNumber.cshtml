@@ -3,7 +3,7 @@
 @model NpwdAccreditationNumViewModel
 
 @{
-    ViewData["Title"] = NpwdAccrNumResources.PageTitle + materialTypeViewModel.Name + "?";
+    ViewData["Title"] = NpwdAccrNumResources.PageTitle + materialTypeViewModel.Name;
 }
 
 <partial name="_ValidationSummary" />
@@ -13,9 +13,15 @@
         <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <h1 class="govuk-heading-l">
-                    @NpwdAccrNumResources.PageTitle @materialTypeViewModel.Name?
+                    @NpwdAccrNumResources.PageTitle @materialTypeViewModel.Name
                 </h1>
-                <h2 class="govuk-heading-m">@NpwdAccrNumResources.H2</h2>
+                <p class="govuk-body">@NpwdAccrNumResources.P1
+                    <a
+                        href="https://npwd.environment-agency.gov.uk/PublicRegister.aspx"
+                        target="_blank">@NpwdAccrNumResources.LinkText
+                    </a>
+                </p>
+                <h2 class="govuk-heading-m">@NpwdAccrNumResources.H2 @materialTypeViewModel.Name</h2>
             </legend>
             <div id="event-name-hint" class="govuk-hint">
                 @NpwdAccrNumResources.HintText
