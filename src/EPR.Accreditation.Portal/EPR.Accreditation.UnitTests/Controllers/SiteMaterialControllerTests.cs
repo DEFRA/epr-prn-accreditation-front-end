@@ -970,7 +970,7 @@
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("NpwdAccreditationNumber", result.ActionName);
-            Assert.AreEqual("Accreditation", result.ControllerName);
+            Assert.AreEqual("SiteMaterial", result.ControllerName);
             Assert.AreEqual(viewModel.Id, result.RouteValues["Id"]);
             Assert.AreEqual(viewModel.MaterialId, result.RouteValues["MaterialId"]);
 

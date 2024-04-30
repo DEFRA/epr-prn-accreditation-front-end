@@ -652,6 +652,7 @@
                 saveButton,
                 NpwdAccrNumResources.ErrorMessageBlank))
             {
+                _backPageViewModel.Url = $"/Accreditation/{viewModel.Id}/Site/Material/{viewModel.MaterialId}/HasNpwdAccreditationNumber";
                 return View(viewModel);
             }
 
