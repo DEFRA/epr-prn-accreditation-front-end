@@ -461,7 +461,7 @@
             var materialId = Guid.NewGuid();
             var npwdAccredidtaionNumberDto = new HasNpwdAccreditationNumber
             {
-                Has2024NPWDAccreditation = false
+                Has2024NPWDAccreditationNumber = false
             };
 
             var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Material/{materialId}/HasNpwdAccreditationNumber";

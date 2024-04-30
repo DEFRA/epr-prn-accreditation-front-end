@@ -389,7 +389,7 @@
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateNpwdAccreditationNumber(NpwdAccreditationNumViewModel viewModel)
         {
-            var dto = viewModel.AccreditationNumber; // TODO: Need to create a DTO
+            var dto = _mapper.Map<DTOs.SiteMaterial.NpwdAccreditationNumber>(viewModel);
 
             await _httpSiteMaterialService.UpdateNpwdAccreditationNumber(
                 viewModel.Id,

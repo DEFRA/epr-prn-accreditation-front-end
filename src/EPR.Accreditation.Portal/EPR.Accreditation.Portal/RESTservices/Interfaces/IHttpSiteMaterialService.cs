@@ -162,6 +162,6 @@
         Task UpdateNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
-            string npwdAccreditationNumber);
+            NpwdAccreditationNumber npwdAccreditationNumber);
     }
 }

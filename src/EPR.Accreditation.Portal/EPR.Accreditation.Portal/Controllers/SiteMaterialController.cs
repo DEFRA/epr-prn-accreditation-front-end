@@ -582,7 +582,7 @@
             if (saveButton == SaveButton.SaveAndContinue &&
                 viewModel.Has2024NPWDAccreditationNumber.Value == true)
             {
-                actionResult = RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
+                actionResult = RedirectToAction("NpwdAccreditationNumber", "SiteMaterial", new
                 {
                     viewModel.Id,
                     viewModel.MaterialId

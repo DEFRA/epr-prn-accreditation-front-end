@@ -251,7 +251,7 @@
         public async Task UpdateNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
-            string npwdAccreditationNumber)
+            NpwdAccreditationNumber npwdAccreditationNumber)
         {
             await Put($"{id}/Material/{materialId}/NpwdAccreditationNumber", npwdAccreditationNumber);
         }
