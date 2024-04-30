@@ -536,7 +536,7 @@
             Assert.IsNotNull(viewModel);
             Assert.AreEqual(id, viewModel.Id);
             Assert.AreEqual(materialId, viewModel.MaterialId);
-            Assert.AreEqual(expectedValue, viewModel.Has2024NPWDAccreditation);
+            Assert.AreEqual(expectedValue, viewModel.Has2024NPWDAccreditationNumber);
 
             _mockHttpSiteMaterialService.Verify(s => s.GetHasNpwdAccreditationNumber(id, materialId), Times.Once);
         }
@@ -549,12 +549,12 @@
             {
                 Id = Guid.NewGuid(),
                 MaterialId = Guid.NewGuid(),
-                Has2024NPWDAccreditation = true
+                Has2024NPWDAccreditationNumber = true
             };
-            var dto = new NpwdAccreditationNumber();
+            var dto = new HasNpwdAccreditationNumber();
 
             _mockMapper.Setup(m =>
-                m.Map<NpwdAccreditationNumber>(viewModel))
+                m.Map<HasNpwdAccreditationNumber>(viewModel))
             .Returns(dto);
 
             // Act

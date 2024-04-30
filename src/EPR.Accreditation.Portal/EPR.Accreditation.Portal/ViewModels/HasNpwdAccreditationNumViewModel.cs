@@ -22,6 +22,6 @@
         /// Gets or sets whether or not NPWD number is present
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(HasNpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessage")]
-        public bool? Has2024NPWDAccreditation { get; set; }
+        public bool? Has2024NPWDAccreditationNumber { get; set; }
     }
 }

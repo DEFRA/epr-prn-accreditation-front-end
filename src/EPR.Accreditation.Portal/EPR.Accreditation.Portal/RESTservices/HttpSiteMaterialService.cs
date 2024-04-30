@@ -218,14 +218,14 @@
         /// </summary>
         /// <param name="id">Accreditation ID</param>
         /// <param name="materialId">Material ID</param>
-        /// <param name="npwdAccreditationNumber">True or false value from with the DTO</param>
+        /// <param name="hasNpwdAccreditationNumber">True or false value from with the DTO</param>
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
-            NpwdAccreditationNumber npwdAccreditationNumber)
+            HasNpwdAccreditationNumber hasNpwdAccreditationNumber)
         {
-            await Put($"{id}/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
+            await Put($"{id}/Material/{materialId}/HasNpwdAccreditationNumber", hasNpwdAccreditationNumber);
         }
 
         /// <summary>

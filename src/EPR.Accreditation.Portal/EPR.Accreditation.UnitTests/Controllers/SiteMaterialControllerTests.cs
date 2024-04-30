@@ -957,7 +957,7 @@
             // Arrange
             var viewModel = new HasNpwdAccreditationNumViewModel
             {
-                Has2024NPWDAccreditation = true,
+                Has2024NPWDAccreditationNumber = true,
                 Id = Guid.NewGuid(),
                 MaterialId = Guid.NewGuid()
             };
@@ -983,7 +983,7 @@
             // Arrange
             var viewModel = new HasNpwdAccreditationNumViewModel
             {
-                Has2024NPWDAccreditation = false,
+                Has2024NPWDAccreditationNumber = false,
                 Id = Guid.NewGuid()
             };
 

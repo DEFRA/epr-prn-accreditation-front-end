@@ -459,7 +459,7 @@
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            var npwdAccredidtaionNumberDto = new NpwdAccreditationNumber
+            var npwdAccredidtaionNumberDto = new HasNpwdAccreditationNumber
             {
                 Has2024NPWDAccreditation = false
             };
@@ -473,7 +473,7 @@
                 npwdAccredidtaionNumberDto);
 
             // Arrange
-            var capturedPayload = JsonConvert.DeserializeObject<NpwdAccreditationNumber>(_capturedPayload);
+            var capturedPayload = JsonConvert.DeserializeObject<HasNpwdAccreditationNumber>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(npwdAccredidtaionNumberDto, capturedPayload));
         }

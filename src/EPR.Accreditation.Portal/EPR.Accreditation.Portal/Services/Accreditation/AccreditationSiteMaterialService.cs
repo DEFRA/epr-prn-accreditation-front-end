@@ -345,7 +345,7 @@
             {
                 Id = id,
                 MaterialId = materialId,
-                Has2024NPWDAccreditation = await _httpSiteMaterialService.GetHasNpwdAccreditationNumber(id, materialId)
+                Has2024NPWDAccreditationNumber = await _httpSiteMaterialService.GetHasNpwdAccreditationNumber(id, materialId)
             };
         }
 
@@ -356,12 +356,12 @@
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel)
         {
-            var hasNpwdAccreditationNumberDto = _mapper.Map<DTOs.SiteMaterial.NpwdAccreditationNumber>(viewModel);
+            var dto = _mapper.Map<DTOs.SiteMaterial.HasNpwdAccreditationNumber>(viewModel);
 
             await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
                 viewModel.Id,
                 viewModel.MaterialId,
-                hasNpwdAccreditationNumberDto);
+                dto);
         }
 
         /// <summary>
@@ -378,7 +378,7 @@
             {
                 Id = id,
                 MaterialId = materialId,
-                NpwdAccreditationNumber = await _httpSiteMaterialService.GetNpwdAccreditationNumber(id, materialId)
+                AccreditationNumber = await _httpSiteMaterialService.GetNpwdAccreditationNumber(id, materialId)
             };
         }
 
@@ -389,12 +389,12 @@
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateNpwdAccreditationNumber(NpwdAccreditationNumViewModel viewModel)
         {
-            var npwdAccreditationNumberDto = viewModel.NpwdAccreditationNumber;
+            var dto = viewModel.AccreditationNumber; // TODO: Need to create a DTO
 
             await _httpSiteMaterialService.UpdateNpwdAccreditationNumber(
                 viewModel.Id,
                 viewModel.MaterialId,
-                npwdAccreditationNumberDto);
+                dto);
         }
     }
 }

@@ -580,7 +580,7 @@
             var actionResult = default(ActionResult);
 
             if (saveButton == SaveButton.SaveAndContinue &&
-                viewModel.Has2024NPWDAccreditation.Value == true)
+                viewModel.Has2024NPWDAccreditationNumber.Value == true)
             {
                 actionResult = RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
                 {
@@ -589,7 +589,7 @@
                 });
             }
             else if (saveButton == SaveButton.SaveAndContinue &&
-                viewModel.Has2024NPWDAccreditation.Value == false)
+                viewModel.Has2024NPWDAccreditationNumber.Value == false)
             {
                 actionResult = RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
             }

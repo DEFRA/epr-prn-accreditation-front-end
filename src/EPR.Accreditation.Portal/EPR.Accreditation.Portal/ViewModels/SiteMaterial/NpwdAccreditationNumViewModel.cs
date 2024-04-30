@@ -24,6 +24,6 @@
         [Required(ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessage")]
         [StringLength(12, MinimumLength = 9, ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessage")]
         [RegularExpression(@"^[A-Za-z]{2}\d{0,10}$", ErrorMessageResourceType = typeof(NpwdAccrNumResources), ErrorMessageResourceName = "ErrorMessageInvalidFormat")]
-        public string NpwdAccreditationNumber { get; set; }
+        public string AccreditationNumber { get; set; }
     }
 }
