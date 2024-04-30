@@ -156,20 +156,20 @@
         }
 
         [HttpGet("TaskList", Name = "TaskList")]
-        public async Task<IActionResult> TaskList(Guid Id)
+        public async Task<IActionResult> TaskList(Guid id)
         {
             PopulateBackModel(TaskListRouteName);
 
-            TaskListViewModel model = await _accreditationService.GetTaskList(Id);
+            TaskListViewModel model = await _accreditationService.GetTaskList(id);
             return View(model);
         }
 
         [HttpGet("TaskListSite", Name = "TaskListSite")]
-        public async Task<IActionResult> TaskListSite(Guid Id)
+        public async Task<IActionResult> TaskListSite(Guid id)
         {
             PopulateBackModel(TaskListRouteName);
 
-            TaskListViewModel model = await _accreditationService.GetTaskList(Id);
+            TaskListViewModel model = await _accreditationService.GetTaskList(id);
             return View(model);
         }
 
