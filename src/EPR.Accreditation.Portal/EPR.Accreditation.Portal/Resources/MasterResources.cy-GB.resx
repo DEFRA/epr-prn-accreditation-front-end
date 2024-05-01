@@ -147,6 +147,9 @@
   <data name="SaveAndContinue" xml:space="preserve">
     <value>[Welsh]Save and continue</value>
   </data>
+  <data name="SiteHeading" xml:space="preserve">
+    <value>[Welsh]Accreditation</value>
+  </data>
   <data name="SummaryError" xml:space="preserve">
     <value>[Welsh]There is a problem</value>
   </data>
