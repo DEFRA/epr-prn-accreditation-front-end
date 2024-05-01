@@ -61,6 +61,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Home.
+        /// </summary>
+        public static string AccountHome {
+            get {
+                return ResourceManager.GetString("AccountHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add another.
         /// </summary>
         public static string AddRow {

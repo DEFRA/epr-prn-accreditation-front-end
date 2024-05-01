@@ -1,13 +1,139 @@
-﻿<div class="govuk-grid-row">
-<h4 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h4>
-<h4 class="govuk-heading-s">Use these details to make payment</h4>
-                
-    <table class="govuk-table">
-        <tbody class="govuk-table__body">
-        <tr class="govuk-table__row"><td><li>account name: DAERA</li></td></tr>
-        <tr class="govuk-table__row"><td><li>bank: Danske bank. PO BOX 183 Donegail Square West. Belfast. BT1 6JS</li></td></tr>
-        <tr class="govuk-table__row"><td><li>sort code: 95-01-21</li></td></tr>
-        <tr class="govuk-table__row"><td><li>account number: 61253506</li></td></tr>
-        <tr class="govuk-table__row"><td><li>BACS remittanace: billtocash@accountnl.gov.uk</li></td></tr>
-    </table>
+﻿@model EPR.Accreditation.Portal.ViewModels.CompletionViewModel
+
+<div class="govuk-grid-row">
+
+
+    @if (Model.CountryCode == "IRE")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedIreland
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>HDJ2123F</strong>
+            </div>
+        </div>
+
+        <h4 class="govuk-heading-m">@CompletionResources.AfterPayment</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
+        <h4 class="govuk-heading-m">£@Model.AmountDue</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.PayOnline</h4>
+
+        <h4 class="govuk-heading-s">@CompletionResources.PayOnlineNotice</h4>
+
+        <h4 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h4>
+        <h4 class="govuk-heading-s">Use these details to make payment</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row"><td><li>account name: DAERA</li></td></tr>
+            <tr class="govuk-table__row"><td><li>bank: Danske bank. PO BOX 183 Donegail Square West. Belfast. BT1 6JS</li></td></tr>
+            <tr class="govuk-table__row"><td><li>sort code: 95-01-21</li></td></tr>
+            <tr class="govuk-table__row"><td><li>account number: 61253506</li></td></tr>
+            <tr class="govuk-table__row"><td><li>BACS remittanace: billtocash@accountnl.gov.uk</li></td></tr>
+        </table>
+
+        <table class="govuk-table">
+            <tr class="govuk-table__row">
+                <td>
+                    <details open>
+                        <summary>Other ways to pay</summary>
+                        <p>To discuss paying through other methods please contact Ireland Environment Agency</p>
+                        <p>Email: packaging@environment-agency.gov.uk</p>
+                        <p>Telephone: 028 9058 9338</p>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    }
+
+    @if (Model.CountryCode == "GBR")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedEngland
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>HDJ2123F</strong>
+            </div>
+        </div>
+
+        <h4 class="govuk-heading-m">@CompletionResources.AfterPayment</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
+        <h4 class="govuk-heading-m">£@Model.AmountDue</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.PayOnline</h4>
+
+        <h4 class="govuk-heading-s">@CompletionResources.PayOnlineNotice</h4>
+
+        <h4 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h4>
+        <h4 class="govuk-heading-s">Use these details to make payment</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row"><td><li>Company name: Environment Agency</li></td></tr>
+            <tr class="govuk-table__row"><td><li>Bank RBS/NatWest</li></td></tr>
+            <tr class="govuk-table__row"><td><li>Address London Corporate Service Centre, CPB Services, 2nd Floor, 280 Bishopsgate, London EC2M 4RB</li></td></tr>
+            <tr class="govuk-table__row"><td><li>Sort code 60-70-80</li></td></tr>
+            <tr class="govuk-table__row"><td><li>Account number 10014411</li></td></tr>
+            <tr class="govuk-table__row"><td><li>Account name EA RECEIPTS</li></td></tr>
+            <tr class="govuk-table__row"><td><li>Payment reference number: Same as reference number in green confirmation box above</li></td></tr>
+        </table>
+
+        <table class="govuk-table">
+            <tr class="govuk-table__row"><td>
+                <details open>
+                    <summary>Other ways to pay</summary>
+                    <p>To discuss paying by other methods please contact the Environment Agency</p>
+                    <p>Email: packaging@environment-agency.gov.uk</p>
+                    <p>Telephone: 03708 506506</p>
+                </details>
+                </td>
+            </tr>
+        </table>
+    }
+
+    @if (Model.CountryCode == "SCO")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedScotland
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>HDJ2123F</strong>
+            </div>
+        </div>
+
+        <h4 class="govuk-heading-m">@CompletionResources.AfterPayment</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
+        <h4 class="govuk-heading-m">£@Model.AmountDue</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.HowToPay</h4>
+
+        <h5 class="govuk-heading-s">Please contact the Scottish Environmental Protection Agency for payment details.</h5>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row"><td>Email: producer.responsibility@sepa.org.uk</td></tr>
+                <tr class="govuk-table__row"><td>Telephone: 01786 457700</td></tr>
+        </table>
+    }
+
+    @if (Model.CountryCode == "WALES")
+    {
+        <h4 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h4>
+        <h4 class="govuk-heading-s">Use these details to make payment</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row"><td><li>Company name: Natural Resources Wales</li></td></tr>
+                <tr class="govuk-table__row"><td><li>Company address: Income department, PO BOX 663, Cardiff, CF24 0TP</li></td></tr>
+                <tr class="govuk-table__row"><td><li>Bank: RBS, National Westminster bank plc, 2 ½ Devonshire Square, London, EC2M 4BA</li></td></tr>
+                <tr class="govuk-table__row"><td><li>Sort code: 60-70-80</li></td></tr>
+                <tr class="govuk-table__row"><td><li>Account number: 10014438</li></td></tr>
+                <tr class="govuk-table__row"><td><li>Payment reference number: <Same as reference number in green confirmation box above></li></td></tr>
+        </table>
+    }
+    <button class="govuk-button" data-module="govuk-button">
+        @MasterResources.AccountHome
+    </button>
+
 </div>

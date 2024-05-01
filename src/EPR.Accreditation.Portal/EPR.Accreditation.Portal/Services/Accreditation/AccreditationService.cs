@@ -108,7 +108,9 @@
 
             var result = new CompletionViewModel()
             {
-                Id = id
+                Id = id,
+                CountryCode = "SCO",
+                AmountDue = 505
             };
 
             return result;

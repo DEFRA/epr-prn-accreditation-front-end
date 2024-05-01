@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AfterPayment" xml:space="preserve">
+    <value>The regulator will only review your application after you've made payment.</value>
+  </data>
   <data name="AmountDue" xml:space="preserve">
     <value>Amount due</value>
   </data>
   <data name="ApplicationSubmittedEngland" xml:space="preserve">
     <value>Application submitted to the Environment Agency</value>
+  </data>
+  <data name="ApplicationSubmittedIreland" xml:space="preserve">
+    <value>Application submitted to Northern Ireland Environment Agency</value>
+  </data>
+  <data name="ApplicationSubmittedScotland" xml:space="preserve">
+    <value>Application submitted to the Scotish Environment Protection Agency</value>
   </data>
   <data name="BankTransferDetails" xml:space="preserve">
     <value>Use these details to make payment:
@@ -142,6 +151,9 @@ To discuss paying by other methods please contact the Environment Agency
 Email: packaging@environment-agency.gov.uk
 Telephone: 03708 506506</value>
   </data>
+  <data name="HowToPay" xml:space="preserve">
+    <value>How to pay</value>
+  </data>
   <data name="PageHeading" xml:space="preserve">
     <value>Accreditation Completion</value>
   </data>
@@ -153,6 +165,9 @@ Telephone: 03708 506506</value>
   </data>
   <data name="PayOnline" xml:space="preserve">
     <value>Pay online</value>
+  </data>
+  <data name="PayOnlineLink" xml:space="preserve">
+    <value>www.gov.uk</value>
   </data>
   <data name="PayOnlineNotice" xml:space="preserve">
     <value>You can pay online using GOV.UK Pay</value>

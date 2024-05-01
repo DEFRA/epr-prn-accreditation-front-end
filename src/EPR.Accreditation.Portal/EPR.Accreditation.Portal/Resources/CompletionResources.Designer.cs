@@ -61,6 +61,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The regulator will only review your application after you&apos;ve made payment..
+        /// </summary>
+        public static string AfterPayment {
+            get {
+                return ResourceManager.GetString("AfterPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount due.
         /// </summary>
         public static string AmountDue {
@@ -75,6 +84,24 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string ApplicationSubmittedEngland {
             get {
                 return ResourceManager.GetString("ApplicationSubmittedEngland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application submitted to Northern Ireland Environment Agency.
+        /// </summary>
+        public static string ApplicationSubmittedIreland {
+            get {
+                return ResourceManager.GetString("ApplicationSubmittedIreland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application submitted to the Scotish Environment Protection Agency.
+        /// </summary>
+        public static string ApplicationSubmittedScotland {
+            get {
+                return ResourceManager.GetString("ApplicationSubmittedScotland", resourceCulture);
             }
         }
         
@@ -99,6 +126,15 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string BankTransferDetails {
             get {
                 return ResourceManager.GetString("BankTransferDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to pay.
+        /// </summary>
+        public static string HowToPay {
+            get {
+                return ResourceManager.GetString("HowToPay", resourceCulture);
             }
         }
         
@@ -135,6 +171,15 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string PayOnline {
             get {
                 return ResourceManager.GetString("PayOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to www.gov.uk.
+        /// </summary>
+        public static string PayOnlineLink {
+            get {
+                return ResourceManager.GetString("PayOnlineLink", resourceCulture);
             }
         }
         

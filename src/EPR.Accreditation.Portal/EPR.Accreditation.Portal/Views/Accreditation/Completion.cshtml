@@ -20,19 +20,8 @@
                 
                 <div class="govuk-grid-column-full">
 
-                <div class="govuk-panel govuk-panel--confirmation">
-                    <h1 class="govuk-panel__title">
-                        @CompletionResources.ApplicationSubmittedEngland
-                    </h1>
-                    <div class="govuk-panel__body">
-                        @CompletionResources.ReferenceNumber<br><strong>HDJ2123F</strong>
-                    </div>
-                </div>
 
-                <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
-                <h4 class="govuk-heading-m">@CompletionResources.PayOnline</h4>
-                <h4 class="govuk-heading-s">@CompletionResources.PayOnlineNotice</h4>
-                <partial name="_BankDetails" />
+                @Html.Partial("_BankDetails", Model)
                 </div>
 
             </div>
