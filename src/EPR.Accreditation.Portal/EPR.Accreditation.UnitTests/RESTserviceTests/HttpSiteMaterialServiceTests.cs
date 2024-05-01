@@ -459,7 +459,7 @@
             // Arrange
             var id = Guid.NewGuid();
             var materialId = Guid.NewGuid();
-            var npwdAccredidtaionNumberDto = new HasNpwdAccreditationNumber
+            var hasNpwdAccredidtaionNumberDto = new HasNpwdAccreditationNumber
             {
                 Has2024NPWDAccreditationNumber = false
             };
@@ -470,10 +470,56 @@
             await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
                 id,
                 materialId,
-                npwdAccredidtaionNumberDto);
+                hasNpwdAccredidtaionNumberDto);
 
             // Arrange
             var capturedPayload = JsonConvert.DeserializeObject<HasNpwdAccreditationNumber>(_capturedPayload);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+            Assert.IsTrue(AreObjectsEqual(hasNpwdAccredidtaionNumberDto, capturedPayload));
+        }
+
+        [TestMethod]
+        public async Task GetNpwdAccreditationNumber_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedOutput = "EX123456789";
+            SetClientResponse(HttpStatusCode.OK, expectedOutput);
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Material/{materialId}/NpwdAccreditationNumber";
+
+            // Act
+            var result = await _httpSiteMaterialService.GetNpwdAccreditationNumber(
+                id,
+                materialId);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
+        }
+
+        [TestMethod]
+        public async Task UpdateNpwdAccreditationNumber_CallsEndPointSuccesfully_WithExpectedOutput()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var npwdAccredidtaionNumberDto = new NpwdAccreditationNumber
+            {
+                AccreditationNumber = "AC123456789"
+            };
+
+            var expectedUrl = $"{_baseUrl}/{_endpointName}/{id}/Material/{materialId}/NpwdAccreditationNumber";
+
+            // Act
+            await _httpSiteMaterialService.UpdateNpwdAccreditationNumber(
+                id,
+                materialId,
+                npwdAccredidtaionNumberDto);
+
+            // Arrange
+            var capturedPayload = JsonConvert.DeserializeObject<NpwdAccreditationNumber>(_capturedPayload);
             Assert.AreEqual(expectedUrl.ToLower(), _capturedUrl.ToLower());
             Assert.IsTrue(AreObjectsEqual(npwdAccredidtaionNumberDto, capturedPayload));
         }

@@ -569,5 +569,60 @@
                     dto),
                 Times.Once);
         }
+
+        [TestMethod]
+        public async Task GetAccreditationNumViewModel_ReturnsViewModelWithCorrectProperties()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedValue = "EX12345678";
+
+            _mockHttpSiteMaterialService.Setup(s =>
+                s.GetNpwdAccreditationNumber(
+                    id,
+                    materialId))
+                .ReturnsAsync(expectedValue);
+
+            // Act
+            var viewModel = await _accreditationSiteMaterialService.GetAccreditationNumViewModel(id, materialId);
+
+            // Assert
+            Assert.IsNotNull(viewModel);
+            Assert.AreEqual(id, viewModel.Id);
+            Assert.AreEqual(materialId, viewModel.MaterialId);
+            Assert.AreEqual(expectedValue, viewModel.AccreditationNumber);
+
+            _mockHttpSiteMaterialService.Verify(s => s.GetNpwdAccreditationNumber(id, materialId), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateNpwdAccreditationNumber_CallsHttpServiceWithCorrectParameters()
+        {
+            // Arrange
+            var viewModel = new NpwdAccreditationNumViewModel
+            {
+                Id = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid(),
+                AccreditationNumber = "AN12345678"
+            };
+            var dto = new NpwdAccreditationNumber();
+
+            _mockMapper.Setup(m =>
+                m.Map<NpwdAccreditationNumber>(viewModel))
+            .Returns(dto);
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateNpwdAccreditationNumber(viewModel);
+
+            // Assert
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                s.UpdateNpwdAccreditationNumber(
+                    viewModel.Id,
+                    viewModel.MaterialId,
+                    dto),
+                Times.Once);
+        }
     }
 }
