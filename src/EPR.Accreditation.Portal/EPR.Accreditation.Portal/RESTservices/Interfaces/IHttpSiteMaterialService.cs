@@ -135,9 +135,31 @@
         /// </summary>
         /// <param name="id">Accreditation ID</param>
         /// <param name="materialId">Material ID</param>
-        /// <param name="npwdAccreditationNumber">The boolean value within the DTO</param>
+        /// <param name="hasNpwdAccreditationNumber">The boolean value within the DTO</param>
         /// <returns>Task completed asynchronously</returns>
         Task UpdateHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            HasNpwdAccreditationNumber hasNpwdAccreditationNumber);
+
+        /// <summary>
+        /// Gets the 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>A string value</returns>
+        Task<string> GetNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates the 2024 NPWD Accreditation Number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="npwdAccreditationNumber">The boolean value within the DTO</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
             NpwdAccreditationNumber npwdAccreditationNumber);

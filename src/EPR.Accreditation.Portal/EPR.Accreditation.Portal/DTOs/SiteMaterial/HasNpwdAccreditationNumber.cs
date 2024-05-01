@@ -3,11 +3,11 @@
     /// <summary>
     /// DTO created to avoid UnsupportedMediaType error
     /// </summary>
-    public class NpwdAccreditationNumber
+    public class HasNpwdAccreditationNumber
     {
         /// <summary>
-        /// Gets or sets the 2024 NPWD AccreditationNumber
+        /// Gets or sets whether or not a 2024 NPWD AccreditationNumber is present
         /// </summary>
-        public string AccreditationNumber { get; set; }
+        public bool? Has2024NPWDAccreditationNumber { get; set; }
     }
 }

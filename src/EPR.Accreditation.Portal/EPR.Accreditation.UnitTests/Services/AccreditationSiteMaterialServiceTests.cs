@@ -536,7 +536,7 @@
             Assert.IsNotNull(viewModel);
             Assert.AreEqual(id, viewModel.Id);
             Assert.AreEqual(materialId, viewModel.MaterialId);
-            Assert.AreEqual(expectedValue, viewModel.Has2024NPWDAccreditation);
+            Assert.AreEqual(expectedValue, viewModel.Has2024NPWDAccreditationNumber);
 
             _mockHttpSiteMaterialService.Verify(s => s.GetHasNpwdAccreditationNumber(id, materialId), Times.Once);
         }
@@ -549,12 +549,12 @@
             {
                 Id = Guid.NewGuid(),
                 MaterialId = Guid.NewGuid(),
-                Has2024NPWDAccreditation = true
+                Has2024NPWDAccreditationNumber = true
             };
-            var dto = new NpwdAccreditationNumber();
+            var dto = new HasNpwdAccreditationNumber();
 
             _mockMapper.Setup(m =>
-                m.Map<NpwdAccreditationNumber>(viewModel))
+                m.Map<HasNpwdAccreditationNumber>(viewModel))
             .Returns(dto);
 
             // Act
@@ -564,6 +564,61 @@
             _mockHttpSiteMaterialService.Verify(
                 s =>
                 s.UpdateHasNpwdAccreditationNumber(
+                    viewModel.Id,
+                    viewModel.MaterialId,
+                    dto),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetAccreditationNumViewModel_ReturnsViewModelWithCorrectProperties()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var materialId = Guid.NewGuid();
+            var expectedValue = "EX12345678";
+
+            _mockHttpSiteMaterialService.Setup(s =>
+                s.GetNpwdAccreditationNumber(
+                    id,
+                    materialId))
+                .ReturnsAsync(expectedValue);
+
+            // Act
+            var viewModel = await _accreditationSiteMaterialService.GetAccreditationNumViewModel(id, materialId);
+
+            // Assert
+            Assert.IsNotNull(viewModel);
+            Assert.AreEqual(id, viewModel.Id);
+            Assert.AreEqual(materialId, viewModel.MaterialId);
+            Assert.AreEqual(expectedValue, viewModel.AccreditationNumber);
+
+            _mockHttpSiteMaterialService.Verify(s => s.GetNpwdAccreditationNumber(id, materialId), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateNpwdAccreditationNumber_CallsHttpServiceWithCorrectParameters()
+        {
+            // Arrange
+            var viewModel = new NpwdAccreditationNumViewModel
+            {
+                Id = Guid.NewGuid(),
+                MaterialId = Guid.NewGuid(),
+                AccreditationNumber = "AN12345678"
+            };
+            var dto = new NpwdAccreditationNumber();
+
+            _mockMapper.Setup(m =>
+                m.Map<NpwdAccreditationNumber>(viewModel))
+            .Returns(dto);
+
+            // Act
+            await _accreditationSiteMaterialService.UpdateNpwdAccreditationNumber(viewModel);
+
+            // Assert
+            _mockHttpSiteMaterialService.Verify(
+                s =>
+                s.UpdateNpwdAccreditationNumber(
                     viewModel.Id,
                     viewModel.MaterialId,
                     dto),

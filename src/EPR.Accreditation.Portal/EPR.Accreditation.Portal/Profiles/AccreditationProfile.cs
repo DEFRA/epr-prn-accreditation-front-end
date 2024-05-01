@@ -24,7 +24,8 @@
             CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
             CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
-            CreateMap<HasNpwdAccreditationNumViewModel, NpwdAccreditationNumber>();
+            CreateMap<HasNpwdAccreditationNumViewModel, HasNpwdAccreditationNumber>();
+            CreateMap<NpwdAccreditationNumViewModel, NpwdAccreditationNumber>();
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
             CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()

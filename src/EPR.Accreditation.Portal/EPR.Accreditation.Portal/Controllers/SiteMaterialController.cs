@@ -559,7 +559,7 @@
         }
 
         /// <summary>
-        /// Updates the 2024 NPWD accreditation number
+        /// Updates if the 2024 NPWD accreditation number is present
         /// </summary>
         /// <param name="viewModel">The relevant view model</param>
         /// <param name="saveButton">Enum for if it's continue or come back</param>
@@ -580,16 +580,16 @@
             var actionResult = default(ActionResult);
 
             if (saveButton == SaveButton.SaveAndContinue &&
-                viewModel.Has2024NPWDAccreditation.Value == true)
+                viewModel.Has2024NPWDAccreditationNumber.Value == true)
             {
-                actionResult = RedirectToAction("NpwdAccreditationNumber", "Accreditation", new
+                actionResult = RedirectToAction("NpwdAccreditationNumber", "SiteMaterial", new
                 {
                     viewModel.Id,
                     viewModel.MaterialId
                 });
             }
             else if (saveButton == SaveButton.SaveAndContinue &&
-                viewModel.Has2024NPWDAccreditation.Value == false)
+                viewModel.Has2024NPWDAccreditationNumber.Value == false)
             {
                 actionResult = RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
             }
@@ -600,6 +600,72 @@
             }
 
             return new EmptyResult();
+        }
+
+        /// <summary>
+        /// User can enter or update the Npwd number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>The view result</returns>
+        [HttpGet("NpwdAccreditationNumber")]
+        public async Task<IActionResult> NpwdAccreditationNumber(
+            Guid? id,
+            Guid? materialId)
+        {
+            _backPageViewModel.Url = _urlHelper.ActionLink(
+                "CheckNpwdAccreditationNumber",
+                "SiteMaterial",
+                new
+                {
+                    Id = id,
+                    MaterialId = materialId
+                });
+
+            if (id != null &&
+                materialId != null)
+            {
+                var viewModel = await _accreditationSiteMaterialService.GetAccreditationNumViewModel(
+                    id.Value,
+                    materialId.Value);
+
+                return View(viewModel);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        /// <summary>
+        /// Updates the 2024 NPWD accreditation number
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <param name="saveButton">Enum for if it's continue or come back</param>
+        /// <returns>Task completed asynchronously</returns>
+        [HttpPost("NpwdAccreditationNumber")]
+        public async Task<IActionResult> NpwdAccreditationNumber(
+            NpwdAccreditationNumViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                NpwdAccrNumResources.ErrorMessageBlank))
+            {
+                _backPageViewModel.Url = $"/Accreditation/{viewModel.Id}/Site/Material/{viewModel.MaterialId}/HasNpwdAccreditationNumber";
+                return View(viewModel);
+            }
+
+            await _accreditationSiteMaterialService.UpdateNpwdAccreditationNumber(viewModel);
+
+            return RedirectToRoute(
+                "CheckAnswers",
+                new
+                {
+                    id = viewModel.Id,
+                    viewModel.MaterialId,
+                    Section = "AboutMaterial"
+                });
         }
     }
 }

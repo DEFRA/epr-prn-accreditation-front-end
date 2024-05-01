@@ -345,7 +345,7 @@
             {
                 Id = id,
                 MaterialId = materialId,
-                Has2024NPWDAccreditation = await _httpSiteMaterialService.GetHasNpwdAccreditationNumber(id, materialId)
+                Has2024NPWDAccreditationNumber = await _httpSiteMaterialService.GetHasNpwdAccreditationNumber(id, materialId)
             };
         }
 
@@ -356,12 +356,45 @@
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel)
         {
-            var hasNpwdAccreditationNumberDto = _mapper.Map<DTOs.SiteMaterial.NpwdAccreditationNumber>(viewModel);
+            var dto = _mapper.Map<DTOs.SiteMaterial.HasNpwdAccreditationNumber>(viewModel);
 
             await _httpSiteMaterialService.UpdateHasNpwdAccreditationNumber(
                 viewModel.Id,
                 viewModel.MaterialId,
-                hasNpwdAccreditationNumberDto);
+                dto);
+        }
+
+        /// <summary>
+        /// Concrete implementation to get the view model that drives the view
+        /// </summary>
+        /// <param name="id">Accrediation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task<NpwdAccreditationNumViewModel> GetAccreditationNumViewModel(
+            Guid id,
+            Guid materialId)
+        {
+            return new NpwdAccreditationNumViewModel
+            {
+                Id = id,
+                MaterialId = materialId,
+                AccreditationNumber = await _httpSiteMaterialService.GetNpwdAccreditationNumber(id, materialId)
+            };
+        }
+
+        /// <summary>
+        /// Concrete implementation of interface action
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateNpwdAccreditationNumber(NpwdAccreditationNumViewModel viewModel)
+        {
+            var dto = _mapper.Map<DTOs.SiteMaterial.NpwdAccreditationNumber>(viewModel);
+
+            await _httpSiteMaterialService.UpdateNpwdAccreditationNumber(
+                viewModel.Id,
+                viewModel.MaterialId,
+                dto);
         }
     }
 }
