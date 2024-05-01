@@ -59,5 +59,13 @@
         {
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
         }
+
+        public async Task UpdateAccreditation(
+    Guid id,
+    Guid materialId,
+    ReprocessingSupportingInformationDto nonWasteInputsDto)
+        {
+            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
+        }
     }
 }
