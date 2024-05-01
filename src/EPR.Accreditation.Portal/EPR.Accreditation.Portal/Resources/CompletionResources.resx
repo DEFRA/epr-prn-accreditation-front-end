@@ -132,6 +132,9 @@
   <data name="ApplicationSubmittedScotland" xml:space="preserve">
     <value>Application submitted to the Scotish Environment Protection Agency</value>
   </data>
+  <data name="ApplicationSubmittedWales" xml:space="preserve">
+    <value>Application submitted to Natual Resources Wales</value>
+  </data>
   <data name="BankTransferDetails" xml:space="preserve">
     <value>Use these details to make payment:
 

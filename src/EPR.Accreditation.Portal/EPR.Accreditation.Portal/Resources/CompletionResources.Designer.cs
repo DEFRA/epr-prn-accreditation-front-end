@@ -106,6 +106,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application submitted to Natual Resources Wales.
+        /// </summary>
+        public static string ApplicationSubmittedWales {
+            get {
+                return ResourceManager.GetString("ApplicationSubmittedWales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use these details to make payment:
         ///
         ///Company name: Environment Agency 

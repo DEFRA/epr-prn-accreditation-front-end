@@ -119,6 +119,18 @@
 
     @if (Model.CountryCode == "WALES")
     {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedWales
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>HDJ2123F</strong>
+            </div>
+        </div>
+
+        <h4 class="govuk-heading-m">@CompletionResources.AfterPayment</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
+        <h4 class="govuk-heading-m">£@Model.AmountDue</h4>
         <h4 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h4>
         <h4 class="govuk-heading-s">Use these details to make payment</h4>
 
@@ -129,7 +141,20 @@
                 <tr class="govuk-table__row"><td><li>Bank: RBS, National Westminster bank plc, 2 ½ Devonshire Square, London, EC2M 4BA</li></td></tr>
                 <tr class="govuk-table__row"><td><li>Sort code: 60-70-80</li></td></tr>
                 <tr class="govuk-table__row"><td><li>Account number: 10014438</li></td></tr>
-                <tr class="govuk-table__row"><td><li>Payment reference number: <Same as reference number in green confirmation box above></li></td></tr>
+                <tr class="govuk-table__row"><td><li>Payment reference number: Same as reference number in green confirmation box above</li></td></tr>
+        </table>
+
+        <table class="govuk-table">
+            <tr class="govuk-table__row">
+                <td>
+                    <details open>
+                        <summary>Other ways to pay</summary>
+                        <p>To discuss paying by other methods please contact the Natural Resources Wales</p>
+                        <p>Email: packaging@naturalresourcesales.gov.uk</p>
+                        <p>Telephone: 0300 065 3000</p>
+                    </details>
+                </td>
+            </tr>
         </table>
     }
     <button class="govuk-button" data-module="govuk-button">

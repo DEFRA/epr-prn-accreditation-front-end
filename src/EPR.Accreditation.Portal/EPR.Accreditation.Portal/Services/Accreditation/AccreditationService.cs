@@ -109,7 +109,7 @@
             var result = new CompletionViewModel()
             {
                 Id = id,
-                CountryCode = "SCO",
+                CountryCode = "WALES",
                 AmountDue = 505
             };
 
