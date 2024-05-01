@@ -61,51 +61,6 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address Line 1.
-        /// </summary>
-        public static string AddressLine1 {
-            get {
-                return ResourceManager.GetString("AddressLine1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Address Line 1 Missing.
-        /// </summary>
-        public static string AddressLine1Missing {
-            get {
-                return ResourceManager.GetString("AddressLine1Missing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Address Line 2 (optional).
-        /// </summary>
-        public static string AddressLine2 {
-            get {
-                return ResourceManager.GetString("AddressLine2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Address Line not in range.
-        /// </summary>
-        public static string AddressLineNumberNotInRange {
-            get {
-                return ResourceManager.GetString("AddressLineNumberNotInRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to County (optional).
-        /// </summary>
-        public static string County {
-            get {
-                return ResourceManager.GetString("County", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to What is the address of the reprocessing site?.
         /// </summary>
         public static string Heading {
@@ -120,42 +75,6 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Post Code.
-        /// </summary>
-        public static string PostCode {
-            get {
-                return ResourceManager.GetString("PostCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PostCode missing.
-        /// </summary>
-        public static string PostCodeMissing {
-            get {
-                return ResourceManager.GetString("PostCodeMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Town or City.
-        /// </summary>
-        public static string TownOrCity {
-            get {
-                return ResourceManager.GetString("TownOrCity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Town or city missing.
-        /// </summary>
-        public static string TownOrCityMisssing {
-            get {
-                return ResourceManager.GetString("TownOrCityMisssing", resourceCulture);
             }
         }
     }

@@ -64,18 +64,14 @@
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
 
-        public async Task<TaskListViewModel> GetTaskList(
-            Guid id,
-            Guid materialId)
+        public async Task<TaskListViewModel> GetTaskList(Guid id)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
 
             var viewModel = new TaskListViewModel
             {
-                Id = id,
-                MaterialId = materialId,
-
                 // Address = need the address from legal contacts and contact details
+                Id = id,
                 WasteLicensesStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
                 UploadBusinessPlanStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
                 AboutMaterialStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
@@ -125,6 +121,34 @@
         {
             var dto = _mapper.Map<PrnTonnesPlannedDto>(vm);
             await _httpAccreditationService.UpdatePrnTonnesPlanned(accreditationExternalId, dto);
+        }
+
+        /// <summary>
+        /// Creates the view model for the given accreditation id
+        /// </summary>
+        /// <param name="id">The id of the accreditation that the legal documents are for</param>
+        /// <returns>The view model for the accreditation legal documents</returns>
+        public async Task<LegalDocumentsAddressViewModel> GetLegalDocumentsAddressViewModel(Guid id)
+        {
+            var addressDto = await _httpAccreditationService.GetLegalDocumentsAddress(id);
+
+            return _mapper.Map<LegalDocumentsAddressViewModel>(addressDto);
+        }
+
+        /// <summary>
+        /// Creates or updates the address for the legal documents for the accreditation
+        /// </summary>
+        /// <param name="id">Id of the accreditation id</param>
+        /// <param name="viewModel">The view model containing the address for the legal documents</param>
+        /// <returns>async task</returns>
+        public async Task UpdateLegalDocumentsAddress(
+            LegalDocumentsAddressViewModel viewModel)
+        {
+            var addressDto = _mapper.Map<AddressDto>(viewModel);
+
+            await _httpAccreditationService.UpdateLegalDocumentsAddress(
+                viewModel.Id,
+                addressDto);
         }
 
         private Enums.TaskStatus ReturnStatusFromList(

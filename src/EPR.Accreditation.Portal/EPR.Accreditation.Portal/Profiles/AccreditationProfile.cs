@@ -60,7 +60,10 @@
             CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()
+            CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()
+                .ReverseMap();
+
+            CreateMap<AddressDto, LegalDocumentsAddressViewModel>()
                 .ReverseMap();
         }
     }
