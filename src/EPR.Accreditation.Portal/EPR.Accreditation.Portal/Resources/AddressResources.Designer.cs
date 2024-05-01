@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ReprocessorDetailsResources___Copy {
+    public class AddressResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ReprocessorDetailsResources___Copy() {
+        internal AddressResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.ReprocessorDetailsResources - Copy", typeof(ReprocessorDetailsResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.AddressResources", typeof(AddressResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,92 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address.
+        ///   Looks up a localized string similar to Address Line 1.
         /// </summary>
-        public static string Address {
+        public static string AddressLine1 {
             get {
-                return ResourceManager.GetString("Address", resourceCulture);
+                return ResourceManager.GetString("AddressLine1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a country.
+        ///   Looks up a localized string similar to Address Line 1 Missing.
         /// </summary>
-        public static string DefaultOption {
+        public static string AddressLine1Missing {
             get {
-                return ResourceManager.GetString("DefaultOption", resourceCulture);
+                return ResourceManager.GetString("AddressLine1Missing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Address.
+        ///   Looks up a localized string similar to Address Line 2 (optional).
         /// </summary>
-        public static string ErrorAddress {
+        public static string AddressLine2 {
             get {
-                return ResourceManager.GetString("ErrorAddress", resourceCulture);
+                return ResourceManager.GetString("AddressLine2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter country.
+        ///   Looks up a localized string similar to Address Line not in range.
         /// </summary>
-        public static string ErrorCountry {
+        public static string AddressLineNumberNotInRange {
             get {
-                return ResourceManager.GetString("ErrorCountry", resourceCulture);
+                return ResourceManager.GetString("AddressLineNumberNotInRange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Organisation name.
+        ///   Looks up a localized string similar to County (optional).
         /// </summary>
-        public static string ErrorOrgName {
+        public static string County {
             get {
-                return ResourceManager.GetString("ErrorOrgName", resourceCulture);
+                return ResourceManager.GetString("County", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Organisation name.
+        ///   Looks up a localized string similar to Post Code.
         /// </summary>
-        public static string OrgName {
+        public static string PostCode {
             get {
-                return ResourceManager.GetString("OrgName", resourceCulture);
+                return ResourceManager.GetString("PostCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessor details.
+        ///   Looks up a localized string similar to Enter a UK postcode.
         /// </summary>
-        public static string PageHeading {
+        public static string PostCodeInvalid {
             get {
-                return ResourceManager.GetString("PageHeading", resourceCulture);
+                return ResourceManager.GetString("PostCodeInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessor details.
+        ///   Looks up a localized string similar to Enter a UK postcode.
         /// </summary>
-        public static string PageTitle {
+        public static string PostCodeMissing {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("PostCodeMissing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select country.
+        ///   Looks up a localized string similar to Town or City.
         /// </summary>
-        public static string SelectCountry {
+        public static string TownOrCity {
             get {
-                return ResourceManager.GetString("SelectCountry", resourceCulture);
+                return ResourceManager.GetString("TownOrCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Town or city missing.
+        /// </summary>
+        public static string TownOrCityMisssing {
+            get {
+                return ResourceManager.GetString("TownOrCityMisssing", resourceCulture);
             }
         }
     }

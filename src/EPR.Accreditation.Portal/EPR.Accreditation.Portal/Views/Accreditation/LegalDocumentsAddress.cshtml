@@ -1,9 +1,7 @@
-﻿@using EPR.Accreditation.Portal.Resources;
-@using EPR.Accreditation.Portal.ViewModels;
+﻿@model LegalDocumentsAddressViewModel
 
-@model SiteAddressViewModel
 @{
-    ViewData["Title"] = SiteAddressResources.PageTitle;
+    ViewData["Title"] = LegalDocumentsAddressResources.PageTitle;
 }
 
 <partial name="_ValidationSummary" />
@@ -11,7 +9,8 @@
 <form method="post">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-            <h1 class="govuk-heading-l">@SiteAddressResources.Heading</h1>
+            <h1 class="govuk-heading-l">@LegalDocumentsAddressResources.PageTitle</h1>
+            <p class="govuk-body">@LegalDocumentsAddressResources.Subtitle</p>
             <partial name="_Address" model="Model"></partial>
             <partial name="_SaveButtons" />
         </div>

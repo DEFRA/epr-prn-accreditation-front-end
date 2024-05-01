@@ -13,23 +13,40 @@
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.Options;
 
+    /// <summary>
+    /// Main accreditator controller. Anything specific to just the accreditator should be handled here
+    /// </summary>
     [Route("[controller]/{id}")]
     public class AccreditationController : BaseController
     {
         private const string TaskListRouteName = "TaskList";
+        private const string RegulatorContactRouteName = "RegulatorContact";
+        private const string LegalDocumentsRouteName = "LegalDocuments";
+        private const string LegalDocumentsAddressRouteName = "LegalDocumentsAddress";
         private const string CreateOverseasSiteRouteName = "CreateOverseasSite";
         private readonly IAccreditationService _accreditationService;
         private readonly IWastePermitService _wastePermitService;
         private readonly ISiteService _siteService;
         private readonly IOptions<AppSettingsConfigOptions> _appSettings;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccreditationController"/> class.
+        /// </summary>
+        /// <param name="httpContextAccessor">The IHttpContextAccessor relevant to the current request</param>
+        /// <param name="wastePermitService">The IWastePermitService instance</param>
+        /// <param name="accreditationService">The IAccreditationService instance</param>
+        /// <param name="siteSerivce">The ISiteService instance</param>
+        /// <param name="urlHelper">The IUrlHelperWrapper which wraps IUrlHelper</param>
+        /// <param name="backPageViewModel">View model for the back page link</param>
+        /// <param name="appSettings">The app settings configuratrion</param>
+        /// <exception cref="ArgumentNullException">If any parameters are null, this exception is thrown</exception>
         public AccreditationController(
             IHttpContextAccessor httpContextAccessor,
             IWastePermitService wastePermitService,
             IAccreditationService accreditationService,
+            ISiteService siteSerivce,
             IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel,
-            ISiteService siteSerivce,
             IOptions<AppSettingsConfigOptions> appSettings)
             : base(
                   httpContextAccessor,
@@ -346,7 +363,7 @@
             return NotFound();
         }
 
-        [HttpGet("SiteAddress", Name = "SiteAddress")]
+        [HttpGet("Site", Name = "Site")]
         public async Task<IActionResult> SiteAddress(Guid? id)
         {
             if (id == null)
@@ -359,14 +376,9 @@
             return View(viewModel);
         }
 
-        [HttpPost("SiteAddress", Name = "SiteAddress")]
+        [HttpPost("Site")]
         public async Task<IActionResult> SiteAddress(SiteAddressViewModel viewModel, SaveButton saveButton)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
@@ -376,6 +388,79 @@
 
             await _siteService.SaveSiteAddress(viewModel);
             return RedirectToAction("PermitExemption", "Accreditation", new { viewModel.Id });
+        }
+
+        /// <summary>
+        /// Stubbed method for the back action from the legal documents address to work
+        /// </summary>
+        /// <param name="id">accreditation id</param>
+        /// <returns>async IActionResult representing the legal documents view</returns>
+        [HttpGet("LegalDocuments", Name = "LegalDocuments")]
+        public async Task<IActionResult> LegalDocuments(Guid id)
+        {
+            return NotFound();
+        }
+
+        /// <summary>
+        /// End point for getting the view for adding the address for legal documentation
+        /// </summary>
+        /// <param name="id">The accreditation id</param>
+        /// <returns>async IActionResult representing the legal document address view</returns>
+        [HttpGet("LegalDocumentsAddress", Name = "LegalDocumentsAddress")]
+        public async Task<IActionResult> LegalDocumentsAddress(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            PopulateBackModel(LegalDocumentsRouteName);
+
+            var viewModel = await _accreditationService.GetLegalDocumentsAddressViewModel(id.Value);
+
+            return View(viewModel);
+        }
+
+        /// <summary>
+        /// End point to update the address for legal documents
+        /// </summary>
+        /// <param name="viewModel">The view model as sent from the view</param>
+        /// <param name="saveButton">Which save button has been used</param>
+        /// <returns>Redirection to the new route action</returns>
+        [HttpPost("LegalDocumentsAddress")]
+        public async Task<IActionResult> LegalDocumentsAddress(
+            LegalDocumentsAddressViewModel viewModel,
+            SaveButton saveButton)
+        {
+            PopulateBackModel(LegalDocumentsRouteName);
+
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                AddressResources.AddressLine1Missing,
+                AddressResources.TownOrCityMisssing,
+                AddressResources.PostCodeMissing))
+            {
+                return View(viewModel);
+            }
+
+            await _accreditationService.UpdateLegalDocumentsAddress(viewModel);
+            return RedirectToRoute(
+                RegulatorContactRouteName,
+                new
+                {
+                    id = viewModel.Id
+                });
+        }
+
+        /// <summary>
+        /// Stubbed method for "Who can the regulator contact about this application
+        /// </summary>
+        /// <param name="id">Accreditation id</param>
+        /// <returns>the relevant view or response</returns>
+        [HttpGet("RegulatorContact", Name = "RegulatorContact")]
+        public async Task<IActionResult> RegulatorContact(Guid id)
+        {
+            return NotFound();
         }
 
         /// <summary>
