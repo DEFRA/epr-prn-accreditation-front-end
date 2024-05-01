@@ -39,6 +39,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AddressResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\LegalDocumentsAddressResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LegalDocumentsAddressResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\MaterialOutputsEstimatedResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -189,6 +194,10 @@
     <EmbeddedResource Update="Resources\AddressResources.cy-GB.resx">
       <LastGenOutput>ApplicationSavedResources - Copy.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\LegalDocumentsAddressResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LegalDocumentsAddressResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
