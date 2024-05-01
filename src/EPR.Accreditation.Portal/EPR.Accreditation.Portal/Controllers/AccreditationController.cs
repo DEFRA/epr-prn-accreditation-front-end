@@ -172,21 +172,22 @@
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("Material/{materialId}/TaskList", Name = "TaskList")]
-        public async Task<IActionResult> TaskList(
-            Guid? id,
-            Guid? materialId)
+        [HttpGet("TaskList", Name = "TaskList")]
+        public async Task<IActionResult> TaskList(Guid id)
         {
-            if (id != null &&
-                materialId != null)
-            {
-                TaskListViewModel model = await _accreditationService.GetTaskList(
-                    id.Value,
-                    materialId.Value);
-                return View(model);
-            }
+            PopulateBackModel(TaskListRouteName);
 
-            return NotFound();
+            TaskListViewModel model = await _accreditationService.GetTaskList(id);
+            return View(model);
+        }
+
+        [HttpGet("TaskListSite", Name = "TaskListSite")]
+        public async Task<IActionResult> TaskListSite(Guid id)
+        {
+            PopulateBackModel(TaskListRouteName);
+
+            TaskListViewModel model = await _accreditationService.GetTaskList(id);
+            return View(model);
         }
 
         /// <summary>
@@ -311,25 +312,6 @@
             }
 
             base.OnActionExecuted(context);
-        }
-
-        [HttpGet("Site/{siteId}/Material/{materialId}/TaskListSite", Name = "TaskListSite")]
-        public async Task<IActionResult> TaskListSite(
-            Guid? id,
-            Guid? siteId,
-            Guid? materialId)
-        {
-            if (id != null &&
-                siteId != null &&
-                materialId != null)
-            {
-                TaskListViewModel model = await _accreditationService.GetTaskList(
-                    id.Value,
-                    materialId.Value);
-                return View(model);
-            }
-
-            return NotFound();
         }
 
         [HttpGet("WasteCarrierRegistrationNumber")]

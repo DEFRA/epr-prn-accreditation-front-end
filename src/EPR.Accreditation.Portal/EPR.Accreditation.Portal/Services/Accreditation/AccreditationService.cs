@@ -64,18 +64,14 @@
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
 
-        public async Task<TaskListViewModel> GetTaskList(
-            Guid id,
-            Guid materialId)
+        public async Task<TaskListViewModel> GetTaskList(Guid id)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
 
             var viewModel = new TaskListViewModel
             {
-                Id = id,
-                MaterialId = materialId,
-
                 // Address = need the address from legal contacts and contact details
+                Id = id,
                 WasteLicensesStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
                 UploadBusinessPlanStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
                 AboutMaterialStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
