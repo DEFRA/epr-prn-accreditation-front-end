@@ -1,18 +1,15 @@
-﻿using EPR.Accreditation.Portal.Common.Dtos.Portal;
-using EPR.Accreditation.Portal.RESTservices;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EPR.Accreditation.UnitTests.RESTserviceTests
+﻿namespace EPR.Accreditation.UnitTests.RESTserviceTests
 {
+    using System;
+    using System.Net;
+    using System.Threading.Tasks;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.RESTservices;
+    using Microsoft.AspNetCore.Http;
+    using Moq;
+    using Moq.Protected;
+    using Newtonsoft.Json;
+
     [TestClass]
     public class HttpAccreditationServiceTests
     {
