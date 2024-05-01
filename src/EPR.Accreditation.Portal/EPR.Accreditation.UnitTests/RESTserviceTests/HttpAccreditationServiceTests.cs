@@ -85,8 +85,6 @@
             Assert.AreEqual(HttpMethod.Put.Method, _requestVerb);
         }
 
-
-
         private void SetClientResponse(
             HttpStatusCode httpStatusCode = HttpStatusCode.OK,
             object content = null)
