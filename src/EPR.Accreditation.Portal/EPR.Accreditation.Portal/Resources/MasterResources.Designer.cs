@@ -151,6 +151,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accreditation.
+        /// </summary>
+        public static string SiteHeading {
+            get {
+                return ResourceManager.GetString("SiteHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is a problem.
         /// </summary>
         public static string SummaryError {
