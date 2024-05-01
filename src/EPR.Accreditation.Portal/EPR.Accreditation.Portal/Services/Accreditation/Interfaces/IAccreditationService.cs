@@ -12,9 +12,7 @@
 
         Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
 
-        Task<TaskListViewModel> GetTaskList(
-            Guid id,
-            Guid materialId);
+        Task<TaskListViewModel> GetTaskList(Guid id);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
 
