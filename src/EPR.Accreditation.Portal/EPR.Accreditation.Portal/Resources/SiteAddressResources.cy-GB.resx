@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddressLine1" xml:space="preserve">
-    <value>[Welsh] Address Line 1</value>
-  </data>
-  <data name="AddressLine1Missing" xml:space="preserve">
-    <value>[Welsh] Address Line 1 Missing</value>
-  </data>
-  <data name="AddressLine2" xml:space="preserve">
-    <value>[Welsh] Address Line 2 (optional)</value>
-  </data>
-  <data name="AddressLineNumberNotInRange" xml:space="preserve">
-    <value>[Welsh] Address Line not in range</value>
-  </data>
-  <data name="County" xml:space="preserve">
-    <value>[Welsh] County (optional)</value>
-  </data>
   <data name="Heading" xml:space="preserve">
     <value>[Welsh] What is the address of the reprocessing site?</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>[Welsh] Site Address</value>
-  </data>
-  <data name="PostCode" xml:space="preserve">
-    <value>[Welsh] Post Code</value>
-  </data>
-  <data name="PostCodeMissing" xml:space="preserve">
-    <value>[Welsh] PostCode missing</value>
-  </data>
-  <data name="TownOrCity" xml:space="preserve">
-    <value>[Welsh] Town or City</value>
-  </data>
-  <data name="TownOrCityMisssing" xml:space="preserve">
-    <value>[Welsh] Town or city missing</value>
   </data>
 </root>

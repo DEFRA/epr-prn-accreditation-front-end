@@ -52,11 +52,8 @@
         public async Task<SiteAddressViewModel> GetSiteAddressViewModel(
             Guid id)
         {
-            SiteAddressViewModel siteAddressViewModel = new SiteAddressViewModel();
             var site = await _httpSiteService.GetSite(id);
-            siteAddressViewModel = _mapper.Map<SiteAddressViewModel>(site);
-            siteAddressViewModel.Id = id;
-            return siteAddressViewModel;
+            return _mapper.Map<SiteAddressViewModel>(site);
         }
 
         /// <summary>
@@ -66,9 +63,9 @@
         /// <returns>Task</returns>
         public async Task SaveSiteAddress(SiteAddressViewModel siteAddressViewModel)
         {
-            Site site = null;
             var siteAddress = _mapper.Map<Site>(siteAddressViewModel);
-            site = await _httpSiteService.GetSite(siteAddressViewModel.Id);
+            var site = await _httpSiteService.GetSite(siteAddressViewModel.Id);
+
             if (site == null)
             {
                 // This has to be updated when org Id is retrieved at login

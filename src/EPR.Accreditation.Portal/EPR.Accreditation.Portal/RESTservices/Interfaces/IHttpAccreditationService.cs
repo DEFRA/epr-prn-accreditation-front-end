@@ -27,5 +27,22 @@
         Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
         Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
+
+        /// <summary>
+        /// Gets the legal documents address for the accreditation
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>The DTO Address object</returns>
+        Task<AddressDto> GetLegalDocumentsAddress(Guid id);
+
+        /// <summary>
+        /// Saves the address for the legal documents
+        /// </summary>
+        /// <param name="id">Id of the accreditation for the legal documents</param>
+        /// <param name="address">The DTO address object</param>
+        /// <returns>async task</returns>
+        Task UpdateLegalDocumentsAddress(
+            Guid id,
+            AddressDto address);
     }
 }

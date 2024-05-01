@@ -127,6 +127,34 @@
             await _httpAccreditationService.UpdatePrnTonnesPlanned(accreditationExternalId, dto);
         }
 
+        /// <summary>
+        /// Creates the view model for the given accreditation id
+        /// </summary>
+        /// <param name="id">The id of the accreditation that the legal documents are for</param>
+        /// <returns>The view model for the accreditation legal documents</returns>
+        public async Task<LegalDocumentsAddressViewModel> GetLegalDocumentsAddressViewModel(Guid id)
+        {
+            var addressDto = await _httpAccreditationService.GetLegalDocumentsAddress(id);
+
+            return _mapper.Map<LegalDocumentsAddressViewModel>(addressDto);
+        }
+
+        /// <summary>
+        /// Creates or updates the address for the legal documents for the accreditation
+        /// </summary>
+        /// <param name="id">Id of the accreditation id</param>
+        /// <param name="viewModel">The view model containing the address for the legal documents</param>
+        /// <returns>async task</returns>
+        public async Task UpdateLegalDocumentsAddress(
+            LegalDocumentsAddressViewModel viewModel)
+        {
+            var addressDto = _mapper.Map<AddressDto>(viewModel);
+
+            await _httpAccreditationService.UpdateLegalDocumentsAddress(
+                viewModel.Id,
+                addressDto);
+        }
+
         private Enums.TaskStatus ReturnStatusFromList(
             List<AccreditationTaskProgress> accreditationsTaskProgress,
             Enums.TaskName taskName)

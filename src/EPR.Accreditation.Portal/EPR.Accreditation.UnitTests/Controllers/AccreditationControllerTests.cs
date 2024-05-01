@@ -42,9 +42,9 @@
                 _mockContextAccessor.Object,
                 _mockWastePermitService.Object,
                 _mockAccreditationService.Object,
+                _mockSiteService.Object,
                 _mockUrlHelper.Object,
                 _backPageViewModel,
-                _mockSiteService.Object,
                 _mockAppSettings.Object);
 
             var context = new DefaultHttpContext();
@@ -266,6 +266,84 @@
             Assert.AreEqual("PermitExemption", redirectToActionResult.ActionName);
 
             _mockSiteService.Verify(service => service.SaveSiteAddress(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetLegalDocumentsAddress_WithNullId_ReturnsNotFound()
+        {
+            // Arrange
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(null) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task GetLegalDocumentsAddress_WithValidParameters_ReturnsViewAndCallsService()
+        {
+            // arrange
+            var id = Guid.NewGuid();
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            _mockAccreditationService.Verify(
+                s =>
+                    s.GetLegalDocumentsAddressViewModel(id),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateLegalDocumentsAddress_WithValidData_ReturnsRedirectResultAndCallsService()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var legalDocumentsAddressViewModel = new LegalDocumentsAddressViewModel
+            {
+                Id = id
+            };
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(
+                legalDocumentsAddressViewModel,
+                SaveButton.SaveAndContinue) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            _mockAccreditationService.Verify(
+                s =>
+                    s.UpdateLegalDocumentsAddress(legalDocumentsAddressViewModel),
+                Times.Once);
+            result.RouteName = "RegulatorContact";
+            result.RouteValues.ContainsKey("id");
+        }
+
+        [TestMethod]
+        public async Task UpdateLegalDocumentsAddress_WithInvalidData_ReturnsOriginalViewDoesNotCallService()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            _accreditationController.ModelState.AddModelError("Error", "Error");
+            var legalDocumentsAddressViewModel = new LegalDocumentsAddressViewModel
+            {
+                Id = id
+            };
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(
+                legalDocumentsAddressViewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            _mockAccreditationService.Verify(
+                s =>
+                    s.UpdateLegalDocumentsAddress(legalDocumentsAddressViewModel),
+                Times.Never);
         }
     }
 }
