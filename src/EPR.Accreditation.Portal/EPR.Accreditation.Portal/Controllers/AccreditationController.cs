@@ -314,6 +314,5 @@
             CompletionViewModel vm = await _accreditationService.Completion(id.Value);
             return View(vm);
         }
-
     }
 }
