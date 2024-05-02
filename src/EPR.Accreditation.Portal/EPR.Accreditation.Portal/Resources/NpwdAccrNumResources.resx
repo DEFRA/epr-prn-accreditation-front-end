@@ -117,46 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddRow" xml:space="preserve">
-    <value>[Welsh]Add another</value>
+  <data name="ErrorMessageBlank" xml:space="preserve">
+    <value>Enter your NPWD number</value>
   </data>
-  <data name="BackLink" xml:space="preserve">
-    <value>[Welsh]Back</value>
+  <data name="ErrorMessageInvalidFormat" xml:space="preserve">
+    <value>NPWD number must be between 9 and 12 characters and only include letters A-Z, and numbers</value>
   </data>
-  <data name="ConfirmAndContinue" xml:space="preserve">
-    <value>[Welsh]Confirm and continue</value>
+  <data name="H2" xml:space="preserve">
+    <value>Enter your accreditation number for:</value>
   </data>
-  <data name="Continue" xml:space="preserve">
-    <value>[Welsh]Continue</value>
+  <data name="HintText" xml:space="preserve">
+    <value>It starts with 2 letters, followed by up to 10 numbers.</value>
   </data>
-  <data name="DecimalNumberFormatError" xml:space="preserve">
-    <value>[Welsh]Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
+  <data name="LinkText" xml:space="preserve">
+    <value>public register (opens in a new tab)</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>[Welsh]For:</value>
+  <data name="P1" xml:space="preserve">
+    <value>You can find it on the</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>[Welsh]No</value>
+  <data name="PageHeading" xml:space="preserve">
+    <value>Your NPWD accreditation number</value>
   </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>[Welsh]Save and come back later</value>
-  </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>[Welsh]Save and continue</value>
-  </data>
-  <data name="SiteHeading" xml:space="preserve">
-    <value>[Welsh]Accreditation</value>
-  </data>
-  <data name="SummaryError" xml:space="preserve">
-    <value>[Welsh]There is a problem</value>
-  </data>
-  <data name="TonnesLabel" xml:space="preserve">
-    <value>[Welsh]Tonnes</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>[Welsh]Yes</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Your NPWD accreditation number</value>
   </data>
 </root>

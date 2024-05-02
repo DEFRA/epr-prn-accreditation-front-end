@@ -24,7 +24,8 @@
             CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
             CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
-            CreateMap<HasNpwdAccreditationNumViewModel, NpwdAccreditationNumber>();
+            CreateMap<HasNpwdAccreditationNumViewModel, HasNpwdAccreditationNumber>();
+            CreateMap<NpwdAccreditationNumViewModel, NpwdAccreditationNumber>();
             CreateMap<ReprocessedWasteLastYearViewModel, ReprocessedWasteLastYear>();
             CreateMap<ReprocessorDetailsViewModel, ReprocessorDetailsDto>();
             CreateMap<MaterialOutputsDto, MaterialOutputsViewModel>()
@@ -59,7 +60,10 @@
             CreateMap<OverseasReprocessingSiteOutputs, OverseasReprocessingSiteOutputsViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()
+            CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()
+                .ReverseMap();
+
+            CreateMap<AddressDto, LegalDocumentsAddressViewModel>()
                 .ReverseMap();
         }
     }

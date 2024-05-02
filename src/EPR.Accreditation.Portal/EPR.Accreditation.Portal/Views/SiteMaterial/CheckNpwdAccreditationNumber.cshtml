@@ -6,19 +6,19 @@
 <partial name="_ValidationSummary" />
 <form method="post">
     <partial name="_WasteMaterialName" />
-    <radios asp-for="Has2024NPWDAccreditation" asp-title="@HasNpwdAccrNumResources.PageHeading">
+    <radios asp-for="Has2024NPWDAccreditationNumber" asp-title="@HasNpwdAccrNumResources.PageHeading">
         <p class="govuk-hint">@HasNpwdAccrNumResources.HintText</p>
         <p class="govuk-error-message">
-            <span asp-validation-for="Has2024NPWDAccreditation"></span>
+            <span asp-validation-for="Has2024NPWDAccreditationNumber"></span>
         </p>
         <div class="govuk-radios__item">
-            <input class="govuk-radios__input" type="radio" asp-for="Has2024NPWDAccreditation" value="@true" aria-describedby="@MasterResources.Yes">
+            <input class="govuk-radios__input" type="radio" asp-for="Has2024NPWDAccreditationNumber" value="@true" aria-describedby="@MasterResources.Yes">
             <label class="govuk-label govuk-radios__label" for="@MasterResources.Yes">
                 @MasterResources.Yes
             </label>
         </div>
         <div class="govuk-radios__item">
-            <input class="govuk-radios__input" type="radio" asp-for="Has2024NPWDAccreditation" value="@false" aria-describedby="@MasterResources.No">
+            <input class="govuk-radios__input" type="radio" asp-for="Has2024NPWDAccreditationNumber" value="@false" aria-describedby="@MasterResources.No">
             <label class="govuk-label govuk-radios__label" for="@MasterResources.No">
                 @MasterResources.No
             </label>

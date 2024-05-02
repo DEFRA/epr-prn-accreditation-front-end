@@ -117,46 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddRow" xml:space="preserve">
-    <value>[Welsh]Add another</value>
+  <data name="AddressLine1" xml:space="preserve">
+    <value>[Welsh]Address Line 1</value>
   </data>
-  <data name="BackLink" xml:space="preserve">
-    <value>[Welsh]Back</value>
+  <data name="AddressLine1Missing" xml:space="preserve">
+    <value>[Welsh]Address Line 1 Missing</value>
   </data>
-  <data name="ConfirmAndContinue" xml:space="preserve">
-    <value>[Welsh]Confirm and continue</value>
+  <data name="AddressLine2" xml:space="preserve">
+    <value>[Welsh]Address Line 2 (optional)</value>
   </data>
-  <data name="Continue" xml:space="preserve">
-    <value>[Welsh]Continue</value>
+  <data name="AddressLineNumberNotInRange" xml:space="preserve">
+    <value>[Welsh]Address Line not in range</value>
   </data>
-  <data name="DecimalNumberFormatError" xml:space="preserve">
-    <value>[Welsh]Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
+  <data name="County" xml:space="preserve">
+    <value>[Welsh]County (optional)</value>
   </data>
-  <data name="MaterialForLabel" xml:space="preserve">
-    <value>[Welsh]For:</value>
+  <data name="PostCode" xml:space="preserve">
+    <value>[Welsh]Post Code</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>[Welsh]No</value>
+  <data name="PostCodeInvalid" xml:space="preserve">
+    <value>[Welsh]Enter a UK postcode</value>
   </data>
-  <data name="OppositeLanguage" xml:space="preserve">
-    <value>English</value>
+  <data name="PostCodeMissing" xml:space="preserve">
+    <value>[Welsh]Enter a UK postcode</value>
   </data>
-  <data name="SaveAndComeBack" xml:space="preserve">
-    <value>[Welsh]Save and come back later</value>
+  <data name="TownOrCity" xml:space="preserve">
+    <value>[Welsh]Town or City</value>
   </data>
-  <data name="SaveAndContinue" xml:space="preserve">
-    <value>[Welsh]Save and continue</value>
-  </data>
-  <data name="SiteHeading" xml:space="preserve">
-    <value>[Welsh]Accreditation</value>
-  </data>
-  <data name="SummaryError" xml:space="preserve">
-    <value>[Welsh]There is a problem</value>
-  </data>
-  <data name="TonnesLabel" xml:space="preserve">
-    <value>[Welsh]Tonnes</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>[Welsh]Yes</value>
+  <data name="TownOrCityMisssing" xml:space="preserve">
+    <value>[Welsh]Town or city missing</value>
   </data>
 </root>

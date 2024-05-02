@@ -81,5 +81,28 @@
         {
             await Put($"{accreditationExternalId}/PrnTonnesPlanned", dto);
         }
+
+        /// <summary>
+        /// Requests the legal documents address from the facade
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>The address dto object</returns>
+        public async Task<AddressDto> GetLegalDocumentsAddress(Guid id)
+        {
+            return await Get<AddressDto>($"{id}/LegalDocumentAddress");
+        }
+
+        /// <summary>
+        /// Sends the dto to the facade for saving
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <param name="address">The address DTO</param>
+        /// <returns>async task</returns>
+        public async Task UpdateLegalDocumentsAddress(
+            Guid id,
+            AddressDto address)
+        {
+            await Put($"{id}/LegalDocumentAddress", address);
+        }
     }
 }

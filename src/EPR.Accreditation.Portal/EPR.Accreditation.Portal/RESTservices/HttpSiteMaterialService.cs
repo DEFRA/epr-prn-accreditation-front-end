@@ -218,14 +218,42 @@
         /// </summary>
         /// <param name="id">Accreditation ID</param>
         /// <param name="materialId">Material ID</param>
-        /// <param name="npwdAccreditationNumber">True or false value from with the DTO</param>
+        /// <param name="hasNpwdAccreditationNumber">True or false value from with the DTO</param>
         /// <returns>Task completed asynchronously</returns>
         public async Task UpdateHasNpwdAccreditationNumber(
             Guid id,
             Guid materialId,
+            HasNpwdAccreditationNumber hasNpwdAccreditationNumber)
+        {
+            await Put($"{id}/Material/{materialId}/HasNpwdAccreditationNumber", hasNpwdAccreditationNumber);
+        }
+
+        /// <summary>
+        /// Gets the 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>The value</returns>
+        public async Task<string> GetNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId)
+        {
+            return await Get<string>($"{id}/Material/{materialId}/NpwdAccreditationNumber");
+        }
+
+        /// <summary>
+        /// Updates the 2024 NPWD Accreditation number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="npwdAccreditationNumber">The value of the NPWD number</param>
+        /// <returns>Task completed asynchronously</returns>
+        public async Task UpdateNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
             NpwdAccreditationNumber npwdAccreditationNumber)
         {
-            await Put($"{id}/Material/{materialId}/HasNpwdAccreditationNumber", npwdAccreditationNumber);
+            await Put($"{id}/Material/{materialId}/NpwdAccreditationNumber", npwdAccreditationNumber);
         }
 
         private string GetSiteName(

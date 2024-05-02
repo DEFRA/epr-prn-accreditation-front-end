@@ -26,5 +26,19 @@
         Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
         Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm);
+
+        /// <summary>
+        /// Creates the view model for the given accreditation id
+        /// </summary>
+        /// <param name="id">The id of the accreditation that the legal documents are for</param>
+        /// <returns>The view model for the accreditation legal documents</returns>
+        Task<LegalDocumentsAddressViewModel> GetLegalDocumentsAddressViewModel(Guid id);
+
+        /// <summary>
+        /// Creates or updates the address for the legal documents for the accreditation
+        /// </summary>
+        /// <param name="viewModel">The view model containing the address for the legal documents</param>
+        /// <returns>async task</returns>
+        Task UpdateLegalDocumentsAddress(LegalDocumentsAddressViewModel viewModel);
     }
 }

@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class TaskListResources___Copy {
+    public class NpwdAccrNumResources___Copy {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TaskListResources___Copy() {
+        internal NpwdAccrNumResources___Copy() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.TaskListResources - Copy", typeof(TaskListResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.NpwdAccrNumResources - Copy", typeof(NpwdAccrNumResources___Copy).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,43 +61,61 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About the material.
+        ///   Looks up a localized string similar to Enter your NPWD number.
         /// </summary>
-        public static string AboutMaterial {
+        public static string ErrorMessageBlank {
             get {
-                return ResourceManager.GetString("AboutMaterial", resourceCulture);
+                return ResourceManager.GetString("ErrorMessageBlank", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessing sites.
+        ///   Looks up a localized string similar to NPWD number must be between 9 and 12 characters and only include letters A-Z, and numbers.
         /// </summary>
-        public static string OverseasHeader {
+        public static string ErrorMessageInvalidFormat {
             get {
-                return ResourceManager.GetString("OverseasHeader", resourceCulture);
+                return ResourceManager.GetString("ErrorMessageInvalidFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can be started after completing &apos;About the waste you export&apos;..
+        ///   Looks up a localized string similar to Enter your accreditation number for:.
         /// </summary>
-        public static string OverseasHintLink {
+        public static string H2 {
             get {
-                return ResourceManager.GetString("OverseasHintLink", resourceCulture);
+                return ResourceManager.GetString("H2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessing sites .
+        ///   Looks up a localized string similar to It starts with 2 letters, followed by up to 10 numbers..
         /// </summary>
-        public static string OverseasLink {
+        public static string HintText {
             get {
-                return ResourceManager.GetString("OverseasLink", resourceCulture);
+                return ResourceManager.GetString("HintText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is your application task list. You can save your progress and come back to it at any time..
+        ///   Looks up a localized string similar to public register (opens in a new tab).
+        /// </summary>
+        public static string LinkText {
+            get {
+                return ResourceManager.GetString("LinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can find it on the.
+        /// </summary>
+        public static string P1 {
+            get {
+                return ResourceManager.GetString("P1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your NPWD accreditation number.
         /// </summary>
         public static string PageHeading {
             get {
@@ -106,56 +124,11 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply for accreditation as an exporter.
+        ///   Looks up a localized string similar to Your NPWD accreditation number.
         /// </summary>
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload your business plan .
-        /// </summary>
-        public static string UploadBusinessPlan {
-            get {
-                return ResourceManager.GetString("UploadBusinessPlan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload sampling and inspection plan and recording system for this material.
-        /// </summary>
-        public static string UploadInspectionPlan {
-            get {
-                return ResourceManager.GetString("UploadInspectionPlan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to About the packaging waste you export .
-        /// </summary>
-        public static string WasteExportHeader {
-            get {
-                return ResourceManager.GetString("WasteExportHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Once you’ve completed one material you can add more materials. You can upload documents after you&apos;ve chosen a material. .
-        /// </summary>
-        public static string WasteExportTitle {
-            get {
-                return ResourceManager.GetString("WasteExportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Waste licences, PRNs and business plan .
-        /// </summary>
-        public static string WasteLicencesHeading {
-            get {
-                return ResourceManager.GetString("WasteLicencesHeading", resourceCulture);
             }
         }
     }

@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ExemptionReferencesResources___Copy {
+    public class LegalDocumentsAddressResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ExemptionReferencesResources___Copy() {
+        internal LegalDocumentsAddressResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.ExemptionReferencesResources - Copy", typeof(ExemptionReferencesResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.LegalDocumentsAddressResources", typeof(LegalDocumentsAddressResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,20 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter an exemption reference.
-        /// </summary>
-        public static string ErrorMessageBlank {
-            get {
-                return ResourceManager.GetString("ErrorMessageBlank", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exemption reference number already added.
-        /// </summary>
-        public static string ErrorMessageDuplicate {
-            get {
-                return ResourceManager.GetString("ErrorMessageDuplicate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference number must include letters, numbers  or &apos;/&apos; only.
-        /// </summary>
-        public static string ErrorMessageInvalidFormat {
-            get {
-                return ResourceManager.GetString("ErrorMessageInvalidFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference number must not exceed 20 characters.
-        /// </summary>
-        public static string ErrorMessageTooLong {
-            get {
-                return ResourceManager.GetString("ErrorMessageTooLong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leave blank once you have entered all of your waste exemption references..
-        /// </summary>
-        public static string P1 {
-            get {
-                return ResourceManager.GetString("P1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter all your exemption references.
-        /// </summary>
-        public static string PageHeading {
-            get {
-                return ResourceManager.GetString("PageHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter all your exemption references.
+        ///   Looks up a localized string similar to UK address for the legal documents.
         /// </summary>
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This must be an address in the UK.
+        /// </summary>
+        public static string Subtitle {
+            get {
+                return ResourceManager.GetString("Subtitle", resourceCulture);
             }
         }
     }

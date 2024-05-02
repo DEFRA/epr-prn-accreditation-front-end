@@ -1,4 +1,5 @@
 ﻿@using EPR.Accreditation.Portal
+@using EPR.Accreditation.Portal.Configuration
 @using EPR.Accreditation.Portal.Helpers.Interfaces
 @using EPR.Accreditation.Portal.Options
 @using EPR.Accreditation.Portal.Resources
@@ -6,6 +7,7 @@
 @using Microsoft.Extensions.Options
 
 @inject IOptions<AppSettingsConfigOptions> appSettingsConfig;
+@inject IOptions<ContentLinksConfiguration> contentLinks;
 @inject IQueryStringHelper queryStringHelper
 @inject ICultureHelper cultureHelper;
 @inject BackPageViewModel backPageViewModel;
@@ -63,8 +65,13 @@
                     </span>
                 </a>
             </div>
-            <div class="govuk-header__navigation--end">
-                <a href="@Url.Action(null, null, new { culture = oppositeCultureValue })@existingQueryStringParameters" class="govuk-header__language">@MasterResources.OppositeLanguage</a>
+            <div class="govuk-header__content">
+                <a href="@contentLinks.Value.MainHeadingLink" class="govuk-header__link govuk-header__service-name">
+                    @MasterResources.SiteHeading
+                </a>
+                <div class="govuk-header__navigation--end" style="position:absolute;right:0;">
+                    <a href="@Url.Action(null, null, new { culture = oppositeCultureValue })@existingQueryStringParameters" class="govuk-header__language">@MasterResources.OppositeLanguage</a>
+                </div>
             </div>
         </div>
     </header>

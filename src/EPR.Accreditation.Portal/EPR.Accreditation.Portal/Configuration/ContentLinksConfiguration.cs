@@ -14,8 +14,18 @@
         public const string SectionName = "ContentLinks";
 
         /// <summary>
+        /// Gets or sets the url for the main heading on the accreditation site
+        /// </summary>
+        public string MainHeadingLink { get; set; }
+
+        /// <summary>
         /// Gets or sets the url for consolidated waste list
         /// </summary>
         public string ConsolidatedWasteList { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL for the National Packaging Waste Database
+        /// </summary>
+        public string NationalPackagingWasteDb { get; set; }
     }
 }

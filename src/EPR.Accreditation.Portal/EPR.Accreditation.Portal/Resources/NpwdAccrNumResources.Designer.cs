@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PhaseBannerResources___Copy {
+    public class NpwdAccrNumResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PhaseBannerResources___Copy() {
+        internal NpwdAccrNumResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.PhaseBannerResources - Copy", typeof(PhaseBannerResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.NpwdAccrNumResources", typeof(NpwdAccrNumResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,74 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to feedback.
+        ///   Looks up a localized string similar to Enter your NPWD number.
         /// </summary>
-        public static string BannerLinkText {
+        public static string ErrorMessageBlank {
             get {
-                return ResourceManager.GetString("BannerLinkText", resourceCulture);
+                return ResourceManager.GetString("ErrorMessageBlank", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is a new service – your .
+        ///   Looks up a localized string similar to NPWD number must be between 9 and 12 characters and only include letters A-Z, and numbers.
         /// </summary>
-        public static string BannerText_P1 {
+        public static string ErrorMessageInvalidFormat {
             get {
-                return ResourceManager.GetString("BannerText_P1", resourceCulture);
+                return ResourceManager.GetString("ErrorMessageInvalidFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to will help us to improve it..
+        ///   Looks up a localized string similar to Enter your accreditation number for:.
         /// </summary>
-        public static string BannerText_P2 {
+        public static string H2 {
             get {
-                return ResourceManager.GetString("BannerText_P2", resourceCulture);
+                return ResourceManager.GetString("H2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private Beta.
+        ///   Looks up a localized string similar to It starts with 2 letters, followed by up to 10 numbers..
         /// </summary>
-        public static string Tag {
+        public static string HintText {
             get {
-                return ResourceManager.GetString("Tag", resourceCulture);
+                return ResourceManager.GetString("HintText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to public register (opens in a new tab).
+        /// </summary>
+        public static string LinkText {
+            get {
+                return ResourceManager.GetString("LinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can find it on the.
+        /// </summary>
+        public static string P1 {
+            get {
+                return ResourceManager.GetString("P1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your NPWD accreditation number.
+        /// </summary>
+        public static string PageHeading {
+            get {
+                return ResourceManager.GetString("PageHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your NPWD accreditation number.
+        /// </summary>
+        public static string PageTitle {
+            get {
+                return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
     }
