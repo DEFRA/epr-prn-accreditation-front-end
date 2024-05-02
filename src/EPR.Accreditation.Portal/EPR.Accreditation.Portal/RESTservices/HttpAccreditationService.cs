@@ -6,6 +6,7 @@
     using EPR.Accreditation.Portal.Common.RESTservices;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
+    using EPR.Accreditation.Portal.ViewModels.Files;
 
     public class HttpAccreditationService : BaseHttpService, IHttpAccreditationService
     {
@@ -80,6 +81,37 @@
             PrnTonnesPlannedDto dto)
         {
             await Put($"{accreditationExternalId}/PrnTonnesPlanned", dto);
+        }
+
+        /// <summary>
+        /// Gets a list of file uploads for the given accreditaion.
+        /// </summary>
+        /// <param name="accreditationId">Accreditation Id.</param>
+        /// <returns>A list of FileUpload objects.</returns>
+        public async Task<List<FileUpload>> GetFiles(Guid accreditationId)
+        {
+            return await Get<List<FileUpload>>($"{accreditationId}/Files");
+        }
+
+        /// <summary>
+        /// Adds a new uploaded file.
+        /// </summary>
+        /// <param name="accreditationId">Accreditation Id.</param>
+        /// <returns>Completed task</returns>
+        public Task<FileUploadRecordsViewModel> AddFile(Guid accreditationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Deletes a previously uploaded file.
+        /// </summary>
+        /// <param name="accreditationId">Accreditation Id.</param>
+        /// <param name="fileId">File Id.</param>
+        /// <returns>Completed task</returns>
+        public async Task DeleteFile(Guid accreditationId, Guid fileId)
+        {
+            await Delete($"{accreditationId}/Files/{fileId}");
         }
     }
 }

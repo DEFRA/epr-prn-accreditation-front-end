@@ -14,7 +14,7 @@
         {
             <tr class="govuk-table__row">
                 <td class ="govuk-table__cell">
-                    <a class="govuk-link govuk-link--no-visited-state" href="@Url.Action("View","Files", new { id = "3FA85F64-5717-4562-B3FC-2C963F66AFA6", fileId = file.FileId })">@file.Filename</a>
+                    <a class="govuk-link govuk-link--no-visited-state" href='@Url.Action("File","Files", new { id = ViewData["id"], fileId = file.FileId })'>@file.Filename</a>
                 </td>
                 <td class="govuk-table__cell">@file.DateUploaded.ToString("dd/MM/yy")</td>
                 <td class="govuk-table__cell">@file.UploadedBy</td>

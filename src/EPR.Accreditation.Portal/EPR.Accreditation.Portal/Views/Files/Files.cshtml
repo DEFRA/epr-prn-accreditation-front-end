@@ -36,9 +36,9 @@
                             @Html.Partial("_fileUploadButton")
                             <br>
                             <br>
-                            @Html.Partial("_fileUploadedList", Model.FlowCharts)
-
-
+                            @* @Html.Partial("_fileUploadedList", Model.FlowCharts) *@
+                            <partial name="_fileUploadedList" for="FlowCharts" view-data="ViewData" />
+                           
 
                             <table class="govuk-table">
 
@@ -53,12 +53,11 @@
                                 </thead>
 
                             </table>
-                            <input class="govuk-file-upload" width="10px" id="file-upload-1" name="waste-file-upload" type="file"> </a>
-
+                            @Html.Partial("_fileUploadButton")
                             <br>
                             <br>
-                            </tbody>
-                            </table>
+                            @* @Html.Partial("_fileUploadedList", Model.RecordingSystems) *@
+                            <partial name="_fileUploadedList" for="RecordingSystems" view-data="ViewData" />
 
                             <table class="govuk-table">
 
@@ -73,12 +72,11 @@
                                 </thead>
 
                             </table>
-                            <input class="govuk-file-upload" width="10px" id="file-upload-1" name="waste-file-upload" type="file"> </a>
-
+                            @Html.Partial("_fileUploadButton")
                             <br>
                             <br>
-                            </tbody>
-                            </table>
+                            @* @Html.Partial("_fileUploadedList", Model.PlantsAndEquipments) *@
+                            <partial name="_fileUploadedList" for="PlantsAndEquipments" view-data="ViewData" />
 
 
                             <table class="govuk-table">
@@ -94,13 +92,11 @@
                                 </thead>
 
                             </table>
-                            <input class="govuk-file-upload" width="10px" id="file-upload-1" name="waste-file-upload" type="file"> </a>
-
+                            @Html.Partial("_fileUploadButton")
                             <br>
                             <br>
-                            </tbody>
-                            </table>
-
+                            @* @Html.Partial("_fileUploadedList", Model.SamplingAndInspection) *@
+                            <partial name="_fileUploadedList" for="SamplingAndInspection" view-data="ViewData" />
 
                         </fieldset>
                     </div>

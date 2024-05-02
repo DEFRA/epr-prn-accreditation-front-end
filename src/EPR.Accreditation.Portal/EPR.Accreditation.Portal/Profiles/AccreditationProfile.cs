@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using EPR.Accreditation.Facade.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
     using EPR.Accreditation.Portal.DTOs.OverseasSite;
@@ -9,7 +10,9 @@
     using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.ViewModels;
+    using EPR.Accreditation.Portal.ViewModels.Files;
     using EPR.Accreditation.Portal.ViewModels.SiteMaterial;
+    using Site = EPR.Accreditation.Portal.DTOs.Site.Site;
 
     /// <summary>
     /// Class to describe mappings of view models and DTOs
@@ -60,6 +63,16 @@
                 .ReverseMap();
 
             this.CreateMap<PrnTonnesPlannedDto, PrnTonnesPlannedViewModel>()
+                .ReverseMap();
+
+            this.CreateMap<FileUpload, FileUploadRecordsViewModel>()
+                .ForMember(dest => dest.FlowCharts, opt => opt.MapFrom(src => src.FileUploadTypeId == Common.Enums.FileUploadType.FlowDiagram))
+                .ForMember(dest => dest.PlantsAndEquipments, opt => opt.MapFrom(src => src.FileUploadTypeId == Common.Enums.FileUploadType.PlantsAndEquipment))
+                .ForMember(dest => dest.RecordingSystems, opt => opt.MapFrom(src => src.FileUploadTypeId == Common.Enums.FileUploadType.RecordingSystem))
+                .ForMember(dest => dest.SamplingAndInspection, opt => opt.MapFrom(src => src.FileUploadTypeId == Common.Enums.FileUploadType.SamplingPlan))
+                .ReverseMap();
+
+            this.CreateMap<FileUpload, FileUploadRecordViewModel>()
                 .ReverseMap();
         }
     }

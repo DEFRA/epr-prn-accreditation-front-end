@@ -7,6 +7,7 @@
         RecordingSystem,
         SamplingPlan,
         BroadlyEquivalentEvidence,
-        FlowDiagram
+        FlowDiagram,
+        PlantsAndEquipment
     }
 }
