@@ -114,20 +114,20 @@
         /// <summary>
         /// Gets the Outputs value for the given accreditation and site.
         /// </summary>
-        /// <param name="accreditationExternalId">Accreditation external Id.</param>
-        /// <param name="siteExternalId">Site external Id.</param>
+        /// <param name="id">Accreditation external Id.</param>
+        /// <param name="overseasSiteId">Site external Id.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpGet("{siteExternalId}/Outputs")]
-        public async Task<IActionResult> OverseasSiteOutputs(Guid? accreditationExternalId, Guid? siteExternalId)
+        [HttpGet("Outputs")]
+        public async Task<IActionResult> OverseasSiteOutputs(Guid? id, Guid? overseasSiteId)
         {
-            if (accreditationExternalId == null || siteExternalId == null)
+            if (id == null || overseasSiteId == null)
             {
                 return NotFound();
             }
 
             var overseasSiteOutputsViewModel = await _overseasSiteService.GetOverseasReprocessingSiteOutputs(
-                accreditationExternalId.Value,
-                siteExternalId.Value);
+                id.Value,
+                overseasSiteId.Value);
 
             return View(overseasSiteOutputsViewModel);
         }
@@ -138,7 +138,7 @@
         /// <param name="overseasReprocessingSiteOutputsViewModel">View model containing data to be saved.</param>
         /// <param name="saveButton">Determines the next step in the journey.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpPost("{siteExternalId}/Outputs")]
+        [HttpPost("Outputs")]
         public async Task<IActionResult> OverseasSiteOutputs(
             OverseasReprocessingSiteOutputsViewModel overseasReprocessingSiteOutputsViewModel,
             SaveButton saveButton)

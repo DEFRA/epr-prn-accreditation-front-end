@@ -65,7 +65,7 @@
             Guid accreditationExternalId,
             OverseasReprocessingSiteOutputs overseasSiteOutputs)
         {
-            await Put($"{accreditationExternalId}/OverseasSite/Outputs", overseasSiteOutputs);
+            await Put($"{accreditationExternalId}/OverseasSite/{overseasSiteOutputs.ExternalId}/Outputs", overseasSiteOutputs);
         }
     }
 }
