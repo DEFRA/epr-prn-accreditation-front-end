@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation.Interfaces
 {
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.ViewModels;
 
     public interface IAccreditationService
@@ -15,6 +16,18 @@
         Task<TaskListViewModel> GetTaskList(Guid id);
 
         Task<CheckYourAnswersViewModel> CheckYourAnswers(Guid id);
+
+        /// <summary>
+        /// Get the CYA page for the specified section
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">The material ID</param>
+        /// <param name="section">The name of the CYA page we want</param>
+        /// <returns>The view result</returns>
+        Task<CheckAnswersViewModel> CheckAnswers(
+            Guid id,
+            Guid materialId,
+            CheckAnswersSection section);
 
         /// <summary>
         /// Determines if the ID is for an exporter or not

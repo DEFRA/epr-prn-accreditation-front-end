@@ -41,6 +41,12 @@
 
             CreateMap<CheckYourAnswersDto, CheckYourAnswersViewModel>();
 
+            CreateMap<CheckAnswersDto, CheckAnswersViewModel>();
+
+            CreateMap<CheckAnswersSectionDto, CheckAnswersSectionViewModel>();
+
+            CreateMap<CheckAnswersSectionRowDto, CheckAnswersSectionRowViewModel>();
+
             CreateMap<MaterialWasteInputsDto, MaterialWasteInputsViewModel>()
                 .ReverseMap();
 

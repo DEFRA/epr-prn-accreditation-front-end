@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.Constants;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Extensions;
@@ -287,6 +288,25 @@
 
             CheckYourAnswersViewModel vm = await _accreditationService.CheckYourAnswers(id.Value);
             return View(vm);
+        }
+
+        [HttpGet("Material/{materialId}/CheckAnswers/{section}")]
+        public async Task<IActionResult> CheckAnswers(
+            Guid? id,
+            Guid? materialId,
+            CheckAnswersSection section)
+        {
+            if (!id.HasValue || !materialId.HasValue)
+            {
+                return NotFound();
+            }
+
+            var viewModel = await _accreditationService.CheckAnswers(
+                id.Value,
+                materialId.Value,
+                section);
+
+            return View(viewModel);
         }
 
         [HttpPost("CheckYourAnswers")]

@@ -162,5 +162,20 @@
 
             return Enums.TaskStatus.NotStarted;
         }
+
+        public async Task<CheckAnswersViewModel> CheckAnswers(
+            Guid id,
+            Guid materialId,
+            CheckAnswersSection section)
+        {
+            var result = await _httpAccreditationService.GetCheckAnswers(
+                id,
+                materialId,
+                section);
+
+            var viewModel = _mapper.Map<CheckAnswersViewModel>(result);
+
+            return viewModel;
+        }
     }
 }

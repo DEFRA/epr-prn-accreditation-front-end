@@ -20,6 +20,11 @@
 
         Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid id);
 
+        Task<CheckAnswersDto> GetCheckAnswers(
+            Guid id,
+            Guid materialId,
+            CheckAnswersSection section);
+
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);

@@ -104,5 +104,13 @@
         {
             await Put($"{id}/LegalDocumentAddress", address);
         }
+
+        public async Task<CheckAnswersDto> GetCheckAnswers(
+            Guid id,
+            Guid materialId,
+            CheckAnswersSection section)
+        {
+            return await Get<CheckAnswersDto>($"{id}/Material/{materialId}/CheckAnswers/{section}");
+        }
     }
 }

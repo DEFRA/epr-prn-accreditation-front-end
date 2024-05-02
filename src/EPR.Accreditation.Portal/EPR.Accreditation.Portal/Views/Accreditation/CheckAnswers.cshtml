@@ -1,0 +1,44 @@
+﻿@using EPR.Accreditation.Portal.Constants
+@model CheckAnswersViewModel
+
+@{
+    ViewData["Title"] = CheckYourAnswersResources.Title;
+
+    // create the route data for returning to previous pages and showing that
+    // completing those redirects back here
+    var queryStringRouteData = new Dictionary<string, string>
+    {
+        { "Id", Model.Id.ToString() },
+        { Strings.QueryStrings.ReturnToAnswers, Strings.QueryStrings.ReturnToAnswersYes }
+    };
+}
+
+<partial name="_ValidationSummary" />
+<form method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <h1 class="govuk-heading-l">@CheckYourAnswersResources.Title</h1>
+            @foreach (var cyaSection in Model.Sections)
+            {
+                <h2 class="govuk-heading-m">@cyaSection.Title</h2>
+                <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                    @foreach (var row in cyaSection.SectionRows)
+                    {
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                @row.TitleKey
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                @row.Value
+                            </dd>
+                            <dd class="govuk-summary-list__actions">
+                                <a class="govuk-link" href="@row.ChangeLink" style="margin: 40px;">Change</a>
+                            </dd>
+                        </div>
+                    }
+                </dl>
+            }
+            <partial name="_SaveButtons" />
+        </div>
+    </div>
+</form>
