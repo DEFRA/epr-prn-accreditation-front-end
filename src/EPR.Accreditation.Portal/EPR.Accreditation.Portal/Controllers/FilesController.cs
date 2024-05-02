@@ -55,5 +55,23 @@
             var vm = await _fileService.GetFileRecords(id);
             return View(vm);
         }
+
+        [HttpGet("View")]
+        public async Task<IActionResult> View(Guid id, Guid fileId)
+        {
+            return RedirectToAction("Index", new { id });
+        }
+
+        [HttpPost("Upload")]
+        public async Task<IActionResult> Upload(Guid id)
+        {
+            return RedirectToAction("Index", new { id });
+        }
+
+        [HttpGet("Delete")]
+        public async Task<IActionResult> Delete(Guid id, Guid fileId)
+        {
+            return RedirectToAction("Index", new { id });
+        }
     }
 }

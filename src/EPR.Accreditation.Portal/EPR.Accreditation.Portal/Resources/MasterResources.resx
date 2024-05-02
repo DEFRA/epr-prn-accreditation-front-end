@@ -132,6 +132,9 @@
   <data name="DecimalNumberFormatError" xml:space="preserve">
     <value>Decimal numbers cannot be any larger than 1,000,000 and have no more than 3 decimal places</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="MaterialForLabel" xml:space="preserve">
     <value>For:</value>
   </data>

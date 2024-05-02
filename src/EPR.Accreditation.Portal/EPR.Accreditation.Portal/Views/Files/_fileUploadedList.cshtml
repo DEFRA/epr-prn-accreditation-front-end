@@ -6,23 +6,21 @@
             <th scope="col" class="govuk-table__header">Uploaded files</th>
             <th scope="col" class="govuk-table__header">Date uploaded</th>
             <th scope="col" class="govuk-table__header">Uploaded by</th>
-            <th></th>
+            <th scope="col" class="govuk-table__header"></th>
         </tr>
     </thead>
     <tbody class="govuk-table__body">
         @foreach(var file in Model)
         {
             <tr class="govuk-table__row">
-                <td class="govuk-table__cell">@file.Filename</td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell">@file.DateUploaded</td>
-            </tr>
-            <tr class="govuk-table__row">
+                <td class ="govuk-table__cell">
+                    <a class="govuk-link govuk-link--no-visited-state" href="@Url.Action("View","Files", new { id = "3FA85F64-5717-4562-B3FC-2C963F66AFA6", fileId = file.FileId })">@file.Filename</a>
+                </td>
+                <td class="govuk-table__cell">@file.DateUploaded.ToString("dd/MM/yy")</td>
                 <td class="govuk-table__cell">@file.UploadedBy</td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Delete</td>
+                <td class="govuk-table__cell">
+                    <a class="govuk-link govuk-link--no-visited-state" href="@Url.Action("Delete","Files", new { id = "3FA85F64-5717-4562-B3FC-2C963F66AFA6", fileId = file.FileId })">@MasterResources.Delete</a>
+                </td>
             </tr>
         }
     </tbody>
