@@ -22,5 +22,11 @@
         Task<Site> GetSite(Guid siteId);
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+
+        Task UpdateReferenceNumber(Guid accreditationId, string referenceNumber);
+
+        Task<Accreditation> GetAccreditation(Guid accreditationExternalId);
+
+        Task<string> GetReferenceNumber(Guid accreditationExternalId);
     }
 }

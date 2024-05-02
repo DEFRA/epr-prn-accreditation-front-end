@@ -10,6 +10,8 @@
 
         public string CountryCode { get; set; }
 
-        public decimal AmountDue {  get; set; }
+        public decimal AmountDue { get; set; }
+
+        public string ReferenceNumber { get; set; }
     }
 }

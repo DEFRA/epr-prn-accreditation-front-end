@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using System;
     using System.Threading.Tasks;
     using AutoMapper;
     using EPR.Accreditation.Facade.Common.Dtos;
@@ -9,6 +10,7 @@
 
     public class AccreditationService : IAccreditationService
     {
+        private static Random random = new Random();
         private readonly IMapper _mapper;
         private readonly RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;
 
@@ -88,6 +90,22 @@
             return vm;
         }
 
+        public async Task<CompletionViewModel> Completion(Guid id)
+        {
+            string referenceNumber = RandomString(12);
+            _httpAccreditationService.UpdateReferenceNumber(id, referenceNumber);
+            referenceNumber = await _httpAccreditationService.GetReferenceNumber(id);
+            var result = new CompletionViewModel()
+            {
+                Id = id,
+                CountryCode = "GBR",
+                AmountDue = 505,
+                ReferenceNumber = referenceNumber
+            };
+
+            return result;
+        }
+
         private Enums.TaskStatus ReturnStatusFromList(
             List<AccreditationTaskProgress> accreditationsTaskProgress,
             Enums.TaskName taskName)
@@ -100,16 +118,11 @@
             return Enums.TaskStatus.NotStarted;
         }
 
-        public async Task<CompletionViewModel> Completion(Guid id)
+        private static string RandomString(int length)
         {
-            var result = new CompletionViewModel()
-            {
-                Id = id,
-                CountryCode = "WALES",
-                AmountDue = 505
-            };
-
-            return result;
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

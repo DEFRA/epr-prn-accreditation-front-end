@@ -60,12 +60,21 @@
             return await Get<List<AccreditationTaskProgress>>($"{accreditationExternalId}/TaskProgress");
         }
 
-        public async Task UpdateAccreditation(
-    Guid id,
-    Guid materialId,
-    ReprocessingSupportingInformationDto nonWasteInputsDto)
+        public async Task UpdateReferenceNumber(
+            Guid id,
+            string referenceNumber)
         {
-            await Put<ReprocessingSupportingInformationDto>($"{id}/Site/Material/{materialId}/NonWasteInputs", nonWasteInputsDto);
+            await Put<Accreditation>($"{id}/ReferenceNumber", referenceNumber);
+        }
+
+        public async Task<Accreditation> GetAccreditation(Guid accreditationExternalId)
+        {
+            return await Get<Accreditation>($"{accreditationExternalId}/Accreditation");
+        }
+
+        public async Task<string> GetReferenceNumber(Guid accreditationExternalId)
+        {
+            return await Get<string>($"{accreditationExternalId}/ReferenceNumber");
         }
     }
 }
