@@ -70,6 +70,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only letters can been entered.
+        /// </summary>
+        public static string OnlyLettersAllowed {
+            get {
+                return ResourceManager.GetString("OnlyLettersAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify the type and quantity of each non-waste material used, in tonnes. For example, sandstone, limestones or dolomite.
         /// </summary>
         public static string SubTitle {
@@ -84,6 +93,15 @@ namespace EPR.Accreditation.Portal.Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tonnes must be greater than 0 and equal to or less than 1,000,000.000.
+        /// </summary>
+        public static string TonnesNotWithinRange {
+            get {
+                return ResourceManager.GetString("TonnesNotWithinRange", resourceCulture);
             }
         }
         
