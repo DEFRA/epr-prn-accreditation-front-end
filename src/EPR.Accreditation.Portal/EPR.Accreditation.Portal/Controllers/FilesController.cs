@@ -1,11 +1,15 @@
 ﻿namespace EPR.Accreditation.Portal.Controllers
 {
+    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.Services.FileService;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.Extensions.Options;
+    using System.Net;
 
     /// <summary>
     /// This controller contains methods to handle file upload management
@@ -63,12 +67,27 @@
         [HttpGet("/{fileId}")]
         public async Task<IActionResult> File(Guid id, Guid fileId)
         {
-            return RedirectToAction("Files", new { id });
+            //var filePath = @"c:\temp\Uploaded_Files\" + fileId + ".txt";
+            var filePath = @"c:\temp\Uploaded_Files\" + fileId + ".csv";
+            //var filePath = @"c:\temp\Uploaded_Files\" + "Alex 1.png";
+
+            var provider = new FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(filePath, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+            var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(bytes, contentType, Path.GetFileName(filePath));
+
+            //return RedirectToAction("Files", new { id });
         }
 
         [HttpPost("Upload")]
-        public async Task<IActionResult> Upload(Guid id)
+        public async Task<IActionResult> Upload(Guid id, IFormFile file)
         {
+            var filePath = @"c:\temp\Uploaded_Files\" + file.FileName;
+            var fileStream = new FileStream(filePath, FileMode.Create);
+            await file.CopyToAsync(fileStream);
             return RedirectToAction("Files", new { id });
         }
 

@@ -8,7 +8,7 @@
 
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-three-quarters">
-                <form action="file-uploaded-2" method="post">
+
 
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset" aria-describedby="waste-hint">
@@ -37,8 +37,10 @@
                             <br>
                             <br>
                             @* @Html.Partial("_fileUploadedList", Model.FlowCharts) *@
-                            <partial name="_fileUploadedList" for="FlowCharts" view-data="ViewData" />
-                           
+                            @if (Model.FlowCharts.Any())
+                            {
+                                <partial name="_fileUploadedList" for="FlowCharts" view-data="ViewData" />
+                            }
 
                             <table class="govuk-table">
 
@@ -56,8 +58,10 @@
                             @Html.Partial("_fileUploadButton")
                             <br>
                             <br>
-                            @* @Html.Partial("_fileUploadedList", Model.RecordingSystems) *@
-                            <partial name="_fileUploadedList" for="RecordingSystems" view-data="ViewData" />
+                            @if (Model.RecordingSystems.Any())
+                            {
+                                <partial name="_fileUploadedList" for="RecordingSystems" view-data="ViewData" />
+                            }
 
                             <table class="govuk-table">
 
@@ -76,8 +80,10 @@
                             <br>
                             <br>
                             @* @Html.Partial("_fileUploadedList", Model.PlantsAndEquipments) *@
-                            <partial name="_fileUploadedList" for="PlantsAndEquipments" view-data="ViewData" />
-
+                            @if (Model.PlantsAndEquipments.Any())
+                            {
+                                <partial name="_fileUploadedList" for="PlantsAndEquipments" view-data="ViewData" />
+                            }
 
                             <table class="govuk-table">
 
@@ -96,8 +102,10 @@
                             <br>
                             <br>
                             @* @Html.Partial("_fileUploadedList", Model.SamplingAndInspection) *@
-                            <partial name="_fileUploadedList" for="SamplingAndInspection" view-data="ViewData" />
-
+                            @if (Model.SamplingAndInspection.Any())
+                            {
+                                <partial name="_fileUploadedList" for="SamplingAndInspection" view-data="ViewData" />
+                            }
                         </fieldset>
                     </div>
 
@@ -120,7 +128,7 @@
                         @MasterResources.SaveAndComeBack
                     </button>
 
-                </form>
+
             </div>
         </div>
 
