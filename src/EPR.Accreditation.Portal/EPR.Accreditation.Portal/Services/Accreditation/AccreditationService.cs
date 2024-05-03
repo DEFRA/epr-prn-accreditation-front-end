@@ -90,17 +90,17 @@
             return vm;
         }
 
-        public async Task<CompletionViewModel> Completion(Guid id)
+        public async Task<CompletionViewModel> Completion(Guid id, string countryCode)
         {
             string referenceNumber = RandomString(12);
             _httpAccreditationService.UpdateReferenceNumber(id, referenceNumber);
-            referenceNumber = await _httpAccreditationService.GetReferenceNumber(id);
+            var accrediation = await _httpAccreditationService.GetAccreditation(id);
             var result = new CompletionViewModel()
             {
                 Id = id,
-                CountryCode = "GBR",
-                AmountDue = 505,
-                ReferenceNumber = referenceNumber
+                CountryCode = countryCode,
+                AmountDue = (decimal)accrediation.AccreditationFee,
+                ReferenceNumber = accrediation.ReferenceNumber
             };
 
             return result;

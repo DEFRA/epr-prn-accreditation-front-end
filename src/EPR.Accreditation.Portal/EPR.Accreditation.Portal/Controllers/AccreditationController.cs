@@ -304,14 +304,14 @@
         }
 
         [HttpGet("Completion")]
-        public async Task<IActionResult> Completion(Guid? id)
+        public async Task<IActionResult> Completion(Guid? id, string countryCode)
         {
             if (!id.HasValue)
             {
                 return BadRequest();
             }
 
-            CompletionViewModel vm = await _accreditationService.Completion(id.Value);
+            CompletionViewModel vm = await _accreditationService.Completion(id.Value, countryCode);
             return View(vm);
         }
     }

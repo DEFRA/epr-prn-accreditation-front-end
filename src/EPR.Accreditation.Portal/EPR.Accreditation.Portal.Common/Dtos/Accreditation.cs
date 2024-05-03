@@ -26,5 +26,7 @@
         public Guid? UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+
+        public decimal? AccreditationFee { get; set; }
     }
 }
