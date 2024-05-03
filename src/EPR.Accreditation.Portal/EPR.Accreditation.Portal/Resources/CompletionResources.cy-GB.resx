@@ -118,37 +118,37 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountNameIreland" xml:space="preserve">
-    <value>account name: DAERA</value>
+    <value>[Welsh] account name: DAERA</value>
   </data>
   <data name="AfterPayment" xml:space="preserve">
-    <value>The regulator will only review your application after you've made payment.</value>
+    <value>[Welsh] The will only review your application after you've made payment.</value>
   </data>
   <data name="AmountDue" xml:space="preserve">
-    <value>Amount due</value>
+    <value>[Welsh] Amount due</value>
   </data>
   <data name="ApplicationSubmittedEngland" xml:space="preserve">
-    <value>Application submitted to the Environment Agency</value>
+    <value>[Welsh] Application submitted to the Environment Agency</value>
   </data>
   <data name="ApplicationSubmittedIreland" xml:space="preserve">
-    <value>Application submitted to Northern Ireland Environment Agency</value>
+    <value>[Welsh] Application submitted to Northern Ireland Environment Agency</value>
   </data>
   <data name="ApplicationSubmittedScotland" xml:space="preserve">
-    <value>Application submitted to the Scotish Environment Protection Agency</value>
+    <value>[Welsh] Application submitted to the Scotish Environment Protection Agency</value>
   </data>
   <data name="ApplicationSubmittedWales" xml:space="preserve">
-    <value>Application submitted to Natual Resources Wales</value>
+    <value>[Welsh] Application submitted to Natual Resources Wales</value>
   </data>
   <data name="BACSIreland" xml:space="preserve">
-    <value>BACS remittanace: billtocash@accountnl.gov.uk</value>
+    <value>[Welsh] BACS remittanace: billtocash@accountnl.gov.uk</value>
   </data>
   <data name="BankAccountNumberIreland" xml:space="preserve">
-    <value>account number: 61253506</value>
+    <value>[Welsh] account number: 61253506</value>
   </data>
   <data name="BankNameIrelreland" xml:space="preserve">
-    <value>bank: Danske bank. PO BOX 183 Donegail Square West. Belfast. BT1 6JS</value>
+    <value>[Welsh] bank: Danske bank. PO BOX 183 Donegail Square West. Belfast. BT1 6JS</value>
   </data>
   <data name="BankTransferDetails" xml:space="preserve">
-    <value>Use these details to make payment:
+    <value>[Welsh] Use these details to make payment:
 
 Company name: Environment Agency 
 Bank RBS/NatWest 
@@ -167,102 +167,102 @@ Email: packaging@environment-agency.gov.uk
 Telephone: 03708 506506</value>
   </data>
   <data name="BnakSortCodeIreland" xml:space="preserve">
-    <value>sort code: 95-01-21</value>
+    <value>[Welsh] sort code: 95-01-21</value>
   </data>
   <data name="EnglandAccountName" xml:space="preserve">
-    <value>Account name EA RECEIPTS</value>
+    <value>[Welsh] Account name EA RECEIPTS</value>
   </data>
   <data name="EnglandAccountNumber" xml:space="preserve">
-    <value>Account number 10014411</value>
+    <value>[Welsh] Account number 10014411</value>
   </data>
   <data name="EnglandAddress" xml:space="preserve">
-    <value>Address London Corporate Service Centre, CPB Services, 2nd Floor, 280 Bishopsgate, London EC2M 4RB</value>
+    <value>[Welsh] Address London Corporate Service Centre, CPB Services, 2nd Floor, 280 Bishopsgate, London EC2M 4RB</value>
   </data>
   <data name="EnglandBnakName" xml:space="preserve">
-    <value>Bank RBS/NatWest</value>
+    <value>[Welsh] Bank RBS/NatWest</value>
   </data>
   <data name="EnglandBnakSortCode" xml:space="preserve">
-    <value>Sort code 60-70-80</value>
+    <value>[Welsh] Sort code 60-70-80</value>
   </data>
   <data name="EnglandCompanyName" xml:space="preserve">
-    <value>Company name: Environment Agency</value>
+    <value>[Welsh] Company name: Environment Agency</value>
   </data>
   <data name="HowToPay" xml:space="preserve">
-    <value>How to pay</value>
+    <value>[Welsh] How to pay</value>
   </data>
   <data name="OtherwaysToPay" xml:space="preserve">
-    <value>Other ways to pay</value>
+    <value>[Welsh] Other ways to pay</value>
   </data>
   <data name="OtherwaysToPayEmail" xml:space="preserve">
-    <value>Email: packaging@environment-agency.gov.uk</value>
+    <value>[Welsh] Email: packaging@environment-agency.gov.uk</value>
   </data>
   <data name="OtherwaysToPayEngland" xml:space="preserve">
-    <value>To discuss paying by other methods please contact the Environment Agency</value>
+    <value>[Welsh] To discuss paying by other methods please contact the Environment Agency</value>
   </data>
   <data name="OtherwaysToPayIreland" xml:space="preserve">
-    <value>To discuss paying by other methods please contact the Northern Ireland Environment Agency</value>
+    <value>[Welsh] To discuss paying by other methods please contact the Northern Ireland Environment Agency</value>
   </data>
   <data name="OtherwaysToPayPhoneEngland" xml:space="preserve">
-    <value>Telephone: 03708 506506</value>
+    <value>[Welsh] Telephone: 03708 506506</value>
   </data>
   <data name="OtherwaysToPayPhoneIreland" xml:space="preserve">
-    <value>Telephone: 028 9058 9338</value>
+    <value>[Welsh] Telephone: 028 9058 9338</value>
   </data>
   <data name="OtherwaysToPayPhoneWales" xml:space="preserve">
-    <value>Telephone: 0300 065 3000</value>
+    <value>[Welsh] Telephone: 0300 065 3000</value>
   </data>
   <data name="OtherWaysToPayWales" xml:space="preserve">
-    <value>To discuss paying by other methods please contact the Natural Resources Wales</value>
+    <value>[Welsh] To discuss paying by other methods please contact the Natural Resources Wales</value>
   </data>
   <data name="PageHeading" xml:space="preserve">
-    <value>Accreditation Completion</value>
+    <value>[Welsh] Accreditation Completion</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Accreditation Completion</value>
+    <value>[Welsh] Accreditation Completion</value>
   </data>
   <data name="PayByBankTransfer" xml:space="preserve">
-    <value>Pay by bank transfer</value>
+    <value>[Welsh] Pay by bank transfer</value>
   </data>
   <data name="PaymentReference" xml:space="preserve">
-    <value>Payment reference number:</value>
+    <value>[Welsh] Payment reference number:</value>
   </data>
   <data name="PayOnline" xml:space="preserve">
-    <value>Pay online</value>
+    <value>[Welsh] Pay online</value>
   </data>
   <data name="PayOnlineLink" xml:space="preserve">
-    <value>www.gov.uk</value>
+    <value>[Welsh] www.gov.uk</value>
   </data>
   <data name="PayOnlineNotice" xml:space="preserve">
-    <value>You can pay online using GOV.UK Pay</value>
+    <value>[Welsh] You can pay online using GOV.UK Pay</value>
   </data>
   <data name="ReferenceNumber" xml:space="preserve">
-    <value>Reference number</value>
+    <value>[Welsh] Reference number</value>
   </data>
   <data name="ScotlandContact" xml:space="preserve">
-    <value>Please contact the Scottish Environmental Protection Agency for payment details.</value>
+    <value>[Welsh] Please contact the Scottish Environmental Protection Agency for payment details.</value>
   </data>
   <data name="ScotlandEmail" xml:space="preserve">
-    <value>Email: producer.responsibility@sepa.org.uk</value>
+    <value>[Welsh] Email: producer.responsibility@sepa.org.uk</value>
   </data>
   <data name="ScotlandPhone" xml:space="preserve">
-    <value>Telephone: 01786 457700</value>
+    <value>[Welsh] Telephone: 01786 457700</value>
   </data>
   <data name="UseDetails" xml:space="preserve">
-    <value>Use these details to make payment</value>
+    <value>[Welsh] Use these details to make payment</value>
   </data>
   <data name="WalesAddress" xml:space="preserve">
-    <value>Company address: Income department, PO BOX 663, Cardiff, CF24 0TP</value>
+    <value>[Welsh] Company address: Income department, PO BOX 663, Cardiff, CF24 0TP</value>
   </data>
   <data name="WalesBank" xml:space="preserve">
-    <value>Bank: RBS, National Westminster bank plc, 2 ½ Devonshire Square, London, EC2M 4BA</value>
+    <value>[Welsh] Bank: RBS, National Westminster bank plc, 2 ½ Devonshire Square, London, EC2M 4BA</value>
   </data>
   <data name="WalesBankAccountNumber" xml:space="preserve">
-    <value>Account number: 10014438</value>
+    <value>[Welsh] Account number: 10014438</value>
   </data>
   <data name="WalesBankSortCode" xml:space="preserve">
-    <value>Sort code: 60-70-80</value>
+    <value>[Welsh] Sort code: 60-70-80</value>
   </data>
   <data name="WalesCompanyName" xml:space="preserve">
-    <value>Company name: Natural Resources Wales</value>
+    <value>[Welsh] Company name: Natural Resources Wales</value>
   </data>
 </root>
