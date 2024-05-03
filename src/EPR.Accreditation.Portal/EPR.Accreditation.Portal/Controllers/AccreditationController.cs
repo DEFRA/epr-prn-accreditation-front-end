@@ -290,6 +290,17 @@
             return View(vm);
         }
 
+        [HttpPost("CheckYourAnswers")]
+        public async Task<IActionResult> CheckYourAnswers(CheckYourAnswersViewModel checkYourAnswersViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("CheckYourAnswers", new { id = checkYourAnswersViewModel.Id });
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet("Material/{materialId}/CheckAnswers/{section}")]
         public async Task<IActionResult> CheckAnswers(
             Guid? id,
@@ -309,12 +320,23 @@
             return View(viewModel);
         }
 
-        [HttpPost("CheckYourAnswers")]
-        public async Task<IActionResult> CheckYourAnswers(CheckYourAnswersViewModel checkYourAnswersViewModel)
+        [HttpPost("Material/{materialId}/CheckAnswers/{section}")]
+        public async Task<IActionResult> CheckAnswers(
+            Guid? id,
+            Guid? materialId,
+            CheckAnswersSection section,
+            CheckAnswersViewModel checkAnswersViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("CheckYourAnswers", new { id = checkYourAnswersViewModel.Id });
+                return RedirectToAction(
+                    "CheckAnswers",
+                    new
+                    {
+                        Id = id,
+                        MaterialId = materialId,
+                        Section = section
+                    });
             }
 
             return RedirectToAction("Index", "Home");

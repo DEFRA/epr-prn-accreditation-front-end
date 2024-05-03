@@ -31,9 +31,12 @@
                             <dd class="govuk-summary-list__value">
                                 @row.Value
                             </dd>
-                            <dd class="govuk-summary-list__actions">
-                                <a class="govuk-link" href="@row.ChangeLink" style="margin: 40px;">Change</a>
-                            </dd>
+                            @if(row.TitleKey != "Total")
+                            {
+                                <dd class="govuk-summary-list__actions">
+                                    <a class="govuk-link" href="@row.ChangeLink" style="margin: 40px;">Change</a>
+                                </dd>
+                            }
                         </div>
                     }
                 </dl>

@@ -151,18 +151,6 @@
                 addressDto);
         }
 
-        private Enums.TaskStatus ReturnStatusFromList(
-            List<AccreditationTaskProgress> accreditationsTaskProgress,
-            Enums.TaskName taskName)
-        {
-            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
-            {
-                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
-            }
-
-            return Enums.TaskStatus.NotStarted;
-        }
-
         public async Task<CheckAnswersViewModel> CheckAnswers(
             Guid id,
             Guid materialId,
@@ -176,6 +164,18 @@
             var viewModel = _mapper.Map<CheckAnswersViewModel>(result);
 
             return viewModel;
+        }
+
+        private Enums.TaskStatus ReturnStatusFromList(
+            List<AccreditationTaskProgress> accreditationsTaskProgress,
+            Enums.TaskName taskName)
+        {
+            if (accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).Any())
+            {
+                return (Enums.TaskStatus)Enum.Parse(typeof(Enums.TaskStatus), accreditationsTaskProgress.Where(a => a.TaskNameId.ToString().Contains(taskName.ToString())).FirstOrDefault().TaskStatusId.ToString());
+            }
+
+            return Enums.TaskStatus.NotStarted;
         }
     }
 }
