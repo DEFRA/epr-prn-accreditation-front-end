@@ -8,8 +8,6 @@
     /// </summary>
     public class NumericCharacterLengthAttribute : ValidationAttribute
     {
-        public int MaxLength { get; private set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NumericCharacterLengthAttribute"/> class.
         /// </summary>
@@ -24,6 +22,11 @@
 
             MaxLength = maxLength;
         }
+
+        /// <summary>
+        /// Gets the maximum number of characters are numeric field can have
+        /// </summary>
+        public int MaxLength { get; private set; }
 
         /// <summary>
         /// Override for formatting the error message.
