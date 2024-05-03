@@ -156,6 +156,9 @@
   <data name="TonnesLabel" xml:space="preserve">
     <value>Tonnes</value>
   </data>
+  <data name="TonnesLabelLowerCase" xml:space="preserve">
+    <value>tonnes</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>

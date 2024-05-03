@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SubTitle" xml:space="preserve">
-    <value>Specify the type and quantity of each non-waste material used, in tonnes. For example, sandstone, limestones or dolomite</value>
+    <value>Specify the type and quantity of each non-waste material used, in tonnes. For example: sandstone, limestones or dolomite</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Estimate your annual non-waste inputs</value>
