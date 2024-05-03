@@ -3,14 +3,6 @@
 
 @{
     ViewData["Title"] = CheckYourAnswersResources.Title;
-
-    // create the route data for returning to previous pages and showing that
-    // completing those redirects back here
-    var queryStringRouteData = new Dictionary<string, string>
-    {
-        { "Id", Model.Id.ToString() },
-        { Strings.QueryStrings.ReturnToAnswers, Strings.QueryStrings.ReturnToAnswersYes }
-    };
 }
 
 <partial name="_ValidationSummary" />
