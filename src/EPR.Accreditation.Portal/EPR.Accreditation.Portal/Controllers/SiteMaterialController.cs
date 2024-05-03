@@ -181,7 +181,7 @@
             NonWasteInputsViewModel viewModel,
             SaveButton saveButton)
         {
-            PopulateBackModel(WasteLastYearRouteName);
+            PopulateBackModel(MaterialWasteInputsRouteName);
 
             if (saveButton == SaveButton.AddRow)
             {
@@ -202,18 +202,11 @@
 
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
-                MaterialOutputsLastYearResources.ContaminentsBlank,
-                MaterialOutputsLastYearResources.ProcessLossBlank))
+                NonWasteInputLastYearResources.TonnesRequired,
+                NonWasteInputLastYearResources.TypeRequired,
+                NonWasteInputLastYearResources.AtLeastOneEntryRequired))
             {
-                if (viewModel.WasteLastYear == true)
-                {
-                    return View(NonWasteInputsLastYearView, viewModel);
-                }
-                else
-                {
-                    return View(NonWasteInputsEstimatedView, viewModel);
-                }
+                return View(viewModel.WasteLastYear.Value ? NonWasteInputsLastYearView : NonWasteInputsEstimatedView, viewModel);
             }
 
             await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
@@ -346,7 +339,7 @@
                 MaterialWasteInputsLastYearResources.NonUkPackagingWasteBlank,
                 MaterialWasteInputsLastYearResources.NonPackagingWasteBlank))
             {
-                return View(viewModel);
+                return View(viewModel.WasteLastYear.Value ? "MaterialWasteInputsLastYear" : "MaterialWasteInputsEstimated");
             }
 
             await _accreditationSiteMaterialService.UpdateMaterialWasteInputs(viewModel);

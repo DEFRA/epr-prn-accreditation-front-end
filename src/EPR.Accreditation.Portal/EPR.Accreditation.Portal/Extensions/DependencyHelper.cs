@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using EPR.Accreditation.Portal.Attributes.ActionFilters;
+    using EPR.Accreditation.Portal.Attributes.Validation.Provider;
     using EPR.Accreditation.Portal.Configuration;
     using EPR.Accreditation.Portal.Helpers;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
@@ -11,6 +12,7 @@
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc.DataAnnotations;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Options;
 
@@ -31,6 +33,7 @@
         {
             services.AddHttpClient("HttpClient");
             services
+                .AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>()
                 .AddScoped<MaterialTypeViewModel>()
                 .AddScoped<WasteTypeActionFilter>()
                 .AddTransient<SaveAndComeBackLaterFilter>()
