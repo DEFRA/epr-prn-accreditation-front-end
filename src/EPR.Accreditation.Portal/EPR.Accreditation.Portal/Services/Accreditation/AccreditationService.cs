@@ -118,7 +118,7 @@
             return Enums.TaskStatus.NotStarted;
         }
 
-        private static string RandomString(int length)
+        private string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
