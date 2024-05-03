@@ -134,9 +134,12 @@
                 nonWasteInputsViewModel.Rows.Any())
             {
                 // remove blank rows
+                // allow null values to fall through as save and come back later
+                // needs to be considered. We have validation that takes care of
+                // rows that are not completed
                 nonWasteInputsViewModel.Rows = nonWasteInputsViewModel
                     .Rows
-                    .Where(r => !string.IsNullOrWhiteSpace(r.Type) && r.Tonnes != null)
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Type) || r.Tonnes != null)
                     .ToList();
             }
 

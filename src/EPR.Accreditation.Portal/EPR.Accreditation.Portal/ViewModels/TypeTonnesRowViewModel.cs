@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.ViewModels
 {
+    using System.ComponentModel.DataAnnotations;
     using EPR.Accreditation.Portal.Attributes.Validation;
     using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.ViewModels.Interfaces;
@@ -13,12 +14,16 @@
         /// Gets or sets the Type value for the current row.
         /// </summary>
         [RequiredIfOther("Tonnes", ErrorMessageResourceName = "TypeRequired", ErrorMessageResourceType = typeof(NonWasteInputLastYearResources))]
+        [StringLength(50)]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessageResourceName = "OnlyLettersAllowed", ErrorMessageResourceType = typeof(NonWasteInputLastYearResources))]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or sets the Tonnes value for the current row.
         /// </summary>
         [RequiredIfOther("Type", ErrorMessageResourceName = "TonnesRequired", ErrorMessageResourceType = typeof(NonWasteInputLastYearResources))]
+        [Range(0.001, 1000000.000, ErrorMessageResourceName = "TonnesNotWithinRange", ErrorMessageResourceType = typeof(NonWasteInputLastYearResources))]
+        [NumericCharacterLength(11)]
         public decimal? Tonnes { get; set; }
 
         /// <summary>
