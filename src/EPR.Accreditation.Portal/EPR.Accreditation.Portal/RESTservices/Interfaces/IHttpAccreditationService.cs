@@ -29,8 +29,7 @@
         Task<string> GetReferenceNumber(Guid accreditationExternalId);
 
         Task<decimal> GetAccreditationFee(Guid accreditationExternalId);
-        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
-
+        
         Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
         Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
