@@ -23,13 +23,11 @@
             IOptions<AppSettingsConfigOptions> appSettingsConfiguration,
             IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
-            ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel)
             : base(
                   httpContextAccessor,
                   urlHelper,
                   accreditationSiteMaterialService,
-                  saveAndComeBackService,
                   backPageViewModel,
                   SiteType.OverseasSite)
         {
@@ -175,15 +173,6 @@
             }
 
             await _accreditationSiteMaterialService.UpdateWasteDescriptionCodeViewModel(viewModel);
-
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    _httpContextAccessor.HttpContext.Request.RouteValues);
-
-                return View("_ApplicationSaved");
-            }
 
             return RedirectToAction(
                 "OverseasAgentChoice",

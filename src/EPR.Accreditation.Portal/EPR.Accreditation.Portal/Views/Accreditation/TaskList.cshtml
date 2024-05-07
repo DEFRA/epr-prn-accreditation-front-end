@@ -12,10 +12,7 @@
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column">
-            <p class="govuk-body">
-                <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
-            </p>
-
+            
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
                 <h1 class="govuk-panel__title">@TaskListResources.PageTitle</h1>
@@ -65,7 +62,7 @@
                     <tbody class="govuk-table__body">
                         <tr class="govuk-table__row">
                             <td>
-                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("Overseas","Accreditation", new { id = Model.Id })>@TaskListResources.OverseasLink</a>
+                                <ul><a class="govuk-link govuk-link--no-visited-state" href=@Url.Action("OverseasReprocessors","Accreditation", new { id = Model.Id })>@TaskListResources.OverseasLink</a>
                             </td>
                             <td>Cannot start yet</td>
                         </tr>

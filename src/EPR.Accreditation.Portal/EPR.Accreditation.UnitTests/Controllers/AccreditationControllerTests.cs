@@ -3,44 +3,49 @@
     using EPR.Accreditation.Portal.Controllers;
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
+    using EPR.Accreditation.Portal.Options;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.Options;
     using Moq;
 
     [TestClass]
     public class AccreditationControllerTests
     {
         private Mock<IHttpContextAccessor> _mockContextAccessor;
-        private Mock<ISaveAndComeBackService> _mockSaveAndComeBackService;
         private Mock<IHttpAccreditationService> _mockhttpAccreditationService;
         private Mock<IAccreditationService> _mockAccreditationService;
         private Mock<IWastePermitService> _mockWastePermitService;
+        private Mock<ISiteService> _mockSiteService;
         private Mock<IUrlHelperWrapper> _mockUrlHelper;
         private AccreditationController _accreditationController;
         private BackPageViewModel _backPageViewModel;
+        private Mock<IOptions<AppSettingsConfigOptions>> _mockAppSettings;
 
         [TestInitialize]
         public void Init()
         {
             _mockContextAccessor = new Mock<IHttpContextAccessor>();
-            _mockSaveAndComeBackService = new Mock<ISaveAndComeBackService>();
             _mockhttpAccreditationService = new Mock<IHttpAccreditationService>();
             _mockAccreditationService = new Mock<IAccreditationService>();
             _mockWastePermitService = new Mock<IWastePermitService>();
+            _mockSiteService = new Mock<ISiteService>();
             _mockUrlHelper = new Mock<IUrlHelperWrapper>();
             _backPageViewModel = new BackPageViewModel();
+            _mockAppSettings = new Mock<IOptions<AppSettingsConfigOptions>>();
 
             _accreditationController = new AccreditationController(
                 _mockContextAccessor.Object,
                 _mockWastePermitService.Object,
-                _mockSaveAndComeBackService.Object,
                 _mockAccreditationService.Object,
+                _mockSiteService.Object,
                 _mockUrlHelper.Object,
-                _backPageViewModel);
+                _backPageViewModel,
+                _mockAppSettings.Object);
 
             var context = new DefaultHttpContext();
             _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);
@@ -158,40 +163,6 @@
         }
 
         [TestMethod]
-        public async Task CheckWastePermitExemption_ReturnsViewResult_ForSaveAndComeBack()
-        {
-            // Arrange
-            var saveButton = SaveButton.SaveAndComeBack;
-            var viewModel = new PermitExemptionViewModel
-            {
-                Id = Guid.NewGuid(),
-                HasPermitExemption = false
-            };
-
-            _accreditationController.ModelState.Clear(); // Ensuring ModelState is valid
-
-            // Act
-            var result = await _accreditationController.CheckWastePermitExemption(viewModel, saveButton) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("_ApplicationSaved", result.ViewName);
-
-            _mockWastePermitService.Verify(
-                s =>
-                    s.UpdatePermitExemption(
-                        viewModel),
-                Times.Once);
-
-            _mockSaveAndComeBackService.Verify(
-                x =>
-                    x.AddSaveAndComeBack(
-                        It.IsAny<Guid>(),
-                        It.IsAny<RouteValueDictionary>()),
-                Times.Once());
-        }
-
-        [TestMethod]
         public async Task CheckWastePermitExemption_ReturnsCorrectView_WhenModelIsInvalid()
         {
             // Arrange
@@ -217,6 +188,162 @@
             Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
 
             _mockWastePermitService.Verify(s => s.UpdatePermitExemption(viewModel), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task CheckSiteAddress_ReturnsViewWithViewModel()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var expectedViewModel = new SiteAddressViewModel();
+            var expectedUrl = "Home/ApplyForAccreditation";
+
+            expectedViewModel.Address1 = "New Street1";
+
+            _mockUrlHelper.Setup(helper => helper.ActionLink(
+                "ApplyForAccreditation", "Home", null, null, null, null)).Returns(expectedUrl);
+
+            _mockSiteService.Setup(service => service.GetSiteAddressViewModel(id)).ReturnsAsync(expectedViewModel);
+
+            // Act
+            var result = await _accreditationController.SiteAddress(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SiteAddressViewModel));
+            Assert.IsNull(viewResult.ViewName);
+
+            _mockSiteService.Verify(service => service.GetSiteAddressViewModel(id), Times.Once());
+        }
+
+        [TestMethod]
+        public async Task CheckSiteAddress_ReturnsCorrectView_WhenModelIsInvalid()
+        {
+            // Arrange
+            var viewModel = new SiteAddressViewModel();
+            var saveButton = SaveButton.Undefined;
+
+            _accreditationController.ModelState.AddModelError("Error", "Error");
+
+            // Act
+            var result = await _accreditationController.SiteAddress(viewModel, saveButton);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SiteAddressViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+        }
+
+        [TestMethod]
+        public async Task CheckSiteAddress_SavesWithValidData_SaveAndContinue()
+        {
+            // Arrange
+            var viewModel = new SiteAddressViewModel
+            {
+                Id = Guid.NewGuid(),
+                Address1 = "New Street"
+            };
+
+            // Act
+            var result = await _accreditationController.SiteAddress(viewModel, SaveButton.SaveAndContinue);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectToActionResult = result as RedirectToActionResult;
+            Assert.AreEqual("PermitExemption", redirectToActionResult.ActionName);
+
+            _mockSiteService.Verify(service => service.SaveSiteAddress(viewModel), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task GetLegalDocumentsAddress_WithNullId_ReturnsNotFound()
+        {
+            // Arrange
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(null) as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task GetLegalDocumentsAddress_WithValidParameters_ReturnsViewAndCallsService()
+        {
+            // arrange
+            var id = Guid.NewGuid();
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            _mockAccreditationService.Verify(
+                s =>
+                    s.GetLegalDocumentsAddressViewModel(id),
+                Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateLegalDocumentsAddress_WithValidData_ReturnsRedirectResultAndCallsService()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var legalDocumentsAddressViewModel = new LegalDocumentsAddressViewModel
+            {
+                Id = id
+            };
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(
+                legalDocumentsAddressViewModel,
+                SaveButton.SaveAndContinue) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            _mockAccreditationService.Verify(
+                s =>
+                    s.UpdateLegalDocumentsAddress(legalDocumentsAddressViewModel),
+                Times.Once);
+            result.RouteName = "RegulatorContact";
+            result.RouteValues.ContainsKey("id");
+        }
+
+        [TestMethod]
+        public async Task UpdateLegalDocumentsAddress_WithInvalidData_ReturnsOriginalViewDoesNotCallService()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            _accreditationController.ModelState.AddModelError("Error", "Error");
+            var legalDocumentsAddressViewModel = new LegalDocumentsAddressViewModel
+            {
+                Id = id
+            };
+
+            // Act
+            var result = await _accreditationController.LegalDocumentsAddress(
+                legalDocumentsAddressViewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            _mockAccreditationService.Verify(
+                s =>
+                    s.UpdateLegalDocumentsAddress(legalDocumentsAddressViewModel),
+                Times.Never);
         }
     }
 }

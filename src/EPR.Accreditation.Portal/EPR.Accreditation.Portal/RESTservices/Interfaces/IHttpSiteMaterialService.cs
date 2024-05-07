@@ -1,16 +1,16 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
-    using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.DTOs.MaterialReprocessorDetails;
+    using EPR.Accreditation.Portal.DTOs.SiteMaterial;
     using EPR.Accreditation.Portal.Enums;
 
     public interface IHttpSiteMaterialService
     {
         // available for both reprocessor and exporter
         Task<string> GetMeterialName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId,
             Enums.Language language);
 
@@ -61,12 +61,12 @@
             MaterialOutputsDto materialOutputsDto);
 
         /// <summary>
-        /// Gets material waste output.
+        /// Gets material waste input.
         /// </summary>
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>Material waste output dto.</returns>
-        Task<MaterialWasteOutputsDto> GetMaterialWasteOutputs(
+        Task<MaterialWasteInputsDto> GetMaterialWasteInputs(
             Guid id,
             Guid materialId);
 
@@ -77,10 +77,10 @@
         /// <param name="materialId">Material id.</param>
         /// <param name="materialWasteOutputsDto">Material waste output dto.</param>
         /// <returns>Nothing.</returns>
-        Task UpdateMaterialWasteOutputs(
+        Task UpdateMaterialWasteInputs(
             Guid id,
             Guid materialId,
-            MaterialWasteOutputsDto materialWasteOutputsDto);
+            MaterialWasteInputsDto materialWasteOutputsDto);
 
         // only reprocessor
         Task<bool?> GetReprocessedWasteLastYear(
@@ -119,5 +119,49 @@
             Guid siteId,
             Guid materialId,
             IEnumerable<string> wasteDecriptionCodes);
+
+        /// <summary>
+        /// Gets whether a 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>A boolean value</returns>
+        Task<bool?> GetHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates the 2024 NPWD Accreditation Number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="hasNpwdAccreditationNumber">The boolean value within the DTO</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateHasNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            HasNpwdAccreditationNumber hasNpwdAccreditationNumber);
+
+        /// <summary>
+        /// Gets the 2024 NPWD Accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>A string value</returns>
+        Task<string> GetNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Updates the 2024 NPWD Accreditation Number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <param name="npwdAccreditationNumber">The boolean value within the DTO</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateNpwdAccreditationNumber(
+            Guid id,
+            Guid materialId,
+            NpwdAccreditationNumber npwdAccreditationNumber);
     }
 }

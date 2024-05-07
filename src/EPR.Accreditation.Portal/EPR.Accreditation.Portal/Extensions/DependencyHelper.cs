@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using EPR.Accreditation.Portal.Attributes.ActionFilters;
+    using EPR.Accreditation.Portal.Attributes.Validation.Provider;
     using EPR.Accreditation.Portal.Configuration;
     using EPR.Accreditation.Portal.Helpers;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
@@ -11,6 +12,7 @@
     using EPR.Accreditation.Portal.Services.Accreditation;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
+    using Microsoft.AspNetCore.Mvc.DataAnnotations;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Options;
 
@@ -31,8 +33,10 @@
         {
             services.AddHttpClient("HttpClient");
             services
+                .AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>()
                 .AddScoped<MaterialTypeViewModel>()
                 .AddScoped<WasteTypeActionFilter>()
+                .AddTransient<SaveAndComeBackLaterFilter>()
                 .AddScoped<BackPageViewModel>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
@@ -43,6 +47,7 @@
                 .AddScoped<IWastePermitService, WastePermitService>()
                 .AddScoped<IAccreditationService, AccreditationService>()
                 .AddScoped<IUrlHelperWrapper, UrlHelperWrapper>()
+                .AddScoped<ISiteService, SiteService>()
                 .AddScoped<IAccreditationSiteService, AccreditationSiteService>()
                 .AddScoped<IOverseasSiteService, OverseasSiteService>()
                 .Configure<ServicesConfiguration>(configuration.GetSection(ServicesConfiguration.SectionName))
@@ -91,6 +96,14 @@
             services
                 .AddScoped<IHttpOverseasSiteService>(s =>
                     new HttpOverseasSiteService(
+                        s.GetRequiredService<IHttpContextAccessor>(),
+                        s.GetRequiredService<IHttpClientFactory>(),
+                        s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,
+                        "Accreditation"));
+
+            services
+                .AddScoped<IHttpSiteService>(s =>
+                    new HttpSiteService(
                         s.GetRequiredService<IHttpContextAccessor>(),
                         s.GetRequiredService<IHttpClientFactory>(),
                         s.GetRequiredService<IOptions<ServicesConfiguration>>().Value.AccreditationFacade.Url,

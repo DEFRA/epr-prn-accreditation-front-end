@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class TaskListResources___Copy {
+    public class AddressResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TaskListResources___Copy() {
+        internal AddressResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.TaskListResources - Copy", typeof(TaskListResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.AddressResources", typeof(AddressResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,101 +61,92 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About the material.
+        ///   Looks up a localized string similar to Address Line 1.
         /// </summary>
-        public static string AboutMaterial {
+        public static string AddressLine1 {
             get {
-                return ResourceManager.GetString("AboutMaterial", resourceCulture);
+                return ResourceManager.GetString("AddressLine1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessing sites.
+        ///   Looks up a localized string similar to Address Line 1 Missing.
         /// </summary>
-        public static string OverseasHeader {
+        public static string AddressLine1Missing {
             get {
-                return ResourceManager.GetString("OverseasHeader", resourceCulture);
+                return ResourceManager.GetString("AddressLine1Missing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can be started after completing &apos;About the waste you export&apos;..
+        ///   Looks up a localized string similar to Address Line 2 (optional).
         /// </summary>
-        public static string OverseasHintLink {
+        public static string AddressLine2 {
             get {
-                return ResourceManager.GetString("OverseasHintLink", resourceCulture);
+                return ResourceManager.GetString("AddressLine2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessing sites .
+        ///   Looks up a localized string similar to Address Line not in range.
         /// </summary>
-        public static string OverseasLink {
+        public static string AddressLineNumberNotInRange {
             get {
-                return ResourceManager.GetString("OverseasLink", resourceCulture);
+                return ResourceManager.GetString("AddressLineNumberNotInRange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is your application task list. You can save your progress and come back to it at any time..
+        ///   Looks up a localized string similar to County (optional).
         /// </summary>
-        public static string PageHeading {
+        public static string County {
             get {
-                return ResourceManager.GetString("PageHeading", resourceCulture);
+                return ResourceManager.GetString("County", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply for accreditation as an exporter.
+        ///   Looks up a localized string similar to Post Code.
         /// </summary>
-        public static string PageTitle {
+        public static string PostCode {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("PostCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload your business plan .
+        ///   Looks up a localized string similar to Enter a UK postcode.
         /// </summary>
-        public static string UploadBusinessPlan {
+        public static string PostCodeInvalid {
             get {
-                return ResourceManager.GetString("UploadBusinessPlan", resourceCulture);
+                return ResourceManager.GetString("PostCodeInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload sampling and inspection plan and recording system for this material.
+        ///   Looks up a localized string similar to Enter a UK postcode.
         /// </summary>
-        public static string UploadInspectionPlan {
+        public static string PostCodeMissing {
             get {
-                return ResourceManager.GetString("UploadInspectionPlan", resourceCulture);
+                return ResourceManager.GetString("PostCodeMissing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About the packaging waste you export .
+        ///   Looks up a localized string similar to Town or City.
         /// </summary>
-        public static string WasteExportHeader {
+        public static string TownOrCity {
             get {
-                return ResourceManager.GetString("WasteExportHeader", resourceCulture);
+                return ResourceManager.GetString("TownOrCity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Once you’ve completed one material you can add more materials. You can upload documents after you&apos;ve chosen a material. .
+        ///   Looks up a localized string similar to Town or city missing.
         /// </summary>
-        public static string WasteExportTitle {
+        public static string TownOrCityMisssing {
             get {
-                return ResourceManager.GetString("WasteExportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Waste licences, PRNs and business plan .
-        /// </summary>
-        public static string WasteLicencesHeading {
-            get {
-                return ResourceManager.GetString("WasteLicencesHeading", resourceCulture);
+                return ResourceManager.GetString("TownOrCityMisssing", resourceCulture);
             }
         }
     }

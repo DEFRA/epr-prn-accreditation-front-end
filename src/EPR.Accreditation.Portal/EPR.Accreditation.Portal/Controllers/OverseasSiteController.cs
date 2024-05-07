@@ -13,7 +13,7 @@
     /// Controller for the overseas site
     /// </summary>
     [Route("Accreditation/{id}/[controller]/{overseasSiteId}")]
-    public class OverseasSiteController : Controller
+    public class OverseasSiteController : BaseController
     {
         private readonly IOverseasSiteService _overseasSiteService;
         private readonly ISaveAndComeBackService _saveAndComeBackService;
@@ -36,12 +36,24 @@
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
             BackPageViewModel backPageViewModel)
+            : base(httpContextAccessor, urlHelper, backPageViewModel)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
             _overseasSiteService = overseasSiteService ?? throw new ArgumentNullException(nameof(overseasSiteService));
             _backPageViewModel = backPageViewModel;
+        }
+
+        /// <summary>
+        /// STUBBED method for Create overseas site
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("/Accreditation/{id}/[controller]/Create", Name = "CreateOverseasSite")]
+        public async Task<IActionResult> CreateSite(Guid? id)
+        {
+            return NotFound();
         }
 
         /// <summary>
@@ -96,35 +108,26 @@
 
             await _overseasSiteService.UpdateReprocessorDetails(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue)
-            {
-                return RedirectToAction("PersonWeCanContact", "Accreditation");
-            }
-
-            // this is all the data we require to save for come back later
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.Id,
-                _httpContextAccessor.HttpContext.GetRouteData().Values);
-            return View("_ApplicationSaved");
+            return RedirectToAction("PersonWeCanContact", "Accreditation");
         }
 
         /// <summary>
         /// Gets the Outputs value for the given accreditation and site.
         /// </summary>
-        /// <param name="accreditationExternalId">Accreditation external Id.</param>
-        /// <param name="siteExternalId">Site external Id.</param>
+        /// <param name="id">Accreditation external Id.</param>
+        /// <param name="overseasSiteId">Site external Id.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpGet("{siteExternalId}/Outputs")]
-        public async Task<IActionResult> OverseasSiteOutputs(Guid? accreditationExternalId, Guid? siteExternalId)
+        [HttpGet("Outputs")]
+        public async Task<IActionResult> OverseasSiteOutputs(Guid? id, Guid? overseasSiteId)
         {
-            if (accreditationExternalId == null || siteExternalId == null)
+            if (id == null || overseasSiteId == null)
             {
                 return NotFound();
             }
 
             var overseasSiteOutputsViewModel = await _overseasSiteService.GetOverseasReprocessingSiteOutputs(
-                accreditationExternalId.Value,
-                siteExternalId.Value);
+                id.Value,
+                overseasSiteId.Value);
 
             return View(overseasSiteOutputsViewModel);
         }
@@ -135,7 +138,7 @@
         /// <param name="overseasReprocessingSiteOutputsViewModel">View model containing data to be saved.</param>
         /// <param name="saveButton">Determines the next step in the journey.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpPost("{siteExternalId}/Outputs")]
+        [HttpPost("Outputs")]
         public async Task<IActionResult> OverseasSiteOutputs(
             OverseasReprocessingSiteOutputsViewModel overseasReprocessingSiteOutputsViewModel,
             SaveButton saveButton)

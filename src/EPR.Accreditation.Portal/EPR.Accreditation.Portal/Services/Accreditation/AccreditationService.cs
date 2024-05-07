@@ -3,8 +3,9 @@
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
+    using EPR.Accreditation.Portal.Common.Dtos.Portal;
+    using EPR.Accreditation.Portal.Common.Enums;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
 
@@ -27,14 +28,18 @@
             var result = await _httpAccreditationService.GetOperatorType(id);
             return new OperatorTypeViewModel
             {
-                ExternalId = id,
+                Id = id,
                 OperatorType = result
             };
         }
 
         public async Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel)
         {
-            var accreditation = new Accreditation { OperatorTypeId = viewModel.OperatorType.Value };
+            var accreditation = new Accreditation
+            {
+                OperatorTypeId = viewModel.OperatorType.Value
+            };
+
             var externalId = await _httpAccreditationService.CreateAccreditation(accreditation);
             return externalId;
         }
@@ -61,20 +66,14 @@
             await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
         }
 
-        public async Task<TaskListViewModel> GetTaskList(
-            Guid id,
-            Guid siteId,
-            Guid materialId)
+        public async Task<TaskListViewModel> GetTaskList(Guid id)
         {
             var taskStatus = await _httpAccreditationService.GetAccreditationTaskProgress(id);
-            var address = await _httpAccreditationService.GetSite(siteId);
 
             var viewModel = new TaskListViewModel
             {
+                // Address = need the address from legal contacts and contact details
                 Id = id,
-                SiteId = siteId,
-                MaterialId = materialId,
-                Address = address.Address1.ToString(),
                 WasteLicensesStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.WasteLicencesAndPrns).ToString(),
                 UploadBusinessPlanStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.UploadBusinessPlan).ToString(),
                 AboutMaterialStatus = ReturnStatusFromList(taskStatus, Enums.TaskName.AboutMaterial).ToString(),
@@ -88,6 +87,70 @@
             var result = await _httpAccreditationService.GetCheckYourAnswers(id);
             var vm = _mapper.Map<CheckYourAnswersViewModel>(result);
             return vm;
+        }
+
+        /// <summary>
+        /// Determines if the ID is for an exporter or not
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>true if an exporter, otherwise false</returns>
+        public async Task<bool> IsExporter(Guid id)
+        {
+            var operatorType = await _httpAccreditationService.GetOperatorType(id);
+
+            return operatorType == OperatorType.Exporter;
+        }
+
+        /// <summary>
+        /// Gets PRN tonnage data view.
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation id.</param>
+        /// <returns>PRN tonnage data view model.</returns>
+        public async Task<PrnTonnesPlannedViewModel> GetPrnTonnesPlanned(Guid accreditationExternalId)
+        {
+            var result = await _httpAccreditationService.GetPrnTonnesPlanned(accreditationExternalId);
+            var vm = _mapper.Map<PrnTonnesPlannedViewModel>(result);
+            return vm;
+        }
+
+        /// <summary>
+        /// Updates PRN tonnage data.
+        /// </summary>
+        /// <param name="accreditationExternalId">Accreditation id.</param>
+        /// <param name="vm">View model for PRN tonnage data.</param>
+        /// <returns>Returns completed Task.</returns>
+        public async Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedViewModel vm)
+        {
+            var dto = _mapper.Map<PrnTonnesPlannedDto>(vm);
+            await _httpAccreditationService.UpdatePrnTonnesPlanned(accreditationExternalId, dto);
+        }
+
+        /// <summary>
+        /// Creates the view model for the given accreditation id
+        /// </summary>
+        /// <param name="id">The id of the accreditation that the legal documents are for</param>
+        /// <returns>The view model for the accreditation legal documents</returns>
+        public async Task<LegalDocumentsAddressViewModel> GetLegalDocumentsAddressViewModel(Guid id)
+        {
+            var addressDto = await _httpAccreditationService.GetLegalDocumentsAddress(id);
+
+            return _mapper.Map<LegalDocumentsAddressViewModel>(addressDto);
+        }
+
+        /// <summary>
+        /// Creates or updates the address for the legal documents for the accreditation
+        /// </summary>
+        /// <param name="id">Id of the accreditation id</param>
+        /// <param name="viewModel">The view model containing the address for the legal documents</param>
+        /// <returns>async task</returns>
+        public async Task UpdateLegalDocumentsAddress(
+            LegalDocumentsAddressViewModel viewModel)
+        {
+            var addressDto = _mapper.Map<AddressDto>(viewModel);
+
+            await _httpAccreditationService.UpdateLegalDocumentsAddress(
+                viewModel.Id,
+                addressDto);
         }
 
         public async Task<CompletionViewModel> Completion(Guid id, string countryCode)

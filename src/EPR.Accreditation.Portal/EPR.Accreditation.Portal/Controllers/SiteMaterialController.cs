@@ -22,6 +22,7 @@
         // Routename string constants
         private const string SiteMaterialOutputsRouteName = "SiteMaterialOutputs";
         private const string WasteLastYearRouteName = "WasteLastYear";
+        private const string MaterialWasteInputsRouteName = "MaterialWasteInputs";
         private const string NonWasteInputsRouteName = "NonWasteInputs";
         private const string ProductsProducedRouteName = "ProductsProduced";
         private const string AuthorityRouteName = "Authority";
@@ -43,21 +44,18 @@
         /// <param name="httpContextAccessor">The http context accessor</param>
         /// <param name="urlHelper">Wrapper to the IUrlHelper - makes testing easier</param>
         /// <param name="accreditationSiteMaterialService">The service for performing any busines logic for accreditation site materials</param>
-        /// <param name="saveAndComeBackService">The service for save and continue</param>
         /// <param name="appSettingsConfiguration">The app settings configuration</param>
         /// <param name="backPageViewModel">The view model for populating the back button/link</param>
         public SiteMaterialController(
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
-            ISaveAndComeBackService saveAndComeBackService,
             IOptions<AppSettingsConfigOptions> appSettingsConfiguration,
             BackPageViewModel backPageViewModel)
             : base(
                   httpContextAccessor,
                   urlHelper,
                   accreditationSiteMaterialService,
-                  saveAndComeBackService,
                   backPageViewModel,
                   SiteType.Site)
         {
@@ -142,7 +140,7 @@
             if (id.HasValue &&
                 materialId.HasValue)
             {
-                PopulateBackModel(WasteLastYearRouteName);
+                PopulateBackModel(MaterialWasteInputsRouteName);
 
                 var nonWasteInputsViewModel = await _accreditationSiteMaterialService.GetNonWasteInputs(
                     id.Value,
@@ -183,7 +181,7 @@
             NonWasteInputsViewModel viewModel,
             SaveButton saveButton)
         {
-            PopulateBackModel(WasteLastYearRouteName);
+            PopulateBackModel(MaterialWasteInputsRouteName);
 
             if (saveButton == SaveButton.AddRow)
             {
@@ -204,42 +202,22 @@
 
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                MaterialOutputsLastYearResources.MaterialsNotProcessedBlank,
-                MaterialOutputsLastYearResources.ContaminentsBlank,
-                MaterialOutputsLastYearResources.ProcessLossBlank))
+                NonWasteInputLastYearResources.TonnesRequired,
+                NonWasteInputLastYearResources.TypeRequired,
+                NonWasteInputLastYearResources.AtLeastOneEntryRequired))
             {
-                if (viewModel.WasteLastYear == true)
-                {
-                    return View(NonWasteInputsLastYearView, viewModel);
-                }
-                else
-                {
-                    return View(NonWasteInputsEstimatedView, viewModel);
-                }
+                return View(viewModel.WasteLastYear.Value ? NonWasteInputsLastYearView : NonWasteInputsEstimatedView, viewModel);
             }
 
             await _accreditationSiteMaterialService.UpdateNonWasteInputs(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteNonWasteInputsRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                SiteMaterialOutputsRouteName,
+                new
+                {
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    SiteMaterialOutputsRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         [HttpGet("MaterialOutputs", Name = "SiteMaterialOutputs")]
@@ -298,26 +276,13 @@
 
             await _accreditationSiteMaterialService.UpdateMaterialOutputs(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteNonWasteInputsRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                ProductsProducedRouteName,
+                new
+                {
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    ProductsProducedRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         /// <summary>
@@ -326,32 +291,35 @@
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpGet("MaterialWasteOutputs", Name = "SiteMaterialWasteOutputs")]
-        public async Task<IActionResult> MaterialWasteOutputs(
+        [HttpGet("MaterialWasteInputs", Name = "MaterialWasteInputs")]
+        public async Task<IActionResult> MaterialWasteInputs(
             Guid? id,
             Guid? materialId)
         {
-            if (id == null || materialId == null)
+            if (id == null ||
+                materialId == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            MaterialWasteOutputsViewModel materialWasteOutputsViewModel = await this._accreditationSiteMaterialService.GetMaterialWasteOutputs(
+            PopulateBackModel(WasteLastYearRouteName);
+
+            var materialWasteInputsViewModel = await _accreditationSiteMaterialService.GetMaterialWasteInputs(
                 id.Value,
                 materialId.Value);
 
             // if waste last year has not been set, then the user should not
             // be on this page
-            if (materialWasteOutputsViewModel.WasteLastYear == null)
+            if (materialWasteInputsViewModel.WasteLastYear == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
             // if waste last year is true then return the MaterialWasteOutputs view
             // otherwise, return the estimated view
-            return materialWasteOutputsViewModel.WasteLastYear == true ?
-                this.View("MaterialWasteOutputsLastYear", materialWasteOutputsViewModel) :
-                this.View("MaterialWasteOutputsEstimated", materialWasteOutputsViewModel);
+            return materialWasteInputsViewModel.WasteLastYear == true ?
+                View("MaterialWasteInputsLastYear", materialWasteInputsViewModel) :
+                View("MaterialWasteInputsEstimated", materialWasteInputsViewModel);
         }
 
         /// <summary>
@@ -360,42 +328,29 @@
         /// <param name="viewModel">View model used for data input.</param>
         /// <param name="saveButton">Save button.</param>
         /// <returns>Does a page redirect.</returns>
-        [HttpPost("MaterialWasteOutputs")]
-        public async Task<IActionResult> MaterialWasteOutputs(
-            MaterialWasteOutputsViewModel viewModel,
+        [HttpPost("MaterialWasteInputs")]
+        public async Task<IActionResult> MaterialWasteInputs(
+            MaterialWasteInputsViewModel viewModel,
             SaveButton saveButton)
         {
-            if (!this.ModelState.IsValidForSaveForLater(
+            if (!ModelState.IsValidForSaveForLater(
                 saveButton,
-                MaterialWasteOutputsLastYearResources.UkPackagingWasteBlank,
-                MaterialWasteOutputsLastYearResources.NonUkPackagingWasteBlank,
-                MaterialWasteOutputsLastYearResources.NonPackagingWasteBlank))
+                MaterialWasteInputsLastYearResources.UkPackagingWasteBlank,
+                MaterialWasteInputsLastYearResources.NonUkPackagingWasteBlank,
+                MaterialWasteInputsLastYearResources.NonPackagingWasteBlank))
             {
-                return await this.MaterialWasteOutputs(
-                    viewModel.Id,
-                    viewModel.MaterialId);
+                return View(viewModel.WasteLastYear.Value ? "MaterialWasteInputsLastYear" : "MaterialWasteInputsEstimated");
             }
 
-            await this._accreditationSiteMaterialService.UpdateMaterialWasteOutputs(viewModel);
+            await _accreditationSiteMaterialService.UpdateMaterialWasteInputs(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                // this is all the data we require to save for come back later
-                await this._saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                NonWasteInputsRouteName,
+                new
+                {
                     viewModel.Id,
-                    this._httpContextAccessor.HttpContext.GetRouteData().Values);
-                return this.View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    NonWasteInputsRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         /// <summary>
@@ -491,26 +446,13 @@
 
             await _accreditationSiteMaterialService.UpdateProductsProduced(viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteNonWasteInputsRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
+            return RedirectToRoute(
+                AuthorityRouteName,
+                new
+                {
                     viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    AuthorityRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
+                    viewModel.MaterialId
+                });
         }
 
         /// <summary>
@@ -559,28 +501,164 @@
 
             await _accreditationSiteMaterialService.UpdateReprocessedWasteLastYear(viewModel);
 
-            if (saveButton == SaveButton.SaveAndContinue)
-            {
-                return RedirectToRoute(
-                    NonWasteInputsRouteName,
-                    new
-                    {
-                        id = viewModel.Id,
-                        viewModel.MaterialId
-                    });
-            }
-
-            // this is all the data we require to save for come back later
-            await _saveAndComeBackService.AddSaveAndComeBack(
-                viewModel.Id,
-                _httpContextAccessor.HttpContext.GetRouteData().Values);
-            return View("_ApplicationSaved");
+            return RedirectToRoute(
+                MaterialWasteInputsRouteName,
+                new
+                {
+                    id = viewModel.Id,
+                    viewModel.MaterialId
+                });
         }
 
         [HttpGet("Authority", Name = "Authority")]
         public Task<IActionResult> Authority()
         {
             return null;
+        }
+
+        /// <summary>
+        /// Checks if a 2024 NPWD accreditation number is present
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>The view result</returns>
+        [HttpGet("HasNpwdAccreditationNumber")]
+        public async Task<IActionResult> CheckNpwdAccreditationNumber(
+            Guid? id,
+            Guid? materialId)
+        {
+            _backPageViewModel.Url = _urlHelper.ActionLink(
+                "AuthorityToIssuePrn",
+                "Accreditation",
+                new
+                {
+                    Id = id,
+                    MaterialId = materialId
+                });
+
+            if (id != null &&
+                materialId != null)
+            {
+                var viewModel = await _accreditationSiteMaterialService.GetHasAccreditationNumViewModel(
+                    id.Value,
+                    materialId.Value);
+
+                return View(viewModel);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        /// <summary>
+        /// Updates if the 2024 NPWD accreditation number is present
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <param name="saveButton">Enum for if it's continue or come back</param>
+        /// <returns>Task completed asynchronously</returns>
+        [HttpPost("HasNpwdAccreditationNumber")]
+        public async Task<IActionResult> CheckNpwdAccreditationNumber(
+            HasNpwdAccreditationNumViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                HasNpwdAccrNumResources.ErrorMessage))
+            {
+                return View(viewModel);
+            }
+
+            await _accreditationSiteMaterialService.UpdateHasNpwdAccreditationNumber(viewModel);
+            var actionResult = default(ActionResult);
+
+            if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.Has2024NPWDAccreditationNumber.Value == true)
+            {
+                actionResult = RedirectToAction("NpwdAccreditationNumber", "SiteMaterial", new
+                {
+                    viewModel.Id,
+                    viewModel.MaterialId
+                });
+            }
+            else if (saveButton == SaveButton.SaveAndContinue &&
+                viewModel.Has2024NPWDAccreditationNumber.Value == false)
+            {
+                actionResult = RedirectToAction("CheckYourAnswers", "Accreditation", new { viewModel.Id });
+            }
+
+            if (actionResult != null)
+            {
+                return actionResult;
+            }
+
+            return new EmptyResult();
+        }
+
+        /// <summary>
+        /// User can enter or update the Npwd number
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>The view result</returns>
+        [HttpGet("NpwdAccreditationNumber")]
+        public async Task<IActionResult> NpwdAccreditationNumber(
+            Guid? id,
+            Guid? materialId)
+        {
+            _backPageViewModel.Url = _urlHelper.ActionLink(
+                "CheckNpwdAccreditationNumber",
+                "SiteMaterial",
+                new
+                {
+                    Id = id,
+                    MaterialId = materialId
+                });
+
+            if (id != null &&
+                materialId != null)
+            {
+                var viewModel = await _accreditationSiteMaterialService.GetAccreditationNumViewModel(
+                    id.Value,
+                    materialId.Value);
+
+                return View(viewModel);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        /// <summary>
+        /// Updates the 2024 NPWD accreditation number
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <param name="saveButton">Enum for if it's continue or come back</param>
+        /// <returns>Task completed asynchronously</returns>
+        [HttpPost("NpwdAccreditationNumber")]
+        public async Task<IActionResult> NpwdAccreditationNumber(
+            NpwdAccreditationNumViewModel viewModel,
+            SaveButton saveButton)
+        {
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                NpwdAccrNumResources.ErrorMessageBlank))
+            {
+                _backPageViewModel.Url = $"/Accreditation/{viewModel.Id}/Site/Material/{viewModel.MaterialId}/HasNpwdAccreditationNumber";
+                return View(viewModel);
+            }
+
+            await _accreditationSiteMaterialService.UpdateNpwdAccreditationNumber(viewModel);
+
+            return RedirectToRoute(
+                "CheckAnswers",
+                new
+                {
+                    id = viewModel.Id,
+                    viewModel.MaterialId,
+                    Section = "AboutMaterial"
+                });
         }
     }
 }

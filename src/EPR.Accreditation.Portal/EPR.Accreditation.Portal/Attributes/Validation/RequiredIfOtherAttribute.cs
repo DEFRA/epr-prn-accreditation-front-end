@@ -48,7 +48,8 @@
                 if (otherPropertyValue == null || string.IsNullOrWhiteSpace(otherPropertyValue.ToString()))
                 {
                     var errorMessage = FormatErrorMessage(validationContext.DisplayName);
-                    return new ValidationResult(ErrorMessage ?? $"{validationContext.DisplayName} requires {_propertyName} to have a value.");
+
+                    return new ValidationResult(errorMessage ?? $"{validationContext.DisplayName} requires {_propertyName} to have a value.");
                 }
             }
 

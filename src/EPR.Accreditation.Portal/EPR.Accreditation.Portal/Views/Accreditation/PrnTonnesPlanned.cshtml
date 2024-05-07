@@ -1,0 +1,47 @@
+﻿@using EPR.Accreditation.Portal.Options
+@using EPR.Accreditation.Portal.Resources;
+@using EPR.Accreditation.Portal.Common.Enums
+@using Microsoft.Extensions.Options
+@using System.Globalization
+@inject IOptions<AppSettingsConfigOptions> appSettings;
+@model EPR.Accreditation.Portal.ViewModels.PrnTonnesPlannedViewModel
+
+@{
+    ViewData["Title"] = @PrnTonnesPlannedResources.PageTitle;
+}
+
+<partial name="_ValidationSummary" />
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">
+            <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
+        </p>
+
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <radios asp-for="PrnPlannedTonnesType" asp-title="@PrnTonnesPlannedResources.PageTitle">
+                <p class="govuk-error-message">
+                    <span asp-validation-for="PrnPlannedTonnesType"></span>
+                </p>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="PrnPlannedTonnesType" value="@PrnPlannedTonnesType.Upto" aria-describedby="@PrnTonnesPlannedResources.Upto">
+                    <label class="govuk-label govuk-radios__label" for="@PrnTonnesPlannedResources.Upto">
+                        @PrnTonnesPlannedResources.Upto: £@appSettings.Value.PrnTonnageUpto400Fee.Value
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" type="radio" asp-for="PrnPlannedTonnesType" value="@PrnPlannedTonnesType.Over" aria-describedby="@PrnTonnesPlannedResources.Over">
+                    <label class="govuk-label govuk-radios__label" for="@PrnTonnesPlannedResources.Upto">
+                        @PrnTonnesPlannedResources.Over: £@appSettings.Value.PrnTonnageOver400Fee.Value
+                    </label>
+                </div>
+
+            </radios>
+
+            <partial name="_SaveButtons" />
+        </form>
+    </div>
+</div>

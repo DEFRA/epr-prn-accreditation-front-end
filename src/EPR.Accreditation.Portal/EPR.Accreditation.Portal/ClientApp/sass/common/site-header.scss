@@ -1,4 +1,11 @@
-.govuk-header__language{
-    color: white;
-    text-decoration: none;
+.govuk-header__navigation--end {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    .govuk-header__language {
+        color: white;
+        text-decoration: none;
+    }
 }

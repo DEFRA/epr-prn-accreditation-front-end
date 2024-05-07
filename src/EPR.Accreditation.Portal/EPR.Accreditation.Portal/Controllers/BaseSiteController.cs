@@ -11,15 +11,12 @@
     /// <summary>
     /// Base class for Sites and Overseas Sites
     /// </summary>
-    public abstract class BaseSiteController : Controller
+    public abstract class BaseSiteController : BaseController
     {
         // overriden in inheriting classes
 #pragma warning disable SA1401 // FieldsMustBePrivate
         protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly IUrlHelperWrapper _urlHelper;
         protected readonly IAccreditationSiteMaterialService _accreditationSiteMaterialService;
-        protected readonly ISaveAndComeBackService _saveAndComeBackService;
-        protected readonly BackPageViewModel _backPageViewModel;
         protected string _siteChooseMaterialRouteName;
         protected string _siteProcessingCapacityRouteName;
         protected string _siteNonWasteInputsRouteName;
@@ -40,17 +37,16 @@
             IHttpContextAccessor httpContextAccessor,
             IUrlHelperWrapper urlHelper,
             IAccreditationSiteMaterialService accreditationSiteMaterialService,
-            ISaveAndComeBackService saveAndComeBackService,
             BackPageViewModel backPageViewModel,
             SiteType siteType)
+            : base(
+                  httpContextAccessor,
+                  urlHelper,
+                  backPageViewModel)
         {
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _siteType = siteType;
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-            _urlHelper = urlHelper ?? throw new ArgumentNullException(nameof(urlHelper));
             _accreditationSiteMaterialService = accreditationSiteMaterialService ?? throw new ArgumentNullException(nameof(accreditationSiteMaterialService));
-            _saveAndComeBackService = saveAndComeBackService ?? throw new ArgumentNullException(nameof(saveAndComeBackService));
-            _backPageViewModel = backPageViewModel ?? throw new ArgumentNullException(nameof(backPageViewModel));
         }
 
         protected async Task<IActionResult> GetMaterialWasteSource(
@@ -74,6 +70,8 @@
             WasteSourceViewModel viewModel,
             SaveButton saveButton)
         {
+            PopulateBackModel(_siteChooseMaterialRouteName);
+
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,
                 WasteSourceResources.NoSourceSupplied))
@@ -90,42 +88,13 @@
                 _siteType,
                 viewModel);
 
-            if (saveButton == SaveButton.SaveAndComeBack)
-            {
-                PopulateBackModel(_siteChooseMaterialRouteName);
-
-                // this is all the data we require to save for come back later
-                await _saveAndComeBackService.AddSaveAndComeBack(
-                    viewModel.Id,
-                    _httpContextAccessor.HttpContext.GetRouteData().Values);
-                return View("_ApplicationSaved");
-            }
-            else
-            {
-                return RedirectToRoute(
-                    _siteProcessingCapacityRouteName,
-                    new
-                    {
-                        viewModel.Id,
-                        viewModel.SiteId,
-                        viewModel.MaterialId
-                    });
-            }
-        }
-
-        protected void PopulateBackModel(string action)
-        {
-            var idValue = _httpContextAccessor.HttpContext.Request.RouteValues["id"];
-            var siteId = _httpContextAccessor.HttpContext.Request.RouteValues["siteId"];
-            var materialIdValue = _httpContextAccessor.HttpContext.Request.RouteValues["materialId"];
-
-            _backPageViewModel.Url = _urlHelper.RouteUrl(
-                action,
+            return RedirectToRoute(
+                _siteProcessingCapacityRouteName,
                 new
                 {
-                    id = idValue,
-                    siteId = siteId,
-                    materialId = materialIdValue
+                    viewModel.Id,
+                    viewModel.SiteId,
+                    viewModel.MaterialId
                 });
         }
     }

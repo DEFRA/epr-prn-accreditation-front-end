@@ -34,8 +34,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\CompletionResources.cy-GB.Designer.cs">
-      <DependentUpon>CompletionResources.cy-GB.resx</DependentUpon>
+    <Compile Update="Resources\AddressResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddressResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\LegalDocumentsAddressResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LegalDocumentsAddressResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\NpwdAccrNumResources.cy-GB.Designer.cs">
+      <DependentUpon>NpwdAccrNumResources.cy-GB.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\NpwdAccrNumResources.Designer.cs">
+      <DependentUpon>NpwdAccrNumResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\HasNpwdAccrNumResources.cy-GB.Designer.cs">
+      <DependentUpon>HasNpwdAccrNumResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -69,6 +89,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MaterialWasteOutputsLastYearResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\OverseasReprocessorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OverseasReprocessorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\HasNpwdAccrNumResources.Designer.cs">
+      <DependentUpon>HasNpwdAccrNumResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\PrnTonnesPlannedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrnTonnesPlannedResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\ProductsProducedLastYearResources.Designer.cs">
       <DependentUpon>ProductsProducedLastYearResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -78,11 +113,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductsProducedEstimatedResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\ReprocessorDetailsResources.cy-GB.Designer.cs">
-      <DependentUpon>ReprocessorDetailsResources.cy-GB.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\ReprocessorDetailsResources.Designer.cs">
       <DependentUpon>ReprocessorDetailsResources.resx</DependentUpon>
@@ -103,6 +133,7 @@
       <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>SiteAddressResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\TaskListSiteResources.Designer.cs">
       <DependentUpon>TaskListSiteResources.resx</DependentUpon>
@@ -111,16 +142,6 @@
     </Compile>
     <Compile Update="Resources\ExemptionReferencesResources.Designer.cs">
       <DependentUpon>ExemptionReferencesResources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-	<Compile Update="Resources\ExemptionReferencesResources.cy-GB.Designer.cs">
-		<DependentUpon>ExemptionReferencesResources.cy-GB.resx</DependentUpon>
-		<DesignTime>True</DesignTime>
-		<AutoGen>True</AutoGen>
-	</Compile>
-    <Compile Update="Resources\TaskListResources.cy-GB.Designer.cs">
-      <DependentUpon>TaskListResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -134,28 +155,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WasteDescriptionCodeResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\WasteLastYearResources.cy-GB.Designer.cs">
-      <DependentUpon>WasteLastYearResources.cy-GB.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="Resources\WasteLastYearResources.Designer.cs">
       <DependentUpon>WasteLastYearResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Resources\PermitExemptionResources.cy-GB.Designer.cs">
-      <DependentUpon>PermitExemptionResources.cy-GB.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="Resources\PermitExemptionResources.Designer.cs">
       <DependentUpon>PermitExemptionResources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\ApplicationSavedResources.cy-GB.Designer.cs">
-      <DependentUpon>ApplicationSavedResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -178,11 +184,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>OperatorTypeResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\PhaseBannerResources.cy-GB.Designer.cs">
-      <DependentUpon>PhaseBannerResources.cy-GB.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\PhaseBannerResources.Designer.cs">
       <DependentUpon>PhaseBannerResources.resx</DependentUpon>
@@ -207,6 +208,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\AddressResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AddressResources.cy-GB.resx">
+      <LastGenOutput>ApplicationSavedResources - Copy.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\LegalDocumentsAddressResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LegalDocumentsAddressResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\NpwdAccrNumResources.cy-GB.resx">
+      <LastGenOutput>NpwdAccrNumResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\NpwdAccrNumResources.resx">
+      <LastGenOutput>NpwdAccrNumResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\HasNpwdAccrNumResources.cy-GB.resx">
+      <LastGenOutput>HasNpwdAccrNumResources.cy-GB.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\CompletionResources.cy-GB.resx">
       <LastGenOutput>CompletionResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -241,6 +266,21 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialWasteOutputsLastYearResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\OverseasReprocessorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OverseasReprocessorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\HasNpwdAccrNumResources.resx">
+      <LastGenOutput>HasNpwdAccrNumResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PrnTonnesPlannedResources.cy-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PrnTonnesPlannedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrnTonnesPlannedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\ProductsProducedLastYearResources.resx">
       <LastGenOutput>ProductsProducedLastYearResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -268,20 +308,25 @@
       <LastGenOutput>OverseasSiteOutputsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ReprocessorDetailsResources.cy-GB.resx">
-      <LastGenOutput>ReprocessorDetailsResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ReprocessorDetailsResources.resx">
       <LastGenOutput>ReprocessorDetailsResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SiteAddressResources.cy-GB.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SiteAddressResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteAddressResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\CompletionResources.resx">
       <LastGenOutput>CompletionResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
-      <LastGenOutput>TaskListSiteResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.resx">
       <LastGenOutput>TaskListSiteResources.Designer.cs</LastGenOutput>
@@ -292,8 +337,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListResources.cy-GB.resx">
-      <LastGenOutput>TaskListResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListResources.resx">
       <LastGenOutput>TaskListResources.Designer.cs</LastGenOutput>
@@ -304,24 +348,21 @@
       <LastGenOutput>WasteDescriptionCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\WasteLastYearResources.cy-GB.resx">
-      <LastGenOutput>WasteLastYearResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\WasteLastYearResources.resx">
       <LastGenOutput>WasteLastYearResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PermitExemptionResources.cy-GB.resx">
-      <LastGenOutput>PermitExemptionResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PermitExemptionResources.resx">
       <LastGenOutput>PermitExemptionResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ApplicationSavedResources.cy-GB.resx">
-      <LastGenOutput>ApplicationSavedResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\GovFrontEndTextOverrideResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -343,8 +384,7 @@
       <LastGenOutput>OperatorTypeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PhaseBannerResources.cy-GB.resx">
-      <LastGenOutput>PhaseBannerResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PhaseBannerResources.resx">
       <LastGenOutput>PhaseBannerResources.Designer.cs</LastGenOutput>

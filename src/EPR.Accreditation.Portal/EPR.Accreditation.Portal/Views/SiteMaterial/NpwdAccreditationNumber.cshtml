@@ -1,0 +1,46 @@
+﻿@using EPR.Accreditation.Portal.ViewModels.SiteMaterial
+@using EPR.Accreditation.Portal.Configuration
+@using EPR.Accreditation.Portal.Options
+@using Microsoft.Extensions.Options
+@inject MaterialTypeViewModel materialTypeViewModel;
+@inject IOptions<AppSettingsConfigOptions> appSettings;
+@inject IOptions<ContentLinksConfiguration> contentLinksSettings;
+@model NpwdAccreditationNumViewModel
+
+@{
+    ViewData["Title"] = NpwdAccrNumResources.PageTitle + materialTypeViewModel.Name;
+}
+
+<partial name="_ValidationSummary" />
+<partial name="_WasteMaterialName" />
+<form method="post">
+    <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-heading-l">
+                    @NpwdAccrNumResources.PageTitle @materialTypeViewModel.Name
+                </h1>
+                <p class="govuk-body">@NpwdAccrNumResources.P1
+                    <a href="@contentLinksSettings.Value.NationalPackagingWasteDb"
+                        target="_blank">@NpwdAccrNumResources.LinkText
+                    </a>
+                </p>
+                <h2 class="govuk-heading-m">@NpwdAccrNumResources.H2 @materialTypeViewModel.Name</h2>
+            </legend>
+            <div id="event-name-hint" class="govuk-hint">
+                @NpwdAccrNumResources.HintText
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-input__wrapper">
+                    <input
+                        class="govuk-input govuk-input--width-10"
+                        name="AccreditationNumber"
+                        asp-for="AccreditationNumber"
+                        type="text" spellcheck="false"
+                    >
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <partial name="_SaveButtons" />
+</form>

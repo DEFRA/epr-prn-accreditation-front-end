@@ -1,6 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.RESTservices.Interfaces
 {
-    using EPR.Accreditation.Facade.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos;
     using EPR.Accreditation.Portal.Common.Dtos.Portal;
     using EPR.Accreditation.Portal.Common.Enums;
@@ -9,15 +8,17 @@
 
     public interface IHttpAccreditationService
     {
-        Task CreateWastePermit(Guid accreditationId, LicensesAndPermitsReferences wastePermit);
+        Task CreateWastePermit(
+            Guid id,
+            LicensesAndPermitsReferences wastePermit);
 
-        Task<LicensesAndPermitsReferences> GetWastePermit(Guid accreditationId);
+        Task<LicensesAndPermitsReferences> GetWastePermit(Guid id);
 
-        Task<OperatorType> GetOperatorType(Guid accreditationExternalId);
+        Task<OperatorType> GetOperatorType(Guid id);
 
         Task<Guid> CreateAccreditation(DTO.Accreditation accreditation);
 
-        Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid accreditationExternalId);
+        Task<CheckYourAnswersDto> GetCheckYourAnswers(Guid id);
 
         Task<Site> GetSite(Guid siteId);
 
@@ -28,5 +29,27 @@
         Task<string> GetReferenceNumber(Guid accreditationExternalId);
 
         Task<decimal> GetAccreditationFee(Guid accreditationExternalId);
+        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
+
+        Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
+
+        Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
+
+        /// <summary>
+        /// Gets the legal documents address for the accreditation
+        /// </summary>
+        /// <param name="id">The id of the accreditation</param>
+        /// <returns>The DTO Address object</returns>
+        Task<AddressDto> GetLegalDocumentsAddress(Guid id);
+
+        /// <summary>
+        /// Saves the address for the legal documents
+        /// </summary>
+        /// <param name="id">Id of the accreditation for the legal documents</param>
+        /// <param name="address">The DTO address object</param>
+        /// <returns>async task</returns>
+        Task UpdateLegalDocumentsAddress(
+            Guid id,
+            AddressDto address);
     }
 }

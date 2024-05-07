@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ReprocessorDetailsResources___Copy {
+    public class OverseasReprocessorResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ReprocessorDetailsResources___Copy() {
+        internal OverseasReprocessorResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.ReprocessorDetailsResources - Copy", typeof(ReprocessorDetailsResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.OverseasReprocessorResources", typeof(OverseasReprocessorResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,70 +61,34 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address.
+        ///   Looks up a localized string similar to You can apply with no overseas reprocessing sites and add them once accredited..
         /// </summary>
-        public static string Address {
+        public static string Hint1 {
             get {
-                return ResourceManager.GetString("Address", resourceCulture);
+                return ResourceManager.GetString("Hint1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a country.
+        ///   Looks up a localized string similar to For sites you add after your intial accreditation, you must pay £85 for the first site and £35 for each additional site. You cannot issue PERNs until you have added overseas sites..
         /// </summary>
-        public static string DefaultOption {
+        public static string Hint2 {
             get {
-                return ResourceManager.GetString("DefaultOption", resourceCulture);
+                return ResourceManager.GetString("Hint2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Address.
+        ///   Looks up a localized string similar to No, I will add them later.
         /// </summary>
-        public static string ErrorAddress {
+        public static string NoText {
             get {
-                return ResourceManager.GetString("ErrorAddress", resourceCulture);
+                return ResourceManager.GetString("NoText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter country.
-        /// </summary>
-        public static string ErrorCountry {
-            get {
-                return ResourceManager.GetString("ErrorCountry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter Organisation name.
-        /// </summary>
-        public static string ErrorOrgName {
-            get {
-                return ResourceManager.GetString("ErrorOrgName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Organisation name.
-        /// </summary>
-        public static string OrgName {
-            get {
-                return ResourceManager.GetString("OrgName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessor details.
-        /// </summary>
-        public static string PageHeading {
-            get {
-                return ResourceManager.GetString("PageHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Overseas reprocessor details.
+        ///   Looks up a localized string similar to Overseas reprocessor.
         /// </summary>
         public static string PageTitle {
             get {
@@ -133,11 +97,11 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select country.
+        ///   Looks up a localized string similar to Select a radio button before moving.
         /// </summary>
-        public static string SelectCountry {
+        public static string SelectionError {
             get {
-                return ResourceManager.GetString("SelectCountry", resourceCulture);
+                return ResourceManager.GetString("SelectionError", resourceCulture);
             }
         }
     }

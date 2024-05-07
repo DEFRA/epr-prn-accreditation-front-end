@@ -105,6 +105,7 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
                 overseasSiteExternalId);
             var vm = _mapper.Map<OverseasReprocessingSiteOutputsViewModel>(overseasSiteOutputs);
             vm.Id = accreditationExternalId;
+            vm.ExternalId = overseasSiteExternalId;
             return vm;
         }
 

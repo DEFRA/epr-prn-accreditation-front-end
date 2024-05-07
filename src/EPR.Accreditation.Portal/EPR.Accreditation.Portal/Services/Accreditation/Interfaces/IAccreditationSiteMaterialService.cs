@@ -8,8 +8,8 @@
     {
         // available for both reprocessor and exporter
         Task<string> GetWasteName(
+            SiteType siteType,
             Guid id,
-            Guid? siteId,
             Guid materialId);
 
         // available for both reprocessor and exporter
@@ -62,14 +62,16 @@
         /// <param name="id">Accreditation id.</param>
         /// <param name="materialId">Material id.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        Task<MaterialWasteOutputsViewModel> GetMaterialWasteOutputs(Guid id, Guid materialId);
+        Task<MaterialWasteInputsViewModel> GetMaterialWasteInputs(
+            Guid id,
+            Guid materialId);
 
         /// <summary>
         /// Updates annual waste (actual or estimated) data.
         /// </summary>
-        /// <param name="materialWasteOutputsViewModel"> Material waste output view model.</param>
+        /// <param name="materialWasteInputsViewModel"> Material waste input view model.</param>
         /// <returns>A <see cref="Task{TResult}"/> Nothing returned.</returns>
-        Task UpdateMaterialWasteOutputs(MaterialWasteOutputsViewModel materialWasteOutputsViewModel);
+        Task UpdateMaterialWasteInputs(MaterialWasteInputsViewModel materialWasteInputsViewModel);
 
         /// <summary>
         /// Gets the view model and any relevant data fore the waste description code page
@@ -90,5 +92,39 @@
         /// <returns>Async task</returns>
         Task UpdateWasteDescriptionCodeViewModel(
             WasteDescriptionCodeViewModel wasteDescriptionCodeViewModel);
+
+        /// <summary>
+        /// Gets the view model to drive the view
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task<HasNpwdAccreditationNumViewModel> GetHasAccreditationNumViewModel(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Saves the data from the submitted view model
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateHasNpwdAccreditationNumber(HasNpwdAccreditationNumViewModel viewModel);
+
+        /// <summary>
+        /// Gets the view model to drive the view
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="materialId">Material ID</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task<NpwdAccreditationNumViewModel> GetAccreditationNumViewModel(
+            Guid id,
+            Guid materialId);
+
+        /// <summary>
+        /// Saves the data from the submitted view model
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
+        Task UpdateNpwdAccreditationNumber(NpwdAccreditationNumViewModel viewModel);
     }
 }

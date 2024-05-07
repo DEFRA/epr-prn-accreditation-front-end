@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ApplicationSavedResources___Copy {
+    public class LegalDocumentsAddressResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ApplicationSavedResources___Copy() {
+        internal LegalDocumentsAddressResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.ApplicationSavedResources - Copy", typeof(ApplicationSavedResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.LegalDocumentsAddressResources", typeof(LegalDocumentsAddressResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,34 +61,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application saved..
-        /// </summary>
-        public static string BannerHeading {
-            get {
-                return ResourceManager.GetString("BannerHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Success.
-        /// </summary>
-        public static string BannerTitle {
-            get {
-                return ResourceManager.GetString("BannerTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Account home.
-        /// </summary>
-        public static string BtnText {
-            get {
-                return ResourceManager.GetString("BtnText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Application saved.
+        ///   Looks up a localized string similar to UK address for the legal documents.
         /// </summary>
         public static string PageTitle {
             get {
@@ -97,20 +70,11 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can return to this application at any point over the next .
+        ///   Looks up a localized string similar to This must be an address in the UK.
         /// </summary>
-        public static string ParagraphTextP1 {
+        public static string Subtitle {
             get {
-                return ResourceManager.GetString("ParagraphTextP1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to days and pick up where you left off..
-        /// </summary>
-        public static string ParagraphTextP2 {
-            get {
-                return ResourceManager.GetString("ParagraphTextP2", resourceCulture);
+                return ResourceManager.GetString("Subtitle", resourceCulture);
             }
         }
     }

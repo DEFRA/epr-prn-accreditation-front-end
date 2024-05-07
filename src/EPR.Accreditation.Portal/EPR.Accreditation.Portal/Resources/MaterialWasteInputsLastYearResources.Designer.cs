@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ExemptionReferencesResources___Copy {
+    public class MaterialWasteInputsLastYearResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ExemptionReferencesResources___Copy() {
+        internal MaterialWasteInputsLastYearResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.ExemptionReferencesResources - Copy", typeof(ExemptionReferencesResources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.MaterialWasteInputsLastYearResources", typeof(MaterialWasteInputsLastYearResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,92 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter an exemption reference.
+        ///   Looks up a localized string similar to Enter waste material outputs before moving.
         /// </summary>
-        public static string ErrorMessageBlank {
+        public static string NonPackagingWasteBlank {
             get {
-                return ResourceManager.GetString("ErrorMessageBlank", resourceCulture);
+                return ResourceManager.GetString("NonPackagingWasteBlank", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exemption reference number already added.
+        ///   Looks up a localized string similar to Non-UK packaging waste.
         /// </summary>
-        public static string ErrorMessageDuplicate {
+        public static string NonPackagingWasteField {
             get {
-                return ResourceManager.GetString("ErrorMessageDuplicate", resourceCulture);
+                return ResourceManager.GetString("NonPackagingWasteField", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reference number must include letters, numbers  or &apos;/&apos; only.
+        ///   Looks up a localized string similar to Non-UK packaging waste.
         /// </summary>
-        public static string ErrorMessageInvalidFormat {
+        public static string NonPackagingWasteHint {
             get {
-                return ResourceManager.GetString("ErrorMessageInvalidFormat", resourceCulture);
+                return ResourceManager.GetString("NonPackagingWasteHint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reference number must not exceed 20 characters.
+        ///   Looks up a localized string similar to Enter waste material outputs before moving.
         /// </summary>
-        public static string ErrorMessageTooLong {
+        public static string NonUkPackagingWasteBlank {
             get {
-                return ResourceManager.GetString("ErrorMessageTooLong", resourceCulture);
+                return ResourceManager.GetString("NonUkPackagingWasteBlank", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leave blank once you have entered all of your waste exemption references..
+        ///   Looks up a localized string similar to Non-packaging waste.
         /// </summary>
-        public static string P1 {
+        public static string NonUkPackagingWasteField {
             get {
-                return ResourceManager.GetString("P1", resourceCulture);
+                return ResourceManager.GetString("NonUkPackagingWasteField", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter all your exemption references.
+        ///   Looks up a localized string similar to Non-packaging waste.
         /// </summary>
-        public static string PageHeading {
+        public static string NonUkPackagingWasteHint {
             get {
-                return ResourceManager.GetString("PageHeading", resourceCulture);
+                return ResourceManager.GetString("NonUkPackagingWasteHint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter all your exemption references.
+        ///   Looks up a localized string similar to Enter your waste inputs for the last calendar year.
         /// </summary>
-        public static string PageTitle {
+        public static string Title {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter waste material outputs before moving.
+        /// </summary>
+        public static string UkPackagingWasteBlank {
+            get {
+                return ResourceManager.GetString("UkPackagingWasteBlank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UK packaging waste.
+        /// </summary>
+        public static string UkPackagingWasteField {
+            get {
+                return ResourceManager.GetString("UkPackagingWasteField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UK packaging waste.
+        /// </summary>
+        public static string UkPackagingWasteHint {
+            get {
+                return ResourceManager.GetString("UkPackagingWasteHint", resourceCulture);
             }
         }
     }

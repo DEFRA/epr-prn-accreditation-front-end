@@ -120,11 +120,17 @@
   <data name="AtLeastOneEntryRequired" xml:space="preserve">
     <value>Enter non-waste inputs before moving</value>
   </data>
+  <data name="OnlyLettersAllowed" xml:space="preserve">
+    <value>Only letters can been entered</value>
+  </data>
   <data name="SubTitle" xml:space="preserve">
     <value>Specify the type and quantity of each non-waste material used, in tonnes. For example, sandstone, limestones or dolomite</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Enter your non-waste inputs for the last calender year</value>
+  </data>
+  <data name="TonnesNotWithinRange" xml:space="preserve">
+    <value>Tonnes must be greater than 0 and equal to or less than 1,000,000.000</value>
   </data>
   <data name="TonnesRequired" xml:space="preserve">
     <value>Tonnes field is required when type has been entered</value>
