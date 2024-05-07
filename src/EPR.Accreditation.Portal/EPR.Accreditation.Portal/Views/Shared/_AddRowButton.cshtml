@@ -1,6 +1,8 @@
 ﻿@using EPR.Accreditation.Portal.Enums
 @model string
 
-<button class="add-row" type="submit" data-function="@Model" name="saveButton" value="@SaveButton.AddRow">
-    @MasterResources.AddRow
-</button>
+<p>
+    <button class="button-as-link add-row" type="submit" data-function="@Model" name="saveButton" value="@SaveButton.AddRow">
+        @MasterResources.AddRow
+    </button>
+</p>

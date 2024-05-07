@@ -5,35 +5,38 @@
     ViewData["Title"] = WasteSourceResources.PageTitle;
 }
 
-<partial name="_ValidationSummary" />
-<partial name="_WasteMaterialName" />
-<form method="post">
-    <partial name="_WasteMaterialName" />
-    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
+<div class="govuk-grid-column-two-thirds">
+    <partial name="_ValidationSummary" />
+    <form method="post">
         <div class="govuk-form-group">
-            <p class="govuk-error-message">
-                <span asp-validation-for="WasteSource"></span>
-            </p>
-
-            <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
+            <fieldset class="govuk-fieldset">
                 <div class="govuk-form-group">
-                    <h1 class="govuk-label-wrapper">
-                        <label class="govuk-label govuk-label--l" for="with-hint">
-                            @WasteSourceResources.PageTitle
-                        </label>
-                    </h1>
-                    <div id="with-hint-hint" class="govuk-hint">
-                        @WasteSourceResources.InfoText
+                    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="200">
+                        <div class="govuk-form-group">
+                            <h1 class="govuk-label-wrapper">
+                                <partial name="_WasteMaterialName" />
+                                <label class="govuk-label govuk-label--l" for="with-hint">
+                                    @WasteSourceResources.PageTitle
+                                </label>
+                            </h1>
+                            <p id="with-hint-hint" class="govuk-body-m">
+                                @WasteSourceResources.InfoText
+                            </p>
+                            <p class="govuk-error-message">
+                                <span asp-validation-for="WasteSource"></span>
+                            </p>
+                            <textarea class="govuk-textarea govuk-js-character-count" asp-for="WasteSource" rows="5" aria-describedby="with-hint-info with-hint-hint"></textarea>
+                            
+                            <div id="WasteSource-info" class="govuk-hint govuk-character-count__message">
+                                You can enter up to 200 characters
+                            </div>
+                            
+
+                        </div>
                     </div>
-                    <textarea class="govuk-textarea govuk-js-character-count" asp-for="WasteSource" rows="5" aria-describedby="with-hint-info with-hint-hint"></textarea>
                 </div>
-                <div id="WasteSource-info" class="govuk-hint govuk-character-count__message">
-                    You can enter up to 200 characters
-                </div>
-            </div>
-
+            </fieldset>
         </div>
-    </div>
-
-    <partial name="_SaveButtons" />
-</form>
+        <partial name="_SaveButtons" />
+    </form>
+</div>

@@ -121,10 +121,10 @@
     <value>feedback</value>
   </data>
   <data name="BannerText_P1" xml:space="preserve">
-    <value>This is a new service – your </value>
+    <value>This is a new service - your </value>
   </data>
   <data name="BannerText_P2" xml:space="preserve">
-    <value>will help us to improve it.</value>
+    <value>will help us improve it.</value>
   </data>
   <data name="Tag" xml:space="preserve">
     <value>Private Beta</value>
