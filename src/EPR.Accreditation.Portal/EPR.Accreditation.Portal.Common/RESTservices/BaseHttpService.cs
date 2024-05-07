@@ -72,7 +72,7 @@
         {
             CheckUrl(url);
 
-            url = $"{_baseUrl}/{url}";
+            url = $"{_baseUrl}/{url}/";
 
             return await Send<T>(CreateMessage(url, payload, HttpMethod.Post));
         }
