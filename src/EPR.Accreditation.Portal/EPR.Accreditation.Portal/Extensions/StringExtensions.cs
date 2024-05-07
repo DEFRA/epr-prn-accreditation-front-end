@@ -1,20 +1,23 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-namespace EPR.Accreditation.Portal.Extensions
+﻿namespace EPR.Accreditation.Portal.Extensions
 {
     /// <summary>
     /// Static class used for any string extensions that may prove useful
     /// </summary>
     public static class StringExtensions
     {
-        public static string ToHtmlId(this string ItemId)
+        /// <summary>
+        /// Converts an id field into a valid html field name
+        /// </summary>
+        /// <param name="itemId">The name of the field to convert</param>
+        /// <returns>The converted id</returns>
+        public static string ToHtmlId(this string itemId)
         {
-            if (ItemId == null)
+            if (itemId == null)
             {
                 return string.Empty;
             }
 
-            return ItemId.Replace(".", "_").Replace("[", "_").Replace("]", "_");
+            return itemId.Replace(".", "_").Replace("[", "_").Replace("]", "_");
         }
     }
 }
