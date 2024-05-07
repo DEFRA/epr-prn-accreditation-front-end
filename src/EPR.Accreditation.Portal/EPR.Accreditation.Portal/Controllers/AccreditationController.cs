@@ -519,5 +519,25 @@
         {
             return NotFound();
         }
+
+        /// <summary>
+        /// Completion view model.
+        /// </summary>
+        /// <param name="id">The accrediationid.</param>
+        /// <param name="countryCode">The country code.</param>
+        /// <returns>Completion view.</returns>
+        [HttpGet("Completion")]
+        public async Task<IActionResult> Completion(Guid? id, string countryCode)
+        {
+            PopulateBackModel(LegalDocumentsRouteName);
+
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            CompletionViewModel vm = await _accreditationService.Completion(id.Value, countryCode);
+            return View(vm);
+        }
     }
 }

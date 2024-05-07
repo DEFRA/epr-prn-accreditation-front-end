@@ -106,20 +106,19 @@
         }
 
         public async Task UpdateReferenceNumber(
-            Guid id,
-            string referenceNumber)
+            Guid id)
         {
-            await Put<Accreditation>($"{id}/ReferenceNumber", referenceNumber);
+            await Post<Accreditation>($"{id}/ReferenceNumber");
         }
 
-        public async Task<string> GetReferenceNumber(Guid accreditationExternalId)
+        public async Task<string> GetReferenceNumber(Guid Id)
         {
-            return await Get<string>($"{accreditationExternalId}/ReferenceNumber");
+            return await Get<string>($"{Id}/ReferenceNumber");
         }
 
-        public async Task<decimal> GetAccreditationFee(Guid accreditationExternalId)
+        public async Task<decimal> GetAccreditationFee(Guid Id)
         {
-            return await Get<decimal>($"{accreditationExternalId}/AccreditationFee");
+            return await Get<decimal>($"{Id}/AccreditationFee");
         }
     }
 }

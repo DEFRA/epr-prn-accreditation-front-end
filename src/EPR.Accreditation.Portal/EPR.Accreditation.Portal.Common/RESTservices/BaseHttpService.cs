@@ -70,9 +70,9 @@
             string url,
             object payload = null)
         {
-            url = $"{_baseUrl}/{url}";
-
             CheckUrl(url);
+
+            url = $"{_baseUrl}/{url}";
 
             return await Send<T>(CreateMessage(url, payload, HttpMethod.Post));
         }

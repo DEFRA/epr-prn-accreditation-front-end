@@ -22,13 +22,13 @@
 
         Task<Site> GetSite(Guid siteId);
 
-        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid accreditationExternalId);
+        Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
 
-        Task UpdateReferenceNumber(Guid accreditationId, string referenceNumber);
+        Task UpdateReferenceNumber(Guid accreditationId);
 
-        Task<string> GetReferenceNumber(Guid accreditationExternalId);
+        Task<string> GetReferenceNumber(Guid id);
 
-        Task<decimal> GetAccreditationFee(Guid accreditationExternalId);
+        Task<decimal> GetAccreditationFee(Guid id);
 
         Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
 

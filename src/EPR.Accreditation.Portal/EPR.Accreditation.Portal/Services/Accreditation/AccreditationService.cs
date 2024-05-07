@@ -11,7 +11,6 @@
 
     public class AccreditationService : IAccreditationService
     {
-        private static Random random = new Random();
         private readonly IMapper _mapper;
         private readonly RESTservices.Interfaces.IHttpAccreditationService _httpAccreditationService;
 
@@ -155,9 +154,8 @@
 
         public async Task<CompletionViewModel> Completion(Guid id, string countryCode)
         {
-            string referenceNumber = RandomString(12);
-            _httpAccreditationService.UpdateReferenceNumber(id, referenceNumber);
-            referenceNumber = await _httpAccreditationService.GetReferenceNumber(id);
+            await _httpAccreditationService.UpdateReferenceNumber(id);
+            string referenceNumber = await _httpAccreditationService.GetReferenceNumber(id);
             decimal fee = await _httpAccreditationService.GetAccreditationFee(id);
             var result = new CompletionViewModel()
             {
@@ -180,13 +178,6 @@
             }
 
             return Enums.TaskStatus.NotStarted;
-        }
-
-        private string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

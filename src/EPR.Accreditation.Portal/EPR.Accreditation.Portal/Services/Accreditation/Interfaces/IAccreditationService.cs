@@ -40,5 +40,13 @@
         /// <param name="viewModel">The view model containing the address for the legal documents</param>
         /// <returns>async task</returns>
         Task UpdateLegalDocumentsAddress(LegalDocumentsAddressViewModel viewModel);
+
+        /// <summary>
+        /// Completion view model.
+        /// </summary>
+        /// <param name="id">The accrediation id</param>
+        /// <param name="countryCode">The country code.</param>
+        /// <returns>CompletionViewModel</returns>
+        Task<CompletionViewModel> Completion(Guid id, string countryCode);
     }
 }
