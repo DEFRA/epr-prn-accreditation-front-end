@@ -70,7 +70,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is a new service – your .
+        ///   Looks up a localized string similar to This is a new service - your .
         /// </summary>
         public static string BannerText_P1 {
             get {
@@ -79,7 +79,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to will help us to improve it..
+        ///   Looks up a localized string similar to will help us improve it..
         /// </summary>
         public static string BannerText_P2 {
             get {

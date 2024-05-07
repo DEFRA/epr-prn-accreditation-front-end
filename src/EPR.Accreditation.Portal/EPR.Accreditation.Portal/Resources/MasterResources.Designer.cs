@@ -187,6 +187,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to tonnes.
+        /// </summary>
+        public static string TonnesLabelLowerCase {
+            get {
+                return ResourceManager.GetString("TonnesLabelLowerCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Yes {

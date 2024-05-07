@@ -61,7 +61,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify the type and quantity of each non-waste material used, in tonnes. For example, sandstone, limestones or dolomite.
+        ///   Looks up a localized string similar to Specify the type and quantity of each non-waste material used, in tonnes. For example: sandstone, limestones or dolomite..
         /// </summary>
         public static string SubTitle {
             get {
