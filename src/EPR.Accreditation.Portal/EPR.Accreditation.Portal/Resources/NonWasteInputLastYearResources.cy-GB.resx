@@ -124,7 +124,7 @@
     <value>[Welsh]Only letters can been entered</value>
   </data>
   <data name="SubTitle" xml:space="preserve">
-    <value>[Welsh]Specify the type and quantity of each non-waste material used, in tonnes. For example: sandstone, limestones or dolomite</value>
+    <value>[Welsh]Specify the type and quantity of each non-waste material used, in tonnes. For example: sandstone, limestones or dolomite.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>[Welsh]Enter your non-waste inputs for the last calender year</value>

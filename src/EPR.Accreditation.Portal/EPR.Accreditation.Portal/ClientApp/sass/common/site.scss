@@ -14,7 +14,7 @@
     }
 }
 
-button.add-row {
+button.button-as-link {
     background: none !important;
     border: none;
     padding: 0 !important; /*optional*/
@@ -22,7 +22,6 @@ button.add-row {
     color: #069;
     text-decoration: underline;
     cursor: pointer;
-    margin-top: 30px;
     font-family: "GDS Transport", arial, sans-serif;
-    font-size: 1rem;
+    font-size: 1.1875rem;
 }

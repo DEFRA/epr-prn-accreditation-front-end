@@ -1,27 +1,31 @@
-﻿@using EPR.Accreditation.Portal.Resources;
-<div class="govuk-error-summary @(ViewContext.ViewData.ModelState.IsValid ? "govuk-visually-hidden" : string.Empty)" data-module="govuk-error-summary">
-    <div role="alert">
-        <h2 class="govuk-error-summary__title">
-            @MasterResources.SummaryError
-        </h2>
-        <div class="govuk-error-summary__body">
-            <ul class="govuk-list govuk-error-summary__list">
-                @if (!ViewContext.ViewData.ModelState.IsValid)
-                {
-                    foreach (var fieldErrorCollection in ViewContext.ViewData.ModelState)
+﻿@using EPR.Accreditation.Portal.Extensions
+@using EPR.Accreditation.Portal.Resources;
+@if (!ViewContext.ViewData.ModelState.IsValid)
+{
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+            <h2 class="govuk-error-summary__title">
+                @MasterResources.SummaryError
+            </h2>
+            <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                    @if (!ViewContext.ViewData.ModelState.IsValid)
                     {
-                        if (fieldErrorCollection.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-                            continue;
-
-                        foreach (var error in fieldErrorCollection.Value.Errors)
+                        foreach (var fieldErrorCollection in ViewContext.ViewData.ModelState)
                         {
-                            <li>
-                                <a href="#@fieldErrorCollection.Key">@error.ErrorMessage</a>
-                            </li>
+                            if (fieldErrorCollection.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
+                                continue;
+
+                            foreach (var error in fieldErrorCollection.Value.Errors)
+                            {
+                                <li>
+                                    <a href="#@fieldErrorCollection.Key.ToHtmlId()">@error.ErrorMessage</a>
+                                </li>
+                            }
                         }
                     }
-                }
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+}
