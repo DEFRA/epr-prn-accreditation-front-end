@@ -67,14 +67,14 @@
             await Put<Accreditation>($"{id}/ReferenceNumber", referenceNumber);
         }
 
-        public async Task<Accreditation> GetAccreditation(Guid accreditationExternalId)
-        {
-            return await Get<Accreditation>($"{accreditationExternalId}/Accreditation");
-        }
-
         public async Task<string> GetReferenceNumber(Guid accreditationExternalId)
         {
             return await Get<string>($"{accreditationExternalId}/ReferenceNumber");
+        }
+
+        public async Task<decimal> GetAccreditationFee(Guid accreditationExternalId)
+        {
+            return await Get<decimal>($"{accreditationExternalId}/AccreditationFee");
         }
     }
 }

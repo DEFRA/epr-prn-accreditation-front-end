@@ -25,8 +25,8 @@
 
         Task UpdateReferenceNumber(Guid accreditationId, string referenceNumber);
 
-        Task<Accreditation> GetAccreditation(Guid accreditationExternalId);
-
         Task<string> GetReferenceNumber(Guid accreditationExternalId);
+
+        Task<decimal> GetAccreditationFee(Guid accreditationExternalId);
     }
 }

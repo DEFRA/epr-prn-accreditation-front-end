@@ -94,13 +94,14 @@
         {
             string referenceNumber = RandomString(12);
             _httpAccreditationService.UpdateReferenceNumber(id, referenceNumber);
-            var accrediation = await _httpAccreditationService.GetAccreditation(id);
+            referenceNumber = await _httpAccreditationService.GetReferenceNumber(id);
+            decimal fee = await _httpAccreditationService.GetAccreditationFee(id);
             var result = new CompletionViewModel()
             {
                 Id = id,
                 CountryCode = countryCode,
-                AmountDue = (decimal)accrediation.AccreditationFee,
-                ReferenceNumber = accrediation.ReferenceNumber
+                AmountDue = fee,
+                ReferenceNumber = referenceNumber
             };
 
             return result;
