@@ -121,7 +121,7 @@
             services.AddRazorPages()
                 .AddViewOptions(o =>
                 {
-                    o.HtmlHelperOptions.ClientValidationEnabled = configuration.GetValue<bool>("ClientValidationEnabled");
+                    o.HtmlHelperOptions.ClientValidationEnabled = false;
                 });
 
             return services;
