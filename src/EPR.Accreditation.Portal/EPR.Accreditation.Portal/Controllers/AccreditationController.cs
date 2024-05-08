@@ -513,6 +513,8 @@
         [HttpGet("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(Guid? id)
         {
+            PopulateBackModel(TaskListRouteName);
+
             if (!id.HasValue)
             {
                 return NotFound();
@@ -531,14 +533,19 @@
         [HttpPost("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(
             Guid? id,
-            PrnTonnesPlannedViewModel vm)
+            PrnTonnesPlannedViewModel vm,
+            SaveButton saveButton)
         {
+            PopulateBackModel(TaskListRouteName);
+
             if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidForSaveForLater(
+                saveButton,
+                PrnTonnesPlannedResources.MissingSelectionErrorMessage))
             {
                 return View(vm);
             }

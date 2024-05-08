@@ -61,6 +61,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your application fee depends on the tonnage of PRNs you plan to issue. We&apos;ll ask you to pay the fee at the end of your application..
+        /// </summary>
+        public static string Hint {
+            get {
+                return ResourceManager.GetString("Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select a radio button.
         /// </summary>
         public static string MissingSelectionErrorMessage {
