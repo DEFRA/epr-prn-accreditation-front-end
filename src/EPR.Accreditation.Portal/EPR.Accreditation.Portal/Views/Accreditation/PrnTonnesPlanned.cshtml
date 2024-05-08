@@ -14,13 +14,12 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">
-            <a href="/" class="govuk-back-link">@MasterResources.BackLink</a>
-        </p>
 
         <form method="post">
             <input type="hidden" asp-for="Id" />
             <radios asp-for="PrnPlannedTonnesType" asp-title="@PrnTonnesPlannedResources.PageTitle">
+                <p class="govuk-hint">@PrnTonnesPlannedResources.Hint</p>
+
                 <p class="govuk-error-message">
                     <span asp-validation-for="PrnPlannedTonnesType"></span>
                 </p>
