@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Helpers.TagHelpers
 {
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -15,28 +16,59 @@
     [HtmlTargetElement("radios")]
     public class GovInputTagValidationHelper : TagHelper
     {
-        public override int Order => 2;
+        private const string InvalidCssClass = "govuk-form-group--error";
+        private const string ClassString = "class";
 
-        [HtmlAttributeNotBound]
+        /// <summary>
+        /// Gets or sets the model expression for the current property in the view
+        /// Used to match validation errors in the ModelState
+        /// </summary>
+        [HtmlAttributeName("asp-for")]
+        public ModelExpression For { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ViewContext for the current request
+        /// </summary>
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
+        /// <summary>
+        /// The override of the base class Process. Identifies if the ModelState key
+        /// that matches the For and if it is invalid, adds the class to highlight the field
+        /// is invalid
+        /// </summary>
+        /// <param name="context">The TagHelperContext</param>
+        /// <param name="output">The TagHelperOutput</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            // can exit if valid as we don't need to do anything more
-            if (ViewContext.ViewData.ModelState.IsValid)
+            if (For == null)
             {
                 return;
             }
 
-            var outputClass = output.Attributes.FirstOrDefault(a => a.Name == "class");
-
-            if (outputClass == null || !outputClass.Value.ToString().Contains("govuk-form-group", StringComparison.OrdinalIgnoreCase))
+            if (For.ModelExplorer == null)
             {
                 return;
             }
 
-            output.Attributes.SetAttribute("class", $"{outputClass.Value} govuk-form-group--error");
+            if (!ViewContext.ModelState.ContainsKey(For.Name))
+            {
+                return;
+            }
+
+            if (ViewContext.ModelState[For.Name].ValidationState == ModelValidationState.Valid)
+            {
+                return;
+            }
+
+            var currentClass = string.Empty;
+
+            if (output.Attributes[ClassString] != null)
+            {
+                currentClass = output.Attributes[ClassString].Value.ToString();
+            }
+
+            output.Attributes.SetAttribute(ClassString, $"{currentClass} {InvalidCssClass}");
         }
     }
 }
