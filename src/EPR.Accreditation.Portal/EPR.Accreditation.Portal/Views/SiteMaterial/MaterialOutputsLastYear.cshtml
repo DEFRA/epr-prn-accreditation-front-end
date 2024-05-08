@@ -14,7 +14,7 @@
                 @MaterialOutputsLastYearResources.Title
             </h1>
         </legend>
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" asp-for="TonnesNotProcessedOnSite">
             <p class="govuk-error-message">
                 <span asp-validation-for="TonnesNotProcessedOnSite"></span>
             </p>
@@ -32,7 +32,7 @@
                 <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
             </div>
         </div>
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" asp-for="TonnesContaminents">
             <p class="govuk-error-message">
                 <span asp-validation-for="TonnesContaminents"></span>
             </p>
@@ -50,7 +50,7 @@
                 <div class="govuk-input__suffix" aria-hidden="true">@MasterResources.TonnesLabel</div>
             </div>
         </div>
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" asp-for="TonnesProcessLoss">
             <p class="govuk-error-message">
                 <span asp-validation-for="TonnesProcessLoss"></span>
             </p>
