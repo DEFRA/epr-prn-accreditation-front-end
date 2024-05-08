@@ -21,7 +21,11 @@
                                 @row.TitleKey
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                @row.Value
+                                @foreach(var item in row.Value)
+                                {
+                                    @Html.Raw(item)
+                                    <br />
+                                }
                             </dd>
                             @if(row.TitleKey != "Total")
                             {

@@ -1,7 +1,5 @@
 ﻿namespace EPR.Accreditation.Portal.ViewModels
 {
-    using EPR.Accreditation.Portal.Common.Dtos.Portal;
-
     public class CheckAnswersSectionViewModel
     {
         //public Guid Id { get; set; }
@@ -10,7 +8,7 @@
 
         public bool Completed { get; set; }
 
-        public List<CheckAnswersSectionRowDto> SectionRows { get; set; }
+        public List<CheckAnswersSectionRowViewModel> SectionRows { get; set; }
 
         //public Dictionary<string, string> QueryStringRouteData { get; set; } = new();
     }
