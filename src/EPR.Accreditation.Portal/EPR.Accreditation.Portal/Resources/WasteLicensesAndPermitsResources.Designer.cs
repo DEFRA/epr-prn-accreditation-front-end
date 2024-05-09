@@ -88,7 +88,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste management license or environment permit number.
+        ///   Looks up a localized string similar to Waste management licence or environment permit number.
         /// </summary>
         public static string EnvironmentalPermitNumber {
             get {
