@@ -151,7 +151,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste licences, PRNs and business plan .
+        ///   Looks up a localized string similar to Waste licences, PERN and business plan .
         /// </summary>
         public static string WasteLicencesHeading {
             get {
