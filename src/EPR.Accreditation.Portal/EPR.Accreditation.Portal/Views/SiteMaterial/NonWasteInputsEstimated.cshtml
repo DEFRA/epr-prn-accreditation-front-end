@@ -9,28 +9,28 @@
     var initialRows = appSettings.Value.InitialTypeTonnesRows.Value;
 }
 
-<div class="govuk-grid-column-full">
-    <partial name="_ValidationSummary" />
-    <partial name="_WasteMaterialName" />
-    <h1 class="govuk-heading-l">@NonWasteInputEstimatedResources.Title</h1>
-    <p class="govuk-body-m">@NonWasteInputEstimatedResources.SubTitle</p>
-    <form method="post">
-        <div class="govuk-form-group">
-            <fieldset class="govuk-fieldset">    
-                <input type="hidden" asp-for="WasteLastYear" />
-                <input type="hidden" id="tonnesLabel" value="@MasterResources.TonnesLabel" />
-                @* .net appears to cache this if i use asp-for *@
-                <input type="hidden" name="RowsToAdd" value="@Model.RowsToAdd" />
-                <div class="rows-container">
-                    @for (var i = 0; i < Model.RowsToDisplay(initialRows); i++)
-                    {
-                        <div class="govuk-form-group">
-                            <p class="govuk-error-message">
-                                <span asp-validation-for="Rows[i].Type"></span>
-                            </p>
-                            <p class="govuk-error-message">
-                                <span asp-validation-for="Rows[i].Tonnes"></span>
-                            </p>
+<partial name="_ValidationSummary" />
+<partial name="_WasteMaterialName" />
+<h1 class="govuk-heading-l">@NonWasteInputEstimatedResources.Title</h1>
+<p class="govuk-body-m">@NonWasteInputEstimatedResources.SubTitle</p>
+<form method="post">
+    <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">    
+            <input type="hidden" asp-for="WasteLastYear" />
+            <input type="hidden" id="tonnesLabel" value="@MasterResources.TonnesLabel" />
+            @* .net appears to cache this if i use asp-for *@
+            <input type="hidden" name="RowsToAdd" value="@Model.RowsToAdd" />
+            <div class="rows-container">
+                @for (var i = 0; i < Model.RowsToDisplay(initialRows); i++)
+                {
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="Rows[i].Type"></span>
+                    </p>
+                    <p class="govuk-error-message">
+                        <span asp-validation-for="Rows[i].Tonnes"></span>
+                    </p>
+                    <div class="govuk-form-group" asp-for="Rows[i].Type">
+                        <div class="govuk-form-group" asp-for="Rows[i].Tonnes">
                             <div class="govuk-input__wrapper">
                             @if (Model != null && Model.Rows.Count() > i)
                             {                            
@@ -50,17 +50,17 @@
                             }
                             </div>
                         </div>
-                    }
-                </div>
-                @if (Model.RowsToDisplay(initialRows) < appSettings.Value.MaximumMultiLineRecordNumber.Value)
-                {
-                    <partial name="_AddRowButton" model='"reprocessorSupportingInformation"' />
+                    </div>
                 }
+            </div>
+            @if (Model.RowsToDisplay(initialRows) < appSettings.Value.MaximumMultiLineRecordNumber.Value)
+            {
+                <partial name="_AddRowButton" model='"reprocessorSupportingInformation"' />
+            }
                 
-                <br />
-                <partial name="_SaveButtons" />
+            <br />
+            <partial name="_SaveButtons" />
     
-            </fieldset>
-        </div>
-    </form>
-</div>
+        </fieldset>
+    </div>
+</form>

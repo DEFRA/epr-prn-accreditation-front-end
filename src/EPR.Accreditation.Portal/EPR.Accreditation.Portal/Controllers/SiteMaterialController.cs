@@ -382,15 +382,9 @@
                 }
 
                 // if waste last year is true then return the MaterialOutputs view
-                if (productsProducedViewModel.WasteLastYear == true)
-                {
-                    return View(ProductsProducedLastYearView, productsProducedViewModel);
-                }
-                else
-                {
-                    // otherwise return the annual outputs
-                    return View(ProductsProducedEstimatedView, productsProducedViewModel);
-                }
+                return View(
+                    productsProducedViewModel.WasteLastYear == true ? ProductsProducedLastYearView : ProductsProducedEstimatedView,
+                    productsProducedViewModel);
             }
 
             return NotFound();

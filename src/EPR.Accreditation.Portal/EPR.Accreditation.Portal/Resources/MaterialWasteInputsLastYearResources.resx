@@ -121,19 +121,19 @@
     <value>Enter waste material outputs before moving</value>
   </data>
   <data name="NonPackagingWasteField" xml:space="preserve">
-    <value>Non-UK packaging waste</value>
+    <value>Non packaging waste</value>
   </data>
   <data name="NonPackagingWasteHint" xml:space="preserve">
-    <value>Non-UK packaging waste</value>
+    <value>Non packaging waste</value>
   </data>
   <data name="NonUkPackagingWasteBlank" xml:space="preserve">
     <value>Enter waste material outputs before moving</value>
   </data>
   <data name="NonUkPackagingWasteField" xml:space="preserve">
-    <value>Non-packaging waste</value>
+    <value>Non-UK packaging waste</value>
   </data>
   <data name="NonUkPackagingWasteHint" xml:space="preserve">
-    <value>Non-packaging waste</value>
+    <value>Non-UK packaging waste</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Enter your waste inputs for the last calendar year</value>
