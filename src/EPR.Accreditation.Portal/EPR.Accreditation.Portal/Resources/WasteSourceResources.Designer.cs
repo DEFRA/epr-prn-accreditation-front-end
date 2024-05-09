@@ -61,7 +61,7 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provide a list of UK businesses you source packaging from, including a brief description of what each business does, such as &apos;Trading Co, a supermarket chain&apos;..
+        ///   Looks up a localized string similar to Provide a list of UK businesses you source packaging waste from, including a brief description of what each business does, such as &apos;Trading Co, a supermarket chain&apos;..
         /// </summary>
         public static string InfoText {
             get {
