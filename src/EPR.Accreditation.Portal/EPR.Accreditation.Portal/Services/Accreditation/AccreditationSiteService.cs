@@ -53,16 +53,28 @@ namespace EPR.Accreditation.Portal.Services.Accreditation
             return viewModel;
         }
 
+        /// <summary>
+        /// Updates the site with the provided exemption references
+        /// </summary>
+        /// <param name="viewModel">The relevant view model</param>
+        /// <returns>Task completed asynchronously</returns>
         public async Task UpdateExemptionReferences(ExemptionReferencesViewModel viewModel)
         {
-            IEnumerable<string> exemptionReferences = new List<string>
+            var exemptionReferences = new List<string>();
+
+            void AddNonNullReference(string reference)
             {
-                viewModel.Reference1,
-                viewModel.Reference2,
-                viewModel.Reference3,
-                viewModel.Reference4,
-                viewModel.Reference5
-            };
+                if (!string.IsNullOrEmpty(reference))
+                {
+                    exemptionReferences.Add(reference);
+                }
+            }
+
+            AddNonNullReference(viewModel.Reference1);
+            AddNonNullReference(viewModel.Reference2);
+            AddNonNullReference(viewModel.Reference3);
+            AddNonNullReference(viewModel.Reference4);
+            AddNonNullReference(viewModel.Reference5);
 
             await _httpAccreditationSiteService.UpdateExemptionReferences(
                 viewModel.Id,
