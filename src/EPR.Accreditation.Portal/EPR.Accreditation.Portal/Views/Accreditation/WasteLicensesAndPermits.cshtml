@@ -14,7 +14,7 @@
             <h1 class="govuk-heading-l">Waste licences and permits</h1>
             <p class="govuk-hint">Enter the reference numbers for the licences and permits you have.</p>
             <fieldset class="govuk-fieldset">
-                <div class="govuk-form-group">
+                <div class="govuk-form-group" asp-for="DealerRegistrationNumber">
                     <p class="govuk-error-message">
                         <span asp-validation-for="DealerRegistrationNumber"></span>
                     </p>
@@ -26,9 +26,9 @@
                     <div id="registration-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="DealerRegistrationNumber" name="DealerRegistrationNumber" type="text" value="@Model.DealerRegistrationNumber" aria-describedby="registration-number-hint">
+                    <input class="govuk-input" type="text" asp-for="DealerRegistrationNumber" aria-describedby="registration-number-hint">
                 </div>
-                <div class="govuk-form-group">
+                <div class="govuk-form-group" asp-for="EnvironmentalPermitNumber">
                     <p class="govuk-error-message">
                         <span asp-validation-for="EnvironmentalPermitNumber"></span>
                     </p>
@@ -40,9 +40,9 @@
                     <div id="permit-number-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="EnvironmentalPermitNumber" name="EnvironmentalPermitNumber" type="text" value="@Model.EnvironmentalPermitNumber" aria-describedby="permit-number-hint">
+                    <input class="govuk-input" type="text" asp-for=EnvironmentalPermitNumber aria-describedby="permit-number-hint">
                 </div>
-                <div class="govuk-form-group">
+                <div class="govuk-form-group" asp-for="PartBActivityReferenceNumber">
                     <p class="govuk-error-message">
                         <span asp-validation-for="PartBActivityReferenceNumber"></span>
                     </p>
@@ -54,9 +54,9 @@
                     <div id="activity-number-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="PartBActivityReferenceNumber" name="PartBActivityReferenceNumber" type="text" value="@Model.PartBActivityReferenceNumber" aria-describedby="activity-number-hint">
+                    <input class="govuk-input" type="text" asp-for="PartBActivityReferenceNumber" aria-describedby="activity-number-hint">
                 </div>
-                <div class="govuk-form-group">
+                <div class="govuk-form-group" asp-for="PartAActivityReferenceNumber">
                     <p class="govuk-error-message">
                         <span asp-validation-for="PartAActivityReferenceNumber"></span>
                     </p>
@@ -68,9 +68,9 @@
                     <div id="activity-reference-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="PartAActivityReferenceNumber" name="PartAActivityReferenceNumber" type="text" value="@Model.PartAActivityReferenceNumber" aria-describedby="activity-reference-number-hint">
+                    <input class="govuk-input" type="text" asp-for="PartAActivityReferenceNumber" aria-describedby="activity-reference-number-hint">
                 </div>
-                <div class="govuk-form-group">
+                <div class="govuk-form-group" asp-for="DealerRegistrationNumber">
                     <p class="govuk-error-message">
                         <span asp-validation-for="DischargeConsentNumber"></span>
                     </p>
@@ -82,7 +82,7 @@
                     <div id="discharge-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" id="DischargeConsentNumber" name="DischargeConsentNumber" type="text" value="@Model.DealerRegistrationNumber" aria-describedby=" discharge-number-hint">
+                    <input class="govuk-input" type="text" asp-for="DealerRegistrationNumber" aria-describedby="discharge-number-hint">
                 </div>
                 <partial name="_SaveButtons" />
             </fieldset>
