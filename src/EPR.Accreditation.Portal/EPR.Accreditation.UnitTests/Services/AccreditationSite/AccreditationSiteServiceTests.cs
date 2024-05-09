@@ -55,40 +55,22 @@
                 Reference1 = "Reference 1",
                 Reference2 = "Reference 2",
                 Reference3 = "Reference 3",
-                Reference4 = "Reference 4",
-                Reference5 = "Reference 5"
+                Reference4 = null,
+                Reference5 = null
+            };
+
+            var expectedReferences = new List<string>
+            {
+                "Reference 1",
+                "Reference 2",
+                "Reference 3"
             };
 
             // Act
             await _accreditationSiteService.UpdateExemptionReferences(viewModel);
 
             // Assert
-            _mockHttpAccreditationSiteService.Verify(
-                s =>
-                    s.UpdateExemptionReferences(
-                        viewModel.Id,
-                        It.Is<IEnumerable<string>>(references =>
-                            VerifyExemptionReferencesMatchViewModel(
-                                references,
-                                viewModel))),
-                Times.Once);
-        }
-
-        private bool VerifyExemptionReferencesMatchViewModel(
-            IEnumerable<string> references,
-            ExemptionReferencesViewModel viewModel)
-        {
-            var referenceList = new List<string>
-            {
-                viewModel.Reference1,
-                viewModel.Reference2,
-                viewModel.Reference3,
-                viewModel.Reference4,
-                viewModel.Reference5
-            };
-
-            return referenceList.ToList().Count == references.ToList().Count
-                && referenceList.TrueForAll(reference => references.Contains(reference));
+            _mockHttpAccreditationSiteService.Verify(s => s.UpdateExemptionReferences(viewModel.Id, expectedReferences), Times.Once);
         }
     }
 }
