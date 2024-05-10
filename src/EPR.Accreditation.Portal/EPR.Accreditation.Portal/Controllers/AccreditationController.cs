@@ -59,7 +59,7 @@
             _appSettings = appSettings ?? throw new ArgumentNullException(nameof(appSettings));
         }
 
-        [HttpGet("PermitExemption")]
+        [HttpGet("PermitExemption", Name = "PermitExemption")]
         public async Task<IActionResult> CheckWastePermitExemption(Guid? id)
         {
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
@@ -130,14 +130,15 @@
                 saveButton,
                 PermitExemptionResources.ErrorMessage))
             {
+                _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
+
                 return View(viewModel);
             }
 
             await _accreditationService.SaveWastePermit(viewModel);
 
-            return RedirectToAction(
+            return RedirectToRoute(
                 "PermitExemption",
-                "Accreditation",
                 new
                 {
                     viewModel.Id

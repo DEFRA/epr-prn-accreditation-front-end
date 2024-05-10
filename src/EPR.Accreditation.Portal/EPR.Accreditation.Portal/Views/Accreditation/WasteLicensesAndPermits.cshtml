@@ -70,7 +70,7 @@
                     </div>
                     <input class="govuk-input" type="text" asp-for="PartAActivityReferenceNumber" aria-describedby="activity-reference-number-hint">
                 </div>
-                <div class="govuk-form-group" asp-for="DealerRegistrationNumber">
+                <div class="govuk-form-group" asp-for="DischargeConsentNumber">
                     <p class="govuk-error-message">
                         <span asp-validation-for="DischargeConsentNumber"></span>
                     </p>
@@ -82,7 +82,7 @@
                     <div id="discharge-hint" class="govuk-hint">
                             @WasteLicensesAndPermitsResources.LeaveBlank
                     </div>
-                    <input class="govuk-input" type="text" asp-for="DealerRegistrationNumber" aria-describedby="discharge-number-hint">
+                    <input class="govuk-input" type="text" asp-for="DischargeConsentNumber" aria-describedby="discharge-number-hint">
                 </div>
                 <partial name="_SaveButtons" />
             </fieldset>

@@ -97,65 +97,29 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference number must include letters, numbers  or &apos;/&apos; only.
+        /// </summary>
+        public static string ErrorMessageInvalidFormat {
+            get {
+                return ResourceManager.GetString("ErrorMessageInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference number must not exceed 20 characters.
+        /// </summary>
+        public static string ErrorMessageTooLong {
+            get {
+                return ResourceManager.GetString("ErrorMessageTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leave blank if you do not have one..
         /// </summary>
         public static string LeaveBlank {
             get {
                 return ResourceManager.GetString("LeaveBlank", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Waste carrier, broker or dealer registration number is missing.
-        /// </summary>
-        public static string MissingDealerRegistrationNumberNumber {
-            get {
-                return ResourceManager.GetString("MissingDealerRegistrationNumberNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing discharge constent number.
-        /// </summary>
-        public static string MissingDischargeConstentNumber {
-            get {
-                return ResourceManager.GetString("MissingDischargeConstentNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Permit Number is missing.
-        /// </summary>
-        public static string MissingEnvironmentalPermitNumber {
-            get {
-                return ResourceManager.GetString("MissingEnvironmentalPermitNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing actitivy reference number.
-        /// </summary>
-        public static string MissingPartAActivityReferenceNumber {
-            get {
-                return ResourceManager.GetString("MissingPartAActivityReferenceNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing activity number.
-        /// </summary>
-        public static string MissingPartBActivityReferenceNumber {
-            get {
-                return ResourceManager.GetString("MissingPartBActivityReferenceNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Registration Number is missing.
-        /// </summary>
-        public static string MissingRegistrationNumber {
-            get {
-                return ResourceManager.GetString("MissingRegistrationNumber", resourceCulture);
             }
         }
         

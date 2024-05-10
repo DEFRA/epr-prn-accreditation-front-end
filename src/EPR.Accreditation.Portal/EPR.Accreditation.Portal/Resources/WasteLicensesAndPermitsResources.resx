@@ -129,26 +129,14 @@
   <data name="EnvironmentalPermitNumber" xml:space="preserve">
     <value>Waste management licence or environment permit number</value>
   </data>
+  <data name="ErrorMessageInvalidFormat" xml:space="preserve">
+    <value>Reference number must include letters, numbers  or '/' only</value>
+  </data>
+  <data name="ErrorMessageTooLong" xml:space="preserve">
+    <value>Reference number must not exceed 20 characters</value>
+  </data>
   <data name="LeaveBlank" xml:space="preserve">
     <value>Leave blank if you do not have one.</value>
-  </data>
-  <data name="MissingDealerRegistrationNumberNumber" xml:space="preserve">
-    <value>Waste carrier, broker or dealer registration number is missing</value>
-  </data>
-  <data name="MissingDischargeConstentNumber" xml:space="preserve">
-    <value>Missing discharge constent number</value>
-  </data>
-  <data name="MissingEnvironmentalPermitNumber" xml:space="preserve">
-    <value>Permit Number is missing</value>
-  </data>
-  <data name="MissingPartAActivityReferenceNumber" xml:space="preserve">
-    <value>Missing actitivy reference number</value>
-  </data>
-  <data name="MissingPartBActivityReferenceNumber" xml:space="preserve">
-    <value>Missing activity number</value>
-  </data>
-  <data name="MissingRegistrationNumber" xml:space="preserve">
-    <value>Registration Number is missing</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Waste Licenses And Permits</value>
