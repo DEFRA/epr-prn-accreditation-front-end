@@ -9,7 +9,6 @@
     using EPR.Accreditation.Portal.ViewModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Options;
     using Moq;
 
@@ -49,35 +48,6 @@
 
             var context = new DefaultHttpContext();
             _mockContextAccessor.Setup(context => context.HttpContext).Returns(context);
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void WasteLicensesAndPermits_ReturnsCorrectly_WithValidId()
-        {
-            // Arrange
-            Guid id = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
-            var viewModel = new WasteLicencesAndPermitsViewModel();
-
-            _mockAccreditationService.Setup(service => service.GetWastePermitViewModel(id)).ReturnsAsync(viewModel);
-
-            // Act
-            var result = _accreditationController.WasteLicensesAndPermits(id);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Result, typeof(ViewResult));
-
-            var viewResult = result.Result as ViewResult;
-            Assert.IsNotNull(viewResult.ViewData.Model);
-
-            // check model is expected type
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(WasteLicencesAndPermitsViewModel));
-
-            // check view name
-            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
-
-            _mockAccreditationService.Verify(service => service.GetWastePermitViewModel(id), Times.Once);
         }
 
         [TestMethod]
@@ -344,6 +314,134 @@
                 s =>
                     s.UpdateLegalDocumentsAddress(legalDocumentsAddressViewModel),
                 Times.Never);
+        }
+
+        [TestMethod]
+        public void WasteLicensesAndPermits_ReturnsCorrectly_WithValidId()
+        {
+            // Arrange
+            Guid id = Guid.NewGuid();
+            var viewModel = new WasteLicencesAndPermitsViewModel();
+            var expectedBackLinkUrl = "/Home/ApplyForAccreditation";
+
+            _mockAccreditationService.Setup(service =>
+                service.GetWastePermitViewModel(
+                    id))
+                .ReturnsAsync(viewModel);
+
+            _mockUrlHelper.Setup(h =>
+                h.ActionLink(
+                    "ApplyForAccreditation",
+                    "Home",
+                    null,
+                    null,
+                    null,
+                    null))
+                .Returns(expectedBackLinkUrl);
+
+            // Act
+            var result = _accreditationController.WasteLicensesAndPermits(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result.Result, typeof(ViewResult));
+            Assert.AreEqual(expectedBackLinkUrl, _backPageViewModel.Url);
+
+            var viewResult = result.Result as ViewResult;
+            Assert.IsNotNull(viewResult.ViewData.Model);
+
+            // check model is expected type
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(WasteLicencesAndPermitsViewModel));
+
+            // check view name
+            Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default
+
+            _mockAccreditationService.Verify(service => service.GetWastePermitViewModel(id), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task WasteLicensesAndPermits_WithNullId_ShouldReturnNotFoundResult()
+        {
+            // Arrange
+
+            // Act
+            var result = await _accreditationController.WasteLicensesAndPermits(null);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+            _mockAccreditationService.Verify(s => s.GetWastePermitViewModel(Guid.Empty), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task WasteLicensesAndPermits_WithInvalidModelState_ShouldReturnViewResultSaveAndContinue()
+        {
+            // Arrange
+            var viewModel = new WasteLicencesAndPermitsViewModel();
+            var saveButton = SaveButton.SaveAndContinue;
+            var expectedBackLinkUrl = "/Home/ApplyForAccreditation";
+
+            _accreditationController.ModelState.AddModelError("PropertyName", "Error message");
+
+            _mockUrlHelper.Setup(h =>
+                h.ActionLink(
+                    "ApplyForAccreditation",
+                    "Home",
+                    null,
+                    null,
+                    null,
+                    null))
+                .Returns(expectedBackLinkUrl);
+
+            // Act
+            var result = await _accreditationController.WasteLicencesAndPermits(viewModel, saveButton);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.AreEqual("/Home/ApplyForAccreditation", _backPageViewModel.Url);
+        }
+
+        [TestMethod]
+        public async Task WasteLicensesAndPermits_WithInvalidModelState_ShouldReturnViewResultSaveAndComeback()
+        {
+            // Arrange
+            var viewModel = new WasteLicencesAndPermitsViewModel();
+            var saveButton = SaveButton.SaveAndComeBack;
+            var expectedBackLinkUrl = "/Home/ApplyForAccreditation";
+
+            _accreditationController.ModelState.AddModelError("PropertyName", "Error message");
+
+            _mockUrlHelper.Setup(h =>
+                h.ActionLink(
+                    "ApplyForAccreditation",
+                    "Home",
+                    null,
+                    null,
+                    null,
+                    null))
+                .Returns(expectedBackLinkUrl);
+
+            // Act
+            var result = await _accreditationController.WasteLicencesAndPermits(viewModel, saveButton);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.AreEqual("/Home/ApplyForAccreditation", _backPageViewModel.Url);
+        }
+
+        [TestMethod]
+        public async Task WasteLicensesAndPermits_WithValidModelState_ShouldReturnRedirectToRouteResult()
+        {
+            // Arrange
+            var viewModel = new WasteLicencesAndPermitsViewModel();
+            var saveButton = SaveButton.SaveAndContinue;
+
+            // Act
+            var result = await _accreditationController.WasteLicencesAndPermits(viewModel, saveButton);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual("PermitExemption", ((RedirectToRouteResult)result).RouteName);
         }
     }
 }

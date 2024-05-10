@@ -135,7 +135,7 @@
         /// <param name="saveButton">The save button enum</param>
         /// <returns>Task completed asynchronously</returns>
         [HttpPost("WasteLicencesAndPermits")]
-        public async Task<IActionResult> WasteLicensesAndPermits(
+        public async Task<IActionResult> WasteLicencesAndPermits(
             WasteLicencesAndPermitsViewModel viewModel,
             SaveButton saveButton)
         {
