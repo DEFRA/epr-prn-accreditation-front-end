@@ -108,7 +108,7 @@
             return new EmptyResult();
         }
 
-        [HttpGet("WasteLicensesAndPermits")]
+        [HttpGet("WasteLicencesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
@@ -123,7 +123,7 @@
             return View(viewModel);
         }
 
-        [HttpPost("WasteLicensesAndPermits")]
+        [HttpPost("WasteLicencesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel viewModel, SaveButton saveButton)
         {
             if (!ModelState.IsValidForSaveForLater(
