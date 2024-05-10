@@ -48,7 +48,7 @@
 
             // Asset
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Result, typeof(WasteLicensesAndPermitsViewModel));
+            Assert.IsInstanceOfType(result.Result, typeof(WasteLicencesAndPermitsViewModel));
         }
 
         [TestMethod]
@@ -56,10 +56,10 @@
         {
             // Arrange
             var id = Guid.NewGuid();
-            var expectedDto = new Portal.DTOs.WastePermit.LicensesAndPermitsReferences();
-            var expectedViewModel = new WasteLicensesAndPermitsViewModel();
+            var expectedDto = new Portal.DTOs.WastePermit.LicencesAndPermitsReferences();
+            var expectedViewModel = new WasteLicencesAndPermitsViewModel();
 
-            expectedDto = new Portal.DTOs.WastePermit.LicensesAndPermitsReferences()
+            expectedDto = new Portal.DTOs.WastePermit.LicencesAndPermitsReferences()
             {
                 AccreditationId = 1,
                 EnvironmentalPermitNumber = "1",

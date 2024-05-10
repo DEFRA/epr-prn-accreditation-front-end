@@ -194,10 +194,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WasteSourceResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\WasteLicensesAndPermitsResources.Designer.cs">
+    <Compile Update="Resources\WasteLicencesAndPermitsResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>WasteLicensesAndPermitsResources.resx</DependentUpon>
+      <DependentUpon>WasteLicencesAndPermitsResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -384,9 +384,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteSourceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\WasteLicensesAndPermitsResources.resx">
+    <EmbeddedResource Update="Resources\WasteLicencesAndPermitsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>WasteLicensesAndPermitsResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>WasteLicencesAndPermitsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

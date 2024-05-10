@@ -57,7 +57,7 @@
         {
             // Arrange
             Guid id = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
-            var viewModel = new WasteLicensesAndPermitsViewModel();
+            var viewModel = new WasteLicencesAndPermitsViewModel();
 
             _mockAccreditationService.Setup(service => service.GetWastePermitViewModel(id)).ReturnsAsync(viewModel);
 
@@ -72,7 +72,7 @@
             Assert.IsNotNull(viewResult.ViewData.Model);
 
             // check model is expected type
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(WasteLicensesAndPermitsViewModel));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(WasteLicencesAndPermitsViewModel));
 
             // check view name
             Assert.IsNull(viewResult.ViewName); // It's going to return the view name of the action by default

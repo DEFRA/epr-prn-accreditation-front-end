@@ -120,14 +120,14 @@
   <data name="DealerRegistrationNumber" xml:space="preserve">
     <value>Waste carrier, broker or dealer registration number</value>
   </data>
-  <data name="DealerRegistrationNumberNotInRange" xml:space="preserve">
-    <value>Registration numberr not in range</value>
-  </data>
-  <data name="DischargeConstentNumber" xml:space="preserve">
+  <data name="DischargeConsentNumber" xml:space="preserve">
     <value>Discharge consent number</value>
   </data>
+  <data name="EnterRefNumText" xml:space="preserve">
+    <value>Enter the reference numbers for the licences and permits you have.</value>
+  </data>
   <data name="EnvironmentalPermitNumber" xml:space="preserve">
-    <value>Waste management licence or environment permit number</value>
+    <value>Waste management licence or environmental permit number</value>
   </data>
   <data name="ErrorMessageInvalidFormat" xml:space="preserve">
     <value>Reference number must include letters, numbers  or '/' only</value>
@@ -138,13 +138,16 @@
   <data name="LeaveBlank" xml:space="preserve">
     <value>Leave blank if you do not have one.</value>
   </data>
+  <data name="PageHeading" xml:space="preserve">
+    <value>Waste licences and permits</value>
+  </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Waste Licenses And Permits</value>
   </data>
-  <data name="PartAActivityReferenceNumber" xml:space="preserve">
-    <value>PPC 'Part B or C' or non-waste EPR 'Part A2 or B' activity reference number </value>
+  <data name="PartAReferenceNumber" xml:space="preserve">
+    <value>PPC ‘Part A’ or non-waste EPR ‘Part A1’ activity reference number</value>
   </data>
-  <data name="PartBActivityReferenceNumber" xml:space="preserve">
-    <value>PPC 'Part A' or non-waste EPR 'Part A1' activity number</value>
+  <data name="PartBReferenceNumber" xml:space="preserve">
+    <value>PPC ‘Part B or C’ or non-waste EPR ‘Part A2 or B’ activity reference number</value>
   </data>
 </root>

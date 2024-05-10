@@ -124,7 +124,9 @@
         }
 
         [HttpPost("WasteLicencesAndPermits")]
-        public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel viewModel, SaveButton saveButton)
+        public async Task<IActionResult> WasteLicensesAndPermits(
+            WasteLicencesAndPermitsViewModel viewModel,
+            SaveButton saveButton)
         {
             if (!ModelState.IsValidForSaveForLater(
                 saveButton,

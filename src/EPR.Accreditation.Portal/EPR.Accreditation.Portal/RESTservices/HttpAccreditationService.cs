@@ -20,14 +20,14 @@
 
         public async Task CreateWastePermit(
             Guid id,
-            LicensesAndPermitsReferences wastePermit)
+            LicencesAndPermitsReferences wastePermit)
         {
             await Post($"{id}/WastePermit", wastePermit);
         }
 
-        public async Task<LicensesAndPermitsReferences> GetWastePermit(Guid id)
+        public async Task<LicencesAndPermitsReferences> GetWastePermit(Guid id)
         {
-            return await Get<LicensesAndPermitsReferences>($"{id}/WastePermit");
+            return await Get<LicencesAndPermitsReferences>($"{id}/WastePermit");
         }
 
         public async Task<OperatorType> GetOperatorType(Guid id)

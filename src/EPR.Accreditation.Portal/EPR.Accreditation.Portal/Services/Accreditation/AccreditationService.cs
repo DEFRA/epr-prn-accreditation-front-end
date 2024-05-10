@@ -42,26 +42,26 @@
             return externalId;
         }
 
-        public async Task<WasteLicensesAndPermitsViewModel> GetWastePermitViewModel(Guid id)
+        public async Task<WasteLicencesAndPermitsViewModel> GetWastePermitViewModel(Guid id)
         {
             var wastePermit = await _httpAccreditationService.GetWastePermit(id);
 
-            WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicensesAndPermitsViewModel();
+            WasteLicencesAndPermitsViewModel wasteLicensesAndPermitsViewModel = new WasteLicencesAndPermitsViewModel();
 
             if (wastePermit != null)
             {
-                wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicensesAndPermitsViewModel>(wastePermit);
+                wasteLicensesAndPermitsViewModel = _mapper.Map<WasteLicencesAndPermitsViewModel>(wastePermit);
                 wasteLicensesAndPermitsViewModel.Id = id;
             }
 
             return wasteLicensesAndPermitsViewModel;
         }
 
-        public async Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel)
+        public async Task SaveWastePermit(WasteLicencesAndPermitsViewModel wasteLicencesAndPermitsViewModel)
         {
-            var wastePermit = _mapper.Map<DTOs.WastePermit.LicensesAndPermitsReferences>(wasteLicensesAndPermitsViewModel);
+            var wastePermit = _mapper.Map<DTOs.WastePermit.LicencesAndPermitsReferences>(wasteLicencesAndPermitsViewModel);
 
-            await _httpAccreditationService.CreateWastePermit(wasteLicensesAndPermitsViewModel.Id, wastePermit);
+            await _httpAccreditationService.CreateWastePermit(wasteLicencesAndPermitsViewModel.Id, wastePermit);
         }
 
         public async Task<TaskListViewModel> GetTaskList(Guid id)

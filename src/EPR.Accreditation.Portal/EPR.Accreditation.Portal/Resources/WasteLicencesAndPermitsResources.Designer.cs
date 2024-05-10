@@ -22,14 +22,14 @@ namespace EPR.Accreditation.Portal.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class WasteLicensesAndPermitsResources {
+    public class WasteLicencesAndPermitsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal WasteLicensesAndPermitsResources() {
+        internal WasteLicencesAndPermitsResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EPR.Accreditation.Portal.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.WasteLicensesAndPermitsResources", typeof(WasteLicensesAndPermitsResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EPR.Accreditation.Portal.Resources.WasteLicencesAndPermitsResources", typeof(WasteLicencesAndPermitsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,25 +70,25 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Registration numberr not in range.
-        /// </summary>
-        public static string DealerRegistrationNumberNotInRange {
-            get {
-                return ResourceManager.GetString("DealerRegistrationNumberNotInRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Discharge consent number.
         /// </summary>
-        public static string DischargeConstentNumber {
+        public static string DischargeConsentNumber {
             get {
-                return ResourceManager.GetString("DischargeConstentNumber", resourceCulture);
+                return ResourceManager.GetString("DischargeConsentNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste management licence or environment permit number.
+        ///   Looks up a localized string similar to Enter the reference numbers for the licences and permits you have..
+        /// </summary>
+        public static string EnterRefNumText {
+            get {
+                return ResourceManager.GetString("EnterRefNumText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste management licence or environmental permit number.
         /// </summary>
         public static string EnvironmentalPermitNumber {
             get {
@@ -124,6 +124,15 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waste licences and permits.
+        /// </summary>
+        public static string PageHeading {
+            get {
+                return ResourceManager.GetString("PageHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waste Licenses And Permits.
         /// </summary>
         public static string PageTitle {
@@ -133,20 +142,20 @@ namespace EPR.Accreditation.Portal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PPC &apos;Part B or C&apos; or non-waste EPR &apos;Part A2 or B&apos; activity reference number .
+        ///   Looks up a localized string similar to PPC ‘Part A’ or non-waste EPR ‘Part A1’ activity reference number.
         /// </summary>
-        public static string PartAActivityReferenceNumber {
+        public static string PartAReferenceNumber {
             get {
-                return ResourceManager.GetString("PartAActivityReferenceNumber", resourceCulture);
+                return ResourceManager.GetString("PartAReferenceNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PPC &apos;Part A&apos; or non-waste EPR &apos;Part A1&apos; activity number.
+        ///   Looks up a localized string similar to PPC ‘Part B or C’ or non-waste EPR ‘Part A2 or B’ activity reference number.
         /// </summary>
-        public static string PartBActivityReferenceNumber {
+        public static string PartBReferenceNumber {
             get {
-                return ResourceManager.GetString("PartBActivityReferenceNumber", resourceCulture);
+                return ResourceManager.GetString("PartBReferenceNumber", resourceCulture);
             }
         }
     }

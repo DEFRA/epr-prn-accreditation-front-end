@@ -2,7 +2,7 @@
 
 namespace EPR.Accreditation.Portal.DTOs.WastePermit
 {
-    public class LicensesAndPermitsReferences
+    public class LicencesAndPermitsReferences
     {
         public int AccreditationId { get; set; }
 

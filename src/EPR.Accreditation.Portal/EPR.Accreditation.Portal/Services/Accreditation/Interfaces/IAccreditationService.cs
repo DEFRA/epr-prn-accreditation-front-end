@@ -8,9 +8,9 @@
 
         Task<Guid> CreateAccreditation(OperatorTypeViewModel viewModel);
 
-        Task<WasteLicensesAndPermitsViewModel> GetWastePermitViewModel(Guid id);
+        Task<WasteLicencesAndPermitsViewModel> GetWastePermitViewModel(Guid id);
 
-        Task SaveWastePermit(WasteLicensesAndPermitsViewModel wasteLicensesAndPermitsViewModel);
+        Task SaveWastePermit(WasteLicencesAndPermitsViewModel wasteLicencesAndPermitsViewModel);
 
         Task<TaskListViewModel> GetTaskList(Guid id);
 

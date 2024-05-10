@@ -21,8 +21,8 @@
         /// </summary>
         public AccreditationProfile()
         {
-            CreateMap<LicensesAndPermitsReferences, WasteLicensesAndPermitsViewModel>();
-            CreateMap<WasteLicensesAndPermitsViewModel, LicensesAndPermitsReferences>();
+            CreateMap<LicencesAndPermitsReferences, WasteLicencesAndPermitsViewModel>();
+            CreateMap<WasteLicencesAndPermitsViewModel, LicencesAndPermitsReferences>();
             CreateMap<PermitExemptionViewModel, PermitExemption>();
             CreateMap<HasNpwdAccreditationNumViewModel, HasNpwdAccreditationNumber>();
             CreateMap<NpwdAccreditationNumViewModel, NpwdAccreditationNumber>();

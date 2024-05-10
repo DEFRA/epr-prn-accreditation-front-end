@@ -10,9 +10,9 @@
     {
         Task CreateWastePermit(
             Guid id,
-            LicensesAndPermitsReferences wastePermit);
+            LicencesAndPermitsReferences wastePermit);
 
-        Task<LicensesAndPermitsReferences> GetWastePermit(Guid id);
+        Task<LicencesAndPermitsReferences> GetWastePermit(Guid id);
 
         Task<OperatorType> GetOperatorType(Guid id);
 
