@@ -31,10 +31,6 @@
         /// <returns></returns>
         Task UpdateReferenceNumber(Guid accreditationId);
 
-        Task<string> GetReferenceNumber(Guid id);
-
-        Task<decimal> GetAccreditationFee(Guid id);
-
         Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
         Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
@@ -60,7 +56,7 @@
         /// Gets the completion record.
         /// </summary>
         /// <param name="id">The a</param>
-        /// <returns></returns>
+        /// <returns>Completion object</returns>
         Task<Completion> GetCompletion(Guid id);
     }
 }

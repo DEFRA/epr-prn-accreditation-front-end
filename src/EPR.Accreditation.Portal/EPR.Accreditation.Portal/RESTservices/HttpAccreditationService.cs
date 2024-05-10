@@ -117,26 +117,6 @@
         }
 
         /// <summary>
-        /// Gets the reference number.
-        /// </summary>
-        /// <param name="Id">The accrediation id</param>
-        /// <returns>async task</returns>
-        public async Task<string> GetReferenceNumber(Guid Id)
-        {
-            return await Get<string>($"{Id}/ReferenceNumber");
-        }
-
-        /// <summary>
-        /// Gets the accredition Fee.
-        /// </summary>
-        /// <param name="Id">The accrediation id.</param>
-        /// <returns>Task decimal for accrediation fee.</returns>
-        public async Task<decimal> GetAccreditationFee(Guid Id)
-        {
-            return await Get<decimal>($"{Id}/AccreditationFee");
-        }
-
-        /// <summary>
         /// Returns the completion record.
         /// </summary>
         /// <param name="Id">The accredition id.</param>
