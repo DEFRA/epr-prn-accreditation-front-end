@@ -233,8 +233,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\CompletionResources.cy-GB.resx">
-      <LastGenOutput>CompletionResources.cy-GB.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

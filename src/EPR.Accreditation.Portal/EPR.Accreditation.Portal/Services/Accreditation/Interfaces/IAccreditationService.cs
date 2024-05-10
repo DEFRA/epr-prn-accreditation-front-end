@@ -42,7 +42,7 @@
         Task UpdateLegalDocumentsAddress(LegalDocumentsAddressViewModel viewModel);
 
         /// <summary>
-        /// Completion view model.
+        /// Returns the Completion view model.
         /// </summary>
         /// <param name="id">The accrediation id</param>
         /// <param name="countryCode">The country code.</param>

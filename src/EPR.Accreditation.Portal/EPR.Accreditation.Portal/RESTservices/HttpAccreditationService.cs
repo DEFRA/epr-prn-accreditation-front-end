@@ -105,17 +105,32 @@
             await Put($"{id}/LegalDocumentAddress", address);
         }
 
+        /// <summary>
+        /// Updates the reference number.
+        /// </summary>
+        /// <param name="id">The accrediation id.</param>
+        /// <returns>async task</returns>
         public async Task UpdateReferenceNumber(
             Guid id)
         {
             await Post<Accreditation>($"{id}/ReferenceNumber");
         }
 
+        /// <summary>
+        /// Gets the reference number.
+        /// </summary>
+        /// <param name="Id">The accrediation id</param>
+        /// <returns>async task</returns>
         public async Task<string> GetReferenceNumber(Guid Id)
         {
             return await Get<string>($"{Id}/ReferenceNumber");
         }
 
+        /// <summary>
+        /// Gets the accredition Fee.
+        /// </summary>
+        /// <param name="Id">The accrediation id.</param>
+        /// <returns>Task decimal for accrediation fee.</returns>
         public async Task<decimal> GetAccreditationFee(Guid Id)
         {
             return await Get<decimal>($"{Id}/AccreditationFee");

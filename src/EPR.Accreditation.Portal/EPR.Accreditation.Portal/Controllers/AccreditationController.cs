@@ -533,7 +533,7 @@
         }
 
         /// <summary>
-        /// Completion view model.
+        /// Renders the Completion page.
         /// </summary>
         /// <param name="id">The accrediationid.</param>
         /// <param name="countryCode">The country code.</param>

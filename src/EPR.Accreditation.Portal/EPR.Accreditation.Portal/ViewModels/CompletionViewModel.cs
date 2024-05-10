@@ -6,32 +6,32 @@
     public class CompletionViewModel
     {
         /// <summary>
-        /// Id.
+        /// Gets or sets Id.
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// SiteId.
+        /// Gets or sets SiteId.
         /// </summary>
         public Guid SiteId { get; set; }
 
         /// <summary>
-        /// MaterialId.
+        /// Gets or sets MaterialId.
         /// </summary>
         public Guid MaterialId { get; set; }
 
         /// <summary>
-        /// CountryCode.
+        /// Gets or sets CountryCode.
         /// </summary>
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// AmountDue.
+        /// Gets or sets AmountDue.
         /// </summary>
         public decimal AmountDue { get; set; }
 
         /// <summary>
-        /// ReferenceNumber.
+        /// Gets or sets ReferenceNumber.
         /// </summary>
         public string ReferenceNumber { get; set; }
     }

@@ -24,6 +24,11 @@
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
 
+        /// <summary>
+        /// Updates the reference number.
+        /// </summary>
+        /// <param name="accreditationId">The accrediation id.</param>
+        /// <returns></returns>
         Task UpdateReferenceNumber(Guid accreditationId);
 
         Task<string> GetReferenceNumber(Guid id);

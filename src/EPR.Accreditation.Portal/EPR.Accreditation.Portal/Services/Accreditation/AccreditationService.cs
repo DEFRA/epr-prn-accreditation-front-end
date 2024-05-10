@@ -152,6 +152,12 @@
                 addressDto);
         }
 
+        /// <summary>
+        /// Returns the completion viewmodel.
+        /// </summary>
+        /// <param name="id">The accrediation id.</param>
+        /// <param name="countryCode">The country code.</param>
+        /// <returns>Task<CompletionViewModel> object</returns>
         public async Task<CompletionViewModel> Completion(Guid id, string countryCode)
         {
             await _httpAccreditationService.UpdateReferenceNumber(id);
