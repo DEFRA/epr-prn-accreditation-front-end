@@ -55,7 +55,7 @@
         /// <summary>
         /// Gets the completion record.
         /// </summary>
-        /// <param name="id">The a</param>
+        /// <param name="id">The accrediation id.</param>
         /// <returns>Completion object</returns>
         Task<Completion> GetCompletion(Guid id);
     }
