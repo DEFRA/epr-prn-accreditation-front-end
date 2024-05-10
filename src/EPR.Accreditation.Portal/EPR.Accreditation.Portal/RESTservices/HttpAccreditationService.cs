@@ -7,8 +7,18 @@
     using EPR.Accreditation.Portal.DTOs.WastePermit;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
 
+    /// <summary>
+    /// Initialises the class
+    /// </summary>
     public class HttpAccreditationService : BaseHttpService, IHttpAccreditationService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpAccreditationService"/> class.
+        /// </summary>
+        /// <param name="httpContextAccessor">httpContextAccessor interface to implement</param>
+        /// <param name="httpClientFactory">httpClientFactory interface to implement</param>
+        /// <param name="baseUrl">The base URL</param>
+        /// <param name="endPointName">The name of the endpoint</param>
         public HttpAccreditationService(
             IHttpContextAccessor httpContextAccessor,
             IHttpClientFactory httpClientFactory,
@@ -18,6 +28,12 @@
         {
         }
 
+        /// <summary>
+        /// Method to create the waste permit using the provided data
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <param name="wastePermit">The relevant DTO</param>
+        /// <returns>Task completed asynchronously</returns>
         public async Task CreateWastePermit(
             Guid id,
             LicencesAndPermitsReferences wastePermit)
@@ -25,6 +41,11 @@
             await Post($"{id}/WastePermit", wastePermit);
         }
 
+        /// <summary>
+        /// Method to get the Waste Permit data
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>The relevant DTO</returns>
         public async Task<LicencesAndPermitsReferences> GetWastePermit(Guid id)
         {
             return await Get<LicencesAndPermitsReferences>($"{id}/WastePermit");

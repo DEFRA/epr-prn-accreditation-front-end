@@ -108,6 +108,11 @@
             return new EmptyResult();
         }
 
+        /// <summary>
+        /// Gets the View result for the Waste licences and permits page
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>The view result</returns>
         [HttpGet("WasteLicencesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
@@ -123,6 +128,12 @@
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Updates the references based on the data from the view model
+        /// </summary>
+        /// <param name="viewModel">WasteLicencesAndPermitsViewModel</param>
+        /// <param name="saveButton">The save button enum</param>
+        /// <returns>Task completed asynchronously</returns>
         [HttpPost("WasteLicencesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(
             WasteLicencesAndPermitsViewModel viewModel,

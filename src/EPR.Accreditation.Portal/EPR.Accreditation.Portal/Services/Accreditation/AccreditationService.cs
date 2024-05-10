@@ -42,6 +42,11 @@
             return externalId;
         }
 
+        /// <summary>
+        /// Method to return the view model for the view result
+        /// </summary>
+        /// <param name="id">Accreditation ID</param>
+        /// <returns>The WasteLicencesAndPermitsViewModel</returns>
         public async Task<WasteLicencesAndPermitsViewModel> GetWastePermitViewModel(Guid id)
         {
             var wastePermit = await _httpAccreditationService.GetWastePermit(id);
@@ -57,6 +62,11 @@
             return wasteLicensesAndPermitsViewModel;
         }
 
+        /// <summary>
+        /// Method to save the details entered in the view
+        /// </summary>
+        /// <param name="wasteLicencesAndPermitsViewModel">The relevant view model</param>
+        /// <returns>Task compelted asynchronously</returns>
         public async Task SaveWastePermit(WasteLicencesAndPermitsViewModel wasteLicencesAndPermitsViewModel)
         {
             var wastePermit = _mapper.Map<DTOs.WastePermit.LicencesAndPermitsReferences>(wasteLicencesAndPermitsViewModel);
