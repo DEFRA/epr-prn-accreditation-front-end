@@ -161,14 +161,14 @@
         public async Task<CompletionViewModel> Completion(Guid id, string countryCode)
         {
             await _httpAccreditationService.UpdateReferenceNumber(id);
-            string referenceNumber = await _httpAccreditationService.GetReferenceNumber(id);
-            decimal fee = await _httpAccreditationService.GetAccreditationFee(id);
+            Completion completion = await _httpAccreditationService.GetCompletion(id);
+            
             var result = new CompletionViewModel()
             {
                 Id = id,
                 CountryCode = countryCode,
-                AmountDue = fee,
-                ReferenceNumber = referenceNumber
+                AmountDue = completion.AccreditationFee,
+                ReferenceNumber = completion.ReferenceNumber,
             };
 
             return result;

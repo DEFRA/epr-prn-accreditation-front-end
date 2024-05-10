@@ -135,5 +135,15 @@
         {
             return await Get<decimal>($"{Id}/AccreditationFee");
         }
+
+        /// <summary>
+        /// Returns the completion record.
+        /// </summary>
+        /// <param name="Id">The accredition id.</param>
+        /// <returns>Completion record</returns>
+        public async Task<Completion> GetCompletion(Guid Id)
+        {
+            return await Get<Completion>($"{Id}/Accreditation");
+        }
     }
 }

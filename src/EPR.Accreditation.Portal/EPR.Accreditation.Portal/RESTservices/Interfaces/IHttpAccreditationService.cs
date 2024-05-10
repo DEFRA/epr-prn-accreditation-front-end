@@ -55,5 +55,12 @@
         Task UpdateLegalDocumentsAddress(
             Guid id,
             AddressDto address);
+
+        /// <summary>
+        /// Gets the completion record.
+        /// </summary>
+        /// <param name="id">The a</param>
+        /// <returns></returns>
+        Task<Completion> GetCompletion(Guid id);
     }
 }
