@@ -121,7 +121,7 @@
         /// </summary>
         /// <param name="Id">The accredition id.</param>
         /// <returns>Completion record</returns>
-        public async Task<Completion> GetCompletion(Guid Id)
+        public async Task<Completion> GetCompletionData(Guid Id)
         {
             return await Get<Completion>($"{Id}/Accreditation");
         }

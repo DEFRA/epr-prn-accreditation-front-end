@@ -57,6 +57,6 @@
         /// </summary>
         /// <param name="id">The accrediation id.</param>
         /// <returns>Completion object</returns>
-        Task<Completion> GetCompletion(Guid id);
+        Task<Completion> GetCompletionData(Guid id);
     }
 }

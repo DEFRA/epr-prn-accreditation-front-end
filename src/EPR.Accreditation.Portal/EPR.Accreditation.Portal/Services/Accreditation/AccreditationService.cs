@@ -160,7 +160,7 @@
         public async Task<CompletionViewModel> Completion(Guid id)
         {
             await _httpAccreditationService.UpdateReferenceNumber(id);
-            Completion completion = await _httpAccreditationService.GetCompletion(id);
+            Completion completion = await _httpAccreditationService.GetCompletionData(id);
 
             var result = new CompletionViewModel()
             {
