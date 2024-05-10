@@ -536,10 +536,9 @@
         /// Renders the Completion page.
         /// </summary>
         /// <param name="id">The accrediationid.</param>
-        /// <param name="countryCode">The country code.</param>
         /// <returns>Completion view.</returns>
         [HttpGet("Completion")]
-        public async Task<IActionResult> Completion(Guid? id, string countryCode)
+        public async Task<IActionResult> Completion(Guid? id)
         {
             PopulateBackModel(LegalDocumentsRouteName);
 
@@ -548,7 +547,7 @@
                 return BadRequest();
             }
 
-            CompletionViewModel vm = await _accreditationService.Completion(id.Value, countryCode);
+            CompletionViewModel vm = await _accreditationService.Completion(id.Value);
             return View(vm);
         }
     }

@@ -45,8 +45,7 @@
         /// Returns the Completion view model.
         /// </summary>
         /// <param name="id">The accrediation id</param>
-        /// <param name="countryCode">The country code.</param>
         /// <returns>CompletionViewModel</returns>
-        Task<CompletionViewModel> Completion(Guid id, string countryCode);
+        Task<CompletionViewModel> Completion(Guid id);
     }
 }

@@ -14,5 +14,10 @@
         /// Gets or sets the reference number.
         /// </summary>
         public string ReferenceNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the country code.
+        /// </summary>
+        public string CountryCode { get; set; }
     }
 }
