@@ -127,7 +127,7 @@
     <value>Discharge consent number</value>
   </data>
   <data name="EnvironmentalPermitNumber" xml:space="preserve">
-    <value>Waste management license or environment permit number</value>
+    <value>Waste management licence or environment permit number</value>
   </data>
   <data name="LeaveBlank" xml:space="preserve">
     <value>Leave blank if you do not have one.</value>

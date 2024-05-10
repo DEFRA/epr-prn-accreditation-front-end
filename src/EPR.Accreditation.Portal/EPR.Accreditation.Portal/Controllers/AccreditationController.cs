@@ -108,7 +108,7 @@
             return new EmptyResult();
         }
 
-        [HttpGet("WasteLicensesAndPermits")]
+        [HttpGet("WasteLicencesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(Guid? id)
         {
             _backPageViewModel.Url = _urlHelper.ActionLink("ApplyForAccreditation", "Home");
@@ -123,7 +123,7 @@
             return View(viewModel);
         }
 
-        [HttpPost("WasteLicensesAndPermits")]
+        [HttpPost("WasteLicencesAndPermits")]
         public async Task<IActionResult> WasteLicensesAndPermits(WasteLicensesAndPermitsViewModel viewModel, SaveButton saveButton)
         {
             if (!ModelState.IsValidForSaveForLater(
@@ -485,6 +485,7 @@
         /// </summary>
         /// <param name="id">Accreditation id.</param>
         /// <param name="vm">View model for PRN tonnage data.</param>
+        /// <param name="saveButton">The save button selection</param>
         /// <returns>Redirects to Declaration page.</returns>
         [HttpPost("PrnTonnesPlanned")]
         public async Task<IActionResult> PrnTonnesPlanned(
@@ -506,9 +507,13 @@
                 return View(vm);
             }
 
-            vm.PrnPlannedTonnesFee = vm.PrnPlannedTonnesType == Common.Enums.PrnPlannedTonnesType.Upto ?
-                _appSettings.Value.PrnTonnageUpto400Fee :
-                _appSettings.Value.PrnTonnageOver400Fee.Value;
+            if (vm.PrnPlannedTonnesType.HasValue)
+            {
+                vm.PrnPlannedTonnesFee = vm.PrnPlannedTonnesType == Common.Enums.PrnPlannedTonnesType.Upto ?
+                    _appSettings.Value.PrnTonnageUpto400Fee :
+                    _appSettings.Value.PrnTonnageOver400Fee.Value;
+            }
+
             await _accreditationService.UpdatePrnTonnesPlanned(id.Value, vm);
 
             return RedirectToAction("Declaration", new { id = id.Value });
