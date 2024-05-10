@@ -45,7 +45,7 @@
         /// Returns the Completion view model.
         /// </summary>
         /// <param name="id">The accrediation id</param>
-        /// <returns>CompletionViewModel</returns>
+        /// <returns>The CompletionViewModel for the completion page.</returns>
         Task<CompletionViewModel> Completion(Guid id);
     }
 }
