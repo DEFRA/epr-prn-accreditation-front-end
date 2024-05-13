@@ -4,6 +4,7 @@
     using EPR.Accreditation.Portal.Enums;
     using EPR.Accreditation.Portal.Helpers.Interfaces;
     using EPR.Accreditation.Portal.Options;
+    using EPR.Accreditation.Portal.Resources;
     using EPR.Accreditation.Portal.RESTservices.Interfaces;
     using EPR.Accreditation.Portal.Services.Accreditation.Interfaces;
     using EPR.Accreditation.Portal.ViewModels;
@@ -402,46 +403,112 @@
         }
 
         [TestMethod]
-        public async Task WasteLicensesAndPermits_WithInvalidModelState_ShouldReturnViewResultSaveAndComeback()
+        public async Task WasteLicensesAndPermits_ShouldReturnViewResult_WithInvalidModelState_ForInvalidRefNumSaveAndContinue()
         {
             // Arrange
-            var viewModel = new WasteLicencesAndPermitsViewModel();
-            var saveButton = SaveButton.SaveAndComeBack;
-            var expectedBackLinkUrl = "/Home/ApplyForAccreditation";
+            var viewModel = new WasteLicencesAndPermitsViewModel
+            {
+                Id = Guid.NewGuid(),
+                DealerRegistrationNumber = "invalid£$%"
+            };
 
-            _accreditationController.ModelState.AddModelError("PropertyName", "Error message");
+            var expectedBackUrl = "/";
 
-            _mockUrlHelper.Setup(h =>
-                h.ActionLink(
-                    "ApplyForAccreditation",
-                    "Home",
-                    null,
-                    null,
-                    null,
-                    null))
-                .Returns(expectedBackLinkUrl);
+            _mockUrlHelper.Setup(h => h.ActionLink(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<object>(),
+                null,
+                null,
+                null))
+            .Returns(expectedBackUrl);
+
+            _accreditationController.ModelState.AddModelError("DealerRegistrationNumber", WasteLicencesAndPermitsResources.ErrorMessageInvalidFormat);
 
             // Act
-            var result = await _accreditationController.WasteLicencesAndPermits(viewModel, saveButton);
+            var result = await _accreditationController.WasteLicencesAndPermits(
+                viewModel,
+                SaveButton.SaveAndContinue) as ViewResult;
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-            Assert.AreEqual("/Home/ApplyForAccreditation", _backPageViewModel.Url);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(viewModel, result.Model);
+            Assert.IsTrue(result.ViewData.ModelState.ContainsKey("DealerRegistrationNumber"));
+            Assert.AreEqual(
+                WasteLicencesAndPermitsResources.ErrorMessageInvalidFormat,
+                result.ViewData.ModelState["DealerRegistrationNumber"].Errors[0].ErrorMessage);
+            Assert.AreEqual(expectedBackUrl, _backPageViewModel.Url);
+
+            _mockAccreditationService.Verify(s => s.SaveWastePermit(viewModel), Times.Never);
         }
 
         [TestMethod]
-        public async Task WasteLicensesAndPermits_WithValidModelState_ShouldReturnRedirectToRouteResult()
+        public async Task WasteLicensesAndPermits_ShouldReturnViewResult_WithInvalidModelState_ForInvalidRefNumSaveAndComeBack()
+        {
+            // Arrange
+            var viewModel = new WasteLicencesAndPermitsViewModel
+            {
+                Id = Guid.NewGuid(),
+                EnvironmentalPermitNumber = "invalidReferenceNumberBecauseItIsTooLong"
+            };
+
+            var expectedBackUrl = "/";
+
+            _mockUrlHelper.Setup(h => h.ActionLink(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<object>(),
+                null,
+                null,
+                null))
+            .Returns(expectedBackUrl);
+
+            _accreditationController.ModelState.AddModelError("EnvironmentalPermitNumber", WasteLicencesAndPermitsResources.ErrorMessageInvalidFormat);
+
+            // Act
+            var result = await _accreditationController.WasteLicencesAndPermits(
+                viewModel,
+                SaveButton.SaveAndComeBack) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(viewModel, result.Model);
+            Assert.IsTrue(result.ViewData.ModelState.ContainsKey("EnvironmentalPermitNumber"));
+            Assert.AreEqual(
+                WasteLicencesAndPermitsResources.ErrorMessageInvalidFormat,
+                result.ViewData.ModelState["EnvironmentalPermitNumber"].Errors[0].ErrorMessage);
+            Assert.AreEqual(expectedBackUrl, _backPageViewModel.Url);
+
+            _mockAccreditationService.Verify(s => s.SaveWastePermit(viewModel), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task WasteLicensesAndPermits_WithValidModelState_ShouldReturnRedirectToRouteResultAfterUpdatingDatabase()
         {
             // Arrange
             var viewModel = new WasteLicencesAndPermitsViewModel();
             var saveButton = SaveButton.SaveAndContinue;
+            var expectedId = viewModel.Id;
+            var expectedRouteName = "PermitExemption";
+
+            _mockAccreditationService.Setup(s =>
+                s.SaveWastePermit(
+                    viewModel))
+                .Returns(Task.CompletedTask);
 
             // Act
-            var result = await _accreditationController.WasteLicencesAndPermits(viewModel, saveButton);
+            var result = await _accreditationController.WasteLicencesAndPermits(viewModel, saveButton) as RedirectToRouteResult;
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-            Assert.AreEqual("PermitExemption", ((RedirectToRouteResult)result).RouteName);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedRouteName, result.RouteName);
+            Assert.AreEqual(expectedId, result.RouteValues["id"]);
+
+            _mockAccreditationService.Verify(
+                s =>
+                s.SaveWastePermit(
+                    viewModel),
+                Times.Once);
         }
     }
 }
