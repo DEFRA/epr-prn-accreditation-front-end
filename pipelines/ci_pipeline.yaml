@@ -29,8 +29,8 @@ parameters:
   type: string
   default: 'dotnet'
   values:
-  - 'DotNet'
-  - 'DotNetLatest'
+  - 'dotnetVersion6'
+  - 'dotnetVersion8'
 
 pool: DEFRA-COMMON-ubuntu2004-SSV3
 
