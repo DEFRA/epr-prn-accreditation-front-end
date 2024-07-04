@@ -27,7 +27,7 @@ parameters:
 - name: dotnetVersion
   displayName: 'Select dotnet for v6.0 or dotnetlatest for 8.0'
   type: string
-  default: 'dotnet'
+  default: 'dotnetVersion6'
   values:
   - 'dotnetVersion6'
   - 'dotnetVersion8'
