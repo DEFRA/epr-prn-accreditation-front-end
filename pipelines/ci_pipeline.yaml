@@ -24,6 +24,14 @@ parameters:
   - 'SonarQube'
   - 'SonarQubeLatest'
 
+- name: dotnetVersion
+  displayName: 'Select dotnet for v6.0 or dotnetlatest for 8.0'
+  type: string
+  default: 'dotnet'
+  values:
+  - 'DotNet'
+  - 'DotNetLatest'
+
 pool: DEFRA-COMMON-ubuntu2004-SSV3
 
 variables:
