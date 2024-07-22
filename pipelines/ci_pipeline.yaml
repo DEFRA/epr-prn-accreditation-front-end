@@ -56,7 +56,7 @@ resources:
     - repository: CommonTemplates
       name: RWD-CPR-EPR4P-ADO/epr-webapps-code-deploy-templates
       type: git
-      ref: main
+      ref: upgrate-net-8
 
 extends:
   template: epr-build-pipeline.yaml@CommonTemplates
@@ -75,4 +75,4 @@ extends:
     runNugetTasks: ${{ variables.runNugetTasks }}
     serviceName: $(serviceName)
     sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
-    dotnetVersion: ${{ variables.dotnetVersion8 }}
+    #dotnetVersion: ${{ variables.dotnetVersion8 }}
