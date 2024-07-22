@@ -48,13 +48,15 @@ variables:
     value: epr-prn-accreditation-front-end
   - name: runNugetTasks
     value: true
+  - name: dotnetVersion8
+    value: dotnetVersion8
 
 resources:
   repositories:
     - repository: CommonTemplates
       name: RWD-CPR-EPR4P-ADO/epr-webapps-code-deploy-templates
       type: git
-      ref: upgrade-net-8
+      ref: main
 
 extends:
   template: epr-build-pipeline.yaml@CommonTemplates
@@ -73,4 +75,4 @@ extends:
     runNugetTasks: ${{ variables.runNugetTasks }}
     serviceName: $(serviceName)
     sonarqubeInstance: ${{ parameters.sonarqubeInstance }}
-    dotnetVersion: ${{ parameters.dotnetVersion }}
+    dotnetVersion: ${{ variables.dotnetVersion8 }}
