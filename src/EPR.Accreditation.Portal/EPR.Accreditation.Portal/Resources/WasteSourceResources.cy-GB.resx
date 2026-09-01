@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InfoText" xml:space="preserve">
-    <value>[Welsh]Provide a list of UK businesses you source packaging from, including a brief description of what each business does, such as 'Trading Co, a supermarket chain'.</value>
+    <value>[Welsh]Provide a list of UK businesses you source packaging waste from, including a brief description of what each business does, such as 'Trading Co, a supermarket chain'.</value>
   </data>
   <data name="NoSourceSupplied" xml:space="preserve">
     <value>[Welsh]Confirm the source before moving</value>
