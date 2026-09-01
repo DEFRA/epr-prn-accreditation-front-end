@@ -1,5 +1,6 @@
 ﻿namespace EPR.Accreditation.Portal.Services.Accreditation
 {
+    using System;
     using System.Threading.Tasks;
     using AutoMapper;
     using EPR.Accreditation.Portal.Common.Dtos;
@@ -149,6 +150,27 @@
             await _httpAccreditationService.UpdateLegalDocumentsAddress(
                 viewModel.Id,
                 addressDto);
+        }
+
+        /// <summary>
+        /// Returns the completion viewmodel.
+        /// </summary>
+        /// <param name="id">The accrediation id.</param>
+        /// <returns>Task<CompletionViewModel> object</returns>
+        public async Task<CompletionViewModel> Completion(Guid id)
+        {
+            await _httpAccreditationService.UpdateReferenceNumber(id);
+            Completion completion = await _httpAccreditationService.GetCompletionData(id);
+
+            var result = new CompletionViewModel()
+            {
+                Id = id,
+                AmountDue = completion.AccreditationFee,
+                ReferenceNumber = completion.ReferenceNumber,
+                CountryCode = completion.CountryCode
+            };
+
+            return result;
         }
 
         private Enums.TaskStatus ReturnStatusFromList(

@@ -104,5 +104,26 @@
         {
             await Put($"{id}/LegalDocumentAddress", address);
         }
+
+        /// <summary>
+        /// Updates the reference number.
+        /// </summary>
+        /// <param name="id">The accrediation id.</param>
+        /// <returns>async task</returns>
+        public async Task UpdateReferenceNumber(
+            Guid id)
+        {
+            await Post<Accreditation>($"{id}/ReferenceNumber");
+        }
+
+        /// <summary>
+        /// Returns the completion record.
+        /// </summary>
+        /// <param name="Id">The accredition id.</param>
+        /// <returns>Completion record</returns>
+        public async Task<Completion> GetCompletionData(Guid Id)
+        {
+            return await Get<Completion>($"{Id}/Accreditation");
+        }
     }
 }

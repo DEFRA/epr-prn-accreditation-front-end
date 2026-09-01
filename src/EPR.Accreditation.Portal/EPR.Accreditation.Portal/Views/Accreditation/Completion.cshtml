@@ -1,0 +1,19 @@
+﻿@model CompletionViewModel
+@using EPR.Accreditation.Portal.Enums
+@using EPR.Accreditation.Portal.ViewModels
+@using EPR.Accreditation.Portal.Resources
+@using EPR.Accreditation.Portal.Helpers.TagHelpers
+
+@{
+    ViewData["Title"] = CompletionResources.PageTitle;
+}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column">
+            <div class="govuk-grid-row">                
+                <div class="govuk-grid-column-full">
+                @Html.Partial("_BankDetails", Model)
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,159 @@
+﻿@model EPR.Accreditation.Portal.ViewModels.CompletionViewModel
+
+<div class="govuk-grid-row">
+
+
+    @if (Model.CountryCode == "IRE")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedIreland
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>@Model.ReferenceNumber</strong>
+            </div>
+        </div>
+
+
+        <h2 class="govuk-heading-s">@CompletionResources.AfterPayment</h2>
+        <h1 class="govuk-heading-m">@CompletionResources.AmountDue</h1>
+        <h1 class="govuk-heading-m">£@Model.AmountDue</h1>
+        <h2 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h2>
+        <h4 class="govuk-heading-s">@CompletionResources.UseDetails</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row"><td><li>@CompletionResources.AccountNameIreland</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.BankNameIrelreland</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.BnakSortCodeIreland</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.BankAccountNumberIreland</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.BACSIreland</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.PaymentReference @Model.ReferenceNumber</li></td></tr>
+        </table>
+
+        <table class="govuk-table">
+            <tr class="govuk-table__row">
+                <td>
+                    <details open>
+                        <summary>@CompletionResources.OtherwaysToPay</summary>
+                        <p>@CompletionResources.OtherwaysToPayIreland</p>
+                        <p>@CompletionResources.OtherwaysToPayEmail</p>
+                        <p>@CompletionResources.OtherwaysToPayPhoneIreland</p>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    }
+
+    @if (Model.CountryCode == "GBR")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedEngland
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>@Model.ReferenceNumber</strong>
+            </div>
+        </div>
+
+        <h2 class="govuk-heading-s">@CompletionResources.AfterPayment</h2>
+        <h1 class="govuk-heading-m">@CompletionResources.AmountDue</h1>
+        <h1 class="govuk-heading-m">£@Model.AmountDue</h1>
+        <h4 class="govuk-heading-m">@CompletionResources.PayOnline</h4>
+        <h4 class="govuk-heading-s">@CompletionResources.PayOnlineNotice</h4>
+        <h2 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h2>
+        <h4 class="govuk-heading-s">@CompletionResources.UseDetails</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row"><td><li>@CompletionResources.EnglandCompanyName</li></td></tr>
+            <tr class="govuk-table__row"><td><li>@CompletionResources.EnglandBnakName</li></td></tr>
+            <tr class="govuk-table__row"><td><li>@CompletionResources.EnglandAddress</li></td></tr>
+            <tr class="govuk-table__row"><td><li>@CompletionResources.EnglandBnakSortCode</li></td></tr>
+            <tr class="govuk-table__row"><td><li>@CompletionResources.EnglandAccountNumber</li></td></tr>
+            <tr class="govuk-table__row"><td><li>@CompletionResources.EnglandAccountName</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.PaymentReference @Model.ReferenceNumber</li></td></tr>
+        </table>
+
+        <table class="govuk-table">
+            <tr class="govuk-table__row"><td>
+                    <details open>
+                        <summary>@CompletionResources.OtherwaysToPay</summary>
+                        <p>@CompletionResources.OtherwaysToPayEngland</p>
+                        <p>@CompletionResources.OtherwaysToPayEmail</p>
+                        <p>@CompletionResources.OtherwaysToPayPhoneEngland</p>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    }
+
+    @if (Model.CountryCode == "SCO")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedScotland
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>@Model.ReferenceNumber</strong>
+            </div>
+        </div>
+
+        <h4 class="govuk-heading-m">@CompletionResources.AfterPayment</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
+        <h4 class="govuk-heading-m">£@Model.AmountDue</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.HowToPay</h4>
+        <h4 class="govuk-heading-s">@CompletionResources.ScotlandContact</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row"><td>@CompletionResources.ScotlandEmail</td></tr>
+                <tr class="govuk-table__row"><td>@CompletionResources.ScotlandPhone</td></tr>
+        </table>
+    }
+
+    @if (Model.CountryCode == "WAL")
+    {
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                @CompletionResources.ApplicationSubmittedWales
+            </h1>
+            <div class="govuk-panel__body">
+                @CompletionResources.ReferenceNumber<br><strong>@Model.ReferenceNumber</strong>
+            </div>
+        </div>
+
+        <h4 class="govuk-heading-m">@CompletionResources.AfterPayment</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.AmountDue</h4>
+        <h4 class="govuk-heading-m">£@Model.AmountDue</h4>
+        <h4 class="govuk-heading-m">@CompletionResources.PayByBankTransfer</h4>
+        <h4 class="govuk-heading-s">@CompletionResources.UseDetails</h4>
+
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row"><td><li>@CompletionResources.WalesCompanyName</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.WalesAddress</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.WalesBank</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.WalesBankSortCode</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.WalesBankAccountNumber</li></td></tr>
+                <tr class="govuk-table__row"><td><li>@CompletionResources.PaymentReference @Model.ReferenceNumber</li></td></tr>
+        </table>
+
+        <table class="govuk-table">
+            <tr class="govuk-table__row">
+                <td>
+                    <details open>
+                        <summary>@CompletionResources.OtherwaysToPay</summary>
+                        <p>@CompletionResources.OtherWaysToPayWales</p>
+                        <p>@CompletionResources.OtherwaysToPayEmail</p>
+                        <p>@CompletionResources.OtherwaysToPayPhoneWales</p>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    }
+    <button class="govuk-button" data-module="govuk-button">
+        @MasterResources.AccountHome
+    </button>
+
+</div>

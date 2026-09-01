@@ -144,8 +144,7 @@
                 });
         }
 
-        [HttpGet]
-        [ActionName("OperatorType")]
+        [HttpGet("OperatorType")]
         public async Task<IActionResult> OperatorType(Guid? id)
         {
             if (id.HasValue)
@@ -158,8 +157,7 @@
             return View(new OperatorTypeViewModel());
         }
 
-        [HttpPost]
-        [ActionName("OperatorType")]
+        [HttpPost("OperatorType")]
         public async Task<IActionResult> OperatorType(OperatorTypeViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -532,6 +530,25 @@
             Guid? id)
         {
             return NotFound();
+        }
+
+        /// <summary>
+        /// Renders the Completion page.
+        /// </summary>
+        /// <param name="id">The accrediationid.</param>
+        /// <returns>Completion view.</returns>
+        [HttpGet("Completion")]
+        public async Task<IActionResult> Completion(Guid? id)
+        {
+            PopulateBackModel(LegalDocumentsRouteName);
+
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            CompletionViewModel vm = await _accreditationService.Completion(id.Value);
+            return View(vm);
         }
     }
 }

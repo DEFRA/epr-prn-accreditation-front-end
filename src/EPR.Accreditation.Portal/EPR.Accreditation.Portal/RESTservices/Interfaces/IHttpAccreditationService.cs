@@ -24,6 +24,13 @@
 
         Task<List<AccreditationTaskProgress>> GetAccreditationTaskProgress(Guid id);
 
+        /// <summary>
+        /// Updates the reference number.
+        /// </summary>
+        /// <param name="accreditationId">The accrediation id.</param>
+        /// <returns></returns>
+        Task UpdateReferenceNumber(Guid accreditationId);
+
         Task<PrnTonnesPlannedDto> GetPrnTonnesPlanned(Guid accreditationExternalId);
 
         Task UpdatePrnTonnesPlanned(Guid accreditationExternalId, PrnTonnesPlannedDto dto);
@@ -44,5 +51,12 @@
         Task UpdateLegalDocumentsAddress(
             Guid id,
             AddressDto address);
+
+        /// <summary>
+        /// Gets the completion record.
+        /// </summary>
+        /// <param name="id">The accrediation id.</param>
+        /// <returns>Completion object</returns>
+        Task<Completion> GetCompletionData(Guid id);
     }
 }

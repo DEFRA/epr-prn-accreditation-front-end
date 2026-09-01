@@ -124,7 +124,13 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>OverseasSiteOutputsResources.resx</DependentUpon>
 	  </Compile>
-    <Compile Update="Resources\SiteAddressResources.Designer.cs">
+	  <Compile Update="Resources\CompletionResources.Designer.cs">
+	    <DependentUpon>CompletionResources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
+    <Compile Update="Resources\TaskListSiteResources.cy-GB.Designer.cs">
+      <DependentUpon>TaskListSiteResources.cy-GB.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SiteAddressResources.resx</DependentUpon>
@@ -226,6 +232,9 @@
       <LastGenOutput>HasNpwdAccrNumResources.cy-GB.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CompletionResources.cy-GB.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\MaterialOutputsEstimatedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MaterialOutputsEstimatedResources.Designer.cs</LastGenOutput>
@@ -310,6 +319,10 @@
     <EmbeddedResource Update="Resources\SiteAddressResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteAddressResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CompletionResources.resx">
+      <LastGenOutput>CompletionResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\TaskListSiteResources.cy-GB.resx">
       <Generator></Generator>

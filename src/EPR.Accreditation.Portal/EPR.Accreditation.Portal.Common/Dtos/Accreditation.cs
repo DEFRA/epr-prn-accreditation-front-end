@@ -62,5 +62,7 @@
         /// Gets or sets UpdatedOn.
         /// </summary>
         public DateTime? UpdatedOn { get; set; }
+
+        public decimal? AccreditationFee { get; set; }
     }
 }
